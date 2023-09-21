@@ -4,7 +4,7 @@ const AdminNavbar = () => {
   return (
     <header id="header" className="header fixed-top d-flex align-items-center">
       <div className="d-flex align-items-center justify-content-between">
-        <Link href="/" className="logo d-flex align-items-center">
+        <Link href="/admin/" className="logo d-flex align-items-center">
           <span className="d-none d-lg-block">Dashboard</span>
         </Link>
       </div>

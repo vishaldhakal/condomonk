@@ -6,7 +6,7 @@ export default function AdminLayout({ children }) {
     <>
       <AdminNavbar></AdminNavbar>
       <AdminSidebar></AdminSidebar>
-      <main>{children}</main>
+      <main id="main">{children}</main>
     </>
   );
 }

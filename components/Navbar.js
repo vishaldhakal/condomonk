@@ -1,34 +1,58 @@
 const Navbar = () => {
   return (
-    <header id="header" className="header fixed-top d-flex align-items-center">
-      <div className="d-flex align-items-center justify-content-between">
-        <a href="index.html" className="logo d-flex align-items-center">
-          <span className="d-none d-lg-block">Portal Admin</span>
+    <nav className="navbar navbar-expand-sm navbar-light bg-light py-3">
+      <div className="container">
+        <a className="navbar-brand fw-bold" href="#">
+          Condomonk
         </a>
-      </div>
-      <div className="search-bar">
-        <form
-          className="search-form d-flex align-items-center"
-          method="POST"
-          action="#"
+        <button
+          className="navbar-toggler d-lg-none"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavId"
+          aria-controls="collapsibleNavId"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
-          <input
-            type="text"
-            name="query"
-            placeholder="Search"
-            title="Enter search keyword"
-          />
-          <button type="submit" title="Search">
-            <i className="bi bi-search"></i>
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="collapsibleNavId">
+          <ul className="navbar-nav mx-auto mt-2 mt-lg-0">
+            <li className="nav-item">
+              <a className="nav-link active" href="#" aria-current="page">
+                Condos For Sale
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+                About
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+                News
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+                Events
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+                Contact
+              </a>
+            </li>
+          </ul>
+          <button
+            className="btn btn-danger my-2 my-sm-0 rounded-pill"
+            type="submit"
+          >
+            Platinum Access
           </button>
-        </form>
+        </div>
       </div>
-      <nav className="header-nav ms-auto">
-        <ul className="d-flex align-items-center">
-          <li className="nav-item dropdown pe-3">Vishal Dhakal</li>
-        </ul>
-      </nav>
-    </header>
+    </nav>
   );
 };
 

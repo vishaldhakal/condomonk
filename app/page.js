@@ -12,7 +12,14 @@ export default async function Home(props) {
   const data = await getData();
   return (
     <>
-      <p>{JSON.stringify(data)}</p>
+      <div className="pt-5">
+        <div className="container">
+          <div className="d-flex justify-content-between align-items-center">
+            <h2 className="main-title">PLATINUM ACCESS</h2>
+            <p className="text-mine">Sell all Platinum Access</p>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

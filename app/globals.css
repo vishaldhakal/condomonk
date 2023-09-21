@@ -781,6 +781,19 @@ label {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-/* .ql-editor{
-  min-height: 550px !important;
-} */
+
+.main-title{
+  display: inline-flex;
+  font-weight: 800;
+}
+.main-title:before {
+  background-color: red;
+  width: 10px;
+  height: 33px;
+  margin-right: 0.2em;
+  content: "";
+}
+.text-mine{
+  color: red;
+  font-weight: 600;
+}
