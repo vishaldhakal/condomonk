@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import swal from "sweetalert";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { Cagliostro } from "next/font/google";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -20,7 +21,6 @@ export default function Upload() {
     builder_sales_email: "",
     builder_sales_phone: "",
     co_op_available: false,
-    occupancy: "",
     status: "",
     developer: {
       name: "",
@@ -95,9 +95,7 @@ export default function Upload() {
 
   const handleChangeCity = (e) => {
     const { id, value } = e.target;
-    let mycity = {
-      name: value,
-    };
+    let mycity = cities.filter((city) => city.name === value);
     setPredata((prevState) => ({
       ...prevState,
       [id]: mycity,
@@ -106,12 +104,11 @@ export default function Upload() {
 
   const handleChangeDev = (e) => {
     const { id, value } = e.target;
-    let mydev = {
-      name: value,
-    };
+
+    let mydev = developers.filter((dev) => dev.name === value);
     setPredata((prevState) => ({
       ...prevState,
-      [id]: mydev,
+      [id]: mydev[0],
     }));
   };
 
