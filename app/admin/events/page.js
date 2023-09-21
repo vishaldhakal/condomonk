@@ -1,9 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
-import ReactQuill from "react-quill";
+import dynamic from "next/dynamic";
 import EventTable from "@/components/EventTable";
 import axios from "axios";
 import swal from "sweetalert";
+
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function Events() {
   let stat = {

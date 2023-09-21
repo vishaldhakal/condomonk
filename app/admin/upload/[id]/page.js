@@ -1,10 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import ReactQuill from "react-quill";
+import dynamic from "next/dynamic";
 import swal from "sweetalert";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function Update({ params }) {
   let stat = {
