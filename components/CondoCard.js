@@ -67,7 +67,7 @@ export default function CondoCard(props) {
               {props.project_type} in {props.city.name}
             </h5>
             <p className="card-secondary-title">{props.project_address}</p>
-            <p className="card-secondary-title">
+            <p className="card-secondary-title mb-0">
               Updated {daysCount(props.last_updated)}
             </p>
           </div>
