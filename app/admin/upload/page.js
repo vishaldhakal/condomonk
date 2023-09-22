@@ -95,7 +95,9 @@ export default function Upload() {
 
   const handleChangeCity = (e) => {
     const { id, value } = e.target;
-    let mycity = cities.filter((city) => city.name === value);
+    let mycity = {
+      name: value,
+    };
     setPredata((prevState) => ({
       ...prevState,
       [id]: mycity,
