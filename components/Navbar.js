@@ -1,4 +1,12 @@
+"use client";
+import { usePathname } from "next/navigation";
+
 const Navbar = () => {
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/admin")) {
+    return <></>;
+  }
   return (
     <nav className="navbar navbar-expand-sm navbar-light bg-light py-3">
       <div className="container">
