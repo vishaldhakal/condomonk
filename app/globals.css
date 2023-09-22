@@ -836,3 +836,40 @@ label {
   font-size: 0.85rem;
   border-bottom-left-radius: 10px;
 }
+
+.grid-cont{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 8px 8px;
+  z-index: 98 !important;
+}
+
+
+.g-item {
+  transition: transform 0.5s ease-in-out;
+}
+
+.g-item img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.g-item:hover {
+  overflow: hidden;
+  transform: scale(1.01);
+  cursor: pointer;
+}
+
+.grid-item1 {
+  grid-area: 1/1/4/3;
+  height: 410px;
+}
+.grid-item2,
+.grid-item3,
+.grid-item4,
+.grid-item5,
+.grid-item6,
+.grid-item7 {
+  height: 200px !important;
+}

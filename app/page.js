@@ -1,7 +1,9 @@
 import CondoCard from "@/components/CondoCard";
 
 async function getData() {
-  const res = await fetch("https://api.condomonk.ca/api/preconstructions");
+  const res = await fetch("https://api.condomonk.ca/api/preconstructions", {
+    next: { revalidate: 10 },
+  });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");

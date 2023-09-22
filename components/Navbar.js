@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
@@ -10,9 +11,9 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-sm navbar-light bg-light py-3">
       <div className="container">
-        <a className="navbar-brand fw-bold" href="#">
+        <Link href="/" className="navbar-brand fw-bold">
           Condomonk
-        </a>
+        </Link>
         <button
           className="navbar-toggler d-lg-none"
           type="button"
