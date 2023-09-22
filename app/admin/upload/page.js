@@ -99,6 +99,7 @@ export default function Upload() {
     let newcity = {
       id: mycity[0].id,
       name: mycity[0].name,
+      slug: mycity[0].slug,
     };
     setPredata((prevState) => ({
       ...prevState,
