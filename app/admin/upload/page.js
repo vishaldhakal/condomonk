@@ -95,12 +95,14 @@ export default function Upload() {
 
   const handleChangeCity = (e) => {
     const { id, value } = e.target;
-    let mycity = {
-      name: value,
+    let mycity = cities.filter((city) => city.name === value);
+    let newcity = {
+      id: mycity[0].id,
+      name: mycity[0].name,
     };
     setPredata((prevState) => ({
       ...prevState,
-      [id]: mycity,
+      [id]: newcity,
     }));
   };
 
@@ -108,6 +110,7 @@ export default function Upload() {
     const { id, value } = e.target;
 
     let mydev = developers.filter((dev) => dev.name === value);
+
     setPredata((prevState) => ({
       ...prevState,
       [id]: mydev[0],
