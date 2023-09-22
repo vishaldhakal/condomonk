@@ -797,3 +797,42 @@ label {
   color: red;
   font-weight: 600;
 }
+
+.condocard-img-top{
+  width: 100%;
+  max-height: 18rem;
+  height: 250px !important;
+  object-fit: cover;
+}
+
+.cardd-title{
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.cardd-subtitle{
+  font-size: 1rem;
+  font-weight: 500;
+  color: red;
+}
+
+.card-address{
+  font-size: 1rem;
+}
+.abs1{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: red;
+  border-bottom-right-radius: 10px;
+  color: white;
+  font-size: 0.85rem;
+}
+.abs2{
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: white;
+  font-size: 0.85rem;
+  border-bottom-left-radius: 10px;
+}
