@@ -3,7 +3,9 @@ import Nformatter from "@/components/Nformatter";
 async function getData(slug) {
   const res = await fetch(
     "https://api.condomonk.ca/api/preconstructions-detail/" + slug,
-    { next: { revalidate: 10 } }
+    {
+      next: { revalidate: 10 },
+    }
   );
 
   if (!res.ok) {
@@ -15,6 +17,20 @@ async function getData(slug) {
 
 export default async function Home({ params }) {
   const data = await getData(params.slug);
+
+  const newImages = (images) => {
+    let neImgs = images;
+    neImgs.forEach((image) => {
+      image.image = "https://api.condomonk.ca" + image.image;
+    });
+    for (let i = images.length; i < 6; i++) {
+      neImgs.push({
+        id: 0,
+        image: "https://condomonk.ca/noimage.webp",
+      });
+    }
+    return neImgs;
+  };
 
   const convDash = (add) => {
     var result = add.split(" ").join("-");
@@ -41,22 +57,25 @@ export default async function Home({ params }) {
       <div className="pt-1">
         <div className="container">
           <div className="my-3 grid-cont">
-            {data.image?.slice(0, 7).map((image, no) => (
-              <a
-                href={`https://api.condomonk.ca${image.image}`}
-                className={
-                  "position-relative g-item grid-item" + parseInt(no + 1)
-                }
-              >
-                <img
-                  alt={`${data.project_name} located at ${
-                    data.project_address
-                  } image ${no + 1}`}
-                  className="img-fluid w-100 h-100 rounded-mine"
-                  src={`https://api.condomonk.ca${image.image}`}
-                />
-              </a>
-            ))}
+            {newImages(data.image)
+              ?.slice(0, 7)
+              .map((image, no) => (
+                <a
+                  href={`${image.image}`}
+                  className={
+                    "position-relative g-item grid-item" + parseInt(no + 1)
+                  }
+                  key={no}
+                >
+                  <img
+                    alt={`${data.project_name} located at ${
+                      data.project_address
+                    } image ${no + 1}`}
+                    className="img-fluid w-100 h-100 rounded-mine"
+                    src={`${image.image}`}
+                  />
+                </a>
+              ))}
           </div>
           <div className="container px-0 px-sm-3 pt-3">
             <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 justify-content-center">

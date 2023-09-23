@@ -27,10 +27,25 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="collapsibleNavId">
           <ul className="navbar-nav mx-auto mt-2 mt-lg-0">
-            <li className="nav-item">
-              <a className="nav-link active" href="#" aria-current="page">
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle active fw-bold"
+                href="#"
+                id="dropdownId"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
                 Condos For Sale
               </a>
+              <div className="dropdown-menu" aria-labelledby="dropdownId">
+                <Link className="dropdown-item" href={"/toronto"}>
+                  Toronto
+                </Link>
+                <Link className="dropdown-item" href={"/brampton"}>
+                  Brampton
+                </Link>
+              </div>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
@@ -57,7 +72,7 @@ const Navbar = () => {
             className="btn btn-danger my-2 my-sm-0 rounded-pill"
             type="submit"
           >
-            Platinum Access
+            Call Now
           </button>
         </div>
       </div>

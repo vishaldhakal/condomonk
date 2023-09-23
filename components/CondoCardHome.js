@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Nformatter from "./Nformatter";
 
-export default function CondoCard(props) {
+export default function CondoCardHome(props) {
   function checkPricing(price) {
     if (price >= 0) {
       return `Starting from low $${Nformatter(price, 2)}`;
@@ -34,7 +34,7 @@ export default function CondoCard(props) {
             {props.image.length > 0 ? (
               <img
                 loading="lazy"
-                src={`https://api.condomonk.ca${props.image[0].image}`}
+                src={`${props.image[0].image}`}
                 layout="responsive"
                 className="img-fluid condocard-img-top"
                 alt={`${props.project_name} located at ${props.project_address} image`}
