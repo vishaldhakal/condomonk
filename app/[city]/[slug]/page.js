@@ -23,7 +23,7 @@ export default async function Home({ params }) {
     neImgs.forEach((image) => {
       image.image = "https://api.condomonk.ca" + image.image;
     });
-    for (let i = images.length; i < 6; i++) {
+    for (let i = images.length; i < 7; i++) {
       neImgs.push({
         id: 0,
         image: "https://condomonk.ca/noimage.webp",
