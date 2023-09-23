@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const ListingTable = ({ preconstructions, handleDelete }) => {
   return (
     <div className="container">
@@ -22,7 +24,12 @@ const ListingTable = ({ preconstructions, handleDelete }) => {
                 <td>{preconstruction.status}</td>
                 <td>{preconstruction.project_type}</td>
                 <td>
-                  <button className="btn btn-sm btn-outline-dark">Edit</button>
+                  <Link
+                    href={"/admin/upload/" + preconstruction.id}
+                    className="btn btn-sm btn-outline-dark"
+                  >
+                    Edit
+                  </Link>
                   <span className="mx-2"></span>
                   <button
                     className="btn btn-sm btn-outline-danger"

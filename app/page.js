@@ -22,7 +22,7 @@ export default async function Home(props) {
             <p className="text-mine">Sell all</p>
           </div>
           <div className="py-2"></div>
-          <div className="row row-cols-2 row-cols-md-4 gy-4">
+          <div className="row row-cols-1 row-cols-md-4 gy-4">
             {data.results.map((item) => (
               <div className="col" key={item.id}>
                 <CondoCardHome {...item} />

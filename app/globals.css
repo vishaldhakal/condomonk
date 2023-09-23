@@ -31,6 +31,14 @@ a:hover {
   }
 }
 
+@media (min-width: 1200px) {
+
+  #main,
+  #footer {
+    margin-left: 300px;
+  }
+}
+
 
 /*--------------------------------------------------------------
 # Override some default Bootstrap stylings

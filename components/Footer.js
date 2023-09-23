@@ -1,8 +1,14 @@
-import React from "react";
+"use client";
+import { usePathname } from "next/navigation";
 
 const Footer = () => {
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/admin")) {
+    return <></>;
+  }
   return (
-    <footer id="footer" className="footer mt-5">
+    <footer className="footer mt-5">
       <div className="container footer-top">
         <div className="row gy-4">
           <div className="col-lg-5 col-md-12 footer-about">

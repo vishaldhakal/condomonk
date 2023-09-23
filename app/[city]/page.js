@@ -32,7 +32,7 @@ export default async function Home({ params }) {
             </h2>
           </div>
           <div className="py-2"></div>
-          <div className="row row-cols-2 row-cols-md-4">
+          <div className="row row-cols-1 row-cols-md-4">
             {data.map((item) => (
               <div className="col" key={item.id}>
                 <CondoCard {...item} />

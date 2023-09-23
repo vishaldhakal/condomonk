@@ -95,23 +95,26 @@ export default function Update({ params }) {
 
   const handleChangeCity = (e) => {
     const { id, value } = e.target;
-    let mycity = {
-      name: value,
+    let mycity = cities.filter((city) => city.name === value);
+    let newcity = {
+      id: mycity[0].id,
+      name: mycity[0].name,
+      slug: mycity[0].slug,
     };
     setPredata((prevState) => ({
       ...prevState,
-      [id]: mycity,
+      [id]: newcity,
     }));
   };
 
   const handleChangeDev = (e) => {
     const { id, value } = e.target;
-    let mydev = {
-      name: value,
-    };
+
+    let mydev = developers.filter((dev) => dev.name === value);
+
     setPredata((prevState) => ({
       ...prevState,
-      [id]: mydev,
+      [id]: mydev[0],
     }));
   };
 
@@ -144,11 +147,15 @@ export default function Update({ params }) {
     };
 
     axios
-      .post("https://api.condomonk.ca/api/preconstructions/", alldata, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .put(
+        `https://api.condomonk.ca/api/preconstructions/${predata.id}/`,
+        alldata,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
         console.log(res.data);
         setRefetch(!refetch);
@@ -523,7 +530,7 @@ export default function Update({ params }) {
               className="btn btn-success btn-lg shadow-lg"
               onClick={(e) => handleSubmit(e)}
             >
-              Upload now
+              Update now
             </button>
           </div>
         </div>
