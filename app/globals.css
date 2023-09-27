@@ -913,3 +913,68 @@ label {
   display: inline-block;
   line-height: 1;
 }
+
+.properti_city {
+  margin-bottom: 30px;
+  position: relative;
+}
+.properti_city .thumb {
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.properti_city .thumb img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 300px;
+}
+.properti_city .overlay {
+  background: linear-gradient(180deg,hsla(0,0%,100%,.01),#1d293e);
+  border-radius: 0 0 10px 10px;
+  height: 300px !important;
+  bottom: 0;
+  height: inherit;
+  left: 0;
+  position: absolute;
+  right: 0;
+  text-align: center;
+}
+.properti_city .overlay .details {
+  bottom: 20px;
+  left: 0;
+  color: white;
+  position: absolute;
+  right: 0;
+  text-shadow: 0 0 10px #000000;
+}
+.properti_city .overlay .details h4{
+  font-weight: 700;
+}
+.properti_city .overlay .details p{
+  font-size: 0.8rem;
+}
+.fw-mine{
+  font-weight: 800;
+}
+.accent-line{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.accent-line:before {
+  background-color: red;
+  height: 2px;
+  width: 2em;
+  margin-right: 0.75em;
+  content: "";
+}
+.accent-line:after {
+  width: 2em;
+  height: 2px;
+  background-color: red;
+  margin-left: 0.75em;
+  content: "";
+}

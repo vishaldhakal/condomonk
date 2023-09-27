@@ -1,4 +1,5 @@
 import CondoCardHome from "@/components/CondoCardHome";
+import Link from "next/link";
 
 async function getData() {
   const res = await fetch("https://api.condomonk.ca/api/preconstructions", {
@@ -34,6 +35,80 @@ export default async function Home(props) {
                 <CondoCardHome {...item} />
               </div>
             ))}
+          </div>
+          <div className="py-5 my-2"></div>
+          <h2 className="fw-mine text-center mb-5 accent-line">
+            Explore New Construction Condos in These Cities
+          </h2>
+          <div className="row">
+            <div className="col-4 col-md-4 col-xl-4">
+              <Link className="d-block properti_city" href={"/toronto"}>
+                <div className="thumb">
+                  <img
+                    src="/cities/toronto.jpg"
+                    alt="toronto"
+                    className="img-fluid"
+                  />
+                </div>
+                <div className="overlay">
+                  <div className="details">
+                    <h4>Toronto</h4>
+                    <p>Explore Toronto's finest New construction condos</p>
+                  </div>
+                </div>
+              </Link>
+            </div>
+            <div className="col-4 col-lg-8 col-xl-8">
+              <Link className="d-block properti_city" href={"/brampton"}>
+                <div className="thumb">
+                  <img
+                    src="/cities/brampton.jpg"
+                    alt="brampton"
+                    className="img-fluid"
+                  />
+                </div>
+                <div className="overlay">
+                  <div className="details">
+                    <h4>Brampton</h4>
+                    <p>Brampton's finest New construction condos</p>
+                  </div>
+                </div>
+              </Link>
+            </div>
+            <div className="col-4 col-lg-8 col-xl-8">
+              <Link className="d-block properti_city" href={"/etobicoke"}>
+                <div className="thumb">
+                  <img
+                    src="/cities/etobicoke.jpg"
+                    alt="etobicoke"
+                    className="img-fluid"
+                  />
+                </div>
+                <div className="overlay">
+                  <div className="details">
+                    <h4>Etobicoke</h4>
+                    <p>Etobicoke's finest New construction condos</p>
+                  </div>
+                </div>
+              </Link>
+            </div>
+            <div className="col-4 col-md-4 col-xl-4">
+              <Link className="d-block properti_city" href={"/mississauga"}>
+                <div className="thumb">
+                  <img
+                    src="/cities/mississauga.jpg"
+                    alt="mississauga"
+                    className="img-fluid"
+                  />
+                </div>
+                <div className="overlay">
+                  <div className="details">
+                    <h4>Mississauga</h4>
+                    <p>Mississauga's finest New construction condos</p>
+                  </div>
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
