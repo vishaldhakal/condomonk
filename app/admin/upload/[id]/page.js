@@ -574,6 +574,7 @@ export default function Update({ params }) {
                     <select
                       className="form-select"
                       id="city"
+                      value={predata.city.name}
                       onChange={(e) => handleChangeCity(e)}
                       aria-label="Floating label select example"
                     >
