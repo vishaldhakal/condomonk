@@ -17,8 +17,8 @@ export default function Update({ params }) {
     project_type: "Condo",
     description: "",
     project_address: "",
-    builder_sales_email: "",
-    builder_sales_phone: "",
+    occupancy: "",
+    no_of_units: "",
     co_op_available: false,
     occupancy: "",
     status: "",
@@ -133,8 +133,8 @@ export default function Update({ params }) {
       predata.status === "" ||
       predata.city.name === "" ||
       predata.developer.name === "" ||
-      predata.builder_sales_email === "" ||
-      predata.builder_sales_phone === ""
+      predata.occupancy === "" ||
+      predata.no_of_units === ""
     ) {
       swal("Please fill all the fields", "", "error");
       return;
@@ -315,13 +315,12 @@ export default function Update({ params }) {
                       type="text"
                       className="form-control"
                       min="0"
-                      id="builder_sales_email"
-                      value={predata.builder_sales_email}
+                      id="occupancy"
+                      value={predata.occupancy}
                       onChange={(e) => handleChange(e)}
                     />
-                    <label htmlFor="builder_sales_email">
-                      Builders Sales Email{" "}
-                      <span className="text-danger">*</span>
+                    <label htmlFor="occupancy">
+                      Occupancy <span className="text-danger">*</span>
                     </label>
                   </div>
                 </div>
@@ -331,13 +330,12 @@ export default function Update({ params }) {
                       type="text"
                       className="form-control"
                       min="0"
-                      id="builder_sales_phone"
-                      value={predata.builder_sales_phone}
+                      id="no_of_units"
+                      value={predata.no_of_units}
                       onChange={(e) => handleChange(e)}
                     />
-                    <label htmlFor="builder_sales_phone">
-                      Builders Sales Phone{" "}
-                      <span className="text-danger">*</span>
+                    <label htmlFor="no_of_units">
+                      No of units <span className="text-danger">*</span>
                     </label>
                   </div>
                 </div>
@@ -370,19 +368,21 @@ export default function Update({ params }) {
                 </div>
                 <div className="col-4">
                   <div className="form-floating w-100">
-                    <select
+                    <input
+                      list="devs"
                       className="form-select"
                       id="developer"
                       onChange={(e) => handleChangeDev(e)}
-                      aria-label="Floating label select example"
-                    >
+                    />
+                    <datalist id="devs">
+                      <option value="">---</option>
                       {developers &&
                         developers.map((developer) => (
                           <option key={developer.id} value={developer.name}>
                             {developer.name}
                           </option>
                         ))}
-                    </select>
+                    </datalist>
                     <label htmlFor="developer">
                       Developer <span className="text-danger">*</span>
                     </label>

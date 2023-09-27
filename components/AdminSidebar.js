@@ -69,12 +69,6 @@ const AdminSidebar = () => {
             <span>News</span>
           </Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link" href="#">
-            <i className="bi bi-people"></i>
-            <span>Assignments</span>
-          </Link>
-        </li>
       </ul>
     </aside>
   );

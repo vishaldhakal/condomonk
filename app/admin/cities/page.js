@@ -3,11 +3,14 @@ import { useState, useEffect } from "react";
 import CityTable from "@/components/CityTable";
 import axios from "axios";
 import swal from "sweetalert";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function Cities() {
   let stat = {
     id: 1,
     name: "",
+    details: "",
   };
   const [isEdit, setIsEdit] = useState(false);
   const [refetch, setRefetcch] = useState(true);
@@ -150,7 +153,7 @@ export default function Cities() {
     <>
       {modalevent && (
         <div className="modal">
-          <section className="modal-main2 rounded-4">
+          <section className="modal-main rounded-4">
             <div className="p-3 py-4 bg-light">
               <div className="d-flex justify-content-between align-items-center">
                 <p className="fw-bold mb-0">Upload City</p>
@@ -189,6 +192,57 @@ export default function Cities() {
                         City Name <span className="text-danger">*</span>
                       </label>
                     </div>
+                  </div>
+                  <div className="col-12">
+                    <ReactQuill
+                      theme="snow"
+                      value={citydata.details}
+                      style={{ height: "450px", marginBottom: "80px" }}
+                      modules={{
+                        toolbar: [
+                          [{ header: "1" }, { header: "2" }, { font: [] }],
+                          [{ size: [] }],
+                          [
+                            "bold",
+                            "italic",
+                            "underline",
+                            "strike",
+                            "blockquote",
+                          ],
+                          [
+                            { list: "ordered" },
+                            { list: "bullet" },
+                            { indent: "-1" },
+                            { indent: "+1" },
+                          ],
+                          ["link", "image", "video"],
+                          ["clean"],
+                        ],
+                        clipboard: {
+                          // toggle to add extra line breaks when pasting HTML:
+                          matchVisual: false,
+                        },
+                      }}
+                      formats={[
+                        "header",
+                        "bold",
+                        "italic",
+                        "underline",
+                        "strike",
+                        "blockquote",
+                        "list",
+                        "bullet",
+                        "link",
+                        "image",
+                        "video",
+                      ]}
+                      onChange={(newText) =>
+                        setCityData((prevState) => ({
+                          ...prevState,
+                          ["details"]: newText,
+                        }))
+                      }
+                    />
                   </div>
                 </div>
               </div>
