@@ -1,9 +1,24 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const Navbar = () => {
   const pathname = usePathname();
+
+  const [cities, setCities] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://api.condomonk.ca/api/city/")
+      .then((res) => {
+        setCities(res.data.results);
+      })
+      .catch((err) => {
+        console.log(err.data);
+      });
+  }, []);
 
   if (pathname.startsWith("/admin")) {
     return <></>;
@@ -39,12 +54,11 @@ const Navbar = () => {
                 Condos For Sale
               </a>
               <div className="dropdown-menu" aria-labelledby="dropdownId">
-                <Link className="dropdown-item" href={"/toronto"}>
-                  Toronto
-                </Link>
-                <Link className="dropdown-item" href={"/brampton"}>
-                  Brampton
-                </Link>
+                {cities.map((city) => (
+                  <Link className="dropdown-item" href={`/${city.slug}`}>
+                    {city.name}
+                  </Link>
+                ))}
               </div>
             </li>
             <li className="nav-item">

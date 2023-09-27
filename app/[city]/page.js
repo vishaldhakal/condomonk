@@ -52,11 +52,29 @@ export default async function Home({ params }) {
           </div>
           <div className="py-2"></div>
           <div className="row row-cols-1 row-cols-md-4">
-            {data.map((item) => (
-              <div className="col" key={item.id}>
-                <CondoCard {...item} />
+            {data.preconstructions &&
+              data.preconstructions.map((item) => (
+                <div className="col" key={item.id}>
+                  <CondoCard {...item} />
+                </div>
+              ))}
+          </div>
+          <div className="pt-5 mt-5"></div>
+          <div className="pt-5 mt-5"></div>
+          <div className="pt-5 mt-5"></div>
+          <div className="py-5">
+            {data.city && (
+              <div className="container" id="make-img-responsive">
+                <div className="row row-cols-1 g-0">
+                  <div
+                    className="col-12 mt-mine px-3 max-w-100"
+                    dangerouslySetInnerHTML={{
+                      __html: data.city.details,
+                    }}
+                  ></div>
+                </div>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </div>
