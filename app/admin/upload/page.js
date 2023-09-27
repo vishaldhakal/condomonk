@@ -20,7 +20,7 @@ export default function Upload() {
     occupancy: "",
     no_of_units: "",
     co_op_available: false,
-    status: "",
+    status: "Upcoming",
     developer: {
       name: "",
     },
@@ -281,7 +281,7 @@ export default function Upload() {
                       <option value="Sold out">Sold out</option>
                       <option value="Planning Phase">Planning Phase</option>
                     </select>
-                    <label htmlFor="developer">
+                    <label htmlFor="status">
                       Status <span className="text-danger">*</span>
                     </label>
                   </div>
@@ -367,10 +367,10 @@ export default function Upload() {
                       list="devs"
                       className="form-select"
                       id="developer"
+                      value={predata.developer.name}
                       onChange={(e) => handleChangeDev(e)}
                     />
                     <datalist id="devs">
-                      <option value="">---</option>
                       {developers &&
                         developers.map((developer) => (
                           <option key={developer.id} value={developer.name}>
@@ -398,7 +398,8 @@ export default function Upload() {
         <div className="container-fluid px-minn pb-5 mydetaill">
           <p className="fs-5 fw-bold">Enter Description about the Project</p>
           <p className="my-3">
-            The most anticipated preconstruction project in CITY NAME ...
+            The most anticipated preconstruction project in CITY NAME ... [
+            Summary, Descriptions, Deposite Structure, Amenities ]
           </p>
           <ReactQuill
             theme="snow"

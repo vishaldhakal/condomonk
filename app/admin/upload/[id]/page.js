@@ -21,7 +21,7 @@ export default function Update({ params }) {
     no_of_units: "",
     co_op_available: false,
     occupancy: "",
-    status: "",
+    status: "Upcoming",
     developer: {
       name: "",
     },
@@ -177,6 +177,70 @@ export default function Update({ params }) {
   const handleDeleteImage = (image) => {
     let newimages = uploadimages.filter((p) => p !== image);
     setUploadImages(newimages);
+  };
+
+  const handleDeleteUploadedImage = (image) => {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this image!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        axios
+          .delete(`https://api.condomonk.ca/api/delete-image/${image.id}/`)
+          .then((res) => {
+            console.log(res.data);
+            setRefetch(!refetch);
+            swal("Image Deleted Successfully", "", "success");
+          })
+          .catch((err) => {
+            console.log(err.data);
+            swal("Something went wrong", "", "error");
+          });
+      } else {
+        swal({
+          title: "Cancelled!",
+          text: "Your image is safe!",
+          icon: "error",
+          timer: 1000,
+          buttons: false,
+        });
+      }
+    });
+  };
+
+  const handleDeleteUploadedPlan = (plan) => {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this plan!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        axios
+          .delete(`https://api.condomonk.ca/api/delete-floorplan/${plan.id}/`)
+          .then((res) => {
+            console.log(res.data);
+            setRefetch(!refetch);
+            swal("Plan Deleted Successfully", "", "success");
+          })
+          .catch((err) => {
+            console.log(err.data);
+            swal("Something went wrong", "", "error");
+          });
+      } else {
+        swal({
+          title: "Cancelled!",
+          text: "Your plan is safe!",
+          icon: "error",
+          timer: 1000,
+          buttons: false,
+        });
+      }
+    });
   };
 
   return (
@@ -372,10 +436,10 @@ export default function Update({ params }) {
                       list="devs"
                       className="form-select"
                       id="developer"
+                      value={predata.developer.name}
                       onChange={(e) => handleChangeDev(e)}
                     />
                     <datalist id="devs">
-                      <option value="">---</option>
                       {developers &&
                         developers.map((developer) => (
                           <option key={developer.id} value={developer.name}>
@@ -403,7 +467,8 @@ export default function Update({ params }) {
         <div className="container-fluid px-minn pb-5 mydetaill">
           <p className="fs-5 fw-bold">Enter Description about the Project</p>
           <p className="my-3">
-            The most anticipated preconstruction project in CITY NAME ...
+            The most anticipated preconstruction project in CITY NAME ... [
+            Summary, Descriptions, Deposite Structure, Amenities ]
           </p>
           <ReactQuill
             theme="snow"
@@ -449,10 +514,46 @@ export default function Update({ params }) {
             }
           />
           <div className="row row-cols-2 pt-4 pb-3">
+            <div className="col-6 pb-3">
+              <h5 className="fw-bold">Uploaded Images</h5>
+              <div className="row row-cols-3">
+                {predata.image &&
+                  predata.image.map((image) => (
+                    <div className="col-4">
+                      <img src={image.image} className="img-fluid" />
+                      <button
+                        className="btn btn-sm btn-danger mt-2"
+                        onClick={() => handleDeleteUploadedImage(image)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  ))}
+              </div>
+            </div>
+            <div className="col-6 pb-3">
+              <h5 className="fw-bold">Uploaded Plans</h5>
+              <div className="row row-cols-3">
+                {predata.floorplan &&
+                  predata.floorplan.map((plan) => (
+                    <div className="col-4">
+                      <img src={plan.floorplan} className="img-fluid" />
+                      <button
+                        className="btn btn-sm btn-danger mt-2"
+                        onClick={() => handleDeleteUploadedPlan(plan)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          </div>
+          <div className="row row-cols-2 pt-4 pb-3">
             <div className="col shadow-lg">
               <div className="py-3">
                 <label htmlFor="images" className="fw-bold">
-                  Upload Photos
+                  Upload New Photos
                 </label>
                 <br />
                 <br />
@@ -488,7 +589,7 @@ export default function Update({ params }) {
             <div className="col shadow-lg">
               <div className="py-3">
                 <label htmlFor="plans" className="fw-bold">
-                  Upload Plans
+                  Upload New Plans
                 </label>
                 <br />
                 <br />
