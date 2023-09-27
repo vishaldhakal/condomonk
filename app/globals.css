@@ -746,7 +746,7 @@ label {
   position: sticky;
   bottom: 0 !important;
   right: 0 !important;
-  z-index: 99999999;
+  z-index: 99;
 }
 .modal {
   position: fixed !important;

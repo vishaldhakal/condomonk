@@ -29,6 +29,15 @@ export default function Upload() {
     },
   };
 
+  let developer_stat = {
+    id: 1,
+    name: "",
+    phone: "",
+    website_link: "",
+    details: "",
+    image: null,
+  };
+
   const routee = useRouter();
   const [predata, setPredata] = useState(stat);
   const [cities, setCities] = useState([]);
@@ -36,7 +45,42 @@ export default function Upload() {
   const [refetch, setRefetch] = useState(true);
   const [uploadplans, setUploadPlans] = useState([]);
   const [uploadimages, setUploadImages] = useState([]);
-  const [editorLoaded, setEditorLoaded] = useState(false);
+  const [developerdata, setDeveloperData] = useState(developer_stat);
+  const [modaldeveloper, setModalDeveloper] = useState(false);
+
+  const handleCreateDeveloper = (e) => {
+    e.preventDefault();
+    console.log(developerdata);
+    if (
+      developerdata.name == "" ||
+      developerdata.phone == "" ||
+      developerdata.website_link == "" ||
+      developerdata.details == "" ||
+      developerdata.image == null
+    ) {
+      swal({
+        title: "Error!",
+        text: "Please fill all the fields!",
+        icon: "error",
+        button: "Ok",
+      });
+      return;
+    }
+    axios
+      .post("https://api.condomonk.ca/api/developers/", developerdata, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        setRefetch(!refetch);
+        setDeveloperData(stat);
+        setModalDeveloper(false);
+      })
+      .catch((err) => {
+        console.log(err.data);
+      });
+  };
 
   const handleImagesChange = (e) => {
     const prevImages = uploadimages;
@@ -49,10 +93,6 @@ export default function Upload() {
     const selectedPlans = Array.from(e.target.files);
     setUploadPlans([...prevPlans, ...selectedPlans]);
   };
-
-  useEffect(() => {
-    setEditorLoaded(true);
-  }, []);
 
   useEffect(() => {
     axios
@@ -90,6 +130,20 @@ export default function Upload() {
       ...prevState,
       [id]: value,
     }));
+  };
+
+  const handleChangeDeveloperData = (e) => {
+    const { id, value } = e.target;
+    setDeveloperData((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }));
+  };
+
+  const handleImageChange = (e) => {
+    let newData = { ...developerdata };
+    newData["image"] = e.target.files[0];
+    setDeveloperData(newData);
   };
 
   const handleChangeCity = (e) => {
@@ -176,6 +230,115 @@ export default function Upload() {
 
   return (
     <>
+      {modaldeveloper && (
+        <div className="modal">
+          <section className="modal-main rounded-4">
+            <div className="p-3 py-4 bg-light">
+              <div className="d-flex justify-content-between align-items-center">
+                <p className="fw-bold mb-0">Upload Developer</p>
+                <button
+                  className="btn bg-white btn-outline-danger p-1 py-0"
+                  onClick={() => {
+                    setModalDeveloper(false);
+                    setDeveloperData(stat);
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="#ff0000"
+                    className="bi bi-x"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                  </svg>
+                </button>
+              </div>
+              <div className="py-3 mt-2">
+                <div className="row row-cols-1 gy-4">
+                  <div className="col-4">
+                    <div className="form-floating w-100">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="name"
+                        value={developerdata.name}
+                        onChange={(e) => handleChangeDeveloperData(e)}
+                      />
+                      <label htmlFor="name">
+                        Developer Name <span className="text-danger">*</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div className="col-4">
+                    <div className="form-floating w-100">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="phone"
+                        value={developerdata.phone}
+                        onChange={(e) => handleChangeDeveloperData(e)}
+                      />
+                      <label htmlFor="phone">
+                        Phone <span className="text-danger">*</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div className="col-4">
+                    <div className="form-floating w-100">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="website_link"
+                        value={developerdata.website_link}
+                        onChange={(e) => handleChangeDeveloperData(e)}
+                      />
+                      <label htmlFor="website_link">
+                        Website Link <span className="text-danger">*</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div className="col-4">
+                    <div className="w-100">
+                      <label htmlFor="image">
+                        Logo / Banner <span className="text-danger">*</span>
+                      </label>
+                      <input
+                        type="file"
+                        className="form-control"
+                        id="image"
+                        onChange={(e) => {
+                          handleImageChange(e);
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-12">
+                    <p className="fw-bold mb-1 mt-2">
+                      About <span className="text-danger">*</span>{" "}
+                    </p>
+                    <textarea
+                      name="details"
+                      id="details"
+                      rows={8}
+                      className="textbox w-100"
+                      defaultValue={developerdata.details}
+                      onChange={(e) => handleChangeDeveloperData(e)}
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+              <button
+                className="btn btn-success mt-5 d-flex justify-content-center w-100 btn-lg"
+                onClick={(e) => handleCreateDeveloper(e)}
+              >
+                Submit
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
       <div className="bg-white">
         <div className="container-fluid px-minn">
           <div className="d-flex justify-content-between pt-5">
@@ -352,14 +515,14 @@ export default function Upload() {
                       Select City <span className="text-danger">*</span>
                     </label>
                   </div>
-                  <div className="col-12">
+                  {/* <div className="col-12">
                     <button
                       className="btn btn-outline-dark mt-2 w-100"
                       onClick={() => setModalstat(true)}
                     >
                       Add New City
                     </button>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="col-4">
                   <div className="form-floating w-100">
@@ -367,10 +530,10 @@ export default function Upload() {
                       list="devs"
                       className="form-select"
                       id="developer"
-                      value={predata.developer.name}
                       onChange={(e) => handleChangeDev(e)}
                     />
                     <datalist id="devs">
+                      <option value="">---</option>
                       {developers &&
                         developers.map((developer) => (
                           <option key={developer.id} value={developer.name}>
@@ -385,7 +548,7 @@ export default function Upload() {
                   <div className="col-12">
                     <button
                       className="btn btn-outline-dark mt-2 w-100"
-                      onClick={() => setModalstat(true)}
+                      onClick={() => setModalDeveloper(true)}
                     >
                       Add New Developer
                     </button>
