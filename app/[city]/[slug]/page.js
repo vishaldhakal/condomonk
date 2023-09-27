@@ -14,6 +14,49 @@ async function getData(slug) {
 
   return res.json();
 }
+export async function generateMetadata({ params }, parent) {
+  const data = await getData(params.slug);
+  return {
+    ...parent,
+    title:
+      data.project_name + " in " + data.city.name + "by " + data.developer.name,
+    description:
+      data.project_name +
+      " in " +
+      data.city.name +
+      "by " +
+      data.developer.name +
+      " prices starting from " +
+      Nformatter(data.price_starting_from, 2) +
+      " CAD",
+    openGraph: {
+      ...parent.openGraph,
+      title: data.project_name + " in " + data.city.name,
+      description:
+        data.project_name +
+        " in " +
+        data.city.name +
+        "by " +
+        data.developer.name +
+        " prices starting from " +
+        Nformatter(data.price_starting_from, 2) +
+        " CAD",
+    },
+    twitter: {
+      ...parent.twitter,
+      title: data.project_name + " in " + data.city.name,
+      description:
+        data.project_name +
+        " in " +
+        data.city.name +
+        "by " +
+        data.developer.name +
+        " prices starting from " +
+        Nformatter(data.price_starting_from, 2) +
+        " CAD",
+    },
+  };
+}
 
 export default async function Home({ params }) {
   const data = await getData(params.slug);

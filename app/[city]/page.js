@@ -15,12 +15,31 @@ async function getData(city) {
   return res.json();
 }
 
+const CapitalizeFirst = (city) => {
+  return city.charAt(0).toUpperCase() + city.slice(1);
+};
+
+export async function generateMetadata({ params }, parent) {
+  let city = CapitalizeFirst(params.city);
+  return {
+    ...parent,
+    title: "Preconstruction Condos in " + city,
+    description: "Preconstruction Condos in " + city,
+    openGraph: {
+      ...parent.openGraph,
+      title: "Preconstruction Condos in " + city,
+      description: "Preconstruction Condos in " + city,
+    },
+    twitter: {
+      ...parent.twitter,
+      title: "Preconstruction Condos in " + city,
+      description: "Preconstruction Condos in " + city,
+    },
+  };
+}
+
 export default async function Home({ params }) {
   const data = await getData(params.city);
-
-  const CapitalizeFirst = (city) => {
-    return city.charAt(0).toUpperCase() + city.slice(1);
-  };
 
   return (
     <>
