@@ -13,18 +13,21 @@ export default function Home() {
   });
   const [preconstructions, setPreConstructions] = useState([]);
   const [refetch, setRefetch] = useState(true);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     axios
-      .get("https://api.condomonk.ca/api/preconstructions/")
+      .get("https://api.condomonk.ca/api/preconstructions/?page=" + page)
       .then((res) => {
         console.log(res.data.results);
         setPreConstructions(res.data.results);
+        setTotalPages(Math.ceil(res.data.count / 10));
       })
       .catch((err) => {
         console.log(err.data);
       });
-  }, [refetch]);
+  }, [refetch, page]);
 
   const handleDelete = (e, id) => {
     swal({
@@ -64,6 +67,19 @@ export default function Home() {
       .catch((err) => {
         console.log(err.data);
       });
+  }
+
+  function checkPrev() {
+    if (page === 1) {
+      return false;
+    }
+    return true;
+  }
+  function checkNext() {
+    if (preconstructions && page === totalPages) {
+      return false;
+    }
+    return true;
   }
 
   return (
@@ -126,6 +142,27 @@ export default function Home() {
             </Link>
           </div>
         </div>
+      </div>
+      <div className="d-flex justify-content-between align-items-center">
+        <button
+          className="btn btn-lg btn-dark me-4"
+          onClick={() => setPage(page - 1)}
+          disabled={page === 1}
+        >
+          <i className="bi bi-arrow-left me-2"></i>
+          Previous Page
+        </button>
+        <span className="fw-bold">
+          Page {page} of {totalPages}
+        </span>
+        <button
+          className="btn btn-lg btn-dark"
+          onClick={() => setPage(page + 1)}
+          disabled={page === totalPages}
+        >
+          Next Page
+          <i className="bi bi-arrow-right ms-2"></i>
+        </button>
       </div>
       <div className="mt-4"></div>
       <ListingTable

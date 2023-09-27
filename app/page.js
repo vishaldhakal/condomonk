@@ -2,9 +2,12 @@ import CondoCardHome from "@/components/CondoCardHome";
 import Link from "next/link";
 
 async function getData() {
-  const res = await fetch("https://api.condomonk.ca/api/preconstructions", {
-    next: { revalidate: 10 },
-  });
+  const res = await fetch(
+    "https://api.condomonk.ca/api/preconstructions?page_size=16",
+    {
+      next: { revalidate: 10 },
+    }
+  );
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -23,9 +26,8 @@ export default async function Home(props) {
               New Construction condos in Canada (2023)
             </h1>
             <p className="text-mine">
-              {data.count} New Preconstruction Condos for sale in Canada | Check
-              out plans, pricing, availability for pre construction condos in
-              Canada
+              1000+ New Preconstruction Condos for sale in Canada | Check out
+              plans, pricing, availability for pre construction condos in Canada
             </p>
           </div>
           <div className="py-2"></div>
