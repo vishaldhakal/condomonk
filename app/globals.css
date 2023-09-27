@@ -785,7 +785,9 @@ label {
 
 .main-title{
   display: inline-flex;
+  line-height: 2rem !important;
   font-weight: 800;
+  margin-bottom: 10px;
 }
 .main-title:before {
   background-color: red;
@@ -795,8 +797,8 @@ label {
   content: "";
 }
 .text-mine{
-  color: red;
-  font-weight: 600;
+  color: rgb(0, 0, 0);
+  font-weight: 500;
 }
 
 .condocard-img-top{

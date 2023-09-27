@@ -17,9 +17,15 @@ export default async function Home(props) {
     <>
       <div className="pt-5">
         <div className="container">
-          <div className="d-flex justify-content-between align-items-center">
-            <h2 className="main-title">Pre construction condos in Canada</h2>
-            <p className="text-mine">Sell all</p>
+          <div className="d-flex flex-column justify-content-start align-items-start">
+            <h1 className="main-title">
+              New Construction condos in Canada (2023)
+            </h1>
+            <p className="text-mine">
+              {data.count} New Preconstruction Condos for sale in Canada | Check
+              out plans, pricing, availability for pre construction condos in
+              Canada
+            </p>
           </div>
           <div className="py-2"></div>
           <div className="row row-cols-1 row-cols-md-4 gy-4">
