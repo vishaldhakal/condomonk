@@ -51,8 +51,9 @@ export default async function Home({ params }) {
             </h1>
             <p className="text-mine">
               {data.preconstructions.length} New Preconstruction Condos for sale
-              in Markham, Ontario | Check out plans, pricing, availability for
-              pre construction condos in Markham
+              in {CapitalizeFirst(params.city)}, Ontario | Check out plans,
+              pricing, availability for pre construction condos in{" "}
+              {CapitalizeFirst(params.city)}
             </p>
           </div>
           <div className="py-2"></div>
