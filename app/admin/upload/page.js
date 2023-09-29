@@ -173,7 +173,6 @@ export default function Upload() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    e.target.disabled = true;
     console.log(predata);
     console.log(uploadimages);
     console.log(uploadplans);
