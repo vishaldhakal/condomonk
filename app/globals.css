@@ -311,11 +311,17 @@ a:hover {
 
 .logo span {
   font-size: 26px;
-  font-weight: 700;
+  font-weight: 800;
   color: #012970;
-  font-family: "Nunito", sans-serif;
 }
-
+.btn-danger{
+  background-color: red !important;
+  border-color:red !important ;
+}
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active {
+  background-color: red !important;
+  border-color:red !important ;
+}
 .header {
   transition: all 0.5s;
   z-index: 997;

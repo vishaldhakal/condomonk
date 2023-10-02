@@ -98,11 +98,11 @@ const Footer = () => {
 
           <div className="col-lg-3 col-md-12 footer-contact text-center text-md-start">
             <h4>Contact Us</h4>
-            <p>A108 Adam Street</p>
-            <p>New York, NY 535022</p>
-            <p>United States</p>
+            <p>4 Robert speck parkway,</p>
+            <p>, Mississauga, ONTARIO</p>
+            <p>Canada</p>
             <p className="mt-4">
-              <strong>Phone:</strong> <span>+1 5589 55488 55</span>
+              <strong>Phone:</strong> <span>647 527 4970</span>
             </p>
             <p>
               <strong>Email:</strong> <span>info@condomonk.ca</span>

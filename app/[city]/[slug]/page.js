@@ -1,4 +1,5 @@
 import Nformatter from "@/components/Nformatter";
+import CondoCard from "@/components/CondoCard";
 
 async function getData(slug) {
   const res = await fetch(
@@ -14,8 +15,24 @@ async function getData(slug) {
 
   return res.json();
 }
+
+async function getRelatedData(city) {
+  const res = await fetch(
+    "https://api.condomonk.ca/api/related-precons/" + city,
+    {
+      next: { revalidate: 10 },
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
 export async function generateMetadata({ params }, parent) {
   const data = await getData(params.slug);
+
   return {
     ...parent,
     title:
@@ -60,6 +77,7 @@ export async function generateMetadata({ params }, parent) {
 
 export default async function Home({ params }) {
   const data = await getData(params.slug);
+  const related = await getRelatedData(params.city);
 
   const newImages = (images) => {
     let neImgs = images;
@@ -180,14 +198,6 @@ export default async function Home({ params }) {
                           </div>
                           <div className="mb-1">
                             <span className="me-2 fw-mine2 mb-2 fs-mine3">
-                              Co-op Available :
-                            </span>
-                            <span scope="col">
-                              {data.co_op_available ? "Yes" : "No"}
-                            </span>
-                          </div>
-                          <div className="mb-1">
-                            <span className="me-2 fw-mine2 mb-2 fs-mine3">
                               Developed by:
                             </span>
                             <span scope="col">{data.developer.name}</span>
@@ -255,6 +265,23 @@ export default async function Home({ params }) {
                   <div className="text-center"></div>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="py-5 my-5"></div>
+          <div>
+            <div className="d-flex flex-column">
+              <h2 className="main-title">
+                Similar New Construction condos in {data.city.name} ( 2023 )
+              </h2>
+            </div>
+            <div className="py-2"></div>
+            <div className="row row-cols-1 row-cols-md-4 gy-4">
+              {related &&
+                related.map((item) => (
+                  <div className="col" key={item.id}>
+                    <CondoCard {...item} />
+                  </div>
+                ))}
             </div>
           </div>
         </div>

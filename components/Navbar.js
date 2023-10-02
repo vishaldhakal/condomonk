@@ -11,10 +11,10 @@ const Navbar = ({ cities }) => {
     return <></>;
   }
   return (
-    <nav className="navbar navbar-expand-sm navbar-light bg-light py-3">
+    <nav className="navbar navbar-expand-sm navbar-light bg-white shadow-lg py-3">
       <div className="container">
-        <Link href="/" className="navbar-brand fw-bold">
-          Condomonk
+        <Link href="/" className="logo d-flex align-items-center">
+          <span>Condomonk</span>
         </Link>
         <button
           className="navbar-toggler d-lg-none"
