@@ -1,5 +1,6 @@
 import CondoCardHome from "@/components/CondoCardHome";
 import Link from "next/link";
+import BottomContactForm from "@/components/BottomContactForm";
 
 async function getData() {
   const res = await fetch(
@@ -112,6 +113,33 @@ export default async function Home(props) {
               </Link>
             </div>
           </div>
+          <div className="pt-5 mt-5"></div>
+          <div className="py-5 my-5" id="mycontact">
+            <div className="container">
+              <div className="row justify-content-center">
+                <img
+                  src="/contact-bottom-2.png"
+                  alt="dce"
+                  className="img-fluid w-25 w-smm-50 mb-3"
+                />
+              </div>
+              <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3">
+                Are you looking to buy a preconstruction home for the first time
+                ?
+              </h2>
+              <h2 className="fw-mine text-center px-md-4 fs-4">
+                Don't know where to start ? Contact Condomonk now!
+              </h2>
+              <div className="row row-cols-1 row-cols-md-3 mt-5">
+                <div className="col-md-3"></div>
+                <div className="col-md-6">
+                  <BottomContactForm></BottomContactForm>
+                </div>
+                <div className="col-md-3"></div>
+              </div>
+            </div>
+          </div>
+          <div className="pt-5 mt-5"></div>
         </div>
       </div>
     </>
