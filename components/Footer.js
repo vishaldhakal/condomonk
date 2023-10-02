@@ -12,9 +12,9 @@ const Footer = () => {
       <div className="container footer-top">
         <div className="row gy-4">
           <div className="col-lg-5 col-md-12 footer-about">
-            <a href="index.html" className="logo d-flex align-items-center">
+            <Link href="/" className="logo d-flex align-items-center">
               <span>Condomonk</span>
-            </a>
+            </Link>
             <p></p>
             <p>
               Condomonk, your premier destination for pre-construction condos in
@@ -23,18 +23,18 @@ const Footer = () => {
               for your future.
             </p>
             <div className="social-links d-flex mt-4">
-              <a href="" className="me-2">
+              <Link href="#" className="me-2">
                 <i className="bi bi-twitter"></i>
-              </a>
-              <a href="" className="me-2">
+              </Link>
+              <Link href="#" className="me-2">
                 <i className="bi bi-facebook"></i>
-              </a>
-              <a href="" className="me-2">
+              </Link>
+              <Link href="#" className="me-2">
                 <i className="bi bi-instagram"></i>
-              </a>
-              <a href="" className="me-2">
+              </Link>
+              <Link href="#" className="me-2">
                 <i className="bi bi-linkedin"></i>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -42,19 +42,34 @@ const Footer = () => {
             <h4>Locations</h4>
             <ul>
               <li>
-                <a href="#">Ajax</a>
+                <Link href="/ajax">
+                  <span>Ajax</span>
+                </Link>
               </li>
               <li>
-                <a href="#">Brampton</a>
+                <Link href="/aurora">
+                  <span>Aurora</span>
+                </Link>
               </li>
               <li>
-                <a href="#">Calgary</a>
+                <Link href="/brampton">
+                  <span>Brampton</span>
+                </Link>
               </li>
               <li>
-                <a href="#">Mississauga</a>
+                <Link href="/calgary">
+                  <span>Calgary</span>
+                </Link>
               </li>
               <li>
-                <a href="#">Milton</a>
+                <Link href="/mississauga">
+                  <span>Mississauga</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/milton">
+                  <span>Milton</span>
+                </Link>
               </li>
             </ul>
           </div>

@@ -20,7 +20,6 @@ export default function Update({ params }) {
     occupancy: "",
     no_of_units: "",
     co_op_available: false,
-    occupancy: "",
     status: "Upcoming",
     developer: {
       name: "",
