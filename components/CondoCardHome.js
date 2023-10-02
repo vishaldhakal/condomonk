@@ -3,7 +3,8 @@ import Nformatter from "./Nformatter";
 
 export default function CondoCardHome(props) {
   function checkPricing(price) {
-    if (price >= 0) {
+    //convert double to int
+    if (parseInt(price) > 0) {
       return `Starting from low $${Nformatter(price, 2)}`;
     } else {
       return `Pricing not available`;
