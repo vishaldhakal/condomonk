@@ -2,14 +2,14 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-const Footer = () => {
+const Footer = ({ cities }) => {
   const pathname = usePathname();
 
   if (pathname.startsWith("/admin")) {
     return <></>;
   }
   return (
-    <footer className="footer mt-5">
+    <footer className="footer mt-5 shadow-lg">
       <div className="container footer-top">
         <div className="row gy-4">
           <div className="col-lg-5 col-md-12 footer-about">
@@ -39,60 +39,17 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="col-lg-2 col-6 footer-links">
-            <h4>Locations</h4>
+          <div className="col-lg-4 col-6 footer-links">
+            <h4>New Construction Condos in Canada</h4>
             <ul>
-              <li>
-                <Link href="/ajax">
-                  <span>Ajax</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/aurora">
-                  <span>Aurora</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/brampton">
-                  <span>Brampton</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/calgary">
-                  <span>Calgary</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/mississauga">
-                  <span>Mississauga</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/milton">
-                  <span>Milton</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div className="col-lg-2 col-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li>
-                <a href="#">About us</a>
-              </li>
-              <li>
-                <a href="#">Events</a>
-              </li>
-              <li>
-                <a href="#">News</a>
-              </li>
-              <li>
-                <a href="#">Contact</a>
-              </li>
-              <li>
-                <a href="#">Terms</a>
-              </li>
+              {cities &&
+                cities.map((city) => (
+                  <li>
+                    <Link href={`/${city.slug}`}>
+                      <span>New construction condos in {city.name}</span>
+                    </Link>
+                  </li>
+                ))}
             </ul>
           </div>
 
@@ -113,7 +70,8 @@ const Footer = () => {
 
       <div className="container copyright text-center mt-4">
         <p>
-          © <span>Copyright</span> <strong className="px-1">Condomonk</strong>{" "}
+          ©2023 <span>Copyright</span>{" "}
+          <strong className="px-1">Condomonk</strong>{" "}
           <span>All Rights Reserved</span>
         </p>
       </div>

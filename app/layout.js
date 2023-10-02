@@ -90,7 +90,7 @@ export default async function RootLayout({ children }) {
       <body className={montserrat.className}>
         <Navbar cities={cities}></Navbar>
         {children}
-        <Footer></Footer>
+        <Footer cities={cities}></Footer>
       </body>
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

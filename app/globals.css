@@ -816,12 +816,12 @@ label {
 
 .cardd-title{
   font-size: 1.3rem;
-  font-weight: bold;
+  font-weight: 800;
 }
 
 .cardd-subtitle{
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   color: red;
 }
 
@@ -884,7 +884,7 @@ label {
 }
 
 .footer {
-  background-color: #f4f4f4;
+  background-color: #ffffff;
   font-size: 14px;
   padding-bottom: 50px;
 }
@@ -917,7 +917,7 @@ label {
 .footer .footer-links ul a {
   color: black;
   display: inline-block;
-  line-height: 1;
+  line-height: 1.2rem;
 }
 
 .properti_city {
@@ -991,4 +991,80 @@ label {
 .card-secondary-title{
   font-size: 0.8rem !important;
   margin-top: 0.3rem;
+  color: #585858;
+}
+.navbar-nav .nav-item .nav-link{
+  font-weight: 500;
+  color: black !important;
+}
+
+.fields {
+  width: 100%;
+  padding: 1.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #f1f3fa;
+}
+
+.fields:focus {
+  outline-color: black !important;
+}
+
+.colo-mine {
+  color: #443d3d;
+}
+
+.fff {
+  background-color: rgb(255, 255, 255);
+  border-radius: 0.25rem;
+  border: 1px solid;
+  border-color: #dce0e0;
+  padding: 1rem 1rem;
+}
+
+.mess {
+  padding: 1.5rem 1rem;
+}
+
+.sendbtn {
+  background-color: #000000;
+  /*ff6200*/
+  color: white;
+  border-radius: 100px;
+  border: 1px solid #000000;
+  /*ff6200*/
+}
+
+.rounded-minetop {
+  border-radius: 0 !important;
+  border-top-left-radius: 3px !important;
+  border-bottom-left-radius: 3px !important;
+}
+
+.rounded-minetop2 {
+  border-radius: 0 !important;
+  border-top-right-radius: 3px !important;
+  border-bottom-right-radius: 3px !important;
+}
+
+.sendbtn:hover {
+  color: #000000;
+  /*ff6200*/
+  background-color: white;
+  border: 1px solid #000000;
+  /*ff6200*/
+}
+
+.btn-call {
+  background-color: red !important;
+  color: #ffffff
+    /*ff6200*/
+    !important;
+  transition: background-color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+  box-shadow: none !important;
+}
+
+.btn-call:hover {
+  background-image: linear-gradient(106deg, red, rgb(255, 57, 57));
 }

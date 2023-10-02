@@ -28,7 +28,7 @@ const Navbar = ({ cities }) => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="collapsibleNavId">
-          <ul className="navbar-nav mx-auto mt-2 mt-lg-0">
+          <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle active fw-bold"
@@ -71,7 +71,7 @@ const Navbar = ({ cities }) => {
             </li>
           </ul>
           <button
-            className="btn btn-danger my-2 my-sm-0 rounded-pill"
+            className="btn btn-danger my-2 my-sm-0 rounded-pill ms-md-3"
             type="submit"
           >
             Call Now

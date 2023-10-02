@@ -63,12 +63,10 @@ export default function CondoCard(props) {
             <h4 className="mb-2 cardd-subtitle">
               {checkPricing(props.price_starting_from)}
             </h4>
-            <h5 className="fs-mine text-limit card-address">
-              {props.project_type} in {props.city.name}
-            </h5>
             <p className="mb-0">{props.project_address}</p>
             <p className="card-secondary-title mb-0">
-              Updated {daysCount(props.last_updated)}
+              {props.project_type} in {props.city.name} | Updated{" "}
+              {daysCount(props.last_updated)}
             </p>
           </div>
         </Link>
