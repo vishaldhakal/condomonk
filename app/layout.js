@@ -64,7 +64,19 @@ export const metadata = {
   category: "real estate",
 };
 
-export default function RootLayout({ children }) {
+async function getCities() {
+  const res = await fetch("https://api.condomonk.ca/api/all-city", {
+    next: { revalidate: 10 },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+}
+
+export default async function RootLayout({ children }) {
+  let cities = await getCities();
   return (
     <html lang="en">
       <head>
@@ -76,7 +88,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={montserrat.className}>
-        <Navbar></Navbar>
+        <Navbar cities={cities}></Navbar>
         {children}
         <Footer></Footer>
       </body>
