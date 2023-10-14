@@ -5,6 +5,7 @@ import "react-quill/dist/quill.snow.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Montserrat } from "next/font/google";
+import Providers from "./providers";
 
 const montserrat = Montserrat({ subsets: ["cyrillic"] });
 
@@ -76,7 +77,7 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={montserrat.className}>
         <Navbar cities={cities}></Navbar>
-        {children}
+        <Providers>{children}</Providers>
         <Footer cities={cities}></Footer>
       </body>
       <script
