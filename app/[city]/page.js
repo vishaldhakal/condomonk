@@ -31,6 +31,11 @@ export async function generateMetadata({ params }, parent) {
       title: "Preconstruction Condos in " + city,
       description: "Preconstruction Condos in " + city,
     },
+    twitter: {
+      ...parent.twitter,
+      title: "Preconstruction Condos in " + city,
+      description: "Preconstruction Condos in " + city,
+    },
   };
 }
 
