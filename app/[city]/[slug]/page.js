@@ -60,19 +60,6 @@ export async function generateMetadata({ params }, parent) {
         Nformatter(data.price_starting_from, 2) +
         " CAD",
     },
-    twitter: {
-      ...parent.twitter,
-      title: data.project_name + " in " + data.city.name,
-      description:
-        data.project_name +
-        " in " +
-        data.city.name +
-        "by " +
-        data.developer.name +
-        " prices starting from " +
-        Nformatter(data.price_starting_from, 2) +
-        " CAD",
-    },
   };
 }
 
