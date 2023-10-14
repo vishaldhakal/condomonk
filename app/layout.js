@@ -74,7 +74,7 @@ async function getCities() {
 export default async function RootLayout({ children }) {
   let cities = await getCities();
   return (
-    <>
+    <html lang="en">
       <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         rel="stylesheet"
@@ -91,6 +91,6 @@ export default async function RootLayout({ children }) {
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"
       ></script>
-    </>
+    </html>
   );
 }
