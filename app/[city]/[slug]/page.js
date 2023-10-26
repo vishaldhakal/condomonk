@@ -1,7 +1,7 @@
 import Nformatter from "@/components/Nformatter";
 import CondoCard from "@/components/CondoCard";
 import BottomContactForm from "@/components/BottomContactForm";
-
+import { notFound } from "next/navigation";
 async function getData(slug) {
   const res = await fetch(
     "https://api.condomonk.ca/api/preconstructions-detail/" + slug,
