@@ -39,7 +39,7 @@ const Footer = ({ cities }) => {
             </div>
           </div>
 
-          <div className="col-lg-4 col-6 footer-links">
+          <div className="col-12 col-lg-4 col-6 footer-links">
             <h4>New Construction Condos in Canada</h4>
             <ul>
               {cities &&
@@ -53,7 +53,7 @@ const Footer = ({ cities }) => {
             </ul>
           </div>
 
-          <div className="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <div className="col-lg-3 col-md-12 footer-contact text-start text-md-start">
             <h4>Contact Us</h4>
             <p>4 Robert speck parkway,</p>
             <p>, Mississauga, ONTARIO</p>
@@ -68,7 +68,7 @@ const Footer = ({ cities }) => {
         </div>
       </div>
 
-      <div className="container copyright text-center mt-4">
+      <div className="container copyright text-start text-md-center mt-4">
         <p>
           ©2023 <span>Copyright</span>{" "}
           <strong className="px-1">Condomonk</strong>{" "}

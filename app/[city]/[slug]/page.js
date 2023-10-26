@@ -108,7 +108,7 @@ export default async function Home({ params }) {
               ?.slice(0, 7)
               .map((image, no) => (
                 <a
-                  href={`${image.image}`}
+                  href="#"
                   className={
                     "position-relative g-item grid-item" + parseInt(no + 1)
                   }
@@ -214,20 +214,17 @@ export default async function Home({ params }) {
                   <div>
                     <div className="p-1">
                       <div className="walkscore-container mt-2 p-1 rounded-mine">
-                        <script type="text/javascript"></script>
-                        <div id="ws-walkscore-tile" className="ham2 img-fluid">
-                          <iframe
-                            height="500px"
-                            title="Walk Score"
-                            className="ham"
-                            width="100%"
-                            src={
-                              "https://www.walkscore.com/serve-walkscore-tile.php?wsid=&amp&s=" +
-                              convDash(data.project_address) +
-                              "&amp;o=h&amp;c=f&amp;h=500&amp;fh=0&amp;w=737"
-                            }
-                          ></iframe>
-                        </div>
+                        <iframe
+                          height="500px"
+                          title="Walk Score"
+                          className="ham"
+                          width="100%"
+                          src={
+                            "https://www.walkscore.com/serve-walkscore-tile.php?wsid=&amp&s=" +
+                            convDash(data.project_address) +
+                            "&amp;o=h&amp;c=f&amp;h=500&amp;fh=0&amp;w=737"
+                          }
+                        ></iframe>
                         <script
                           type="text/javascript"
                           src="https://www.walkscore.com/tile/show-walkscore-tile.php"
