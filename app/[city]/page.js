@@ -24,18 +24,11 @@ export async function generateMetadata({ params }, parent) {
   let city = CapitalizeFirst(params.city);
   return {
     ...parent,
+    alternates: {
+      canonical: `https://condomonk.ca/${params.city}`,
+    },
     title: "Preconstruction Condos in " + city,
     description: "Preconstruction Condos in " + city,
-    openGraph: {
-      ...parent.openGraph,
-      title: "Preconstruction Condos in " + city,
-      description: "Preconstruction Condos in " + city,
-    },
-    twitter: {
-      ...parent.twitter,
-      title: "Preconstruction Condos in " + city,
-      description: "Preconstruction Condos in " + city,
-    },
   };
 }
 

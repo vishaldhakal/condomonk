@@ -36,6 +36,9 @@ export async function generateMetadata({ params }, parent) {
 
   return {
     ...parent,
+    alternates: {
+      canonical: `https://condomonk.ca/${params.city}/${params.slug}`,
+    },
     title:
       data.project_name + " in " + data.city.name + "by " + data.developer.name,
     description:
@@ -47,32 +50,6 @@ export async function generateMetadata({ params }, parent) {
       " prices starting from " +
       Nformatter(data.price_starting_from, 2) +
       " CAD",
-    openGraph: {
-      ...parent.openGraph,
-      title: data.project_name + " in " + data.city.name,
-      description:
-        data.project_name +
-        " in " +
-        data.city.name +
-        "by " +
-        data.developer.name +
-        " prices starting from " +
-        Nformatter(data.price_starting_from, 2) +
-        " CAD",
-    },
-    twitter: {
-      ...parent.twitter,
-      title: data.project_name + " in " + data.city.name,
-      description:
-        data.project_name +
-        " in " +
-        data.city.name +
-        "by " +
-        data.developer.name +
-        " prices starting from " +
-        Nformatter(data.price_starting_from, 2) +
-        " CAD",
-    },
   };
 }
 

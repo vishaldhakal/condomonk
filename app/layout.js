@@ -9,53 +9,15 @@ import { Montserrat } from "next/font/google";
 const montserrat = Montserrat({ subsets: ["cyrillic"] });
 
 export const metadata = {
-  metadatBase: new URL("https://condomonk.ca"),
+  alternates: {
+    canonical: `https://condomonk.ca/`,
+  },
   title: "Condomonk",
   description: "Preconstruction condos sales website in Canada",
-  keywords: ["condos", "preconstruction", "Canada", "sales"],
-  applicationName: "Condomonk",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  openGraph: {
-    title: "Condomonk",
-    description: "Preconstruction condos sales website in Canada",
-    url: "https://condomonk.ca",
-    siteName: "Condomonk",
-    images: [
-      {
-        url: "https://condomonk.ca/logo.png",
-        alt: "Logo",
-      },
-    ],
-    locale: "en_CA",
-    type: "website",
-  },
-  robots: {
-    index: false,
-    follow: true,
-    nocache: true,
-    googleBot: {
-      index: true,
-      follow: false,
-      noimageindex: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
   icons: {
     icon: "/icon.png",
     shortcut: "/shortcut-icon.png",
     apple: "/apple-icon.png",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Condomonk",
-    description: "Preconstruction condos sales website in Canada",
-    images: ["https://condomonk.ca/logo.png"],
   },
   viewport: {
     width: "device-width",
