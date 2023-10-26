@@ -1,747 +1,1462 @@
-<?xml version="1.0" encoding="UTF-8"?> 
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> 
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
 <url>
   <loc>https://condomonk.ca/</loc>
-  <priority>0.2</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/brampton</loc>
-  <priority>0.2</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/burlington</loc>
-  <priority>0.7</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/calgary</loc>
-  <priority>0.9</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/cambridge</loc>
-  <priority>0.7</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/edmonton</loc>
-  <priority>0.7</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/etobicoke</loc>
-  <priority>0.3</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/kitchener</loc>
-  <priority>0.8</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/milton</loc>
-  <priority>0.6</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/mississauga</loc>
-  <priority>0.5</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/north-york</loc>
-  <priority>0.5</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/oakville</loc>
-  <priority>0.2</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/pickering</loc>
-  <priority>0.1</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/toronto</loc>
-  <priority>0.8</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/milton/thompson-towers-condo</loc>
-  <priority>0.4</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/milton/elements-condos</loc>
-  <priority>0.2</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/milton/creekside-condos</loc>
-  <priority>0.8</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/oakville/distrikt-trailside-20</loc>
-  <priority>0.8</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/pickering/vupoint-condos-128</loc>
-  <priority>0.6</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/kitchener/station-park-phase</loc>
-  <priority>0.5</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/edmonton/edge-at-larch-park-building</loc>
-  <priority>0.1</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/brampton/honeystone-homes</loc>
-  <priority>0.1</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/pickering/699-kingston-road-condos</loc>
-  <priority>0.3</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/pickering/1525-pickering-parkway-condos</loc>
-  <priority>0.4</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/north-york/addington-park-condominiums</loc>
-  <priority>0.3</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/north-york/glenhill-condominiums</loc>
-  <priority>0.2</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/kitchener/central-lofts-condos</loc>
-  <priority>0.7</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/kitchener/evergreen-at-lackner-ridge</loc>
-  <priority>1.0</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/kitchener/197-frederick-condos</loc>
-  <priority>1.0</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/oakville/berkshire-residences</loc>
-  <priority>0.5</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:10:04+00:00</lastmod>
+  <priority>1.00</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/ajax</loc>
-  <priority>0.1</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:07:59+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://condomonk.ca/aurora</loc>
-  <priority>0.7</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <loc>https://condomonk.ca/barrie</loc>
+  <lastmod>2023-10-26T10:08:00+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://condomonk.ca/cdn-cgi/l/email-protection</loc>
-  <priority>0.2</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <loc>https://condomonk.ca/brampton</loc>
+  <lastmod>2023-10-26T10:08:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/brantford</loc>
+  <lastmod>2023-10-26T10:08:01+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/burlington</loc>
+  <lastmod>2023-10-26T10:08:01+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/burnaby</loc>
+  <lastmod>2023-10-26T10:08:02+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/caledon</loc>
+  <lastmod>2023-10-26T10:08:02+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/calgary</loc>
+  <lastmod>2023-10-26T10:08:03+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/cambridge</loc>
+  <lastmod>2023-10-26T10:08:03+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/collingwood</loc>
+  <lastmod>2023-10-26T10:08:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/edmonton</loc>
+  <lastmod>2023-10-26T10:08:04+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/etobicoke</loc>
+  <lastmod>2023-10-26T10:08:05+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/georgetown</loc>
+  <lastmod>2023-10-26T10:08:05+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/grimsby</loc>
+  <lastmod>2023-10-26T10:08:05+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/guelph</loc>
+  <lastmod>2023-10-26T10:08:06+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/hamilton</loc>
+  <lastmod>2023-10-26T10:08:06+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/innisfil</loc>
+  <lastmod>2023-10-26T10:08:07+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/kitchener</loc>
+  <lastmod>2023-10-26T10:08:07+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/london</loc>
+  <lastmod>2023-10-26T10:08:07+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/markham</loc>
+  <lastmod>2023-10-26T10:08:08+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/milton</loc>
+  <lastmod>2023-10-26T10:08:08+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga</loc>
+  <lastmod>2023-10-26T10:08:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/montreal</loc>
+  <lastmod>2023-10-26T10:08:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/niagara</loc>
+  <lastmod>2023-10-26T10:08:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york</loc>
+  <lastmod>2023-10-26T10:08:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/oakville</loc>
+  <lastmod>2023-10-26T10:08:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/ottawa</loc>
+  <lastmod>2023-10-26T10:08:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/paris</loc>
+  <lastmod>2023-10-26T10:08:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/pickering</loc>
+  <lastmod>2023-10-26T10:08:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/richmond</loc>
+  <lastmod>2023-10-26T10:08:13+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/scarborough</loc>
+  <lastmod>2023-10-26T10:08:13+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/stouffville</loc>
+  <lastmod>2023-10-26T10:08:13+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/stratford</loc>
+  <lastmod>2023-10-26T10:08:14+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/surrey</loc>
+  <lastmod>2023-10-26T10:08:14+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/thorold</loc>
+  <lastmod>2023-10-26T10:08:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/toronto</loc>
+  <lastmod>2023-10-26T10:08:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/vancouver</loc>
+  <lastmod>2023-10-26T10:08:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/vaughan</loc>
+  <lastmod>2023-10-26T10:08:16+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/waterloo</loc>
+  <lastmod>2023-10-26T10:08:16+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/welland</loc>
+  <lastmod>2023-10-26T10:08:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/whitby</loc>
+  <lastmod>2023-10-26T10:08:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/oakville/oakpointe-townhomes</loc>
+  <lastmod>2023-10-26T10:08:18+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/oakville/views-on-the-preserve-condos</loc>
+  <lastmod>2023-10-26T10:08:18+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/brampton/205-queen-east-condos</loc>
+  <lastmod>2023-10-26T10:08:18+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/ruby-condominiums</loc>
+  <lastmod>2023-10-26T10:08:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/club-285-condominiums</loc>
+  <lastmod>2023-10-26T10:08:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/leona-condominiums</loc>
+  <lastmod>2023-10-26T10:08:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/3-swift-drive-condos</loc>
+  <lastmod>2023-10-26T10:08:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/ottawa/quinns-pointe</loc>
+  <lastmod>2023-10-26T10:08:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/edmonton/walker-summit-townhomes</loc>
+  <lastmod>2023-10-26T10:08:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/olive-residences</loc>
+  <lastmod>2023-10-26T10:08:22+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/yonge-city-square-residences</loc>
+  <lastmod>2023-10-26T10:08:22+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/vaughan/3300-highway-7-condos</loc>
+  <lastmod>2023-10-26T10:08:23+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/6200-yonge-street-condos</loc>
+  <lastmod>2023-10-26T10:08:23+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/vaughan/175-millway-avenue-condos</loc>
+  <lastmod>2023-10-26T10:08:23+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/vaughan/7028-yonge-street-condos</loc>
+  <lastmod>2023-10-26T10:08:24+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/marlee-condos</loc>
+  <lastmod>2023-10-26T10:08:24+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/brampton/132-church-east-condos</loc>
+  <lastmod>2023-10-26T10:08:25+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/brampton/123-railroad-street-condos</loc>
+  <lastmod>2023-10-26T10:08:25+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/brampton/200-county-court-boulevard-condos</loc>
+  <lastmod>2023-10-26T10:08:26+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/brampton/2-county-court-boulevard-condos</loc>
+  <lastmod>2023-10-26T10:08:26+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/brampton/billy</loc>
+  <lastmod>2023-10-26T10:08:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/brampton/1730-queen-street-west-condos</loc>
+  <lastmod>2023-10-26T10:08:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/brampton/bramalea-square-condos</loc>
+  <lastmod>2023-10-26T10:08:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/brampton/226-queen-street-east-condos</loc>
+  <lastmod>2023-10-26T10:08:28+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/brampton/253-queen-street-east-condos</loc>
+  <lastmod>2023-10-26T10:08:28+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/brampton/honeystone-homes</loc>
+  <lastmod>2023-10-26T10:08:29+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/brampton/daniels-mpv2-condos</loc>
-  <priority>0.3</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:29+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/brampton/bristol-place-condos</loc>
-  <priority>1.0</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:29+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/brampton/stella-2-condos</loc>
-  <priority>0.8</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:30+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/brampton/stella-at-southside-condos</loc>
-  <priority>0.9</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:30+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/brampton/omg-2-condos</loc>
-  <priority>0.5</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/brampton/bellamy-hill-road-northwest-condos</loc>
-  <priority>0.9</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/brampton/garneau-project-eleonor</loc>
-  <priority>0.8</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
-</url>
-<url>
-  <loc>https://condomonk.ca/brampton/logel-mahogany-waterside</loc>
-  <priority>0.3</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:31+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/brampton/new-claireville-condo-living</loc>
-  <priority>0.4</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/burlington/fairview-go-condos</loc>
+  <lastmod>2023-10-26T10:08:32+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/burlington/the-west-condominiums-at-stationwest</loc>
+  <lastmod>2023-10-26T10:08:32+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/burlington/409-brant-street-condos</loc>
+  <lastmod>2023-10-26T10:08:33+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/burlington/martha-james-condos</loc>
+  <lastmod>2023-10-26T10:08:33+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/burlington/waterdown-masonry-condos</loc>
+  <lastmod>2023-10-26T10:08:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/burlington/1989-appleby-line-condos</loc>
+  <lastmod>2023-10-26T10:08:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/burlington/688-brant-street-condos</loc>
+  <lastmod>2023-10-26T10:08:35+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/burlington/4274-dundas-street-condos</loc>
+  <lastmod>2023-10-26T10:08:35+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/burlington/1120-cooke-boulevard-condos</loc>
+  <lastmod>2023-10-26T10:08:35+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/burlington/illumina-condos</loc>
-  <priority>0.5</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:36+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/burlington/paradigm-grand-condos</loc>
-  <priority>0.6</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:36+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/burlington/north-shore-condos</loc>
-  <priority>0.8</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:36+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/burlington/gallery-condos-lofts</loc>
-  <priority>0.6</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:37+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/burlington/realm-ii-condos</loc>
-  <priority>0.2</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:37+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/burlington/nautique-lakefront-residences</loc>
-  <priority>0.2</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:38+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/burlington/35-plains-road-condos</loc>
-  <priority>0.7</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:38+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/burlington/beausoleil-condos</loc>
-  <priority>0.1</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:39+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/burlington/waldemar-condos</loc>
-  <priority>0.8</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:39+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/calgary/currie-225</loc>
+  <lastmod>2023-10-26T10:08:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/calgary/logel-mahogany-waterside</loc>
+  <lastmod>2023-10-26T10:08:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/calgary/cambridge-and-oxford-towers</loc>
+  <lastmod>2023-10-26T10:08:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/calgary/currie</loc>
+  <lastmod>2023-10-26T10:08:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/calgary/crosstown-residential</loc>
+  <lastmod>2023-10-26T10:08:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/calgary/the-castello-in-cornerbrook</loc>
+  <lastmod>2023-10-26T10:08:42+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/calgary/currie-condos</loc>
+  <lastmod>2023-10-26T10:08:42+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/calgary/myne-condos</loc>
-  <priority>0.5</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:43+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/calgary/truman-imperia</loc>
-  <priority>0.4</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:43+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/calgary/1714-33-street-sw</loc>
-  <priority>0.9</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:43+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/calgary/vibe-condos</loc>
-  <priority>0.2</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:44+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/calgary/the-castello-in-cornerbrook-condos</loc>
-  <priority>0.6</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:44+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/calgary/hudson-west-south-village</loc>
-  <priority>0.8</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:45+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/calgary/alto</loc>
-  <priority>0.8</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:45+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/calgary/14121-centre-street-nw</loc>
-  <priority>0.2</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:45+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/calgary/cobalt-mixed-use</loc>
-  <priority>0.7</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:46+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/calgary/1901-college-condos</loc>
-  <priority>0.8</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:46+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/calgary/2027-81-street-sw</loc>
-  <priority>0.4</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:47+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/calgary/west-33-townhomes</loc>
-  <priority>0.7</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:47+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/calgary/sage-hill-park-future-phase</loc>
-  <priority>0.5</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:48+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/calgary/highgate-condos</loc>
-  <priority>0.4</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:48+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/cambridge/the-gaslight-district-condos</loc>
+  <lastmod>2023-10-26T10:08:48+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/cambridge/river-mill-condos</loc>
+  <lastmod>2023-10-26T10:08:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/cambridge/cambridge-mill-hotel-and-residences</loc>
+  <lastmod>2023-10-26T10:08:49+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/cambridge/61-69-ainslie-street-south-condos</loc>
+  <lastmod>2023-10-26T10:08:50+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/cambridge/the-textile-factory</loc>
+  <lastmod>2023-10-26T10:08:50+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/cambridge/cachet-on-the-park-condos</loc>
-  <priority>0.6</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:51+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/cambridge/ljm-riverview-condos</loc>
-  <priority>0.4</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:51+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/cambridge/modal-at-main</loc>
-  <priority>0.3</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/edmonton/garneau-project-eleonor</loc>
+  <lastmod>2023-10-26T10:08:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/edmonton/bellamy-hill-road-northwest-condos</loc>
+  <lastmod>2023-10-26T10:08:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/edmonton/aurora-greens</loc>
+  <lastmod>2023-10-26T10:08:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/edmonton/creekwood-landing</loc>
+  <lastmod>2023-10-26T10:08:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/edmonton/vita-estates</loc>
+  <lastmod>2023-10-26T10:08:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/edmonton/west-block-glenora</loc>
+  <lastmod>2023-10-26T10:08:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/edmonton/west-secord-urban-flats</loc>
+  <lastmod>2023-10-26T10:08:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/edmonton/savida-townhomes</loc>
+  <lastmod>2023-10-26T10:08:55+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/edmonton/edge-at-larch-park-building</loc>
+  <lastmod>2023-10-26T10:08:55+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/edmonton/glenridding-townhomes-by-streetside-developments</loc>
-  <priority>0.6</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:56+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/edmonton/bentley</loc>
-  <priority>0.2</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:56+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/edmonton/tall-tower</loc>
-  <priority>0.7</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:57+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/edmonton/upper-vista</loc>
-  <priority>0.6</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:57+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/edmonton/the-hive</loc>
-  <priority>0.2</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:57+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/edmonton/10123-106-street-condos</loc>
-  <priority>0.3</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:58+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/edmonton/emerald-tower-condo</loc>
-  <priority>0.3</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:58+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/edmonton/yorkton-twin-condo-towers</loc>
-  <priority>0.4</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:59+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/edmonton/garneau-project-laurent</loc>
-  <priority>0.4</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:59+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/edmonton/aloft-skyview</loc>
-  <priority>0.4</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:08:59+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/edmonton/edge-at-larch-park</loc>
-  <priority>0.6</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/kitchener/elevate-condos-tower-3</loc>
+  <lastmod>2023-10-26T10:09:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/kitchener/station-park-phase</loc>
+  <lastmod>2023-10-26T10:09:01+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/kitchener/central-lofts-condos</loc>
+  <lastmod>2023-10-26T10:09:01+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/kitchener/evergreen-at-lackner-ridge</loc>
+  <lastmod>2023-10-26T10:09:01+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/kitchener/197-frederick-condos</loc>
+  <lastmod>2023-10-26T10:09:02+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/kitchener/deer-ridge-point</loc>
-  <priority>0.4</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:02+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/kitchener/the-flats-at-rainbow-lake</loc>
-  <priority>0.7</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:03+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/kitchener/verde-living-condos</loc>
-  <priority>0.3</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:03+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/kitchener/tek-tower-kitchener</loc>
-  <priority>0.5</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:03+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/kitchener/otis-in-the-park</loc>
-  <priority>0.5</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:04+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/kitchener/lux-condominiums</loc>
-  <priority>0.5</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:05+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/kitchener/q-condos</loc>
-  <priority>0.9</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:05+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/kitchener/duo-at-station-park</loc>
-  <priority>0.3</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:06+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/kitchener/six-sixty-belmont-condos</loc>
-  <priority>0.5</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:06+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/milton/mile-and-creek-condos-2</loc>
+  <lastmod>2023-10-26T10:09:07+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/milton/mile-and-creek-condos</loc>
+  <lastmod>2023-10-26T10:09:07+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/milton/milton-condos</loc>
+  <lastmod>2023-10-26T10:09:08+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/milton/soleil-condos</loc>
+  <lastmod>2023-10-26T10:09:08+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/milton/thompson-towers-condo</loc>
+  <lastmod>2023-10-26T10:09:08+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/milton/creekside-condos</loc>
+  <lastmod>2023-10-26T10:09:09+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/milton/connectt-condos-building-c</loc>
-  <priority>0.8</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:09+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/milton/kennedy-circle-condos</loc>
-  <priority>1.0</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:10+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/milton/the-millhouse-condominiums</loc>
-  <priority>0.5</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:10+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/milton/stationside-condos</loc>
-  <priority>0.3</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:10+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/milton/art-on-main-condos</loc>
-  <priority>1.0</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/kith-condos</loc>
+  <lastmod>2023-10-26T10:09:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/1150-centre-street-condos</loc>
+  <lastmod>2023-10-26T10:09:12+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/connecting-cooksville</loc>
+  <lastmod>2023-10-26T10:09:12+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/lakeview-village-221</loc>
+  <lastmod>2023-10-26T10:09:12+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/cameo-condominiums</loc>
+  <lastmod>2023-10-26T10:09:13+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/aspire-condominiums</loc>
+  <lastmod>2023-10-26T10:09:13+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/above-condos</loc>
+  <lastmod>2023-10-26T10:09:14+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/exhale-condos</loc>
+  <lastmod>2023-10-26T10:09:14+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/canopy-towers-2</loc>
+  <lastmod>2023-10-26T10:09:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/the-southlands-condos</loc>
+  <lastmod>2023-10-26T10:09:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/the-orchard-district</loc>
+  <lastmod>2023-10-26T10:09:15+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/180-burnhamthorpe-road-west-condos</loc>
+  <lastmod>2023-10-26T10:09:16+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/2225-erin-mills-parkway-condos</loc>
+  <lastmod>2023-10-26T10:09:16+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/elite-well-condos</loc>
+  <lastmod>2023-10-26T10:09:16+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/88-park-street-condos</loc>
+  <lastmod>2023-10-26T10:09:17+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/the-miss-queen-condos</loc>
+  <lastmod>2023-10-26T10:09:17+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/high-line-condos</loc>
+  <lastmod>2023-10-26T10:09:18+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/birch-condos-towns-at-lakeview-village</loc>
+  <lastmod>2023-10-26T10:09:18+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/m6-condos</loc>
+  <lastmod>2023-10-26T10:09:19+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/lakeview-village</loc>
+  <lastmod>2023-10-26T10:09:19+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/46-park-street-east-condos</loc>
+  <lastmod>2023-10-26T10:09:20+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/southlands-at-exchange-district</loc>
+  <lastmod>2023-10-26T10:09:20+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/the-ann</loc>
+  <lastmod>2023-10-26T10:09:20+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/6620-rothschild-trail-condos</loc>
+  <lastmod>2023-10-26T10:09:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/mw-condo</loc>
+  <lastmod>2023-10-26T10:09:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/420-lakeshore-road-east-condos</loc>
+  <lastmod>2023-10-26T10:09:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/hurontario-condos</loc>
+  <lastmod>2023-10-26T10:09:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/49th-south-service-road-condos</loc>
+  <lastmod>2023-10-26T10:09:23+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/two55</loc>
+  <lastmod>2023-10-26T10:09:23+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/arte-residences</loc>
+  <lastmod>2023-10-26T10:09:24+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/avia</loc>
+  <lastmod>2023-10-26T10:09:24+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/keystone</loc>
+  <lastmod>2023-10-26T10:09:24+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/mississauga/aquanova-condos</loc>
+  <lastmod>2023-10-26T10:09:25+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/niagara/bromley-gardens</loc>
+  <lastmod>2023-10-26T10:09:25+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/niagara/the-stanley-district-phase-1</loc>
+  <lastmod>2023-10-26T10:09:26+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/niagara/the-stanley-district-tower</loc>
+  <lastmod>2023-10-26T10:09:26+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/niagara/the-boho-condos</loc>
+  <lastmod>2023-10-26T10:09:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/niagara/the-discoverie-condos</loc>
+  <lastmod>2023-10-26T10:09:27+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/niagara/niagara-77-condos</loc>
+  <lastmod>2023-10-26T10:09:28+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/niagara/joy-towns-niagara</loc>
+  <lastmod>2023-10-26T10:09:28+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/bayview-village-redevelopment</loc>
+  <lastmod>2023-10-26T10:09:29+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/westdale-condos</loc>
+  <lastmod>2023-10-26T10:09:29+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/2810-bayview-avenue-condos</loc>
+  <lastmod>2023-10-26T10:09:29+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/280-viewmount-avenue-condos</loc>
+  <lastmod>2023-10-26T10:09:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/scala-condos</loc>
+  <lastmod>2023-10-26T10:09:30+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/the-keeley-condos</loc>
+  <lastmod>2023-10-26T10:09:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/t1-at-m2m-yonge-finch-condos</loc>
+  <lastmod>2023-10-26T10:09:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/3309-dufferin-street-condos</loc>
+  <lastmod>2023-10-26T10:09:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/5205-yonge-street-condos</loc>
+  <lastmod>2023-10-26T10:09:32+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/crest-at-crosstown-condos</loc>
+  <lastmod>2023-10-26T10:09:32+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/nuewest-boutique-condominium</loc>
+  <lastmod>2023-10-26T10:09:33+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/metro-park-condos</loc>
+  <lastmod>2023-10-26T10:09:33+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/m2m-squared-condos</loc>
+  <lastmod>2023-10-26T10:09:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/six99-condos</loc>
+  <lastmod>2023-10-26T10:09:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/northcore-condos</loc>
+  <lastmod>2023-10-26T10:09:35+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/addington-park-condominiums</loc>
+  <lastmod>2023-10-26T10:09:35+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/north-york/glenhill-condominiums</loc>
+  <lastmod>2023-10-26T10:09:35+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/north-york/dufferin-plaza-condos</loc>
-  <priority>0.6</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:36+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/north-york/5800-yonge-street-condos</loc>
-  <priority>0.6</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:36+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/north-york/yorkwoods-condos</loc>
-  <priority>1.0</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:37+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/north-york/express-2-condos</loc>
-  <priority>0.2</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:37+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/north-york/kings-landing-condos</loc>
-  <priority>0.5</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:38+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/north-york/lsq1-condos</loc>
-  <priority>0.3</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:38+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/north-york/saisons-condos</loc>
-  <priority>0.5</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:39+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/north-york/the-dylan-2-condos</loc>
-  <priority>0.4</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:39+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/oakville/109-reynolds-street-condos</loc>
+  <lastmod>2023-10-26T10:09:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/oakville/the-insignia-condos</loc>
+  <lastmod>2023-10-26T10:09:40+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/oakville/kerr-st-lofts-condos</loc>
+  <lastmod>2023-10-26T10:09:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/oakville/the-saw-whet-condos</loc>
+  <lastmod>2023-10-26T10:09:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/oakville/oakville-mid-rise-condos</loc>
+  <lastmod>2023-10-26T10:09:42+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/oakville/north-oak-condos-3</loc>
+  <lastmod>2023-10-26T10:09:42+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/oakville/daniels-oakville-yards-condos</loc>
+  <lastmod>2023-10-26T10:09:43+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/oakville/2365-2377-lakeshore-west-condos</loc>
+  <lastmod>2023-10-26T10:09:43+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/oakville/3015-dundas-west-condos</loc>
+  <lastmod>2023-10-26T10:09:44+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/oakville/627-lyons-lane-condos</loc>
+  <lastmod>2023-10-26T10:09:44+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/oakville/oakville-green-condos</loc>
+  <lastmod>2023-10-26T10:09:44+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/oakville/clockwork-condos-3</loc>
+  <lastmod>2023-10-26T10:09:45+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/oakville/435-reynolds-street-condos</loc>
+  <lastmod>2023-10-26T10:09:45+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/oakville/271-cornwall-road-condos</loc>
+  <lastmod>2023-10-26T10:09:46+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/oakville/distrikt-trailside-20</loc>
+  <lastmod>2023-10-26T10:09:46+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/oakville/berkshire-residences</loc>
+  <lastmod>2023-10-26T10:09:46+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/oakville/the-villages-of-oak-park</loc>
-  <priority>1.0</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:47+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/oakville/north-oak-condos-at-oakvillage</loc>
-  <priority>0.6</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:47+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/oakville/the-greenwich-condos-at-oakvillage</loc>
-  <priority>0.7</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:48+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/oakville/the-post-condos</loc>
-  <priority>1.0</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:48+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/oakville/the-branch-condos</loc>
-  <priority>0.3</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:49+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/oakville/the-residences-at-bronte-lakeside</loc>
-  <priority>0.5</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:49+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/oakville/oak-co-condos</loc>
-  <priority>0.2</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:49+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/oakville/the-deane-condos</loc>
-  <priority>0.1</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:50+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/oakville/distrikt-trailside</loc>
-  <priority>0.5</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:50+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/oakville/gemini-condos</loc>
-  <priority>0.8</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:51+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/oakville/distrikt-trafalgar-condos</loc>
-  <priority>0.1</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:51+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/oakville/2477-old-bronte-apartments</loc>
-  <priority>1.0</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:52+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/oakville/42-lakeshore-road-west-condos</loc>
-  <priority>0.3</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:52+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/oakville/distrikt-station-condos</loc>
-  <priority>0.1</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:52+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/oakville/oakville-yards-condos</loc>
-  <priority>0.4</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:52+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/oakville/the-gates-of-bronte</loc>
-  <priority>0.7</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:53+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/oakville/the-butler-condos</loc>
-  <priority>0.3</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:09:53+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/ottawa/monocle</loc>
+  <lastmod>2023-10-26T10:09:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/ottawa/greenhaus-former</loc>
+  <lastmod>2023-10-26T10:09:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/ottawa/4639-bank-street-condos</loc>
+  <lastmod>2023-10-26T10:09:55+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/ottawa/175-richmond-road-condos</loc>
+  <lastmod>2023-10-26T10:09:55+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/ottawa/q-west-condos-phase-2</loc>
+  <lastmod>2023-10-26T10:09:56+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/ottawa/east-flats-remaining-phases</loc>
+  <lastmod>2023-10-26T10:09:56+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/ottawa/the-ridge-towns</loc>
+  <lastmod>2023-10-26T10:09:56+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/pickering/vupoint-condos-2</loc>
+  <lastmod>2023-10-26T10:09:57+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/pickering/rougemount-square-condos</loc>
+  <lastmod>2023-10-26T10:09:57+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/pickering/smartcentres-pickering-condos</loc>
+  <lastmod>2023-10-26T10:09:57+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/pickering/875-kingston-road-condos</loc>
+  <lastmod>2023-10-26T10:09:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/pickering/1294-kingston-road-condos</loc>
+  <lastmod>2023-10-26T10:09:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/pickering/vupoint-condos-128</loc>
+  <lastmod>2023-10-26T10:09:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/pickering/699-kingston-road-condos</loc>
+  <lastmod>2023-10-26T10:09:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/pickering/1525-pickering-parkway-condos</loc>
+  <lastmod>2023-10-26T10:09:59+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/pickering/the-highmark-condos</loc>
-  <priority>0.6</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:10:00+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/pickering/pickering-city-centre-condos</loc>
-  <priority>1.0</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:10:00+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/pickering/the-grand-at-universal-city</loc>
-  <priority>0.7</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:10:00+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://condomonk.ca/pickering/vupoint-condos</loc>
-  <priority>1.0</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <lastmod>2023-10-26T10:10:01+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://condomonk.ca/noimage.webp</loc>
-  <priority>0.6</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <loc>https://condomonk.ca/vaughan/180-steeles-avenue-west-condos</loc>
+  <lastmod>2023-10-26T10:10:02+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
-  <loc></loc>
-  <priority>0.7</priority>
-  <changefreq>daily</changefreq>
-  <lastmod>2023-10-02</lastmod>
+  <loc>https://condomonk.ca/vaughan/1150-centre-street-condos-229</loc>
+  <lastmod>2023-10-26T10:10:02+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
+<url>
+  <loc>https://condomonk.ca/vaughan/5225-highway-7-condos</loc>
+  <lastmod>2023-10-26T10:10:02+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/vaughan/7800-jane-street-condos</loc>
+  <lastmod>2023-10-26T10:10:03+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/vaughan/victory-condominium</loc>
+  <lastmod>2023-10-26T10:10:03+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/vaughan/2966-2986-highway-7-condos</loc>
+  <lastmod>2023-10-26T10:10:04+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://condomonk.ca/vaughan/5655-highway-7-condos-181</loc>
+  <lastmod>2023-10-26T10:10:04+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
 </urlset>
