@@ -1,8 +1,6 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
-import axios from "axios";
 
 const Navbar = ({ cities }) => {
   const pathname = usePathname();
@@ -43,7 +41,11 @@ const Navbar = ({ cities }) => {
               <div className="dropdown-menu" aria-labelledby="dropdownId">
                 {cities &&
                   cities.map((city) => (
-                    <Link className="dropdown-item" href={`/${city.slug}`}>
+                    <Link
+                      className="dropdown-item"
+                      href={`/${city.slug}`}
+                      key={city.id}
+                    >
                       {city.name}
                     </Link>
                   ))}

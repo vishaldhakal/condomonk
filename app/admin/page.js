@@ -93,7 +93,7 @@ export default function Home() {
                 id="floatingCity"
                 value={filters.city}
                 onChange={(e) => handleChange(e)}
-                aria-label="Floating label select example"
+                ariaLabel="Floating label select example"
               >
                 <option value="All">All</option>
                 <option value="Toronto">Toronto</option>
@@ -108,7 +108,7 @@ export default function Home() {
                 id="typee"
                 value={filters.typee}
                 onChange={(e) => handleChange(e)}
-                aria-label="Floating label select example"
+                ariaLabel="Floating label select example"
               >
                 <option value="All">All</option>
                 <option value="Condo">Condo</option>
@@ -126,7 +126,7 @@ export default function Home() {
                 id="status"
                 value={filters.status}
                 onChange={(e) => handleChange(e)}
-                aria-label="Floating label select example"
+                ariaLabel="Floating label select example"
               >
                 <option value="All">All</option>
                 <option value="Upcoming">Upcoming</option>

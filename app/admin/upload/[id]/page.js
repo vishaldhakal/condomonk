@@ -458,7 +458,7 @@ export default function Update({ params }) {
                       id="project_type"
                       value={predata.project_type}
                       onChange={(e) => handleChange(e)}
-                      aria-label="Floating label select example"
+                      ariaLabel="Floating label select example"
                     >
                       <option value="Condo">Condo</option>
                       <option value="Townhome">Townhome</option>
@@ -508,7 +508,7 @@ export default function Update({ params }) {
                       id="status"
                       value={predata.status}
                       onChange={(e) => handleChange(e)}
-                      aria-label="Floating label select example"
+                      ariaLabel="Floating label select example"
                     >
                       <option value="Selling">Selling</option>
                       <option value="Upcoming">Upcoming</option>
@@ -527,7 +527,7 @@ export default function Update({ params }) {
                       id="co_op_available"
                       value={predata.co_op_available}
                       onChange={(e) => handleChange(e)}
-                      aria-label="Floating label select example"
+                      ariaLabel="Floating label select example"
                     >
                       <option value={false}>Not Available</option>
                       <option value={true}>Available</option>
@@ -575,7 +575,7 @@ export default function Update({ params }) {
                       id="city"
                       value={predata.city.name}
                       onChange={(e) => handleChangeCity(e)}
-                      aria-label="Floating label select example"
+                      ariaLabel="Floating label select example"
                     >
                       {cities.map((city) => (
                         <option key={city.id} value={city.name}>
@@ -603,7 +603,7 @@ export default function Update({ params }) {
                       id="developer"
                       value={predata.developer.name}
                       onChange={(e) => handleChangeDev(e)}
-                      aria-label="Floating label select example"
+                      ariaLabel="Floating label select example"
                     >
                       {developers &&
                         developers.map((developer) => (

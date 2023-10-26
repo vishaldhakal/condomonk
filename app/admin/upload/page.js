@@ -387,7 +387,7 @@ export default function Upload() {
                       id="project_type"
                       value={predata.project_type}
                       onChange={(e) => handleChange(e)}
-                      aria-label="Floating label select example"
+                      ariaLabel="Floating label select example"
                     >
                       <option value="Condo">Condo</option>
                       <option value="Townhome">Townhome</option>
@@ -437,7 +437,7 @@ export default function Upload() {
                       id="status"
                       value={predata.status}
                       onChange={(e) => handleChange(e)}
-                      aria-label="Floating label select example"
+                      ariaLabel="Floating label select example"
                     >
                       <option value="Selling">Selling</option>
                       <option value="Upcoming">Upcoming</option>
@@ -456,7 +456,7 @@ export default function Upload() {
                       id="co_op_available"
                       value={predata.co_op_available}
                       onChange={(e) => handleChange(e)}
-                      aria-label="Floating label select example"
+                      ariaLabel="Floating label select example"
                     >
                       <option value={false}>Not Available</option>
                       <option value={true}>Available</option>
@@ -503,7 +503,7 @@ export default function Upload() {
                       className="form-select"
                       id="city"
                       onChange={(e) => handleChangeCity(e)}
-                      aria-label="Floating label select example"
+                      ariaLabel="Floating label select example"
                     >
                       {cities.map((city) => (
                         <option key={city.id} value={city.name}>

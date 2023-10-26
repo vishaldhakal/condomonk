@@ -76,18 +76,16 @@ export default function BottomContactForm(props) {
       <div className="row me-0 row-cols-1">
         <div className="col">
           <div className="mb-2">
-            <div class="form-floating">
+            <div className="form-floating">
               <select
-                class="form-select"
+                className="form-select"
                 id="realtor"
-                ariaLabel="Floating label select example"
+                aria-label="Floating label select example"
                 value={credentials.realtor}
                 onChange={(e) => handleChange(e)}
                 required
               >
-                <option value="No" selected>
-                  No
-                </option>
+                <option value="No">No</option>
                 <option value="Yes">Yes</option>
               </select>
               <label htmlFor="floatingSelect">
