@@ -24,6 +24,15 @@ export const metadata = {
     initialScale: 1,
     maximumScale: 1,
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: true,
+    },
+  },
   category: "real estate",
 };
 
