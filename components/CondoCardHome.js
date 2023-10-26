@@ -59,8 +59,8 @@ export default function CondoCardHome(props) {
           className="card-body text-decoration-none text-dark bg-white shadow-lgg"
           target="_blank"
         >
-          <div className="card-content">
-            <h3 className="mb-1 cardd-title">{props.project_name}</h3>
+          <div className="card-content pt-2">
+            <h3 className="mb-1 cardd-title text-dark">{props.project_name}</h3>
             <h4 className="mb-2 cardd-subtitle">
               {checkPricing(props.price_starting_from)}
             </h4>

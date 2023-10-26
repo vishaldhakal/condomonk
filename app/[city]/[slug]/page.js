@@ -11,7 +11,7 @@ async function getData(slug) {
   );
 
   if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    notFound();
   }
 
   return res.json();
@@ -26,7 +26,7 @@ async function getRelatedData(city) {
   );
 
   if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    notFound();
   }
 
   return res.json();

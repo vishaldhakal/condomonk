@@ -1,5 +1,6 @@
 import CondoCard from "@/components/CondoCard";
 import BottomContactForm from "@/components/BottomContactForm";
+import { notFound } from "next/navigation";
 
 async function getData(city) {
   const res = await fetch(
@@ -10,7 +11,7 @@ async function getData(city) {
   );
 
   if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    notFound();
   }
 
   return res.json();
