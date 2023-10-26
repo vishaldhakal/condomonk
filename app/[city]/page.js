@@ -23,13 +23,19 @@ const CapitalizeFirst = (city) => {
 
 export async function generateMetadata({ params }, parent) {
   let city = CapitalizeFirst(params.city);
+  const data = await getData(params.city);
   return {
     ...parent,
     alternates: {
       canonical: `https://condomonk.ca/${params.city}`,
     },
-    title: "Preconstruction Condos in " + city,
+    title: data.preconstructions.length + " Preconstruction Condos in " + city,
     description: "Preconstruction Condos in " + city,
+    description:
+      "Search our selection of pre construction condos for sale in " +
+      city +
+      ". Our ever-changing portfolio of pre constructions brings you closer to your ideal condos in the growing city of " +
+      city,
   };
 }
 
