@@ -49,7 +49,7 @@ export async function generateMetadata({ params }, parent) {
       data.project_name +
       " in " +
       data.city.name +
-      "by " +
+      " by " +
       data.developer.name +
       " prices starting from " +
       Nformatter(data.price_starting_from, 2) +
