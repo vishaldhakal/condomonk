@@ -40,7 +40,11 @@ export async function generateMetadata({ params }, parent) {
       canonical: `https://condomonk.ca/${params.city}/${params.slug}`,
     },
     title:
-      data.project_name + " in " + data.city.name + "by " + data.developer.name,
+      data.project_name +
+      " in " +
+      data.city.name +
+      " by " +
+      data.developer.name,
     description:
       data.project_name +
       " in " +
