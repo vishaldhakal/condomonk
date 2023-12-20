@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Nformatter from "./Nformatter";
+import Image from "next/image";
 
 export default function CondoCard(props) {
   function checkPricing(price) {
@@ -21,7 +22,17 @@ export default function CondoCard(props) {
       return Math.abs(TotalDays) + " day ago ";
     }
   }
-
+  {props.image.length > 0 ? (
+    <Image
+      loading="lazy"
+      src={`https://api.condomonk.ca${props.image[0].image}`}
+      layout="responsive"
+      className="img-fluid condocard-img-top"
+      alt={`${props.project_name} located at ${props.project_address} image`}
+    />
+  ) : (
+    <p>NO Image</p>
+  )}
   return (
     <>
       <div className="card border-0 shadow-sm rounded-mine my-3 my-md-0">

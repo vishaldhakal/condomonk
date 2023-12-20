@@ -10,7 +10,7 @@ const Navbar = ({ cities }) => {
   }
   return (
     <nav className="navbar navbar-expand-sm navbar-light bg-white shadow-lg py-3">
-      <div className="container">
+      <div className="container-fluid">
         <Link href="/" className="logo d-flex align-items-center">
           <span>Condomonk</span>
         </Link>
@@ -39,16 +39,21 @@ const Navbar = ({ cities }) => {
                 Condos For Sale
               </a>
               <div className="dropdown-menu" aria-labelledby="dropdownId">
-                {cities &&
-                  cities.map((city) => (
-                    <Link
-                      className="dropdown-item"
-                      href={`/${city.slug}`}
-                      key={city.id}
-                    >
-                      {city.name}
-                    </Link>
-                  ))}
+                <div className="container">
+                  <div className="row row-cols-3">
+                    {cities &&
+                      cities.map((city) => (
+                        <div className="col" key={city.id}>
+                          <Link
+                            className="dropdown-item"
+                            href={`/${city.slug}`}
+                          >
+                            {city.name}
+                          </Link>
+                        </div>
+                      ))}
+                  </div>
+                </div>
               </div>
             </li>
             <li className="nav-item">

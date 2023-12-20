@@ -4,7 +4,7 @@ import BottomContactForm from "@/components/BottomContactForm";
 
 async function getData() {
   const res = await fetch(
-    "https://api.condomonk.ca/api/preconstructions?page_size=16",
+    "https://api.condomonk.ca/api/preconstructions?page_size=10",
     {
       next: { revalidate: 10 },
     }
@@ -21,7 +21,7 @@ export default async function Home(props) {
   return (
     <>
       <div className="pt-5">
-        <div className="container">
+        <div className="container-fluid">
           <div className="d-flex flex-column justify-content-start align-items-start">
             <h1 className="main-title">
               New Construction condos in Canada (2023)
@@ -32,7 +32,7 @@ export default async function Home(props) {
             </p>
           </div>
           <div className="py-2"></div>
-          <div className="row row-cols-1 row-cols-md-4 gy-4">
+          <div className="row row-cols-1 row-cols-md-5 gy-3">
             {data.results.map((item) => (
               <div className="col" key={item.id}>
                 <CondoCardHome {...item} />
