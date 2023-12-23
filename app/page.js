@@ -20,6 +20,46 @@ export default async function Home(props) {
   const data = await getData();
   return (
     <>
+   <section id="hero">
+        <div className="container">
+            <div className=" hero-container" >
+                <div >
+                <h1 className="main-titlee pb-0  mb-0 mt-2 mt-md-0" >Find your dream home here
+                </h1>
+                <p className="fs-2 text-center mt-0 pt-1 text-white" >Get access to new pre constructions and plans now!</p>
+                </div>
+
+                <div className="pb-1 pt-3 d-flex justify-content-center align-items-center">
+              <div className="form-floating mb-4">
+                <input
+                  type="email"
+                  className="form-control smaller-input"
+                  id="floatingInput"
+                  placeholder="name@example.com"
+                />
+                <label
+                  htmlFor="floatingInput"
+                  className="d-flex align-items-center "
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-search"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                  </svg>
+                  <span className="mx-2 "></span>
+                  Type a city
+                </label>
+              </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
       <div className="pt-5">
         <div className="container-fluid">
           <div className="d-flex flex-column justify-content-start align-items-start">
@@ -43,6 +83,7 @@ export default async function Home(props) {
           <h2 className="fw-mine text-center mb-5 accent-line">
             Explore New Construction Condos in These Cities
           </h2>
+          <div className="container">
           <div className="row">
             <div className="col-4 col-md-4 col-xl-4">
               <Link className="d-block properti_city" href={"/toronto"}>
@@ -112,6 +153,7 @@ export default async function Home(props) {
                 </div>
               </Link>
             </div>
+          </div>
           </div>
           <div className="pt-5 mt-5"></div>
           <div className="py-5 my-5" id="mycontact">
