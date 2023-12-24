@@ -1,5 +1,6 @@
 import CondoCardHome from "@/components/CondoCardHome";
 import Link from "next/link";
+import SearchBar from "@/components/SearchBar";
 import BottomContactForm from "@/components/BottomContactForm";
 
 async function getData() {
@@ -15,9 +16,28 @@ async function getData() {
   }
   return res.json();
 }
+async function getCities() {
+  const res = await fetch("https://api.condomonk.ca/api/all-city", {
+    next: { revalidate: 10 },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+}
 
 export default async function Home(props) {
   const data = await getData();
+  let cities = await getCities();
+  // let dropdown_cities = await getCitiesandProjects();
+
+  const filteredprojects = (value) => {
+    return dropdown_cities.filter((city) => {
+      return value.includes(city.name);
+    });
+  };
+
   return (
     <>
    <section id="hero">
@@ -30,7 +50,7 @@ export default async function Home(props) {
                 </div>
 
                 <div className="pb-1 pt-3 d-flex justify-content-center align-items-center">
-              <div className="form-floating mb-4">
+              {/* <div className="form-floating mb-4">
                 <input
                   type="email"
                   className="form-control smaller-input"
@@ -54,14 +74,17 @@ export default async function Home(props) {
                   <span className="mx-2 "></span>
                   Type a city
                 </label>
-              </div>
+              </div> */}
+               <div className="pb-1 ww">
+              <SearchBar cities={cities} />
+            </div>
             </div>
             </div>
         </div>
     </section>
 
       <div className="pt-5">
-        <div className="container-fluid">
+        <div className="container-fluid px-md-5">
           <div className="d-flex flex-column justify-content-start align-items-start">
             <h1 className="main-title">
               New Construction condos in Canada (2023)
@@ -166,18 +189,17 @@ export default async function Home(props) {
                 />
               </div>
               <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3">
-                Are you looking to buy a preconstruction home for the first time
-                ?
+                Are you looking to buy a preconstruction home ?
               </h2>
               <h2 className="fw-mine text-center px-md-4 fs-4">
-                Don't know where to start ? Contact Condomonk now!
+                 Contact Condomonk now!
               </h2>
               <div className="row row-cols-1 row-cols-md-3 mt-5">
-                <div className="col-md-3"></div>
-                <div className="col-md-6">
+                <div className="col-md-2"></div>
+                <div className="col-md-8">
                   <BottomContactForm></BottomContactForm>
                 </div>
-                <div className="col-md-3"></div>
+                <div className="col-md-2"></div>
               </div>
             </div>
           </div>

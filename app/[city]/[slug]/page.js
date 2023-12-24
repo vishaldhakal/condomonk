@@ -1,6 +1,7 @@
 import Nformatter from "@/components/Nformatter";
 import CondoCard from "@/components/CondoCard";
 import BottomContactForm from "@/components/BottomContactForm";
+import Breadcrumb from "@/components/Breadcrumb";
 import { notFound } from "next/navigation";
 async function getData(slug) {
   const res = await fetch(
@@ -107,6 +108,29 @@ export default async function Home({ params }) {
     <>
       <div className="pt-1">
         <div className="container">
+        <Breadcrumb
+            homeElement={"Home"}
+            separator={
+              <span>
+                {" "}
+                <svg
+                  className="svg minearr"
+                  viewBox="0 0 32 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M17.65 16.513l-7.147-7.055 1.868-1.893 9.068 8.951-9.069 8.927-1.866-1.896z"
+                    fill={"#869099"}
+                  ></path>
+                </svg>{" "}
+              </span>
+            }
+            activeClasses="text-dark"
+            containerClasses="d-flex align-items-center p-0 m-0 pt-4 breadcrumb"
+            listClasses="mx-1"
+            capitalizeLinks
+          />
+
           <div className="my-3 grid-cont">
             {newImages(data.image)
               ?.slice(0, 7)
@@ -147,7 +171,7 @@ export default async function Home({ params }) {
                       </div>
                     </div>
                   </div>
-                  <div className="my-5"></div>
+                  <div className="my-4"></div>
                   <div id="features">
                     <div className="mb-5 mt-4">
                       <div className="rounded-mine">
@@ -257,18 +281,18 @@ export default async function Home({ params }) {
                 />
               </div>
               <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3">
-                Are you looking to buy a preconstruction home for the first time
+                Are you looking to buy a preconstruction home 
                 ?
               </h2>
               <h2 className="fw-mine text-center px-md-4 fs-4">
-                Don't know where to start ? Contact Condomonk now!
+                 Contact Condomonk now!
               </h2>
               <div className="row row-cols-1 row-cols-md-3 mt-5">
-                <div className="col-md-3"></div>
-                <div className="col-md-6">
+                <div className="col-md-2"></div>
+                <div className="col-md-8">
                   <BottomContactForm></BottomContactForm>
                 </div>
-                <div className="col-md-3"></div>
+                <div className="col-md-2"></div>
               </div>
             </div>
           </div>

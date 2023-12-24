@@ -45,7 +45,7 @@ export default async function Home({ params }) {
   return (
     <>
       <div className="pt-5">
-        <div className="container">
+        <div className="container-fluid  px-md-5">
           <div className="d-flex flex-column">
             <h1 className="main-title">
               New Construction condos in {CapitalizeFirst(params.city)} ( 2023 )
@@ -58,7 +58,7 @@ export default async function Home({ params }) {
             </p>
           </div>
           <div className="py-2"></div>
-          <div className="row row-cols-1 row-cols-md-4 gy-4">
+          <div className="row row-cols-1 row-cols-md-5 gy-4">
             {data.preconstructions &&
               data.preconstructions.map((item) => (
                 <div className="col" key={item.id}>

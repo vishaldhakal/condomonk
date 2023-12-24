@@ -987,7 +987,7 @@ label {
 
 .grid-item1 {
     grid-area: 1/1/4/3;
-    height: 410px;
+    height: 510px;
 }
 
 .grid-item2,
@@ -996,7 +996,7 @@ label {
 .grid-item5,
 .grid-item6,
 .grid-item7 {
-    height: 200px !important;
+    height: 250px !important;
 }
 
 .footer {
@@ -1135,10 +1135,12 @@ label {
 
 .fields {
     width: 100%;
+    border-color: #000000;
     padding: 1.5rem 1rem;
     border: none;
     border-radius: 8px;
-    background-color: #f1f3fa;
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px 0 rgba(251, 251, 251, 0.2), 0 6px 20px 0 rgba(166, 164, 164, 0.19);
 }
 
 .fields:focus {
@@ -1149,13 +1151,14 @@ label {
     color: #443d3d;
 }
 
-.fff {
-    background-color: rgb(255, 255, 255);
+
+/* .fff {
+  
     border-radius: 0.25rem;
     border: 1px solid;
-    border-color: #dce0e0;
+ 
     padding: 1rem 1rem;
-}
+} */
 
 .mess {
     padding: 1.5rem 1rem;
@@ -1172,8 +1175,8 @@ label {
 
 .rounded-minetop {
     border-radius: 0 !important;
-    border-top-left-radius: 3px !important;
-    border-bottom-left-radius: 3px !important;
+    border-top-left-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
 }
 
 .rounded-minetop2 {
@@ -1202,4 +1205,131 @@ label {
 
 .btn-call:hover {
     background-image: linear-gradient(106deg, #012970, #005eff);
+}
+
+.ha-link {
+    font-weight: 300 !important;
+}
+
+.ha-link:hover {
+    color: black !important;
+    font-weight: 300 !important;
+}
+
+.react-autosuggest__input {
+    background-color: #f5f5f5;
+    right: 0;
+    width: 280px !important;
+    height: 45px;
+    padding: 20px 20px;
+    font-weight: 300;
+    font-size: 16px;
+    border: none;
+    border-radius: 0 !important;
+    border-top-left-radius: 99px !important;
+    border-bottom-left-radius: 99px !important;
+}
+
+.ww .react-autosuggest__input {
+    background-color: #f5f5f5;
+    right: 0;
+    width: 700px !important;
+    height: 70px;
+    padding: 20px 20px;
+    font-weight: 300;
+    font-size: 16px;
+    border: none;
+    border-radius: 0 !important;
+    border-radius: 99px !important;
+}
+
+.react-autosuggest__input--focused {
+    outline: none;
+}
+
+.react-autosuggest__input--open {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.react-autosuggest__suggestions-container {
+    display: none;
+}
+
+.ww .react-autosuggest__suggestions-container--open {
+    display: block;
+    position: absolute;
+    top: auto;
+    margin-top: 5px;
+    width: 700px;
+    background-color: #fff;
+    font-weight: 300;
+    font-size: 16px;
+    box-shadow: 0 1rem 2rem 2px rgb(0 0 0 / 15%);
+    border-radius: 5px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    z-index: 2;
+}
+
+.react-autosuggest__suggestions-container--open {
+    display: block;
+    position: absolute;
+    top: 51px;
+    width: 100%;
+    background-color: #fff;
+    font-weight: 300;
+    font-size: 16px;
+    box-shadow: 0 1rem 2rem 2px rgb(0 0 0 / 15%);
+    border-radius: 5px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    z-index: 2;
+}
+
+.react-autosuggest__suggestions-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.react-autosuggest__suggestions-list a {
+    color: black !important;
+}
+
+.react-autosuggest__suggestion {
+    cursor: pointer;
+    padding: 10px 20px;
+}
+
+.react-autosuggest__suggestion--highlighted {
+    background-color: rgb(241, 241, 241);
+    font-weight: 500;
+}
+
+.react-autosuggest__section-container {
+    border-top: 1px dashed #ccc;
+}
+
+.react-autosuggest__section-container--first {
+    border-top: 0;
+}
+
+.react-autosuggest__section-title {
+    padding: 10px 0 0 10px;
+    font-size: 12px;
+    color: #777;
+}
+
+.minearr {
+    width: 18px;
+    height: 18px;
+}
+
+.breadcrumb {
+    list-style: none !important;
+}
+
+.breadcrumb li a {
+    color: black !important;
 }
