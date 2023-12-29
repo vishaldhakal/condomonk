@@ -1,7 +1,12 @@
 import Nformatter from "@/components/Nformatter";
 import CondoCard from "@/components/CondoCard";
 import BottomContactForm from "@/components/BottomContactForm";
+import Breadcrumb from "@/components/Breadcrumb";
+import SideContactForm from "@/components/SideContactForm";
+import FixedContactButton from "@/components/FixedContactButton";
 import { notFound } from "next/navigation";
+import Link from "next/link";
+
 async function getData(slug) {
   const res = await fetch(
     "https://api.condomonk.ca/api/preconstructions-detail/" + slug,
@@ -105,8 +110,32 @@ export default async function Home({ params }) {
 
   return (
     <>
+     <FixedContactButton></FixedContactButton>
       <div className="pt-1">
         <div className="container">
+        <Breadcrumb
+            homeElement={"Home"}
+            separator={
+              <span>
+                {" "}
+                <svg
+                  className="svg minearr"
+                  viewBox="0 0 32 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M17.65 16.513l-7.147-7.055 1.868-1.893 9.068 8.951-9.069 8.927-1.866-1.896z"
+                    fill={"#869099"}
+                  ></path>
+                </svg>{" "}
+              </span>
+            }
+            activeClasses="text-dark"
+            containerClasses="d-flex align-items-center p-0 m-0 pt-4 breadcrumb"
+            listClasses="mx-1"
+            capitalizeLinks
+          />
+
           <div className="my-3 grid-cont">
             {newImages(data.image)
               ?.slice(0, 7)
@@ -147,7 +176,7 @@ export default async function Home({ params }) {
                       </div>
                     </div>
                   </div>
-                  <div className="my-5"></div>
+                  <div className="my-4"></div>
                   <div id="features">
                     <div className="mb-5 mt-4">
                       <div className="rounded-mine">
@@ -238,40 +267,58 @@ export default async function Home({ params }) {
                   </div>
                 </div>
               </div>
-              <div className="col col-md-4 ps-md-2 pt-5 pt-md-0">
+             
+<div className="col col-md-4 ps-md-2 pt-5 pt-md-0">
                 <div className="py-4 py-md-0"></div>
-                <div className="myps3 mt-mine pe-0" id="mycontact">
-                  <div className="text-center"></div>
+                <div className="side-fix-contact mt-mine pe-0">
+                  <div className="text-center">
+                    <img
+                      alt="Register Now Text Design"
+                      src="/contact-me.png"
+                      className="img-fluid mb-3 side-contact-img"
+                    />
+                  </div>
+                  <div className="m-1 p-4 py-3 shadow-lg rounded-mine bordt">
+                    <div className="row row-cols-2 align-items-start">
+                      <div className="col-4">
+                        <img
+                          src="/contact-image.png"
+                          alt="contact image"
+                          className="agent-img"
+                        />
+                      </div>
+                      <div className="col-8">
+                        <h5 className="fw-bold text-center linem fs-4  mb-0">
+                          Send a Message
+                        </h5>
+                        <p className="mb-0 text-center">
+                          <Link
+                            href="telto:(587) 887-2572"
+                            className="link-black"
+                          >
+                            <i className="bi bi-telephone"></i> 647 527 4970
+                          </Link>
+                        </p>
+                        <p className="mb-0 text-center">info@condomonk.ca</p>
+                      </div>
+                    </div>
+                    <div className="my-4"></div>
+                    <SideContactForm
+                      projects_name={data.project_name}
+                      defaultmessage={
+                        "Please send me additional information about " +
+                        data.project_name +
+                        ".  Thank you"
+                      }
+                    ></SideContactForm>
+                  </div>
                 </div>
               </div>
+
             </div>
           </div>
-          <div className="pt-5 mt-5"></div>
-          <div className="py-5 my-5" id="mycontact">
-            <div className="container">
-              <div className="row justify-content-center">
-                <img
-                  src="/contact-bottom-2.png"
-                  alt="dce"
-                  className="img-fluid w-25 w-smm-50 mb-3"
-                />
-              </div>
-              <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3">
-                Are you looking to buy a preconstruction home for the first time
-                ?
-              </h2>
-              <h2 className="fw-mine text-center px-md-4 fs-4">
-                Don't know where to start ? Contact Condomonk now!
-              </h2>
-              <div className="row row-cols-1 row-cols-md-3 mt-5">
-                <div className="col-md-3"></div>
-                <div className="col-md-6">
-                  <BottomContactForm></BottomContactForm>
-                </div>
-                <div className="col-md-3"></div>
-              </div>
-            </div>
-          </div>
+          
+         
           <div className="pt-5 mt-5"></div>
           <div className="py-5 my-5"></div>
           <div>

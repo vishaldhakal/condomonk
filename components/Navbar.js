@@ -9,7 +9,7 @@ const Navbar = ({ cities }) => {
     return <></>;
   }
   return (
-    <nav className="navbar navbar-expand-sm navbar-light bg-white shadow-lg py-3">
+    <nav className="navbar navbar-expand-sm navbar-light bg-white shadow-lg py-4">
       <div className="container-fluid">
         <Link href="/" className="logo d-flex align-items-center">
           <span>Condomonk</span>
@@ -40,10 +40,10 @@ const Navbar = ({ cities }) => {
               </a>
               <div className="dropdown-menu" aria-labelledby="dropdownId">
                 <div className="container">
-                  <div className="row row-cols-3">
+                  <div className="row">
                     {cities &&
                       cities.map((city) => (
-                        <div className="col" key={city.id}>
+                        <div className="col-md-4" key={city.id}>
                           <Link
                             className="dropdown-item"
                             href={`/${city.slug}`}

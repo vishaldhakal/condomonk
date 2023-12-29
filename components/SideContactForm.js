@@ -1,9 +1,10 @@
 "use client";
+
 import { useState } from "react";
 import ContactFormSubmit from "./ContactFormSubmit";
 
-export default function BottomContactForm(props) {
-  const [submitbtn, setSubmitbtn] = useState("Send a message");
+export default function SideContactForm(props) {
+  const [submitbtn, setSubmitbtn] = useState("Contact now");
   const [credentials, setCredentials] = useState({
     name: "",
     phone: "",
@@ -26,12 +27,12 @@ export default function BottomContactForm(props) {
   return (
     <form
       method="POST"
-      className="mb-2"
+      className="mb-3"
       onSubmit={(e) => handleFormSubmit(e)}
       id="contactForm"
     >
-      <div className="row me-0 row-cols-2 g-4 me-0">
-        <div className="col mb-2">
+      <div className="row me-0 row-cols-2 g-1 me-0">
+        <div className="col mb-3">
           <input
             type="text"
             placeholder="Name"
@@ -43,7 +44,7 @@ export default function BottomContactForm(props) {
           />
         </div>
         <div className="col">
-          <div className="mb-2">
+          <div className="mb-3">
             <input
               type="text"
               name="phone"
@@ -59,7 +60,7 @@ export default function BottomContactForm(props) {
       </div>
       <div className="row me-0 row-cols-1">
         <div className="col">
-          <div className="mb-2">
+          <div className="mb-3">
             <input
               type="email"
               aria-describedby="emailHelp"
@@ -75,12 +76,12 @@ export default function BottomContactForm(props) {
       </div>
       <div className="row me-0 row-cols-1">
         <div className="col">
-          <div className="mb-2">
+          <div className="mb-3">
             <div className="form-floating">
               <select
-                className="form-select "
+                className="form-select"
                 id="realtor"
-                aria-label="Floating label select example"
+                aira-label="Floating label select example"
                 value={credentials.realtor}
                 onChange={(e) => handleChange(e)}
                 required
@@ -96,27 +97,24 @@ export default function BottomContactForm(props) {
         </div>
       </div>
       <div className="row me-0">
-        <div className="mb-2">
+        <div className="mb-3">
           <textarea
             id="message"
             name="message"
             className="fields fff mess"
             rows="3"
             cols="50"
-            placeholder="Enter your message here"
             value={credentials.message}
             onChange={(e) => handleChange(e)}
           ></textarea>
         </div>
       </div>
-     <div className=" text-center">
-     <input
+      <input
         type="submit"
         value={submitbtn}
-        className="btn btn-call btn-lg  mb-2"
+        className="btn bg-dark text-white btn-lg w-100 mb-3"
         id="subbtn"
       />
-     </div>
     </form>
   );
 }
