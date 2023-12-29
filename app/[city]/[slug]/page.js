@@ -5,6 +5,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import SideContactForm from "@/components/SideContactForm";
 import FixedContactButton from "@/components/FixedContactButton";
 import { notFound } from "next/navigation";
+import Gallery from "@/components/Gallery";
 import Link from "next/link";
 
 async function getData(slug) {
@@ -136,7 +137,7 @@ export default async function Home({ params }) {
             capitalizeLinks
           />
 
-          <div className="my-3 grid-cont">
+          {/* <div className="my-3 grid-cont">
             {newImages(data.image)
               ?.slice(0, 7)
               .map((image, no) => (
@@ -156,7 +157,14 @@ export default async function Home({ params }) {
                   />
                 </a>
               ))}
-          </div>
+          </div> */}
+     
+        <Gallery
+            images={data.image}
+            project_name={data.project_name}
+            project_address={data.project_address}
+          ></Gallery>
+      
           <div className="container px-0 px-sm-3 pt-3">
             <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 justify-content-center">
               <div className="col col-md-6">
@@ -271,13 +279,13 @@ export default async function Home({ params }) {
 <div className="col col-md-4 ps-md-2 pt-5 pt-md-0">
                 <div className="py-4 py-md-0"></div>
                 <div className="side-fix-contact mt-mine pe-0">
-                  <div className="text-center">
+                  {/* <div className="text-center">
                     <img
                       alt="Register Now Text Design"
                       src="/contact-me.png"
                       className="img-fluid mb-3 side-contact-img"
                     />
-                  </div>
+                  </div> */}
                   <div className="m-1 p-4 py-3 shadow-lg rounded-mine bordt">
                     <div className="row row-cols-2 align-items-start">
                       <div className="col-4">

@@ -44,9 +44,9 @@ export default async function Home(props) {
         <div className="container">
             <div className=" hero-container" >
                 <div >
-                <h1 className="main-titlee pb-0  mb-0 mt-2 mt-md-0" >Find your dream home here
+                <h1 className="main-titlee pb-0  mb-0 mt-2 mt-md-0" >Canada's leading pre construction homes Platform
                 </h1>
-                <p className="fs-3 text-center mt-0 pt-1 text-white" >Get access to new pre constructions and plans now!</p>
+                <p className="titlee text-center mt-0 pt-1 text-white" >Get first updates on New Construction Homes Projects across Canada</p>
                 </div>
 
                 <div className="pb-1 pt-3 d-flex justify-content-center align-items-center">

@@ -410,12 +410,12 @@ a:hover {
         display: none;
     }
     .fs-5 {
-        font-size: 1.1rem !important;
+        font-size: 1.1rem;
     }
     .grid-item1 {
-        grid-area: 1/1/8/8;
-        display: grid;
-        height: 320px;
+        grid-area: 1/1/8/8 !important;
+        display: grid !important;
+        height: 300px !important;
     }
     .grid-itemx1 {
         grid-area: 1/1/8/8;
@@ -465,13 +465,17 @@ a:hover {
         z-index: 2;
     }
     .main-titlee {
-        font-size: 4.3rem !important;
+        font-size: 2rem !important;
         font-weight: 700;
         color: #ffffff;
         line-height: 1 !important;
         letter-spacing: 1px;
         text-align: center;
         font-family: "Helvetica Neue", sans-serif;
+    }
+    .titlee {
+        font-size: 0.9rem !important;
+        color: #ffffff;
     }
     #hero {
         width: 100%;
@@ -759,13 +763,18 @@ a:hover {
 }
 
 .main-titlee {
-    font-size: 8rem;
+    font-size: 5.7rem;
     font-weight: 700;
     color: #ffffff;
-    line-height: 0.95;
+    line-height: 1.2;
     letter-spacing: 1px;
     text-align: center;
     font-family: "Helvetica Neue", sans-serif;
+}
+
+.titlee {
+    font-size: 1.5rem;
+    color: #ffffff;
 }
 
 .smaller-input {
@@ -1091,14 +1100,6 @@ label {
     border-bottom-left-radius: 10px;
 }
 
-.grid-cont {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 8px 8px;
-    z-index: 98 !important;
-}
-
 .g-item {
     transition: transform 0.5s ease-in-out;
 }
@@ -1126,6 +1127,14 @@ label {
 .grid-item6,
 .grid-item7 {
     height: 250px !important;
+}
+
+.grid-cont>div:first-child {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px 8px;
+    z-index: 98 !important;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
 .footer {
@@ -1265,7 +1274,7 @@ label {
 .fields {
     width: 100%;
     border-color: #000000;
-    padding: 1.5rem 1rem;
+    padding: 1rem 1rem;
     border: none;
     border-radius: 8px;
     background-color: #ffffff;
@@ -1348,7 +1357,7 @@ label {
 .react-autosuggest__input {
     background-color: #f5f5f5;
     right: 0;
-    width: 700px;
+    width: 850px;
     height: 45px;
     padding: 20px 20px;
     font-weight: 300;
@@ -1362,7 +1371,7 @@ label {
 .ww .react-autosuggest__input {
     background-color: #f5f5f5;
     right: 0;
-    width: 700px;
+    width: 850px;
     height: 70px;
     padding: 20px 20px;
     font-weight: 300;
@@ -1390,7 +1399,7 @@ label {
     position: absolute;
     top: auto;
     margin-top: 5px;
-    width: 700px;
+    width: 850px;
     background-color: #fff;
     font-weight: 300;
     font-size: 16px;
