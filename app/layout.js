@@ -4,6 +4,7 @@ import "./icons.css";
 import "react-quill/dist/quill.snow.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import NextTopLoader from "nextjs-toploader";
 import { Montserrat } from "next/font/google";
 
 const montserrat = Montserrat({ subsets: ["cyrillic"] });
@@ -53,6 +54,17 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={montserrat.className}>
+      <NextTopLoader
+          color="#FF0000"
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={3}
+          crawl={true}
+          showSpinner={true}
+          easing="ease"
+          speed={200}
+          shadow="0 0 10px #00A1FF,0 0 5px #00A1FF"
+        />
         <Navbar cities={cities}></Navbar>
         {children}
         <Footer cities={cities}></Footer>

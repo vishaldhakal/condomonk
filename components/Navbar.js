@@ -9,7 +9,7 @@ const Navbar = ({ cities }) => {
     return <></>;
   }
   return (
-    <nav className="navbar navbar-expand-sm navbar-light bg-white shadow-lg py-3">
+    <nav className="navbar navbar-expand-sm navbar-light bg-white shadow-lg py-4">
       <div className="container-fluid">
         <Link href="/" className="logo d-flex align-items-center">
           <span>Condomonk</span>
