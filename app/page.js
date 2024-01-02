@@ -76,7 +76,7 @@ export default async function Home(props) {
                 </label>
               </div> */}
                <div className="pb-1 ww">
-              <SearchBar cities={cities} />
+              <SearchBar  cities={cities} />
             </div>
             </div>
             </div>

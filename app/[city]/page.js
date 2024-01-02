@@ -1,6 +1,7 @@
 import CondoCard from "@/components/CondoCard";
 import BottomContactForm from "@/components/BottomContactForm";
 import { notFound } from "next/navigation";
+import PreconSchema from "@/components/PreconSchema";
 
 async function getData(city) {
   const res = await fetch(
@@ -41,7 +42,10 @@ export async function generateMetadata({ params }, parent) {
 
 export default async function Home({ params }) {
   const data = await getData(params.city);
-
+  
+  const filteredprojects = (value) => {
+    return data.preconstructions.filter((item) => item.status == value);
+  };
   return (
     <>
       <div className="pt-5">
@@ -58,11 +62,84 @@ export default async function Home({ params }) {
             </p>
           </div>
           <div className="py-2"></div>
-          <div className="row row-cols-1 row-cols-md-5 gy-4">
+         
+          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-5 gy-0 gx-3 gx-lg-2">
             {data.preconstructions &&
-              data.preconstructions.map((item) => (
+              filteredprojects("Selling").map((item, no) => (
                 <div className="col" key={item.id}>
-                  <CondoCard {...item} />
+                  <script
+                    key={item.slug}
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                      __html: JSON.stringify(PreconSchema(item)),
+                    }}
+                  />
+                  <CondoCard {...item} no={no} />
+                </div>
+              ))}
+          </div>
+          <div className="pt-5 mt-5"></div>
+          <div className="pt-5"></div>
+          <h2 className="fw-bold fs-3 mb-4">
+            {filteredprojects("Upcoming").length > 0 ? (
+              `Launching Soon - New Construction Projects in ${CapitalizeFirst(
+                data.city.name
+              )}`
+            ) : (
+              <></>
+            )}
+          </h2>
+          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-5 gy-4 gx-3 gx-lg-2">
+            {data.preconstructions &&
+              filteredprojects("Planning Phase").map((item, no) => (
+                <div className="col" key={item.id}>
+                  <script
+                    key={item.slug}
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                      __html: JSON.stringify(PreconSchema(item)),
+                    }}
+                  />
+                  <CondoCard {...item} no={no} />
+                </div>
+              ))}
+            {data.preconstructions &&
+              filteredprojects("Upcoming").map((item, no) => (
+                <div className="col" key={item.id}>
+                  <script
+                    key={item.slug}
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                      __html: JSON.stringify(PreconSchema(item)),
+                    }}
+                  />
+                  <CondoCard {...item} no={no} />
+                </div>
+              ))}
+          </div>
+          <div className="pt-5 mt-5"></div>
+          <div className="pt-5"></div>
+          <h2 className="fw-bold fs-3 mb-4 text-red">
+            {filteredprojects("Sold out").length > 0 ? (
+              <i>{`Past Communities in ${CapitalizeFirst(
+                data.city.name
+              )} - Sold out`}</i>
+            ) : (
+              <></>
+            )}
+          </h2>
+          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-6 gy-4 gx-3 gx-lg-2">
+            {data.preconstructions &&
+              filteredprojects("Sold out").map((item, no) => (
+                <div className="col" key={item.id}>
+                  <script
+                    key={item.slug}
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                      __html: JSON.stringify(PreconSchema(item)),
+                    }}
+                  />
+                  <CondoCard {...item} no={no} />
                 </div>
               ))}
           </div>
