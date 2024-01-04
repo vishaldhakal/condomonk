@@ -1,19 +1,48 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import SearchBar from "./SearchBar";
 
-const Navbar = ({ cities }) => {
-  const pathname = usePathname();
 
-  if (pathname.startsWith("/admin")) {
-    return <></>;
-  }
+const Navbar = ({ cities, dropdown_cities }) => {
+  const [cityname, setCityname] = useState("");
+
+  // if (pathname.startsWith("/admin")) {
+  //   return <></>;
+  // }
   return (
     <nav className="navbar navbar-expand-sm navbar-light bg-white shadow-lg py-4">
-      <div className="container-fluid">
-        <Link href="/" className="logo d-flex align-items-center">
+      <div className="container-fluid justify-content-start">
+       <Link href="/" className="logo ">
           <span>Condomonk</span>
         </Link>
+        <div className="input-group input-group-search mx-1 me-md-0">
+          <SearchBar changeCity={setCityname} cities={cities} />
+          <Link
+            href={"/" + cityname.toLowerCase()}
+            className=""
+          >
+            <button
+              className="input-group-text btn bg-light2 bg-lh d-block"
+              type="button"
+              aria-label="Search Button"
+            >
+              <svg
+                aria-hidden="true"
+                className="svg"
+                viewBox="0 0 30 30"
+                xmlns="http://www.w3.org/2000/svg"
+                height="25"
+                width="25"
+              >
+                <path
+                  d="M20.756 18.876l6.155 6.154-1.88 1.881-6.155-6.155A9.269 9.269 0 0 1 13.3 22.61a9.31 9.31 0 1 1 9.31-9.31c0 2.091-.69 4.021-1.854 5.576zM13.3 19.95a6.65 6.65 0 1 0 0-13.3 6.65 6.65 0 0 0 0 13.3z"
+                  fill="#000000"
+                ></path>
+              </svg>
+            </button>
+          </Link>
+        </div>
         <button
           className="navbar-toggler d-lg-none"
           type="button"
