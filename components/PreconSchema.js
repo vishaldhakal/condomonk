@@ -24,7 +24,7 @@ const PreconSchema = (listing) => {
     },
     offers: {
       "@type": "AggregateOffer",
-      url: `https://dolphy.ca/pre-construction-homes/${listing.city.slug}/${listing.slug}`,
+      url: `https://condomonk.ca/${listing.city.slug}/${listing.slug}`,
       priceCurrency: "CAD",
       lowPrice: listing.price_starting_from || "0",
       highPrice: listing.price_to || "0",
