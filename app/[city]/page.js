@@ -55,7 +55,7 @@ export default async function Home({ params }) {
               New Construction condos in {CapitalizeFirst(params.city)} ( 2023 )
             </h1>
             <p className="text-mine">
-              {data.preconstructions.length} New Preconstruction Condos for sale
+              {data.preconstructions.length} New Preconstruction Condos for saleeeee
               in {CapitalizeFirst(params.city)}, Ontario | Check out plans,
               pricing, availability for pre construction condos in{" "}
               {CapitalizeFirst(params.city)}
