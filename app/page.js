@@ -108,7 +108,7 @@ export default async function Home(props) {
           </h2>
           <div className="container">
           <div className="row">
-            <div className="col-4 col-md-4 col-xl-4">
+            <div className="col-6 col-md-4 col-xl-4">
               <Link className="d-block properti_city" href={"/toronto"}>
                 <div className="thumb">
                   <img
@@ -125,7 +125,7 @@ export default async function Home(props) {
                 </div>
               </Link>
             </div>
-            <div className="col-4 col-lg-8 col-xl-8">
+            <div className="col-6 col-lg-8 col-xl-8">
               <Link className="d-block properti_city" href={"/brampton"}>
                 <div className="thumb">
                   <img
@@ -142,7 +142,7 @@ export default async function Home(props) {
                 </div>
               </Link>
             </div>
-            <div className="col-4 col-lg-8 col-xl-8">
+            <div className="col-6 col-lg-8 col-xl-8">
               <Link className="d-block properti_city" href={"/etobicoke"}>
                 <div className="thumb">
                   <img
@@ -159,7 +159,7 @@ export default async function Home(props) {
                 </div>
               </Link>
             </div>
-            <div className="col-4 col-md-4 col-xl-4">
+            <div className="col-6 col-md-4 col-xl-4">
               <Link className="d-block properti_city" href={"/mississauga"}>
                 <div className="thumb">
                   <img
