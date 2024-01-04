@@ -22,17 +22,19 @@ export default function CondoCard(props) {
       return Math.abs(TotalDays) + " day ago ";
     }
   }
-  {props.image.length > 0 ? (
-    <Image
-      loading="lazy"
-      src={`https://api.condomonk.ca${props.image[0].image}`}
-      layout="responsive"
-      className="img-fluid condocard-img-top"
-      alt={`${props.project_name} located at ${props.project_address} image`}
-    />
-  ) : (
-    <p>NO Image</p>
-  )}
+  {
+    props.image.length > 0 ? (
+      <Image
+        loading="lazy"
+        src={`https://api.condomonk.ca${props.image[0].image}`}
+        layout="responsive"
+        className="img-fluid condocard-img-top"
+        alt={`${props.project_name} located at ${props.project_address} image`}
+      />
+    ) : (
+      <p>NO Image</p>
+    );
+  }
   return (
     <>
       <div className="card border-0 shadow-sm rounded-mine my-3 my-md-0">
@@ -42,6 +44,7 @@ export default function CondoCard(props) {
             className="mylinkk"
             target="_blank"
           >
+            {""}
             {props.image.length > 0 ? (
               <img
                 loading="lazy"
