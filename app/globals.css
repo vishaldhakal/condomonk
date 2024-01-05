@@ -41,6 +41,17 @@ a:hover {
     }
 }
 
+.link-black,
+.link-black:hover {
+    color: #000!important;
+}
+
+@media (min-width: 1200px) {
+    .fs-big {
+        font-size: 4rem !important;
+    }
+}
+
 
 /*--------------------------------------------------------------
 # Override some default Bootstrap stylings
@@ -49,15 +60,30 @@ a:hover {
 
 /* Dropdown menus */
 
+@media (min-width: 1200px) {
+    .nav-item:hover .dropdown-menu {
+        display: block;
+        animation-name: dropdown-animate;
+        animation-duration: 0.2s;
+        animation-fill-mode: both;
+        border: 0;
+        box-shadow: 0 5px 30px 0 rgba(82, 63, 105, 0.2);
+        width: 450px;
+    }
+}
 
-/* .dropdown-menu {
+.nav-item:hover .dropdown-menu .dropdown-item:hover {
+    background-color: #f6f9ff;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
     border-radius: 4px;
     padding: 10px 0;
-    animation-name: dropdown-animate;
-    animation-duration: 0.2s;
-    animation-fill-mode: both;
-    border: 0;
-    box-shadow: 0 5px 30px 0 rgba(82, 63, 105, 0.2);
 }
 
 .dropdown-menu .dropdown-header,
@@ -93,10 +119,6 @@ a:hover {
     line-height: 0;
 }
 
-.dropdown-menu .dropdown-item:hover {
-    background-color: #f6f9ff;
-}
-
 @media (min-width: 768px) {
     .dropdown-menu-arrow::before {
         content: "";
@@ -122,46 +144,6 @@ a:hover {
     0% {
         opacity: 0;
     }
-} */
-
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.dropdown-menu .container {
-    width: 100%;
-}
-
-.dropdown-menu .row {
-    display: flex;
-    flex-wrap: wrap;
-    margin: -8px;
-    /* Add negative margin to offset padding */
-}
-
-.dropdown-menu .col-md-4 {
-    flex: 0 0 33.33333%;
-    max-width: 33.33333%;
-    padding: 8px;
-}
-
-.dropdown-menu .dropdown-item {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 0.25rem 1.5rem;
-    clear: both;
-    font-weight: 400;
-    color: #212529;
-    text-align: inherit;
-    white-space: nowrap;
-    background-color: transparent;
-    border: 0;
-    box-sizing: border-box;
-    /* Ensure padding doesn't affect width */
 }
 
 
@@ -506,7 +488,7 @@ a:hover {
 
 @media (min-width: 1200px) {
     .logo {
-        width: 200px;
+        width: 180px;
     }
 }
 

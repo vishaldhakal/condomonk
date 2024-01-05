@@ -1,11 +1,15 @@
 import CondoCardHome from "@/components/CondoCardHome";
 import Link from "next/link";
+import CondoCard from "@/components/CondoCard";
 import SearchBar from "@/components/SearchBar";
+import PreconSchema from "@/components/PreconSchema";
 import BottomContactForm from "@/components/BottomContactForm";
 
-async function getData() {
+async function getData(city) {
   const res = await fetch(
-    "https://api.condomonk.ca/api/preconstructions?page_size=10",
+    "https://api.condomonk.ca/api/preconstructions-city/" +
+      city +
+      "?page_size=10",
     {
       next: { revalidate: 10 },
     }
@@ -28,7 +32,8 @@ async function getCities() {
 }
 
 export default async function Home(props) {
-  const data = await getData();
+  const data = await getData("calgary");
+  const mississauga_data = await getData("mississauga");
   let cities = await getCities();
   // let dropdown_cities = await getCitiesandProjects();
 
@@ -40,16 +45,20 @@ export default async function Home(props) {
 
   return (
     <>
-   <section id="hero">
+      <section id="hero">
         <div className="container">
-            <div className=" hero-container" >
-                <div >
-                <h1 className="main-titlee pb-0  mb-0 mt-2 mt-md-0" >Canada's leading pre construction homes Platform
-                </h1>
-                <p className="titlee text-center mt-0 pt-1 text-white" >Get first updates on New Construction Homes Projects across Canada</p>
-                </div>
+          <div className=" hero-container">
+            <div>
+              <h1 className="main-titlee pb-0  mb-0 mt-2 mt-md-0">
+                Canada's leading pre construction homes Platform
+              </h1>
+              <p className="titlee text-center mt-0 pt-1 text-white">
+                Get first updates on New Construction Homes Projects across
+                Canada
+              </p>
+            </div>
 
-                <div className="pb-1 pt-3 d-flex justify-content-center align-items-center">
+            <div className="pb-1 pt-3 d-flex justify-content-center align-items-center">
               {/* <div className="form-floating mb-4">
                 <input
                   type="email"
@@ -75,111 +84,172 @@ export default async function Home(props) {
                   Type a city
                 </label>
               </div> */}
-               <div className="pb-1 ww">
-              <SearchBar  cities={cities} />
+              <div className="pb-1 ww">
+                <SearchBar cities={cities} />
+              </div>
             </div>
-            </div>
-            </div>
+          </div>
         </div>
-    </section>
+      </section>
 
       <div className="pt-5">
-        <div className="container-fluid px-md-5">
-          <div className="d-flex flex-column justify-content-start align-items-start">
-            <h1 className="main-title">
-              New Construction condos in Canada (2023)
-            </h1>
-            <p className="text-mine">
-              1000+ New Preconstruction Condos for sale in Canada | Check out
-              plans, pricing, availability for pre construction condos in Canada
-            </p>
+        <div className="container-fluid px-md-5 pt-5">
+          <div className="d-flex align-items-center justify-content-center">
+            <h2 className="fw-mine ccent-line fs-big fs-1">
+              <Link
+                href={"/calgary"}
+                className="link-black"
+              >
+                Calgary
+              </Link>
+            </h2>
           </div>
-          <div className="py-2"></div>
-          <div className="row row-cols-1 row-cols-md-5 gy-3">
-            {data.results.map((item) => (
-              <div className="col" key={item.id}>
-                <CondoCardHome {...item} />
-              </div>
-            ))}
+          <div className="d-flex flex-column justify-content-center flex-column align-items-center mb-5">
+            <p className="fs-5 mb-0 text-center">
+              Explore 20+ current & past new homes communities from Truman homes
+              in Calgary
+            </p>
+            <Link
+              href={"/calgary"}
+              className="mt-1 text-mine text-primary"
+            >
+              More communities in Calgary{" "}
+              <i className="bi bi-arrow-right-short"></i>
+            </Link>
+          </div>
+          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-5 gy-4 gx-3 gx-lg-2">
+            {data.preconstructions &&
+              data.preconstructions.slice(0, 10).map((item) => (
+                <div className="col" key={item.id}>
+                  <script
+                    key={item.slug}
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                      __html: JSON.stringify(PreconSchema(item)),
+                    }}
+                  />
+                  <CondoCard {...item} />
+                </div>
+              ))}
           </div>
           <div className="py-5 my-2"></div>
-          <h2 className="fw-mine text-center mb-5 accent-line">
+          <h2 className="fw-mine text-center mb-5 accent-line fs-1">
             Explore New Construction Condos in These Cities
           </h2>
           <div className="container">
-          <div className="row">
-            <div className="col-6 col-md-4 col-xl-4">
-              <Link className="d-block properti_city" href={"/toronto"}>
-                <div className="thumb">
-                  <img
-                    src="/cities/toronto.jpg"
-                    alt="toronto"
-                    className="img-fluid"
-                  />
-                </div>
-                <div className="overlay">
-                  <div className="details">
-                    <h4>Toronto</h4>
-                    <p>Explore Toronto's finest New construction condos</p>
+            <div className="row">
+              <div className="col-6 col-md-4 col-xl-4">
+                <Link className="d-block properti_city" href={"/toronto"}>
+                  <div className="thumb">
+                    <img
+                      src="/cities/toronto.jpg"
+                      alt="toronto"
+                      className="img-fluid"
+                    />
                   </div>
-                </div>
-              </Link>
-            </div>
-            <div className="col-6 col-lg-8 col-xl-8">
-              <Link className="d-block properti_city" href={"/brampton"}>
-                <div className="thumb">
-                  <img
-                    src="/cities/brampton.jpg"
-                    alt="brampton"
-                    className="img-fluid"
-                  />
-                </div>
-                <div className="overlay">
-                  <div className="details">
-                    <h4>Brampton</h4>
-                    <p>Brampton's finest New construction condos</p>
+                  <div className="overlay">
+                    <div className="details">
+                      <h4>Toronto</h4>
+                      <p>Explore Toronto's finest New construction condos</p>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            </div>
-            <div className="col-6 col-lg-8 col-xl-8">
-              <Link className="d-block properti_city" href={"/etobicoke"}>
-                <div className="thumb">
-                  <img
-                    src="/cities/etobicoke.jpg"
-                    alt="etobicoke"
-                    className="img-fluid"
-                  />
-                </div>
-                <div className="overlay">
-                  <div className="details">
-                    <h4>Etobicoke</h4>
-                    <p>Etobicoke's finest New construction condos</p>
+                </Link>
+              </div>
+              <div className="col-6 col-lg-8 col-xl-8">
+                <Link className="d-block properti_city" href={"/brampton"}>
+                  <div className="thumb">
+                    <img
+                      src="/cities/brampton.jpg"
+                      alt="brampton"
+                      className="img-fluid"
+                    />
                   </div>
-                </div>
-              </Link>
-            </div>
-            <div className="col-6 col-md-4 col-xl-4">
-              <Link className="d-block properti_city" href={"/mississauga"}>
-                <div className="thumb">
-                  <img
-                    src="/cities/mississauga.jpg"
-                    alt="mississauga"
-                    className="img-fluid"
-                  />
-                </div>
-                <div className="overlay">
-                  <div className="details">
-                    <h4>Mississauga</h4>
-                    <p>Mississauga's finest New construction condos</p>
+                  <div className="overlay">
+                    <div className="details">
+                      <h4>Brampton</h4>
+                      <p>Brampton's finest New construction condos</p>
+                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </div>
+              <div className="col-6 col-lg-8 col-xl-8">
+                <Link className="d-block properti_city" href={"/etobicoke"}>
+                  <div className="thumb">
+                    <img
+                      src="/cities/etobicoke.jpg"
+                      alt="etobicoke"
+                      className="img-fluid"
+                    />
+                  </div>
+                  <div className="overlay">
+                    <div className="details">
+                      <h4>Etobicoke</h4>
+                      <p>Etobicoke's finest New construction condos</p>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+              <div className="col-6 col-md-4 col-xl-4">
+                <Link className="d-block properti_city" href={"/mississauga"}>
+                  <div className="thumb">
+                    <img
+                      src="/cities/mississauga.jpg"
+                      alt="mississauga"
+                      className="img-fluid"
+                    />
+                  </div>
+                  <div className="overlay">
+                    <div className="details">
+                      <h4>Mississauga</h4>
+                      <p>Mississauga's finest New construction condos</p>
+                    </div>
+                  </div>
+                </Link>
+              </div>
             </div>
           </div>
+          <div className="py-5 my-2"></div>
+          <div className="d-flex align-items-center justify-content-center ">
+            <h2 className="fw-mine ccent-line fs-big fs-1">
+              <Link
+                href={"/calgary"}
+                className="link-black"
+              >
+                Mississauga
+              </Link>
+            </h2>
           </div>
+          <div className="d-flex flex-column justify-content-center flex-column align-items-center mb-5">
+            <p className="fs-5 mb-0 text-center">
+              Explore 30+ currently selling & upcoming pre-construction
+              communities in Mississauga
+            </p>
+            <Link
+              href={"/mississauga"}
+              className="mt-1 text-mine text-primary"
+            >
+              More developments in Mississauga{" "}
+              <i className="bi bi-arrow-right-short"></i>
+            </Link>
+          </div>
+          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-5 gy-4 gx-3 gx-lg-2">
+            {mississauga_data.preconstructions &&
+              mississauga_data.preconstructions.slice(0, 10).map((item) => (
+                <div className="col" key={item.id}>
+                  <script
+                    key={item.slug}
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                      __html: JSON.stringify(PreconSchema(item)),
+                    }}
+                  />
+                  <CondoCard {...item} />
+                </div>
+              ))}
+          </div>
+
           <div className="pt-5 mt-5"></div>
-          <div className="py-5 my-5" id="mycontact">
+          <div className="py-5 my-5" id="contact">
             <div className="container">
               <div className="row justify-content-center">
                 <img
@@ -192,7 +262,7 @@ export default async function Home(props) {
                 Are you looking to buy a preconstruction home ?
               </h2>
               <h2 className="fw-mine text-center px-md-4 fs-4">
-                 Contact Condomonk now!
+                Contact Condomonk now!
               </h2>
               <div className="row row-cols-1 row-cols-md-3 mt-5">
                 <div className="col-md-2"></div>

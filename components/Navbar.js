@@ -20,7 +20,7 @@ const Navbar = ({ cities, dropdown_cities }) => {
           <SearchBar changeCity={setCityname} cities={cities} />
           <Link
             href={"/" + cityname.toLowerCase()}
-            className=""
+            className="d-none d-md-inline"
           >
             <button
               className="input-group-text btn bg-light2 bg-lh d-block"
@@ -69,10 +69,10 @@ const Navbar = ({ cities, dropdown_cities }) => {
               </a>
               <div className="dropdown-menu" aria-labelledby="dropdownId">
                 <div className="container">
-                  <div className="row">
+                  <div className="row row-cols-md-3 row-cols-2">
                     {cities &&
                       cities.map((city) => (
-                        <div className="col-md-4" key={city.id}>
+                        <div className="col" key={city.id}>
                           <Link
                             className="dropdown-item"
                             href={`/${city.slug}`}
@@ -106,11 +106,12 @@ const Navbar = ({ cities, dropdown_cities }) => {
               </a>
             </li>
           </ul>
-          <button
+          <button 
             className="btn btn-danger my-2 my-sm-0 rounded-pill ms-md-3"
-            type="submit"
-          >
+            type="submit" 
+          > <a className="nav-link" href="#contact">
             Call Now
+            </a>
           </button>
         </div>
       </div>

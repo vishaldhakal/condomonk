@@ -145,7 +145,7 @@ export default async function Home({ params }) {
           </div>
           <div className="pt-5 mt-5"></div>
           <div className="pt-5 mt-5"></div>
-          <div className="py-5 my-5" id="mycontact">
+          <div className="py-5 my-5" id="contact">
             <div className="container">
               <div className="row justify-content-center">
                 <img
