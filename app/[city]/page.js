@@ -2,6 +2,7 @@ import CondoCard from "@/components/CondoCard";
 import BottomContactForm from "@/components/BottomContactForm";
 import { notFound } from "next/navigation";
 import PreconSchema from "@/components/PreconSchema";
+import Link from "next/link";
 
 async function getData(city) {
   const res = await fetch(
@@ -52,7 +53,7 @@ export default async function Home({ params }) {
         <div className="container-fluid  px-md-5">
           <div className="d-flex flex-column">
             <h1 className="main-title">
-              New Construction condos in {CapitalizeFirst(params.city)} ( 2023 )
+              New Construction Condos in {CapitalizeFirst(params.city)} ( 2023 )
             </h1>
             <p className="text-mine">
               {data.preconstructions.length} New Preconstruction Condos for sale
@@ -61,7 +62,38 @@ export default async function Home({ params }) {
               {CapitalizeFirst(params.city)}
             </p>
           </div>
-          <div className="py-2"></div>
+        
+          <div className="d-flex mb-4 mt-0 gap-2 overflow-hidden">
+            <div>
+              <Link
+                className="link-black badge py-2 mx-2 bg-white shadow-sm text-dark fs-small fw-m"
+                href={`/${params.city}/upcoming/`}
+              >
+                Upcoming Projects in {CapitalizeFirst(params.city)}
+              </Link>
+              <Link
+                className="link-black badge py-2 bg-white shadow-sm text-dark fs-small fw-m"
+                href={`/${params.city}/townhomes/`}
+              >
+                New Townhomes {CapitalizeFirst(params.city)}
+              </Link>
+            </div>
+            <div>
+              <Link
+                className="link-black badge py-2 bg-white shadow-sm text-dark fs-small fw-m"
+                href={`/${params.city}/detached/`}
+              >
+                New Detached Homes {CapitalizeFirst(params.city)}
+              </Link>
+              <Link
+                className="link-black badge py-2 mx-2 bg-white shadow-sm text-dark fs-small fw-m"
+                href={`/${params.city}/condos/`}
+              >
+                New Condos {CapitalizeFirst(params.city)}
+              </Link>
+            </div>
+          </div>
+          <div className="py-3"></div>
          
           <div className="row row-cols-1 row-cols-md-4 row-cols-lg-5 gy-0 gx-3 gx-lg-2">
             {data.preconstructions &&
