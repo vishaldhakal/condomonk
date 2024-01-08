@@ -4,6 +4,7 @@ import CondoCard from "@/components/CondoCard";
 import SearchBar from "@/components/SearchBar";
 import PreconSchema from "@/components/PreconSchema";
 import BottomContactForm from "@/components/BottomContactForm";
+import FixedContactButton from "@/components/FixedContactButton";
 
 async function getData(city) {
   const res = await fetch(
@@ -45,6 +46,7 @@ export default async function Home(props) {
 
   return (
     <>
+     <FixedContactButton></FixedContactButton>
       <section id="hero">
         <div className="container">
           <div className=" hero-container">

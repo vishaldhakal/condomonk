@@ -3,8 +3,8 @@ import Link from "next/link";
 export default function FixedContactButton() {
   return (
     <>
-      {/* <Link href="#mycontact" className="floating fixcontact">
-      <div className="bg-white text-dark shadow-lg rounded-mine d-flex flex-column">
+      <Link href="#contact" className="floating fixcontact">
+      <div className="text-dark shadow-lg rounded-mine d-flex flex-column">
         <div className="btn my-sm-0 ms-md-3 d-flex text-dark link-black align-items-center gap-2">
           <img
             src="/COA-agent-pic.jpg"
@@ -16,7 +16,7 @@ export default function FixedContactButton() {
           </span>
         </div>
       </div>
-    </Link> */}
+    </Link>
     </>
   );
 }

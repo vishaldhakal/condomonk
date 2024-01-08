@@ -3,6 +3,7 @@ import BottomContactForm from "@/components/BottomContactForm";
 import { notFound } from "next/navigation";
 import PreconSchema from "@/components/PreconSchema";
 import Link from "next/link";
+import FixedContactButton from "@/components/FixedContactButton";
 
 async function getData(city) {
   const res = await fetch(
@@ -49,6 +50,7 @@ export default async function Home({ params }) {
   };
   return (
     <>
+        <FixedContactButton></FixedContactButton>
       <div className="pt-5">
         <div className="container-fluid  px-md-5">
           <div className="d-flex flex-column">
@@ -195,7 +197,7 @@ export default async function Home({ params }) {
               </h2>
               <div className="row row-cols-1 row-cols-md-3 mt-5">
                 <div className="col-md-3"></div>
-                <div className="col-md-6">
+                <div className="col-md-6" id="contact">
                   <BottomContactForm></BottomContactForm>
                 </div>
                 <div className="col-md-3"></div>

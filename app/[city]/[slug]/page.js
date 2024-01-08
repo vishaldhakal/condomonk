@@ -276,7 +276,7 @@ export default async function Home({ params }) {
                 </div>
               </div>
              
-<div className="col col-md-4 ps-md-2 pt-5 pt-md-0">
+<div className="col col-md-4 ps-md-2 pt-5 pt-md-0" id="contact">
                 <div className="py-4 py-md-0"></div>
                 <div className="side-fix-contact mt-mine pe-0">
                   {/* <div className="text-center">
@@ -310,7 +310,7 @@ export default async function Home({ params }) {
                         <p className="mb-0 text-center">info@condomonk.ca</p>
                       </div>
                     </div>
-                    <div className="my-4"></div>
+                    <div className="my-4" ></div>
                     <SideContactForm
                       projects_name={data.project_name}
                       defaultmessage={
