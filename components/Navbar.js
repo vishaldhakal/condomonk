@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import SearchBar from "./SearchBar";
+import SearchSuggest from "./SerachSuggest";
 
 
 const Navbar = ({ cities, dropdown_cities }) => {
@@ -17,8 +18,8 @@ const Navbar = ({ cities, dropdown_cities }) => {
           <span>Condomonk</span>
         </Link>
         <div className="input-group input-group-search mx-1 me-md-0">
-          <SearchBar changeCity={setCityname} cities={cities} />
-          <Link
+          <SearchSuggest  cities={cities} />
+          {/* <Link
             href={"/" + cityname.toLowerCase()}
             className="d-none d-md-inline"
           >
@@ -41,7 +42,7 @@ const Navbar = ({ cities, dropdown_cities }) => {
                 ></path>
               </svg>
             </button>
-          </Link>
+          </Link> */}
         </div>
         <button
           className="navbar-toggler d-lg-none"
