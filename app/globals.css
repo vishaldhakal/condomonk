@@ -343,7 +343,30 @@ a:hover {
     line-height: 1;
 }
 
+.muuuu {
+    width: 320px;
+}
+
+.muuuuu {
+    width: 850px;
+    margin-bottom: 2rem !important;
+}
+
+.muuuuu input {
+    height: 4rem !important;
+}
+
+.zzz {
+    z-index: 99999 !important;
+}
+
 @media (max-width: 800px) {
+    .muuuuu {
+        width: 400px;
+    }
+    .muuuu {
+        width: 200px;
+    }
     .logo span {
         font-size: 18px !important;
         font-weight: 800;

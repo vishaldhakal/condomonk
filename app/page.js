@@ -5,6 +5,7 @@ import SearchBar from "@/components/SearchBar";
 import PreconSchema from "@/components/PreconSchema";
 import BottomContactForm from "@/components/BottomContactForm";
 import FixedContactButton from "@/components/FixedContactButton";
+import MainSearch from "@/components/MainSearch";
 
 async function getData(city) {
   const res = await fetch(
@@ -87,7 +88,7 @@ export default async function Home(props) {
                 </label>
               </div> */}
               <div className="pb-1 ww">
-                <SearchBar cities={cities} />
+                <MainSearch cities={cities} />
               </div>
             </div>
           </div>

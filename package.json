@@ -19,6 +19,7 @@
     "react-autosuggest": "^10.1.0",
     "react-dom": "18.2.0",
     "react-quill": "^2.0.0",
+    "react-search-autocomplete": "^8.5.2",
     "simple-datatables": "^8.0.0",
     "sweetalert": "^2.1.2"
   }

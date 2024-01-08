@@ -31,7 +31,7 @@ const SearchBar = (props) => {
   // Render Each Option
   const renderSuggestion = (suggestion) => (
     <Link
-      href={ "/"+ suggestion.name.toLowerCase()}
+      href={ "/" + suggestion.name.toLowerCase()}
       className="ha-link"
     >
       <span className="d-none d-sm-inline me-3">
