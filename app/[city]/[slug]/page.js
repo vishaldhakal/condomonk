@@ -176,11 +176,11 @@ export default async function Home({ params }) {
                         By <strong>{data.developer.name}</strong>
                       </p>
                       <p className="mt-1 mb-0 me-2">Price Starting from</p>
-                      <h2 className="text-mine fs-3 fw-mine3 mt-1 mb-0">
+                      <h2 className="text-mine fs-3 fw-mine3 mt-1 mb-0 cardd-subtitle">
                         {checkPricing(data.price_starting_from, data.price_to)}
                       </h2>
-                      <div className="mb-1 fw-bold">
-                        <span scope="col">{data.status}</span>
+                      <div className="mb-1 ">
+                        <span scope="col">Project Status: {data.status}</span>
                       </div>
                     </div>
                   </div>

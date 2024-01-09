@@ -1,14 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 :root {
     scroll-behavior: smooth;
 }
 
 body {
-    background: #f6f9ff;
-    color: #000000;
+    background: #ffffff;
+    font-family: 'Poppins', sans-serif !important;
 }
 
 a {
-    color: #4154f1;
+    color: #161f69;
     text-decoration: none !important;
 }
 
@@ -68,7 +69,7 @@ a:hover {
         animation-fill-mode: both;
         border: 0;
         box-shadow: 0 5px 30px 0 rgba(82, 63, 105, 0.2);
-        width: 450px;
+        width: 420px;
     }
 }
 
@@ -348,7 +349,7 @@ a:hover {
 }
 
 .muuuuu {
-    width: 850px;
+    width: 950px;
     margin-bottom: 2rem !important;
 }
 
@@ -368,9 +369,9 @@ a:hover {
         width: 180px;
     }
     .logo span {
-        font-size: 18px !important;
+        font-size: 19px !important;
         font-weight: 800;
-        color: #012970;
+        color: #000;
     }
     .fs-mine {
         font-size: 1.7rem !important;
@@ -475,7 +476,7 @@ a:hover {
         z-index: 2;
     }
     .main-titlee {
-        font-size: 2rem !important;
+        font-size: 2.2rem !important;
         font-weight: 700;
         color: #ffffff;
         line-height: 1 !important;
@@ -501,6 +502,8 @@ a:hover {
         height: 100vh !important;
         justify-content: center;
         flex-direction: column;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
     }
     .bg-light2 {
         background-color: #f5f5f5;
@@ -518,6 +521,21 @@ a:hover {
         display: block !important;
         background-color: #daeff4!important;
         border-color: #5bdbff1f !important;
+    }
+    .overlay-container {
+        position: relative;
+        max-width: 100%;
+    }
+    .overlay-content {
+        position: absolute;
+        bottom: 0 !important;
+        left: 40% !important;
+        transform: translate(-50%, -50%);
+        text-align: center !important;
+        color: #000000;
+        white-space: nowrap !important;
+        display: none !important;
+        /* Adjust text color based on your image */
     }
 }
 
@@ -542,7 +560,7 @@ a:hover {
 .logo span {
     font-size: 26px;
     font-weight: 800;
-    color: #012970;
+    color: #000;
 }
 
 .btn-danger {
@@ -792,16 +810,17 @@ a:hover {
     position: relative;
     display: flex;
     height: 90vh;
+    margin-left: 50px;
+    margin-right: 50px;
     justify-content: center;
     flex-direction: column;
 }
 
 .main-titlee {
-    font-size: 5.7rem;
-    font-weight: 700;
+    font-size: 4.5rem;
+    font-weight: 800;
     color: #ffffff;
-    line-height: 1.2;
-    letter-spacing: 1px;
+    line-height: 0.95;
     text-align: center;
     font-family: "Helvetica Neue", sans-serif;
 }
@@ -1108,7 +1127,7 @@ label {
 .cardd-subtitle {
     font-size: 1rem;
     font-weight: 600;
-    color: red;
+    color: rgb(255, 136, 0);
 }
 
 .card-address {
@@ -1117,11 +1136,11 @@ label {
 
 .abs1 {
     position: absolute;
-    top: 0;
-    left: 0;
-    background-color: red;
-    border-bottom-right-radius: 10px;
-    color: white;
+    bottom: 5px;
+    left: 5px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
     font-size: 0.85rem;
 }
 
@@ -1131,7 +1150,7 @@ label {
     right: 0;
     background-color: white;
     font-size: 0.85rem;
-    border-bottom-left-radius: 10px;
+    border-radius: 10px;
 }
 
 .g-item {
@@ -1301,18 +1320,20 @@ label {
 }
 
 .navbar-nav .nav-item .nav-link {
-    font-weight: 500;
+    font-weight: 400;
     color: black !important;
+}
+
+.btn-dark {
+    white-space: nowrap !important;
 }
 
 .fields {
     width: 100%;
-    border-color: #000000;
-    padding: 1rem 1rem;
+    padding: 1.3rem 1rem;
     border: none;
-    border-radius: 8px;
-    background-color: #ffffff;
-    box-shadow: 0 1px 2px 0 rgba(251, 251, 251, 0.2), 0 6px 20px 0 rgba(166, 164, 164, 0.19);
+    border-radius: 7px;
+    background-color: #f1f3fa;
 }
 
 .fields:focus {
@@ -1366,7 +1387,7 @@ label {
 }
 
 .btn-call {
-    background-color: #012970 !important;
+    background-color: #000000 !important;
     color: #ffffff
     /*ff6200*/
     !important;
@@ -1376,7 +1397,7 @@ label {
 }
 
 .btn-call:hover {
-    background-image: linear-gradient(106deg, #012970, #005eff);
+    background-image: linear-gradient(106deg, #000000, #0c3978);
 }
 
 .ha-link {
@@ -1503,6 +1524,7 @@ label {
 
 .breadcrumb li a {
     color: black !important;
+    font-weight: 300;
 }
 
 .side-fix-contact {
@@ -1542,17 +1564,39 @@ label {
     font-weight: 500;
     padding: 0.3rem auto !important;
     color: #008bdb !important;
-    background-color: rgb(255, 255, 255) !important;
+    background-color: rgb(114, 111, 111) !important;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px !important;
 }
 
 .fs-small {
     font-size: 0.85rem !important;
     color: #0e64d4 !important;
+    background-color: rgb(114, 111, 111) !important;
     font-weight: 600;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px !important;
+    box-shadow: rgba(147, 147, 147, 0.15) 0px 3px 3px 0px !important;
 }
 
 .fixcontact {
     display: none;
+}
+
+.overlay-container {
+    position: relative;
+    max-width: 100%;
+}
+
+.overlay-content {
+    position: absolute;
+    bottom: 10%;
+    left: 18%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #000000;
+    /* Adjust text color based on your image */
+}
+
+.btn-contact-now {
+    background-color: #000000 !important;
+    /* Adjust button color */
+    color: #ffffff !important;
 }

@@ -15,6 +15,7 @@ export default function Home() {
   const [refetch, setRefetch] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  
 
   useEffect(() => {
     axios
@@ -81,7 +82,17 @@ export default function Home() {
     }
     return true;
   }
-
+  async function getCities() {
+    const res = await fetch("https://api.condomonk.ca/api/all-city", {
+      next: { revalidate: 10 },
+    });
+  
+    if (!res.ok) {
+      throw new Error("Failed to fetch data");
+    }
+    return res.json();
+  }
+  
   return (
     <>
       <div className="py-4 w-100 ">

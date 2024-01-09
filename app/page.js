@@ -47,13 +47,15 @@ export default async function Home(props) {
 
   return (
     <>
-     <FixedContactButton></FixedContactButton>
+      <FixedContactButton></FixedContactButton>
       <section id="hero">
         <div className="container">
           <div className=" hero-container">
             <div>
-              <h1 className="main-titlee pb-0  mb-0 mt-2 mt-md-0">
-                Canada's leading pre construction homes Platform
+              <h1 className="main-titlee pb-0  mb-0 mt-2 mt-md-0 ">
+                <span className="d-block ">Canada's</span> leading{" "}
+                <span className="text-warning">pre construction </span>homes
+                Platform
               </h1>
               <p className="titlee text-center mt-0 pt-1 text-white">
                 Get first updates on New Construction Homes Projects across
@@ -99,10 +101,7 @@ export default async function Home(props) {
         <div className="container-fluid px-md-5 pt-5">
           <div className="d-flex align-items-center justify-content-center">
             <h2 className="fw-mine ccent-line fs-big fs-1">
-              <Link
-                href={"/calgary"}
-                className="link-black"
-              >
+              <Link href={"/calgary"} className="link-black">
                 Calgary
               </Link>
             </h2>
@@ -112,10 +111,7 @@ export default async function Home(props) {
               Explore 20+ current & past new homes communities from Truman homes
               in Calgary
             </p>
-            <Link
-              href={"/calgary"}
-              className="mt-1 text-mine text-primary"
-            >
+            <Link href={"/calgary"} className="mt-1 text-mine text-primary">
               More communities in Calgary{" "}
               <i className="bi bi-arrow-right-short"></i>
             </Link>
@@ -214,10 +210,7 @@ export default async function Home(props) {
           <div className="py-5 my-2"></div>
           <div className="d-flex align-items-center justify-content-center ">
             <h2 className="fw-mine ccent-line fs-big fs-1">
-              <Link
-                href={"/calgary"}
-                className="link-black"
-              >
+              <Link href={"/calgary"} className="link-black">
                 Mississauga
               </Link>
             </h2>
@@ -227,10 +220,7 @@ export default async function Home(props) {
               Explore 30+ currently selling & upcoming pre-construction
               communities in Mississauga
             </p>
-            <Link
-              href={"/mississauga"}
-              className="mt-1 text-mine text-primary"
-            >
+            <Link href={"/mississauga"} className="mt-1 text-mine text-primary">
               More developments in Mississauga{" "}
               <i className="bi bi-arrow-right-short"></i>
             </Link>
@@ -251,8 +241,25 @@ export default async function Home(props) {
               ))}
           </div>
 
-          <div className="pt-5 mt-5"></div>
-          <div className="py-5 my-5" id="contact">
+          <div className="py-5 mt-md-5 mt-0">
+            <div className="text-center py-5 my-5 overlay-container">
+              <img src="/heroBanner.png" className="img-fluid d-md-block d-none" alt="" />
+              <img src="/heroBanner-sm.png" className="img-fluid d-md-none d-block" alt="" />
+
+              <div class="overlay-content row row-cols-2 g-5">
+                <div className="col fs-5 fw-medium"> 
+                <p className="mb-0">info@condomonk.ca</p>
+                <p>647-527-4970</p>
+                </div>
+                <div className="col">
+                <a href="#contact" class="btn btn-outline-dark btn-lg fs-4">Contact Now</a>
+              </div>
+                </div>
+            </div>
+          </div>
+
+          <div className="pt-md-5 pt-0 mt-md-5 mt-0"></div>
+          <div className="py-5 my-md-5 my-0" id="contact">
             <div className="container">
               <div className="row justify-content-center">
                 <img

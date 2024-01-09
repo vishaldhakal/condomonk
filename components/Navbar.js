@@ -12,9 +12,10 @@ const Navbar = ({ cities, dropdown_cities }) => {
   //   return <></>;
   // }
   return (
-    <nav className="navbar navbar-expand-sm navbar-light bg-white shadow-lg py-4">
-      <div className="container-fluid justify-content-start">
-       <Link href="/" className="logo ">
+    <nav className="navbar navbar-expand-sm navbar-light bg-white shadow-lg py-3 sticky-top">
+      <div className="container-fluid justify-content-start mx-md-5 mx-0">
+      <div className="d-flex">
+      <Link href="/" className="logo d-flex justify-content-center align-items-center pe-1 ">
           <span>Condomonk</span>
         </Link>
         <div className="input-group input-group-search mx-1 me-md-0">
@@ -55,18 +56,19 @@ const Navbar = ({ cities, dropdown_cities }) => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
+      </div>
         <div className="collapse navbar-collapse" id="collapsibleNavId">
           <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
             <li className="nav-item dropdown">
               <a
-                className="nav-link dropdown-toggle active fw-bold"
+                className="nav-link dropdown-toggle active fw-medium shadow-sm"
                 href="#"
                 id="dropdownId"
                 data-bs-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                Condos For Sale
+               Cities
               </a>
               <div className="dropdown-menu" aria-labelledby="dropdownId">
                 <div className="container">
@@ -96,11 +98,7 @@ const Navbar = ({ cities, dropdown_cities }) => {
                 News
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Events
-              </a>
-            </li>
+           
             <li className="nav-item">
               <a className="nav-link" href="#">
                 Contact
@@ -108,7 +106,7 @@ const Navbar = ({ cities, dropdown_cities }) => {
             </li>
           </ul>
           <button 
-            className="btn btn-danger my-2 my-sm-0 rounded-pill ms-md-3"
+            className="btn btn-dark my-2 my-sm-0 rounded ms-md-4 py-2 px-3"
             type="submit" 
           > <a className="nav-link" href="#contact">
             Call Now
