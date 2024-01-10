@@ -247,12 +247,12 @@ export default async function Home(props) {
               <img src="/heroBanner-sm.png" className="img-fluid d-md-none d-block" alt="" />
 
               <div class="overlay-content row row-cols-2 g-5">
-                <div className="col fs-5 fw-medium"> 
+                <div className="col fs-5 fw-bold"> 
                 <p className="mb-0">info@condomonk.ca</p>
                 <p>647-527-4970</p>
                 </div>
                 <div className="col">
-                <a href="#contact" class="btn btn-outline-dark btn-lg fs-4">Contact Now</a>
+                <a href="#contact" class="btn btn-outline-dark btn-lg fs-4 fw-bold">Contact Now</a>
               </div>
                 </div>
             </div>

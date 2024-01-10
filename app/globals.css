@@ -1,11 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap'); */
+
+@import url('https://fonts.googleapis.com/css2?family=Genos:wght@100;200;300;400;500;600;700;800;900&display=swap');
 :root {
     scroll-behavior: smooth;
 }
 
 body {
     background: #ffffff;
-    font-family: 'Poppins', sans-serif !important;
+    /* font-family: 'Poppins', sans-serif !important; */
+    font-family: 'Genos', sans-serif !important;
 }
 
 a {
@@ -546,8 +549,6 @@ a:hover {
     }
     .overlay-content {
         position: absolute;
-        bottom: 0 !important;
-        left: 40% !important;
         transform: translate(-50%, -50%);
         text-align: center !important;
         color: #000000;
@@ -555,11 +556,32 @@ a:hover {
         display: none !important;
         /* Adjust text color based on your image */
     }
+    .two-column-list {
+        columns: 1 !important;
+        list-style: none;
+    }
+    .two-column-list li {
+        break-inside: avoid-column;
+        margin-bottom: 10px;
+        text-align: center !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
 }
 
 @media (min-width: 1200px) {
     .logo {
         width: 180px;
+    }
+    .textt {
+        justify-content: center;
+        max-width: 640px;
+        margin: 0 auto;
+    }
+    .texttt {
+        justify-content: center;
+        max-width: 840px;
+        margin: 0 auto;
     }
 }
 
@@ -1346,6 +1368,10 @@ label {
     white-space: nowrap !important;
 }
 
+.btn-warning {
+    white-space: nowrap !important;
+}
+
 .fields {
     width: 100%;
     padding: 1.3rem 1rem;
@@ -1588,8 +1614,8 @@ label {
 
 .fs-small {
     font-size: 0.85rem !important;
-    color: #0e64d4 !important;
-    background-color: rgb(114, 111, 111) !important;
+    color: #000 !important;
+    background-color: #feeddb !important;
     font-weight: 600;
     box-shadow: rgba(147, 147, 147, 0.15) 0px 3px 3px 0px !important;
 }
@@ -1617,4 +1643,23 @@ label {
     background-color: #000000 !important;
     /* Adjust button color */
     color: #ffffff !important;
+}
+
+.two-column-list {
+    columns: 5;
+    list-style: none;
+}
+
+.two-column-list li {
+    break-inside: avoid-column;
+    margin-bottom: 10px;
+}
+
+.footer-contact p {
+    margin-bottom: 3px;
+}
+
+.orangebtn {
+    background-color: rgb(255, 136, 0);
+    white-space: nowrap !important;
 }
