@@ -14,7 +14,7 @@ const Footer = ({ cities }) => {
         <div className="text-center pt-5">
           <p className="fs-2 fw-bold">Get Exclusive Preconstruction Updates.</p>
           <p className="textt">
-            "Be the First to Know! Subscribe to Our Newsletter and Receive
+            Be the First to Know! Subscribe to Our Newsletter and Receive
             Timely Updates on Exclusive Preconstruction Sales – Your Gateway to
             Prime Real Estate Opportunities. Stay Informed, Stay Ahead!
           </p>
