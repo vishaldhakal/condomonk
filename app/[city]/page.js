@@ -55,7 +55,7 @@ export default async function Home({ params }) {
         <div className="container-fluid  px-md-5">
           <div className="d-flex flex-column">
             <h1 className="main-title">
-              New Construction Condos in {CapitalizeFirst(params.city)} ( 2023 )
+              New Construction Condos in {CapitalizeFirst(params.city)} ( 2024 )
             </h1>
             <p className="text-mine">
               {data.preconstructions.length} New Preconstruction Condos for sale
@@ -189,11 +189,11 @@ export default async function Home({ params }) {
                 />
               </div>
               <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3">
-                Are you looking to buy a preconstruction home for the first time
+            Looking to buy a preconstruction home
                 ?
               </h2>
               <h2 className="fw-mine text-center px-md-4 fs-4">
-                Don't know where to start ? Contact Condomonk now!
+                Contact Condomonk now!
               </h2>
               <div className="row row-cols-1 row-cols-md-3 mt-5">
                 <div className="col-md-3"></div>

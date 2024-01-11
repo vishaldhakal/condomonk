@@ -176,7 +176,7 @@ export default async function Home({ params }) {
                         By <strong>{data.developer.name}</strong>
                       </p>
                       <p className="mt-1 mb-0 me-2">Price Starting from</p>
-                      <h2 className="text-mine fs-3 fw-mine3 mt-1 mb-0 cardd-subtitle">
+                      <h2 className="text-mine fs-4 fw-mine3 mt-1 mb-0 cardd-subtitle">
                         {checkPricing(data.price_starting_from, data.price_to)}
                       </h2>
                       <div className="mb-1 ">
@@ -234,11 +234,11 @@ export default async function Home({ params }) {
                     <div className="py-5 pt-3">
                       <h2 className="fw-bold fs-3">
                         Information about {data.project_name} in{" "}
-                        {data.city.name}
+           {data.city.name}
                       </h2>
                       <div className="text-start my-3 text-inside">
                         <div
-                          className="iframe-container"
+                          className="iframe-container custom-description-container "
                           dangerouslySetInnerHTML={{
                             __html: data.description,
                           }}
@@ -332,7 +332,7 @@ export default async function Home({ params }) {
           <div>
             <div className="d-flex flex-column">
               <h2 className="main-title">
-                Similar New Construction condos in {data.city.name} ( 2023 )
+                Similar New Construction condos in {data.city.name} ( 2024 )
               </h2>
             </div>
             <div className="py-2"></div>

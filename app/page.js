@@ -268,8 +268,8 @@ export default async function Home(props) {
                   className="img-fluid w-25 w-smm-50 mb-3"
                 />
               </div>
-              <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3">
-                Are you looking to buy a preconstruction home ?
+              <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3 ">
+               Looking to buy a preconstruction home ?
               </h2>
               <h2 className="fw-mine text-center px-md-4 fs-4">
                 Contact Condomonk now!
