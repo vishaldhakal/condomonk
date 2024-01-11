@@ -1,26 +1,26 @@
 {
-  "name": "portal",
-  "version": "0.2.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@popperjs/core": "^2.11.8",
-    "axios": "^1.5.0",
-    "bootstrap": "^5.3.1",
-    "lightgallery": "^2.7.2",
-    "next": "^13.4.19",
-    "nextjs-toploader": "^1.6.4",
-    "react": "18.2.0",
-    "react-autosuggest": "^10.1.0",
-    "react-dom": "18.2.0",
-    "react-quill": "^2.0.0",
-    "react-search-autocomplete": "^8.5.2",
-    "simple-datatables": "^8.0.0",
-    "sweetalert": "^2.1.2"
-  }
+    "name": "portal",
+    "version": "0.2.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "@popperjs/core": "^2.11.8",
+        "axios": "^1.5.0",
+        "bootstrap": "^5.3.1",
+        "lightgallery": "^2.7.2",
+        "next": "^13.4.19",
+        "nextjs-toploader": "^1.6.4",
+        "react": "18.2.0",
+        "react-autosuggest": "^10.1.0",
+        "react-dom": "18.2.0",
+        "react-quill": "^2.0.0",
+        "react-search-autocomplete": "^8.5.2",
+        "simple-datatables": "^8.0.0",
+        "sweetalert": "^2.1.2"
+    }
 }
