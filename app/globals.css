@@ -73,7 +73,7 @@ a:hover {
         animation-fill-mode: both;
         border: 0;
         box-shadow: 0 5px 30px 0 rgba(82, 63, 105, 0.2);
-        width: 420px;
+        width: 380px;
     }
     .overlay-container {
         position: relative;
@@ -95,6 +95,47 @@ a:hover {
     }
 }
 
+.navbar {
+    background-color: transparent !important;
+}
+
+
+/* Apply white background when scrolled */
+
+.navbar.whiteBackground {
+    background-color: white !important;
+}
+
+
+/* Set styles for nav links and logo */
+
+.navbar-nav .nav-item .nav-link {
+    font-weight: 400;
+    color: white !important;
+    /* Set default color to white */
+}
+
+.logo span {
+    font-size: 30px;
+    font-weight: 800;
+    color: white;
+    /* Set default color to white */
+}
+
+.flogo span {
+    font-size: 30px;
+    font-weight: 800;
+    color: rgb(0, 0, 0);
+}
+
+
+/* Update styles when the navbar has a white background */
+
+.navbar.whiteBackground .navbar-nav .nav-item .nav-link,
+.navbar.whiteBackground .logo span {
+    color: black !important;
+}
+
 .nav-item:hover .dropdown-menu .dropdown-item:hover {
     background-color: #f6f9ff;
 }
@@ -103,7 +144,8 @@ a:hover {
     display: none;
     position: absolute;
     top: 100%;
-    left: 0;
+    left: 60%;
+    transform: translateX(-25%);
     z-index: 1000;
     border-radius: 4px;
     padding: 10px 0;
@@ -132,12 +174,12 @@ a:hover {
 
 .dropdown-menu .dropdown-item {
     font-size: 14px;
-    padding: 10px 35px;
+    padding: 10px 10px;
     transition: 0.3s;
 }
 
 .dropdown-menu .dropdown-item i {
-    margin-right: 10px;
+    margin-right: 0px;
     font-size: 18px;
     line-height: 0;
 }
@@ -367,6 +409,7 @@ a:hover {
 }
 
 .muuuu {
+    padding-left: 10px;
     width: 300px;
 }
 
@@ -393,7 +436,7 @@ a:hover {
     .logo span {
         font-size: 19px !important;
         font-weight: 800;
-        color: #000;
+        color: #ffffff;
     }
     .fs-mine {
         font-size: 1.7rem !important;
@@ -596,12 +639,6 @@ a:hover {
 .logo img {
     max-height: 26px;
     margin-right: 6px;
-}
-
-.logo span {
-    font-size: 26px;
-    font-weight: 800;
-    color: #000;
 }
 
 .btn-danger {
@@ -1358,11 +1395,6 @@ label {
     font-size: 0.8rem !important;
     margin-top: 0.3rem;
     color: #585858;
-}
-
-.navbar-nav .nav-item .nav-link {
-    font-weight: 400;
-    color: black !important;
 }
 
 .btn-dark {

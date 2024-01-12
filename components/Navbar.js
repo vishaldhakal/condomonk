@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import SearchBar from "./SearchBar";
 import SearchSuggest from "./SerachSuggest";
@@ -11,8 +11,24 @@ const Navbar = ({ cities, dropdown_cities }) => {
   // if (pathname.startsWith("/admin")) {
   //   return <></>;
   // }
+
+    const [scrolled, setScrolled] = useState(false);
+  
+    useEffect(() => {
+      const handleScroll = () => {
+        const isScrolled = window.scrollY > 0;
+        setScrolled(isScrolled);
+      };
+  
+      window.addEventListener('scroll', handleScroll);
+  
+      // Cleanup event listener on component unmount
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }, []);
   return (
-    <nav className="navbar navbar-expand-sm navbar-light bg-white shadow-lg py-3 sticky-top">
+    <nav className={`navbar navbar-expand-lg navbar-light fixed-top py-3 ${scrolled ? 'whiteBackground' : ''}`}>
       <div className="container-fluid justify-content-start mx-md-5 mx-0">
       <div className="d-flex">
       <Link href="/" className="logo d-flex justify-content-center align-items-center pe-1 ">
@@ -70,9 +86,9 @@ const Navbar = ({ cities, dropdown_cities }) => {
               >
                Cities
               </a>
-              <div className="dropdown-menu" aria-labelledby="dropdownId">
+              <div className="dropdown-menu mt-1 " aria-labelledby="dropdownId">
                 <div className="container">
-                  <div className="row row-cols-md-3 row-cols-2">
+                  <div className="row row-cols-md-3 row-cols-3">
                     {cities &&
                       cities.map((city) => (
                         <div className="col" key={city.id}>
@@ -88,19 +104,15 @@ const Navbar = ({ cities, dropdown_cities }) => {
                 </div>
               </div>
             </li>
+           
             <li className="nav-item">
               <a className="nav-link" href="#">
-                About
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                News
+                Blogs
               </a>
             </li>
            
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="#contact">
                 Contact
               </a>
             </li>

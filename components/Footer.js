@@ -60,7 +60,7 @@ const Footer = ({ cities }) => {
   <div className="text-center d-flex justify-content-around align-items-center ">
   <div className="row justify-content-center d-flex justify-content-around align-items-center pt-5">
         <div className="col-lg-6 texttt">
-            <a href="/" className="logo">
+            <a href="/" className="flogo">
                 <span>Condomonk</span>
             </a>
             <p></p>
