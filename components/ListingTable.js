@@ -1,6 +1,14 @@
 import Link from "next/link";
 
-const ListingTable = ({ preconstructions, handleDelete }) => {
+const ListingTable = ({ preconstructions, handleDelete, filters}) => {
+ 
+  const filteredPreconstructions = preconstructions.filter((preconstruction) => {
+    if (filters.status === 'All') {
+      return true; // Show all preconstructions
+    } else {
+      return preconstruction.status === filters.status;
+    }
+  });
   return (
     <div className="container">
       <table className="table table-striped table-responsive">
@@ -15,15 +23,14 @@ const ListingTable = ({ preconstructions, handleDelete }) => {
           </tr>
         </thead>
         <tbody>
-          {preconstructions &&
-            preconstructions.map((preconstruction, index) => (
-              <tr key={index}>
-                <th scope="row">{index + 1}</th>
-                <td>{preconstruction.project_name}</td>
-                <td>{preconstruction.city.name}</td>
-                <td>{preconstruction.status}</td>
-                <td>{preconstruction.project_type}</td>
-                <td>
+        {filteredPreconstructions.map((preconstruction, index) => (
+            <tr key={index}>
+              <th scope="row">{index + 1}</th>
+              <td>{preconstruction.project_name}</td>
+              <td>{preconstruction.city.name}</td>
+              <td>{preconstruction.status}</td>
+              <td>{preconstruction.project_type}</td>
+              <td>
                   <Link
                     href={"/admin/upload/" + preconstruction.id}
                     className="btn btn-sm btn-outline-dark"

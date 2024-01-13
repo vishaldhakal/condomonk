@@ -11,6 +11,11 @@ export default function Home() {
     status: "All",
     typee: "All",
   });
+
+  const handleChange = (e) => {
+    setFilters((prevFilters) => ({ ...prevFilters, status: e.target.value }));
+  };
+
   const [preconstructions, setPreConstructions] = useState([]);
   const [refetch, setRefetch] = useState(true);
   const [page, setPage] = useState(1);
@@ -18,17 +23,26 @@ export default function Home() {
   
 
   useEffect(() => {
-    axios
-      .get("https://api.condomonk.ca/api/preconstructions/?page=" + page)
-      .then((res) => {
-        console.log(res.data.results);
+    const fetchPreconstructions = async () => {
+      try {
+        const res = await axios.get("https://api.condomonk.ca/api/preconstructions/", {
+          params: {
+            page: page,
+            city: filters.city,
+            status: filters.status,
+            typee: filters.typee,
+          },
+        });
+  
         setPreConstructions(res.data.results);
         setTotalPages(Math.ceil(res.data.count / 10));
-      })
-      .catch((err) => {
-        console.log(err.data);
-      });
-  }, [refetch, page]);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
+    fetchPreconstructions();
+  }, [refetch, page, filters]);
 
   const handleDelete = (e, id) => {
     swal({
