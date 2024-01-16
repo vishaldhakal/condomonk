@@ -12,11 +12,26 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
   //   return <></>;
   // }
 
+    const [scrolled, setScrolled] = useState(false);
+  
+    useEffect(() => {
+      const handleScroll = () => {
+        const isScrolled = window.scrollY > 0;
+        setScrolled(isScrolled);
+      };
+  
+      window.addEventListener('scroll', handleScroll);
+  
+      // Cleanup event listener on component unmount
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }, []);
   return (
-    <nav className="navbar navbar-expand-lg navbar-light sticky-tops py-3">
+    <nav className={`navbar2 navbar-expand-lg navbar-light sticky-tops py-3 ${scrolled ? ' whiteBackground' : ''}${!transparent ? ' whiteBackground' : ''}`}>
       <div className="container-fluid justify-content-start mx-md-5 mx-0">
       <div className="d-flex">
-      <Link href="/" className="logo d-flex justify-content-center align-items-center pe-1 ">
+      <Link href="/" className="logo2 d-flex justify-content-center align-items-center pe-1 ">
           <span>Condomonk</span>
         </Link>
         <div className="input-group input-group-search mx-1 me-md-0">

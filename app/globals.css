@@ -99,30 +99,49 @@ a:hover {
     }
 }
 
-.navbar {
-    background-color: transparent !important;
+.navbar2 {
+    background-color: transparent;
 }
 
 
 /* Apply white background when scrolled */
 
-.navbar.whiteBackground {
+.navbar2.whiteBackground {
     background-color: white !important;
 }
 
 
 /* Set styles for nav links and logo */
 
-.navbar-nav .nav-item .nav-link {
+.navbar2-nav .nav-item .nav-link {
     font-weight: 400;
     color: white !important;
+    /* Set default color to white */
+}
+
+.logo2 span {
+    font-size: 30px;
+    font-weight: 800;
+    color: white;
+    /* Set default color to white */
+}
+
+
+/* Apply white background when scrolled */
+
+
+/* Set styles for nav links and logo */
+
+.navbar-nav .nav-item .nav-link {
+    font-weight: 400;
+    color: rgb(0, 0, 0) !important;
     /* Set default color to white */
 }
 
 .logo span {
     font-size: 30px;
     font-weight: 800;
-    color: white;
+    color: rgb(0, 0, 0);
     /* Set default color to white */
 }
 

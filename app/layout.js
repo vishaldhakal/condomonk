@@ -1,8 +1,10 @@
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
 import "./icons.css";
 import "react-quill/dist/quill.snow.css";
 import Navbar from "@/components/Navbar";
+import Navbar2 from "@/components/Navbar2";
 import Footer from "@/components/Footer";
 import NextTopLoader from "nextjs-toploader";
 import { Montserrat } from "next/font/google";
@@ -51,6 +53,7 @@ async function getCities() {
 
 export default async function RootLayout({ children }) {
   let cities = await getCities();
+  
   return (
     <html lang="en">
       <body className={montserrat.className}>
@@ -65,7 +68,9 @@ export default async function RootLayout({ children }) {
           speed={200}
           shadow="0 0 10px #00A1FF,0 0 5px #00A1FF"
         />
-        <Navbar cities={cities}></Navbar>
+         
+         <Navbar cities={cities}></Navbar>
+     
         {children}
         <Footer cities={cities}></Footer>
         <script

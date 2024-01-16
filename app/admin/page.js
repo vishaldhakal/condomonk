@@ -28,6 +28,7 @@ export default function Home() {
         const res = await axios.get("https://api.condomonk.ca/api/preconstructions/", {
           params: {
             page: page,
+            page_size: 500,
             city: filters.city,
             status: filters.status,
             typee: filters.typee,
@@ -35,14 +36,14 @@ export default function Home() {
         });
   
         setPreConstructions(res.data.results);
-        setTotalPages(Math.ceil(res.data.count / 10));
+        setTotalPages(Math.ceil(res.data.count / 500));
       } catch (error) {
         console.error(error);
       }
     };
   
     fetchPreconstructions();
-  }, [refetch, page, filters]);
+  }, [refetch, filters]);
 
   const handleDelete = (e, id) => {
     swal({

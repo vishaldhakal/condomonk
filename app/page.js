@@ -6,6 +6,7 @@ import PreconSchema from "@/components/PreconSchema";
 import BottomContactForm from "@/components/BottomContactForm";
 import FixedContactButton from "@/components/FixedContactButton";
 import MainSearch from "@/components/MainSearch";
+import Navbar2 from "@/components/Navbar2";
 
 async function getData(city) {
   const res = await fetch(
@@ -47,7 +48,9 @@ export default async function Home(props) {
 
   return (
     <>
+    
       <FixedContactButton></FixedContactButton>
+      
       <section id="hero">
         <div className="container">
           <div className=" hero-container">
