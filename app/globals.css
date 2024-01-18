@@ -281,8 +281,8 @@ a:hover {
 .card {
     margin-bottom: 30px;
     border: none;
-    border-radius: 5px;
-    box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+    border-radius: 10px !important;
+    box-shadow: 10px 10px 30px rgba(8, 15, 27, 0.1);
 }
 
 .card-header,
@@ -1218,6 +1218,19 @@ label {
     max-height: 18rem;
     height: 250px !important;
     object-fit: cover;
+    border-radius: 7px;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.condocard a:hover,
+.condocard a:focus {
+    text-decoration: none;
+    color: #000000 !important;
+}
+
+.bigg:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
 }
 
 .cardd-title {
@@ -1476,6 +1489,10 @@ label {
     border-radius: 0 !important;
     border-top-right-radius: 3px !important;
     border-bottom-right-radius: 3px !important;
+}
+
+.rounded-mine {
+    border-radius: 7px !important;
 }
 
 .sendbtn:hover {
