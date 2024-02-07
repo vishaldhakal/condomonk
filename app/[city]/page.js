@@ -32,8 +32,8 @@ export async function generateMetadata({ params }, parent) {
     alternates: {
       canonical: `https://condomonk.ca/${params.city}`,
     },
-    title: data.preconstructions.length + " Preconstruction Condos in " + city,
-    description: "Preconstruction Condos in " + city,
+    title: data.preconstructions.length + " Preconstruction Homes in " + city,
+    description: "Preconstruction Homes in " + city,
     description:
       "Search our selection of pre construction condos for sale in " +
       city +
@@ -55,12 +55,12 @@ export default async function Home({ params }) {
         <div className="container-fluid  px-md-5">
           <div className="d-flex flex-column">
             <h1 className="main-title">
-              New Construction Condos in {CapitalizeFirst(params.city)} ( 2024 )
+              New Pre Construction Homes in {CapitalizeFirst(params.city)} ( 2024 )
             </h1>
             <p className="text-mine">
-              {data.preconstructions.length} New Preconstruction Condos for sale
+              {data.preconstructions.length} New Preconstruction Homes for sale
               in {CapitalizeFirst(params.city)}, Ontario | Check out plans,
-              pricing, availability for pre construction condos in{" "}
+              pricing, availability for pre construction homes in{" "}
               {CapitalizeFirst(params.city)}
             </p>
           </div>
