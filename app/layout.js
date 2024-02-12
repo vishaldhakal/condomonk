@@ -4,7 +4,7 @@ import "./globals.css";
 import "./icons.css";
 import "react-quill/dist/quill.snow.css";
 import Navbar from "@/components/Navbar";
-import Navbar2 from "@/components/Navbar2";
+
 import Footer from "@/components/Footer";
 import NextTopLoader from "nextjs-toploader";
 import { Montserrat } from "next/font/google";

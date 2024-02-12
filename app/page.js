@@ -35,6 +35,7 @@ async function getCities() {
 }
 
 export default async function Home(props) {
+  
   const data = await getData("calgary");
   const mississauga_data = await getData("mississauga");
   let cities = await getCities();

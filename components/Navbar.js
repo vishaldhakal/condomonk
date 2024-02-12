@@ -7,13 +7,28 @@ import SearchSuggest from "./SerachSuggest";
 
 const Navbar = ({ cities, dropdown_cities, transparent }) => {
   const [cityname, setCityname] = useState("");
+  const [navbar, setNavbar] = useState(false);
 
   // if (pathname.startsWith("/admin")) {
   //   return <></>;
   // }
 
+  
+const changebackground = () => {
+  if(window.scrollY >= 90){
+    setNavbar(true);
+  }else{
+    setNavbar(false);
+  }
+};
+
+
+
+window.addEventListener('scroll', changebackground);
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light sticky-tops py-3">
+    <div className={navbar ? 'navbar-transparent active': 'navbar-transparent'}>
+      <nav className=" navbar navbar-expand-lg  py-3 ">
       <div className="container-fluid justify-content-start mx-md-5 mx-0">
       <div className="d-flex">
       <Link href="/" className="logo d-flex justify-content-center align-items-center pe-1 ">
@@ -112,6 +127,7 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
         </div>
       </div>
     </nav>
+    </div>
   );
 };
 
