@@ -12,15 +12,20 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
   //   return <></>;
   // }
 
-  /* const changebackground = () => {
-  if(window.scrollY >= 90){
-    setNavbar(true);
-  }else{
-    setNavbar(false);
-  }
-}; */
 
-  /* window.addEventListener("scroll", changebackground); */
+  const changebackground = () => {
+    if(window.scrollY >= 80){
+      setNavbar(true);
+    }else{
+      setNavbar(false);
+    }
+  };
+
+  useEffect(() =>{
+    if(window){
+      window.addEventListener('scroll', changebackground);
+    }
+  },[])
 
   return (
     <div
