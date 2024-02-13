@@ -111,10 +111,10 @@ export default async function Home({ params }) {
 
   return (
     <>
-     <FixedContactButton></FixedContactButton>
+      <FixedContactButton></FixedContactButton>
       <div className="pt-1">
         <div className="container">
-        <Breadcrumb
+          <Breadcrumb
             homeElement={"Home"}
             separator={
               <span>
@@ -158,13 +158,13 @@ export default async function Home({ params }) {
                 </a>
               ))}
           </div> */}
-     
-        <Gallery
+
+          <Gallery
             images={data.image}
             project_name={data.project_name}
             project_address={data.project_address}
           ></Gallery>
-      
+
           <div className="container px-0 px-sm-3 pt-3">
             <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 justify-content-center">
               <div className="col col-md-6">
@@ -234,7 +234,7 @@ export default async function Home({ params }) {
                     <div className="py-5 pt-3">
                       <h2 className="fw-bold fs-3">
                         Information about {data.project_name} in{" "}
-           {data.city.name}
+                        {data.city.name}
                       </h2>
                       <div className="text-start my-3 text-inside">
                         <div
@@ -275,8 +275,8 @@ export default async function Home({ params }) {
                   </div>
                 </div>
               </div>
-             
-<div className="col col-md-4 ps-md-2 pt-5 pt-md-0" id="contact">
+
+              <div className="col col-md-4 ps-md-2 pt-5 pt-md-0" id="contact">
                 <div className="py-4 py-md-0"></div>
                 <div className="side-fix-contact mt-mine pe-0">
                   {/* <div className="text-center">
@@ -310,7 +310,7 @@ export default async function Home({ params }) {
                         <p className="mb-0 text-center">info@condomonk.ca</p>
                       </div>
                     </div>
-                    <div className="my-4" ></div>
+                    <div className="my-4"></div>
                     <SideContactForm
                       projects_name={data.project_name}
                       defaultmessage={
@@ -318,15 +318,14 @@ export default async function Home({ params }) {
                         data.project_name +
                         ".  Thank you"
                       }
+                      city={data.city.name}
                     ></SideContactForm>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
-          
-         
+
           <div className="pt-5 mt-5"></div>
           <div className="py-5 my-5"></div>
           <div>

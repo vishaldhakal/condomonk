@@ -35,7 +35,6 @@ async function getCities() {
 }
 
 export default async function Home(props) {
-  
   const data = await getData("calgary");
   const mississauga_data = await getData("mississauga");
   let cities = await getCities();
@@ -49,9 +48,8 @@ export default async function Home(props) {
 
   return (
     <>
-    
       <FixedContactButton></FixedContactButton>
-      
+
       <section id="hero">
         <div className="container">
           <div className=" hero-container">
@@ -247,18 +245,31 @@ export default async function Home(props) {
 
           <div className="py-5 mt-md-5 mt-0">
             <div className="text-center py-5 my-5 overlay-container">
-              <img src="/heroBanner.png" className="img-fluid d-md-block d-none" alt="" />
-              <img src="/heroBanner-sm.png" className="img-fluid d-md-none d-block" alt="" />
+              <img
+                src="/heroBanner.png"
+                className="img-fluid d-md-block d-none"
+                alt=""
+              />
+              <img
+                src="/heroBanner-sm.png"
+                className="img-fluid d-md-none d-block"
+                alt=""
+              />
 
               <div class="overlay-content row row-cols-2 g-5">
-                <div className="col fs-5 fw-bold"> 
-                <p className="mb-0">info@condomonk.ca</p>
-                <p>647-527-4970</p>
+                <div className="col fs-5 fw-bold">
+                  <p className="mb-0">info@condomonk.ca</p>
+                  <p>647-527-4970</p>
                 </div>
                 <div className="col">
-                <a href="#contact" class="btn btn-outline-dark btn-lg fs-4 fw-bold">Contact Now</a>
-              </div>
+                  <a
+                    href="#contact"
+                    class="btn btn-outline-dark btn-lg fs-4 fw-bold"
+                  >
+                    Contact Now
+                  </a>
                 </div>
+              </div>
             </div>
           </div>
 
@@ -273,7 +284,7 @@ export default async function Home(props) {
                 />
               </div>
               <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3 ">
-               Looking to buy a preconstruction home ?
+                Looking to buy a preconstruction home ?
               </h2>
               <h2 className="fw-mine text-center px-md-4 fs-4">
                 Contact Condomonk now!
@@ -281,7 +292,10 @@ export default async function Home(props) {
               <div className="row row-cols-1 row-cols-md-3 mt-5">
                 <div className="col-md-2"></div>
                 <div className="col-md-8">
-                  <BottomContactForm></BottomContactForm>
+                  <BottomContactForm
+                    proj_name="All"
+                    city="Home Page"
+                  ></BottomContactForm>
                 </div>
                 <div className="col-md-2"></div>
               </div>

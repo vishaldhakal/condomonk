@@ -44,18 +44,19 @@ export async function generateMetadata({ params }, parent) {
 
 export default async function Home({ params }) {
   const data = await getData(params.city);
-  
+
   const filteredprojects = (value) => {
     return data.preconstructions.filter((item) => item.status == value);
   };
   return (
     <>
-        <FixedContactButton></FixedContactButton>
+      <FixedContactButton></FixedContactButton>
       <div className="pt-5">
         <div className="container-fluid  px-md-5">
           <div className="d-flex flex-column">
             <h1 className="main-title">
-              New Pre Construction Homes in {CapitalizeFirst(params.city)} ( 2024 )
+              New Pre Construction Homes in {CapitalizeFirst(params.city)} (
+              2024 )
             </h1>
             <p className="text-mine">
               {data.preconstructions.length} New Preconstruction Homes for sale
@@ -64,7 +65,7 @@ export default async function Home({ params }) {
               {CapitalizeFirst(params.city)}
             </p>
           </div>
-        
+
           <div className="d-flex mb-4 mt-0 gap-2 overflow-hidden">
             <div>
               <Link
@@ -96,7 +97,7 @@ export default async function Home({ params }) {
             </div>
           </div>
           <div className="py-3"></div>
-         
+
           <div className="row row-cols-1 row-cols-md-4 row-cols-lg-5 gy-0 gx-3 gx-lg-2">
             {data.preconstructions &&
               filteredprojects("Selling").map((item, no) => (
@@ -189,8 +190,7 @@ export default async function Home({ params }) {
                 />
               </div>
               <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3">
-            Looking to buy a preconstruction home
-                ?
+                Looking to buy a preconstruction home ?
               </h2>
               <h2 className="fw-mine text-center px-md-4 fs-4">
                 Contact Condomonk now!
@@ -198,7 +198,10 @@ export default async function Home({ params }) {
               <div className="row row-cols-1 row-cols-md-3 mt-5">
                 <div className="col-md-3"></div>
                 <div className="col-md-6" id="contact">
-                  <BottomContactForm></BottomContactForm>
+                  <BottomContactForm
+                    proj_name="City Page"
+                    city={data.city.name}
+                  ></BottomContactForm>
                 </div>
                 <div className="col-md-3"></div>
               </div>

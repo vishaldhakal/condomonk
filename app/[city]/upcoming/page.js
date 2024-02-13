@@ -7,7 +7,6 @@ import FixedContactButton from "@/components/FixedContactButton";
 
 import Link from "next/link";
 
-
 async function getData(city) {
   const res = await fetch(
     "https://api.condomonk.ca/api/preconstructions-city/" +
@@ -136,7 +135,7 @@ export default async function Home({ params }) {
             </div>
           </div>
         </div>
-   
+
         {/* <div className="bg-white pt-3 pb-3 p-sticky-top">
           <div className="container-fluid d-flex gap-2 flex-column align-items-center flex-md-row justify-content-md-start align-items-md-center fw-normal">
             <div className="d-flex">
@@ -184,7 +183,7 @@ export default async function Home({ params }) {
             </div>
           </div>
         </div> */}
-       <div className="py-3"></div>
+        <div className="py-3"></div>
         <div className="container-fluid px-md-5">
           <div className="py-2"></div>
           <div className="row row-cols-1 row-cols-md-4 row-cols-lg-5 gy-4 gx-3 gx-lg-2">
@@ -214,16 +213,18 @@ export default async function Home({ params }) {
                 />
               </div>
               <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3">
-                Looking to buy a preconstruction home 
-                ?
+                Looking to buy a preconstruction home ?
               </h2>
               <h2 className="fw-mine text-center px-md-4 fs-4">
-               Contact Condomonk now!
+                Contact Condomonk now!
               </h2>
               <div className="row row-cols-1 row-cols-md-3 mt-5">
                 <div className="col-md-3"></div>
                 <div className="col-md-6">
-                  <BottomContactForm></BottomContactForm>
+                  <BottomContactForm
+                    proj_name="City Page"
+                    city={data.city.name}
+                  ></BottomContactForm>
                 </div>
                 <div className="col-md-3"></div>
               </div>

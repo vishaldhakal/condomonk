@@ -7,7 +7,6 @@ import FixedContactButton from "@/components/FixedContactButton";
 
 import Link from "next/link";
 
-
 async function getData(city) {
   const res = await fetch(
     "https://api.condomonk.ca/api/preconstructions-city/" +
@@ -158,8 +157,7 @@ export default async function Home({ params }) {
                 />
               </div>
               <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3">
-              Looking to buy a preconstruction home 
-                ?
+                Looking to buy a preconstruction home ?
               </h2>
               <h2 className="fw-mine text-center px-md-4 fs-4">
                 Contact Condomonk now!
@@ -167,7 +165,10 @@ export default async function Home({ params }) {
               <div className="row row-cols-1 row-cols-md-3 mt-5">
                 <div className="col-md-3"></div>
                 <div className="col-md-6">
-                  <BottomContactForm></BottomContactForm>
+                  <BottomContactForm
+                    proj_name="City Page"
+                    city={data.city.name}
+                  ></BottomContactForm>
                 </div>
                 <div className="col-md-3"></div>
               </div>
