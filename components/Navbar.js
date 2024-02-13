@@ -4,39 +4,40 @@ import Link from "next/link";
 import SearchBar from "./SearchBar";
 import SearchSuggest from "./SerachSuggest";
 
-
 const Navbar = ({ cities, dropdown_cities, transparent }) => {
   const [cityname, setCityname] = useState("");
-  const [navbar, setNavbar] = useState(false);
+  const [navbar, setNavbar] = useState(true);
 
   // if (pathname.startsWith("/admin")) {
   //   return <></>;
   // }
 
-  
-const changebackground = () => {
+  /* const changebackground = () => {
   if(window.scrollY >= 90){
     setNavbar(true);
   }else{
     setNavbar(false);
   }
-};
+}; */
 
-
-
-window.addEventListener('scroll', changebackground);
+  /* window.addEventListener("scroll", changebackground); */
 
   return (
-    <div className={navbar ? 'navbar-transparent active': 'navbar-transparent'}>
+    <div
+      className={navbar ? "navbar-transparent active" : "navbar-transparent"}
+    >
       <nav className=" navbar navbar-expand-lg  py-3 ">
-      <div className="container-fluid justify-content-start mx-md-5 mx-0">
-      <div className="d-flex">
-      <Link href="/" className="logo d-flex justify-content-center align-items-center pe-1 ">
-          <span>Condomonk</span>
-        </Link>
-        <div className="input-group input-group-search mx-1 me-md-0">
-          <SearchSuggest  cities={cities} />
-          {/* <Link
+        <div className="container-fluid justify-content-start mx-md-5 mx-0">
+          <div className="d-flex">
+            <Link
+              href="/"
+              className="logo d-flex justify-content-center align-items-center pe-1 "
+            >
+              <span>Condomonk</span>
+            </Link>
+            <div className="input-group input-group-search mx-1 me-md-0">
+              <SearchSuggest cities={cities} />
+              {/* <Link
             href={"/" + cityname.toLowerCase()}
             className="d-none d-md-inline"
           >
@@ -60,73 +61,78 @@ window.addEventListener('scroll', changebackground);
               </svg>
             </button>
           </Link> */}
-        </div>
-        <button
-          className="navbar-toggler d-lg-none"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapsibleNavId"
-          aria-controls="collapsibleNavId"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-      </div>
-        <div className="collapse navbar-collapse" id="collapsibleNavId">
-          <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle active fw-medium shadow-sm"
-                href="#"
-                id="dropdownId"
-                data-bs-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-               Cities
-              </a>
-              <div className="dropdown-menu mt-1 " aria-labelledby="dropdownId">
-                <div className="container">
-                  <div className="row row-cols-md-3 row-cols-3">
-                    {cities &&
-                      cities.map((city) => (
-                        <div className="col" key={city.id}>
-                          <Link
-                            className="dropdown-item"
-                            href={`/${city.slug}`}
-                          >
-                            {city.name}
-                          </Link>
-                        </div>
-                      ))}
+            </div>
+            <button
+              className="navbar-toggler d-lg-none"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapsibleNavId"
+              aria-controls="collapsibleNavId"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+          </div>
+          <div className="collapse navbar-collapse" id="collapsibleNavId">
+            <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle active fw-medium shadow-sm"
+                  href="#"
+                  id="dropdownId"
+                  data-bs-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Cities
+                </a>
+                <div
+                  className="dropdown-menu mt-1 "
+                  aria-labelledby="dropdownId"
+                >
+                  <div className="container">
+                    <div className="row row-cols-md-3 row-cols-3">
+                      {cities &&
+                        cities.map((city) => (
+                          <div className="col" key={city.id}>
+                            <Link
+                              className="dropdown-item"
+                              href={`/${city.slug}`}
+                            >
+                              {city.name}
+                            </Link>
+                          </div>
+                        ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </li>
-           
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Blogs
-              </a>
-            </li>
-           
-            <li className="nav-item">
+              </li>
+
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  Blogs
+                </a>
+              </li>
+
+              <li className="nav-item">
+                <a className="nav-link" href="#contact">
+                  Contact
+                </a>
+              </li>
+            </ul>
+            <button
+              className="btn btn-dark my-2 my-sm-0 rounded ms-md-4 py-2 px-3"
+              type="submit"
+            >
+              {" "}
               <a className="nav-link" href="#contact">
-                Contact
+                Call Now
               </a>
-            </li>
-          </ul>
-          <button 
-            className="btn btn-dark my-2 my-sm-0 rounded ms-md-4 py-2 px-3"
-            type="submit" 
-          > <a className="nav-link" href="#contact">
-            Call Now
-            </a>
-          </button>
+            </button>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
     </div>
   );
 };

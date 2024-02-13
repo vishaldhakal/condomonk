@@ -4,7 +4,6 @@ import Link from "next/link";
 import SearchBar from "./SearchBar";
 import SearchSuggest from "./SerachSuggest";
 
-
 const Navbar = ({ cities, dropdown_cities, transparent }) => {
   const [cityname, setCityname] = useState("");
 
@@ -12,31 +11,38 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
   //   return <></>;
   // }
 
-    const [scrolled, setScrolled] = useState(false);
-  
-    useEffect(() => {
-      const handleScroll = () => {
-        const isScrolled = window.scrollY > 0;
-        setScrolled(isScrolled);
-      };
-  
-      window.addEventListener('scroll', handleScroll);
-  
-      // Cleanup event listener on component unmount
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
-    }, []);
+  const [scrolled, setScrolled] = useState(false);
+
+  /* useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 0;
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []); */
   return (
-    <nav className={`navbar2 navbar-expand-lg navbar-light sticky-tops py-3 ${scrolled ? ' whiteBackground' : ''}${!transparent ? ' whiteBackground' : ''}`}>
+    <nav
+      className={`navbar2 navbar-expand-lg navbar-light sticky-tops py-3 ${
+        scrolled ? " whiteBackground" : ""
+      }${!transparent ? " whiteBackground" : ""}`}
+    >
       <div className="container-fluid justify-content-start mx-md-5 mx-0">
-      <div className="d-flex">
-      <Link href="/" className="logo2 d-flex justify-content-center align-items-center pe-1 ">
-          <span>Condomonk</span>
-        </Link>
-        <div className="input-group input-group-search mx-1 me-md-0">
-          <SearchSuggest  cities={cities} />
-          {/* <Link
+        <div className="d-flex">
+          <Link
+            href="/"
+            className="logo2 d-flex justify-content-center align-items-center pe-1 "
+          >
+            <span>Condomonk</span>
+          </Link>
+          <div className="input-group input-group-search mx-1 me-md-0">
+            <SearchSuggest cities={cities} />
+            {/* <Link
             href={"/" + cityname.toLowerCase()}
             className="d-none d-md-inline"
           >
@@ -60,19 +66,19 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
               </svg>
             </button>
           </Link> */}
+          </div>
+          <button
+            className="navbar-toggler d-lg-none"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapsibleNavId"
+            aria-controls="collapsibleNavId"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
         </div>
-        <button
-          className="navbar-toggler d-lg-none"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapsibleNavId"
-          aria-controls="collapsibleNavId"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-      </div>
         <div className="collapse navbar-collapse" id="collapsibleNavId">
           <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
             <li className="nav-item dropdown">
@@ -84,7 +90,7 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-               Cities
+                Cities
               </a>
               <div className="dropdown-menu mt-1 " aria-labelledby="dropdownId">
                 <div className="container">
@@ -104,24 +110,26 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
                 </div>
               </div>
             </li>
-           
+
             <li className="nav-item">
               <a className="nav-link" href="#">
                 Blogs
               </a>
             </li>
-           
+
             <li className="nav-item">
               <a className="nav-link" href="#contact">
                 Contact
               </a>
             </li>
           </ul>
-          <button 
+          <button
             className="btn btn-dark my-2 my-sm-0 rounded ms-md-4 py-2 px-3"
-            type="submit" 
-          > <a className="nav-link" href="#contact">
-            Call Now
+            type="submit"
+          >
+            {" "}
+            <a className="nav-link" href="#contact">
+              Call Now
             </a>
           </button>
         </div>
