@@ -20,6 +20,9 @@ a {
 .social-links a {
     color: #000 !important;
 }
+.social-links .bi{
+font-size: 20px;
+}
 
 a:hover {
     color: #717ff5;
@@ -1700,6 +1703,9 @@ label {
     background-color: #feeddb !important;
     font-weight: 600;
     box-shadow: rgba(147, 147, 147, 0.15) 0px 3px 3px 0px !important;
+}
+.text-small{
+    font-size: 0.7rem;
 }
 
 .fixcontact {

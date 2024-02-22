@@ -220,6 +220,9 @@ export default async function Home({ params }) {
                       __html: data.city.details,
                     }}
                   ></div>
+                  <div>
+                    <p className="text-small pt-4 text-secondary">The content above is a compilation from diverse reliable online sources, including blogs and news articles. The Condomonk content team does not ensure the factual accuracy of the information. The provided information may be outdated, and it should not be considered as advice or a recommendation. It is advisable to consult with a licensed real estate agent or broker for accurate advice and recommendations.</p>
+                  </div>
                 </div>
               </div>
             )}

@@ -184,9 +184,9 @@ export default async function Home({ params }) {
                       </div>
                     </div>
                   </div>
-                  <div className="my-4"></div>
+                  <div className="mt-4"></div>
                   <div id="features">
-                    <div className="mb-5 mt-4">
+                    <div className="mb-5">
                       <div className="rounded-mine">
                         <div>
                           <div className="mb-1">
@@ -287,27 +287,23 @@ export default async function Home({ params }) {
                     />
                   </div> */}
                   <div className="m-1 p-4 py-3 shadow-lg rounded-mine bordt">
-                    <div className="row row-cols-2 align-items-start">
-                      <div className="col-4">
+                    <div className="row  align-items-start">
+                      {/* <div className="col-4">
                         <img
                           src="/contact-image.png"
                           alt="contact image"
                           className="agent-img"
                         />
-                      </div>
-                      <div className="col-8">
+                      </div> */}
+                      <div className="text-center">
                         <h5 className="fw-bold text-center linem fs-4  mb-0">
-                          Send a Message
+                        GET PLATINUM ACCESS!!
                         </h5>
-                        <p className="mb-0 text-center">
-                          <Link
-                            href="telto:(587) 887-2572"
-                            className="link-black"
-                          >
-                            <i className="bi bi-telephone"></i> 647 527 4970
-                          </Link>
-                        </p>
-                        <p className="mb-0 text-center">info@condomonk.ca</p>
+                     
+                        <p className="mb-0 text-small py-2 text-center">Register to Receive Guaranteed Platinum Access & Prices, Incentives & Discounts, Floor Plans & More!
+
+</p>
+
                       </div>
                     </div>
                     <div className="my-4"></div>

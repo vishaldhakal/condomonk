@@ -57,20 +57,33 @@ const Footer = ({ cities }) => {
         </div>
       </div>
       <div className="container my-5 pt-5 ">
-  <div className="text-center d-flex justify-content-around align-items-center ">
-  <div className="row justify-content-center d-flex justify-content-around align-items-center pt-5">
-        <div className="col-lg-6 texttt">
+  <div className="  d-flex justify-content-around  align-items-center">
+  <div className="row row-cols-md-3 row-cols-1 d-flex justify-content-around  align-items-center pt-5 ">
+        <div className="col-md-6 texttt">
             <a href="/" className="flogo">
                 <span>Condomonk</span>
             </a>
             <p></p>
-            <p className="">
-                Condomonk, your premier destination for pre-construction condos in
-                Canada. Discover your dream home before it's even built. Explore
-                our curated listings and find the perfect pre-construction condo
-                for your future.
+            <p className="pe-md-5 px-0 ">
+            Note: Condomonk is Canada's one of the largest database of new pre construction homes. Our comprehensive database is populated by our research and analysis of publicly available data. Condomonk strives for accuracy and we make every effort to verify the information. The information provided on Condomonk.ca may be outdated or inaccurate. Condomonk Inc. is not liable for the use or misuse of the site's information.The information displayed on condomonk.ca is for reference only. Please contact a liscenced real estate agent or broker to seek advice or receive updated and accurate information.
             </p>
-            <div className="social-links d-flex justify-content-center mt-4 texttt ">
+  
+        </div>
+
+        <div className="col-md-3 mt-4 pt-5 pt-lg-0 mt-lg-0 footer-contact">
+            <h4>Contact Us</h4>
+            <p>4 Robert speck parkway,</p>
+            <p>Mississauga, ONTARIO</p>
+         
+            <p className="mt-2">
+                <strong>Phone:</strong> <span>647 527 4970</span>
+            </p>
+            <p>
+                <strong>Email:</strong> <span>info@condomonk.ca</span>
+            </p>
+        </div>
+        <div className="col-md-3">
+        <div className="social-links d-flex mt-4  ">
                 <a href="#" className="me-2">
                     <i className="bi bi-twitter"></i>
                 </a>
@@ -85,19 +98,6 @@ const Footer = ({ cities }) => {
                 </a>
             </div>
         </div>
-
-        <div className="col-lg-6 mt-4 pt-5 pt-lg-0 mt-lg-0 footer-contact">
-            <h4>Contact Us</h4>
-            <p>4 Robert speck parkway,</p>
-            <p>Mississauga, ONTARIO</p>
-            <p>Canada</p>
-            <p className="mt-2">
-                <strong>Phone:</strong> <span>647 527 4970</span>
-            </p>
-            <p>
-                <strong>Email:</strong> <span>info@condomonk.ca</span>
-            </p>
-        </div>
     </div>
   </div>
 </div>
@@ -105,7 +105,7 @@ const Footer = ({ cities }) => {
 
       <div className="container copyright text-start text-center py-5">
         <p>
-          ©2023 <span>Copyright</span>{" "}
+          ©2024 <span>Copyright</span>{" "}
           <strong className="px-1">Condomonk</strong>{" "}
           <span>All Rights Reserved</span>
         </p>
