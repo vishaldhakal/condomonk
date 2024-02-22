@@ -8,6 +8,9 @@ import { notFound } from "next/navigation";
 import Gallery from "@/components/Gallery";
 import Link from "next/link";
 
+
+
+
 async function getData(slug) {
   const res = await fetch(
     "https://api.condomonk.ca/api/preconstructions-detail/" + slug,
@@ -221,6 +224,7 @@ export default async function Home({ params }) {
                             </span>
                             <span scope="col">{data.developer.name}</span>
                           </div>
+                         
                         </div>
                       </div>
                     </div>
