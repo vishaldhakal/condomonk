@@ -275,6 +275,9 @@ export default async function Home({ params }) {
                           src="https://www.walkscore.com/tile/show-walkscore-tile.php"
                         ></script>
                       </div>
+                      <div className="pt-5">
+<p className="text-small text-secondary">Note: <a href="https://condomonk.ca/" target="_blank">Condomonk</a> is Canada's one of the largest database of new pre construction homes. Our comprehensive database is populated by our research and analysis of publicly available data. Condomonk strives for accuracy and we make every effort to verify the information. The information provided on Condomonk.ca may be outdated or inaccurate. Condomonk Inc. is not liable for the use or misuse of the site's information.The information displayed on condomonk.ca is for reference only. Please contact a liscenced real estate agent or broker to seek advice or receive updated and accurate information.</p>
+              </div>
                     </div>
                   </div>
                 </div>
@@ -323,7 +326,9 @@ export default async function Home({ params }) {
                   </div>
                 </div>
               </div>
+              
             </div>
+            
           </div>
 
           <div className="pt-5 mt-5"></div>

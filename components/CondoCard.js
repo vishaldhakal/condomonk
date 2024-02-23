@@ -74,12 +74,14 @@ export default function CondoCard(props) {
         >
           <div className="card-content pt-2">
             <h3 className="mb-1 cardd-title text-dark">{props.project_name}</h3>
-            <h4 className="mb-2 cardd-subtitle">
+            <h4 className="mb-1 cardd-subtitle">
               {checkPricing(props.price_starting_from)}
             </h4>
-            <p className="mb-0">{props.project_address}</p>
+            <h6 className="mb-1 ">{props.project_type} in {props.city.name} </h6> 
+            <p className="mb-0 ">{props.project_address}</p>
+           
             <p className="card-secondary-title mb-0">
-              {props.project_type} in {props.city.name} | Updated{" "}
+               Updated{" "}
               {daysCount(props.last_updated)}
             </p>
           </div>

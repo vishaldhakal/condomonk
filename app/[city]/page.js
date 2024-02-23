@@ -220,9 +220,9 @@ export default async function Home({ params }) {
                       __html: data.city.details,
                     }}
                   ></div>
-                  <div>
-                    <p className="text-small pt-4 text-secondary">The content above is a compilation from diverse reliable online sources, including blogs and news articles. The Condomonk content team does not ensure the factual accuracy of the information. The provided information may be outdated, and it should not be considered as advice or a recommendation. It is advisable to consult with a licensed real estate agent or broker for accurate advice and recommendations.</p>
-                  </div>
+                   <div className="pt-5">
+<p className="text-small text-secondary">Note: <a href="https://condomonk.ca/" target="_blank">Condomonk</a> is Canada's one of the largest database of new pre construction homes. Our comprehensive database is populated by our research and analysis of publicly available data. Condomonk strives for accuracy and we make every effort to verify the information. The information provided on Condomonk.ca may be outdated or inaccurate. Condomonk Inc. is not liable for the use or misuse of the site's information.The information displayed on condomonk.ca is for reference only. Please contact a liscenced real estate agent or broker to seek advice or receive updated and accurate information.</p>
+              </div>
                 </div>
               </div>
             )}
