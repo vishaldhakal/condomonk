@@ -28,7 +28,7 @@ export default function Home() {
         const res = await axios.get("https://api.condomonk.ca/api/preconstructions/", {
           params: {
             page: page,
-            page_size: 500,
+            page_size: 20,
             city: filters.city,
             status: filters.status,
             typee: filters.typee,
@@ -36,7 +36,7 @@ export default function Home() {
         });
   
         setPreConstructions(res.data.results);
-        setTotalPages(Math.ceil(res.data.count / 500));
+        setTotalPages(Math.ceil(res.data.count / 20));
       } catch (error) {
         console.error(error);
       }
