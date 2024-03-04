@@ -116,7 +116,7 @@ export default async function Home({ params }) {
     <>
       <FixedContactButton></FixedContactButton>
       <div className="pt-1">
-        <div className="container ">
+        <div className="container-fluid px-md-5 px-0 ">
           <Breadcrumb
             homeElement={"Home"}
             separator={
@@ -168,7 +168,7 @@ export default async function Home({ params }) {
             project_address={data.project_address}
           ></Gallery>
 
-          <div className="container px-0 px-sm-3 pt-3">
+          <div className="container-fluid px-0 px-sm-3 pt-3">
             <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 justify-content-center">
               <div className="col col-md-6">
                 <div className="screenshot">
