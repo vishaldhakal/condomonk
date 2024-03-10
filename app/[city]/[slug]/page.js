@@ -8,9 +8,6 @@ import { notFound } from "next/navigation";
 import Gallery from "@/components/Gallery";
 import Link from "next/link";
 
-
-
-
 async function getData(slug) {
   const res = await fetch(
     "https://api.condomonk.ca/api/preconstructions-detail/" + slug,
@@ -90,15 +87,15 @@ export default async function Home({ params }) {
     return newresult;
   };
 
-  const doTOcheck = (noo) => {
+  /* const doTOcheck = (noo) => {
     if (parseInt(noo) != 0) {
       return "- High $ " + Nformatter(noo, 2);
     }
-  };
+  }; */
 
   const doTOcheck2 = (noo) => {
     if (parseInt(noo) != 0) {
-      return "Low $ " + Nformatter(noo, 2);
+      return "Starting From Low $ " + Nformatter(noo, 2);
     } else {
       return "Pricing not available";
     }
@@ -108,7 +105,7 @@ export default async function Home({ params }) {
     if (parseInt(prii) == 0) {
       return `Pricing not available`;
     } else {
-      return doTOcheck2(prii) + doTOcheck(priito);
+      return doTOcheck2(prii);
     }
   }
 
@@ -224,7 +221,6 @@ export default async function Home({ params }) {
                             </span>
                             <span scope="col">{data.developer.name}</span>
                           </div>
-                         
                         </div>
                       </div>
                     </div>
@@ -276,8 +272,25 @@ export default async function Home({ params }) {
                         ></script>
                       </div>
                       <div className="pt-5">
-<p className="text-small text-secondary">Note: <a href="https://condomonk.ca/" target="_blank">Condomonk</a> is Canada's one of the largest database of new pre construction homes. Our comprehensive database is populated by our research and analysis of publicly available data. Condomonk strives for accuracy and we make every effort to verify the information. The information provided on Condomonk.ca may be outdated or inaccurate. Condomonk Inc. is not liable for the use or misuse of the site's information.The information displayed on condomonk.ca is for reference only. Please contact a liscenced real estate agent or broker to seek advice or receive updated and accurate information.</p>
-              </div>
+                        <p className="text-small text-secondary">
+                          Note:{" "}
+                          <a href="https://condomonk.ca/" target="_blank">
+                            Condomonk
+                          </a>{" "}
+                          is Canada's one of the largest database of new pre
+                          construction homes. Our comprehensive database is
+                          populated by our research and analysis of publicly
+                          available data. Condomonk strives for accuracy and we
+                          make every effort to verify the information. The
+                          information provided on Condomonk.ca may be outdated
+                          or inaccurate. Condomonk Inc. is not liable for the
+                          use or misuse of the site's information.The
+                          information displayed on condomonk.ca is for reference
+                          only. Please contact a liscenced real estate agent or
+                          broker to seek advice or receive updated and accurate
+                          information.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -304,13 +317,13 @@ export default async function Home({ params }) {
                       </div> */}
                       <div className="text-center">
                         <h5 className="fw-bold text-center linem fs-4  mb-0">
-                        GET PLATINUM ACCESS!!
+                          GET PLATINUM ACCESS!!
                         </h5>
-                     
-                        <p className="mb-0 text-small py-2 text-center">Register to Receive Guaranteed Platinum Access & Prices, Incentives & Discounts, Floor Plans & More!
 
-</p>
-
+                        <p className="mb-0 text-small py-2 text-center">
+                          Register to Receive Guaranteed Platinum Access &
+                          Prices, Incentives & Discounts, Floor Plans & More!
+                        </p>
                       </div>
                     </div>
                     <div className="my-4"></div>
@@ -326,9 +339,7 @@ export default async function Home({ params }) {
                   </div>
                 </div>
               </div>
-              
             </div>
-            
           </div>
 
           <div className="pt-5 mt-5"></div>
