@@ -33,7 +33,7 @@ export async function generateMetadata({ params }, parent) {
       canonical: `https://condomonk.ca/${params.city}`,
     },
     title:
-      "Top" +
+      "Top " +
       data.preconstructions.length +
       " New Pre construction homes, condos and townhomes in " +
       city,
