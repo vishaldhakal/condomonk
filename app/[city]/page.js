@@ -32,9 +32,16 @@ export async function generateMetadata({ params }, parent) {
     alternates: {
       canonical: `https://condomonk.ca/${params.city}`,
     },
-    title: data.preconstructions.length + " Preconstruction Homes in " + city,
-    description: "Preconstruction Homes in " + city,
+    title:
+      "Top" +
+      data.preconstructions.length +
+      " New Pre construction homes, condos and townhomes in " +
+      city,
+    description: "Pre Construction homes in" + city,
     description:
+      "Looking for a pre construction home in" +
+      city +
+      "?" +
       "Search our selection of pre construction condos for sale in " +
       city +
       ". Our ever-changing portfolio of pre constructions brings you closer to your ideal condos in the growing city of " +
@@ -220,9 +227,25 @@ export default async function Home({ params }) {
                       __html: data.city.details,
                     }}
                   ></div>
-                   <div className="pt-5">
-<p className="text-small text-secondary">Note: <a href="https://condomonk.ca/" target="_blank">Condomonk</a> is Canada's one of the largest database of new pre construction homes. Our comprehensive database is populated by our research and analysis of publicly available data. Condomonk strives for accuracy and we make every effort to verify the information. The information provided on Condomonk.ca may be outdated or inaccurate. Condomonk Inc. is not liable for the use or misuse of the site's information.The information displayed on condomonk.ca is for reference only. Please contact a liscenced real estate agent or broker to seek advice or receive updated and accurate information.</p>
-              </div>
+                  <div className="pt-5">
+                    <p className="text-small text-secondary">
+                      Note:{" "}
+                      <a href="https://condomonk.ca/" target="_blank">
+                        Condomonk
+                      </a>{" "}
+                      is Canada's one of the largest database of new pre
+                      construction homes. Our comprehensive database is
+                      populated by our research and analysis of publicly
+                      available data. Condomonk strives for accuracy and we make
+                      every effort to verify the information. The information
+                      provided on Condomonk.ca may be outdated or inaccurate.
+                      Condomonk Inc. is not liable for the use or misuse of the
+                      site's information.The information displayed on
+                      condomonk.ca is for reference only. Please contact a
+                      liscenced real estate agent or broker to seek advice or
+                      receive updated and accurate information.
+                    </p>
+                  </div>
                 </div>
               </div>
             )}
