@@ -108,7 +108,7 @@ export default async function Home({ params }) {
     if (parseInt(prii) == 0) {
       return `Pricing not available`;
     } else {
-      return doTOcheck2(prii) + doTOcheck(priito);
+      return "Starting from " + doTOcheck2(prii);
     }
   }
 
@@ -178,7 +178,7 @@ export default async function Home({ params }) {
                       <p className="mb-0">
                         By <strong>{data.developer.name}</strong>
                       </p>
-                      <p className="mt-1 mb-0 me-2">Price Starting from</p>
+                      
                       <h2 className="text-mine fs-4 fw-mine3 mt-1 mb-0 cardd-subtitle">
                         {checkPricing(data.price_starting_from, data.price_to)}
                       </h2>
