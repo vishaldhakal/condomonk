@@ -168,9 +168,9 @@ export default async function Home({ params }) {
             project_address={data.project_address}
           ></Gallery>
 
-          <div className="container-fluid p px-0 px-sm-3 pt-3">
+          <div className="container-fluid  px-0 px-sm-3 pt-3">
             <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 justify-content-center">
-              <div className="col col-md-6">
+              <div className="col col-md-7">
                 <div className="screenshot">
                   <div className="row row-cols-1 row-cols-sm-2">
                     <div className="col-sm-12">
@@ -187,7 +187,7 @@ export default async function Home({ params }) {
                       </div>
                     </div>
                   </div>
-                  <div className="mt-4"></div>
+                  <div className=""></div>
                   <div id="features">
                     <div className="mb-5">
                       <div className="rounded-mine">
@@ -196,9 +196,9 @@ export default async function Home({ params }) {
                             <span className="me-2 fw-mine2 mb-2 fs-mine3">
                               Project Location:
                             </span>
-                            <span scope="col">{data.city.name}</span>
+                            <span scope="col">{data.project_address}</span>
                           </div>
-                          <div className="mb-1">
+                          {/* <div className="mb-1">
                             <p className="d-flex align-items-center my-0">
                               <svg
                                 width="14"
@@ -217,13 +217,13 @@ export default async function Home({ params }) {
                                 {data.project_address}
                               </span>
                             </p>
-                          </div>
-                          <div className="mb-1">
+                          </div> */}
+                          {/* <div className="mb-1">
                             <span className="me-2 fw-mine2 mb-2 fs-mine3">
                               Developed by:
                             </span>
                             <span scope="col">{data.developer.name}</span>
-                          </div>
+                          </div> */}
                          
                         </div>
                       </div>
