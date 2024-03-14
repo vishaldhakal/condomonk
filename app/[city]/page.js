@@ -66,23 +66,21 @@ export default async function Home({ params }) {
               2024 )
             </h1>
             <p className="text-mine">
-              {data.preconstructions.length} New Preconstruction Homes for sale
-              in {CapitalizeFirst(params.city)}, Ontario | Check out plans,
-              pricing, availability for pre construction homes in{" "}
-              {CapitalizeFirst(params.city)}
+              {data.preconstructions.length} New Pre construction homes, condos and townhomes for sale
+              in {CapitalizeFirst(params.city)}, Ontario. 
             </p>
           </div>
 
-          <div className="d-flex mb-4 mt-0 gap-2 overflow-hidden">
+          <div className="d-flex mb-4 mt-0 gap-2 overflow-hidden align-items-center justify-content-center">
             <div>
               <Link
-                className="link-black badge py-2 mx-2 bg-white shadow-sm text-dark fs-small fw-m"
+                className="link-black badge py-2 my-1  bg-white shadow-sm text-dark fs-small fw-m"
                 href={`/${params.city}/upcoming/`}
               >
-                Upcoming Projects in {CapitalizeFirst(params.city)}
+                Upcoming Projects {CapitalizeFirst(params.city)}
               </Link>
               <Link
-                className="link-black badge py-2 bg-white shadow-sm text-dark fs-small fw-m"
+                className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m"
                 href={`/${params.city}/townhomes/`}
               >
                 New Townhomes {CapitalizeFirst(params.city)}
@@ -90,13 +88,13 @@ export default async function Home({ params }) {
             </div>
             <div>
               <Link
-                className="link-black badge py-2 bg-white shadow-sm text-dark fs-small fw-m"
+                className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m"
                 href={`/${params.city}/detached/`}
               >
                 New Detached Homes {CapitalizeFirst(params.city)}
               </Link>
               <Link
-                className="link-black badge py-2 mx-2 bg-white shadow-sm text-dark fs-small fw-m"
+                className="link-black badge py-2 my-1  bg-white shadow-sm text-dark fs-small fw-m"
                 href={`/${params.city}/condos/`}
               >
                 New Condos {CapitalizeFirst(params.city)}
