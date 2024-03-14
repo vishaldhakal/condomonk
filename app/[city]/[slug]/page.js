@@ -1,3 +1,5 @@
+
+
 import Nformatter from "@/components/Nformatter";
 import CondoCard from "@/components/CondoCard";
 import BottomContactForm from "@/components/BottomContactForm";
@@ -7,10 +9,10 @@ import FixedContactButton from "@/components/FixedContactButton";
 import { notFound } from "next/navigation";
 import Gallery from "@/components/Gallery";
 import Link from "next/link";
+import CustomModal from '@/components/Modal'; 
 
 
-
-
+// Define your functions outside of the component
 async function getData(slug) {
   const res = await fetch(
     "https://api.condomonk.ca/api/preconstructions-detail/" + slug,
@@ -40,6 +42,7 @@ async function getRelatedData(city) {
 
   return res.json();
 }
+
 export async function generateMetadata({ params }, parent) {
   const data = await getData(params.slug);
 
@@ -66,9 +69,10 @@ export async function generateMetadata({ params }, parent) {
   };
 }
 
-export default async function Home({ params }) {
+export default async function  Home({ params }) {
   const data = await getData(params.slug);
   const related = await getRelatedData(params.city);
+
 
   const newImages = (images) => {
     let neImgs = images;
@@ -225,6 +229,10 @@ export default async function Home({ params }) {
                             <span scope="col">{data.developer.name}</span>
                           </div> */}
                          
+                
+                       <CustomModal/>
+
+                      
                         </div>
                       </div>
                     </div>
@@ -354,3 +362,4 @@ export default async function Home({ params }) {
     </>
   );
 }
+

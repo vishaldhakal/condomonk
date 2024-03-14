@@ -9,9 +9,11 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@nextui-org/react": "^2.2.10",
         "@popperjs/core": "^2.11.8",
         "axios": "^1.5.0",
-        "bootstrap": "^5.3.1",
+        "bootstrap": "^5.3.3",
+        "framer-motion": "^11.0.13",
         "lightgallery": "^2.7.2",
         "next": "^13.4.19",
         "nextjs-toploader": "^1.6.4",
