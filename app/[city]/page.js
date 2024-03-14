@@ -71,7 +71,7 @@ export default async function Home({ params }) {
             </p>
           </div>
 
-          <div className="d-flex mb-4 mt-0 gap-2 overflow-hidden align-items-center justify-content-center">
+          <div className="d-flex mb-4 mt-0 gap-2 overflow-hidden ">
             <div>
               <Link
                 className="link-black badge py-2 my-1  bg-white shadow-sm text-dark fs-small fw-m"
@@ -80,7 +80,7 @@ export default async function Home({ params }) {
                 Upcoming Projects {CapitalizeFirst(params.city)}
               </Link>
               <Link
-                className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m"
+                className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-md-2 mx-0"
                 href={`/${params.city}/townhomes/`}
               >
                 New Townhomes {CapitalizeFirst(params.city)}
@@ -94,7 +94,7 @@ export default async function Home({ params }) {
                 New Detached Homes {CapitalizeFirst(params.city)}
               </Link>
               <Link
-                className="link-black badge py-2 my-1  bg-white shadow-sm text-dark fs-small fw-m"
+                className="link-black badge py-2 my-1  bg-white shadow-sm text-dark fs-small fw-m mx-md-2 mx-0"
                 href={`/${params.city}/condos/`}
               >
                 New Condos {CapitalizeFirst(params.city)}
