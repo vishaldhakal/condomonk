@@ -223,6 +223,14 @@ export default async function Home({ params }) {
                             <span scope="col"> <CustomModal
             linkText="Request Locker Price"/></span>
                           </div>
+
+                          <div className="mb-1">
+                            <span className="me-2 fw-mine2 mb-2 fs-mine3">
+                            Estimated Maintenance Fee
+                            </span>
+                            <span scope="col"> <CustomModal
+            linkText="Request Est Maintenance"/></span>
+                          </div>
                         </div>
                       </div>
                     </div>
