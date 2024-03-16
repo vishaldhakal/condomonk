@@ -1,5 +1,3 @@
-
-
 import Nformatter from "@/components/Nformatter";
 import CondoCard from "@/components/CondoCard";
 import BottomContactForm from "@/components/BottomContactForm";
@@ -9,7 +7,7 @@ import FixedContactButton from "@/components/FixedContactButton";
 import { notFound } from "next/navigation";
 import Gallery from "@/components/Gallery";
 import Link from "next/link";
-import CustomModal from '@/components/Modal'; 
+import CustomModal from "@/components/Modal";
 
 
 // Define your functions outside of the component
@@ -69,10 +67,9 @@ export async function generateMetadata({ params }, parent) {
   };
 }
 
-export default async function  Home({ params }) {
+export default async function Home({ params }) {
   const data = await getData(params.slug);
   const related = await getRelatedData(params.city);
-
 
   const newImages = (images) => {
     let neImgs = images;
@@ -172,7 +169,7 @@ export default async function  Home({ params }) {
             project_address={data.project_address}
           ></Gallery>
 
-          <div className="container-fluid  px-0 px-sm-3 pt-3">
+          <div className="container  px-0 px-sm-3 pt-3">
             <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 justify-content-center">
               <div className="col col-md-7">
                 <div className="screenshot">
@@ -182,8 +179,8 @@ export default async function  Home({ params }) {
                       <p className="mb-0">
                         By <strong>{data.developer.name}</strong>
                       </p>
-                      
-                      <h2 className="text-mine fs-4 fw-mine3 mt-1 mb-0 cardd-subtitle">
+
+                      <h2 className="text-mine fs-4 fw-mine3 mt-1 mb-0 brand-color">
                         {checkPricing(data.price_starting_from, data.price_to)}
                       </h2>
                       <div className="mb-1 ">
@@ -202,37 +199,30 @@ export default async function  Home({ params }) {
                             </span>
                             <span scope="col">{data.project_address}</span>
                           </div>
-                          {/* <div className="mb-1">
-                            <p className="d-flex align-items-center my-0">
-                              <svg
-                                width="14"
-                                height="20"
-                                viewBox="0 0 16 20"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M7 0C3.13 0 0 3.13 0 7C0 12.25 7 20 7 20C7 20 14 12.25 14 7C14 3.13 10.87 0 7 0ZM7 9.5C5.62 9.5 4.5 8.38 4.5 7C4.5 5.62 5.62 4.5 7 4.5C8.38 4.5 9.5 5.62 9.5 7C9.5 8.38 8.38 9.5 7 9.5Z"
-                                  fill="#000000"
-                                />
-                              </svg>
-                              <span className="mx-1"></span>
-                              <span className="text-dark">
-                                {data.project_address}
-                              </span>
-                            </p>
-                          </div> */}
-                          {/* <div className="mb-1">
-                            <span className="me-2 fw-mine2 mb-2 fs-mine3">
-                              Developed by:
-                            </span>
-                            <span scope="col">{data.developer.name}</span>
-                          </div> */}
-                         
-                
-                       <CustomModal/>
 
-                      
+                          <div className="mb-1">
+                            <span className="me-2 fw-mine2 mb-2 fs-mine3">
+                            Number Of Floor Plans:
+                            </span>
+                            <span scope="col"> <CustomModal
+            linkText="Request Number of Floor Plans"/></span>
+                          </div>
+
+                          <div className="mb-1">
+                            <span className="me-2 fw-mine2 mb-2 fs-mine3">
+                            Parking Price:
+                            </span>
+                            <span scope="col"> <CustomModal
+            linkText="Request Parking Price"/></span>
+                          </div>
+
+                          <div className="mb-1">
+                            <span className="me-2 fw-mine2 mb-2 fs-mine3">
+                            Locker Price:
+                            </span>
+                            <span scope="col"> <CustomModal
+            linkText="Request Locker Price"/></span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -284,8 +274,25 @@ export default async function  Home({ params }) {
                         ></script>
                       </div>
                       <div className="pt-5">
-<p className="text-small text-secondary">Note: <a href="https://condomonk.ca/" target="_blank">Condomonk</a> is Canada's one of the largest database of new pre construction homes. Our comprehensive database is populated by our research and analysis of publicly available data. Condomonk strives for accuracy and we make every effort to verify the information. The information provided on Condomonk.ca may be outdated or inaccurate. Condomonk Inc. is not liable for the use or misuse of the site's information.The information displayed on condomonk.ca is for reference only. Please contact a liscenced real estate agent or broker to seek advice or receive updated and accurate information.</p>
-              </div>
+                        <p className="text-small text-secondary">
+                          Note:{" "}
+                          <a href="https://condomonk.ca/" target="_blank">
+                            Condomonk
+                          </a>{" "}
+                          is Canada's one of the largest database of new pre
+                          construction homes. Our comprehensive database is
+                          populated by our research and analysis of publicly
+                          available data. Condomonk strives for accuracy and we
+                          make every effort to verify the information. The
+                          information provided on Condomonk.ca may be outdated
+                          or inaccurate. Condomonk Inc. is not liable for the
+                          use or misuse of the site's information.The
+                          information displayed on condomonk.ca is for reference
+                          only. Please contact a liscenced real estate agent or
+                          broker to seek advice or receive updated and accurate
+                          information.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -312,13 +319,13 @@ export default async function  Home({ params }) {
                       </div> */}
                       <div className="text-center">
                         <h5 className="fw-bold text-center linem fs-4  mb-0">
-                        GET PLATINUM ACCESS!!
+                          GET PLATINUM ACCESS!!
                         </h5>
-                     
-                        <p className="mb-0 text-small py-2 text-center">Register to Receive Guaranteed Platinum Access & Prices, Incentives & Discounts, Floor Plans & More!
 
-</p>
-
+                        <p className="mb-0 text-small py-2 text-center">
+                          Register to Receive Guaranteed Platinum Access &
+                          Prices, Incentives & Discounts, Floor Plans & More!
+                        </p>
                       </div>
                     </div>
                     <div className="my-4"></div>
@@ -334,9 +341,7 @@ export default async function  Home({ params }) {
                   </div>
                 </div>
               </div>
-              
             </div>
-            
           </div>
 
           <div className="pt-5 mt-5"></div>
@@ -362,4 +367,3 @@ export default async function  Home({ params }) {
     </>
   );
 }
-

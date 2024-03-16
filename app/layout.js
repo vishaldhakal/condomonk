@@ -8,8 +8,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import NextTopLoader from "nextjs-toploader";
 import { Montserrat } from "next/font/google";
+import {Providers} from "./providers";
 
 const montserrat = Montserrat({ subsets: ["cyrillic"] });
+
 
 export const metadata = {
   alternates: {
@@ -70,8 +72,9 @@ export default async function RootLayout({ children }) {
         />
          
          <Navbar cities={cities}></Navbar>
-     
+         <Providers>
         {children}
+        </Providers>
         <Footer cities={cities}></Footer>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-BZlP8y3y1aP5dJt6z/74ukidT+PiZCzV5u5F5+1OW2F0k0yGBGvxXuVEvaO3dPbi" crossorigin="anonymous"></script>
 

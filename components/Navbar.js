@@ -79,7 +79,7 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
               <span className="navbar-toggler-icon"></span>
             </button>
           </div>
-          <div className="collapse navbar-collapse" id="collapsibleNavId">
+          <div className=" navbar-collapse" id="collapsibleNavId">
             <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
               <li className="nav-item dropdown">
                 <a
@@ -127,11 +127,11 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
               </li>
             </ul>
             <button
-              className="btn btn-dark my-2 my-sm-0 rounded ms-md-4 py-2 px-3"
+              className="btn bg-dark btn-dark my-2 my-sm-0 rounded ms-md-4 py-2 px-3"
               type="submit"
             >
               {" "}
-              <a className="nav-link" href="#contact">
+              <a className="nav-link btn-dark text-white" href="#contact">
                 Call Now
               </a>
             </button>

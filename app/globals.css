@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap'); */
 
 /* @import url('https://fonts.googleapis.com/css2?family=Genos:wght@100;200;300;400;500;600;700;800;900&display=swap'); */
@@ -65,6 +69,17 @@ a:hover {
     .fs-big {
         font-size: 4rem !important;
     }
+    .popup-container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+      }
 }
 
 
@@ -1250,15 +1265,21 @@ label {
 }
 
 .cardd-title {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 800;
 }
 
-.cardd-subtitle {
+.cardd-price {
     font-size: 1rem;
     font-weight: 600;
     color: rgb(255, 136, 0);
 }
+.cardd-subtitle {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: rgb(0, 0, 0);
+}
+
 
 .card-address {
     font-size: 1rem;
@@ -1444,7 +1465,7 @@ label {
 }
 
 .card-secondary-title {
-    font-size: 0.8rem !important;
+    font-size: 0.7rem !important;
     margin-top: 0.3rem;
     color: #585858;
 }
@@ -1650,6 +1671,9 @@ label {
     width: 18px;
     height: 18px;
 }
+.brand-color{
+    color: rgb(255, 136, 0);
+}
 
 .breadcrumb {
     list-style: none !important;
@@ -1664,7 +1688,7 @@ label {
     position: sticky;
     top: 5.5rem;
     right: 0;
-    z-index: 99 !important;
+   
 }
 
 .side-contact-img {
