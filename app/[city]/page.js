@@ -63,7 +63,7 @@ export default async function Home({ params }) {
           <div className="d-flex flex-column">
             <h1 className="main-title">
               New Pre Construction Homes in {CapitalizeFirst(params.city)} (
-              2024 )
+              2024 ) Test Update
             </h1>
             <p className="text-mine">
               {data.preconstructions.length} New Pre construction homes, condos and townhomes for sale
