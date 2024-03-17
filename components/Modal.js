@@ -10,7 +10,7 @@ export default function CustomModal({ linkText }) {
 
   return (
     <>
-       <Link onPress={onOpen}>{linkText}</Link>
+       <Link className="custom-link" onPress={onOpen}>{linkText}</Link>
       <Modal backdrop={"blur"} placement={modalPlacement}  isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (

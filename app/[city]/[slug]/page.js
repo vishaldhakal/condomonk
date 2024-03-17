@@ -8,6 +8,7 @@ import { notFound } from "next/navigation";
 import Gallery from "@/components/Gallery";
 import Link from "next/link";
 import CustomModal from "@/components/Modal";
+import Map from "@/components/Map";
 
 
 // Define your functions outside of the component
@@ -175,7 +176,7 @@ export default async function Home({ params }) {
                 <div className="screenshot">
                   <div className="row row-cols-1 row-cols-sm-2">
                     <div className="col-sm-12">
-                      <h1 className="side fw-bold">{data.project_name}</h1>
+                      <h1 className="side fs-1 fw-bold">{data.project_name}</h1>
                       <p className="mb-0">
                         By <strong>{data.developer.name}</strong>
                       </p>
@@ -351,6 +352,12 @@ export default async function Home({ params }) {
               </div>
             </div>
           </div>
+
+          <div className="pt-5 mt-5"></div>
+          {/* <div>
+            <Map/>
+          </div> */}
+
 
           <div className="pt-5 mt-5"></div>
           <div className="py-5 my-5"></div>

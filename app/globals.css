@@ -398,6 +398,15 @@ a:hover {
     color: #3e4f6f;
     font-size: 15px;
 }
+.collapse {
+    display: none;
+    visibility: visible;
+}
+
+.collapse.show {
+    display: block;
+    visibility: visible;
+}
 
 
 /* Breadcrumbs */
@@ -1228,16 +1237,16 @@ label {
     line-height: 2rem !important;
     font-weight: 800;
     margin-bottom: 10px;
-    font-size: 1.6rem;
+    font-size: 2rem;
 }
 
-.main-title:before {
+/* .main-title:before {
     background-color: red;
     width: 10px;
     height: 33px;
     margin-right: 0.2em;
     content: "";
-}
+} */
 
 .text-mine {
     color: rgb(0, 0, 0);
@@ -1280,6 +1289,9 @@ label {
     color: rgb(0, 0, 0);
 }
 
+.custom-link {
+    cursor: pointer;
+  }
 
 .card-address {
     font-size: 1rem;
