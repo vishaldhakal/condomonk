@@ -112,10 +112,10 @@ export default function Update({ params }) {
       .then((res) => {
         console.log(res.data.results);
         setCities(res.data.results);
-        setPredata((prevState) => ({
+        /* setPredata((prevState) => ({
           ...prevState,
           city: res.data.results[0],
-        }));
+        })); */
       })
       .catch((err) => {
         console.log(err.data);

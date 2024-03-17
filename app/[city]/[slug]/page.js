@@ -10,7 +10,6 @@ import Link from "next/link";
 import CustomModal from "@/components/Modal";
 import Map from "@/components/Map";
 
-
 // Define your functions outside of the component
 async function getData(slug) {
   const res = await fetch(
@@ -203,34 +202,42 @@ export default async function Home({ params }) {
 
                           <div className="mb-1">
                             <span className="me-2 fw-mine2 mb-2 fs-mine3">
-                            Number Of Floor Plans:
+                              Number Of Floor Plans:
                             </span>
-                            <span scope="col"> <CustomModal
-            linkText="Request Number of Floor Plans"/></span>
+                            <span scope="col">
+                              {" "}
+                              <CustomModal linkText="Request Number of Floor Plans" />
+                            </span>
                           </div>
 
                           <div className="mb-1">
                             <span className="me-2 fw-mine2 mb-2 fs-mine3">
-                            Parking Price:
+                              Parking Price:
                             </span>
-                            <span scope="col"> <CustomModal
-            linkText="Request Parking Price"/></span>
+                            <span scope="col">
+                              {" "}
+                              <CustomModal linkText="Request Parking Price" />
+                            </span>
                           </div>
 
                           <div className="mb-1">
                             <span className="me-2 fw-mine2 mb-2 fs-mine3">
-                            Locker Price:
+                              Locker Price:
                             </span>
-                            <span scope="col"> <CustomModal
-            linkText="Request Locker Price"/></span>
+                            <span scope="col">
+                              {" "}
+                              <CustomModal linkText="Request Locker Price" />
+                            </span>
                           </div>
 
                           <div className="mb-1">
                             <span className="me-2 fw-mine2 mb-2 fs-mine3">
-                            Estimated Maintenance Fee:
+                              Estimated Maintenance Fee:
                             </span>
-                            <span scope="col"> <CustomModal
-            linkText="Request Est Maintenance"/></span>
+                            <span scope="col">
+                              {" "}
+                              <CustomModal linkText="Request Est Maintenance" />
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -357,7 +364,6 @@ export default async function Home({ params }) {
           {/* <div>
             <Map/>
           </div> */}
-
 
           <div className="pt-5 mt-5"></div>
           <div className="py-5 my-5"></div>
