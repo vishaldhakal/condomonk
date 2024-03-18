@@ -59,14 +59,14 @@ export default async function Home({ params }) {
             <h1 className=" text-center fs-1 fw-bold fs-gta pt-5 my-4">
               List of Pre Construction Projects in <br /> Canada
             </h1>
-            <h2 className="text-green mt-4 text-center">
+            <h2 className="text-success mt-4 text-center">
               Register Today For VIP First Access
             </h2>
-            <p className="text-green mb-4 text-center">
+            <p className="text-success mb-4 text-center">
               Get excluisive first access to floor plans and the best pricing
             </p>
             <div className="pb-5 d-flex justify-content-center">
-              <button className="btn btn-lg rounded-pill registernoebtn">
+              <button className="btn btn-lg rounded-pill btn-dark">
                 Register Now
               </button>
             </div>
@@ -88,7 +88,7 @@ export default async function Home({ params }) {
                     href={"/" + item.slug}
                     className="link-black"
                   >
-                    <h4 className="fs-m fw-bold">{item.name}</h4>
+                    <h4 className="fs-4 fw-bold">{item.name}</h4>
                   </Link>
                   <div className="maxhh">
                     <div className="row row-cols-2 row-cols-md-5">
