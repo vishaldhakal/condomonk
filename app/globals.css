@@ -1240,6 +1240,10 @@ label {
     font-size: 2rem;
 }
 
+.maxhh::-webkit-scrollbar {
+    display: none;
+  }
+
 /* .main-title:before {
     background-color: red;
     width: 10px;
