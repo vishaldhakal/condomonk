@@ -35,13 +35,13 @@ const Footer = ({ cities }) => {
         </div>
         <div className="  pt-5 mt-md-5 mt-0">
           <div className=" footer-links">
-            <h3 className="text-center fw-bold pb-2">
+            <h3 className="text-center fw-bold pb-2 fs-3">
               {" "}
               New Construction homes in Canada
             </h3>
             <div className="footer-listcontainer text-center">
               <ul className="two-column-list text-center">
-                <div className="text-center justify-content-center">
+                <div className="text-center ">
                 {cities &&
                   cities.map((city) => (
                     <li key={city.id}>

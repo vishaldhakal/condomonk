@@ -117,7 +117,7 @@ export default async function Home({ params }) {
     <>
       <FixedContactButton></FixedContactButton>
       <div className="pt-1">
-        <div className="container-fluid px-md-5 px-3 ">
+        <div className="container ">
           <Breadcrumb
             homeElement={"Home"}
             separator={
@@ -141,27 +141,7 @@ export default async function Home({ params }) {
             capitalizeLinks
           />
 
-          {/* <div className="my-3 grid-cont">
-            {newImages(data.image)
-              ?.slice(0, 7)
-              .map((image, no) => (
-                <a
-                  href="#"
-                  className={
-                    "position-relative g-item grid-item" + parseInt(no + 1)
-                  }
-                  key={no}
-                >
-                  <img
-                    alt={`${data.project_name} located at ${
-                      data.project_address
-                    } image ${no + 1}`}
-                    className="img-fluid w-100 h-100 rounded-mine"
-                    src={`${image.image}`}
-                  />
-                </a>
-              ))}
-          </div> */}
+         
 
           <Gallery
             images={data.image}
@@ -172,25 +152,21 @@ export default async function Home({ params }) {
           <div className="container  px-0 px-sm-3 pt-3">
             <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 justify-content-center">
               <div className="col col-md-7">
-                <div className="screenshot">
+                <div className="screenshot ">
                   <div className="row row-cols-1 row-cols-sm-2">
                     <div className="col-sm-12">
-                      <h1 className="side fs-1 fw-bold">{data.project_name}</h1>
+                    
+                    <h1 className="side fs-1 fw-bold">{data.project_name}</h1>
                       <p className="mb-0">
                         By <strong>{data.developer.name}</strong>
                       </p>
-
+                     
                       <h2 className="text-mine fs-4 fw-mine3 mt-1 mb-0 brand-color">
                         {checkPricing(data.price_starting_from, data.price_to)}
                       </h2>
                       <div className="mb-1 ">
                         <span scope="col">Project Status: {data.status}</span>
                       </div>
-                    </div>
-                  </div>
-                  <div className=""></div>
-                  <div id="features">
-                    <div className="mb-5">
                       <div className="rounded-mine">
                         <div>
                           <div className="mb-1">
@@ -198,6 +174,18 @@ export default async function Home({ params }) {
                               Project Location:
                             </span>
                             <span scope="col">{data.project_address}</span>
+                          </div>
+                          <div className="mb-1">
+                            <span className="me-2 fw-mine2 mb-2 fs-mine3">
+                               Units:
+                            </span>
+                            <span scope="col">{data.no_of_units}</span>
+                          </div>
+                          <div className="mb-1">
+                            <span className="me-2 fw-mine2 mb-2 fs-mine3">
+                               Occupancy:
+                            </span>
+                            <span scope="col">{data.occupancy}</span>
                           </div>
 
                           <div className="mb-1">
@@ -242,13 +230,14 @@ export default async function Home({ params }) {
                         </div>
                       </div>
                     </div>
-                    <p>
-                      <i>
-                        {data.project_name} is a pre construction project
-                        developed by {data.developer.name} in the city of{" "}
-                        {data.city.name}. The project status is {data.status} .
-                      </i>
-                    </p>
+                  </div>
+                 
+                 
+                    <div className="mb-5">
+                     
+                      
+                    
+                  
                     <div className="py-5 pt-3">
                       <h2 className="fw-bold fs-3">
                         Information about {data.project_name} in{" "}

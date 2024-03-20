@@ -7,6 +7,7 @@ import BottomContactForm from "@/components/BottomContactForm";
 import FixedContactButton from "@/components/FixedContactButton";
 import MainSearch from "@/components/MainSearch";
 import Navbar2 from "@/components/Navbar2";
+import "./icons.css";
 
 async function getData(city) {
   const res = await fetch(
@@ -49,7 +50,7 @@ export default async function Home(props) {
   return (
     <>
       <FixedContactButton></FixedContactButton>
-
+{/* 
       <section id="hero">
         <div className="container">
           <div className=" hero-container">
@@ -66,38 +67,60 @@ export default async function Home(props) {
             </div>
 
             <div className="pb-1 pt-3 d-flex justify-content-center align-items-center">
-              {/* <div className="form-floating mb-4">
-                <input
-                  type="email"
-                  className="form-control smaller-input"
-                  id="floatingInput"
-                  placeholder="name@example.com"
-                />
-                <label
-                  htmlFor="floatingInput"
-                  className="d-flex align-items-center "
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-search"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                  </svg>
-                  <span className="mx-2 "></span>
-                  Type a city
-                </label>
-              </div> */}
-              <div className="pb-1 ww">
-                <MainSearch cities={cities} />
-              </div>
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
+      
+      <section className="py-10 sm:py-16 lg:py-24">
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2 ">
+          <div className="order-md-1 order-2">
+            <h1 className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl sm-center">
+            Canada's leading  
+              <div className="relative inline-flex sm-center">
+                <span className="absolute inset-x-0 bottom-0 border-b-[30px] border-[#4ADE80]"></span>
+                <h1 className="relative text-3xl font-bold text-black sm:text-6xl lg:text-7xl ">pre construction.</h1>
+               
+              </div>
+
+              <h1 className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl"> homes Platform</h1>
+            </h1>
+
+            <p className="mt-3 text-base text-black sm:text-xl sm-center">Get first updates on New Construction Homes Projects across Canada.</p>
+
+            <div class="row row-cols-3 d-flex align-items-center justify-content-around mt-20 ">
+    <div class="col-md-3">
+      <div class="icon-container">
+      <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/link-company-child.png" alt="link-company-child" className=""/>
+        <p>Condo</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="icon-container">
+      <img width="50" height="50" src="https://img.icons8.com/external-line-lima-studio/64/external-building-winter-town-line-lima-studio.png" alt="external-building-winter-town-line-lima-studio"/>
+        <p>Townhouse</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="icon-container">
+      <img width="50" height="50" src="https://img.icons8.com/carbon-copy/100/country-house.png" alt="country-house"/>
+        <p>Detached</p>
+      </div>
+    </div>
+  </div>
+            <div className=" ">
+            <MainSearch cities={cities}/>
+            </div>
+
+          </div>
+
+          <div className="order-1 order-md-2">
+            <img className="w-full" src="/hero-img.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </section>
 
       <div className="pt-5">
         <div className="container-fluid px-md-5 pt-5">
@@ -138,8 +161,8 @@ export default async function Home(props) {
             Explore New Construction Condos in These Cities
           </h2>
           <div className="container">
-            <div className="row">
-              <div className="col-6 col-md-4 col-xl-4">
+            <div className="row row-cols-md-5 row-cols-2">
+              <div className="col">
                 <Link className="d-block properti_city" href={"/toronto"}>
                   <div className="thumb">
                     <img
@@ -151,12 +174,12 @@ export default async function Home(props) {
                   <div className="overlay">
                     <div className="details">
                       <h4>Toronto</h4>
-                      <p>Explore Toronto's finest New construction condos</p>
+                      <p>Explore pre constructions projcts in Toronto</p>
                     </div>
                   </div>
                 </Link>
               </div>
-              <div className="col-6 col-lg-8 col-xl-8">
+              <div className="col">
                 <Link className="d-block properti_city" href={"/brampton"}>
                   <div className="thumb">
                     <img
@@ -168,12 +191,12 @@ export default async function Home(props) {
                   <div className="overlay">
                     <div className="details">
                       <h4>Brampton</h4>
-                      <p>Brampton's finest New construction condos</p>
+                      <p>Explore pre constructions projcts in Brampton</p>
                     </div>
                   </div>
                 </Link>
               </div>
-              <div className="col-6 col-lg-8 col-xl-8">
+              <div className="col">
                 <Link className="d-block properti_city" href={"/etobicoke"}>
                   <div className="thumb">
                     <img
@@ -185,12 +208,29 @@ export default async function Home(props) {
                   <div className="overlay">
                     <div className="details">
                       <h4>Etobicoke</h4>
-                      <p>Etobicoke's finest New construction condos</p>
+                      <p>Explore pre constructions projcts in Etobicoke</p>
                     </div>
                   </div>
                 </Link>
               </div>
-              <div className="col-6 col-md-4 col-xl-4">
+              <div className="col">
+                <Link className="d-block properti_city" href={"/calgary"}>
+                  <div className="thumb">
+                    <img
+                      src="/cities/calgary.jpeg"
+                      alt="brampton"
+                      className="img-fluid"
+                    />
+                  </div>
+                  <div className="overlay">
+                    <div className="details">
+                      <h4>Calgary</h4>
+                      <p>Explore pre constructions projcts in Calgary</p>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+              <div className="col">
                 <Link className="d-block properti_city" href={"/mississauga"}>
                   <div className="thumb">
                     <img
@@ -202,7 +242,7 @@ export default async function Home(props) {
                   <div className="overlay">
                     <div className="details">
                       <h4>Mississauga</h4>
-                      <p>Mississauga's finest New construction condos</p>
+                      <p>Explore pre constructions projcts in Mississauga</p>
                     </div>
                   </div>
                 </Link>

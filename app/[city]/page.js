@@ -59,7 +59,7 @@ export default async function Home({ params }) {
     <>
       <FixedContactButton></FixedContactButton>
       <div className="pt-5">
-        <div className="container-fluid  px-md-5">
+        <div className="container">
           <div className="d-flex flex-column">
             <h1 className="main-title">
               New Pre Construction Homes in {CapitalizeFirst(params.city)} (
@@ -103,7 +103,7 @@ export default async function Home({ params }) {
           </div>
           <div className="py-3"></div>
 
-          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-5 gy-2 gx-3 gx-lg-3">
+          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-4 gy-2 gx-3 gx-lg-3">
             {data.preconstructions &&
               filteredprojects("Selling").map((item, no) => (
                 <div className="col" key={item.id}>
@@ -129,7 +129,7 @@ export default async function Home({ params }) {
               <></>
             )}
           </h2>
-          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-5 gy-4 gx-3 gx-lg-3">
+          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-4 gy-4 gx-3 gx-lg-3">
             {data.preconstructions &&
               filteredprojects("Planning Phase").map((item, no) => (
                 <div className="col" key={item.id}>

@@ -13,7 +13,7 @@
 }
 
 body {
-    background: #ffffff;
+    background: #ffffff !important;
     /* font-family: 'Poppins', sans-serif !important; */
     /* font-family: 'Genos', sans-serif !important; */
     font-family: "Merriweather", serif !important;
@@ -475,7 +475,7 @@ a:hover {
 }
 
 .muuuuu {
-    width: 950px;
+    width: 650px;
     margin-bottom: 2rem !important;
 }
 
@@ -488,8 +488,12 @@ a:hover {
 }
 
 @media (max-width: 800px) {
+    .sm-center{
+        text-align: center;
+        justify-content: center;
+    }
     .muuuuu {
-        width: 350px;
+        width: 100%;
     }
     .muuuu {
         width: 180px;
@@ -1285,7 +1289,7 @@ label {
 .cardd-price {
     font-size: 1rem;
     font-weight: 600;
-    color: rgb(255, 136, 0);
+    color: #FF904D;
 }
 .cardd-subtitle {
     font-size: 0.8rem;
@@ -1319,7 +1323,6 @@ label {
     font-size: 0.85rem;
     border-radius: 10px;
 }
-
 .g-item {
     transition: transform 0.5s ease-in-out;
 }
@@ -1336,25 +1339,37 @@ label {
 }
 
 .grid-item1 {
-    grid-area: 1/1/4/3;
-    height: 510px;
+    grid-area: 1 / 1 / 4 / 3; /* Spanning two rows and two columns */
+    height: 620px;
 }
 
-.grid-item2,
-.grid-item3,
+.grid-item2 {
+    
+    height: 205px !important; /* Half the height of the first item */
+}
+
+.grid-item3 {
+   
+    height: 205px !important; /* Half the height of the first item */
+}
+
 .grid-item4,
 .grid-item5,
 .grid-item6,
 .grid-item7 {
-    height: 250px !important;
+    height: 200px !important;
 }
 
 .grid-cont>div:first-child {
     display: grid;
-    grid-template-rows: 1fr 1fr;
-    gap: 8px 8px;
+    gap: 10px 10px;
     z-index: 98 !important;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto; /* Two rows */
+}
+
+.iframe-container ul{
+    list-style: show !important;
 }
 
 .footer {
@@ -1449,7 +1464,7 @@ label {
 }
 
 .fw-mine {
-    font-weight: 800;
+    font-weight: 400;
 }
 
 .accent-line {
@@ -1688,7 +1703,7 @@ label {
     height: 18px;
 }
 .brand-color{
-    color: rgb(255, 136, 0);
+    color: #FF904D;
 }
 
 .breadcrumb {
@@ -1744,9 +1759,9 @@ label {
 .fs-small {
     font-size: 0.75rem !important;
     color: #000 !important;
-    background-color: #feeddb !important;
-    font-weight: 600;
-    box-shadow: rgba(147, 147, 147, 0.15) 0px 3px 3px 0px !important;
+    background-color: #ffffff !important;
+    font-weight: 400;
+    box-shadow: #FF904D 0px 1px 1px 0px !important;
 }
 .text-small{
     font-size: 0.7rem;
