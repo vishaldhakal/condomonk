@@ -123,7 +123,7 @@ export default async function Home(props) {
     </section>
 
       <div className="pt-5">
-        <div className="container-fluid px-md-5 pt-5">
+        <div className="container pt-5">
           <div className="d-flex align-items-center justify-content-center">
             <h2 className="fw-mine ccent-line fs-big fs-1">
               <Link href={"/calgary"} className="link-black">
@@ -141,9 +141,9 @@ export default async function Home(props) {
               <i className="bi bi-arrow-right-short"></i>
             </Link>
           </div>
-          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-5 gy-4 gx-3 gx-lg-2">
+          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-4 gy-4">
             {data.preconstructions &&
-              data.preconstructions.slice(0, 10).map((item) => (
+              data.preconstructions.slice(0, 8).map((item) => (
                 <div className="col" key={item.id}>
                   <script
                     key={item.slug}
@@ -267,9 +267,9 @@ export default async function Home(props) {
               <i className="bi bi-arrow-right-short"></i>
             </Link>
           </div>
-          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-5 gy-4 gx-3 gx-lg-2">
+          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-4 gy-4">
             {mississauga_data.preconstructions &&
-              mississauga_data.preconstructions.slice(0, 10).map((item) => (
+              mississauga_data.preconstructions.slice(0, 8).map((item) => (
                 <div className="col" key={item.id}>
                   <script
                     key={item.slug}
@@ -296,20 +296,7 @@ export default async function Home(props) {
                 alt=""
               />
 
-              <div class="overlay-content row row-cols-2 g-5">
-                <div className="col fs-5 fw-bold">
-                  <p className="mb-0">info@condomonk.ca</p>
-                  <p>647-527-4970</p>
-                </div>
-                <div className="col">
-                  <a
-                    href="#contact"
-                    class="btn btn-outline-dark btn-lg fs-4 fw-bold"
-                  >
-                    Contact Now
-                  </a>
-                </div>
-              </div>
+             
             </div>
           </div>
 
