@@ -10,8 +10,8 @@ const Footer = ({ cities }) => {
   }
   return (
     <footer className="footer mt-5 shadow-lg">
-      <div className="container footer-top">
-        <div className="text-center pt-5">
+      <div className="container footer-top ">
+        <div className="text-center pt-5 bg-orange-400">
           <p className="fs-2 fw-bold">Get Exclusive Preconstruction Updates.</p>
           <p className="textt">
             Be the First to Know! Subscribe to Our Newsletter and Receive

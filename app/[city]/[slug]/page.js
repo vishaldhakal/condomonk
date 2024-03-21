@@ -155,6 +155,15 @@ export default async function Home({ params }) {
                 <div className="screenshot ">
                   <div className="row row-cols-1 row-cols-sm-2">
                     <div className="col-sm-12">
+
+                   <div className="d-flex gap-3 my-2">
+                   <div className=" btn btn-sm bg-slate-200 ">
+                        <span className="col fs-esmall">{data.status}</span>
+                      </div>
+                      <div className=" btn btn-sm bg-slate-200 ">
+                        <span className="col fs-esmall ">{data.project_type}</span>
+                      </div>
+                   </div>
                     
                     <h1 className="side fs-1 fw-bold">{data.project_name}</h1>
                       <p className="mb-0">
@@ -164,9 +173,6 @@ export default async function Home({ params }) {
                       <h2 className="text-mine fs-4 fw-mine3 mt-1 mb-0 brand-color">
                         {checkPricing(data.price_starting_from, data.price_to)}
                       </h2>
-                      <div className="mb-1 ">
-                        <span scope="col">Project Status: {data.status}</span>
-                      </div>
                       <div className="rounded-mine">
                         <div>
                           <div className="mb-1">

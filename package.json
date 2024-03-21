@@ -13,6 +13,7 @@
         "@popperjs/core": "^2.11.8",
         "axios": "^1.5.0",
         "bootstrap": "^5.3.3",
+        "date-fns": "^3.6.0",
         "framer-motion": "^11.0.14",
         "geocode": "^0.0.3",
         "leaflet": "^1.9.4",

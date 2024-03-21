@@ -130,7 +130,7 @@ export default async function Home({ params }) {
         <div className="py-3"></div>
         <div className="container-fluid px-md-5">
           <div className="py-2"></div>
-          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-5 gy-4 gx-3 gx-lg-2">
+           <div className="row row-cols-1 row-cols-md-4 row-cols-lg-5 gy-4 gx-3 gx-lg-2">
             {data.preconstructions &&
               data.preconstructions.map((item, no) => (
                 <div className="col" key={item.id}>
