@@ -12,6 +12,7 @@
     scroll-behavior: smooth;
 }
 
+
 body {
     background: #ffffff !important;
     /* font-family: 'Poppins', sans-serif !important; */
@@ -1369,8 +1370,13 @@ label {
 }
 
 .iframe-container ul{
-    list-style: show !important;
+   list-style-type: disc;
 }
+
+.iframe-container ol{
+    list-style-type:decimal;
+ }
+ 
 
 .footer {
     background-color: #ffffff;
@@ -1810,6 +1816,9 @@ label {
     background-color: rgb(255, 136, 0);
     white-space: nowrap !important;
 }
-
-
-/* Add this to your CSS file or style block */
+.city-details h1{
+font-size: 2rem;
+}
+.city-details h2{
+    font-size: 1.5rem;
+    }
