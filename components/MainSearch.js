@@ -70,7 +70,7 @@ function MainSearch(props) {
               boxShadow: "none",
               backgroundColor: "#f5f5f5",
               border: "1px solid orange",
-              borderRadius: "29px",
+              borderRadius: "20px",
             }}
             showIcon={false}
             autoFocus

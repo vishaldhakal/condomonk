@@ -72,10 +72,10 @@ export default async function Home(props) {
         </div>
       </section> */}
       
-      <section className="py-10 sm:py-16 lg:py-24">
-      <div className="px-3 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2 ">
-          <div className="order-md-1 order-2">
+      <section className="py-10 sm:py-16 lg:py-24 container">
+      <div className=" ">
+        <div className="grid items-center  grid-cols-1 gap-12 lg:grid-cols-2 ">
+          <div className="order-md-1 order-2 ">
             <h1 className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl sm-center">
             Canada's leading  
               <div className="relative inline-flex sm-center">
@@ -89,26 +89,28 @@ export default async function Home(props) {
 
             <p className="mt-3 text-base text-black sm:text-xl sm-center">Get first updates on New Construction Homes Projects across Canada.</p>
 
-            <div class="row row-cols-3 d-flex align-items-center justify-content-around mt-20 ">
-    <div class="col-md-3">
-      <div class="icon-container">
-      <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/link-company-child.png" alt="link-company-child" className=""/>
+      <div className="  mt-20">
+      <div class="d-flex align-items-center justify-content-between">
+    <div class="col ">
+      <div class="icon-container ">
+      <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/link-company-child.png" alt="link-company-child" className="text-center"/>
         <p>Condo</p>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col ">
       <div class="icon-container">
       <img width="50" height="50" src="https://img.icons8.com/external-line-lima-studio/64/external-building-winter-town-line-lima-studio.png" alt="external-building-winter-town-line-lima-studio"/>
         <p>Townhouse</p>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col ">
       <div class="icon-container">
       <img width="50" height="50" src="https://img.icons8.com/carbon-copy/100/country-house.png" alt="country-house"/>
         <p>Detached</p>
       </div>
     </div>
   </div>
+      </div>
             <div className=" ">
             <MainSearch cities={cities}/>
             </div>
