@@ -61,9 +61,14 @@ export default async function Home({ params }) {
       <div className="pt-5">
         <div className="container">
           <div className="d-flex flex-column">
-            <h1 className="main-title">
-              New Pre Construction Homes in {CapitalizeFirst(params.city)} (
-              2024 ) 
+            <h1 className="main-title font-family2">
+              New Pre Construction Homes
+              <div className="relative inline-flex sm-center mx-2">
+                <span className="absolute inset-x-0 bottom-0 border-b-[18px] border-[#4ADE80]"></span>
+                <h1 className="relative font-bold text-black ">  in {CapitalizeFirst(params.city)} </h1>
+              </div>
+              (
+              2024 )
             </h1>
             <p className="text-mine">
               {data.preconstructions.length} New Pre construction homes, condos and townhomes for sale
@@ -103,7 +108,7 @@ export default async function Home({ params }) {
           </div>
           <div className="py-3"></div>
 
-          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-4 gy-2 gx-3 gx-lg-3">
+          <div className="row row-cols-1 row-cols-md-4  gy-4 gx-3 gx-lg-3 ">
             {data.preconstructions &&
               filteredprojects("Selling").map((item, no) => (
                 <div className="col" key={item.id}>
@@ -120,7 +125,7 @@ export default async function Home({ params }) {
           </div>
           <div className="pt-5 mt-5"></div>
           <div className="pt-5"></div>
-          <h2 className="fw-bold fs-3 mb-4">
+          <h2 className="fw-bold fs-3 mb-4 font-family2">
             {filteredprojects("Upcoming").length > 0 ? (
               `Launching Soon - New Construction Projects in ${CapitalizeFirst(
                 data.city.name
@@ -129,7 +134,7 @@ export default async function Home({ params }) {
               <></>
             )}
           </h2>
-          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-4 gy-4 gx-3 gx-lg-3">
+          <div className="row row-cols-1 row-cols-md-4 gy-4 gx-3">
             {data.preconstructions &&
               filteredprojects("Planning Phase").map((item, no) => (
                 <div className="col" key={item.id}>
@@ -168,7 +173,7 @@ export default async function Home({ params }) {
               <></>
             )}
           </h2>
-          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-6 gy-4 gx-3 gx-lg-3">
+          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-6 gy-4 gx-3 ">
             {data.preconstructions &&
               filteredprojects("Sold out").map((item, no) => (
                 <div className="col" key={item.id}>

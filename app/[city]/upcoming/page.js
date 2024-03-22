@@ -113,7 +113,7 @@ export default async function Home({ params }) {
                 All Projects in {CapitalizeFirst(params.city)}
               </Link>
               <Link
-                className="link-black badge py-2 bg-white shadow-sm text-dark fs-small fw-m"
+                className="link-black badge py-2 bg-white shadow-sm text-dark fs-small fw-m mx-md-2"
                 href={`/${params.city}/townhomes/`}
               >
                 New Townhomes {CapitalizeFirst(params.city)}
@@ -127,7 +127,7 @@ export default async function Home({ params }) {
                 New Detached Homes {CapitalizeFirst(params.city)}
               </Link>
               <Link
-                className="link-black badge py-2 bg-white shadow-sm text-dark fs-small fw-m"
+                className="link-black badge py-2 bg-white shadow-sm text-dark fs-small fw-m mx-md-2"
                 href={`/${params.city}/condos/`}
               >
                 New Condos {CapitalizeFirst(params.city)}

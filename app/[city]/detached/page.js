@@ -77,7 +77,7 @@ export default async function Home({ params }) {
     <>
       <FixedContactButton></FixedContactButton>
       <div className="pt-5 position-relative">
-        <div className="container-fluid px-md-5">
+        <div className="container">
           <div className="pb-0">
             <h1 className="main-title text-center text-md-start fs-mine mb-0">
               {`New Construction Detached Homes in ${CapitalizeFirst(
@@ -108,7 +108,7 @@ export default async function Home({ params }) {
                 All Projects in {CapitalizeFirst(params.city)}
               </Link>
               <Link
-                className="link-black badge py-2 bg-white shadow-sm text-dark fs-small fw-m"
+                className="link-black badge py-2 bg-white shadow-sm text-dark fs-small fw-m mx-md-2"
                 href={`/${params.city}/upcoming/`}
               >
                 Upcoming Projects in {CapitalizeFirst(params.city)}
@@ -122,7 +122,7 @@ export default async function Home({ params }) {
                 New Townhomes {CapitalizeFirst(params.city)}
               </Link>
               <Link
-                className="link-black badge py-2 bg-white shadow-sm text-dark fs-small fw-m"
+                className="link-black badge py-2 bg-white shadow-sm text-dark fs-small fw-m mx-md-2"
                 href={`/${params.city}/condos/`}
               >
                 New Condos {CapitalizeFirst(params.city)}
@@ -132,7 +132,7 @@ export default async function Home({ params }) {
         </div>
 
         <div className="py-3"></div>
-        <div className="container-fluid px-md-5">
+        <div className="container">
           <div className="py-2"></div>
           <div className="row row-cols-1 row-cols-md-4 row-cols-lg-5 gy-4 gx-3 gx-lg-2">
             {data.preconstructions &&

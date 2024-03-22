@@ -31,8 +31,8 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
     <div
       className={navbar ? "navbar-transparent active" : "navbar-transparent"}
     >
-      <nav className=" navbar navbar-expand-lg  py-3 ">
-        <div className="container justify-content-start ">
+      <nav className=" navbar navbar-expand-lg  py-3">
+        <div className=" container justify-content-start">
           <div className="d-flex">
             <Link
               href="/"

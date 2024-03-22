@@ -76,7 +76,7 @@ export default async function Home(props) {
       <div className=" ">
         <div className="grid items-center  grid-cols-1 gap-12 lg:grid-cols-2 ">
           <div className="order-md-1 order-2 ">
-            <h1 className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl sm-center">
+            <h1 className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl sm-center font-family2">
             Canada's leading  
               <div className="relative inline-flex sm-center">
                 <span className="absolute inset-x-0 bottom-0 border-b-[30px] border-[#4ADE80]"></span>
@@ -90,22 +90,22 @@ export default async function Home(props) {
             <p className="mt-3 text-base text-black sm:text-xl sm-center">Get first updates on New Construction Homes Projects across Canada.</p>
 
       <div className="  mt-20">
-      <div class="d-flex align-items-center justify-content-between">
-    <div class="col ">
-      <div class="icon-container ">
-      <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/link-company-child.png" alt="link-company-child" className="text-center"/>
+      <div className="d-flex align-items-center text-center gap-5 sm-center">
+    <div className=" ms-3">
+      <div className="icon-container d-flex flex-column align-items-center ">
+      <img width="30" height="30" src="https://img.icons8.com/ios-filled/50/link-company-child.png" alt="link-company-child" className="text-center"/>
         <p>Condo</p>
       </div>
     </div>
-    <div class="col ">
-      <div class="icon-container">
-      <img width="50" height="50" src="https://img.icons8.com/external-line-lima-studio/64/external-building-winter-town-line-lima-studio.png" alt="external-building-winter-town-line-lima-studio"/>
+    <div class=" ">
+      <div class="icon-container d-flex flex-column align-items-center">
+      <img width="30" height="30" src="https://img.icons8.com/external-line-lima-studio/64/external-building-winter-town-line-lima-studio.png" alt="external-building-winter-town-line-lima-studio"/>
         <p>Townhouse</p>
       </div>
     </div>
-    <div class="col ">
-      <div class="icon-container">
-      <img width="50" height="50" src="https://img.icons8.com/carbon-copy/100/country-house.png" alt="country-house"/>
+    <div class=" ">
+      <div class="icon-container d-flex flex-column align-items-center">
+      <img width="30" height="30" src="https://img.icons8.com/carbon-copy/100/country-house.png" alt="country-house"/>
         <p>Detached</p>
       </div>
     </div>
@@ -124,11 +124,11 @@ export default async function Home(props) {
       </div>
     </section>
 
-      <div className="pt-5">
-        <div className="container pt-5">
+      <div className="pt-5 ">
+        <div className="container pt-5 " >
           <div className="d-flex align-items-center justify-content-center">
             <h2 className="fw-mine ccent-line fs-big fs-1">
-              <Link href={"/calgary"} className="link-black">
+              <Link href={"/calgary"} className="link-black font-family2">
                 Calgary
               </Link>
             </h2>
@@ -143,7 +143,7 @@ export default async function Home(props) {
               <i className="bi bi-arrow-right-short"></i>
             </Link>
           </div>
-          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-4 gy-4">
+          <div className="row row-cols-1 row-cols-md-4 gy-md-5 gy-3 gx-3">
             {data.preconstructions &&
               data.preconstructions.slice(0, 8).map((item) => (
                 <div className="col" key={item.id}>
@@ -159,7 +159,7 @@ export default async function Home(props) {
               ))}
           </div>
           <div className="py-5 my-2"></div>
-          <h2 className="fw-mine text-center mb-5 accent-line fs-1">
+          <h2 className="fw-mine text-center mb-5 accent-line fs-1 font-family2">
             Explore New Construction Condos in These Cities
           </h2>
           <div className="container">
@@ -254,7 +254,7 @@ export default async function Home(props) {
           <div className="py-5 my-2"></div>
           <div className="d-flex align-items-center justify-content-center ">
             <h2 className="fw-mine ccent-line fs-big fs-1">
-              <Link href={"/calgary"} className="link-black">
+              <Link href={"/calgary"} className="link-black font-family2">
                 Mississauga
               </Link>
             </h2>
@@ -269,7 +269,7 @@ export default async function Home(props) {
               <i className="bi bi-arrow-right-short"></i>
             </Link>
           </div>
-          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-4 gy-4">
+          <div className="row row-cols-1 row-cols-md-4 gy-md-5 gy-3 gx-3">
             {mississauga_data.preconstructions &&
               mississauga_data.preconstructions.slice(0, 8).map((item) => (
                 <div className="col" key={item.id}>

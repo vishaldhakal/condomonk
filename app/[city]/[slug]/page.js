@@ -151,7 +151,7 @@ export default async function Home({ params }) {
 
           <div className="container  px-0 px-sm-3 pt-3">
             <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 justify-content-center">
-              <div className="col col-md-7">
+              <div className="col col-md-6">
                 <div className="screenshot ">
                   <div className="row row-cols-1 row-cols-sm-2">
                     <div className="col-sm-12">
@@ -165,12 +165,12 @@ export default async function Home({ params }) {
                       </div>
                    </div>
                     
-                    <h1 className="side fs-1 fw-bold">{data.project_name}</h1>
+                    <h1 className="side fs-1 fw-bold font-family2">{data.project_name}</h1>
                       <p className="mb-0">
                         By <strong>{data.developer.name}</strong>
                       </p>
                      
-                      <h2 className="text-mine fs-4 fw-mine3 mt-1 mb-0 brand-color">
+                      <h2 className="text-mine fs-4 fw-mine3 mt-1 mb-0 brand-color font-family2">
                         {checkPricing(data.price_starting_from, data.price_to)}
                       </h2>
                       <div className="rounded-mine">
@@ -244,8 +244,8 @@ export default async function Home({ params }) {
                       
                     
                   
-                    <div className="py-5 pt-3">
-                      <h2 className="fw-bold fs-3">
+                    <div className="py-5 pt-5 mt-4">
+                      <h2 className="fw-bold fs-3 font-family2">
                         Information about {data.project_name} in{" "}
                         {data.city.name}
                       </h2>
@@ -261,7 +261,7 @@ export default async function Home({ params }) {
                   </div>
                 </div>
                 <div className="py-3 my-5">
-                  <h2 className="fw-bold fs-4 pb-3">
+                  <h2 className="fw-bold fs-4 pb-3 font-family2">
                     Walk Score for {data.project_name}
                   </h2>
 
@@ -329,7 +329,7 @@ export default async function Home({ params }) {
                         />
                       </div> */}
                       <div className="text-center">
-                        <h5 className="fw-bold text-center linem fs-4  mb-0">
+                        <h5 className="fw-bold text-center linem fs-4  mb-0 font-family2">
                           GET PLATINUM ACCESS!!
                         </h5>
 
@@ -364,7 +364,7 @@ export default async function Home({ params }) {
           <div className="py-5 my-5"></div>
           <div>
             <div className="d-flex flex-column">
-              <h2 className="main-title">
+              <h2 className="main-title font-family2">
                 Similar New Construction condos in {data.city.name} ( 2024 )
               </h2>
             </div>

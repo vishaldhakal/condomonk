@@ -69,7 +69,7 @@ function MainSearch(props) {
             styling={{
               boxShadow: "none",
               backgroundColor: "#f5f5f5",
-              border: "1px solid orange",
+              border: "1px solid lightgreen",
               borderRadius: "20px",
             }}
             showIcon={false}

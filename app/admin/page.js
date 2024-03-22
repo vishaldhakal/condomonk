@@ -11,39 +11,23 @@ export default function Home() {
     status: "All",
     typee: "All",
   });
-
-  const handleChange = (e) => {
-    setFilters((prevFilters) => ({ ...prevFilters, status: e.target.value }));
-  };
-
   const [preconstructions, setPreConstructions] = useState([]);
   const [refetch, setRefetch] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  
 
   useEffect(() => {
-    const fetchPreconstructions = async () => {
-      try {
-        const res = await axios.get("https://api.condomonk.ca/api/preconstructions/", {
-          params: {
-            page: page,
-            page_size: 20,
-            city: filters.city,
-            status: filters.status,
-            typee: filters.typee,
-          },
-        });
-  
+    axios
+      .get("https://api.condomonk.ca/api/preconstructions/?page=" + page)
+      .then((res) => {
+        console.log(res.data.results);
         setPreConstructions(res.data.results);
-        setTotalPages(Math.ceil(res.data.count / 20));
-      } catch (error) {
-        console.error(error);
-      }
-    };
-  
-    fetchPreconstructions();
-  }, [refetch, filters]);
+        setTotalPages(Math.ceil(res.data.count / 10));
+      })
+      .catch((err) => {
+        console.log(err.data);
+      });
+  }, [refetch, page]);
 
   const handleDelete = (e, id) => {
     swal({
@@ -97,17 +81,7 @@ export default function Home() {
     }
     return true;
   }
-  async function getCities() {
-    const res = await fetch("https://api.condomonk.ca/api/all-city", {
-      next: { revalidate: 10 },
-    });
-  
-    if (!res.ok) {
-      throw new Error("Failed to fetch data");
-    }
-    return res.json();
-  }
-  
+
   return (
     <>
       <div className="py-4 w-100 ">
@@ -119,7 +93,7 @@ export default function Home() {
                 id="floatingCity"
                 value={filters.city}
                 onChange={(e) => handleChange(e)}
-                ariaLabel="Floating label select example"
+                aira-label="Floating label select example"
               >
                 <option value="All">All</option>
                 <option value="Toronto">Toronto</option>
@@ -134,7 +108,7 @@ export default function Home() {
                 id="typee"
                 value={filters.typee}
                 onChange={(e) => handleChange(e)}
-                ariaLabel="Floating label select example"
+                aira-label="Floating label select example"
               >
                 <option value="All">All</option>
                 <option value="Condo">Condo</option>
@@ -152,7 +126,7 @@ export default function Home() {
                 id="status"
                 value={filters.status}
                 onChange={(e) => handleChange(e)}
-                ariaLabel="Floating label select example"
+                aira-label="Floating label select example"
               >
                 <option value="All">All</option>
                 <option value="Upcoming">Upcoming</option>

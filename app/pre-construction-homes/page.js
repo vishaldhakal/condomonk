@@ -56,7 +56,7 @@ export default async function Home({ params }) {
         <div className="row row-cols-1 row-cols-md-1 align-items-center mx-0">
           <div className="col">
             <div className="py-md-4"></div>
-            <h1 className=" text-center fs-1 fw-bold fs-gta pt-5 my-4">
+            <h1 className=" text-center fs-1 fw-bold fs-gta pt-5 my-4 font-family2">
               List of Pre Construction Projects in <br /> Canada
             </h1>
             <h2 className="text-success mt-4 text-center">
@@ -88,7 +88,7 @@ export default async function Home({ params }) {
                     href={"/" + item.slug}
                     className="link-black"
                   >
-                    <h4 className="fs-4 fw-bold">{item.name}</h4>
+                    <h4 className="fs-4 fw-bold font-family2">{item.name}</h4>
                   </Link>
                   <div className="maxhh">
                     <div className="row row-cols-2 row-cols-md-5">
@@ -109,7 +109,7 @@ export default async function Home({ params }) {
           </div>
 
           <div className="mt-5 pt-5">
-            <h3 className="fs-2">
+            <h3 className="fs-2 font-family2">
               <strong>Explore more citites </strong>
             </h3>
             <div>

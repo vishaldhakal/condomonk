@@ -64,22 +64,29 @@ export default function CondoCard(props) {
           </Link>
           {props.co_op_available && (
             <span className="shadow-lg p-1 px-2 abs2">Co-op Available</span>
+            
           )}
+          <span className="shadow-lg p-1 px-2 abs1">{props.status}</span>
+          <span className="px-2 abs2">
+            {props.no + 1 ? props.no + 1 + " " : " "}
+          </span>
         </div>
         <Link
           href={`/${props.city.slug}/${props.slug}`}
           className="card-body text-decoration-none text-dark bg-white shadow-lgg rounded-mine" 
           target="_blank"
         >
-          <div className="card-content pt-1">
+          <div className="card-content pt-2">
 
-          <span className=" text-danger cardd-subtitle">{props.status} </span> 
-            <h3 className="mb-1 cardd-title text-dark">{props.project_name}</h3>
+        
+          
+            <h3 className="mb-1 cardd-title text-dark font-family2">{props.project_name}</h3>
+            
         
             
-            <p className="mb-0 cardd-subtitle ">{props.project_address}</p>
-            <p className="mb-0 cardd-subtitle text-secondary">{props.occupancy} | {props.project_type}</p>
-            <h4 className="mb-1 cardd-price fw-bold">
+            <p className="mb-1 cardd-subtitle ">{props.project_address}</p>
+            <p className="mb-2 cardd-subtitle text-secondary">{props.occupancy} | {props.project_type}</p>
+            <h4 className="mb-1 ">
               {checkPricing(props.price_starting_from)}
             </h4>
           </div>

@@ -11,8 +11,8 @@ const Footer = ({ cities }) => {
   return (
     <footer className="footer mt-5 shadow-lg">
       <div className="container footer-top ">
-        <div className="text-center pt-5 bg-orange-400">
-          <p className="fs-2 fw-bold">Get Exclusive Preconstruction Updates.</p>
+        <div className="text-center pt-5 bg-green-300">
+          <p className="fs-2 fw-bold font-family2">Get Exclusive Preconstruction Updates.</p>
           <p className="textt">
             Be the First to Know! Subscribe to Our Newsletter and Receive
             Timely Updates on Exclusive Preconstruction Sales – Your Gateway to
@@ -35,7 +35,7 @@ const Footer = ({ cities }) => {
         </div>
         <div className="  pt-5 mt-md-5 mt-0">
           <div className=" footer-links">
-            <h3 className="text-center fw-bold pb-2 fs-3">
+            <h3 className="text-center fw-bold pb-2 fs-3 font-family2">
               {" "}
               New Construction homes in Canada
             </h3>
