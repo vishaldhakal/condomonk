@@ -1263,7 +1263,7 @@ label {
 }
 
 .main-title {
-    display: inline-flex;
+    
     line-height: 2rem !important;
     font-weight: 800;
     margin-bottom: 10px;
@@ -1793,11 +1793,15 @@ label {
 }
 
 .fs-small {
-    font-size: 0.75rem !important;
+    font-size: 0.7rem !important;
     color: #000 !important;
     background-color: #ffffff !important;
     font-weight: 400;
     border: 1px solid grey;
+}
+
+.fw-mine3{
+font-weight: 600;
 }
 
 .fs-esmall {
