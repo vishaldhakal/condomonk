@@ -14,9 +14,7 @@ const Footer = ({ cities }) => {
         <div className="text-center pt-5 bg-green-300">
           <p className="fs-2 fw-bold font-family2">Get Exclusive Preconstruction Updates.</p>
           <p className="textt">
-            Be the First to Know! Subscribe to Our Newsletter and Receive
-            Timely Updates on Exclusive Preconstruction Sales – Your Gateway to
-            Prime Real Estate Opportunities. Stay Informed, Stay Ahead!
+          Be the First to Know! Subscribe to Our Newsletter and Receive Timely Updates on Exclusive Preconstruction projects from reputable builders across Canada – Condomonk.ca curates the latest updates on any new construction townhomes, condos & detached homes launching across canada.
           </p>
 
           <form action="">

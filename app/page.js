@@ -325,6 +325,10 @@ export default async function Home(props) {
                     proj_name="All"
                     city="Home Page"
                   ></BottomContactForm>
+                   <div className="d-flex">
+                    <p class="small-text2 mb-3 text-center">Dolphy is an online pre-construction homes database. Dolphy curates the list of projects that are publicly available on internet Be advised the information provided on this page could be outdated or inaccurate. By submitting above form you consent the real estate agents from Dolphin Realty Inc. to connect with you. We may share your info to our brokerage partners and agents to help you with your questions. You can unsubscribe at any time by emailing us.</p>
+         
+                    </div>
                 </div>
                 <div className="col-md-2"></div>
               </div>
