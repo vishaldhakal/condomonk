@@ -72,7 +72,7 @@ export default async function Home(props) {
         </div>
       </section> */}
       
-      <section className="py-10 sm:py-16 lg:py-24 container">
+      <section className="py-lg-10 py-3 py-lg-5 sm:py-16 lg:py-24 container">
       <div className=" ">
         <div className="grid items-center  grid-cols-1 gap-12 lg:grid-cols-2 ">
           <div className="order-md-1 order-2 ">
@@ -89,7 +89,7 @@ export default async function Home(props) {
 
             <p className="mt-3 text-base text-black sm:text-xl sm-center">Get first updates on New Construction Homes Projects across Canada.</p>
 
-      <div className="  mt-20">
+      <div className=" mt-12 lg:mt-20">
       <div className="d-flex align-items-center text-center gap-5 sm-center">
     <div className=" ms-3">
       <div className="icon-container d-flex flex-column align-items-center ">
@@ -133,7 +133,7 @@ export default async function Home(props) {
               </Link>
             </h2>
           </div>
-          <div className="d-flex flex-column justify-content-center flex-column align-items-center mb-5">
+          <div className="d-flex flex-column justify-content-center flex-column align-items-center mb-lg-5 mb-2">
             <p className="fs-5 mb-0 text-center">
               Explore 20+ current & past new homes communities from Truman homes
               in Calgary
@@ -143,7 +143,7 @@ export default async function Home(props) {
               <i className="bi bi-arrow-right-short"></i>
             </Link>
           </div>
-          <div className="row row-cols-1 row-cols-md-4 gy-md-5 gy-3 gx-3">
+          <div className="row row-cols-1 row-cols-md-4 gy-md-5 gx-3">
             {data.preconstructions &&
               data.preconstructions.slice(0, 8).map((item) => (
                 <div className="col" key={item.id}>

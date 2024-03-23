@@ -58,7 +58,7 @@ export default async function Home({ params }) {
   return (
     <>
       <FixedContactButton></FixedContactButton>
-      <div className="pt-5">
+      <div className="pt-lg-5 pt-3">
         <div className="container">
           <div className="d-flex flex-column">
             <h1 className="main-title font-family2">
@@ -106,7 +106,7 @@ export default async function Home({ params }) {
               </Link>
             </div>
           </div>
-          <div className="py-3"></div>
+          <div className="py-lg-3 py-0"></div>
 
           <div className="row row-cols-1 row-cols-md-4  gy-4 gx-3 gx-lg-3 ">
             {data.preconstructions &&
@@ -125,7 +125,7 @@ export default async function Home({ params }) {
           </div>
           <div className="pt-5 mt-5"></div>
           <div className="pt-5"></div>
-          <h2 className="fw-bold fs-3 mb-4 font-family2">
+          <h2 className="fw-bold fs-2 mb-4 font-family2">
             {filteredprojects("Upcoming").length > 0 ? (
               `Launching Soon - New Construction Projects in ${CapitalizeFirst(
                 data.city.name
@@ -164,7 +164,7 @@ export default async function Home({ params }) {
           </div>
           <div className="pt-5 mt-5"></div>
           <div className="pt-5"></div>
-          <h2 className="fw-bold fs-3 mb-4 text-red">
+          <h2 className="fw-bold fs-2 mb-4 text-red">
             {filteredprojects("Sold out").length > 0 ? (
               <i>{`Past Communities in ${CapitalizeFirst(
                 data.city.name

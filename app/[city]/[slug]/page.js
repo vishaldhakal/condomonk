@@ -116,7 +116,7 @@ export default async function Home({ params }) {
   return (
     <>
       <FixedContactButton></FixedContactButton>
-      <div className="pt-1">
+      <div className="pt-lg-1 pt-0">
         <div className="container ">
           <Breadcrumb
             homeElement={"Home"}
@@ -136,7 +136,7 @@ export default async function Home({ params }) {
               </span>
             }
             activeClasses="text-dark"
-            containerClasses="d-flex align-items-center p-0 m-0 pt-4 breadcrumb"
+            containerClasses="d-flex align-items-center p-0 m-0 pt-lg-4 pt-2 breadcrumb"
             listClasses="mx-1"
             capitalizeLinks
           />
@@ -157,10 +157,10 @@ export default async function Home({ params }) {
                     <div className="col-sm-12">
 
                    <div className="d-flex gap-3 my-2">
-                   <div className=" btn btn-sm bg-slate-200 ">
+                   <div className=" btn btn-sm bg-slate-100 ">
                         <span className="col fs-esmall">{data.status}</span>
                       </div>
-                      <div className=" btn btn-sm bg-slate-200 ">
+                      <div className=" btn btn-sm bg-slate-100 ">
                         <span className="col fs-esmall ">{data.project_type}</span>
                       </div>
                    </div>

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root {
     scroll-behavior: smooth;
@@ -18,7 +18,8 @@ body {
     background: #ffffff !important;
     /* font-family: 'Poppins', sans-serif !important; */
     /* font-family: 'Genos', sans-serif !important; */
-    font-family: "Figtree", sans-serif;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
 }
 .font-family2{
     font-family: "Merriweather", serif !important;
@@ -169,6 +170,7 @@ a:hover {
 .navbar-nav .nav-item .nav-link {
     font-weight: 400;
     color: rgb(0, 0, 0) !important;
+    font-size: 0.85rem;
     /* Set default color to white */
 }
 
@@ -495,6 +497,13 @@ a:hover {
 }
 
 @media (max-width: 800px) {
+    .fs-small {
+        font-size: 0.65rem !important;
+        color: #000 !important;
+        background-color: #ffffff !important;
+        font-weight: 400;
+        border: 0px solid rgb(225, 225, 225);
+    }
     .sm-center{
         text-align: center;
         justify-content: center;
@@ -506,7 +515,7 @@ a:hover {
         width: 180px;
     }
     .logo span {
-        font-size: 19px !important;
+        font-size: 30px !important;
         font-weight: 800;
         color: #000000;
     }
@@ -515,7 +524,7 @@ a:hover {
         margin-bottom: 10px !important;
     }
     .fs-big {
-        font-size: 2rem !important;
+        font-size: 3rem !important;
         font-weight: 800 !important;
         color: #2c2c2c !important;
     }
@@ -548,32 +557,30 @@ a:hover {
     .agent-img {
         max-height: 68px !important;
     }
-    .g-item {
-        display: none;
-    }
-    .g-itemx {
-        display: none;
-    }
-    .g-itemm {
-        display: none;
-    }
     .fs-5 {
         font-size: 1.1rem;
     }
     .grid-item1 {
-        grid-area: 1/1/8/8 !important;
-        display: grid !important;
-        height: 300px !important;
+        grid-area: 1 / 1/ 2/ 5 !important; /* Spanning two rows and two columns */
+        height: 420px;
     }
-    .grid-itemx1 {
-        grid-area: 1/1/8/8;
-        display: grid;
-        height: 320px;
+    
+    .grid-item2,
+    .grid-item3,
+    .grid-item4,
+    .grid-item5 {
+        max-height: 100px !important;
     }
-    .grid-itemm1 {
-        grid-area: 1/1/8/8;
+    
+    .grid-cont>div:first-child {
         display: grid;
-        height: 320px;
+        gap: 10px 10px;
+        z-index: 98 !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        grid-template-rows: auto auto !important; /* Two rows */
+    }
+      .g-item:nth-child(n+6) {
+        display: none !important;
     }
     .react-autosuggest__input {
         width: 180px !important;
@@ -684,8 +691,8 @@ a:hover {
         align-items: center !important;
     }
     .container{
-        padding-left: 1rem;
-        padding-right: 1rem;
+        padding-left: 1.1rem;
+        padding-right: 1.1rem;
         }
 
 .cardd-title {
@@ -694,12 +701,21 @@ a:hover {
 }
 
 .abs1 {
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
+    position: relative;
+    bottom: 40px !important;
+    left: 10px;
     background-color: #2ccc66;
     border-radius: 5px;
     color: white;
+    font-size: 0.9rem !important;
+}
+.abs3 {
+    position: relative;
+    bottom: 40px !important;
+    left: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
     font-size: 0.9rem !important;
 }
 }
@@ -1308,6 +1324,7 @@ label {
 }
 
 .cardd-title {
+    margin-top: -15px !important;
     font-size: 1.4rem;
     font-weight: 800;
 }
@@ -1332,13 +1349,22 @@ label {
 }
 
 .abs1 {
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
+    position: relative;
+    bottom: 30px;
+    left: 10px;
     background-color: #2ccc66;
     border-radius: 5px;
     color: white;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
+}
+.abs3 {
+    position: relative;
+    bottom: 30px;
+    left: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
+    font-size: 0.6rem;
 }
 
 .abs2 {
@@ -1793,11 +1819,11 @@ label {
 }
 
 .fs-small {
-    font-size: 0.7rem !important;
+    font-size: 0.7rem;
     color: #000 !important;
     background-color: #ffffff !important;
     font-weight: 400;
-    border: 1px solid grey;
+    border: 0px solid rgb(225, 225, 225);
 }
 
 .fw-mine3{

@@ -31,12 +31,12 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
     <div
       className={navbar ? "navbar-transparent active" : "navbar-transparent"}
     >
-      <nav className=" navbar navbar-expand-lg  py-3">
+      <nav className=" navbar navbar-expand-lg  py-lg-3 ">
         <div className=" container justify-content-start">
           <div className="d-flex">
             <Link
               href="/"
-              className="logo d-flex justify-content-center align-items-center pe-1 "
+              className="logo d-flex justify-content-center align-items-center pe-1 font-family2"
             >
               <span>Condomonk</span>
             </Link>
@@ -49,10 +49,10 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
     </button>
           </div>
           <div className=" collapse  navbar-collapse" id="collapsibleNavId">
-            <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
-              <li className="nav-item dropdown">
+            <ul className="navbar-nav ms-auto  mt-2 mt-lg-0">
+              <li className="nav-item dropdown mx-1">
                 <a
-                  className="nav-link dropdown-toggle active fw-medium shadow-sm"
+                  className="nav-link dropdown-toggle active fw-medium shadow-sm rounded-2"
                   href="#"
                   id="dropdownId"
                   data-bs-toggle="dropdown"
@@ -82,16 +82,20 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
                   </div>
                 </div>
               </li>
-
-              <li className="nav-item">
+              <li className="nav-item mx-1">
+                <a className="nav-link" href="/pre-construction-homes">
+                  Pre Construction Homes
+                </a>
+              </li>
+              <li className="nav-item rounded-2 shadow-sm mx-1">
                 <a className="nav-link" href="#">
-                  Blogs
+                  Top 10 <span className="fw-medium">GTA</span> Projects
                 </a>
               </li>
 
-              <li className="nav-item">
-                <a className="nav-link" href="#contact">
-                  Contact
+              <li className="nav-item mx-1">
+                <a className="nav-link" href="">
+                  Blogs
                 </a>
               </li>
             </ul>
@@ -101,7 +105,7 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
             >
               {" "}
               <a className="nav-link btn-dark text-white" href="#contact">
-                Call Now
+                Contact Now
               </a>
             </button>
           </div>

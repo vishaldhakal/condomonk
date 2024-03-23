@@ -66,11 +66,16 @@ export default function CondoCard(props) {
             <span className="shadow-lg p-1 px-2 abs2">Co-op Available</span>
             
           )}
-          <span className="shadow-lg p-1 px-2 abs1">{props.status}</span>
+       <span className="d-flex">
+        <span className="shadow-lg p-1 ms-2 abs1">{props.status}</span>
+        <span className="shadow-lg p-1 mx-2  abs3">{props.project_type}</span>
+        </span>
+        
           <span className="px-2 abs2">
             {props.no + 1 ? props.no + 1 + " " : " "}
           </span>
         </div>
+       
         <Link
           href={`/${props.city.slug}/${props.slug}`}
           className="card-body text-decoration-none text-dark bg-white shadow-lgg rounded-mine" 
@@ -85,7 +90,7 @@ export default function CondoCard(props) {
         
             
             <p className="mb-1 cardd-subtitle ">{props.project_address}</p>
-            <p className="mb-2 cardd-subtitle text-secondary">{props.occupancy} | {props.project_type}</p>
+            <p className="mb-2 cardd-subtitle text-secondary">Compl: {props.occupancy}</p>
             <h4 className="mb-1 ">
               {checkPricing(props.price_starting_from)}
             </h4>
