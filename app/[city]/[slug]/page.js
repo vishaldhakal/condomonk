@@ -350,8 +350,9 @@ export default async function Home({ params }) {
                       city={data.city.name}
                     ></SideContactForm>
                     <div className="d-flex">
-                    <p class="small-text2 mb-3 text-center">Dolphy is an online pre-construction homes database. Dolphy curates the list of projects that are publicly available on internet Be advised the information provided on this page could be outdated or inaccurate. By submitting above form you consent the real estate agents from Dolphin Realty Inc. to connect with you. We may share your info to our brokerage partners and agents to help you with your questions. You can unsubscribe at any time by emailing us.</p>
-         
+                    <p class="small-text2 mb-3 text-center">
+                    Condomonk.ca serves as an online database for pre-construction homes. Condomonk compiles a list of projects available publicly on the internet and does not engage in real estate transactions. Please note that the information provided on this page may be outdated or inaccurate. By submitting the above form, you consent to being contacted by real estate agents advertising on this page. Your information may be shared with our partners or advertisers to assist with your inquiries. You can unsubscribe at any time by emailing us.
+                      </p>
                     </div>
          </div>
                   

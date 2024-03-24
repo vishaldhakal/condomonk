@@ -72,8 +72,8 @@ export default async function Home(props) {
         </div>
       </section> */}
       
-      <section className="py-lg-10 py-3 py-lg-5 sm:py-16 lg:py-24 container">
-      <div className=" ">
+      <section className=" py-3 py-lg-5 container">
+      <div className=" mt-lg-5 mt-0">
         <div className="grid items-center  grid-cols-1 gap-12 lg:grid-cols-2 ">
           <div className="order-md-1 order-2 ">
             <h1 className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl sm-center font-family2">
@@ -326,7 +326,7 @@ export default async function Home(props) {
                     city="Home Page"
                   ></BottomContactForm>
                    <div className="d-flex">
-                    <p class="small-text2 mb-3 text-center">Dolphy is an online pre-construction homes database. Dolphy curates the list of projects that are publicly available on internet Be advised the information provided on this page could be outdated or inaccurate. By submitting above form you consent the real estate agents from Dolphin Realty Inc. to connect with you. We may share your info to our brokerage partners and agents to help you with your questions. You can unsubscribe at any time by emailing us.</p>
+                    <p class="small-text2 mb-3 text-center">Condomonk.ca serves as an online database for pre-construction homes. Condomonk compiles a list of projects available publicly on the internet and does not engage in real estate transactions. Please note that the information provided on this page may be outdated or inaccurate. By submitting the above form, you consent to being contacted by real estate agents advertising on this page. Your information may be shared with our partners or advertisers to assist with your inquiries. You can unsubscribe at any time by emailing us.</p>
          
                     </div>
                 </div>
