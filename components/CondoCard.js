@@ -91,7 +91,7 @@ export default function CondoCard(props) {
             
             <p className="mb-1 cardd-subtitle ">{props.project_address}</p>
             <p className="mb-2 cardd-subtitle text-secondary">Compl: {props.occupancy}</p>
-            <h4 className="mb-1 ">
+            <h4 className="mb-1">
               {checkPricing(props.price_starting_from)}
             </h4>
           </div>

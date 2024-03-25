@@ -80,11 +80,11 @@ export default async function Home(props) {
             Canada's leading  
               <div className="relative inline-flex sm-center">
                 <span className="absolute inset-x-0 bottom-0 border-b-[30px] border-[#4ADE80]"></span>
-                <h1 className="relative text-3xl font-bold text-black sm:text-6xl lg:text-7xl ">pre construction</h1>
+                <span className="relative text-3xl font-bold text-black sm:text-6xl lg:text-7xl ">pre construction</span>
                
               </div>
 
-              <h1 className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl"> homes Platform</h1>
+              <span className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl"> homes Platform</span>
             </h1>
 
             <p className="mt-3 text-base text-black sm:text-xl sm-center">Get first updates on New Construction Homes Projects across Canada.</p>
