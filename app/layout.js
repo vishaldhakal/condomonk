@@ -4,6 +4,8 @@ import "./globals.css";
 import "./icons.css";
 import "react-quill/dist/quill.snow.css";
 import Navbar from "@/components/Navbar";
+import Script from "next/script";
+import GoogleAnalytics from "./GoogleAnalytics";
 
 import Footer from "@/components/Footer";
 import NextTopLoader from "nextjs-toploader";
@@ -73,6 +75,7 @@ export default async function RootLayout({ children }) {
          
          <Navbar cities={cities}></Navbar>
          <Providers>
+          <GoogleAnalytics/>
         {children}
         </Providers>
         <Footer cities={cities}></Footer>
