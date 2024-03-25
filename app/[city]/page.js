@@ -37,9 +37,9 @@ export async function generateMetadata({ params }, parent) {
       data.preconstructions.length +
       " New Pre construction homes, condos and townhomes in " +
       city,
-    description: "Pre Construction homes in" + city,
+    description: "Pre Construction homes in " + city,
     description:
-      "Looking for a pre construction home in" +
+      "Looking for a pre construction home in " +
       city +
       "?" +
       "Search our selection of pre construction condos for sale in " +
@@ -72,11 +72,11 @@ export default async function Home({ params }) {
             </h1>
             <p className="text-mine">
               {data.preconstructions.length} New Pre construction homes, condos and townhomes for sale
-              in {CapitalizeFirst(params.city)}, Ontario. 
+              in {CapitalizeFirst(params.city)}. 
             </p>
           </div>
 
-          <div className="d-flex mb-4 mt-2 gap-2 overflow-hidden ">
+          <div className="d-flex mb-4 mt-2 overflow-hidden ">
             <div>
               <Link
                 className="link-black badge py-2 my-1  bg-white shadow-sm text-dark fs-small fw-m"

@@ -100,11 +100,11 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
               </li>
             </ul>
             <button
-              className="btn bg-dark btn-dark my-2 my-sm-0 rounded ms-md-4 py-2 px-3"
+              className="btn bg-warning btn-warning my-2 my-sm-0 rounded ms-md-4 py-2 px-3"
               type="submit"
             >
               {" "}
-              <a className="nav-link btn-dark text-white" href="#contact">
+              <a className="nav-link text-black " href="#contact">
                 Contact Now
               </a>
             </button>
