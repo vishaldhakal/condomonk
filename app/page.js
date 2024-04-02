@@ -135,7 +135,7 @@ export default async function Home(props) {
           </div>
           <div className="d-flex flex-column justify-content-center flex-column align-items-center mb-lg-5 mb-2">
             <p className="fs-5 mb-0 text-center">
-              Explore 20+ current & past new homes communities from Truman homes
+              Explore 20+ pre construction homes for sale
               in Calgary
             </p>
             <Link href={"/calgary"} className="mt-1 text-mine text-primary">
@@ -160,7 +160,7 @@ export default async function Home(props) {
           </div>
           <div className="py-5 my-2"></div>
           <h2 className="fw-mine text-center mb-5 accent-line fs-1 font-family2">
-            Explore New Construction Condos in These Cities
+            Explore New Pre Construction Homes In These Cities
           </h2>
           <div className="container">
             <div className="row row-cols-md-5 row-cols-2">
@@ -261,8 +261,7 @@ export default async function Home(props) {
           </div>
           <div className="d-flex flex-column justify-content-center flex-column align-items-center mb-5">
             <p className="fs-5 mb-0 text-center">
-              Explore 30+ currently selling & upcoming pre-construction
-              communities in Mississauga
+              Explore 30+ pre construction homes for sale in Mississauga
             </p>
             <Link href={"/mississauga"} className="mt-1 text-mine text-primary">
               More developments in Mississauga{" "}
