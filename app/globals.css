@@ -668,8 +668,9 @@ a:hover {
         position: fixed;
         z-index: 9999;
         display: block !important;
-        background-color: #daeff4!important;
+        background-color: #4ADE80 !important;
         border-color: #5bdbff1f !important;
+        color: white !important;
     }
     .overlay-container {
         position: relative;

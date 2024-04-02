@@ -9,9 +9,10 @@ const Footer = ({ cities }) => {
     return <></>;
   }
   return (
-    <footer className="footer mt-5 shadow-lg">
-      <div className="container footer-top ">
-        <div className="text-center pt-5 bg-green-300">
+    <div className="pt-5">
+    <footer className="footer mt-5  shadow-lg">
+       <div className="">
+       <div className="text-center pt-5 bg-green-300 px-3">
           <p className="fs-2 fw-bold font-family2">Get Exclusive Preconstruction Updates.</p>
           <p className="textt">
           Be the First to Know! Subscribe to Our Newsletter and Receive Timely Updates on Exclusive Preconstruction projects from reputable builders across Canada – Condomonk.ca curates the latest updates on any new construction townhomes, condos & detached homes launching across canada.
@@ -31,6 +32,9 @@ const Footer = ({ cities }) => {
             </div>
           </form>
         </div>
+       </div>
+      <div className="container  ">
+      
         <div className="  pt-5 mt-md-5 mt-0">
           <div className=" footer-links">
             <h3 className="text-center fw-bold pb-2 fs-3 font-family2">
@@ -109,6 +113,7 @@ const Footer = ({ cities }) => {
         </p>
       </div>
     </footer>
+    </div>
   );
 };
 

@@ -170,7 +170,7 @@ export default async function Home({ params }) {
                         By <strong>{data.developer.name}</strong>
                       </p>
                      
-                      <h2 className="text-mine fs-4 fw-mine3 mt-1 mb-0 brand-color font-family2">
+                      <h2 className="text-mine fs-4 fw-mine3 mt-1 mb-0 brand-color font-family2 mb-4">
                         {checkPricing(data.price_starting_from, data.price_to)}
                       </h2>
                       <div className="rounded-mine">
@@ -251,7 +251,7 @@ export default async function Home({ params }) {
                       </h2>
                       <div className="text-start my-3 text-inside">
                         <div
-                          className="iframe-container custom-description-container "
+                          className="iframe-container custom-description-container leading-8"
                           dangerouslySetInnerHTML={{
                             __html: data.description,
                           }}
@@ -361,14 +361,14 @@ export default async function Home({ params }) {
             </div>
           </div>
 
-          <div className="pt-5 mt-5"></div>
+          <div className="pt-5 my-md-5"></div>
           {/* <div>
             <Map />
           </div> */}
 
-          <div className="pt-5 mt-5"></div>
+   
           <div className="py-5 my-5"></div>
-          <div>
+          <div className="mb-md-10">
             <div className="d-flex flex-column">
               <h2 className="main-title font-family2">
                 Similar New Construction condos in {data.city.name} ( 2024 )
@@ -383,6 +383,8 @@ export default async function Home({ params }) {
                   </div>
                 ))}
             </div>
+            <div className="pt-md-5 pt-0"></div>
+            <div className="pt-md-5 pt-0"></div>
           </div>
         </div>
       </div>
