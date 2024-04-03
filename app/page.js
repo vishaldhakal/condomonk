@@ -87,7 +87,7 @@ export default async function Home(props) {
               <span className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl"> homes Platform</span>
             </h1>
 
-            <p className="mt-3 text-base text-black sm:text-xl sm-center">Get first updates on New Construction Homes Projects across Canada.</p>
+            <p className="mt-3 text-base text-black sm:text-xl sm-center font-light">Get first updates on New Construction Homes Projects across Canada.</p>
 
       <div className=" mt-12 lg:mt-20">
       <div className="d-flex align-items-center text-center gap-5 sm-center">
@@ -314,9 +314,7 @@ export default async function Home(props) {
               <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3 ">
                 Looking to buy a preconstruction home ?
               </h2>
-              <h2 className="fw-mine text-center px-md-4 fs-4">
-                Contact Condomonk now!
-              </h2>
+              
               <div className="row row-cols-1 row-cols-md-3 mt-5">
                 <div className="col-md-2"></div>
                 <div className="col-md-8">

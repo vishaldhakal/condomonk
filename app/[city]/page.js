@@ -70,13 +70,13 @@ export default async function Home({ params }) {
               (
               2024 )
             </h1>
-            <p className="text-mine">
+            <p className="font-normal">
               {data.preconstructions.length} New Pre construction homes, condos and townhomes for sale
               in {CapitalizeFirst(params.city)}. 
             </p>
           </div>
 
-          <div className="d-flex mb-4 mt-2 overflow-hidden ">
+          <div className="d-flex mb-4 mt-1 overflow-hidden ">
             <div>
               <Link
                 className="link-black badge py-2 my-1  bg-white shadow-sm text-dark fs-small fw-m"
@@ -106,7 +106,7 @@ export default async function Home({ params }) {
               </Link>
             </div>
           </div>
-          <div className="py-lg-3 py-0"></div>
+         
 
           <div className="row row-cols-1 row-cols-md-4  gy-4 gx-3 gx-lg-3 ">
             {data.preconstructions &&
@@ -202,9 +202,7 @@ export default async function Home({ params }) {
               <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3">
                 Looking to buy a preconstruction home ?
               </h2>
-              <h2 className="fw-mine text-center px-md-4 fs-4">
-                Contact Condomonk now!
-              </h2>
+              
               <div className="row row-cols-1 row-cols-md-3 mt-5">
                 <div className="col-md-3"></div>
                 <div className="col-md-6" id="contact">
