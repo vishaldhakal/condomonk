@@ -65,14 +65,16 @@ export default async function Home({ params }) {
               New Pre Construction Homes
               <div className="relative inline-flex sm-center mx-2">
                 <span className="absolute inset-x-0 bottom-0 border-b-[18px] border-[#4ADE80]"></span>
-                <h1 className="relative font-bold text-black ">  in {CapitalizeFirst(params.city)} </h1>
+                <span className="relative font-bold text-black ">
+                  {" "}
+                  in {CapitalizeFirst(params.city)}{" "}
+                </span>
               </div>
-              (
-              2024 )
+              ( 2024 )
             </h1>
             <p className="font-normal">
-              {data.preconstructions.length} New Pre construction homes, condos and townhomes for sale
-              in {CapitalizeFirst(params.city)}. 
+              {data.preconstructions.length} New Pre construction homes, condos
+              and townhomes for sale in {CapitalizeFirst(params.city)}.
             </p>
           </div>
 
@@ -106,7 +108,6 @@ export default async function Home({ params }) {
               </Link>
             </div>
           </div>
-         
 
           <div className="row row-cols-1 row-cols-md-4  gy-4 gx-3 gx-lg-3 ">
             {data.preconstructions &&
@@ -202,7 +203,7 @@ export default async function Home({ params }) {
               <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3">
                 Looking to buy a preconstruction home ?
               </h2>
-              
+
               <div className="row row-cols-1 row-cols-md-3 mt-5">
                 <div className="col-md-3"></div>
                 <div className="col-md-6" id="contact">
@@ -210,12 +211,20 @@ export default async function Home({ params }) {
                     proj_name="City Page"
                     city={data.city.name}
                   ></BottomContactForm>
-                   <div className="d-flex">
+                  <div className="d-flex">
                     <p class="small-text2 mb-3 text-center">
-                    Condomonk.ca serves as an online database for pre-construction homes. Condomonk compiles a list of projects available publicly on the internet and does not engage in real estate transactions. Please note that the information provided on this page may be outdated or inaccurate. By submitting the above form, you consent to being contacted by real estate agents advertising on this page. Your information may be shared with our partners or advertisers to assist with your inquiries. You can unsubscribe at any time by emailing us.
-                      </p>
-         
-                    </div>
+                      Condomonk.ca serves as an online database for
+                      pre-construction homes. Condomonk compiles a list of
+                      projects available publicly on the internet and does not
+                      engage in real estate transactions. Please note that the
+                      information provided on this page may be outdated or
+                      inaccurate. By submitting the above form, you consent to
+                      being contacted by real estate agents advertising on this
+                      page. Your information may be shared with our partners or
+                      advertisers to assist with your inquiries. You can
+                      unsubscribe at any time by emailing us.
+                    </p>
+                  </div>
                 </div>
                 <div className="col-md-3"></div>
               </div>

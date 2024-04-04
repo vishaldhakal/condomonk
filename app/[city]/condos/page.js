@@ -73,53 +73,50 @@ export default async function Home({ params }) {
   return (
     <>
       <FixedContactButton></FixedContactButton>
-      <div className="pt-5 position-relative">
+      <div className="pt-lg-5 pt-3 position-relative">
         <div className="container">
-          <div className="pb-0">
-            <h1 className="main-title text-center text-md-start fs-mine mb-0">
-              {`New Construction Condos in ${CapitalizeFirst(
-                params.city
-              )} ( Selling Now )`}
+          <div className="">
+            <h1 className="main-title  font-family2 mb-2">
+              {` New Construction Condos in  ${CapitalizeFirst(params.city)} `}{" "}
+              <div className="relative inline-flex sm-center me-2 text-wrap">
+                <span className="absolute inset-x-0 bottom-0 border-b-[15px] border-[#4ADE80]"></span>
+                <span className="relative font-bold text-black whitespace-normal">
+                  (Selling Now)
+                </span>
+              </div>
             </h1>
-            <p className="text-dark text-center text-md-start mb-2">
+            <p className=" font-normal  mb-2">
               {`${
                 data.preconstructions.length
-              } Pre construction Condos in ${CapitalizeFirst(
+              } New Pre construction Condos for sale in ${CapitalizeFirst(
                 params.city
-              )} (Updated ${
-                new Date().getMonth() +
-                1 +
-                "-" +
-                new Date().getDate() +
-                "-" +
-                new Date().getFullYear()
-              })`}
+              )}  `}
             </p>
           </div>
-          <div className="d-flex mb-4 mt-0 gap-2 overflow-hidden">
-            <div>
+          <div className="d-flex flex-column flex-md-row mb-md-4 mb-0 mt-1 overflow-hidden">
+            <div className="d-flex gap-2">
               <Link
-                className="link-black badge py-2 bg-white shadow-sm text-dark fs-small fw-m"
+                className="llink-black badge py-2 my-1  bg-white shadow-sm text-dark fs-small fw-m"
                 href={`/${params.city}/`}
               >
                 All Projects in {CapitalizeFirst(params.city)}
               </Link>
               <Link
-                className="link-black badge py-2 bg-white shadow-sm text-dark fs-small fw-m mx-md-2"
+                className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m  mx-0 me-2"
                 href={`/${params.city}/upcoming/`}
               >
                 Upcoming Projects in {CapitalizeFirst(params.city)}
               </Link>
             </div>
-            <div>
+            <div className="d-flex gap-2">
               <Link
-                className="link-black badge py-2 bg-white shadow-sm text-dark fs-small fw-m"
+                className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m"
                 href={`/${params.city}/townhomes/`}
               >
                 New Townhomes {CapitalizeFirst(params.city)}
               </Link>
               <Link
-                className="link-black badge py-2 bg-white shadow-sm text-dark fs-small fw-m mx-md-2"
+                className="link-black badge py-2 my-1  bg-white shadow-sm text-dark fs-small fw-m"
                 href={`/${params.city}/detached/`}
               >
                 New Detached Homes {CapitalizeFirst(params.city)}
@@ -127,10 +124,9 @@ export default async function Home({ params }) {
             </div>
           </div>
         </div>
-        <div className="py-3"></div>
         <div className="container">
           <div className="py-2"></div>
-           <div className="row row-cols-1 row-cols-md-4  gy-4 gx-3">
+          <div className="row row-cols-1 row-cols-md-4  gy-4 gx-3">
             {data.preconstructions &&
               data.preconstructions.map((item, no) => (
                 <div className="col" key={item.id}>
@@ -159,7 +155,7 @@ export default async function Home({ params }) {
               <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3">
                 Looking to buy a preconstruction home ?
               </h2>
-              
+
               <div className="row row-cols-1 row-cols-md-3 mt-5">
                 <div className="col-md-3"></div>
                 <div className="col-md-6">

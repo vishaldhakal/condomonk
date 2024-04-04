@@ -141,8 +141,6 @@ export default async function Home({ params }) {
             capitalizeLinks
           />
 
-         
-
           <Gallery
             images={data.image}
             project_name={data.project_name}
@@ -155,21 +153,24 @@ export default async function Home({ params }) {
                 <div className="screenshot ">
                   <div className="row row-cols-1 row-cols-sm-2">
                     <div className="col-sm-12">
+                      <div className="d-flex gap-3 my-2">
+                        <div className=" btn btn-sm bg-slate-100 ">
+                          <span className="col fs-esmall">{data.status}</span>
+                        </div>
+                        <div className=" btn btn-sm bg-slate-100 ">
+                          <span className="col fs-esmall ">
+                            {data.project_type}
+                          </span>
+                        </div>
+                      </div>
 
-                   <div className="d-flex gap-3 my-2">
-                   <div className=" btn btn-sm bg-slate-100 ">
-                        <span className="col fs-esmall">{data.status}</span>
-                      </div>
-                      <div className=" btn btn-sm bg-slate-100 ">
-                        <span className="col fs-esmall ">{data.project_type}</span>
-                      </div>
-                   </div>
-                    
-                    <h1 className="side fs-1 fw-bold font-family2">{data.project_name}</h1>
+                      <h1 className="side fs-1 fw-bold font-family2">
+                        {data.project_name}
+                      </h1>
                       <p className="mb-0">
                         By <strong>{data.developer.name}</strong>
                       </p>
-                     
+
                       <h2 className="text-mine fs-4 fw-mine3 mt-1 mb-0 brand-color font-family2 mb-4">
                         {checkPricing(data.price_starting_from, data.price_to)}
                       </h2>
@@ -183,13 +184,13 @@ export default async function Home({ params }) {
                           </div>
                           <div className="mb-1">
                             <span className="me-2 fw-mine2 mb-2 fs-mine3">
-                               Units:
+                              Units:
                             </span>
                             <span scope="col">{data.no_of_units}</span>
                           </div>
                           <div className="mb-1">
                             <span className="me-2 fw-mine2 mb-2 fs-mine3">
-                               Occupancy:
+                              Occupancy:
                             </span>
                             <span scope="col">{data.occupancy}</span>
                           </div>
@@ -237,13 +238,8 @@ export default async function Home({ params }) {
                       </div>
                     </div>
                   </div>
-                 
-                 
-                    <div className="mb-5">
-                     
-                      
-                    
-                  
+
+                  <div className="mb-5">
                     <div className="py-5 pt-5 mt-4">
                       <h2 className="fw-bold fs-3 font-family2">
                         Information about {data.project_name} in{" "}
@@ -350,12 +346,20 @@ export default async function Home({ params }) {
                       city={data.city.name}
                     ></SideContactForm>
                     <div className="d-flex">
-                    <p class="small-text2 mb-3 text-center">
-                    Condomonk.ca serves as an online database for pre-construction homes. Condomonk compiles a list of projects available publicly on the internet and does not engage in real estate transactions. Please note that the information provided on this page may be outdated or inaccurate. By submitting the above form, you consent to being contacted by real estate agents advertising on this page. Your information may be shared with our partners or advertisers to assist with your inquiries. You can unsubscribe at any time by emailing us.
+                      <p class="small-text2 mb-3 text-center">
+                        Condomonk.ca serves as an online database for
+                        pre-construction homes. Condomonk compiles a list of
+                        projects available publicly on the internet and does not
+                        engage in real estate transactions. Please note that the
+                        information provided on this page may be outdated or
+                        inaccurate. By submitting the above form, you consent to
+                        being contacted by real estate agents advertising on
+                        this page. Your information may be shared with our
+                        partners or advertisers to assist with your inquiries.
+                        You can unsubscribe at any time by emailing us.
                       </p>
                     </div>
-         </div>
-                  
+                  </div>
                 </div>
               </div>
             </div>
@@ -366,12 +370,18 @@ export default async function Home({ params }) {
             <Map />
           </div> */}
 
-   
           <div className="py-5 my-5"></div>
           <div className="mb-md-10">
             <div className="d-flex flex-column">
               <h2 className="main-title font-family2">
-                Similar New Construction condos in {data.city.name} ( 2024 )
+                Similar New Construction Homes
+                <div className="relative inline-flex sm-center mx-2 text-wrap">
+                  <span className="absolute inset-x-0 bottom-0 border-b-[15px] border-[#4ADE80]"></span>
+                  <span className="relative font-bold text-black whitespace-normal">
+                    in {data.city.name}
+                  </span>
+                </div>
+                ( 2024 )
               </h2>
             </div>
             <div className="py-2"></div>
