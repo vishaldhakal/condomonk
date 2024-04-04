@@ -168,7 +168,7 @@ a:hover {
 /* Set styles for nav links and logo */
 
 .navbar-nav .nav-item .nav-link {
-    font-weight: 400;
+    font-weight: 500;
     color: rgb(0, 0, 0) !important;
     font-size: 0.85rem;
     /* Set default color to white */
@@ -1344,6 +1344,12 @@ label {
     font-weight: 400;
     color: rgb(0, 0, 0);
 }
+.cardd-subtitle-sm {
+    font-size: 0.68rem;
+    font-weight: 400;
+    color: rgb(0, 0, 0);
+}
+
 
 .custom-link {
     cursor: pointer;

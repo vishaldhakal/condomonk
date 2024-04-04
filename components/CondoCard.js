@@ -85,11 +85,12 @@ export default function CondoCard(props) {
         >
           <div className="card-content pt-2">
             <h3 className="mb-1 cardd-title text-dark font-family2">{props.project_name}</h3>
-            
+            <p className=" mb-1 cardd-subtitle cardd-subtitle-sm">By {props.developer.name}</p>
             <p className="mb-1 cardd-subtitle ">{props.project_address}</p>
             <p className=" mb-1 cardd-subtitle text-secondary">Compl: {props.occupancy}</p>
+           
           
-            <h4 className="mb-1">
+            <h4 className="mb-1 text-green-700">
               {checkPricing(props.price_starting_from)}
             </h4>
           </div>

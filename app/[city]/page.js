@@ -76,7 +76,7 @@ export default async function Home({ params }) {
             </p>
           </div>
 
-          <div className="d-flex mb-4 mt-1 overflow-hidden ">
+          <div className="d-flex mb-md-4 mb-0 mt-1 overflow-hidden ">
             <div>
               <Link
                 className="link-black badge py-2 my-1  bg-white shadow-sm text-dark fs-small fw-m"

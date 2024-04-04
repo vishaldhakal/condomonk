@@ -93,20 +93,20 @@ export default async function Home(props) {
       <div className="d-flex align-items-center text-center gap-5 sm-center">
     <div className=" ms-3">
       <div className="icon-container d-flex flex-column align-items-center ">
-      <img width="30" height="30" src="https://img.icons8.com/ios-filled/50/link-company-child.png" alt="link-company-child" className="text-center"/>
-        <p>Condo</p>
+      <img width="22" height="22" src="https://img.icons8.com/ios-filled/50/link-company-child.png" alt="link-company-child" className="text-center"/>
+        <p className="text-sm">Condo</p>
       </div>
     </div>
     <div class=" ">
       <div class="icon-container d-flex flex-column align-items-center">
-      <img width="30" height="30" src="https://img.icons8.com/external-line-lima-studio/64/external-building-winter-town-line-lima-studio.png" alt="external-building-winter-town-line-lima-studio"/>
-        <p>Townhouse</p>
+      <img width="22" height="22" src="https://img.icons8.com/external-line-lima-studio/64/external-building-winter-town-line-lima-studio.png" alt="external-building-winter-town-line-lima-studio"/>
+        <p className="text-sm">Townhouse</p>
       </div>
     </div>
     <div class=" ">
       <div class="icon-container d-flex flex-column align-items-center">
-      <img width="30" height="30" src="https://img.icons8.com/carbon-copy/100/country-house.png" alt="country-house"/>
-        <p>Detached</p>
+      <img width="22" height="22" src="https://img.icons8.com/carbon-copy/100/country-house.png" alt="country-house"/>
+        <p className="text-sm">Detached</p>
       </div>
     </div>
   </div>
