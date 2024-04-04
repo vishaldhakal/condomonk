@@ -504,7 +504,7 @@ a:hover {
 
 @media (max-width: 800px) {
     .fs-small {
-        font-size: 0.7rem !important;
+        font-size: 0.75rem !important;
         font-weight: 500;
 
         box-shadow: none!important;
