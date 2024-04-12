@@ -193,20 +193,62 @@ export default async function Home({ params }) {
           <div className="pt-5 mt-5"></div>
           <div className="py-5 my-5" id="contact">
             <div className="container">
-              <div className="row justify-content-center">
+              {/* <div className="row justify-content-center">
                 <img
                   src="/contact-bottom-2.png"
                   alt="dce"
                   className="img-fluid w-25 w-smm-50 mb-3"
                 />
-              </div>
-              <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3">
-                Looking to buy a preconstruction home ?
-              </h2>
+              </div> */}
+              <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3"></h2>
 
               <div className="row row-cols-1 row-cols-md-3 mt-5">
                 <div className="col-md-3"></div>
                 <div className="col-md-6" id="contact">
+                  <div className="row ">
+                    <div className="col-4 ">
+                      {data.partner[0] && (
+                        <img
+                          src={`https://api.condomonk.ca${data.partner[0].image}`}
+                          alt="dce"
+                          className="partner-img "
+                        />
+                      )}
+                      {!data.partner[0] && (
+                        <img
+                          src="/contact-bottom-2.png"
+                          alt="dce"
+                          className="agent-img"
+                        />
+                      )}
+                    </div>
+                    <div className="col-8 ">
+                      <h5 className="fw-bold  linem fs-4  mb-0">
+                        {data.partner[0] &&
+                          data.partner[0].partner_type != "Brokerage" && (
+                            <>{data.partner[0].name}</>
+                          )}
+                        <br />
+                        {data.partner[0] && data.partner[0].brokerage_name}
+                      </h5>
+                      <p
+                        className="mb-0 bva2  mt-1 text-xs d-flex"
+                        data-tip
+                        data-for="registerTip"
+                      >
+                        Homebaba Verified Partner
+                        <span>
+                          <sup>
+                            <img
+                              src="/cc.png"
+                              alt="verfied"
+                              className="img-fluid small-i ms-1"
+                            />
+                          </sup>
+                        </span>
+                      </p>
+                    </div>
+                  </div>
                   <BottomContactForm
                     proj_name="City Page"
                     city={data.city.name}
