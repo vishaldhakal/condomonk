@@ -205,24 +205,24 @@ export default async function Home({ params }) {
               <div className="row row-cols-1 row-cols-md-3 mt-5">
                 <div className="col-md-3"></div>
                 <div className="col-md-6" id="contact">
-                  <div className="row ">
-                    <div className="col-4 ">
+                  <div className="d-flex gap-5 justify-content-center align-items-center pb-4">
+                    <div className="text-center">
                       {data.partner[0] && (
                         <img
                           src={`https://api.condomonk.ca${data.partner[0].image}`}
                           alt="dce"
-                          className="partner-img "
+                          className="partner-img"
                         />
                       )}
                       {!data.partner[0] && (
                         <img
                           src="/contact-bottom-2.png"
                           alt="dce"
-                          className="agent-img"
+                          className="partner-img "
                         />
                       )}
                     </div>
-                    <div className="col-8 ">
+                    <div className="text-center">
                       <h5 className="fw-bold  linem fs-4  mb-0">
                         {data.partner[0] &&
                           data.partner[0].partner_type != "Brokerage" && (
@@ -230,13 +230,14 @@ export default async function Home({ params }) {
                           )}
                         <br />
                         {data.partner[0] && data.partner[0].brokerage_name}
+                        {!data.partner[0] && "Receive a Call"}
                       </h5>
                       <p
-                        className="mb-0 bva2  mt-1 text-xs d-flex"
+                        className="mb-0 bva2  mt-1 text-xs d-flex justify-content-center"
                         data-tip
                         data-for="registerTip"
                       >
-                        Homebaba Verified Partner
+                        Condomonk Verified Partner
                         <span>
                           <sup>
                             <img

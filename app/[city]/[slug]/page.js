@@ -328,7 +328,56 @@ export default async function Home({ params }) {
                     />
                   </div> */}
                   <div className="m-1 p-4 py-3 shadow-lg rounded-mine bordt">
-                    <div className="row  align-items-start">
+                    <div className="row d-flex justify-content-center align-items-center">
+                      <div className="col-4">
+                        {data.partner[0] && (
+                          <img
+                            src={`https://api.condomonk.ca${data.partner[0].image}`}
+                            alt="dce"
+                            className="partner-img "
+                          />
+                        )}
+                        {!data.partner[0] && (
+                          <img
+                            src="/contact-bottom-2.png"
+                            alt="dce"
+                            className="agent-img"
+                          />
+                        )}
+                      </div>
+                      <div className="col-8 text-center">
+                        <h5 className="fw-bold  fs-5 ">
+                          {data.partner[0] &&
+                            data.partner[0].partner_type != "Brokerage" && (
+                              <>{data.partner[0].name}</>
+                            )}
+
+                          {!data.partner[0] && "Receive a Call"}
+                        </h5>
+
+                        <span className="mt-5 fs-6 text-center">
+                          {data.partner[0] && data.partner[0].brokerage_name}
+                        </span>
+
+                        <p
+                          className="mb-0 bva2 mt-1 d-flex justify-content-center"
+                          data-tip
+                          data-for="registerTip"
+                        >
+                          Condomonk Verified Partner
+                          <span>
+                            <sup>
+                              <img
+                                src="/cc.png"
+                                alt="verfied"
+                                className="img-fluid small-i ms-1"
+                              />
+                            </sup>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <div className="row  align-items-start pt-4">
                       {/* <div className="col-4">
                         <img
                           src="/contact-image.png"
@@ -341,50 +390,13 @@ export default async function Home({ params }) {
                           GET PLATINUM ACCESS!!
                         </h5>
 
-                        <p className="mb-0 text-small py-2 text-center">
+                        <p className="mb-0 text-small pt-2 text-center">
                           Register to Receive Guaranteed Platinum Access &
                           Prices, Incentives & Discounts, Floor Plans & More!
                         </p>
                       </div>
-                      <div className="row ">
-                        <div className="col-4 ">
-                          {data.partner[0] && (
-                            <img
-                              src={`https://api.condomonk.ca${data.partner[0].image}`}
-                              alt="dce"
-                              className="partner-img "
-                            />
-                          )}
-                        </div>
-                        <div className="col-8 ">
-                          <h5 className="fw-bold  linem fs-4  mb-0">
-                            {data.partner[0] &&
-                              data.partner[0].partner_type != "Brokerage" && (
-                                <>{data.partner[0].name}</>
-                              )}
-                            <br />
-                            {data.partner[0] && data.partner[0].brokerage_name}
-                          </h5>
-                          <p
-                            className="mb-0 bva2  mt-1 text-xs d-flex"
-                            data-tip
-                            data-for="registerTip"
-                          >
-                            Homebaba Verified Partner
-                            <span>
-                              <sup>
-                                <img
-                                  src="/cc.png"
-                                  alt="verfied"
-                                  className="img-fluid small-i ms-1"
-                                />
-                              </sup>
-                            </span>
-                          </p>
-                        </div>
-                      </div>
                     </div>
-                    <div className="my-4"></div>
+                    <div className="my-3"></div>
                     <SideContactForm
                       proj_name={data.preconstruction.project_name}
                       defaultmessage={
