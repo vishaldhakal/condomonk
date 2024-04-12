@@ -43,7 +43,7 @@ async function getRelatedData(city) {
 
 export async function generateMetadata({ params }, parent) {
   const alldata = await getData(params.slug);
-  const data = alldata.preconstruction;
+  const data = await alldata.preconstruction;
 
   return {
     ...parent,
