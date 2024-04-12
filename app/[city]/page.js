@@ -223,15 +223,19 @@ export default async function Home({ params }) {
                       )}
                     </div>
                     <div className="text-center">
-                      <h5 className="fw-bold  linem fs-4  mb-0">
+                      <h5 className="fw-bold  fs-5 ">
                         {data.partner[0] &&
                           data.partner[0].partner_type != "Brokerage" && (
                             <>{data.partner[0].name}</>
                           )}
-                        <br />
-                        {data.partner[0] && data.partner[0].brokerage_name}
+
                         {!data.partner[0] && "Receive a Call"}
                       </h5>
+
+                      <span className="mt-5 fs-6 text-center">
+                        {data.partner[0] && data.partner[0].brokerage_name}
+                      </span>
+
                       <p
                         className="mb-0 bva2  mt-1 text-xs d-flex justify-content-center"
                         data-tip
