@@ -4,7 +4,7 @@ import { useState } from "react";
 import ContactFormSubmit from "./ContactFormSubmit";
 
 export default function SideContactForm(props) {
-  const [submitbtn, setSubmitbtn] = useState("Register Now");
+  const [submitbtn, setSubmitbtn] = useState("Send me info");
   const [credentials, setCredentials] = useState({
     name: "",
     phone: "",

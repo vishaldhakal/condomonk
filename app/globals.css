@@ -373,12 +373,15 @@ a:hover {
 }
 
 .small-text2 {
-    font-size: 10px;
+    font-size: 9px;
     line-height: 1.5;
     text-align: justify !important;
     color: #000;
 }
 
+.form-color {
+    background-color: #f7fffb;
+}
 
 /* Close Button */
 
@@ -1659,7 +1662,7 @@ label {
 
 .fields {
     width: 100%;
-    padding: 1.3rem 1rem;
+    padding: 1rem 1rem;
     border: none;
     border-radius: 7px;
     background-color: #f1f3fa;
@@ -1683,7 +1686,12 @@ label {
 } */
 
 .mess {
-    padding: 1.5rem 1rem;
+    padding: 0.6rem 1rem;
+}
+
+textarea {
+    resize: vertical;
+    font-size: .85rem;
 }
 
 .sendbtn {

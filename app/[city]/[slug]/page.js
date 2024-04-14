@@ -327,7 +327,7 @@ export default async function Home({ params }) {
                       className="img-fluid mb-3 side-contact-img"
                     />
                   </div> */}
-                  <div className="m-1 p-4 py-3 shadow-lg rounded-mine bordt">
+                  <div className="m-1 p-4 py-3 shadow-lg rounded-mine bordt form-color">
                     <div className="row d-flex justify-content-center align-items-center">
                       <div className="col-4">
                         {data.partner[0] && (
@@ -346,7 +346,7 @@ export default async function Home({ params }) {
                         )}
                       </div>
                       <div className="col-8 text-center">
-                        <h5 className="fw-bold  fs-5 ">
+                        <h5 className="fw-bold  fs-4 ">
                           {data.partner[0] &&
                             data.partner[0].partner_type != "Brokerage" && (
                               <>{data.partner[0].name}</>
@@ -377,7 +377,7 @@ export default async function Home({ params }) {
                         </p>
                       </div>
                     </div>
-                    <div className="row  align-items-start pt-4">
+                    <div className="row  align-items-start pt-3">
                       {/* <div className="col-4">
                         <img
                           src="/contact-image.png"
@@ -385,7 +385,7 @@ export default async function Home({ params }) {
                           className="agent-img"
                         />
                       </div> */}
-                      <div className="text-center">
+                      {/* <div className="text-center">
                         <h5 className="fw-bold text-center linem fs-4  mb-0 font-family2">
                           GET PLATINUM ACCESS!!
                         </h5>
@@ -394,9 +394,9 @@ export default async function Home({ params }) {
                           Register to Receive Guaranteed Platinum Access &
                           Prices, Incentives & Discounts, Floor Plans & More!
                         </p>
-                      </div>
+                      </div> */}
                     </div>
-                    <div className="my-3"></div>
+                    <div className="my-2"></div>
                     <SideContactForm
                       proj_name={data.preconstruction.project_name}
                       defaultmessage={
