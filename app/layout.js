@@ -1,4 +1,3 @@
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
 import "./icons.css";
@@ -10,10 +9,9 @@ import GoogleAnalytics from "./GoogleAnalytics";
 import Footer from "@/components/Footer";
 import NextTopLoader from "nextjs-toploader";
 import { Montserrat } from "next/font/google";
-import {Providers} from "./providers";
+import { Providers } from "./providers";
 
 const montserrat = Montserrat({ subsets: ["cyrillic"] });
-
 
 export const metadata = {
   alternates: {
@@ -55,13 +53,24 @@ async function getCities() {
   return res.json();
 }
 
+async function getCitiesandProjects() {
+  const res = await fetch("https://api.condomonk.ca/api/all-precons", {
+    next: { revalidate: 10 },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+}
+
 export default async function RootLayout({ children }) {
   let cities = await getCities();
-  
+  let dropdown_cities = await getCitiesandProjects();
   return (
     <html lang="en">
       <body className={montserrat.className}>
-      <NextTopLoader
+        <NextTopLoader
           color="#FF0000"
           initialPosition={0.08}
           crawlSpeed={200}
@@ -72,15 +81,18 @@ export default async function RootLayout({ children }) {
           speed={200}
           shadow="0 0 10px #00A1FF,0 0 5px #00A1FF"
         />
-         
-         <Navbar cities={cities}></Navbar>
-         <Providers>
-          <GoogleAnalytics/>
-        {children}
+
+        <Navbar cities={cities} dropdown_cities={dropdown_cities}></Navbar>
+        <Providers>
+          <GoogleAnalytics />
+          {children}
         </Providers>
         <Footer cities={cities}></Footer>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-BZlP8y3y1aP5dJt6z/74ukidT+PiZCzV5u5F5+1OW2F0k0yGBGvxXuVEvaO3dPbi" crossorigin="anonymous"></script>
-
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-BZlP8y3y1aP5dJt6z/74ukidT+PiZCzV5u5F5+1OW2F0k0yGBGvxXuVEvaO3dPbi"
+          crossorigin="anonymous"
+        ></script>
       </body>
     </html>
   );

@@ -78,7 +78,7 @@ const AdminSidebar = () => {
             }
             href="/admin/partners"
           >
-            <i className="bi bi-newspaper"></i>
+            <i className="bi bi-person-fill"></i>
             <span>Partners</span>
           </Link>
         </li>

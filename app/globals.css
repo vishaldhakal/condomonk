@@ -1989,3 +1989,29 @@ textarea {
 .city-details h2 {
     font-size: 1.5rem;
 }
+
+.small-text2 {
+    font-size: 10px;
+    line-height: 1.5;
+    color: rgb(0, 0, 0);
+}
+
+.w-mine5 {
+    width: 260px;
+    border-radius: 20px;
+    background-color: #f5f5f5;
+}
+
+.autocomplete-results {
+    min-width: 260px;
+}
+
+.fs-vvsmall {
+    font-size: 0.6rem !important;
+}
+
+@media (max-width: 800px) {
+    .w-mine5 {
+        width: 180px;
+    }
+}

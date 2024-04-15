@@ -21,14 +21,26 @@ export default function Partners() {
   const [partners, setPartners] = useState([]);
   const [cities, setCities] = useState([]);
   const [selectedCities, setSelectedCities] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredCities, setFilteredCities] = useState([]);
 
   const handleCreatePartner = (e) => {
     e.preventDefault();
     const { name, image, email, brokerage_name, cities } = partnerData;
-    if (!name || !image || !email || !brokerage_name || cities.length === 0) {
+    if (!name || !image || !email || !brokerage_name) {
       swal({
         title: "Error!",
         text: "Please fill all the required fields!",
+        icon: "error",
+        button: "Ok",
+      });
+      return;
+    }
+
+    if (cities.length === 0) {
+      swal({
+        title: "Error!",
+        text: "Please select at least one city!",
         icon: "error",
         button: "Ok",
       });
@@ -193,24 +205,49 @@ export default function Partners() {
   };
 
   const handleCityChange = (e) => {
-    const { value, checked } = e.target;
-    const cityObj = cities.find((city) => city.name === value);
+    const { checked, value } = e.target;
+    const selectedCity = cities.find((city) => city.name === value);
+
     if (checked) {
-      setSelectedCities([...selectedCities, cityObj]);
+      setSelectedCities((prevSelectedCities) => [
+        ...prevSelectedCities,
+        selectedCity,
+      ]);
+      setPartnerData((prevPartnerData) => ({
+        ...prevPartnerData,
+        cities: [...prevPartnerData.cities, selectedCity],
+      }));
     } else {
-      setSelectedCities(selectedCities.filter((city) => city.name !== value));
+      setSelectedCities((prevSelectedCities) =>
+        prevSelectedCities.filter((city) => city.name !== value)
+      );
+      setPartnerData((prevPartnerData) => ({
+        ...prevPartnerData,
+        cities: prevPartnerData.cities.filter((city) => city.name !== value),
+      }));
     }
-    setPartnerData((prevState) => ({
-      ...prevState,
-      cities: selectedCities,
-    }));
+  };
+  const handleSearchChange = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    // Filter cities based on search query, excluding selected cities
+    const filtered = cities.filter(
+      (city) =>
+        city.name.toLowerCase().includes(query) &&
+        !selectedCities.some((selectedCity) => selectedCity.name === city.name)
+    );
+    setFilteredCities(filtered);
   };
 
   return (
     <>
       {modalVisible && (
         <div className="modal">
-          <section className="modal-main rounded-4">
+          <section
+            className="modal-main rounded-4"
+            style={{ maxHeight: "90vh", overflowY: "auto" }}
+          >
             <div className="p-3 py-4 bg-light">
               <div className="d-flex justify-content-between align-items-center">
                 <p className="fw-bold mb-0">Upload Partner</p>
@@ -284,31 +321,61 @@ export default function Partners() {
                       <label>
                         Cities <span className="text-danger">*</span>
                       </label>
-                      <select
-                        multiple
-                        className="form-control"
-                        value={selectedCities.map((city) => city.name)}
-                        onChange={(e) => {
-                          const selectedOptions = Array.from(
-                            e.target.selectedOptions
-                          ).map((option) => ({
-                            name: option.value,
-                            slug: option.value.toLowerCase().replace(/ /g, "-"),
-                          }));
-                          setSelectedCities(selectedOptions);
-                          setPartnerData((prevState) => ({
-                            ...prevState,
-                            cities: selectedOptions,
-                          }));
-                        }}
-                      >
-                        <option value="">Select Cities</option>
-                        {cities.map((city, index) => (
-                          <option key={index} value={city.name}>
-                            {city.name}
-                          </option>
-                        ))}
-                      </select>
+                      <div className="py-3">
+                        <div className="input-group">
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Search cities..."
+                            value={searchQuery}
+                            onChange={handleSearchChange}
+                          />
+                          {selectedCities.map((city) => (
+                            <div
+                              key={city.id}
+                              className="input-group-text bg-success text-white rounded-0"
+                              style={{ cursor: "pointer" }}
+                              onClick={() =>
+                                setSelectedCities((prevSelectedCities) =>
+                                  prevSelectedCities.filter(
+                                    (c) => c.name !== city.name
+                                  )
+                                )
+                              }
+                            >
+                              {city.name} &times;
+                            </div>
+                          ))}
+                        </div>
+                        <div
+                          className="mt-2"
+                          style={{ maxHeight: "150px", overflowY: "auto" }}
+                        >
+                          {searchQuery && filteredCities.length === 0 && (
+                            <div>No matching cities found</div>
+                          )}
+                          {filteredCities.map((city) => (
+                            <div key={city.id} className="form-check">
+                              <input
+                                type="checkbox"
+                                className="form-check-input"
+                                id={city.slug}
+                                value={city.name}
+                                checked={selectedCities.some(
+                                  (c) => c.name === city.name
+                                )}
+                                onChange={handleCityChange}
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor={city.slug}
+                              >
+                                {city.name}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div className="col-4">

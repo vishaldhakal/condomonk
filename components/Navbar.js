@@ -1,31 +1,35 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import SearchBar from "./SearchBar";
-import SearchSuggest from "./SerachSuggest";
+import ProjectSearch from "./ProjectSearch";
 
 const Navbar = ({ cities, dropdown_cities, transparent }) => {
   const [cityname, setCityname] = useState("");
   const [navbar, setNavbar] = useState(true);
 
+  const filteredprojects = (value) => {
+    return dropdown_cities.filter((city) => {
+      return value.includes(city.name);
+    });
+  };
+
   // if (pathname.startsWith("/admin")) {
   //   return <></>;
   // }
 
-
   const changebackground = () => {
-    if(window.scrollY >= 80){
+    if (window.scrollY >= 80) {
       setNavbar(true);
-    }else{
+    } else {
       setNavbar(false);
     }
   };
 
-  useEffect(() =>{
-    if(window){
-      window.addEventListener('scroll', changebackground);
+  useEffect(() => {
+    if (window) {
+      window.addEventListener("scroll", changebackground);
     }
-  },[])
+  }, []);
 
   return (
     <div
@@ -41,12 +45,21 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
               <span>Condomonk</span>
             </Link>
             <div className="input-group input-group-search mx-1 me-md-0">
-              <SearchSuggest cities={cities} />
-             
+              {/* <SearchSuggest cities={cities} /> */}
+
+              <ProjectSearch />
             </div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
           </div>
           <div className=" collapse  navbar-collapse" id="collapsibleNavId">
             <ul className="navbar-nav ms-auto  mt-2 mt-lg-0">
