@@ -69,6 +69,19 @@ const AdminSidebar = () => {
             <span>News</span>
           </Link>
         </li>
+        <li className="nav-item">
+          <Link
+            className={
+              pathname.startsWith("/admin/partners")
+                ? "nav-link active"
+                : "nav-link"
+            }
+            href="/admin/partners"
+          >
+            <i className="bi bi-newspaper"></i>
+            <span>Partners</span>
+          </Link>
+        </li>
       </ul>
     </aside>
   );
