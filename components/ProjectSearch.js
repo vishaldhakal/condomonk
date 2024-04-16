@@ -122,7 +122,7 @@ const SearchWithAutocomplete = () => {
                 <h3 className="h5 bg-light text-sm px-3 pt-3 pb-2">Projects</h3>
                 <ul className="list-unstyled  text-xs px-3">
                   {searchResults.projects.map((project, index) => (
-                    <Link href={"/" + "city" + "/" + project.slug}>
+                    <Link href={"/" + project.city.slug + "/" + project.slug}>
                       <li
                         key={index}
                         className="mb-2 cursor-pointer fs-vsmall text-black"
