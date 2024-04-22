@@ -213,7 +213,16 @@ export default async function Home({ params }) {
                             </span>
                             <span scope="col">
                               {" "}
-                              <CustomModal linkText="Request Number of Floor Plans" />
+                              <CustomModal
+                                linkText="Request Number of Floor Plans"
+                                proj_name={data.preconstruction.project_name}
+                                defaultmessage={
+                                  "Please send me floor plan details of " +
+                                  data.preconstruction.project_name +
+                                  ".  Thank you"
+                                }
+                                city={data.preconstruction.city.name}
+                              />
                             </span>
                           </div>
 
@@ -223,7 +232,16 @@ export default async function Home({ params }) {
                             </span>
                             <span scope="col">
                               {" "}
-                              <CustomModal linkText="Request Parking Price" />
+                              <CustomModal
+                                linkText="Request Parking Price"
+                                proj_name={data.preconstruction.project_name}
+                                defaultmessage={
+                                  "Please send me parking price details of " +
+                                  data.preconstruction.project_name +
+                                  ".  Thank you"
+                                }
+                                city={data.preconstruction.city.name}
+                              />
                             </span>
                           </div>
 
@@ -233,7 +251,16 @@ export default async function Home({ params }) {
                             </span>
                             <span scope="col">
                               {" "}
-                              <CustomModal linkText="Request Locker Price" />
+                              <CustomModal
+                                linkText="Request Locker Price"
+                                proj_name={data.preconstruction.project_name}
+                                defaultmessage={
+                                  "Please send me locker price details of " +
+                                  data.preconstruction.project_name +
+                                  ".  Thank you"
+                                }
+                                city={data.preconstruction.city.name}
+                              />
                             </span>
                           </div>
 
@@ -243,7 +270,16 @@ export default async function Home({ params }) {
                             </span>
                             <span scope="col">
                               {" "}
-                              <CustomModal linkText="Request Est Maintenance" />
+                              <CustomModal
+                                linkText="Request Est Maintenance"
+                                proj_name={data.preconstruction.project_name}
+                                defaultmessage={
+                                  "Please send me estimated maintenance fee of " +
+                                  data.preconstruction.project_name +
+                                  ".  Thank you"
+                                }
+                                city={data.preconstruction.city.name}
+                              />
                             </span>
                           </div>
                         </div>
