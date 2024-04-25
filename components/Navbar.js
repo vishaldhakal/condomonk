@@ -50,18 +50,18 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
               <ProjectSearch />
             </div>
             <button
-              class="navbar-toggler"
+              className="navbar-toggler"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
+              data-bs-target="#collapsibleNavId"
+              aria-controls="collapsibleNavId"
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span class="navbar-toggler-icon"></span>
+              <span className="navbar-toggler-icon"></span>
             </button>
           </div>
-          <div className=" collapse  navbar-collapse" id="collapsibleNavId">
+          <div className="collapse navbar-collapse" id="collapsibleNavId">
             <ul className="navbar-nav ms-auto  mt-2 mt-lg-0">
               <li className="nav-item dropdown mx-1">
                 <a

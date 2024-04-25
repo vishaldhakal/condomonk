@@ -94,7 +94,7 @@ export default function CondoCard(props) {
               Approx completion: {props.occupancy}
             </p>
 
-            <h4 className="mb-1 text-green-700">
+            <h4 className="mb-1 text-green-700 cardd-price">
               {checkPricing(props.price_starting_from)}
             </h4>
           </div>

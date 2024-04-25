@@ -84,7 +84,7 @@ const SearchWithAutocomplete = () => {
           type="text"
           className="form-control py-2 w-mine5 "
           id="searchInput"
-          placeholder="Search for a city or project"
+          placeholder="Search city or project"
           autoComplete="off"
           value={searchTerm}
           onChange={handleSearch}

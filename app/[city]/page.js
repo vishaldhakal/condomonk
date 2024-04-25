@@ -61,7 +61,7 @@ export default async function Home({ params }) {
       <div className="pt-lg-5 pt-3">
         <div className="container">
           <div className="d-flex flex-column">
-            <h1 className="main-title font-family2">
+            <h1 className="main-title font-family2 pb-2 pb-md-0">
               New Pre Construction Homes
               <div className="relative inline-flex sm-center mx-2">
                 <span className="absolute inset-x-0 bottom-0 border-b-[18px] border-[#4ADE80]"></span>
@@ -72,40 +72,41 @@ export default async function Home({ params }) {
               </div>
               ( 2024 )
             </h1>
-            <p className="font-normal">
+            <p className="font-normal sm-center pb-2 pb-md-0">
               {data.preconstructions.length} New Pre construction homes, condos
               and townhomes for sale in {CapitalizeFirst(params.city)}.
             </p>
           </div>
-
-          <div className="d-flex flex-column flex-md-row mb-md-4 mb-0 mt-1 overflow-hidden ">
-            <div className="d-flex gap-2">
-              <Link
-                className="link-black badge py-2 my-1  bg-white shadow-sm text-dark fs-small fw-m"
-                href={`/${params.city}/upcoming/`}
-              >
-                Upcoming Projects {CapitalizeFirst(params.city)}
-              </Link>
-              <Link
-                className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m  mx-0 me-2"
-                href={`/${params.city}/townhomes/`}
-              >
-                New Townhomes {CapitalizeFirst(params.city)}
-              </Link>
-            </div>
-            <div className="d-flex gap-2">
-              <Link
-                className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m"
-                href={`/${params.city}/detached/`}
-              >
-                New Detached Homes {CapitalizeFirst(params.city)}
-              </Link>
-              <Link
-                className="link-black badge py-2 my-1  bg-white shadow-sm text-dark fs-small fw-m  mx-0"
-                href={`/${params.city}/condos/`}
-              >
-                New Condos {CapitalizeFirst(params.city)}
-              </Link>
+          <div className="d-flex sm-center pb-2 pb-md-0">
+            <div className="d-flex flex-column flex-md-row mb-md-4 mb-0 mt-1 overflow-hidden">
+              <div className="d-flex gap-2">
+                <Link
+                  className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m"
+                  href={`/${params.city}/upcoming/`}
+                >
+                  Upcoming Projects {CapitalizeFirst(params.city)}
+                </Link>
+                <Link
+                  className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 me-2"
+                  href={`/${params.city}/townhomes/`}
+                >
+                  New Townhomes {CapitalizeFirst(params.city)}
+                </Link>
+              </div>
+              <div className="d-flex gap-2">
+                <Link
+                  className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m"
+                  href={`/${params.city}/detached/`}
+                >
+                  New Detached Homes {CapitalizeFirst(params.city)}
+                </Link>
+                <Link
+                  className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0"
+                  href={`/${params.city}/condos/`}
+                >
+                  New Condos {CapitalizeFirst(params.city)}
+                </Link>
+              </div>
             </div>
           </div>
 

@@ -147,9 +147,9 @@ export default async function Home({ params }) {
             project_address={data.preconstruction.project_address}
           ></Gallery>
 
-          <div className="container  px-0 px-sm-3 pt-3">
+          <div className="container  px-0 pt-3">
             <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 justify-content-center">
-              <div className="col col-md-6">
+              <div className="col col-md-8 pe-md-5 pe-0">
                 <div className="screenshot ">
                   <div className="row row-cols-1 row-cols-sm-2">
                     <div className="col-sm-12">

@@ -681,13 +681,14 @@ a:hover {
     }
 
     .main-title {
-        line-height: 2rem !important;
+        line-height: 3rem !important;
         font-weight: 800;
         margin-bottom: 10px;
-        font-size: 1.93rem !important;
+        font-size: 2.6rem !important;
+        text-align: center;
     }
 
-    .titlee {
+    .sm-center .titlee {
         font-size: 0.9rem !important;
         color: #ffffff;
     }
@@ -765,8 +766,32 @@ a:hover {
     }
 
     .cardd-title {
-        font-size: 1.8rem !important;
+        font-size: 1.9rem !important;
         font-weight: 800;
+    }
+
+    .cardd-subtitle-sm {
+        font-size: 0.8rem !important;
+        font-weight: 400;
+        color: rgb(0, 0, 0);
+    }
+
+    .cardd-subtitle {
+        font-size: 0.95rem !important;
+        font-weight: 400;
+        color: rgb(0, 0, 0);
+    }
+
+    .cardd-subtitle {
+        font-size: 0.8rem;
+        font-weight: 400;
+        color: rgb(0, 0, 0);
+    }
+
+    .cardd-price {
+        font-size: 1.1rem !important;
+        font-weight: 500 !important;
+
     }
 
     .abs1 {
@@ -1354,7 +1379,7 @@ label {
 }
 
 .main-title {
-    line-height: 2rem !important;
+    line-height: 2rem;
     font-weight: 800;
     margin-bottom: 10px;
     font-size: 2.25rem;
@@ -1405,8 +1430,8 @@ label {
 
 .cardd-price {
     font-size: 1rem;
-    font-weight: 600;
-    color: #FF904D;
+    font-weight: 400;
+
 }
 
 .cardd-subtitle {
@@ -2000,6 +2025,7 @@ textarea {
     width: 260px;
     border-radius: 20px;
     background-color: #f5f5f5;
+    font-size: 14px;
 }
 
 .autocomplete-results {
