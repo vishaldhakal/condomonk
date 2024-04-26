@@ -92,7 +92,7 @@ export default async function Home({ params }) {
                 </span>
               </div>
             </h1>
-            <p className=" font-normal  mb-2">
+            <p className=" font-normal  mb-2 sm-center">
               {`${
                 data.preconstructions.length
               } Upcoming Pre construction Detached,
