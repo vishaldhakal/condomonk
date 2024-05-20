@@ -502,7 +502,7 @@ export default async function Home({ params }) {
               <h2 className="main-title font-family2">
                 Similar New Construction Homes
                 <div className="relative inline-flex sm-center mx-2 text-wrap">
-                  <span className="absolute inset-x-0 bottom-0 border-b-[15px] border-[#4ADE80]"></span>
+                  <span className="absolute inset-x-0 bottom-0 "></span>
                   <span className="relative font-bold text-black whitespace-normal">
                     in {data.preconstruction.city.name}
                   </span>
