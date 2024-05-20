@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
 
 :root {
     scroll-behavior: smooth;
@@ -18,12 +18,12 @@ body {
     background: #ffffff !important;
     /* font-family: 'Poppins', sans-serif !important; */
     /* font-family: 'Genos', sans-serif !important; */
-    font-family: "Roboto", sans-serif;
-    font-weight: 400;
+    font-family: "Arimo", sans-serif;
+    font-weight: 500;
 }
 
 .font-family2 {
-    font-family: "Merriweather", serif !important;
+    font-family: "Crimson Text", serif !important;
 }
 
 a {
@@ -178,15 +178,53 @@ a:hover {
 .navbar-nav .nav-item .nav-link {
     font-weight: 500;
     color: rgb(0, 0, 0) !important;
-    font-size: 0.85rem;
+    /* font-size: 0.85rem; */
     /* Set default color to white */
 }
 
 .logo span {
-    font-size: 30px;
+    font-size: 40px;
     font-weight: 800;
     color: rgb(0, 0, 0);
 
+}
+
+@media screen and (max-width: 2560px) and (min-width: 1440px) {
+    .navbar-nav .nav-item .nav-link {
+        font-size: 0.9rem;
+        /* Adjust as needed */
+        color: rgb(34, 34, 34) !important;
+        /* Adjust as needed */
+    }
+
+    .logo span {
+        font-size: 36px;
+        /* Adjust as needed */
+        color: rgb(34, 34, 34);
+        /* Adjust as needed */
+    }
+}
+
+/* Media query for 24-inch desktop screen */
+@media screen and (min-width: 1920px) {
+    .navbar-nav .nav-item .nav-link {
+        font-size: 1rem;
+        margin-left: 20px;
+        /* Adjust as needed */
+        color: rgb(51, 51, 51) !important;
+        /* Adjust as needed */
+    }
+
+    .logo span {
+        font-size: 44px;
+        /* Adjust as needed */
+        color: rgb(51, 51, 51);
+        /* Adjust as needed */
+    }
+
+    .logo {
+        width: 280px !important;
+    }
 }
 
 .flogo span {
@@ -530,6 +568,10 @@ a:hover {
     text-align: center;
 }
 
+.search-top-image {
+    width: 500px;
+}
+
 @media (max-width: 800px) {
     .fs-small {
         font-size: 0.75rem !important;
@@ -540,6 +582,11 @@ a:hover {
         border: 1px solid #dfdfdf !important;
         background-color: #fff !important;
     }
+
+    .search-top-image {
+        width: 350px !important;
+    }
+
 
     .sm-center {
         text-align: center;
@@ -723,13 +770,11 @@ a:hover {
         width: 58%;
         left: 50%;
         transform: translateX(-50%);
-        border-radius: 9px;
+        border-radius: 12px;
         position: fixed;
         z-index: 9999;
         display: block !important;
-        background-color: #4ADE80 !important;
-        border-color: #5bdbff1f !important;
-        color: white !important;
+        background-color: #3774f7 !important;
     }
 
     .overlay-container {
@@ -790,7 +835,7 @@ a:hover {
 
     .cardd-price {
         font-size: 1.1rem !important;
-        font-weight: 500 !important;
+        font-weight: 700 !important;
 
     }
 
@@ -817,7 +862,7 @@ a:hover {
 
 @media (min-width: 1200px) {
     .logo {
-        width: 180px;
+        width: 200px;
     }
 
     .textt {
@@ -831,6 +876,38 @@ a:hover {
         max-width: 840px;
         margin: 0 auto;
     }
+}
+
+.custom-button {
+    color: white;
+    background-color: rgb(234, 58, 58);
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+    margin-bottom: 30px;
+    /* 3D Effect */
+    position: relative;
+    box-shadow: 0 7px 0 rgb(148, 42, 42);
+    /* Darker shadow for bottom */
+    transition: all 0.3s ease;
+}
+
+.custom-button:hover {
+    box-shadow: 0 2px 0 rgb(176, 43, 43);
+    /* Lighter shadow on hover */
+    transform: translateY(3px);
+    /* Move button down slightly on hover */
+}
+
+.custom-button:active {
+    box-shadow: none;
+    /* Remove shadow on click */
+    transform: translateY(0);
+    /* Reset transform */
 }
 
 .img-call-height {
@@ -1430,7 +1507,7 @@ label {
 
 .cardd-price {
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 600;
 
 }
 
@@ -1459,7 +1536,7 @@ label {
     position: relative;
     bottom: 30px;
     left: 10px;
-    background-color: #2ccc66;
+    background-color: #3960fc;
     border-radius: 5px;
     color: white;
     font-size: 0.6rem;
@@ -1640,7 +1717,7 @@ label {
 }
 
 .fw-mine {
-    font-weight: 400;
+    font-weight: 800;
 }
 
 .accent-line {
@@ -1651,7 +1728,7 @@ label {
 }
 
 .accent-line:before {
-    background-color: #2ccc66;
+    background-color: darkblue;
     height: 2px;
     width: 2em;
     margin-right: 0.75em;
@@ -1661,7 +1738,7 @@ label {
 .accent-line:after {
     width: 2em;
     height: 2px;
-    background-color: #2ccc66;
+    background-color: darkblue;
     margin-left: 0.75em;
     content: "";
 }
@@ -1885,7 +1962,7 @@ textarea {
 }
 
 .brand-color {
-    color: #4ADE80;
+    color: #2563EB;
 }
 
 .breadcrumb {
@@ -2040,4 +2117,34 @@ textarea {
     .w-mine5 {
         width: 180px;
     }
+
+    .custom-button {
+        color: white;
+        background-color: rgb(234, 58, 58);
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        border: none;
+        /* If using a button element */
+        font-size: 14px;
+        margin-bottom: 30px;
+        /* Optional: adjust font size */
+    }
+
+    .custom-button:hover {
+        box-shadow: 0 2px 0 rgb(176, 43, 43);
+        /* Lighter shadow on hover */
+        transform: translateY(3px);
+        /* Move button down slightly on hover */
+    }
+
+    .custom-button:active {
+        box-shadow: none;
+        /* Remove shadow on click */
+        transform: translateY(0);
+        /* Reset transform */
+    }
+
 }

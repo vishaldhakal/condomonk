@@ -149,7 +149,7 @@ export default async function Home({ params }) {
 
           <div className="container  px-0 pt-3">
             <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 justify-content-center">
-              <div className="col col-md-8 pe-md-5 pe-0">
+              <div className="col col-md-6 pe-md-5 pe-0">
                 <div className="screenshot ">
                   <div className="row row-cols-1 row-cols-sm-2">
                     <div className="col-sm-12">
@@ -289,6 +289,20 @@ export default async function Home({ params }) {
 
                   <div className="mb-5">
                     <div className="py-5 pt-5 mt-4">
+                      <CustomModal
+                        linkText={
+                          <span className="custom-button">
+                            Click here to get the latest information today!
+                          </span>
+                        }
+                        proj_name={data.preconstruction.project_name}
+                        defaultmessage={
+                          "Please send me the latest information of " +
+                          data.preconstruction.project_name +
+                          ".  Thank you"
+                        }
+                        city={data.preconstruction.city.name}
+                      />
                       <h2 className="fw-bold fs-3 font-family2">
                         Information about {data.preconstruction.project_name} in{" "}
                         {data.preconstruction.city.name}

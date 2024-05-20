@@ -50,7 +50,7 @@ export default async function Home(props) {
   return (
     <>
       <FixedContactButton></FixedContactButton>
-{/* 
+      {/* 
       <section id="hero">
         <div className="container">
           <div className=" hero-container">
@@ -71,61 +71,50 @@ export default async function Home(props) {
           </div>
         </div>
       </section> */}
-      
+
       <section className=" py-3 py-lg-5 container">
-      <div className=" mt-lg-5 mt-0">
-        <div className="grid items-center  grid-cols-1 gap-12 lg:grid-cols-2 ">
-          <div className="order-md-1 order-2 ">
-            <h1 className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl sm-center font-family2">
-            Canada's leading  
-              <div className="relative inline-flex sm-center">
-                <span className="absolute inset-x-0 bottom-0 border-b-[30px] border-[#4ADE80]"></span>
-                <span className="relative text-3xl font-bold text-black sm:text-6xl lg:text-7xl ">pre construction</span>
-               
+        <div className=" mt-lg-5 mt-0">
+          <div className="grid items-center  grid-cols-1 gap-12 lg:grid-cols-2 ">
+            <div className="order-md-1 order-2 ">
+              <h1 className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl sm-center font-family2">
+                Canada's leading
+                <div className="relative inline-flex sm-center">
+                  <span className="absolute inset-x-0 bottom-0 border-b-[30px] border-blue-500"></span>
+                  <span className="relative text-3xl font-bold text-black sm:text-6xl lg:text-7xl ">
+                    pre construction
+                  </span>
+                </div>
+                <span className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl">
+                  {" "}
+                  homes Platform
+                </span>
+              </h1>
+
+              <p className="mt-3 text-base text-black sm:text-xl sm-center font-light">
+                Get first updates on New Construction Homes Projects across
+                Canada.
+              </p>
+
+              <div className=" mt-12 lg:mt-20">
+                <img
+                  src="./search top image.png"
+                  className="search-top-image mx-3"
+                ></img>
               </div>
-
-              <span className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl"> homes Platform</span>
-            </h1>
-
-            <p className="mt-3 text-base text-black sm:text-xl sm-center font-light">Get first updates on New Construction Homes Projects across Canada.</p>
-
-      <div className=" mt-12 lg:mt-20">
-      <div className="d-flex align-items-center text-center gap-5 sm-center">
-    <div className=" ms-3">
-      <div className="icon-container d-flex flex-column align-items-center ">
-      <img width="22" height="22" src="https://img.icons8.com/ios-filled/50/link-company-child.png" alt="link-company-child" className="text-center"/>
-        <p className="text-sm">Condo</p>
-      </div>
-    </div>
-    <div class=" ">
-      <div class="icon-container d-flex flex-column align-items-center">
-      <img width="22" height="22" src="https://img.icons8.com/external-line-lima-studio/64/external-building-winter-town-line-lima-studio.png" alt="external-building-winter-town-line-lima-studio"/>
-        <p className="text-sm">Townhouse</p>
-      </div>
-    </div>
-    <div class=" ">
-      <div class="icon-container d-flex flex-column align-items-center">
-      <img width="22" height="22" src="https://img.icons8.com/carbon-copy/100/country-house.png" alt="country-house"/>
-        <p className="text-sm">Detached</p>
-      </div>
-    </div>
-  </div>
-      </div>
-            <div className=" ">
-            <MainSearch cities={cities}/>
+              <div className=" ">
+                <MainSearch cities={cities} />
+              </div>
             </div>
 
-          </div>
-
-          <div className="order-1 order-md-2">
-            <img className="w-full" src="/hero-img.png" alt="" />
+            <div className="order-1 order-md-2">
+              <img className="w-full" src="/hero-img.png" alt="" />
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       <div className="pt-5 ">
-        <div className="container pt-5 " >
+        <div className="container pt-5 ">
           <div className="d-flex align-items-center justify-content-center">
             <h2 className="fw-mine ccent-line fs-big fs-1">
               <Link href={"/calgary"} className="link-black font-family2">
@@ -135,8 +124,7 @@ export default async function Home(props) {
           </div>
           <div className="d-flex flex-column justify-content-center flex-column align-items-center mb-lg-5 mb-2">
             <p className="fs-5 mb-0 text-center">
-              Explore 20+ pre construction homes for sale
-              in Calgary
+              Explore 20+ pre construction homes for sale in Calgary
             </p>
             <Link href={"/calgary"} className="mt-1 text-mine text-primary">
               More communities in Calgary{" "}
@@ -296,8 +284,6 @@ export default async function Home(props) {
                 className="img-fluid d-md-none d-block"
                 alt=""
               />
-
-             
             </div>
           </div>
 
@@ -314,7 +300,7 @@ export default async function Home(props) {
               <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3 ">
                 Looking to buy a preconstruction home ?
               </h2>
-              
+
               <div className="row row-cols-1 row-cols-md-3 mt-5">
                 <div className="col-md-2"></div>
                 <div className="col-md-8">
@@ -322,10 +308,20 @@ export default async function Home(props) {
                     proj_name="All"
                     city="Home Page"
                   ></BottomContactForm>
-                   <div className="d-flex">
-                    <p class="small-text2 mb-3 text-center">Condomonk.ca serves as an online database for pre-construction homes. Condomonk compiles a list of projects available publicly on the internet and does not engage in real estate transactions. Please note that the information provided on this page may be outdated or inaccurate. By submitting the above form, you consent to being contacted by real estate agents advertising on this page. Your information may be shared with our partners or advertisers to assist with your inquiries. You can unsubscribe at any time by emailing us.</p>
-         
-                    </div>
+                  <div className="d-flex">
+                    <p class="small-text2 mb-3 text-center">
+                      Condomonk.ca serves as an online database for
+                      pre-construction homes. Condomonk compiles a list of
+                      projects available publicly on the internet and does not
+                      engage in real estate transactions. Please note that the
+                      information provided on this page may be outdated or
+                      inaccurate. By submitting the above form, you consent to
+                      being contacted by real estate agents advertising on this
+                      page. Your information may be shared with our partners or
+                      advertisers to assist with your inquiries. You can
+                      unsubscribe at any time by emailing us.
+                    </p>
+                  </div>
                 </div>
                 <div className="col-md-2"></div>
               </div>

@@ -86,6 +86,9 @@ export default function CondoCard(props) {
             <h3 className="mb-1 cardd-title text-dark font-family2">
               {props.project_name}
             </h3>
+            <h4 className="mb-1 text-blue-700 cardd-price">
+              {checkPricing(props.price_starting_from)}
+            </h4>
             <p className=" mb-1 cardd-subtitle cardd-subtitle-sm">
               By {props.developer.name}
             </p>
@@ -93,10 +96,6 @@ export default function CondoCard(props) {
             <p className=" mb-1 cardd-subtitle text-secondary">
               Approx completion: {props.occupancy}
             </p>
-
-            <h4 className="mb-1 text-green-700 cardd-price">
-              {checkPricing(props.price_starting_from)}
-            </h4>
           </div>
         </Link>
       </div>
