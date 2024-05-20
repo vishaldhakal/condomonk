@@ -38,6 +38,8 @@ async function getCities() {
 export default async function Home(props) {
   const data = await getData("calgary");
   const mississauga_data = await getData("mississauga");
+  const edmonton_data = await getData("edmonton");
+  const cambridge_data = await getData("cambridge");
   let cities = await getCities();
   // let dropdown_cities = await getCitiesandProjects();
 
@@ -242,7 +244,7 @@ export default async function Home(props) {
           <div className="py-5 my-2"></div>
           <div className="d-flex align-items-center justify-content-center ">
             <h2 className="fw-mine ccent-line fs-big fs-1">
-              <Link href={"/calgary"} className="link-black font-family2">
+              <Link href={"/mississauga"} className="link-black font-family2">
                 Mississauga
               </Link>
             </h2>
@@ -272,6 +274,71 @@ export default async function Home(props) {
               ))}
           </div>
 
+          <div className="py-5 my-2"></div>
+          <div className="d-flex align-items-center justify-content-center ">
+            <h2 className="fw-mine ccent-line fs-big fs-1">
+              <Link href={"/edmonton"} className="link-black font-family2">
+                Edmonton
+              </Link>
+            </h2>
+          </div>
+          <div className="d-flex flex-column justify-content-center flex-column align-items-center mb-5">
+            <p className="fs-5 mb-0 text-center">
+              Explore 30+ pre construction homes for sale in Edmonton
+            </p>
+            <Link href={"/edmonton"} className="mt-1 text-mine text-primary">
+              More developments in Edmonton{" "}
+              <i className="bi bi-arrow-right-short"></i>
+            </Link>
+          </div>
+          <div className="row row-cols-1 row-cols-md-4 gy-md-5 gy-3 gx-3">
+            {edmonton_data.preconstructions &&
+              edmonton_data.preconstructions.slice(0, 8).map((item) => (
+                <div className="col" key={item.id}>
+                  <script
+                    key={item.slug}
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                      __html: JSON.stringify(PreconSchema(item)),
+                    }}
+                  />
+                  <CondoCard {...item} />
+                </div>
+              ))}
+          </div>
+
+          <div className="py-5 my-2"></div>
+          <div className="d-flex align-items-center justify-content-center ">
+            <h2 className="fw-mine ccent-line fs-big fs-1">
+              <Link href={"/calgary"} className="link-black font-family2">
+                Cambridge
+              </Link>
+            </h2>
+          </div>
+          <div className="d-flex flex-column justify-content-center flex-column align-items-center mb-5">
+            <p className="fs-5 mb-0 text-center">
+              Explore 30+ pre construction homes for sale in cambridge
+            </p>
+            <Link href={"/cambridge"} className="mt-1 text-mine text-primary">
+              More developments in cambridge{" "}
+              <i className="bi bi-arrow-right-short"></i>
+            </Link>
+          </div>
+          <div className="row row-cols-1 row-cols-md-4 gy-md-5 gy-3 gx-3">
+            {cambridge_data.preconstructions &&
+              cambridge_data.preconstructions.slice(0, 8).map((item) => (
+                <div className="col" key={item.id}>
+                  <script
+                    key={item.slug}
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                      __html: JSON.stringify(PreconSchema(item)),
+                    }}
+                  />
+                  <CondoCard {...item} />
+                </div>
+              ))}
+          </div>
           <div className="py-5 mt-md-5 mt-0">
             <div className="text-center py-5 my-5 overlay-container">
               <img

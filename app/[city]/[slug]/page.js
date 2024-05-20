@@ -287,22 +287,22 @@ export default async function Home({ params }) {
                     </div>
                   </div>
 
-                  <div className="mb-5">
-                    <div className="py-5 pt-5 mt-4">
-                      <CustomModal
-                        linkText={
-                          <span className="custom-button">
-                            Click here to get the latest information today!
-                          </span>
-                        }
-                        proj_name={data.preconstruction.project_name}
-                        defaultmessage={
-                          "Please send me the latest information of " +
-                          data.preconstruction.project_name +
-                          ".  Thank you"
-                        }
-                        city={data.preconstruction.city.name}
-                      />
+                  <div className="">
+                    <CustomModal
+                      linkText={
+                        <span className="custom-button mt-5">
+                          Click here to get the latest information today!
+                        </span>
+                      }
+                      proj_name={data.preconstruction.project_name}
+                      defaultmessage={
+                        "Please send me the latest information of " +
+                        data.preconstruction.project_name +
+                        ".  Thank you"
+                      }
+                      city={data.preconstruction.city.name}
+                    />
+                    <div className="pb-5 ">
                       <h2 className="fw-bold fs-3 font-family2">
                         Information about {data.preconstruction.project_name} in{" "}
                         {data.preconstruction.city.name}
