@@ -62,7 +62,7 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
             </button>
           </div>
           <div className="collapse navbar-collapse" id="collapsibleNavId">
-            <ul className="navbar-nav m-auto  mt-2 mt-lg-0">
+            <ul className="navbar-nav ms-auto  mt-2 mt-lg-0">
               <li className="nav-item dropdown mx-1">
                 <a
                   className="nav-link dropdown-toggle active fw-medium shadow-sm rounded-2"
