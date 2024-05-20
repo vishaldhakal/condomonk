@@ -315,6 +315,21 @@ export default async function Home({ params }) {
                           }}
                         ></div>
                       </div>
+                      <CustomModal
+                        linkText={
+                          <span className="btn  btn-primary rounded-pill shadow-lg">
+                            Send me more info about{" "}
+                            {data.preconstruction.project_name}
+                          </span>
+                        }
+                        proj_name={data.preconstruction.project_name}
+                        defaultmessage={
+                          "Please send me more information about " +
+                          data.preconstruction.project_name +
+                          ".  Thank you"
+                        }
+                        city={data.preconstruction.city.name}
+                      />
                     </div>
                   </div>
                 </div>
