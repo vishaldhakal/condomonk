@@ -80,7 +80,7 @@ export default async function Home({ params }) {
             <h1 className="main-title  font-family2 mb-2">
               {`Pre Construction Townhomes in ${CapitalizeFirst(params.city)} `}
               <div className="relative inline-flex sm-center me-2 text-wrap">
-                <span className="absolute inset-x-0 bottom-0 border-b-[15px] border-[#4ADE80]"></span>
+                <span className="absolute inset-x-0 bottom-0 "></span>
                 <span className="relative font-bold text-black whitespace-normal">
                   (Selling Now)
                 </span>

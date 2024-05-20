@@ -64,7 +64,7 @@ export default async function Home({ params }) {
             <h1 className="main-title font-family2 pb-2 pb-md-0">
               New Pre Construction Homes
               <div className="relative inline-flex sm-center mx-2">
-                <span className="absolute inset-x-0 bottom-0 border-b-[18px] border-blue-500"></span>
+                <span className="absolute inset-x-0 bottom-0 "></span>
 
                 <span className="relative font-bold text-black ">
                   {" "}
