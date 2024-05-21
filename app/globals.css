@@ -575,6 +575,18 @@ a:hover {
 }
 
 @media (max-width: 800px) {
+    .sticky-buttons {
+        position: -webkit-sticky;
+        /* For Safari */
+        position: sticky;
+        top: 60px;
+        /* Adjust this value to the current position from the top */
+        z-index: 1000;
+        /* Ensure it stays above other content */
+        background-color: white;
+        /* Prevent overlap issues */
+    }
+
     .fs-small {
         font-size: 0.75rem !important;
         font-weight: 500;
