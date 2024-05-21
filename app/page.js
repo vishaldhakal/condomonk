@@ -4,7 +4,7 @@ import CondoCard from "@/components/CondoCard";
 import SearchBar from "@/components/SearchBar";
 import PreconSchema from "@/components/PreconSchema";
 import BottomContactForm from "@/components/BottomContactForm";
-import FixedContactButton from "@/components/FixedContactButton";
+
 import MainSearch from "@/components/MainSearch";
 import Navbar2 from "@/components/Navbar2";
 import "./icons.css";
@@ -51,7 +51,6 @@ export default async function Home(props) {
 
   return (
     <>
-      <FixedContactButton></FixedContactButton>
       {/* 
       <section id="hero">
         <div className="container">
