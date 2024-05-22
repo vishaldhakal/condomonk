@@ -6,6 +6,8 @@ import ProjectSearch from "./ProjectSearch";
 const Navbar = ({ cities, dropdown_cities, transparent }) => {
   const [cityname, setCityname] = useState("");
   const [navbar, setNavbar] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [buttonClicked, setButtonClicked] = useState(false);
 
   const filteredprojects = (value) => {
     return dropdown_cities.filter((city) => {
@@ -13,11 +15,7 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
     });
   };
 
-  // if (pathname.startsWith("/admin")) {
-  //   return <></>;
-  // }
-
-  const changebackground = () => {
+  const changeBackground = () => {
     if (window.scrollY >= 80) {
       setNavbar(true);
     } else {
@@ -27,16 +25,24 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
 
   useEffect(() => {
     if (window) {
-      window.addEventListener("scroll", changebackground);
+      window.addEventListener("scroll", changeBackground);
     }
+    return () => {
+      window.removeEventListener("scroll", changeBackground);
+    };
   }, []);
+
+  const toggleCollapse = () => {
+    setIsCollapsed(!isCollapsed);
+    setButtonClicked(!buttonClicked);
+  };
 
   return (
     <div
       className={navbar ? "navbar-transparent active" : "navbar-transparent"}
     >
-      <nav className=" navbar navbar-expand-lg  py-lg-3 ">
-        <div className=" container justify-content-start">
+      <nav className="navbar navbar-expand-lg py-lg-3">
+        <div className="container justify-content-start">
           <div className="d-flex">
             <Link
               href="/"
@@ -45,24 +51,26 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
               <span>Condomonk</span>
             </Link>
             <div className="input-group input-group-search mx-1 me-md-0">
-              {/* <SearchSuggest cities={cities} /> */}
-
               <ProjectSearch />
             </div>
             <button
-              className="navbar-toggler"
+              className={`navbar-toggler ${buttonClicked ? "bg-white" : ""}`}
               type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapsibleNavId"
+              onClick={toggleCollapse}
               aria-controls="collapsibleNavId"
-              aria-expanded="false"
+              aria-expanded={isCollapsed}
               aria-label="Toggle navigation"
             >
               <span className="navbar-toggler-icon"></span>
             </button>
           </div>
-          <div className="collapse navbar-collapse" id="collapsibleNavId">
-            <ul className="navbar-nav ms-auto  mt-2 mt-lg-0">
+          <div
+            className={`collapse navbar-collapse ${isCollapsed ? "show" : ""} ${
+              isCollapsed ? "bg-white" : ""
+            }`}
+            id="collapsibleNavId"
+          >
+            <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
               <li className="nav-item dropdown mx-1">
                 <a
                   className="nav-link dropdown-toggle active fw-medium shadow-sm rounded-2"
@@ -75,7 +83,7 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
                   Cities
                 </a>
                 <div
-                  className="dropdown-menu mt-1 "
+                  className="dropdown-menu mt-1"
                   aria-labelledby="dropdownId"
                 >
                   <div className="container">
@@ -105,7 +113,6 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
                   Top 10 <span className="fw-medium">GTA</span> Projects
                 </a>
               </li>
-
               <li className="nav-item mx-1">
                 <a className="nav-link" href="">
                   Blogs
@@ -116,8 +123,7 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
               className="btn bg-warning btn-warning my-2 my-sm-0 rounded ms-md-4 py-2 px-3"
               type="submit"
             >
-              {" "}
-              <a className="nav-link text-black " href="#contact">
+              <a className="nav-link text-black" href="#contact">
                 Contact Now
               </a>
             </button>

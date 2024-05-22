@@ -108,7 +108,7 @@ export default async function Home(props) {
             </div>
 
             <div className="order-1 order-md-2">
-              <img className="w-full" src="/hero-img.png" alt="" />
+              <img className="w-full hero-img" src="/hero-photo.avif" alt="" />
             </div>
           </div>
         </div>
@@ -117,7 +117,7 @@ export default async function Home(props) {
       <div className="pt-5 ">
         <div className="container pt-5 ">
           <div className="d-flex align-items-center justify-content-center">
-            <h2 className="fw-mine ccent-line fs-big fs-1">
+            <h2 className="fw-mine ccent-line fs-big ">
               <Link href={"/calgary"} className="link-black font-family2">
                 Calgary
               </Link>
@@ -149,7 +149,7 @@ export default async function Home(props) {
           </div>
           <div className="py-5 my-2"></div>
           <h2 className="fw-mine text-center mb-5 accent-line fs-1 font-family2">
-            Explore New Pre Construction Homes In These Cities
+            Explore New Pre Construction Homes In Ontario & Alberta
           </h2>
           <div className="container">
             <div className="row row-cols-md-5 row-cols-2">
@@ -242,7 +242,7 @@ export default async function Home(props) {
           </div>
           <div className="py-5 my-2"></div>
           <div className="d-flex align-items-center justify-content-center ">
-            <h2 className="fw-mine ccent-line fs-big fs-1">
+            <h2 className="fw-mine ccent-line fs-big">
               <Link href={"/mississauga"} className="link-black font-family2">
                 Mississauga
               </Link>
@@ -275,7 +275,7 @@ export default async function Home(props) {
 
           <div className="py-5 my-2"></div>
           <div className="d-flex align-items-center justify-content-center ">
-            <h2 className="fw-mine ccent-line fs-big fs-1">
+            <h2 className="fw-mine ccent-line fs-big ">
               <Link href={"/edmonton"} className="link-black font-family2">
                 Edmonton
               </Link>
@@ -308,7 +308,7 @@ export default async function Home(props) {
 
           <div className="py-5 my-2"></div>
           <div className="d-flex align-items-center justify-content-center ">
-            <h2 className="fw-mine ccent-line fs-big fs-1">
+            <h2 className="fw-mine ccent-line fs-big ">
               <Link href={"/calgary"} className="link-black font-family2">
                 Cambridge
               </Link>

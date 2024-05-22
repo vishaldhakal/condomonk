@@ -3,13 +3,12 @@ import "./globals.css";
 import "./icons.css";
 import "react-quill/dist/quill.snow.css";
 import Navbar from "@/components/Navbar";
-import Script from "next/script";
 import GoogleAnalytics from "./GoogleAnalytics";
-
 import Footer from "@/components/Footer";
 import NextTopLoader from "nextjs-toploader";
 import { Montserrat } from "next/font/google";
 import { Providers } from "./providers";
+import Script from "next/script";
 
 const montserrat = Montserrat({ subsets: ["cyrillic"] });
 
@@ -69,6 +68,20 @@ export default async function RootLayout({ children }) {
   let dropdown_cities = await getCitiesandProjects();
   return (
     <html lang="en">
+      <head>
+        <Script
+          src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+          integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWld/Hw/8HB5k5IOh5pFR6M2N91F5j+hcLLC7KzXG"
+          crossOrigin="anonymous"
+          strategy="beforeInteractive"
+        ></Script>
+        <Script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+          integrity="sha384-QJHtvGhmr9bEx1rK5z5s2H4PRHbkzFSO5U5i81XrIoPz5fF/RoeER35uOUs1RxWQ"
+          crossOrigin="anonymous"
+          strategy="beforeInteractive"
+        ></Script>
+      </head>
       <body className={montserrat.className}>
         <NextTopLoader
           color="#FF0000"
@@ -81,18 +94,12 @@ export default async function RootLayout({ children }) {
           speed={200}
           shadow="0 0 10px #00A1FF,0 0 5px #00A1FF"
         />
-
         <Navbar cities={cities} dropdown_cities={dropdown_cities}></Navbar>
         <Providers>
           <GoogleAnalytics />
           {children}
         </Providers>
         <Footer cities={cities}></Footer>
-        <script
-          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-BZlP8y3y1aP5dJt6z/74ukidT+PiZCzV5u5F5+1OW2F0k0yGBGvxXuVEvaO3dPbi"
-          crossorigin="anonymous"
-        ></script>
       </body>
     </html>
   );

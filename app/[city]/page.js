@@ -71,12 +71,12 @@ export default async function Home({ params }) {
               </div>
               ( 2024 )
             </h1>
-            <p className="font-normal sm-center pb-2 pb-md-0">
+            <p className="font-normal sm-center pb-2 pb-md-0 mb-0">
               {data.preconstructions.length} New Pre construction homes, condos
               and townhomes for sale in {CapitalizeFirst(params.city)}.
             </p>
           </div>
-          <div className="d-flex sm-center pb-2 pb-md-0 sticky-buttons">
+          <div className="d-flex sm-center mb-2 mb-lg-0 sticky-buttons pb-0 mb-0">
             <div className="d-flex flex-column flex-md-row mb-md-4 mb-0 mt-1 overflow-hidden">
               <div className="d-flex gap-2">
                 <Link
