@@ -604,7 +604,7 @@ a:hover {
     /* Prevent overlap issues */
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
     .navbar-transparent {
         background-color: white;
         height: 70px;
@@ -2185,7 +2185,7 @@ textarea {
     font-size: 0.6rem !important;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
     .w-mine5 {
         width: 180px !important;
     }
