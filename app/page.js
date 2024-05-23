@@ -309,7 +309,7 @@ export default async function Home(props) {
           <div className="py-5 my-2"></div>
           <div className="d-flex align-items-center justify-content-center ">
             <h2 className="fw-mine ccent-line fs-big ">
-              <Link href={"/calgary"} className="link-black font-family2">
+              <Link href={"/cambridge"} className="link-black font-family2">
                 Cambridge
               </Link>
             </h2>
@@ -338,7 +338,7 @@ export default async function Home(props) {
                 </div>
               ))}
           </div>
-          <div className="py-5 mt-md-5 mt-0">
+          {/* <div className="py-5 mt-md-5 mt-0">
             <div className="text-center py-5 my-5 overlay-container">
               <img
                 src="/heroBanner.png"
@@ -351,7 +351,7 @@ export default async function Home(props) {
                 alt=""
               />
             </div>
-          </div>
+          </div> */}
 
           <div className="pt-md-5 pt-0 mt-md-5 mt-0"></div>
           <div className="py-5 my-md-5 my-0" id="contact">

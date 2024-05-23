@@ -50,7 +50,10 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
             >
               <span>Condomonk</span>
             </Link>
-            <div className="input-group input-group-search mx-1 me-md-0">
+            <div
+              className="input-group input-group-search
+             me-md-0"
+            >
               <ProjectSearch />
             </div>
             <button
