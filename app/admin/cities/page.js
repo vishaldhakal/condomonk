@@ -7,23 +7,39 @@ import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function Cities() {
-  let stat = {
-    id: 1,
+  const initialCityData = {
+    id: 0,
     name: "",
     details: "",
   };
+
   const [isEdit, setIsEdit] = useState(false);
-  const [refetch, setRefetcch] = useState(true);
-  const [citydata, setCityData] = useState(stat);
-  const [modalevent, setModalCity] = useState(false);
+  const [refetch, setRefetch] = useState(true);
+  const [citydata, setCityData] = useState(initialCityData);
+  const [modalOpen, setModalOpen] = useState(false);
   const [cities, setCities] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, [refetch]);
+
+  const fetchData = () => {
+    axios
+      .get("https://api.condomonk.ca/api/city/")
+      .then((res) => {
+        setCities(res.data.results);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handleCreateCity = (e) => {
     e.preventDefault();
-    if (citydata.name == "") {
+    if (!citydata.name.trim()) {
       swal({
         title: "Error!",
-        text: "Please enter name",
+        text: "Please enter a city name",
         icon: "error",
         button: "Ok",
       });
@@ -33,69 +49,80 @@ export default function Cities() {
     axios
       .post("https://api.condomonk.ca/api/city/", citydata)
       .then((res) => {
-        setRefetcch(!refetch);
-        setCityData(stat);
-        setModalCity(false);
+        setRefetch(!refetch);
+        setCityData(initialCityData);
+        setModalOpen(false);
+        swal({
+          text: `${citydata.name} has been created!`,
+          icon: "success",
+          timer: 1000,
+          buttons: false,
+        });
       })
       .catch((err) => {
-        console.log(err.data);
+        console.log(err);
       });
   };
 
   const handleUpdateCity = (e) => {
     e.preventDefault();
-    if (citydata.name == "") {
+    if (!citydata.name.trim()) {
       swal({
         title: "Error!",
-        text: "Please fill all the fields!",
+        text: "Please enter a city name",
         icon: "error",
         button: "Ok",
       });
       return;
     }
 
-    let updatecitydata = citydata;
     axios
-      .put(`https://api.condomonk.ca/api/city/${citydata.id}/`, updatecitydata)
+      .put(`https://api.condomonk.ca/api/city/${citydata.id}/`, citydata)
       .then((res) => {
-        setModalCity(false);
+        setModalOpen(false);
         setIsEdit(false);
-        setRefetcch(!refetch);
+        setRefetch(!refetch);
         swal({
-          text: citydata.name + " has been updated!",
+          text: `${citydata.name} has been updated!`,
           icon: "success",
           timer: 1000,
           buttons: false,
         });
-        setCityData(stat);
+        setCityData(initialCityData);
       })
       .catch((err) => {
-        console.log(err.data);
+        console.log(err);
       });
   };
 
   const handleDelete = (e, id) => {
     e.preventDefault();
-    //Create swal confirmation for confirming delete
     swal({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this event!",
+      text: "Once deleted, you will not be able to recover this city!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        deleteEvent(id);
-        swal({
-          text: "Your event has been deleted!",
-          icon: "success",
-          timer: 1000,
-          buttons: false,
-        });
+        axios
+          .delete(`https://api.condomonk.ca/api/city/${id}/`)
+          .then((res) => {
+            setRefetch(!refetch);
+            swal({
+              text: "The city has been deleted!",
+              icon: "success",
+              timer: 1000,
+              buttons: false,
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       } else {
         swal({
           title: "Cancelled!",
-          text: "Your event is safe!",
+          text: "Your city is safe!",
           icon: "error",
           timer: 1000,
           buttons: false,
@@ -103,29 +130,6 @@ export default function Cities() {
       }
     });
   };
-
-  function deleteEvent(id) {
-    axios
-      .delete(`https://api.condomonk.ca/api/city/${id}/`)
-      .then((res) => {
-        console.log(res);
-        setRefetcch(!refetch);
-      })
-      .catch((err) => {
-        console.log(err.data);
-      });
-  }
-  useEffect(() => {
-    axios
-      .get("https://api.condomonk.ca/api/city/")
-      .then((res) => {
-        console.log(res.data.results);
-        setCities(res.data.results);
-      })
-      .catch((err) => {
-        console.log(err.data);
-      });
-  }, [refetch]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -140,64 +144,62 @@ export default function Cities() {
     axios
       .get(`https://api.condomonk.ca/api/city/${id}/`)
       .then((res) => {
-        console.log(res.data);
-        setModalCity(true);
+        setModalOpen(true);
         setIsEdit(true);
         setCityData(res.data);
       })
       .catch((err) => {
-        console.log(err.data);
+        console.log(err);
       });
   };
+
   return (
     <>
-      {modalevent && (
-        <div className="modal">
-          <section className="modal-main rounded-4">
-            <div className="p-3 py-4 bg-light">
-              <div className="d-flex justify-content-between align-items-center">
-                <p className="fw-bold mb-0">Upload City</p>
+      {modalOpen && (
+        <div className="modal" tabIndex="-1">
+          <div className="modal-dialog modal-lg">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">
+                  {isEdit ? "Update City" : "Add New City"}
+                </h5>
                 <button
-                  className="btn bg-white btn-outline-danger p-1 py-0"
+                  type="button"
+                  className="btn-close"
                   onClick={() => {
-                    setModalCity(false);
-                    setCityData(stat);
+                    setModalOpen(false);
+                    setCityData(initialCityData);
                     setIsEdit(false);
                   }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="#ff0000"
-                    className="bi bi-x"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                  </svg>
-                </button>
+                ></button>
               </div>
-              <div className="py-3 mt-2">
-                <div className="row row-cols-1 gy-4">
-                  <div className="col-12">
-                    <div className="form-floating w-100">
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="name"
-                        value={citydata.name}
-                        onChange={(e) => handleChange(e)}
-                      />
-                      <label htmlFor="name">
-                        City Name <span className="text-danger">*</span>
-                      </label>
-                    </div>
+              <div className="modal-body">
+                <form>
+                  <div className="mb-3">
+                    <label htmlFor="name" className="form-label">
+                      City Name
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="name"
+                      value={citydata.name}
+                      onChange={handleChange}
+                    />
                   </div>
-                  <div className="col-12">
+                  <div className="mb-3">
+                    <label htmlFor="details" className="form-label">
+                      City Details
+                    </label>
                     <ReactQuill
                       theme="snow"
                       value={citydata.details}
-                      style={{ height: "450px", marginBottom: "80px" }}
+                      onChange={(newDetails) =>
+                        setCityData((prevState) => ({
+                          ...prevState,
+                          details: newDetails,
+                        }))
+                      }
                       modules={{
                         toolbar: [
                           [{ header: "1" }, { header: "2" }, { font: [] }],
@@ -219,7 +221,6 @@ export default function Cities() {
                           ["clean"],
                         ],
                         clipboard: {
-                          // toggle to add extra line breaks when pasting HTML:
                           matchVisual: false,
                         },
                       }}
@@ -236,57 +237,61 @@ export default function Cities() {
                         "image",
                         "video",
                       ]}
-                      onChange={(newText) =>
-                        setCityData((prevState) => ({
-                          ...prevState,
-                          ["details"]: newText,
-                        }))
-                      }
                     />
                   </div>
-                </div>
+                </form>
               </div>
-              {!isEdit && (
-                <button
-                  className="btn btn-success mt-5 d-flex justify-content-center w-100 btn-lg"
-                  onClick={(e) => handleCreateCity(e)}
-                >
-                  Submit
-                </button>
-              )}
-              {isEdit && (
-                <button
-                  className="btn btn-success mt-5 d-flex justify-content-center w-100 btn-lg"
-                  onClick={(e) => handleUpdateCity(e)}
-                >
-                  Update Now
-                </button>
-              )}
+              <div className="modal-footer">
+                {!isEdit ? (
+                  <button
+                    type="button"
+                    className="btn btn-success"
+                    onClick={handleCreateCity}
+                  >
+                    Create City
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={handleUpdateCity}
+                  >
+                    Update City
+                  </button>
+                )}
+              </div>
             </div>
-          </section>
+          </div>
         </div>
       )}
-      <div className="py-4 w-100 ">
-        <div className="row row-cols-1 row-cols-md-5 d-flex align-items-center mx-0">
-          <div className="col-md-8">
-            <h5 className="fw-bold mb-0">Cities</h5>
-          </div>
-          <div className="col-md-4 d-flex justify-content-end">
-            <button
-              className="btn btn-success py-3"
-              onClick={() => setModalCity(true)}
-            >
-              Add New City
-            </button>
+      <div className="py-4">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8">
+              <h5 className="fw-bold mb-0">Cities</h5>
+            </div>
+            <div className="col-md-4 d-flex justify-content-end">
+              <button
+                className="btn btn-success"
+                onClick={() => setModalOpen(true)}
+              >
+                Add New City
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      <div className="mt-4"></div>
-      <CityTable
-        cities={cities}
-        handleEdit={handleEdit}
-        handleDelete={handleDelete}
-      ></CityTable>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <CityTable
+              cities={cities}
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+            />
+          </div>
+        </div>
+      </div>
     </>
   );
 }

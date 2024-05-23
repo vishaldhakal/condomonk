@@ -472,7 +472,7 @@ export default async function Home({ params }) {
                       city={data.preconstruction.city.name}
                     ></SideContactForm>
                     <div className="d-flex">
-                      <p class="small-text2 mb-3 text-center">
+                      <p className="small-text2 mb-3 text-center">
                         Condomonk.ca serves as an online database for
                         pre-construction homes. Condomonk compiles a list of
                         projects available publicly on the internet and does not

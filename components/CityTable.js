@@ -12,25 +12,23 @@ const CityTable = ({ cities, handleEdit, handleDelete }) => {
         <tbody>
           {cities &&
             cities.map((city, index) => (
-              <tr>
+              <tr key={city.id}>
                 <th scope="row">{index + 1}</th>
                 <td>{city.name}</td>
                 <td>
-                  <td>
-                    <button
-                      className="btn btn-sm btn-outline-dark"
-                      onClick={(e) => handleEdit(e, city.id)}
-                    >
-                      Edit
-                    </button>
-                    <span className="mx-2"></span>
-                    <button
-                      className="btn btn-sm btn-outline-danger"
-                      onClick={(e) => handleDelete(e, city.id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
+                  <button
+                    className="btn btn-sm btn-outline-dark"
+                    onClick={(e) => handleEdit(e, city.id)}
+                  >
+                    Edit
+                  </button>
+                  <span className="mx-2"></span>
+                  <button
+                    className="btn btn-sm btn-outline-danger"
+                    onClick={(e) => handleDelete(e, city.id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
