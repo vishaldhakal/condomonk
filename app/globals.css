@@ -629,7 +629,6 @@ a:hover {
     .fs-small {
         font-size: 0.75rem !important;
         font-weight: 500 !important;
-
         box-shadow: none !important;
         color: #3e3e3e !important;
         border: 1px solid #dfdfdf !important;
