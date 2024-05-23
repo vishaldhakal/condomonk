@@ -91,7 +91,7 @@ export default async function Home(props) {
                 </span>
               </h1>
 
-              <p className="mt-3 text-base text-black sm:text-xl sm-center font-light">
+              <p className="mt-3 text-base text-black sm:text-xl sm-center font-light me-md-5 me-0">
                 Get first updates on New Construction Homes Projects across
                 Canada.
               </p>
