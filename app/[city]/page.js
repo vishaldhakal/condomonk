@@ -76,8 +76,8 @@ export default async function Home({ params }) {
               and townhomes for sale in {CapitalizeFirst(params.city)}.
             </p>
           </div>
-          <div className="d-flex sm-center mb-2 mb-lg-0 sticky-buttons pb-0 mb-0">
-            <div className="d-flex flex-column flex-md-row mb-md-4 mb-0 mt-1 overflow-hidden">
+          <div className="d-flex sm-center  mb-lg-0 sticky-buttons pb-0 mb-0">
+            <div className="d-flex flex-column flex-md-row mb-md-2 mb-0 mt-1 overflow-hidden">
               <div className="d-flex gap-2">
                 <Link
                   className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m"
@@ -108,7 +108,7 @@ export default async function Home({ params }) {
               </div>
             </div>
           </div>
-
+          <div className="mt-md-3 mt-0"></div>
           <div className="row row-cols-1 row-cols-md-4  gy-4 gx-3 gx-lg-3 ">
             {data.preconstructions &&
               filteredprojects("Selling").map((item, no) => (

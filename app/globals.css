@@ -139,7 +139,7 @@ a:hover {
     background-color: white;
     height: 70px;
 
-    position: sticky !important;
+    position: sticky;
     top: 0;
     z-index: 999;
 }
@@ -605,13 +605,22 @@ a:hover {
 }
 
 @media (max-width: 800px) {
+    .navbar-transparent {
+        background-color: white;
+        height: 70px;
+
+        position: relative;
+        top: 0;
+        z-index: 999;
+    }
+
     .sticky-buttons {
         position: -webkit-sticky;
         /* For Safari */
         position: sticky;
-        top: 60px;
+        top: 0px;
         /* Adjust this value to the current position from the top */
-        z-index: 1000;
+        z-index: 100;
         /* Ensure it stays above other content */
         background-color: white;
         /* Prevent overlap issues */
