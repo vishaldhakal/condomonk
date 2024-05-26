@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import ProjectSearch from "./ProjectSearch";
+// import ProjectSearch from "./ProjectSearch";
+import SearchSuggest from "./SerachSuggest";
 
 const Navbar = ({ cities, dropdown_cities, transparent }) => {
   const [cityname, setCityname] = useState("");
@@ -54,7 +55,8 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
               className="input-group input-group-search
              me-md-0"
             >
-              <ProjectSearch />
+              {/* <ProjectSearch /> */}
+              <SearchSuggest cities={cities} />
             </div>
             <button
               className={`navbar-toggler ${buttonClicked ? "bg-white" : ""}`}
