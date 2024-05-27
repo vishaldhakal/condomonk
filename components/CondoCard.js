@@ -22,19 +22,7 @@ export default function CondoCard(props) {
       return Math.abs(TotalDays) + " day ago ";
     }
   }
-  {
-    props.image.length > 0 ? (
-      <Image
-        loading="lazy"
-        src={`https://api.condomonk.ca${props.image[0].image}`}
-        layout="responsive"
-        className="img-fluid condocard-img-top"
-        alt={`${props.project_name} located at ${props.project_address} image`}
-      />
-    ) : (
-      <p>NO Image</p>
-    );
-  }
+
   return (
     <>
       <div className="card border-0 shadow-lg rounded-mine my-3 my-md-0 condocard bigg">
@@ -44,19 +32,23 @@ export default function CondoCard(props) {
             className="mylinkk"
             target="_blank"
           >
-            {""}
             {props.image.length > 0 ? (
-              <img
+              <Image
                 loading="lazy"
                 src={`https://api.condomonk.ca${props.image[0].image}`}
                 layout="responsive"
+                width={500}
+                height={300}
                 className="img-fluid condocard-img-top"
                 alt={`${props.project_name} located at ${props.project_address} image`}
               />
             ) : (
-              <img
+              <Image
                 loading="lazy"
                 src="/noimage.webp"
+                layout="responsive"
+                width={500}
+                height={300}
                 className="img-fluid condocard-img-top"
                 alt={`no image available for ${props.project_name}`}
               />
@@ -67,7 +59,7 @@ export default function CondoCard(props) {
           )}
           <span className="d-flex">
             <span className="shadow-lg p-1 ms-2 abs1">{props.status}</span>
-            <span className="shadow-lg p-1 mx-2  abs3">
+            <span className="shadow-lg p-1 mx-2 abs3">
               {props.project_type}
             </span>
           </span>
@@ -89,11 +81,11 @@ export default function CondoCard(props) {
             <h4 className="mb-1 text-blue-700 cardd-price">
               {checkPricing(props.price_starting_from)}
             </h4>
-            <p className=" mb-1 cardd-subtitle cardd-subtitle-sm">
+            <p className="mb-1 cardd-subtitle cardd-subtitle-sm">
               By {props.developer.name}
             </p>
             <p className="mb-1 cardd-subtitle ">{props.project_address}</p>
-            <p className=" mb-1 cardd-subtitle text-secondary">
+            <p className="mb-1 cardd-subtitle text-secondary">
               Approx completion: {props.occupancy}
             </p>
           </div>

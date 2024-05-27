@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import CondoCard from "@/components/CondoCard";
 import PreconSchema from "@/components/PreconSchema";
 import BottomContactForm from "@/components/BottomContactForm";
@@ -93,10 +94,13 @@ export default async function Home(props) {
               </p>
 
               <div className=" mt-12 lg:mt-20">
-                <img
-                  src="./search top image.png"
+                <Image
+                  src="/search top image.png"
+                  width={500}
+                  height={300}
                   className="search-top-image mx-3"
-                ></img>
+                  alt="Search top image"
+                />
               </div>
               <div className=" ">
                 <MainSearch cities={cities} />
@@ -104,10 +108,12 @@ export default async function Home(props) {
             </div>
 
             <div className="order-1 order-md-2">
-              <img
+              <Image
                 className="w-full hero-img lazy"
                 src="/hero-photo.avif"
-                alt=""
+                width={800}
+                height={600}
+                alt="Hero image"
               />
             </div>
           </div>
@@ -156,16 +162,18 @@ export default async function Home(props) {
               <div className="col">
                 <Link className="d-block properti_city" href={"/toronto"}>
                   <div className="thumb">
-                    <img
+                    <Image
                       src="/cities/toronto.jpg"
                       alt="toronto"
+                      width={400}
+                      height={300}
                       className="img-fluid lazy"
                     />
                   </div>
                   <div className="overlay">
                     <div className="details">
                       <h4>Toronto</h4>
-                      <p>Explore pre constructions projcts in Toronto</p>
+                      <p>Explore pre constructions projects in Toronto</p>
                     </div>
                   </div>
                 </Link>
@@ -173,16 +181,18 @@ export default async function Home(props) {
               <div className="col">
                 <Link className="d-block properti_city" href={"/brampton"}>
                   <div className="thumb">
-                    <img
+                    <Image
                       src="/cities/brampton.jpg"
                       alt="brampton"
+                      width={400}
+                      height={300}
                       className="img-fluid lazy"
                     />
                   </div>
                   <div className="overlay">
                     <div className="details">
                       <h4>Brampton</h4>
-                      <p>Explore pre constructions projcts in Brampton</p>
+                      <p>Explore pre constructions projects in Brampton</p>
                     </div>
                   </div>
                 </Link>
@@ -190,16 +200,18 @@ export default async function Home(props) {
               <div className="col">
                 <Link className="d-block properti_city" href={"/etobicoke"}>
                   <div className="thumb">
-                    <img
+                    <Image
                       src="/cities/etobicoke.jpg"
                       alt="etobicoke"
+                      width={400}
+                      height={300}
                       className="img-fluid lazy"
                     />
                   </div>
                   <div className="overlay">
                     <div className="details">
                       <h4>Etobicoke</h4>
-                      <p>Explore pre constructions projcts in Etobicoke</p>
+                      <p>Explore pre constructions projects in Etobicoke</p>
                     </div>
                   </div>
                 </Link>
@@ -207,16 +219,18 @@ export default async function Home(props) {
               <div className="col">
                 <Link className="d-block properti_city" href={"/calgary"}>
                   <div className="thumb">
-                    <img
+                    <Image
                       src="/cities/calgary.jpeg"
-                      alt="brampton"
+                      alt="calgary"
+                      width={400}
+                      height={300}
                       className="img-fluid lazy"
                     />
                   </div>
                   <div className="overlay">
                     <div className="details">
                       <h4>Calgary</h4>
-                      <p>Explore pre constructions projcts in Calgary</p>
+                      <p>Explore pre constructions projects in Calgary</p>
                     </div>
                   </div>
                 </Link>
@@ -224,16 +238,18 @@ export default async function Home(props) {
               <div className="col">
                 <Link className="d-block properti_city" href={"/mississauga"}>
                   <div className="thumb">
-                    <img
+                    <Image
                       src="/cities/mississauga.jpg"
                       alt="mississauga"
+                      width={400}
+                      height={300}
                       className="img-fluid lazy"
                     />
                   </div>
                   <div className="overlay">
                     <div className="details">
                       <h4>Mississauga</h4>
-                      <p>Explore pre constructions projcts in Mississauga</p>
+                      <p>Explore pre constructions projects in Mississauga</p>
                     </div>
                   </div>
                 </Link>
@@ -357,9 +373,11 @@ export default async function Home(props) {
           <div className="py-5 my-md-5 my-0" id="contact">
             <div className="container">
               <div className="row justify-content-center">
-                <img
+                <Image
                   src="/contact-bottom-2.png"
-                  alt="dce lazy"
+                  alt="Contact bottom"
+                  width={300}
+                  height={200}
                   className="img-fluid w-25 w-smm-50 mb-3"
                 />
               </div>
