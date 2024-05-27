@@ -104,7 +104,11 @@ export default async function Home(props) {
             </div>
 
             <div className="order-1 order-md-2">
-              <img className="w-full hero-img" src="/hero-photo.avif" alt="" />
+              <img
+                className="w-full hero-img lazy"
+                src="/hero-photo.avif"
+                alt=""
+              />
             </div>
           </div>
         </div>
@@ -155,7 +159,7 @@ export default async function Home(props) {
                     <img
                       src="/cities/toronto.jpg"
                       alt="toronto"
-                      className="img-fluid"
+                      className="img-fluid lazy"
                     />
                   </div>
                   <div className="overlay">
@@ -172,7 +176,7 @@ export default async function Home(props) {
                     <img
                       src="/cities/brampton.jpg"
                       alt="brampton"
-                      className="img-fluid"
+                      className="img-fluid lazy"
                     />
                   </div>
                   <div className="overlay">
@@ -189,7 +193,7 @@ export default async function Home(props) {
                     <img
                       src="/cities/etobicoke.jpg"
                       alt="etobicoke"
-                      className="img-fluid"
+                      className="img-fluid lazy"
                     />
                   </div>
                   <div className="overlay">
@@ -206,7 +210,7 @@ export default async function Home(props) {
                     <img
                       src="/cities/calgary.jpeg"
                       alt="brampton"
-                      className="img-fluid"
+                      className="img-fluid lazy"
                     />
                   </div>
                   <div className="overlay">
@@ -223,7 +227,7 @@ export default async function Home(props) {
                     <img
                       src="/cities/mississauga.jpg"
                       alt="mississauga"
-                      className="img-fluid"
+                      className="img-fluid lazy"
                     />
                   </div>
                   <div className="overlay">
@@ -355,7 +359,7 @@ export default async function Home(props) {
               <div className="row justify-content-center">
                 <img
                   src="/contact-bottom-2.png"
-                  alt="dce"
+                  alt="dce lazy"
                   className="img-fluid w-25 w-smm-50 mb-3"
                 />
               </div>
