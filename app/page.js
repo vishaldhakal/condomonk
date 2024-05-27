@@ -1,12 +1,8 @@
-import CondoCardHome from "@/components/CondoCardHome";
 import Link from "next/link";
 import CondoCard from "@/components/CondoCard";
-import SearchBar from "@/components/SearchBar";
 import PreconSchema from "@/components/PreconSchema";
 import BottomContactForm from "@/components/BottomContactForm";
-
 import MainSearch from "@/components/MainSearch";
-import Navbar2 from "@/components/Navbar2";
 import "./icons.css";
 
 async function getData(city) {
