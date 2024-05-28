@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import CondoCard from "@/components/CondoCard";
 import PreconSchema from "@/components/PreconSchema";
 import BottomContactForm from "@/components/BottomContactForm";
@@ -93,12 +93,10 @@ export default async function Home(props) {
                 Canada.
               </p>
 
-              <div className=" mt-12 lg:mt-20">
-                <Image
+              <div className=" mt-12 lg:mt-20 ">
+                <img
                   src="/search top image.png"
-                  width={500}
-                  height={300}
-                  className="search-top-image mx-3"
+                  className="search-top-image mx-3 img-fluid"
                   alt="Search top image"
                 />
               </div>
@@ -108,11 +106,9 @@ export default async function Home(props) {
             </div>
 
             <div className="order-1 order-md-2">
-              <Image
+              <img
                 className="w-full hero-img lazy"
                 src="/hero-photo.avif"
-                width={800}
-                height={600}
                 alt="Hero image"
               />
             </div>
@@ -166,7 +162,7 @@ export default async function Home(props) {
                       src="/cities/toronto.jpg"
                       alt="toronto"
                       width={400}
-                      height={300}
+                      height={600}
                       className="img-fluid lazy"
                     />
                   </div>
@@ -185,7 +181,7 @@ export default async function Home(props) {
                       src="/cities/brampton.jpg"
                       alt="brampton"
                       width={400}
-                      height={300}
+                      height={600}
                       className="img-fluid lazy"
                     />
                   </div>
@@ -204,7 +200,7 @@ export default async function Home(props) {
                       src="/cities/etobicoke.jpg"
                       alt="etobicoke"
                       width={400}
-                      height={300}
+                      height={600}
                       className="img-fluid lazy"
                     />
                   </div>
@@ -223,7 +219,7 @@ export default async function Home(props) {
                       src="/cities/calgary.jpeg"
                       alt="calgary"
                       width={400}
-                      height={300}
+                      height={600}
                       className="img-fluid lazy"
                     />
                   </div>
@@ -242,7 +238,7 @@ export default async function Home(props) {
                       src="/cities/mississauga.jpg"
                       alt="mississauga"
                       width={400}
-                      height={300}
+                      height={600}
                       className="img-fluid lazy"
                     />
                   </div>
@@ -377,7 +373,7 @@ export default async function Home(props) {
                   src="/contact-bottom-2.png"
                   alt="Contact bottom"
                   width={300}
-                  height={200}
+                  height={250}
                   className="img-fluid w-25 w-smm-50 mb-3"
                 />
               </div>
