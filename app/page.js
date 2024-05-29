@@ -168,6 +168,7 @@ export default async function Home(props) {
                       width={400}
                       height={600}
                       className="img-fluid lazy"
+                      priority
                     />
                   </div>
                   <div className="overlay">
@@ -187,6 +188,7 @@ export default async function Home(props) {
                       width={400}
                       height={600}
                       className="img-fluid lazy"
+                      priority
                     />
                   </div>
                   <div className="overlay">
@@ -206,6 +208,7 @@ export default async function Home(props) {
                       width={400}
                       height={600}
                       className="img-fluid lazy"
+                      priority
                     />
                   </div>
                   <div className="overlay">
@@ -225,6 +228,7 @@ export default async function Home(props) {
                       width={400}
                       height={600}
                       className="img-fluid lazy"
+                      priority
                     />
                   </div>
                   <div className="overlay">
@@ -244,6 +248,7 @@ export default async function Home(props) {
                       width={400}
                       height={600}
                       className="img-fluid lazy"
+                      priority
                     />
                   </div>
                   <div className="overlay">

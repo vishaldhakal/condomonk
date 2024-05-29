@@ -41,6 +41,7 @@ export default function CondoCard(props) {
                 height={500}
                 className="img-fluid condocard-img-top"
                 alt={`${props.project_name} located at ${props.project_address} image`}
+                priority
               />
             ) : (
               <Image
@@ -51,6 +52,7 @@ export default function CondoCard(props) {
                 height={500}
                 className="img-fluid condocard-img-top"
                 alt={`no image available for ${props.project_name}`}
+                priority
               />
             )}
           </Link>
