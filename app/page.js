@@ -74,16 +74,15 @@ export default async function Home(props) {
         <div className=" mt-lg-5 mt-0">
           <div className="grid items-center  grid-cols-1 gap-12 lg:grid-cols-2 ">
             <div className="order-md-1 order-2 ">
-              <h1 className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl sm-center font-family2">
+              <h1 className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl font-family2">
                 Canada's leading
-                <div className="relative inline-flex sm-center">
-                  <span className="absolute inset-x-0 bottom-0 border-b-[30px] border-blue-500"></span>
-                  <span className="relative text-3xl font-bold text-black sm:text-6xl lg:text-7xl ">
+                <div className="relative inline-block">
+                  <span className="absolute inset-x-0 bottom-0 h-[30px] bg-blue-500"></span>
+                  <span className="relative text-3xl font-bold text-black sm:text-6xl lg:text-7xl">
                     pre construction
                   </span>
                 </div>
                 <span className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl">
-                  {" "}
                   homes Platform
                 </span>
               </h1>
