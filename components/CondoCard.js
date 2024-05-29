@@ -33,26 +33,20 @@ export default function CondoCard(props) {
             target="_blank"
           >
             {props.image.length > 0 ? (
-              <Image
+              <img
                 loading="lazy"
                 src={`https://api.condomonk.ca${props.image[0].image}`}
                 layout="responsive"
-                width={500}
-                height={500}
                 className="img-fluid condocard-img-top"
                 alt={`${props.project_name} located at ${props.project_address} image`}
-                priority
               />
             ) : (
-              <Image
+              <img
                 loading="lazy"
                 src="/noimage.webp"
                 layout="responsive"
-                width={500}
-                height={500}
                 className="img-fluid condocard-img-top"
                 alt={`no image available for ${props.project_name}`}
-                priority
               />
             )}
           </Link>

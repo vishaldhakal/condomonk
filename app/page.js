@@ -106,14 +106,11 @@ export default async function Home(props) {
             </div>
 
             <div className="order-1 order-md-2">
-              <Image
+              <img
                 className="w-full hero-img"
                 src="/hero-photo.avif"
                 alt="Hero image"
                 layout="responsive"
-                width={500}
-                height={450}
-                priority
               />
             </div>
           </div>
@@ -162,13 +159,10 @@ export default async function Home(props) {
               <div className="col">
                 <Link className="d-block properti_city" href={"/toronto"}>
                   <div className="thumb">
-                    <Image
+                    <img
                       src="/cities/toronto.jpg"
                       alt="toronto"
-                      width={400}
-                      height={600}
                       className="img-fluid lazy"
-                      priority
                     />
                   </div>
                   <div className="overlay">
@@ -182,13 +176,10 @@ export default async function Home(props) {
               <div className="col">
                 <Link className="d-block properti_city" href={"/brampton"}>
                   <div className="thumb">
-                    <Image
+                    <img
                       src="/cities/brampton.jpg"
                       alt="brampton"
-                      width={400}
-                      height={600}
                       className="img-fluid lazy"
-                      priority
                     />
                   </div>
                   <div className="overlay">
@@ -202,13 +193,10 @@ export default async function Home(props) {
               <div className="col">
                 <Link className="d-block properti_city" href={"/etobicoke"}>
                   <div className="thumb">
-                    <Image
+                    <img
                       src="/cities/etobicoke.jpg"
                       alt="etobicoke"
-                      width={400}
-                      height={600}
                       className="img-fluid lazy"
-                      priority
                     />
                   </div>
                   <div className="overlay">
@@ -222,13 +210,10 @@ export default async function Home(props) {
               <div className="col">
                 <Link className="d-block properti_city" href={"/calgary"}>
                   <div className="thumb">
-                    <Image
+                    <img
                       src="/cities/calgary.jpeg"
                       alt="calgary"
-                      width={400}
-                      height={600}
                       className="img-fluid lazy"
-                      priority
                     />
                   </div>
                   <div className="overlay">
@@ -242,13 +227,10 @@ export default async function Home(props) {
               <div className="col">
                 <Link className="d-block properti_city" href={"/mississauga"}>
                   <div className="thumb">
-                    <Image
+                    <img
                       src="/cities/mississauga.jpg"
                       alt="mississauga"
-                      width={400}
-                      height={600}
                       className="img-fluid lazy"
-                      priority
                     />
                   </div>
                   <div className="overlay">
