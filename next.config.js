@@ -1,6 +1,13 @@
 module.exports = {
   images: {
-    domains: ["api.condomonk.ca"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "api.condomonk.ca",
+        port: "",
+        pathname: "/media/**",
+      },
+    ],
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {

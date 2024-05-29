@@ -106,10 +106,14 @@ export default async function Home(props) {
             </div>
 
             <div className="order-1 order-md-2">
-              <img
-                className="w-full hero-img lazy"
+              <Image
+                className="w-full hero-img"
                 src="/hero-photo.avif"
                 alt="Hero image"
+                layout="responsive"
+                width={500}
+                height={450}
+                priority
               />
             </div>
           </div>

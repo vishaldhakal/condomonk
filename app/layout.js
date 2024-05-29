@@ -25,11 +25,6 @@ export const metadata = {
     shortcut: "/shortcut-icon.png",
     apple: "/apple-icon.png",
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
   robots: {
     index: true,
     follow: true,
@@ -40,6 +35,12 @@ export const metadata = {
     },
   },
   category: "real estate",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 async function getCities() {

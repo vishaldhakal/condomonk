@@ -1,67 +1,53 @@
-@tailwind base;
-@tailwind components;
+@tailwind base @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
-
+@import url(https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap);
 
 :root {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth
 }
 
-
 body {
-    background: #ffffff !important;
-    /* font-family: 'Poppins', sans-serif !important; */
-    /* font-family: 'Genos', sans-serif !important; */
+    background: #fff !important;
     font-family: "Arimo", sans-serif;
-    font-weight: 500;
+    font-weight: 500
 }
 
 .container {
-    padding-left: 0rem !important;
-    padding-right: 0rem !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important
 }
 
-
-
 .font-family2 {
-    font-family: "Merriweather", serif !important;
-
+    font-family: "Merriweather", serif !important
 }
 
 a {
     color: #161f69;
-    text-decoration: none !important;
+    text-decoration: none !important
 }
 
 .social-links a {
-    color: #000 !important;
+    color: #000 !important
 }
 
 .social-links .bi {
-    font-size: 20px;
+    font-size: 20px
 }
 
 a:hover {
     color: #717ff5;
-    text-decoration: none !important;
+    text-decoration: none !important
 }
-
-
-/*--------------------------------------------------------------
-# Main
---------------------------------------------------------------*/
 
 #main {
     margin-top: 60px;
     padding: 20px 30px;
-    transition: all 0.3s;
+    transition: all .3s
 }
 
 @media (max-width: 1199px) {
     #main {
-        padding: 20px;
+        padding: 20px
     }
 }
 
@@ -69,18 +55,18 @@ a:hover {
 
     #main,
     #footer {
-        margin-left: 300px;
+        margin-left: 300px
     }
 }
 
 .link-black,
 .link-black:hover {
-    color: #000 !important;
+    color: #000 !important
 }
 
 @media (min-width: 1200px) {
     .fs-big {
-        font-size: 4rem !important;
+        font-size: 4rem !important
     }
 
     .popup-container {
@@ -88,36 +74,28 @@ a:hover {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: white;
+        background-color: #fff;
         padding: 20px;
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        z-index: 1000;
+        z-index: 1000
     }
 }
-
-
-/*--------------------------------------------------------------
-# Override some default Bootstrap stylings
---------------------------------------------------------------*/
-
-
-/* Dropdown menus */
 
 @media (min-width: 1200px) {
     .nav-item:hover .dropdown-menu {
         display: block;
         animation-name: dropdown-animate;
-        animation-duration: 0.2s;
+        animation-duration: .2s;
         animation-fill-mode: both;
         border: 0;
         box-shadow: 0 5px 30px 0 rgba(82, 63, 105, 0.2);
-        width: 520px;
+        width: 520px
     }
 
     .overlay-container {
         position: relative;
-        max-width: 100%;
+        max-width: 100%
     }
 
     .overlay-content {
@@ -126,152 +104,119 @@ a:hover {
         left: 18%;
         transform: translate(-50%, -50%);
         text-align: center;
-        color: #000000;
-        /* Adjust text color based on your image */
+        color: #000
     }
 
     .btn-contact-now {
-        background-color: #000000 !important;
-        /* Adjust button color */
-        color: #ffffff !important;
+        background-color: #000 !important;
+        color: #fff !important
     }
 }
 
 .navbar-transparent {
-    background-color: white;
+    background-color: #fff;
     height: 70px;
-
     position: sticky;
     top: 0;
-    z-index: 999;
+    z-index: 999
 }
 
 .navbar-transparent.active {
-    background-color: white;
+    background-color: #fff
 }
 
 .bg-white {
-    background-color: white !important;
+    background-color: #fff !important
 }
 
 .collapse.bg-white .navbar-nav .nav-link,
 .collapse.bg-white .dropdown-menu,
 .collapse.bg-white {
-    background-color: white !important;
+    background-color: #fff !important
 }
-
-
-
-/* Apply white background when scrolled */
 
 .navbar2.whiteBackground {
-    background-color: white !important;
+    background-color: #fff !important
 }
-
-
-/* Set styles for nav links and logo */
 
 .navbar2-nav .nav-item .nav-link {
     font-weight: 400;
-    color: white !important;
-    /* Set default color to white */
+    color: #fff !important
 }
 
 .logo2 span {
     font-size: 30px;
     font-weight: 800;
-    color: white;
-    /* Set default color to white */
+    color: #fff
 }
-
-
-/* Apply white background when scrolled */
-
-
-/* Set styles for nav links and logo */
 
 .navbar-nav .nav-item .nav-link {
     font-weight: 500;
-    color: rgb(0, 0, 0) !important;
-    /* font-size: 0.85rem; */
-    /* Set default color to white */
+    color: #000 !important
 }
 
 .logo span {
     font-size: 40px;
     font-weight: 800;
-    color: rgb(0, 0, 0);
-
+    color: #000
 }
 
 @media screen and (max-width: 2560px) and (min-width: 1440px) {
     .navbar-nav .nav-item .nav-link {
-        font-size: 0.9rem;
-        /* Adjust as needed */
-        color: rgb(34, 34, 34) !important;
-        /* Adjust as needed */
+        font-size: .9rem;
+        color: #222 !important
     }
 
     .logo span {
         font-size: 36px;
-        /* Adjust as needed */
-        color: rgb(34, 34, 34);
-        /* Adjust as needed */
+        color: #222
     }
 
     .w-mine5 {
         width: 300px !important;
         border-radius: 20px;
         background-color: #f5f5f5 !important;
-        font-size: 14px;
+        font-size: 14px
     }
 }
 
-/* Media query for 24-inch desktop screen */
 @media screen and (min-width: 1920px) {
     .navbar-nav .nav-item .nav-link {
         font-size: 1rem;
         margin-left: 20px;
-        /* Adjust as needed */
-        color: rgb(51, 51, 51) !important;
-        /* Adjust as needed */
+        color: #333 !important
     }
 
     .logo span {
         font-size: 35px;
-        /* Adjust as needed */
-        color: rgb(51, 51, 51);
-        /* Adjust as needed */
+        color: #333
     }
 
     .logo {
-        width: 250px !important;
+        width: 250px !important
     }
 }
 
 .flogo span {
     font-size: 25px;
     font-weight: 800;
-    color: rgb(0, 0, 0);
+    color: #000
 }
 
 .w-mine5 {
     width: 260px !important;
     border-radius: 20px;
     background-color: #f5f5f5 !important;
-    font-size: 14px;
+    font-size: 14px
 }
-
-
-/* Update styles when the navbar has a white background */
 
 .navbar.whiteBackground .navbar-nav .nav-item .nav-link,
 .navbar.whiteBackground .logo span {
-    color: black !important;
+    color: #000 !important
 }
 
 .nav-item:hover .dropdown-menu .dropdown-item:hover {
-    background-color: #f6f9ff;
+    background-color: #f6f9ff
 }
 
 .dropdown-menu {
@@ -282,41 +227,40 @@ a:hover {
     transform: translateX(-25%);
     z-index: 1000;
     border-radius: 4px;
-    padding: 10px 0;
+    padding: 10px 0
 }
 
 .dropdown-menu .dropdown-header,
 .dropdown-menu .dropdown-footer {
     text-align: center;
     font-size: 15px;
-    padding: 10px 25px;
+    padding: 10px 25px
 }
 
 .dropdown-menu .dropdown-footer a {
-    color: #444444;
-    text-decoration: underline;
+    color: #444;
+    text-decoration: underline
 }
 
 .dropdown-menu .dropdown-footer a:hover {
-    text-decoration: none;
+    text-decoration: none
 }
 
 .dropdown-menu .dropdown-divider {
     color: #a5c5fe;
-    margin: 0;
+    margin: 0
 }
 
 .dropdown-menu .dropdown-item {
     font-size: 16px;
-    padding: 10px 10px;
-    transition: 0.3s;
+    padding: 10px;
+    transition: .3s
 }
 
 .dropdown-menu .dropdown-item i {
-
-    margin-right: 0px;
+    margin-right: 0;
     font-size: 14px;
-    line-height: 0;
+    line-height: 0
 }
 
 @media (min-width: 768px) {
@@ -330,74 +274,64 @@ a:hover {
         right: 20px;
         transform: rotate(45deg);
         border-top: 1px solid #eaedf1;
-        border-left: 1px solid #eaedf1;
+        border-left: 1px solid #eaedf1
     }
-
 }
 
 @keyframes dropdown-animate {
     0% {
-        opacity: 0;
+        opacity: 0
     }
 
     100% {
-        opacity: 1;
+        opacity: 1
     }
 
     0% {
-        opacity: 0;
+        opacity: 0
     }
 }
 
-
-/* Adjust the styles as needed for your specific design */
-
-
-/* Light Backgrounds */
-
 .bg-primary-light {
     background-color: #cfe2ff;
-    border-color: #cfe2ff;
+    border-color: #cfe2ff
 }
 
 .bg-secondary-light {
     background-color: #e2e3e5;
-    border-color: #e2e3e5;
+    border-color: #e2e3e5
 }
 
 .bg-success-light {
     background-color: #d1e7dd;
-    border-color: #d1e7dd;
+    border-color: #d1e7dd
 }
 
 .bg-danger-light {
     background-color: #f8d7da;
-    border-color: #f8d7da;
+    border-color: #f8d7da
 }
 
 .bg-warning-light {
     background-color: #fff3cd;
-    border-color: #fff3cd;
+    border-color: #fff3cd
 }
 
 .bg-info-light {
     background-color: #cff4fc;
-    border-color: #cff4fc;
+    border-color: #cff4fc
 }
 
 .bg-dark-light {
     background-color: #d3d3d4;
-    border-color: #d3d3d4;
+    border-color: #d3d3d4
 }
-
-
-/* Card */
 
 .card {
     margin-bottom: 30px;
     border: none;
     border-radius: 10px !important;
-    box-shadow: 10px 10px 30px rgba(8, 15, 27, 0.1);
+    box-shadow: 10px 10px 30px rgba(8, 15, 27, 0.1)
 }
 
 .card-header,
@@ -405,337 +339,306 @@ a:hover {
     border-color: #ebeef4;
     background-color: #fff;
     color: #798eb3;
-    padding: 15px;
+    padding: 15px
 }
 
 .card-title {
-    padding: 20px 0 15px 0;
+    padding: 20px 0 15px;
     font-size: 18px;
     font-weight: 500;
     color: #012970;
-    font-family: "Poppins", sans-serif;
+    font-family: "Poppins", sans-serif
 }
 
 .card-title span {
     color: #899bbd;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 400
 }
 
 .card-body {
-    padding: 0 20px 20px 20px;
+    padding: 0 20px 20px
 }
 
 .card-img-overlay {
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.6)
 }
-
-
-/* Alerts */
 
 .alert-heading {
     font-weight: 500;
     font-family: "Poppins", sans-serif;
-    font-size: 20px;
+    font-size: 20px
 }
 
 .small-text2 {
     font-size: 9px;
     line-height: 1.5;
-
-    color: #000;
+    color: #000
 }
 
 .form-color {
-    background-color: #f7fffb;
+    background-color: #f7fffb
 }
 
-/* Close Button */
-
 .btn-close {
-    background-size: 25%;
+    background-size: 25%
 }
 
 .btn-close:focus {
     outline: 0;
-    box-shadow: none;
+    box-shadow: none
 }
 
-
-/* Accordion */
-
 .accordion-item {
-    border: 1px solid #ebeef4;
+    border: 1px solid #ebeef4
 }
 
 .accordion-button:focus {
     outline: 0;
-    box-shadow: none;
+    box-shadow: none
 }
 
 .accordion-button:not(.collapsed) {
     color: #012970;
-    background-color: #f6f9ff;
+    background-color: #f6f9ff
 }
 
 .accordion-flush .accordion-button {
     padding: 15px 0;
     background: none;
-    border: 0;
+    border: 0
 }
 
 .accordion-flush .accordion-button:not(.collapsed) {
     box-shadow: none;
-    color: #4154f1;
+    color: #4154f1
 }
 
 .accordion-flush .accordion-body {
-    padding: 0 0 15px 0;
+    padding: 0 0 15px;
     color: #3e4f6f;
-    font-size: 15px;
+    font-size: 15px
 }
 
 .collapse {
     display: none;
-    visibility: visible;
+    visibility: visible
 }
 
 .collapse.show {
     display: block;
-    visibility: visible;
+    visibility: visible
 }
-
-
-/* Breadcrumbs */
 
 .breadcrumb {
     font-size: 14px;
     font-family: "Nunito", sans-serif;
     color: #899bbd;
-    font-weight: 600;
+    font-weight: 600
 }
 
 .breadcrumb a {
     color: #899bbd;
-    transition: 0.3s;
+    transition: .3s
 }
 
 .breadcrumb a:hover {
-    color: #51678f;
+    color: #51678f
 }
 
 .breadcrumb .breadcrumb-item::before {
-    color: #899bbd;
+    color: #899bbd
 }
 
 .breadcrumb .active {
     color: #51678f;
-    font-weight: 600;
+    font-weight: 600
 }
 
-
-/* Bordered Tabs */
-
 .nav-tabs-bordered {
-    border-bottom: 2px solid #ebeef4;
+    border-bottom: 2px solid #ebeef4
 }
 
 .nav-tabs-bordered .nav-link {
     margin-bottom: -2px;
     border: none;
-    color: #2c384e;
+    color: #2c384e
 }
 
 .nav-tabs-bordered .nav-link:hover,
 .nav-tabs-bordered .nav-link:focus {
-    color: #4154f1;
+    color: #4154f1
 }
 
 .nav-tabs-bordered .nav-link.active {
     background-color: #fff;
     color: #4154f1;
-    border-bottom: 2px solid #4154f1;
+    border-bottom: 2px solid #4154f1
 }
 
-
-/*--------------------------------------------------------------
-# Header
---------------------------------------------------------------*/
-
 .logo {
-    line-height: 1;
+    line-height: 1
 }
 
 .muuuu {
     padding-left: 10px;
-    width: 270px;
+    width: 270px
 }
 
 .muuuuu {
     width: 550px;
-    margin-bottom: 2rem !important;
+    margin-bottom: 2rem !important
 }
 
 .muuuuu input {
-    height: 4rem !important;
+    height: 4rem !important
 }
 
 .zzz {
-    z-index: 99999 !important;
+    z-index: 99999 !important
 }
 
 .small-i {
-    height: 13px;
+    height: 13px
 }
 
 .partner-img {
-    max-height: 100px !important;
+    max-height: 100px !important
 }
 
 .bva2 {
     font-size: 8px;
-    text-align: center;
+    text-align: center
 }
 
 .search-top-image {
-    width: 500px;
+    width: 500px
 }
 
 .sticky-buttons {
     position: -webkit-sticky;
-    /* For Safari */
     position: sticky;
     top: 70px;
-    /* Adjust this value to the current position from the top */
     z-index: 100;
-    /* Ensure it stays above other content */
-    background-color: white;
-    /* Prevent overlap issues */
+    background-color: #fff
 }
 
 @media (max-width: 768px) {
     .container {
         padding-left: 1rem !important;
-        padding-right: 1rem !important;
+        padding-right: 1rem !important
     }
 
     .navbar-transparent {
-        background-color: white;
+        background-color: #fff;
         height: 70px;
-
         position: relative;
         top: 0;
-        z-index: 999;
+        z-index: 999
     }
 
     .sticky-buttons {
         position: -webkit-sticky;
-        /* For Safari */
         position: sticky;
-        top: 0px;
-        /* Adjust this value to the current position from the top */
+        top: 0;
         z-index: 100;
-        /* Ensure it stays above other content */
-        background-color: white;
-        /* Prevent overlap issues */
+        background-color: #fff
     }
 
     .fs-small {
-        font-size: 0.75rem !important;
+        font-size: .75rem !important;
         font-weight: 500 !important;
         box-shadow: none !important;
         color: #3e3e3e !important;
         border: 1px solid #dfdfdf !important;
-        background-color: #fff !important;
+        background-color: #fff !important
     }
 
     .search-top-image {
-        width: 350px !important;
+        width: 350px !important
     }
-
 
     .sm-center {
         text-align: center;
-        justify-content: center;
+        justify-content: center
     }
 
     .muuuuu {
-        width: 100%;
+        width: 100%
     }
 
     .muuuu {
-        width: 180px;
+        width: 180px
     }
 
     .logo span {
         font-size: 26px !important;
         font-weight: 800;
-        color: #000000;
+        color: #000
     }
 
     .fs-mine {
         font-size: 1.7rem !important;
-        margin-bottom: 10px !important;
+        margin-bottom: 10px !important
     }
 
     .fs-big {
         font-size: 3rem !important;
         font-weight: 800 !important;
-        color: #2c2c2c !important;
+        color: #2c2c2c !important
     }
 
     .fs-gta {
         font-size: 1.7rem !important;
         font-weight: 800 !important;
-        color: #2c2c2c !important;
+        color: #2c2c2c !important
     }
 
     .dropdown-fullwidth {
-        position: static !important;
+        position: static !important
     }
 
     .dropdown-fullwidth .dropdown-menu {
-        max-width: 100% !important;
+        max-width: 100% !important
     }
 
     .dropdown-menu[data-bs-popper] {
-        top: 36% !important;
+        top: 36% !important
     }
 
     .fs-top {
         font-size: 2rem;
         padding-bottom: 0 !important;
         scale: 1;
-        text-shadow: none;
+        text-shadow: none
     }
 
     .fs-md-2 {
-        font-size: 1.3rem !important;
+        font-size: 1.3rem !important
     }
 
     .fs-line {
-        font-size: 2rem;
+        font-size: 2rem
     }
 
     .agent-img {
-        max-height: 68px !important;
+        max-height: 68px !important
     }
 
     .fs-5 {
-        font-size: 1.1rem;
+        font-size: 1.1rem
     }
 
     .grid-item1 {
         grid-area: 1 / 1/ 2/ 5 !important;
-        /* Spanning two rows and two columns */
-        height: 420px;
+        height: 420px
     }
 
     .grid-item2,
     .grid-item3,
     .grid-item4,
     .grid-item5 {
-        max-height: 100px !important;
+        max-height: 100px !important
     }
 
     .grid-cont>div:first-child {
@@ -743,21 +646,20 @@ a:hover {
         gap: 10px 10px;
         z-index: 98 !important;
         grid-template-columns: repeat(4, 1fr) !important;
-        grid-template-rows: auto auto !important;
-        /* Two rows */
+        grid-template-rows: auto auto !important
     }
 
     .g-item:nth-child(n+6) {
-        display: none !important;
+        display: none !important
     }
 
     .react-autosuggest__input {
         width: 180px !important;
-        border-radius: 7px !important;
+        border-radius: 7px !important
     }
 
     .react-autosuggest__input::placeholder {
-        font-size: 1rem !important;
+        font-size: 1rem !important
     }
 
     .ww .react-autosuggest__input {
@@ -765,16 +667,16 @@ a:hover {
         right: 0;
         width: 300px !important;
         height: 60px !important;
-        padding: 20px 20px;
+        padding: 20px;
         font-weight: 300;
         font-size: 16px;
         border: none;
         border-radius: 0 !important;
-        border-radius: 99px !important;
+        border-radius: 99px !important
     }
 
     .ww .react-autosuggest__input::placeholder {
-        font-size: 1rem !important;
+        font-size: 1rem !important
     }
 
     .ww .react-autosuggest__suggestions-container--open {
@@ -786,36 +688,35 @@ a:hover {
         background-color: #fff;
         font-weight: 300;
         font-size: 16px;
-        box-shadow: 0 1rem 2rem 2px rgb(0 0 0 / 15%);
+        box-shadow: 0 1rem 2rem 2px #000;
         border-radius: 5px;
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
-        z-index: 2;
+        z-index: 2
     }
 
     .main-title {
         text-align: center;
-        letter-spacing: 0.5px;
+        letter-spacing: .5px;
         line-height: 2.7rem !important;
         font-weight: 900;
         margin-bottom: 10px;
         font-size: 2.6rem !important;
-        text-align: center;
-
+        text-align: center
     }
 
     .sm-center .titlee {
-        font-size: 0.9rem !important;
-        color: #ffffff;
+        font-size: .9rem !important;
+        color: #fff
     }
 
     #hero {
         width: 100%;
         height: 90vh !important;
-        background: linear-gradient(rgba(74, 73, 73, 0.5), rgba(40, 37, 37, 0.2)), url("/heroo.webp");
+        background: linear-gradient(rgba(74, 73, 73, 0.5), rgba(40, 37, 37, 0.2)), url(/heroo.webp);
         background-size: cover;
         background-position: center;
-        position: relative;
+        position: relative
     }
 
     #hero .hero-container {
@@ -824,14 +725,14 @@ a:hover {
         height: 100vh !important;
         justify-content: center;
         flex-direction: column;
-        margin-left: 0px !important;
-        margin-right: 0px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important
     }
 
     .bg-light2 {
         background-color: #f5f5f5;
         height: 45px !important;
-        display: none !important;
+        display: none !important
     }
 
     .fixcontact {
@@ -843,27 +744,26 @@ a:hover {
         position: fixed;
         z-index: 9999;
         display: block !important;
-        background-color: #3774f7 !important;
+        background-color: #3774f7 !important
     }
 
     .overlay-container {
         position: relative;
-        max-width: 100%;
+        max-width: 100%
     }
 
     .overlay-content {
         position: absolute;
         transform: translate(-50%, -50%);
         text-align: center !important;
-        color: #000000;
+        color: #000;
         white-space: nowrap !important;
-        display: none !important;
-        /* Adjust text color based on your image */
+        display: none !important
     }
 
     .two-column-list {
         columns: 1 !important;
-        list-style: none;
+        list-style: none
     }
 
     .two-column-list li {
@@ -871,41 +771,40 @@ a:hover {
         margin-bottom: 10px;
         text-align: center !important;
         justify-content: center !important;
-        align-items: center !important;
+        align-items: center !important
     }
 
     .container {
         padding-left: 1.1rem;
-        padding-right: 1.1rem;
+        padding-right: 1.1rem
     }
 
     .cardd-title {
         font-size: 1.9rem !important;
-        font-weight: 800;
+        font-weight: 800
     }
 
     .cardd-subtitle-sm {
-        font-size: 0.8rem !important;
+        font-size: .8rem !important;
         font-weight: 400;
-        color: rgb(0, 0, 0);
+        color: #000
     }
 
     .cardd-subtitle {
-        font-size: 0.95rem !important;
+        font-size: .95rem !important;
         font-weight: 400;
-        color: rgb(0, 0, 0);
+        color: #000
     }
 
     .cardd-subtitle {
-        font-size: 0.8rem;
+        font-size: .8rem;
         font-weight: 400;
-        color: rgb(0, 0, 0);
+        color: #000
     }
 
     .cardd-price {
         font-size: 1.1rem !important;
-        font-weight: 700 !important;
-
+        font-weight: 700 !important
     }
 
     .abs1 {
@@ -914,44 +813,43 @@ a:hover {
         left: 10px;
         background-color: #2ccc66;
         border-radius: 5px;
-        color: white;
-        font-size: 0.9rem !important;
+        color: #fff;
+        font-size: .9rem !important
     }
 
     .abs3 {
         position: relative;
         bottom: 40px !important;
         left: 10px;
-        background-color: #ffffff;
+        background-color: #fff;
         border-radius: 5px;
-        color: rgb(0, 0, 0);
-        font-size: 0.9rem !important;
+        color: #000;
+        font-size: .9rem !important
     }
 
     .hero-img {
         width: 100%;
         height: 400px !important;
         object-fit: cover;
-        border-radius: 50px;
-
+        border-radius: 50px
     }
 }
 
 @media (min-width: 1200px) {
     .logo {
-        width: 200px;
+        width: 200px
     }
 
     .textt {
         justify-content: center;
         max-width: 640px;
-        margin: 0 auto;
+        margin: 0 auto
     }
 
     .texttt {
         justify-content: center;
         max-width: 840px;
-        margin: 0 auto;
+        margin: 0 auto
     }
 }
 
@@ -959,13 +857,12 @@ a:hover {
     width: 100%;
     height: 600px;
     object-fit: cover;
-    border-radius: 20px;
-
+    border-radius: 20px
 }
 
 .custom-button {
-    color: white;
-    background-color: rgb(234, 58, 58);
+    color: #fff;
+    background-color: #ea3a3a;
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
@@ -974,72 +871,64 @@ a:hover {
     border: none;
     font-size: 16px;
     margin-bottom: 30px;
-    /* 3D Effect */
     position: relative;
-    box-shadow: 0 7px 0 rgb(148, 42, 42);
-    /* Darker shadow for bottom */
-    transition: all 0.3s ease;
+    box-shadow: 0 7px 0 #942a2a;
+    transition: all .3s ease
 }
 
 .custom-button:hover {
-    box-shadow: 0 2px 0 rgb(176, 43, 43);
-    /* Lighter shadow on hover */
-    transform: translateY(3px);
-    /* Move button down slightly on hover */
+    box-shadow: 0 2px 0 #b02b2b;
+    transform: translateY(3px)
 }
 
 .custom-button:active {
     box-shadow: none;
-    /* Remove shadow on click */
-    transform: translateY(0);
-    /* Reset transform */
+    transform: translateY(0)
 }
 
 .img-call-height {
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    position: static;
+    position: static
 }
 
 .logo img {
     max-height: 26px;
-    margin-right: 6px;
+    margin-right: 6px
 }
 
 .btn-danger {
     background-color: red !important;
-    border-color: red !important;
+    border-color: red !important
 }
 
 .btn-danger:hover,
 .btn-danger:focus,
 .btn-danger:active {
     background-color: red !important;
-    border-color: red !important;
+    border-color: red !important
 }
 
 .header {
-    transition: all 0.5s;
+    transition: all .5s;
     z-index: 997;
     height: 60px;
-    box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
+    box-shadow: 0 2px 20px rgba(1, 41, 112, 0.1);
     background-color: #fff;
-    padding-left: 20px;
-    /* Toggle Sidebar Button */
-    /* Search Bar */
+    padding-left: 20px
 }
 
 .header .toggle-sidebar-btn {
     font-size: 32px;
     padding-left: 10px;
     cursor: pointer;
-    color: #012970;
+    color: #012970
 }
 
 .header .search-bar {
     min-width: 360px;
-    padding: 0 20px;
+    padding: 0 20px
 }
 
 @media (max-width: 1199px) {
@@ -1049,23 +938,23 @@ a:hover {
         left: 0;
         right: 0;
         padding: 20px;
-        box-shadow: 0px 0px 15px 0px rgba(1, 41, 112, 0.1);
-        background: white;
+        box-shadow: 0 0 15px 0 rgba(1, 41, 112, 0.1);
+        background: #fff;
         z-index: 9999;
-        transition: 0.3s;
+        transition: .3s;
         visibility: hidden;
-        opacity: 0;
+        opacity: 0
     }
 
     .header .search-bar-show {
         top: 60px;
         visibility: visible;
-        opacity: 1;
+        opacity: 1
     }
 }
 
 .header .search-form {
-    width: 100%;
+    width: 100%
 }
 
 .header .search-form input {
@@ -1075,181 +964,173 @@ a:hover {
     border: 1px solid rgba(1, 41, 112, 0.2);
     padding: 7px 38px 7px 8px;
     border-radius: 3px;
-    transition: 0.3s;
-    width: 100%;
+    transition: .3s;
+    width: 100%
 }
 
 .header .search-form input:focus,
 .header .search-form input:hover {
     outline: none;
     box-shadow: 0 0 10px 0 rgba(1, 41, 112, 0.15);
-    border: 1px solid rgba(1, 41, 112, 0.3);
+    border: 1px solid rgba(1, 41, 112, 0.3)
 }
 
 .header .search-form button {
     border: 0;
     padding: 0;
     margin-left: -30px;
-    background: none;
+    background: none
 }
 
 .header .search-form button i {
-    color: #012970;
+    color: #012970
 }
 
-
-/*--------------------------------------------------------------
-# Header Nav
---------------------------------------------------------------*/
-
 .header-nav ul {
-    list-style: none;
+    list-style: none
 }
 
 .header-nav>ul {
     margin: 0;
-    padding: 0;
+    padding: 0
 }
 
 .header-nav .nav-icon {
     font-size: 22px;
     color: #012970;
     margin-right: 25px;
-    position: relative;
+    position: relative
 }
 
 .header-nav .nav-profile {
-    color: #012970;
+    color: #012970
 }
 
 .header-nav .nav-profile img {
-    max-height: 36px;
+    max-height: 36px
 }
 
 .header-nav .nav-profile span {
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 600
 }
 
 .header-nav .badge-number {
     position: absolute;
     inset: -2px -5px auto auto;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 12px;
-    padding: 3px 6px;
+    padding: 3px 6px
 }
 
 .header-nav .notifications {
-    inset: 8px -15px auto auto !important;
+    inset: 8px -15px auto auto !important
 }
 
 .header-nav .notifications .notification-item {
     display: flex;
     align-items: center;
     padding: 15px 10px;
-    transition: 0.3s;
+    transition: .3s
 }
 
 .header-nav .notifications .notification-item i {
     margin: 0 20px 0 10px;
-    font-size: 24px;
+    font-size: 24px
 }
 
 .header-nav .notifications .notification-item h4 {
     font-size: 16px;
     font-weight: 600;
-    margin-bottom: 5px;
+    margin-bottom: 5px
 }
 
 .header-nav .notifications .notification-item p {
     font-size: 13px;
     margin-bottom: 3px;
-    color: #919191;
+    color: #919191
 }
 
 .header-nav .notifications .notification-item:hover {
-    background-color: #f6f9ff;
+    background-color: #f6f9ff
 }
 
 .header-nav .messages {
-    inset: 8px -15px auto auto !important;
+    inset: 8px -15px auto auto !important
 }
 
 .header-nav .messages .message-item {
     padding: 15px 10px;
-    transition: 0.3s;
+    transition: .3s
 }
 
 .header-nav .messages .message-item a {
-    display: flex;
+    display: flex
 }
 
 .header-nav .messages .message-item img {
     margin: 0 20px 0 10px;
-    max-height: 40px;
+    max-height: 40px
 }
 
 .header-nav .messages .message-item h4 {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 5px;
-    color: #444444;
+    color: #444
 }
 
 .header-nav .messages .message-item p {
     font-size: 13px;
     margin-bottom: 3px;
-    color: #919191;
+    color: #919191
 }
 
 .header-nav .messages .message-item:hover {
-    background-color: #f6f9ff;
+    background-color: #f6f9ff
 }
 
 .header-nav .profile {
     min-width: 240px;
     padding-bottom: 0;
-    top: 8px !important;
+    top: 8px !important
 }
 
 .header-nav .profile .dropdown-header h6 {
     font-size: 18px;
     margin-bottom: 0;
     font-weight: 600;
-    color: #444444;
+    color: #444
 }
 
 .header-nav .profile .dropdown-header span {
-    font-size: 18px;
+    font-size: 18px
 }
 
 .header-nav .profile .dropdown-item {
     font-size: 14px;
     padding: 10px 15px;
-    transition: 0.3s;
+    transition: .3s
 }
 
 .header-nav .profile .dropdown-item i {
     margin-right: 10px;
     font-size: 18px;
-    line-height: 0;
+    line-height: 0
 }
 
 .header-nav .profile .dropdown-item:hover {
-    background-color: #f6f9ff;
+    background-color: #f6f9ff
 }
-
-
-/* hero image */
 
 #hero {
     margin-top: -80px;
     width: 100%;
     height: 110vh;
-    background: linear-gradient(rgba(74, 73, 73, 0.5), rgba(40, 37, 37, 0.2)), url("/heroo.webp");
+    background: linear-gradient(rgba(74, 73, 73, 0.5), rgba(40, 37, 37, 0.2)), url(/heroo.webp);
     background-size: cover;
     background-position: center;
-    position: relative;
+    position: relative
 }
 
 #hero .hero-container {
@@ -1259,37 +1140,29 @@ a:hover {
     margin-left: 50px;
     margin-right: 50px;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: column
 }
 
 .main-titlee {
     font-size: 4.5rem;
     font-weight: 900;
-    color: #ffffff;
-    line-height: 0.85;
+    color: #fff;
+    line-height: .85;
     text-align: center;
-    font-family: "Helvetica Neue", sans-serif;
+    font-family: "Helvetica Neue", sans-serif
 }
 
 .titlee {
     font-size: 1.5rem;
-    color: #ffffff;
+    color: #fff
 }
 
 .smaller-input {
     width: 70rem;
-    /* Adjust the width as needed */
     padding: 2.2rem !important;
-    /* Adjust the padding as needed */
     font-size: 1.2rem;
-    /* Adjust the font size as needed */
-    border-radius: 30px;
+    border-radius: 30px
 }
-
-
-/*--------------------------------------------------------------
-# Sidebar
---------------------------------------------------------------*/
 
 .sidebar {
     position: fixed;
@@ -1298,34 +1171,34 @@ a:hover {
     bottom: 0;
     width: 300px;
     z-index: 996;
-    transition: all 0.3s;
+    transition: all .3s;
     padding: 20px;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #aab7cf transparent;
-    box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
-    background-color: #fff;
+    box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
+    background-color: #fff
 }
 
 @media (max-width: 1199px) {
     .sidebar {
-        left: -300px;
+        left: -300px
     }
 }
 
 .sidebar::-webkit-scrollbar {
     width: 5px;
     height: 8px;
-    background-color: #fff;
+    background-color: #fff
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-    background-color: #aab7cf;
+    background-color: #aab7cf
 }
 
 @media (max-width: 1199px) {
     .toggle-sidebar .sidebar {
-        left: 0;
+        left: 0
     }
 }
 
@@ -1333,28 +1206,28 @@ a:hover {
 
     .toggle-sidebar #main,
     .toggle-sidebar #footer {
-        margin-left: 0;
+        margin-left: 0
     }
 
     .toggle-sidebar .sidebar {
-        left: -300px;
+        left: -300px
     }
 }
 
 .sidebar-nav {
     padding: 0;
     margin: 0;
-    list-style: none;
+    list-style: none
 }
 
 .sidebar-nav li {
     padding: 0;
     margin: 0;
-    list-style: none;
+    list-style: none
 }
 
 .sidebar-nav .nav-item {
-    margin-bottom: 5px;
+    margin-bottom: 5px
 }
 
 .sidebar-nav .nav-heading {
@@ -1362,7 +1235,7 @@ a:hover {
     text-transform: uppercase;
     color: #899bbd;
     font-weight: 600;
-    margin: 10px 0 5px 15px;
+    margin: 10px 0 5px 15px
 }
 
 .sidebar-nav .nav-link {
@@ -1370,11 +1243,11 @@ a:hover {
     align-items: center;
     font-size: 15px;
     font-weight: 600;
-    color: #000000;
-    transition: 0.3;
-    background: #ffffff;
+    color: #000;
+    transition: .3;
+    background: #fff;
     padding: 10px 15px;
-    border-radius: 4px;
+    border-radius: 4px
 }
 
 .sidebar-nav .nav-link.active {
@@ -1383,55 +1256,55 @@ a:hover {
     font-size: 15px;
     font-weight: 600;
     color: #4154f1;
-    transition: 0.3;
+    transition: .3;
     background: #f6f9ff;
     padding: 10px 15px;
-    border-radius: 4px;
+    border-radius: 4px
 }
 
 .sidebar-nav .nav-link i {
     font-size: 16px;
     margin-right: 10px;
-    color: #000000;
+    color: #000
 }
 
 .sidebar-nav .nav-link.nav-link.active i {
     font-size: 16px;
     margin-right: 10px;
-    color: #4154f1;
+    color: #4154f1
 }
 
 .sidebar-nav .nav-link.collapsed {
     color: #012970;
-    background: #fff;
+    background: #fff
 }
 
 .sidebar-nav .nav-link.collapsed i {
-    color: #899bbd;
+    color: #899bbd
 }
 
 .sidebar-nav .nav-link:hover {
     color: #4154f1;
-    background: #f6f9ff;
+    background: #f6f9ff
 }
 
 .sidebar-nav .nav-link:hover i {
-    color: #4154f1;
+    color: #4154f1
 }
 
 .sidebar-nav .nav-link .bi-chevron-down {
     margin-right: 0;
-    transition: transform 0.2s ease-in-out;
+    transition: transform .2s ease-in-out
 }
 
 .sidebar-nav .nav-link:not(.collapsed) .bi-chevron-down {
-    transform: rotate(180deg);
+    transform: rotate(180deg)
 }
 
 .sidebar-nav .nav-content {
-    padding: 5px 0 0 0;
+    padding: 5px 0 0;
     margin: 0;
-    list-style: none;
+    list-style: none
 }
 
 .sidebar-nav .nav-content a {
@@ -1440,69 +1313,63 @@ a:hover {
     font-size: 14px;
     font-weight: 600;
     color: #012970;
-    transition: 0.3;
+    transition: .3;
     padding: 10px 0 10px 40px;
-    transition: 0.3s;
+    transition: .3s
 }
 
 .sidebar-nav .nav-content a i {
     font-size: 6px;
     margin-right: 8px;
     line-height: 0;
-    border-radius: 50%;
+    border-radius: 50%
 }
 
 .sidebar-nav .nav-content a:hover,
 .sidebar-nav .nav-content a.active {
-    color: #4154f1;
+    color: #4154f1
 }
 
 .sidebar-nav .nav-content a.active i {
-    background-color: #4154f1;
+    background-color: #4154f1
 }
 
 .form-check-input:checked {
-    background-color: #000000
-        /*ff6200*/
-        !important;
-    border-color: #000000
-        /*ff6200*/
-        !important;
+    background-color: #000 !important;
+    border-color: #000 !important
 }
 
 .form-check-input {
     height: 1.4em;
-    width: 1.4em;
+    width: 1.4em
 }
 
 .form-check-label {
     margin-left: 10px;
-    margin-top: 4px;
+    margin-top: 4px
 }
 
 .form-select,
 .form-control {
     padding-top: 1rem;
-    padding-bottom: 1rem;
-    /* margin-top: 0.4rem;
-  margin-bottom: 0.7rem; */
+    padding-bottom: 1rem
 }
 
 .form-select:focus,
 .form-control:focus {
     box-shadow: none !important;
-    border-color: black !important;
+    border-color: #000 !important
 }
 
 label {
-    font-weight: 400;
+    font-weight: 400
 }
 
 .posss {
     position: sticky;
     bottom: 0 !important;
     right: 0 !important;
-    z-index: 99;
+    z-index: 99
 }
 
 .modal {
@@ -1513,55 +1380,47 @@ label {
     height: 100% !important;
     background: rgba(0, 0, 0, 0.6) !important;
     display: block !important;
-    z-index: 99999999;
+    z-index: 99999999
 }
 
 .modal-main {
     position: absolute;
-    background: white;
+    background: #fff;
     width: 900px;
     height: auto;
     overflow: scroll;
     top: 50%;
     border-radius: 10px !important;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%)
 }
 
 .modal-main2 {
     position: absolute;
-    background: white;
+    background: #fff;
     width: 450px;
     height: auto;
     overflow: scroll;
     top: 50%;
     border-radius: 10px !important;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%)
 }
 
 .main-title {
     line-height: 2rem;
     font-weight: 900;
     margin-bottom: 10px;
-    font-size: 2.25rem;
+    font-size: 2.25rem
 }
 
 .maxhh::-webkit-scrollbar {
-    display: none;
+    display: none
 }
 
-/* .main-title:before {
-    background-color: red;
-    width: 10px;
-    height: 33px;
-    margin-right: 0.2em;
-    content: "";
-} */
-
 .text-mine {
-    color: rgb(0, 0, 0);
-    font-weight: 500;
+    color: #000;
+    font-weight: 500
 }
 
 .condocard-img-top {
@@ -1571,50 +1430,48 @@ label {
     object-fit: cover;
     border-radius: 7px;
     border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important
 }
 
 .condocard a:hover,
 .condocard a:focus {
     text-decoration: none;
-    color: #000000 !important;
+    color: #000 !important
 }
 
 .bigg:hover {
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px !important
 }
 
 .cardd-title {
     margin-top: -15px !important;
     font-size: 1.4rem;
-    font-weight: 800;
+    font-weight: 800
 }
 
 .cardd-price {
     font-size: 1rem;
-    font-weight: 600;
-
+    font-weight: 600
 }
 
 .cardd-subtitle {
-    font-size: 0.8rem;
+    font-size: .8rem;
     font-weight: 400;
-    color: rgb(0, 0, 0);
+    color: #000
 }
 
 .cardd-subtitle-sm {
-    font-size: 0.68rem;
+    font-size: .68rem;
     font-weight: 400;
-    color: rgb(0, 0, 0);
+    color: #000
 }
 
-
 .custom-link {
-    cursor: pointer;
+    cursor: pointer
 }
 
 .card-address {
-    font-size: 1rem;
+    font-size: 1rem
 }
 
 .abs1 {
@@ -1623,71 +1480,64 @@ label {
     left: 10px;
     background-color: #3960fc;
     border-radius: 5px;
-    color: white;
-    font-size: 0.6rem;
+    color: #fff;
+    font-size: .6rem
 }
 
 .abs3 {
     position: relative;
     bottom: 30px;
     left: 10px;
-    background-color: #ffffff;
+    background-color: #fff;
     border-radius: 5px;
-    color: rgb(0, 0, 0);
-    font-size: 0.6rem;
+    color: #000;
+    font-size: .6rem
 }
 
 .abs2 {
     position: absolute;
-    top: 0px;
+    top: 0;
     left: 5px;
-    /* box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.2); */
-    /* background-color: white; */
     border-radius: 5px;
-    text-shadow: 3px 4px #000000;
-    color: white;
+    text-shadow: 3px 4px #000;
+    color: #fff;
     font-weight: 900 !important;
-    font-size: 2.5rem;
+    font-size: 2.5rem
 }
 
 .g-item {
-    transition: transform 0.5s ease-in-out;
+    transition: transform .5s ease-in-out
 }
 
 .g-item img {
     object-fit: cover;
-    object-position: center;
+    object-position: center
 }
 
 .g-item:hover {
     overflow: hidden;
     transform: scale(1.01);
-    cursor: pointer;
+    cursor: pointer
 }
 
 .grid-item1 {
     grid-area: 1 / 1 / 3 / 4;
-    /* Spanning two rows and two columns */
-    height: 420px;
+    height: 420px
 }
 
 .grid-item2 {
-
-    height: 205px !important;
-    /* Half the height of the first item */
+    height: 205px !important
 }
 
 .grid-item3 {
-
-    height: 205px !important;
-    /* Half the height of the first item */
+    height: 205px !important
 }
 
 .grid-item4,
 .grid-item5,
 .grid-item6,
 .grid-item7 {
-    height: 200px !important;
+    height: 200px !important
 }
 
 .grid-cont>div:first-child {
@@ -1695,81 +1545,78 @@ label {
     gap: 10px 10px;
     z-index: 98 !important;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto auto;
-    /* Two rows */
+    grid-template-rows: auto auto
 }
 
 .iframe-container ul li {
     list-style: disc !important;
-    margin-left: 30px;
-
+    margin-left: 30px
 }
 
 .iframe-container ol li {
-    list-style: decimal !important;
+    list-style: decimal !important
 }
 
-
 .footer {
-    background-color: #ffffff;
+    background-color: #fff;
     font-size: 14px;
-    padding-bottom: 50px;
+    padding-bottom: 50px
 }
 
 .footer .footer-top {
-    padding-top: 50px;
+    padding-top: 50px
 }
 
 .footer .footer-links {
-    margin-bottom: 30px;
+    margin-bottom: 30px
 }
 
 .footer h4 {
-    color: black;
+    color: #000;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 700;
     position: relative;
-    padding-bottom: 12px;
+    padding-bottom: 12px
 }
 
 .footer .footer-links ul {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0
 }
 
 .footer .footer-links ul li:first-child {
-    padding-top: 0;
+    padding-top: 0
 }
 
 .footer .footer-links ul li {
     padding: 10px 0;
     display: flex;
-    align-items: center;
+    align-items: center
 }
 
 .footer .footer-links ul a {
-    color: black;
+    color: #000;
     display: inline-block;
-    line-height: 1.2rem;
+    line-height: 1.2rem
 }
 
 .properti_city {
     margin-bottom: 30px;
-    position: relative;
+    position: relative
 }
 
 .properti_city .thumb {
     border-radius: 10px;
     overflow: hidden;
-    position: relative;
+    position: relative
 }
 
 .properti_city .thumb img {
     object-fit: cover;
     object-position: center;
     width: 100%;
-    height: 380px;
+    height: 380px
 }
 
 .properti_city .overlay {
@@ -1781,173 +1628,158 @@ label {
     left: 0;
     position: absolute;
     right: 0;
-    text-align: center;
+    text-align: center
 }
 
 .properti_city .overlay .details {
     bottom: 20px;
     left: 0;
-    color: white;
+    color: #fff;
     position: absolute;
     right: 0;
-    text-shadow: 0 0 10px #000000;
+    text-shadow: 0 0 10px #000
 }
 
 .properti_city .overlay .details h4 {
-    font-weight: 700;
+    font-weight: 700
 }
 
 .properti_city .overlay .details p {
-    font-size: 0.8rem;
+    font-size: .8rem
 }
 
 .fw-mine {
-    font-weight: 800;
+    font-weight: 800
 }
 
 .accent-line {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: center
 }
 
 .accent-line:before {
-    background-color: darkblue;
+    background-color: #00008b;
     height: 2px;
     width: 2em;
-    margin-right: 0.75em;
-    content: "";
+    margin-right: .75em;
+    content: ""
 }
 
 .accent-line:after {
     width: 2em;
     height: 2px;
-    background-color: darkblue;
-    margin-left: 0.75em;
-    content: "";
+    background-color: #00008b;
+    margin-left: .75em;
+    content: ""
 }
 
 .text-body2 {
     font-size: 16px;
-    line-height: 26px;
+    line-height: 26px
 }
 
 .card-secondary-title {
-    font-size: 0.7rem !important;
-    margin-top: 0.3rem;
-    color: #585858;
+    font-size: .7rem !important;
+    margin-top: .3rem;
+    color: #585858
 }
 
 .btn-dark {
-    white-space: nowrap !important;
+    white-space: nowrap !important
 }
 
 .btn-warning {
-    white-space: nowrap !important;
+    white-space: nowrap !important
 }
 
 .fields {
     width: 100%;
-    padding: 1rem 1rem;
+    padding: 1rem;
     border: none;
     border-radius: 7px;
-    background-color: #f1f3fa;
+    background-color: #f1f3fa
 }
 
 .fields:focus {
-    outline-color: black !important;
+    outline-color: #000 !important
 }
 
 .colo-mine {
-    color: #443d3d;
+    color: #443d3d
 }
 
-
-/* .fff {
-  
-    border-radius: 0.25rem;
-    border: 1px solid;
- 
-    padding: 1rem 1rem;
-} */
-
 .mess {
-    padding: 0.6rem 1rem;
+    padding: .6rem 1rem
 }
 
 textarea {
     resize: vertical;
-    font-size: .85rem;
+    font-size: .85rem
 }
 
 .sendbtn {
-    background-color: #000000;
-    /*ff6200*/
-    color: white;
+    background-color: #000;
+    color: #fff;
     border-radius: 100px;
-    border: 1px solid #000000;
-    /*ff6200*/
+    border: 1px solid #000
 }
 
 .rounded-minetop {
     border-radius: 0 !important;
     border-top-left-radius: 10px !important;
-    border-bottom-left-radius: 10px !important;
+    border-bottom-left-radius: 10px !important
 }
 
 .rounded-minetop2 {
     border-radius: 0 !important;
     border-top-right-radius: 3px !important;
-    border-bottom-right-radius: 3px !important;
+    border-bottom-right-radius: 3px !important
 }
 
 .rounded-mine {
-    border-radius: 7px !important;
+    border-radius: 7px !important
 }
 
 .sendbtn:hover {
-    color: #000000;
-    /*ff6200*/
-    background-color: white;
-    border: 1px solid #000000;
-    /*ff6200*/
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #000
 }
 
 .btn-call {
-    background-color: #000000 !important;
-    color: #ffffff
-        /*ff6200*/
-        !important;
-    transition: background-color 0.2s ease-in-out;
-    transition: color 0.2s ease-in-out;
-    box-shadow: none !important;
+    background-color: #000 !important;
+    color: #fff !important;
+    transition: background-color .2s ease-in-out;
+    transition: color .2s ease-in-out;
+    box-shadow: none !important
 }
 
 .btn-call:hover {
-    background-image: linear-gradient(106deg, #000000, #0c3978);
+    background-image: linear-gradient(106deg, #000, #0c3978)
 }
 
 .ha-link {
-    font-weight: 300 !important;
+    font-weight: 300 !important
 }
 
 .ha-link:hover {
-    color: black !important;
-    font-weight: 300 !important;
+    color: #000 !important;
+    font-weight: 300 !important
 }
 
 .react-autosuggest__input {
     background-color: #f5f5f5;
     right: 0;
     height: 45px;
-    padding: 20px 20px;
+    padding: 20px;
     font-weight: 300;
     font-size: 16px;
     border: none;
     border-radius: 0 !important;
     border-top-left-radius: 99px !important;
-    border-bottom-left-radius: 99px !important;
+    border-bottom-left-radius: 99px !important
 }
 
 .ww .react-autosuggest__input {
@@ -1955,25 +1787,25 @@ textarea {
     right: 0;
     width: 850px;
     height: 70px;
-    padding: 20px 20px;
+    padding: 20px;
     font-weight: 300;
     font-size: 16px;
     border: none;
     border-radius: 0 !important;
-    border-radius: 99px !important;
+    border-radius: 99px !important
 }
 
 .react-autosuggest__input--focused {
-    outline: none;
+    outline: none
 }
 
 .react-autosuggest__input--open {
     border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    border-bottom-right-radius: 0
 }
 
 .react-autosuggest__suggestions-container {
-    display: none;
+    display: none
 }
 
 .ww .react-autosuggest__suggestions-container--open {
@@ -1985,11 +1817,11 @@ textarea {
     background-color: #fff;
     font-weight: 300;
     font-size: 16px;
-    box-shadow: 0 1rem 2rem 2px rgb(0 0 0 / 15%);
+    box-shadow: 0 1rem 2rem 2px #000;
     border-radius: 5px;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
-    z-index: 2;
+    z-index: 2
 }
 
 .react-autosuggest__suggestions-container--open {
@@ -2000,74 +1832,73 @@ textarea {
     background-color: #fff;
     font-weight: 300;
     font-size: 16px;
-    box-shadow: 0 1rem 2rem 2px rgb(0 0 0 / 15%);
+    box-shadow: 0 1rem 2rem 2px #000;
     border-radius: 5px;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
-    z-index: 2;
+    z-index: 2
 }
 
 .react-autosuggest__suggestions-list {
     margin: 0;
     padding: 0;
-    list-style-type: none;
+    list-style-type: none
 }
 
 .react-autosuggest__suggestions-list a {
-    color: black !important;
+    color: #000 !important
 }
 
 .react-autosuggest__suggestion {
     cursor: pointer;
-    padding: 10px 20px;
+    padding: 10px 20px
 }
 
 .react-autosuggest__suggestion--highlighted {
-    background-color: rgb(241, 241, 241);
-    font-weight: 500;
+    background-color: #f1f1f1;
+    font-weight: 500
 }
 
 .react-autosuggest__section-container {
-    border-top: 1px dashed #ccc;
+    border-top: 1px dashed #ccc
 }
 
 .react-autosuggest__section-container--first {
-    border-top: 0;
+    border-top: 0
 }
 
 .react-autosuggest__section-title {
     padding: 10px 0 0 10px;
     font-size: 12px;
-    color: #777;
+    color: #777
 }
 
 .minearr {
     width: 18px;
-    height: 18px;
+    height: 18px
 }
 
 .brand-color {
-    color: #2563EB;
+    color: #2563EB
 }
 
 .breadcrumb {
-    list-style: none !important;
+    list-style: none !important
 }
 
 .breadcrumb li a {
-    color: black !important;
-    font-weight: 300;
+    color: #000 !important;
+    font-weight: 300
 }
 
 .side-fix-contact {
     position: sticky;
     top: 5.5rem;
-    right: 0;
-
+    right: 0
 }
 
 .side-contact-img {
-    width: 60%;
+    width: 60%
 }
 
 .agent-img {
@@ -2075,64 +1906,62 @@ textarea {
     max-height: 100px !important;
     border-radius: 10%;
     object-fit: cover;
-    object-position: top;
+    object-position: top
 }
 
-
-
 .input-group-search {
-    width: unset;
+    width: unset
 }
 
 .bg-light2 {
     background-color: #f5f5f5;
-    height: 45px !important;
+    height: 45px !important
 }
 
 .bg-light2:hover {
     background-color: #e2e1e1;
-    height: 45px !important;
+    height: 45px !important
 }
 
 .fw-m {
     font-weight: 500;
-    padding: 0.3rem auto !important;
+    padding: .3rem auto !important;
     color: #008bdb !important;
-    background-color: rgb(114, 111, 111) !important;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px !important;
+    background-color: #726f6f !important;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 1px 2px 0px, rgba(60, 64, 67, 0.15) 0 1px 3px 1px !important
 }
 
 .fs-small {
     font-weight: 500 !important;
     padding: .2rem auto !important;
-    margin-right: 0.2rem;
+    margin-right: .2rem;
     box-shadow: none !important;
     color: #3e3e3e !important;
     border: 1px solid #dfdfdf !important;
-    background-color: #fff !important;
+    background-color: #fff !important
 }
 
 .fw-mine3 {
-    font-weight: 600;
+    font-weight: 600
 }
 
 .fs-esmall {
-    font-size: 0.8rem !important;
+    font-size: .8rem !important;
     color: #000 !important;
-    font-weight: 400;
+    font-weight: 400
 }
 
 .text-small {
-    font-size: 0.7rem;
+    font-size: .7rem
 }
 
 .fixcontact {
-    display: none;
+    display: none
 }
 
 .overlay-container {
     position: relative;
-    max-width: 100%;
+    max-width: 100%
 }
 
 .overlay-content {
@@ -2141,49 +1970,47 @@ textarea {
     left: 18%;
     transform: translate(-50%, -50%);
     text-align: center;
-    color: #000000;
-    /* Adjust text color based on your image */
+    color: #000
 }
 
 .btn-contact-now {
-    background-color: #000000 !important;
-    /* Adjust button color */
-    color: #ffffff !important;
+    background-color: #000 !important;
+    color: #fff !important
 }
 
 .two-column-list {
     columns: 5;
-    list-style: none;
+    list-style: none
 }
 
 .two-column-list li {
-    font-size: 0.8rem;
+    font-size: .8rem;
     break-inside: avoid-column;
-    margin-bottom: 10px;
+    margin-bottom: 10px
 }
 
 .footer-contact p {
-    margin-bottom: 3px;
+    margin-bottom: 3px
 }
 
 .orangebtn {
-    background-color: rgb(255, 136, 0);
-    white-space: nowrap !important;
+    background-color: #f80;
+    white-space: nowrap !important
 }
 
 .city-details h1 {
-    font-size: 2rem;
+    font-size: 2rem
 }
 
 .city-details h2 {
-    font-size: 1.5rem;
+    font-size: 1.5rem
 }
 
 .small-text2 {
     text-align: center !important;
     font-size: 10px;
     line-height: 1.5;
-    color: rgb(0, 0, 0);
+    color: #000
 }
 
 .w-mine5 {
@@ -2191,52 +2018,43 @@ textarea {
     width: 320px;
     border-radius: 20px !important;
     background-color: #f5f5f5;
-    font-size: 14px !important;
+    font-size: 14px !important
 }
 
 .autocomplete-results {
-    min-width: 260px;
+    min-width: 260px
 }
 
 .fs-vvsmall {
-    font-size: 0.6rem !important;
+    font-size: .6rem !important
 }
 
 @media (max-width: 768px) {
-
-
     .w-mine5 {
         width: 200px !important;
-        margin-right: 3px;
+        margin-right: 3px
     }
 
     .custom-button {
-        color: white;
-        background-color: rgb(234, 58, 58);
+        color: #fff;
+        background-color: #ea3a3a;
         padding: 10px 20px;
         border-radius: 5px;
         text-decoration: none;
         display: inline-block;
         cursor: pointer;
         border: none;
-        /* If using a button element */
         font-size: 14px;
-        margin-bottom: 30px;
-        /* Optional: adjust font size */
+        margin-bottom: 30px
     }
 
     .custom-button:hover {
-        box-shadow: 0 2px 0 rgb(176, 43, 43);
-        /* Lighter shadow on hover */
-        transform: translateY(3px);
-        /* Move button down slightly on hover */
+        box-shadow: 0 2px 0 #b02b2b;
+        transform: translateY(3px)
     }
 
     .custom-button:active {
         box-shadow: none;
-        /* Remove shadow on click */
-        transform: translateY(0);
-        /* Reset transform */
+        transform: translateY(0)
     }
-
 }
