@@ -1,4 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "jquery";
+import "popper.js";
 import "./globals.css";
 import "./icons.css";
 import "react-quill/dist/quill.snow.css";

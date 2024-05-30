@@ -69,12 +69,11 @@ export default async function Home(props) {
           </div>
         </div>
       </section> */}
-
       <section className=" py-3 py-lg-5 container">
         <div className=" mt-lg-5 mt-0">
           <div className="grid items-center  grid-cols-1 gap-12 lg:grid-cols-2 ">
             <div className="order-md-1 order-2 ">
-              <h1 className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl font-family2">
+              <h1 className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl font-family2 sm-center">
                 Canada's leading
                 <div className="relative inline-block">
                   <span className="absolute inset-x-0 bottom-0 h-[30px] bg-blue-500"></span>
@@ -110,15 +109,171 @@ export default async function Home(props) {
                 src="/hero-photo.avif"
                 alt="Hero image"
                 layout="responsive"
-                fetchpriority="high"
+                fetchPriority="high"
               />
             </div>
           </div>
         </div>
       </section>
 
+      <div className="container my-4">
+        <div className="row pt-5 mt-md-5 align-items-center justify-content-between">
+          <div className="col-md-6">
+            <div
+              id="carouselExampleIndicators"
+              className="carousel slide"
+              data-ride="carousel"
+            >
+              <ol className="carousel-indicators">
+                <li
+                  data-target="#carouselExampleIndicators"
+                  data-slide-to="0"
+                  className="active"
+                ></li>
+                <li
+                  data-target="#carouselExampleIndicators"
+                  data-slide-to="1"
+                ></li>
+                <li
+                  data-target="#carouselExampleIndicators"
+                  data-slide-to="2"
+                ></li>
+              </ol>
+              <div className="carousel-inner">
+                <div className="carousel-item active">
+                  <img
+                    src="/image1.jpeg"
+                    className="d-block image-section"
+                    alt="Image 1"
+                  />
+                </div>
+                <div className="carousel-item">
+                  <img
+                    src="/image2.jpeg"
+                    className="d-block image-section"
+                    alt="Image 2"
+                  />
+                </div>
+                <div className="carousel-item">
+                  <img
+                    src="/image3.jpeg"
+                    className="d-block image-section"
+                    alt="Image 3"
+                  />
+                </div>
+              </div>
+              <a
+                className="carousel-control-prev"
+                href="#carouselExampleIndicators"
+                role="button"
+                data-slide="prev"
+              >
+                <span
+                  className="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span className="sr-only">Previous</span>
+              </a>
+              <a
+                className="carousel-control-next"
+                href="#carouselExampleIndicators"
+                role="button"
+                data-slide="next"
+              >
+                <span
+                  className="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span className="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <h1 className="font-family2 fw-bold sm-center mt-4 mt-md-0 text-4xl">
+              Looking For A Pre Construction?
+            </h1>
+            <div className="buttons my-3 sm-center">
+              <a href="#contact">
+                <button className="button btn btn-dark  mr-2">
+                  Request Information
+                </button>
+                <button className="button btn btn-outline-primary">
+                  Contact Now
+                </button>
+              </a>
+            </div>
+            <p className="pt-2">
+              Welcome to Condomonk, Canada's premier platform for
+              pre-construction homes. Stay ahead with the latest updates on new
+              construction home projects across Canada. Discover exclusive
+              insights and secure your dream home before it's built.
+            </p>
+            <div className="recently-bought pt-md-4 pt-2">
+              <h2 className="fw-normal font-family2 text-3xl sm-center text-decoration-underline">
+                New Properties
+              </h2>
+              <div className="row g-3">
+                <div className="col-4 ">
+                  <img
+                    src="/image1.jpeg"
+                    className="img-fluid img-small"
+                    alt="Image 1"
+                  />
+                </div>
+                <div className="col-4 ">
+                  <img
+                    src="/image2.jpeg"
+                    className="img-fluid img-small"
+                    alt="Image 2"
+                  />
+                </div>
+                <div className="col-4 ">
+                  <img
+                    src="/image3.jpeg"
+                    className="img-fluid img-small"
+                    alt="Image 3"
+                  />
+                </div>
+                <div className="col-4 ">
+                  <img
+                    src="/image4.jpeg"
+                    className="img-fluid img-small"
+                    alt="Image 4"
+                  />
+                </div>
+                <div className="col-4 ">
+                  <img
+                    src="/image5.jpeg"
+                    className="img-fluid img-small"
+                    alt="Image 5"
+                  />
+                </div>
+                <div className="col-4 ">
+                  <img
+                    src="/image6.jpeg"
+                    className="img-fluid img-small"
+                    alt="Image 6"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="sm-center mt-2 mt-md-0">
+              <div className=" mt-3 btn btn-outline-dark sm-center ">
+                <a href="#properties">
+                  {" "}
+                  <span className="sm-center ">
+                    Explore Properties{" "}
+                    <i class="bi bi-arrow-up-right-circle sm-center"></i>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="pt-5 ">
-        <div className="container pt-5 ">
+        <div className="container pt-5 " id="properties">
           <div className="d-flex align-items-center justify-content-center">
             <h2 className="fw-mine ccent-line fs-big ">
               <Link href={"/calgary"} className="link-black font-family2">

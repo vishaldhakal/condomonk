@@ -19,6 +19,7 @@
         "date-fns": "^3.6.0",
         "framer-motion": "^11.0.14",
         "geocode": "^0.0.3",
+        "jquery": "^3.7.1",
         "leaflet": "^1.9.4",
         "leaflet-control-geocoder": "^2.4.0",
         "leaflet-defaulticon-compatibility": "^0.1.2",
