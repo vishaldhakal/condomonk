@@ -110,6 +110,7 @@ export default async function Home(props) {
                 src="/hero-photo.avif"
                 alt="Hero image"
                 layout="responsive"
+                fetchpriority="high"
               />
             </div>
           </div>

@@ -1428,7 +1428,7 @@ label {
     max-height: 25rem;
     height: 350px !important;
     object-fit: cover;
-    border-radius: 7px;
+    border-radius: 25px;
     border-bottom-left-radius: 0 !important;
     border-bottom-right-radius: 0 !important
 }
@@ -1739,7 +1739,7 @@ textarea {
 }
 
 .rounded-mine {
-    border-radius: 7px !important
+    border-radius: 25px !important
 }
 
 .sendbtn:hover {
