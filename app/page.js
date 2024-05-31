@@ -190,7 +190,7 @@ export default async function Home(props) {
           </div>
           <div className="col-md-6">
             <h1 className="font-family2 fw-bold sm-center mt-4 mt-md-0 text-4xl">
-              Looking For A Pre Construction?
+              Looking For A Pre Construction Home?
             </h1>
             <div className="buttons my-3 sm-center">
               <a href="#contact">
@@ -210,7 +210,7 @@ export default async function Home(props) {
             </p>
             <div className="recently-bought pt-md-4 pt-2">
               <h2 className="fw-normal font-family2 text-3xl sm-center text-decoration-underline">
-                New Properties
+                New Projects
               </h2>
               <div className="row g-3">
                 <div className="col-4 ">
@@ -259,10 +259,10 @@ export default async function Home(props) {
             </div>
             <div className="sm-center mt-2 mt-md-0">
               <div className=" mt-3 btn btn-outline-dark sm-center ">
-                <a href="#properties">
+                <a href="#projects">
                   {" "}
                   <span className="sm-center ">
-                    Explore Properties{" "}
+                    Explore More Projects{" "}
                     <i class="bi bi-arrow-up-right-circle sm-center"></i>
                   </span>
                 </a>
@@ -273,7 +273,7 @@ export default async function Home(props) {
       </div>
 
       <div className="pt-5 ">
-        <div className="container pt-5 " id="properties">
+        <div className="container pt-5 " id="projects">
           <div className="d-flex align-items-center justify-content-center">
             <h2 className="fw-mine ccent-line fs-big ">
               <Link href={"/calgary"} className="link-black font-family2">
