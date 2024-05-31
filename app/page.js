@@ -122,70 +122,77 @@ export default async function Home(props) {
             <div
               id="carouselExampleIndicators"
               className="carousel slide"
-              data-ride="carousel"
+              data-bs-ride="carousel"
             >
-              <ol className="carousel-indicators">
-                <li
-                  data-target="#carouselExampleIndicators"
-                  data-slide-to="0"
+              <div className="carousel-indicators">
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide-to="0"
                   className="active"
-                ></li>
-                <li
-                  data-target="#carouselExampleIndicators"
-                  data-slide-to="1"
-                ></li>
-                <li
-                  data-target="#carouselExampleIndicators"
-                  data-slide-to="2"
-                ></li>
-              </ol>
+                  aria-current="true"
+                  aria-label="Slide 1"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide-to="1"
+                  aria-label="Slide 2"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide-to="2"
+                  aria-label="Slide 3"
+                ></button>
+              </div>
               <div className="carousel-inner">
                 <div className="carousel-item active">
                   <img
                     src="/image1.jpeg"
-                    className="d-block image-section"
+                    className="d-block w-100"
                     alt="Image 1"
                   />
                 </div>
                 <div className="carousel-item">
                   <img
                     src="/image2.jpeg"
-                    className="d-block image-section"
+                    className="d-block w-100"
                     alt="Image 2"
                   />
                 </div>
                 <div className="carousel-item">
                   <img
                     src="/image3.jpeg"
-                    className="d-block image-section"
+                    className="d-block w-100"
                     alt="Image 3"
                   />
                 </div>
               </div>
-              <a
+              <button
                 className="carousel-control-prev"
-                href="#carouselExampleIndicators"
-                role="button"
-                data-slide="prev"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev"
               >
                 <span
                   className="carousel-control-prev-icon"
                   aria-hidden="true"
                 ></span>
-                <span className="sr-only">Previous</span>
-              </a>
-              <a
+                <span className="visually-hidden">Previous</span>
+              </button>
+              <button
                 className="carousel-control-next"
-                href="#carouselExampleIndicators"
-                role="button"
-                data-slide="next"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next"
               >
                 <span
                   className="carousel-control-next-icon"
                   aria-hidden="true"
                 ></span>
-                <span className="sr-only">Next</span>
-              </a>
+                <span className="visually-hidden">Next</span>
+              </button>
             </div>
           </div>
           <div className="col-md-6">
