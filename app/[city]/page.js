@@ -71,7 +71,7 @@ export default async function Home({ params }) {
               </div>
               ( 2024 )
             </h1>
-            <p className="font-normal sm-center pb-2 pb-md-0 mb-0">
+            <p className="font-normal sm-center pb-2 pb-md-0 mb-0 fw-medium">
               {data.preconstructions.length} New Pre construction homes, condos
               and townhomes for sale in {CapitalizeFirst(params.city)}.
             </p>
@@ -108,7 +108,7 @@ export default async function Home({ params }) {
               </div>
             </div>
           </div>
-          <div className="mt-md-3 mt-0"></div>
+          <div className="mt-md-5 mt-0"></div>
           <div className="row row-cols-1 row-cols-md-4  gy-4 gx-3 gx-lg-3 ">
             {data.preconstructions &&
               filteredprojects("Selling").map((item, no) => (

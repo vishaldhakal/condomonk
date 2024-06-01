@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-// import ProjectSearch from "./ProjectSearch";
-import SearchSuggest from "./SerachSuggest";
+import ProjectSearch from "./ProjectSearch";
+// import SearchSuggest from "./SerachSuggest";
 
 const Navbar = ({ cities, dropdown_cities, transparent }) => {
   const [cityname, setCityname] = useState("");
@@ -55,8 +55,8 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
               className="input-group input-group-search
              me-md-0"
             >
-              {/* <ProjectSearch /> */}
-              <SearchSuggest cities={cities} />
+              <ProjectSearch />
+              {/* <SearchSuggest cities={cities} /> */}
             </div>
             <button
               className={`navbar-toggler ${buttonClicked ? "bg-white" : ""}`}
@@ -78,7 +78,7 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
             <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
               <li className="nav-item dropdown mx-1">
                 <a
-                  className="nav-link dropdown-toggle active fw-medium shadow-sm rounded-2"
+                  className="nav-link dropdown-toggle active fw-medium  rounded-2"
                   href="#"
                   id="dropdownId"
                   data-bs-toggle="dropdown"
@@ -113,7 +113,7 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
                   Pre Construction Homes
                 </a>
               </li>
-              <li className="nav-item rounded-2 shadow-sm mx-1">
+              <li className="nav-item rounded-2  mx-1">
                 <a className="nav-link" href="#">
                   Top 10 <span className="fw-medium">GTA</span> Projects
                 </a>
