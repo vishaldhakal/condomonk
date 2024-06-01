@@ -76,7 +76,7 @@ export default async function Home(props) {
               <h1 className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl font-family2 sm-center">
                 Canada's leading
                 <div className="relative inline-block">
-                  <span className="absolute inset-x-0 bottom-0 h-[30px] bg-blue-500"></span>
+                  <span className="absolute inset-x-0 bottom-0 h-[30px] bg-yellow-400"></span>
                   <span className="relative text-3xl font-bold text-black sm:text-6xl lg:text-7xl">
                     pre construction
                   </span>
@@ -204,9 +204,7 @@ export default async function Home(props) {
                 <button className="button btn btn-dark  mr-2">
                   Request Information
                 </button>
-                <button className="button btn btn-outline-primary">
-                  Contact Now
-                </button>
+                <button className="button btn btn-warning">Contact Now</button>
               </a>
             </div>
             <p className="pt-2">
@@ -265,15 +263,15 @@ export default async function Home(props) {
               </div>
             </div>
             <div className="sm-center mt-2 mt-md-0">
-              <div className=" mt-3 btn btn-outline-dark sm-center ">
-                <a href="#projects">
+              <a href="#projects">
+                <div className=" mt-3 btn btn-outline-dark sm-center  ">
                   {" "}
-                  <span className="sm-center ">
+                  <span className="sm-center btn-outline-dark ">
                     Explore More Projects{" "}
-                    <i class="bi bi-arrow-up-right-circle sm-center"></i>
+                    <i class="bi bi-arrow-up-right-circle sm-center "></i>
                   </span>
-                </a>
-              </div>
+                </div>
+              </a>
             </div>
           </div>
         </div>

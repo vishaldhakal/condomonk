@@ -811,9 +811,9 @@ a:hover {
         position: relative;
         bottom: 40px !important;
         left: 10px;
-        background-color: #2ccc66;
+        background-color: #FFC007;
         border-radius: 5px;
-        color: #fff;
+        color: #000000;
         font-size: .9rem !important
     }
 
@@ -1478,10 +1478,11 @@ label {
     position: relative;
     bottom: 30px;
     left: 10px;
-    background-color: #3960fc;
+    background-color: #FFC007;
     border-radius: 5px;
-    color: #fff;
-    font-size: .6rem
+    color: #000000;
+    font-size: .6rem;
+    font-weight: 500;
 }
 
 .abs3 {
@@ -1491,7 +1492,8 @@ label {
     background-color: #fff;
     border-radius: 5px;
     color: #000;
-    font-size: .6rem
+    font-size: .6rem;
+    font-weight: 500;
 }
 
 .abs2 {
@@ -1502,7 +1504,8 @@ label {
     text-shadow: 3px 4px #000;
     color: #fff;
     font-weight: 900 !important;
-    font-size: 2.5rem
+    font-size: 2.5rem;
+
 }
 
 .g-item {
@@ -1879,7 +1882,7 @@ textarea {
 }
 
 .brand-color {
-    color: #2563EB
+    color: #ebb105
 }
 
 .breadcrumb {

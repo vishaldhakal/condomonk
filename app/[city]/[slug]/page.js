@@ -154,8 +154,8 @@ export default async function Home({ params }) {
                   <div className="row row-cols-1 row-cols-sm-2">
                     <div className="col-sm-12">
                       <div className="d-flex gap-3 my-2">
-                        <div className=" btn btn-sm bg-primary ">
-                          <span className="col fs-esmall text-white">
+                        <div className=" btn btn-sm bg-warning ">
+                          <span className="col fs-esmall text-dark">
                             {data.preconstruction.status}
                           </span>
                         </div>
@@ -174,7 +174,7 @@ export default async function Home({ params }) {
                         <strong>{data.preconstruction.developer.name}</strong>
                       </p>
 
-                      <h2 className="text-mine fs-4 fw-mine3 mt-1 mb-0 brand-color font-family2 mb-4">
+                      <h2 className="text-mine fs-4 fw-mine mt-1 mb-0 brand-color font-family2 mb-4">
                         {checkPricing(
                           data.preconstruction.price_starting_from,
                           data.preconstruction.price_to
@@ -317,7 +317,7 @@ export default async function Home({ params }) {
                       </div>
                       <CustomModal
                         linkText={
-                          <span className="btn  btn-primary rounded-pill shadow-lg">
+                          <span className="btn  btn-warning rounded-pill shadow-lg">
                             Send me more info about{" "}
                             {data.preconstruction.project_name}
                           </span>
