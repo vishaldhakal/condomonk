@@ -153,7 +153,8 @@ a:hover {
 .navbar-nav .nav-item .nav-link {
     font-weight: 500;
     color: #000 !important;
-    font-size: 1.1rem !important;
+    font-size: 1.02rem !important;
+
 }
 
 .logo span {
@@ -378,7 +379,7 @@ a:hover {
 }
 
 .form-color {
-    background-color: #f7fffb
+    background-color: #fdf5de
 }
 
 .btn-close {
@@ -1703,7 +1704,7 @@ label {
     padding: 1rem;
     border: none;
     border-radius: 7px;
-    background-color: #f1f3fa
+    background-color: #ffffff
 }
 
 .fields:focus {
