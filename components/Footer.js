@@ -12,7 +12,7 @@ const Footer = ({ cities }) => {
     <div className="pt-5">
       <footer className="footer mt-5  shadow-lg">
         <div className="">
-          <div className="text-center pt-5 bg-blue-400 px-3">
+          <div className="text-center pt-5 bg-yellow-500 px-3">
             <p className="fs-2 fw-bold font-family2">
               Get Exclusive Preconstruction Updates.
             </p>
