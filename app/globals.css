@@ -152,7 +152,8 @@ a:hover {
 
 .navbar-nav .nav-item .nav-link {
     font-weight: 500;
-    color: #000 !important
+    color: #000 !important;
+    font-size: 1.1rem !important;
 }
 
 .logo span {
@@ -182,7 +183,7 @@ a:hover {
 
 @media screen and (min-width: 1920px) {
     .navbar-nav .nav-item .nav-link {
-        font-size: 1rem;
+        font-size: 1.5rem;
         margin-left: 20px;
         color: #333 !important
     }
@@ -482,7 +483,7 @@ a:hover {
 
 .muuuu {
     padding-left: 10px;
-    width: 270px
+    width: 300px
 }
 
 .muuuuu {

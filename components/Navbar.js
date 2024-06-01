@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import ProjectSearch from "./ProjectSearch";
-// import SearchSuggest from "./SerachSuggest";
+// import ProjectSearch from "./ProjectSearch";
+import SearchSuggest from "./SerachSuggest";
 
 const Navbar = ({ cities, dropdown_cities, transparent }) => {
   const [cityname, setCityname] = useState("");
@@ -55,8 +55,8 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
               className="input-group input-group-search
              me-md-0"
             >
-              <ProjectSearch />
-              {/* <SearchSuggest cities={cities} /> */}
+              {/* <ProjectSearch /> */}
+              <SearchSuggest cities={cities} />
             </div>
             <button
               className={`navbar-toggler ${buttonClicked ? "bg-white" : ""}`}
@@ -125,10 +125,10 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
               </li>
             </ul>
             <button
-              className="btn bg-warning btn-warning my-2 my-sm-0 rounded ms-md-4 py-2 px-3"
+              className="btn bg-warning btn-warning my-2 my-sm-0 rounded ms-md-4 py-2 px-3 fs-6"
               type="submit"
             >
-              <a className="nav-link text-black" href="#contact">
+              <a className="nav-link text-black " href="#contact">
                 Contact Now
               </a>
             </button>
