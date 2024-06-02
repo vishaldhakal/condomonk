@@ -45,7 +45,7 @@ const Footer = ({ cities }) => {
         <div className="container">
           <div className=" container pt-5 mt-md-5 mt-0">
             <div className="container footer-links">
-              <h3 className="text-center fw-bold pb-2 fs-3 font-family2">
+              <h3 className="text-center fw-bold pb-2 fs-2 font-family2">
                 {" "}
                 New Construction homes in Canada
               </h3>

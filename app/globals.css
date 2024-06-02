@@ -1,6 +1,7 @@
 @tailwind base @tailwind components;
 @tailwind utilities;
-@import url(https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap);
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
     scroll-behavior: smooth
@@ -8,7 +9,7 @@
 
 body {
     background: #fff !important;
-    font-family: "Arimo", sans-serif;
+    font-family: "Montserrat", sans-serif !important;
     font-weight: 500
 }
 
@@ -153,7 +154,7 @@ a:hover {
 .navbar-nav .nav-item .nav-link {
     font-weight: 500;
     color: #000 !important;
-    font-size: 1.02rem !important;
+    font-size: 1.1rem !important;
 
 }
 
@@ -379,7 +380,7 @@ a:hover {
 }
 
 .form-color {
-    background-color: #fdf5de
+    background-color: #ffffff
 }
 
 .btn-close {
@@ -787,25 +788,19 @@ a:hover {
     }
 
     .cardd-subtitle-sm {
-        font-size: .8rem !important;
+        font-size: 1rem !important;
         font-weight: 400;
         color: #000
     }
 
     .cardd-subtitle {
-        font-size: .95rem !important;
-        font-weight: 400;
-        color: #000
-    }
-
-    .cardd-subtitle {
-        font-size: .8rem;
+        font-size: 1rem !important;
         font-weight: 400;
         color: #000
     }
 
     .cardd-price {
-        font-size: 1.1rem !important;
+        font-size: 1.3rem !important;
         font-weight: 700 !important
     }
 
@@ -1452,18 +1447,18 @@ label {
 }
 
 .cardd-price {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 600
 }
 
 .cardd-subtitle {
-    font-size: .8rem;
+    font-size: .85rem;
     font-weight: 400;
     color: #000
 }
 
 .cardd-subtitle-sm {
-    font-size: .68rem;
+    font-size: .8rem;
     font-weight: 400;
     color: #000
 }
@@ -1704,7 +1699,7 @@ label {
     padding: 1rem;
     border: none;
     border-radius: 7px;
-    background-color: #ffffff
+    background-color: #f2f2f2
 }
 
 .fields:focus {

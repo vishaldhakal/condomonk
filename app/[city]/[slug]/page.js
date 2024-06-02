@@ -174,7 +174,7 @@ export default async function Home({ params }) {
                         <strong>{data.preconstruction.developer.name}</strong>
                       </p>
 
-                      <h2 className="text-mine fs-4 fw-mine mt-1 mb-0 brand-color font-family2 mb-4">
+                      <h2 className="text-mine fs-3 fw-mine mt-1 mb-0 brand-color font-family2 mb-4">
                         {checkPricing(
                           data.preconstruction.price_starting_from,
                           data.preconstruction.price_to
