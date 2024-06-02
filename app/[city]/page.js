@@ -70,8 +70,25 @@ export default async function Home({ params }) {
                 </span>
               </div>
               ( 2024 )
+              <span class="absolute-design-border">
+                <svg
+                  width="146"
+                  height="14"
+                  viewBox="0 0 146 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2 4.5L144 2L2 12L144 9"
+                    stroke="#FFC007"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                  ></path>
+                </svg>
+              </span>
             </h1>
-            <p className="font-normal sm-center pb-2 pb-md-0 mb-0 fw-medium">
+
+            <p className="font-normal sm-center pb-2 pb-md-0 mb-0 fw-medium text-lg">
               {data.preconstructions.length} New Pre construction homes, condos
               and townhomes for sale in {CapitalizeFirst(params.city)}.
             </p>
