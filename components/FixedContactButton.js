@@ -11,7 +11,7 @@ export default function FixedContactButton() {
               alt="agent pic"
               className="img-fluid img-call-height"
             />
-            <span className="d-flex flex-column justify-content-start text-white text-sm">
+            <span className="d-flex flex-column justify-content-start text-dark text-sm">
               <b>Send me information</b>
             </span>
           </div>

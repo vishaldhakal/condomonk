@@ -753,7 +753,8 @@ a:hover {
         position: fixed;
         z-index: 9999;
         display: block !important;
-        background-color: #3774f7 !important
+        background-color: #ffc619 !important;
+        color: #000 !important;
     }
 
     .overlay-container {
@@ -864,8 +865,9 @@ a:hover {
 }
 
 .custom-button {
-    color: #fff;
-    background-color: #ea3a3a;
+    font-weight: 500;
+    color: #000000;
+    background-color: #ffc619;
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
@@ -875,12 +877,12 @@ a:hover {
     font-size: 16px;
     margin-bottom: 30px;
     position: relative;
-    box-shadow: 0 7px 0 #942a2a;
+    box-shadow: 0 7px 0 #9f7805;
     transition: all .3s ease
 }
 
 .custom-button:hover {
-    box-shadow: 0 2px 0 #b02b2b;
+    box-shadow: 0 2px 0 #ffc619;
     transform: translateY(3px)
 }
 
@@ -1560,6 +1562,10 @@ label {
     grid-template-rows: auto auto
 }
 
+.iframe-container {
+    text-align: justify !important;
+}
+
 .iframe-container ul li {
     list-style: disc !important;
     margin-left: 30px
@@ -2139,8 +2145,8 @@ textarea {
     }
 
     .custom-button {
-        color: #fff;
-        background-color: #ea3a3a;
+        color: #000000;
+        background-color: #ffc619;
         padding: 10px 20px;
         border-radius: 5px;
         text-decoration: none;
@@ -2152,12 +2158,17 @@ textarea {
     }
 
     .custom-button:hover {
-        box-shadow: 0 2px 0 #b02b2b;
+        box-shadow: 0 2px 0 #ffc619;
         transform: translateY(3px)
     }
 
     .custom-button:active {
         box-shadow: none;
         transform: translateY(0)
+    }
+
+    .iframe-container {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
     }
 }
