@@ -58,18 +58,14 @@ export default async function Home({ params }) {
     <>
       <div className="pt-lg-5 pt-3">
         <div className="container">
-          <div className="d-flex flex-column">
-            <h1 className="main-title font-family2 pb-2 pb-md-0">
-              New Pre Construction Homes
-              <div className="relative inline-flex sm-center mx-2">
-                <span className="absolute inset-x-0 bottom-0 "></span>
-
-                <span className="relative font-bold text-black ">
-                  {" "}
-                  in {CapitalizeFirst(params.city)}{" "}
-                </span>
-              </div>
-              ( 2024 )
+          <div className="d-flex ">
+            <div>
+              <h1 className="main-title font-family2 pb-2 pb-md-0">
+                New Pre Construction Homes in {CapitalizeFirst(params.city)}{" "}
+                <span className="nextline-sm"> ( 2024 )</span>
+              </h1>
+            </div>
+            <div className="">
               <span class="absolute-design-border">
                 <svg
                   width="146"
@@ -86,13 +82,12 @@ export default async function Home({ params }) {
                   ></path>
                 </svg>
               </span>
-            </h1>
-
-            <p className="font-normal sm-center pb-2 pb-md-0 mb-0 fw-medium text-lg">
-              {data.preconstructions.length} New Pre construction homes, condos
-              and townhomes for sale in {CapitalizeFirst(params.city)}.
-            </p>
+            </div>
           </div>
+          <p className="font-normal sm-center pb-2 pb-md-0 mb-0 fw-medium text-lg">
+            {data.preconstructions.length} New Pre construction homes, condos
+            and townhomes for sale in {CapitalizeFirst(params.city)}.
+          </p>
           <div className="d-flex sm-center  mb-lg-0 sticky-buttons pb-0 mb-0">
             <div className="d-flex flex-column flex-md-row mb-md-2 mb-0 mt-1 overflow-hidden">
               <div className="d-flex gap-2">

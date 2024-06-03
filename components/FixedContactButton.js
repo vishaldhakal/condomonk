@@ -12,7 +12,7 @@ export default function FixedContactButton() {
               className="img-fluid img-call-height"
             />
             <span className="d-flex flex-column justify-content-start text-dark text-sm">
-              <b>Send me information</b>
+              <b>Send me latest info</b>
             </span>
           </div>
         </div>

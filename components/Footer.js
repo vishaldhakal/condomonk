@@ -67,9 +67,9 @@ const Footer = ({ cities }) => {
           </div>
         </div>
         <div className="container my-5 pt-5 ">
-          <div className="  d-flex justify-content-around  align-items-center">
+          <div className="footer-listcontainer  d-flex justify-content-around  align-items-center">
             <div className="row row-cols-md-3 row-cols-1 d-flex justify-content-around  align-items-center pt-5 ">
-              <div className="col-md-6 texttt">
+              <div className="col-md-6 texttt text-center">
                 <a href="/" className="flogo font-family2">
                   <span>Condomonk</span>
                 </a>

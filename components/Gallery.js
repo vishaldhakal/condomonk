@@ -44,7 +44,7 @@ export default function Gallery(props) {
                 alt={`${props.project_name} located at ${
                   props.project_address
                 } image ${no + 1}`}
-                className="img-fluid w-100 h-100 rounded-mine lazy"
+                className="img-fluid w-100 h-100 rounded-mine2 lazy"
                 src={`${image.image}`}
               />
             </Link>
