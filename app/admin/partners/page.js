@@ -77,11 +77,17 @@ export default function Partners() {
       return;
     }
 
-    let updatePartnerData = { ...partnerData };
+    let updatePartnerData = {};
     if (typeof image === "string") {
-      updatePartnerData = { name, email, brokerage_name, cities };
+      updatePartnerData = { name, email, brokerage_name, selectedCities };
     } else {
-      updatePartnerData = { name, image, email, brokerage_name, cities };
+      updatePartnerData = {
+        name,
+        image,
+        email,
+        brokerage_name,
+        selectedCities,
+      };
     }
 
     axios
