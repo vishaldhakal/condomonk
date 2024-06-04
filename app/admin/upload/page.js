@@ -19,6 +19,7 @@ export default function Upload() {
     project_address: "",
     occupancy: "",
     no_of_units: "",
+    is_featured: false,
     co_op_available: false,
     status: "Upcoming",
     developer: {
@@ -464,6 +465,23 @@ export default function Upload() {
                     <label htmlFor="co_op_available">
                       Co Op
                       <span className="text-danger">*</span>
+                    </label>
+                  </div>
+                </div>
+                <div className="col-4">
+                  <div className="form-floating w-100">
+                    <select
+                      className="form-select"
+                      id="is_featured"
+                      value={predata.is_featured}
+                      onChange={(e) => handleChange(e)}
+                      ariaLabel="Floating label select example"
+                    >
+                      <option value={false}>Not featured</option>
+                      <option value={true}>Featured</option>
+                    </select>
+                    <label htmlFor="is_featured">
+                      Is Featured ?<span className="text-danger">*</span>
                     </label>
                   </div>
                 </div>

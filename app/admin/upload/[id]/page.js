@@ -17,6 +17,7 @@ export default function Update({ params }) {
     project_type: "Condo",
     description: "",
     project_address: "",
+    is_featured: false,
     occupancy: "",
     no_of_units: "",
     co_op_available: false,
@@ -535,6 +536,23 @@ export default function Update({ params }) {
                     <label htmlFor="co_op_available">
                       Co Op
                       <span className="text-danger">*</span>
+                    </label>
+                  </div>
+                </div>
+                <div className="col-4">
+                  <div className="form-floating w-100">
+                    <select
+                      className="form-select"
+                      id="is_featured"
+                      value={predata.is_featured}
+                      onChange={(e) => handleChange(e)}
+                      ariaLabel="Floating label select example"
+                    >
+                      <option value={false}>Not featured</option>
+                      <option value={true}>Featured</option>
+                    </select>
+                    <label htmlFor="is_featured">
+                      Is Featured ?<span className="text-danger">*</span>
                     </label>
                   </div>
                 </div>
