@@ -336,7 +336,7 @@ a:hover {
 }
 
 .card {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     border: none;
     border-radius: 10px !important;
     box-shadow: 10px 10px 30px rgba(8, 15, 27, 0.1);
@@ -1449,6 +1449,29 @@ label {
     color: #000 !important;
 }
 
+.featuredcard-img-top {
+    width: 100%;
+    max-height: 20rem;
+    height: 305px !important;
+    object-fit: cover;
+    border-radius: 10px;
+    border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+
+.featuredcard a:hover,
+.featuredcard a:focus {
+    text-decoration: none;
+    color: #000 !important;
+}
+
+.fbtn {
+    background-color: black !important;
+    text-align: center;
+    color: white !important;
+}
+
 .bigg:hover {
     box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px !important;
 }
@@ -1517,6 +1540,36 @@ label {
     color: #fff;
     font-weight: 900 !important;
     font-size: 2.5rem;
+    ;
+}
+
+.fstatus {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    left: 0px;
+    background-color: #FFC007;
+    height: 32px;
+    width: 120px;
+    border-radius: 5px;
+    color: #000000;
+    font-size: 1.1rem;
+    font-weight: 500;
+    ;
+}
+
+.ftype {
+    position: absolute;
+    bottom: 30px;
+    left: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    color: #000;
+    font-size: .6rem;
+    font-weight: 500;
     ;
 }
 

@@ -5,6 +5,7 @@ import PreconSchema from "@/components/PreconSchema";
 import BottomContactForm from "@/components/BottomContactForm";
 import MainSearch from "@/components/MainSearch";
 import "./icons.css";
+import FeaturedCard from "@/components/FeaturedCard";
 
 async function getData(city) {
   const res = await fetch(
@@ -295,22 +296,27 @@ export default async function Home(props) {
             <h2 className="fw-mine fs-big ">
               <span className="link-black font-family2">Featured Project</span>
             </h2>
+            <p className="fs-5  text-center">
+              Explore Top 10 Pre Construction Project for sale in GTA
+            </p>
           </div>
 
-          <div className="row row-cols-1 row-cols-md-4 gy-md-5 gy-3 gx-3">
-            {featured.results &&
-              featured.results.slice(0, 8).map((item) => (
-                <div className="col" key={item.id}>
-                  <script
-                    key={item.slug}
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{
-                      __html: JSON.stringify(PreconSchema(item)),
-                    }}
-                  />
-                  <CondoCard {...item} />
-                </div>
-              ))}
+          <div className="">
+            <div className="row row-cols-1 row-cols-md-2 my-md-2 my-3 gy-3 g-4">
+              {featured.results &&
+                featured.results.slice(0, 8).map((item) => (
+                  <div className="col" key={item.id}>
+                    <script
+                      key={item.slug}
+                      type="application/ld+json"
+                      dangerouslySetInnerHTML={{
+                        __html: JSON.stringify(PreconSchema(item)),
+                      }}
+                    />
+                    <FeaturedCard {...item} />
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
       </div>
