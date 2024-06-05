@@ -5,6 +5,7 @@ import PreconSchema from "@/components/PreconSchema";
 import BottomContactForm from "@/components/BottomContactForm";
 import MainSearch from "@/components/MainSearch";
 import "./icons.css";
+import FeaturedCard from "@/components/FeaturedCard";
 
 async function getData(city) {
   const res = await fetch(
@@ -31,7 +32,18 @@ async function getCities() {
   }
   return res.json();
 }
-
+async function getFeaturedData() {
+  const res = await fetch(
+    "https://api.condomonk.ca/api/preconstructions/?is_featured=True",
+    {
+      next: { revalidate: 10 },
+    }
+  );
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+}
 export default async function Home(props) {
   const data = await getData("calgary");
   const mississauga_data = await getData("mississauga");
@@ -39,6 +51,7 @@ export default async function Home(props) {
   const cambridge_data = await getData("cambridge");
   let cities = await getCities();
   // let dropdown_cities = await getCitiesandProjects();
+  const featured = await getFeaturedData();
 
   const filteredprojects = (value) => {
     return dropdown_cities.filter((city) => {
@@ -273,6 +286,32 @@ export default async function Home(props) {
                 </div>
               </a>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="pt-5 ">
+        <div className="container pt-5 ">
+          <div className="d-flex flex-column align-items-center justify-content-center">
+            <h2 className="fw-mine fs-big ">
+              <span className="link-black font-family2">Featured Project</span>
+            </h2>
+          </div>
+
+          <div className="row row-cols-1 row-cols-md-4 gy-md-5 gy-3 gx-3">
+            {featured.results &&
+              featured.results.slice(0, 8).map((item) => (
+                <div className="col" key={item.id}>
+                  <script
+                    key={item.slug}
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                      __html: JSON.stringify(PreconSchema(item)),
+                    }}
+                  />
+                  <FeaturedCard {...item} />
+                </div>
+              ))}
           </div>
         </div>
       </div>

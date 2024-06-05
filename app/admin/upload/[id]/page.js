@@ -548,7 +548,7 @@ export default function Update({ params }) {
                       onChange={(e) => handleChange(e)}
                       ariaLabel="Floating label select example"
                     >
-                      <option value={false}>Not featured</option>
+                      <option value={false}>Not Featured</option>
                       <option value={true}>Featured</option>
                     </select>
                     <label htmlFor="is_featured">

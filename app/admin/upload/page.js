@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function Upload() {
-  let stat = {
+  const initialState = {
     id: 1,
     project_name: "",
     price_starting_from: 0.0,
@@ -22,15 +22,11 @@ export default function Upload() {
     is_featured: false,
     co_op_available: false,
     status: "Upcoming",
-    developer: {
-      name: "",
-    },
-    city: {
-      name: "",
-    },
+    developer: { name: "" },
+    city: { name: "" },
   };
 
-  let developer_stat = {
+  const initialDeveloperState = {
     id: 1,
     name: "",
     phone: "",
@@ -39,199 +35,143 @@ export default function Upload() {
     image: null,
   };
 
-  const routee = useRouter();
-  const [predata, setPredata] = useState(stat);
+  const router = useRouter();
+  const [predata, setPredata] = useState(initialState);
   const [cities, setCities] = useState([]);
   const [developers, setDevelopers] = useState([]);
   const [refetch, setRefetch] = useState(true);
-  const [uploadplans, setUploadPlans] = useState([]);
-  const [uploadimages, setUploadImages] = useState([]);
-  const [developerdata, setDeveloperData] = useState(developer_stat);
-  const [modaldeveloper, setModalDeveloper] = useState(false);
+  const [uploadPlans, setUploadPlans] = useState([]);
+  const [uploadImages, setUploadImages] = useState([]);
+  const [developerData, setDeveloperData] = useState(initialDeveloperState);
+  const [modalDeveloper, setModalDeveloper] = useState(false);
 
   const handleCreateDeveloper = (e) => {
     e.preventDefault();
-    console.log(developerdata);
     if (
-      developerdata.name == "" ||
-      developerdata.phone == "" ||
-      developerdata.website_link == "" ||
-      developerdata.details == "" ||
-      developerdata.image == null
+      !developerData.name ||
+      !developerData.phone ||
+      !developerData.website_link ||
+      !developerData.details ||
+      !developerData.image
     ) {
-      swal({
-        title: "Error!",
-        text: "Please fill all the fields!",
-        icon: "error",
-        button: "Ok",
-      });
+      swal("Error!", "Please fill all the fields!", "error");
       return;
     }
     axios
-      .post("https://api.condomonk.ca/api/developers/", developerdata, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+      .post("https://api.condomonk.ca/api/developers/", developerData, {
+        headers: { "Content-Type": "multipart/form-data" },
       })
-      .then((res) => {
+      .then(() => {
         setRefetch(!refetch);
-        setDeveloperData(stat);
+        setDeveloperData(initialDeveloperState);
         setModalDeveloper(false);
       })
-      .catch((err) => {
-        console.log(err.data);
-      });
+      .catch((err) => console.error(err));
   };
 
   const handleImagesChange = (e) => {
-    const prevImages = uploadimages;
-    const selectedImages = Array.from(e.target.files);
-    setUploadImages([...prevImages, ...selectedImages]);
+    setUploadImages([...uploadImages, ...Array.from(e.target.files)]);
   };
 
   const handlePlansChange = (e) => {
-    const prevPlans = uploadplans;
-    const selectedPlans = Array.from(e.target.files);
-    setUploadPlans([...prevPlans, ...selectedPlans]);
+    setUploadPlans([...uploadPlans, ...Array.from(e.target.files)]);
   };
 
   useEffect(() => {
     axios
       .get("https://api.condomonk.ca/api/city/")
       .then((res) => {
-        console.log(res.data.results);
         setCities(res.data.results);
-        setPredata((prevState) => ({
-          ...prevState,
-          city: res.data.results[0],
-        }));
+        setPredata((prev) => ({ ...prev, city: res.data.results[0] }));
       })
-      .catch((err) => {
-        console.log(err.data);
-      });
+      .catch((err) => console.error(err));
 
     axios
       .get("https://api.condomonk.ca/api/developers/")
       .then((res) => {
-        console.log(res.data.results);
         setDevelopers(res.data.results);
-        setPredata((prevState) => ({
-          ...prevState,
-          developer: res.data.results[0],
-        }));
+        setPredata((prev) => ({ ...prev, developer: res.data.results[0] }));
       })
-      .catch((err) => {
-        console.log(err.data);
-      });
+      .catch((err) => console.error(err));
   }, [refetch]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setPredata((prevState) => ({
-      ...prevState,
-      [id]: value,
-    }));
+    setPredata((prev) => ({ ...prev, [id]: value }));
   };
 
   const handleChangeDeveloperData = (e) => {
     const { id, value } = e.target;
-    setDeveloperData((prevState) => ({
-      ...prevState,
-      [id]: value,
-    }));
+    setDeveloperData((prev) => ({ ...prev, [id]: value }));
   };
 
   const handleImageChange = (e) => {
-    let newData = { ...developerdata };
-    newData["image"] = e.target.files[0];
-    setDeveloperData(newData);
+    setDeveloperData({ ...developerData, image: e.target.files[0] });
   };
 
   const handleChangeCity = (e) => {
-    const { id, value } = e.target;
-    let mycity = cities.filter((city) => city.name === value);
-    let newcity = {
-      id: mycity[0].id,
-      name: mycity[0].name,
-      slug: mycity[0].slug,
-    };
-    setPredata((prevState) => ({
-      ...prevState,
-      [id]: newcity,
-    }));
+    const selectedCity = cities.find((city) => city.name === e.target.value);
+    setPredata((prev) => ({ ...prev, city: selectedCity }));
   };
 
   const handleChangeDev = (e) => {
-    const { id, value } = e.target;
-
-    let mydev = developers.filter((dev) => dev.name === value);
-
-    setPredata((prevState) => ({
-      ...prevState,
-      [id]: mydev[0],
-    }));
+    const selectedDeveloper = developers.find(
+      (dev) => dev.name === e.target.value
+    );
+    setPredata((prev) => ({ ...prev, developer: selectedDeveloper }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(predata);
-    console.log(uploadimages);
-    console.log(uploadplans);
-
     if (
-      predata.project_name === "" ||
-      predata.project_address === "" ||
-      predata.price_starting_from === "" ||
-      predata.price_to === "" ||
-      predata.project_type === "" ||
-      predata.status === "" ||
-      predata.city.name === "" ||
-      predata.developer.name === "" ||
-      predata.occupancy === "" ||
-      predata.no_of_units === ""
+      !predata.project_name ||
+      !predata.project_address ||
+      !predata.price_starting_from ||
+      !predata.price_to ||
+      !predata.project_type ||
+      !predata.status ||
+      !predata.city.name ||
+      !predata.developer.name ||
+      !predata.occupancy ||
+      !predata.no_of_units
     ) {
       swal("Please fill all the fields", "", "error");
       return;
     }
 
-    let alldata = {
-      predata: predata,
-      images: uploadimages,
-      plans: uploadplans,
+    const alldata = {
+      predata,
+      images: uploadImages,
+      plans: uploadPlans,
     };
 
     axios
       .post("https://api.condomonk.ca/api/preconstructions/", alldata, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        headers: { "Content-Type": "multipart/form-data" },
       })
-      .then((res) => {
-        console.log(res.data);
+      .then(() => {
         setRefetch(!refetch);
         swal("Project Uploaded Successfully", "", "success");
-        setPredata(stat);
-        routee.push("/admin/");
+        setPredata(initialState);
+        router.push("/admin/");
       })
       .catch((err) => {
-        console.log(err.data);
+        console.error(err);
         swal("Something went wrong", "", "error");
       });
   };
 
   const handleDeletePlan = (plan) => {
-    let newplans = uploadplans.filter((p) => p !== plan);
-    setUploadPlans(newplans);
+    setUploadPlans(uploadPlans.filter((p) => p !== plan));
   };
 
   const handleDeleteImage = (image) => {
-    let newimages = uploadimages.filter((p) => p !== image);
-    setUploadImages(newimages);
+    setUploadImages(uploadImages.filter((p) => p !== image));
   };
 
   return (
     <>
-      {modaldeveloper && (
+      {modalDeveloper && (
         <div className="modal">
           <section className="modal-main rounded-4">
             <div className="p-3 py-4 bg-light">
@@ -241,7 +181,7 @@ export default function Upload() {
                   className="btn bg-white btn-outline-danger p-1 py-0"
                   onClick={() => {
                     setModalDeveloper(false);
-                    setDeveloperData(stat);
+                    setDeveloperData(initialDeveloperState);
                   }}
                 >
                   <svg
@@ -264,8 +204,8 @@ export default function Upload() {
                         type="text"
                         className="form-control"
                         id="name"
-                        value={developerdata.name}
-                        onChange={(e) => handleChangeDeveloperData(e)}
+                        value={developerData.name}
+                        onChange={handleChangeDeveloperData}
                       />
                       <label htmlFor="name">
                         Developer Name <span className="text-danger">*</span>
@@ -278,8 +218,8 @@ export default function Upload() {
                         type="text"
                         className="form-control"
                         id="phone"
-                        value={developerdata.phone}
-                        onChange={(e) => handleChangeDeveloperData(e)}
+                        value={developerData.phone}
+                        onChange={handleChangeDeveloperData}
                       />
                       <label htmlFor="phone">
                         Phone <span className="text-danger">*</span>
@@ -292,8 +232,8 @@ export default function Upload() {
                         type="text"
                         className="form-control"
                         id="website_link"
-                        value={developerdata.website_link}
-                        onChange={(e) => handleChangeDeveloperData(e)}
+                        value={developerData.website_link}
+                        onChange={handleChangeDeveloperData}
                       />
                       <label htmlFor="website_link">
                         Website Link <span className="text-danger">*</span>
@@ -309,9 +249,7 @@ export default function Upload() {
                         type="file"
                         className="form-control"
                         id="image"
-                        onChange={(e) => {
-                          handleImageChange(e);
-                        }}
+                        onChange={handleImageChange}
                       />
                     </div>
                   </div>
@@ -324,394 +262,314 @@ export default function Upload() {
                       id="details"
                       rows={8}
                       className="textbox w-100"
-                      defaultValue={developerdata.details}
-                      onChange={(e) => handleChangeDeveloperData(e)}
+                      value={developerData.details}
+                      onChange={handleChangeDeveloperData}
                     ></textarea>
+                  </div>
+                  <div className="col-4">
+                    <button
+                      className="btn btn-primary bg-col-primary py-3 px-4 w-100"
+                      onClick={handleCreateDeveloper}
+                    >
+                      Create Developer
+                    </button>
                   </div>
                 </div>
               </div>
-              <button
-                className="btn btn-success mt-5 d-flex justify-content-center w-100 btn-lg"
-                onClick={(e) => handleCreateDeveloper(e)}
-              >
-                Submit
-              </button>
             </div>
           </section>
         </div>
       )}
-      <div className="bg-white">
-        <div className="container-fluid px-minn">
-          <div className="d-flex justify-content-between pt-5">
-            <Link href="/admin/" className="btn bg-white shadow">
-              Go Back
-            </Link>
-            <h4 className="fw-bold">Upload New Pre Construction</h4>
-          </div>
-        </div>
-        <div className="container-fluid px-minn py-5 mydetaill">
-          <div className="row row-cols-2 bg-light py-5 px-3 rounded-mine">
-            <div className="col-12">
-              <div className="row row-cols-2 gy-4">
-                <div className="col-4">
-                  <div className="form-floating w-100">
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="project_name"
-                      value={predata.project_name}
-                      onChange={(e) => handleChange(e)}
-                    />
-                    <label htmlFor="projectname">
-                      Project Name <span className="text-danger">*</span>
-                    </label>
-                  </div>
-                </div>
-                <div className="col-4">
-                  <div className="form-floating w-100">
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="project_address"
-                      value={predata.project_address}
-                      onChange={(e) => handleChange(e)}
-                    />
-                    <label htmlFor="projectaddress">
-                      Project Address <span className="text-danger">*</span>
-                    </label>
-                  </div>
-                </div>
-                <div className="col-4">
-                  <div className="form-floating w-100">
-                    <select
-                      className="form-select"
-                      id="project_type"
-                      value={predata.project_type}
-                      onChange={(e) => handleChange(e)}
-                      ariaLabel="Floating label select example"
-                    >
-                      <option value="Condo">Condo</option>
-                      <option value="Townhome">Townhome</option>
-                      <option value="Detached">Detached</option>
-                      <option value="Semi-Detached">Semi-Detached</option>
-                    </select>
-                    <label htmlFor="floatingSelect2">
-                      Select Type <span className="text-danger">*</span>
-                    </label>
-                  </div>
-                </div>
 
-                <div className="col-4">
-                  <div className="form-floating w-100">
-                    <input
-                      type="number"
-                      className="form-control"
-                      min="0"
-                      id="price_starting_from"
-                      value={predata.price_starting_from}
-                      onChange={(e) => handleChange(e)}
-                    />
-                    <label htmlFor="pricefrom">
-                      Price From <span className="text-danger">*</span>
-                    </label>
-                  </div>
-                </div>
-                <div className="col-4">
-                  <div className="form-floating w-100">
-                    <input
-                      type="number"
-                      className="form-control"
-                      min="0"
-                      id="price_to"
-                      value={predata.price_to}
-                      onChange={(e) => handleChange(e)}
-                    />
-                    <label htmlFor="priceto">
-                      Price To <span className="text-danger">*</span>
-                    </label>
-                  </div>
-                </div>
-                <div className="col-4">
-                  <div className="form-floating w-100">
-                    <select
-                      className="form-select"
-                      id="status"
-                      value={predata.status}
-                      onChange={(e) => handleChange(e)}
-                      ariaLabel="Floating label select example"
-                    >
-                      <option value="Selling">Selling</option>
-                      <option value="Upcoming">Upcoming</option>
-                      <option value="Sold out">Sold out</option>
-                      <option value="Planning Phase">Planning Phase</option>
-                    </select>
-                    <label htmlFor="status">
-                      Status <span className="text-danger">*</span>
-                    </label>
-                  </div>
-                </div>
-                <div className="col-4">
-                  <div className="form-floating w-100">
-                    <select
-                      className="form-select"
-                      id="co_op_available"
-                      value={predata.co_op_available}
-                      onChange={(e) => handleChange(e)}
-                      ariaLabel="Floating label select example"
-                    >
-                      <option value={false}>Not Available</option>
-                      <option value={true}>Available</option>
-                    </select>
-                    <label htmlFor="co_op_available">
-                      Co Op
-                      <span className="text-danger">*</span>
-                    </label>
-                  </div>
-                </div>
-                <div className="col-4">
-                  <div className="form-floating w-100">
-                    <select
-                      className="form-select"
-                      id="is_featured"
-                      value={predata.is_featured}
-                      onChange={(e) => handleChange(e)}
-                      ariaLabel="Floating label select example"
-                    >
-                      <option value={false}>Not featured</option>
-                      <option value={true}>Featured</option>
-                    </select>
-                    <label htmlFor="is_featured">
-                      Is Featured ?<span className="text-danger">*</span>
-                    </label>
-                  </div>
-                </div>
-                <div className="col-4">
-                  <div className="form-floating w-100">
-                    <input
-                      type="text"
-                      className="form-control"
-                      min="0"
-                      id="occupancy"
-                      value={predata.occupancy}
-                      onChange={(e) => handleChange(e)}
-                    />
-                    <label htmlFor="occupancy">
-                      Occupancy <span className="text-danger">*</span>
-                    </label>
-                  </div>
-                </div>
-                <div className="col-4">
-                  <div className="form-floating w-100">
-                    <input
-                      type="text"
-                      className="form-control"
-                      min="0"
-                      id="no_of_units"
-                      value={predata.no_of_units}
-                      onChange={(e) => handleChange(e)}
-                    />
-                    <label htmlFor="no_of_units">
-                      No of units <span className="text-danger">*</span>
-                    </label>
-                  </div>
-                </div>
-                <div className="col-4">
-                  <div className="form-floating w-100">
-                    <select
-                      className="form-select"
-                      id="city"
-                      onChange={(e) => handleChangeCity(e)}
-                      ariaLabel="Floating label select example"
-                    >
-                      {cities.map((city) => (
-                        <option key={city.id} value={city.name}>
-                          {city.name}
-                        </option>
-                      ))}
-                    </select>
-                    <label htmlFor="floatingSelect">
-                      Select City <span className="text-danger">*</span>
-                    </label>
-                  </div>
-                  {/* <div className="col-12">
-                    <button
-                      className="btn btn-outline-dark mt-2 w-100"
-                      onClick={() => setModalstat(true)}
-                    >
-                      Add New City
-                    </button>
-                  </div> */}
-                </div>
-                <div className="col-4">
-                  <div className="form-floating w-100">
-                    <input
-                      list="devs"
-                      className="form-select"
-                      id="developer"
-                      onChange={(e) => handleChangeDev(e)}
-                    />
-                    <datalist id="devs">
-                      <option value="">---</option>
-                      {developers &&
-                        developers.map((developer) => (
-                          <option key={developer.id} value={developer.name}>
-                            {developer.name}
-                          </option>
-                        ))}
-                    </datalist>
-                    <label htmlFor="developer">
-                      Developer <span className="text-danger">*</span>
-                    </label>
-                  </div>
-                  <div className="col-12">
-                    <button
-                      className="btn btn-outline-dark mt-2 w-100"
-                      onClick={() => setModalDeveloper(true)}
-                    >
-                      Add New Developer
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="container-fluid px-minn pb-5 mydetaill">
-          <p className="fs-5 fw-bold">Enter Description about the Project</p>
-          <p className="my-3">
-            The most anticipated preconstruction project in CITY NAME ... [
-            Summary, Descriptions, Deposite Structure, Amenities ]
+      <section className="d-flex justify-content-between">
+        <div>
+          <p className="fs-1 fw-bold">Create New Preconstruction</p>
+          <p className="fs-6 text-secondary">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam,
+            tempora.
           </p>
-          <ReactQuill
-            theme="snow"
-            value={predata.description}
-            style={{ height: "550px", marginBottom: "80px" }}
-            modules={{
-              toolbar: [
-                [{ header: "1" }, { header: "2" }, { font: [] }],
-                [{ size: [] }],
-                ["bold", "italic", "underline", "strike", "blockquote"],
-                [
-                  { list: "ordered" },
-                  { list: "bullet" },
-                  { indent: "-1" },
-                  { indent: "+1" },
-                ],
-                ["link", "image", "video"],
-                ["clean"],
-              ],
-              clipboard: {
-                // toggle to add extra line breaks when pasting HTML:
-                matchVisual: false,
-              },
-            }}
-            formats={[
-              "header",
-              "bold",
-              "italic",
-              "underline",
-              "strike",
-              "blockquote",
-              "list",
-              "bullet",
-              "link",
-              "image",
-              "video",
-            ]}
-            onChange={(newText) =>
-              setPredata((prevState) => ({
-                ...prevState,
-                ["description"]: newText,
-              }))
-            }
-          />
-          <div className="row row-cols-2 pt-4 pb-3">
-            <div className="col shadow-lg">
-              <div className="py-3">
-                <label htmlFor="images" className="fw-bold">
-                  Upload Photos
-                </label>
-                <br />
-                <br />
-                <input
-                  type="file"
-                  multiple
-                  name="images"
-                  id="images"
-                  onChange={(e) => handleImagesChange(e)}
-                />
-              </div>
-              <div className="col-12 pb-3">
-                <div className="row row-cols-3">
-                  {uploadimages &&
-                    uploadimages.map((image) => (
-                      <div className="col-4">
-                        <img
-                          src={URL.createObjectURL(image)}
-                          className="img-fluid"
-                        />
+        </div>
+        <Link href="/admin/">
+          <button className="btn btn-primary bg-col-primary p-3 px-5 rounded-3">
+            Back
+          </button>
+        </Link>
+      </section>
 
-                        <button
-                          className="btn btn-sm btn-danger mt-2"
-                          onClick={() => handleDeleteImage(image)}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    ))}
-                </div>
-              </div>
-            </div>
-            <div className="col shadow-lg">
-              <div className="py-3">
-                <label htmlFor="plans" className="fw-bold">
-                  Upload Plans
-                </label>
-                <br />
-                <br />
-                <input
-                  type="file"
-                  multiple
-                  name="plans"
-                  id="plans"
-                  onChange={(e) => handlePlansChange(e)}
-                />
-              </div>
-              <div className="col-12 pb-3">
-                <div className="row row-cols-3">
-                  {uploadplans &&
-                    uploadplans.map((plan) => (
-                      <div className="col-4">
-                        <img
-                          src={URL.createObjectURL(plan)}
-                          className="img-fluid"
-                        />
-
-                        <button
-                          className="btn btn-sm btn-danger mt-2"
-                          onClick={() => handleDeletePlan(plan)}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    ))}
-                </div>
-              </div>
+      <form onSubmit={handleSubmit}>
+        <div className="row row-cols-1 row-cols-md-2 gy-4">
+          <div className="col-4">
+            <div className="form-floating w-100">
+              <input
+                type="text"
+                className="form-control"
+                id="project_name"
+                value={predata.project_name}
+                onChange={handleChange}
+              />
+              <label htmlFor="project_name">
+                Project Name <span className="text-danger">*</span>
+              </label>
             </div>
           </div>
-          <div className="my-3"></div>
-          <div className="mt-5"></div>
-          <div className="pt-5"></div>
-          <div className="py-3 d-flex justify-content-center align-items-center d-block bg-white w-100 posss">
-            <button
-              className="btn btn-success btn-lg shadow-lg"
-              onClick={(e) => handleSubmit(e)}
-            >
-              Upload now
-            </button>
+
+          <div className="col-4">
+            <div className="form-floating w-100">
+              <select
+                id="city"
+                className="form-select"
+                value={predata.city.name}
+                onChange={handleChangeCity}
+              >
+                {cities.map((city) => (
+                  <option key={city.id} value={city.name}>
+                    {city.name}
+                  </option>
+                ))}
+              </select>
+              <label htmlFor="city">
+                City <span className="text-danger">*</span>
+              </label>
+            </div>
+          </div>
+
+          <div className="col-4">
+            <div className="form-floating w-100">
+              <select
+                id="developer"
+                className="form-select"
+                value={predata.developer.name}
+                onChange={handleChangeDev}
+              >
+                {developers.map((developer) => (
+                  <option key={developer.id} value={developer.name}>
+                    {developer.name}
+                  </option>
+                ))}
+              </select>
+              <label htmlFor="developer">
+                Developer <span className="text-danger">*</span>
+              </label>
+            </div>
+          </div>
+
+          <div className="col-4">
+            <div className="form-floating w-100">
+              <input
+                type="number"
+                className="form-control"
+                id="price_starting_from"
+                value={predata.price_starting_from}
+                onChange={handleChange}
+              />
+              <label htmlFor="price_starting_from">
+                Price Starting From <span className="text-danger">*</span>
+              </label>
+            </div>
+          </div>
+
+          <div className="col-4">
+            <div className="form-floating w-100">
+              <input
+                type="number"
+                className="form-control"
+                id="price_to"
+                value={predata.price_to}
+                onChange={handleChange}
+              />
+              <label htmlFor="price_to">
+                Price To <span className="text-danger">*</span>
+              </label>
+            </div>
+          </div>
+
+          <div className="col-4">
+            <div className="form-floating w-100">
+              <select
+                id="project_type"
+                className="form-select"
+                value={predata.project_type}
+                onChange={handleChange}
+              >
+                <option value="Condo">Condo</option>
+                <option value="Townhome">Townhome</option>
+              </select>
+              <label htmlFor="project_type">
+                Project Type <span className="text-danger">*</span>
+              </label>
+            </div>
+          </div>
+
+          <div className="col-4">
+            <div className="form-floating w-100">
+              <select
+                id="status"
+                className="form-select"
+                value={predata.status}
+                onChange={handleChange}
+              >
+                <option value="Upcoming">Upcoming</option>
+                <option value="Completed">Completed</option>
+              </select>
+              <label htmlFor="status">
+                Status <span className="text-danger">*</span>
+              </label>
+            </div>
+          </div>
+
+          <div className="col-4">
+            <div className="form-floating w-100">
+              <input
+                type="text"
+                className="form-control"
+                id="occupancy"
+                value={predata.occupancy}
+                onChange={handleChange}
+              />
+              <label htmlFor="occupancy">
+                Occupancy <span className="text-danger">*</span>
+              </label>
+            </div>
+          </div>
+
+          <div className="col-4">
+            <div className="form-floating w-100">
+              <input
+                type="text"
+                className="form-control"
+                id="no_of_units"
+                value={predata.no_of_units}
+                onChange={handleChange}
+              />
+              <label htmlFor="no_of_units">
+                No of Units <span className="text-danger">*</span>
+              </label>
+            </div>
+          </div>
+
+          <div className="col-4 d-flex align-items-center">
+            <div className="form-check form-switch">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                id="is_featured"
+                checked={predata.is_featured}
+                onChange={() =>
+                  setPredata((prev) => ({
+                    ...prev,
+                    is_featured: !prev.is_featured,
+                  }))
+                }
+              />
+              <label className="form-check-label" htmlFor="is_featured">
+                Featured
+              </label>
+            </div>
+          </div>
+
+          <div className="col-4 d-flex align-items-center">
+            <div className="form-check form-switch">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                id="co_op_available"
+                checked={predata.co_op_available}
+                onChange={() =>
+                  setPredata((prev) => ({
+                    ...prev,
+                    co_op_available: !prev.co_op_available,
+                  }))
+                }
+              />
+              <label className="form-check-label" htmlFor="co_op_available">
+                Co-Op Available
+              </label>
+            </div>
+          </div>
+
+          <div className="col-12">
+            <p className="fw-bold mb-1 mt-2">
+              Description <span className="text-danger">*</span>
+            </p>
+            <ReactQuill
+              value={predata.description}
+              onChange={(value) =>
+                setPredata((prev) => ({ ...prev, description: value }))
+              }
+            />
+          </div>
+
+          <div className="col-12 mt-4">
+            <label htmlFor="uploadImages">Upload Images</label>
+            <input
+              type="file"
+              id="uploadImages"
+              multiple
+              onChange={handleImagesChange}
+            />
+            <div className="d-flex mt-2">
+              {uploadImages.map((image, index) => (
+                <div key={index} className="position-relative">
+                  <img
+                    src={URL.createObjectURL(image)}
+                    alt="uploaded"
+                    className="me-2"
+                    style={{ width: "100px", height: "100px" }}
+                  />
+                  <button
+                    type="button"
+                    className="btn-close position-absolute top-0 end-0"
+                    onClick={() => handleDeleteImage(image)}
+                  ></button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="col-12 mt-4">
+            <label htmlFor="uploadPlans">Upload Floor Plans</label>
+            <input
+              type="file"
+              id="uploadPlans"
+              multiple
+              onChange={handlePlansChange}
+            />
+            <div className="d-flex mt-2">
+              {uploadPlans.map((plan, index) => (
+                <div key={index} className="position-relative">
+                  <div className="me-2">
+                    {plan.name}
+                    <button
+                      type="button"
+                      className="btn-close position-absolute top-0 end-0"
+                      onClick={() => handleDeletePlan(plan)}
+                    ></button>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+
+        <div className="col-4 mt-5">
+          <button
+            type="button"
+            className="btn btn-primary bg-col-primary py-3 px-4 w-100"
+            onClick={() => setModalDeveloper(true)}
+          >
+            Create New Developer
+          </button>
+        </div>
+
+        <div className="col-4 mt-5">
+          <button
+            type="submit"
+            className="btn btn-primary bg-col-primary py-3 px-4 w-100"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
     </>
   );
 }
