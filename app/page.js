@@ -5,7 +5,6 @@ import PreconSchema from "@/components/PreconSchema";
 import BottomContactForm from "@/components/BottomContactForm";
 import MainSearch from "@/components/MainSearch";
 import "./icons.css";
-import FeaturedCard from "@/components/FeaturedCard";
 
 async function getData(city) {
   const res = await fetch(
@@ -309,7 +308,7 @@ export default async function Home(props) {
                       __html: JSON.stringify(PreconSchema(item)),
                     }}
                   />
-                  <FeaturedCard {...item} />
+                  <CondoCard {...item} />
                 </div>
               ))}
           </div>
