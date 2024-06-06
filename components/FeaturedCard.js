@@ -25,7 +25,7 @@ export default function FeaturedCard(props) {
 
   return (
     <>
-      <div className="card">
+      <div className="card bigg shadow-lg">
         <div className="row g-0">
           <div className="col-md-6">
             <div className=" position-relative is-loading">

@@ -114,7 +114,7 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
                 </a>
               </li>
               <li className="nav-item rounded-2  mx-1">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="#top10gta">
                   Top 10 <span className="fw-medium">GTA</span> Projects
                 </a>
               </li>

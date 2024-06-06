@@ -213,12 +213,12 @@ export default async function Home(props) {
               Looking For A Pre Construction Home?
             </h1>
             <div className="buttons my-3 sm-center">
-              <a href="#contact">
+              <Link href="#contact">
                 <button className="button btn btn-dark  mr-2">
                   Request Information
                 </button>
                 <button className="button btn btn-warning">Contact Now</button>
-              </a>
+              </Link>
             </div>
             <p className="pt-2">
               Welcome to Condomonk, Canada's premier platform for
@@ -290,7 +290,7 @@ export default async function Home(props) {
         </div>
       </div>
 
-      <div className="pt-5 ">
+      <div className="pt-5 " id="top10gta">
         <div className="container pt-5 ">
           <div className="d-flex flex-column align-items-center justify-content-center">
             <h2 className="fw-mine fs-big ">
