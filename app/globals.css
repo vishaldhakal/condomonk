@@ -1417,6 +1417,13 @@ label {
     font-size: 2.5rem;
 }
 
+.featured-main-title {
+    line-height: 2rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+    font-size: 3rem;
+}
+
 .maxhh::-webkit-scrollbar {
     display: none;
 }
@@ -1430,6 +1437,13 @@ label {
     position: relative;
     bottom: -2.3rem;
     right: 8.2rem;
+
+}
+
+.absolute-design-border2 {
+    position: absolute;
+    top: 2rem;
+    right: 1rem;
 
 }
 
@@ -2191,6 +2205,10 @@ textarea {
 
 @media (max-width: 768px) {
     .absolute-design-border {
+        display: none !important;
+    }
+
+    .absolute-design-border2 {
         display: none !important;
     }
 

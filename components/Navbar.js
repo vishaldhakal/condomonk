@@ -77,7 +77,7 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
           >
             <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
               <li className="nav-item dropdown mx-1">
-                <a
+                <Link
                   className="nav-link dropdown-toggle active fw-medium  rounded-2"
                   href="#"
                   id="dropdownId"
@@ -86,7 +86,7 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
                   aria-expanded="false"
                 >
                   Cities
-                </a>
+                </Link>
                 <div
                   className="dropdown-menu mt-1"
                   aria-labelledby="dropdownId"
@@ -109,28 +109,28 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
                 </div>
               </li>
               <li className="nav-item mx-1">
-                <a className="nav-link" href="/pre-construction-homes">
+                <Link className="nav-link" href="/pre-construction-homes">
                   Pre Construction Homes
-                </a>
+                </Link>
               </li>
               <li className="nav-item rounded-2  mx-1">
-                <a className="nav-link" href="#top10gta">
+                <Link className="nav-link" href="/top-10-gta-projects">
                   Top 10 <span className="fw-medium">GTA</span> Projects
-                </a>
+                </Link>
               </li>
               <li className="nav-item mx-1">
-                <a className="nav-link" href="">
+                <Link className="nav-link" href="">
                   Blogs
-                </a>
+                </Link>
               </li>
             </ul>
             <button
               className="btn bg-warning btn-warning my-2 my-sm-0 rounded ms-md-4 py-2 px-3 fs-6"
               type="submit"
             >
-              <a className="nav-link text-black " href="#contact">
+              <Link className="nav-link text-black " href="#contact">
                 Contact Now
-              </a>
+              </Link>
             </button>
           </div>
         </div>

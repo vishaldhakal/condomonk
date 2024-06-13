@@ -112,9 +112,9 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
             </li>
 
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <Link className="nav-link" href="#">
                 Blogs
-              </a>
+              </Link>
             </li>
 
             <li className="nav-item">
