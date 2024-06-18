@@ -25,7 +25,7 @@ export default function Home() {
   useEffect(() => {
     axios
       .get(
-        "https://api.condomonk.ca/api/preconstructions/?page=" +
+        "https://api.condomonk.ca/api/preconstructions/?small=aaa&page=" +
           page +
           "&city=" +
           filters.city
@@ -40,7 +40,7 @@ export default function Home() {
       });
 
     axios
-      .get("https://api.condomonk.ca/api/city/")
+      .get("https://api.condomonk.ca/api/city/?show_desc=no")
       .then((res) => {
         setCities(res.data.results);
       })
