@@ -12,17 +12,37 @@ export default function Home() {
     typee: "All",
   });
   const [preconstructions, setPreConstructions] = useState([]);
+  const [cities, setCities] = useState([]);
   const [refetch, setRefetch] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
+  function handleChange(e) {
+    setFilters({ ...filters, [e.target.id]: e.target.value });
+    setRefetch(!refetch);
+  }
+
   useEffect(() => {
     axios
-      .get("https://api.condomonk.ca/api/preconstructions/?page=" + page)
+      .get(
+        "https://api.condomonk.ca/api/preconstructions/?page=" +
+          page +
+          "&city=" +
+          filters.city
+      )
       .then((res) => {
         console.log(res.data.results);
         setPreConstructions(res.data.results);
         setTotalPages(Math.ceil(res.data.count / 10));
+      })
+      .catch((err) => {
+        console.log(err.data);
+      });
+
+    axios
+      .get("https://api.condomonk.ca/api/city/")
+      .then((res) => {
+        setCities(res.data.results);
       })
       .catch((err) => {
         console.log(err.data);
@@ -90,13 +110,18 @@ export default function Home() {
             <div className="form-floating">
               <select
                 className="form-select"
-                id="floatingCity"
+                id="city"
                 value={filters.city}
                 onChange={(e) => handleChange(e)}
                 aira-label="Floating label select example"
               >
                 <option value="All">All</option>
-                <option value="Toronto">Toronto</option>
+                {cities &&
+                  cities.map((city) => (
+                    <option key={city.id} value={city.slug}>
+                      {city.name}
+                    </option>
+                  ))}
               </select>
               <label htmlFor="floatingCity">Select City</label>
             </div>
