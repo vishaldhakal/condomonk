@@ -32,10 +32,10 @@ export default function CondoCardHome(props) {
             className="mylinkk"
             target="_blank"
           >
-            {props.image.length > 0 ? (
+            {props.image ? (
               <img
                 loading="lazy"
-                src={`${props.image[0].image}`}
+                src={`${props.image.image}`}
                 layout="responsive"
                 className="img-fluid condocard-img-top"
                 alt={`${props.project_name} located at ${props.project_address} image`}
