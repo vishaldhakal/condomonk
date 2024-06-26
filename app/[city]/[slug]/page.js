@@ -360,9 +360,9 @@ export default async function Home({ params }) {
                       <div className="pt-5">
                         <p className="text-small text-secondary">
                           Note:{" "}
-                          <a href="https://condomonk.ca/" target="_blank">
+                          <Link href="https://condomonk.ca/" target="_blank">
                             Condomonk
-                          </a>{" "}
+                          </Link>{" "}
                           is Canada's one of the largest database of new pre
                           construction homes. Our comprehensive database is
                           populated by our research and analysis of publicly

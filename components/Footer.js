@@ -5,7 +5,7 @@ import Link from "next/link";
 const Footer = ({ cities }) => {
   const pathname = usePathname();
 
-  if (pathname.startsWith("/admin")) {
+  if (pathname.startsWith("/Linkdmin")) {
     return <></>;
   }
   return (
@@ -32,12 +32,12 @@ const Footer = ({ cities }) => {
                   className="fields mx-2"
                   placeholder="email"
                 />
-                <a
+                <Link
                   href=""
                   className="btn btn-dark d-flex fw-bold align-items-center"
                 >
                   Sign Up{" "}
-                </a>
+                </Link>
               </div>
             </form>
           </div>
@@ -70,9 +70,9 @@ const Footer = ({ cities }) => {
           <div className="footer-listcontainer  d-flex justify-content-around  align-items-center">
             <div className="row row-cols-md-3 row-cols-1 d-flex justify-content-around  align-items-center pt-5 ">
               <div className="col-md-6 texttt text-center">
-                <a href="/" className="flogo font-family2">
+                <Link href="/" className="flogo font-family2">
                   <span>Condomonk</span>
-                </a>
+                </Link>
                 <p></p>
                 <p className="pe-md-5 px-0 ">
                   Note: Condomonk is Canada's one of the largest database of new
@@ -102,18 +102,18 @@ const Footer = ({ cities }) => {
               </div>
               <div className="col-md-3">
                 <div className="social-links d-flex mt-4  ">
-                  <a href="#" className="me-2">
+                  <Link href="#" className="me-2">
                     <i className="bi bi-twitter"></i>
-                  </a>
-                  <a href="#" className="me-2">
+                  </Link>
+                  <Link href="#" className="me-2">
                     <i className="bi bi-facebook"></i>
-                  </a>
-                  <a href="#" className="me-2">
+                  </Link>
+                  <Link href="#" className="me-2">
                     <i className="bi bi-instagram"></i>
-                  </a>
-                  <a href="#" className="me-2">
+                  </Link>
+                  <Link href="#" className="me-2">
                     <i className="bi bi-linkedin"></i>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
