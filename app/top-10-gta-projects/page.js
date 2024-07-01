@@ -71,7 +71,7 @@ export default async function Home({ params }) {
           <div className="pt-md-3 pt-0">
             <div className="row row-cols-1 row-cols-md-2 my-md-2 my-3 gy-3 g-4">
               {featured.results &&
-                featured.results.slice(0, 8).map((item) => (
+                featured.results.slice(0, 20).map((item) => (
                   <div className="col" key={item.id}>
                     <script
                       key={item.slug}
