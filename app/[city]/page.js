@@ -38,13 +38,9 @@ export async function generateMetadata({ params }, parent) {
       city,
     description: "Pre Construction homes in " + city,
     description:
-      "Looking for a pre construction home in " +
+      "Discover stunning new construction homes, condos & townhouses in " +
       city +
-      "?" +
-      "Search our selection of pre construction condos for sale in " +
-      city +
-      ". Our ever-changing portfolio of pre constructions brings you closer to your ideal condos in the growing city of " +
-      city,
+      ". Find your dream property in our latest developments. Tour new builds today!",
   };
 }
 
