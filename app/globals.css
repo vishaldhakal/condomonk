@@ -1417,6 +1417,13 @@ label {
     font-size: 2.5rem;
 }
 
+.main-title2 {
+    line-height: 2rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+    font-size: 3rem;
+}
+
 .featured-main-title {
     line-height: 2rem;
     font-weight: 900;
