@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const NewsTable = ({ news, handleEdit, handleDelete }) => {
   return (
     <div className="container">
@@ -16,9 +18,13 @@ const NewsTable = ({ news, handleEdit, handleDelete }) => {
             news.map((news, index) => (
               <tr key={index}>
                 <th scope="row">{index + 1}</th>
-                <td>{news.news_title}</td>
+                <td className="text-limit">{news.news_title}</td>
                 <td>{news.last_updated.slice(0, 10)}</td>
-                <td>{news.news_link}</td>
+                <td className="text-limit">
+                  <Link href={`/blogs/${news.slug}`}>
+                    {`https://condomonk.ca/blogs/${news.slug}`}
+                  </Link>
+                </td>
                 <td>
                   <button
                     className="btn btn-sm btn-outline-dark"

@@ -712,6 +712,17 @@ a:hover {
         text-align: center;
     }
 
+    .main-title2 {
+        text-align: center;
+        letter-spacing: .5px;
+        line-height: 3rem !important;
+        font-weight: 900;
+        margin-bottom: 10px;
+        font-size: 2.7rem !important;
+        text-align: center;
+    }
+
+
     .sm-center .titlee {
         font-size: .9rem !important;
         color: #fff;
@@ -1418,7 +1429,7 @@ label {
 }
 
 .main-title2 {
-    line-height: 2rem;
+    line-height: 3.5rem;
     font-weight: 900;
     margin-bottom: 10px;
     font-size: 3rem;
@@ -2208,6 +2219,85 @@ textarea {
     height: 150px !important;
     object-fit: cover;
     border-radius: 10px;
+}
+
+.city-insights-container {
+    text-align: center;
+    padding: 8px 20px 20px 0;
+}
+
+.insights-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.city-list {
+    text-align: center;
+    margin-inline: 32px;
+}
+
+.city-item {
+    margin: 10px;
+    padding: 6px 14px;
+    /* border: 1px solid #00a1ff; */
+    border: 1px solid rgb(218, 220, 224);
+    /* border-radius: 8px; */
+    border-radius: 100px;
+    transition: all 100ms linear;
+    color: rgb(32, 33, 36);
+}
+
+.city-link .active {
+    /* background-color: #00a1ff; */
+    /* color: #fff !important; */
+
+    background: rgb(232, 240, 254);
+    color: #00a1ff;
+    font-weight: bold;
+}
+
+.city-item:hover {
+    /* transform: scale(1.05); */
+    /* background-color: #00a1ff; */
+    /* color: #fff !important; */
+    background-color: rgb(232, 234, 237);
+}
+
+.city-link {
+    text-decoration: none;
+    /* font-weight: bold; */
+    display: block;
+    color: inherit;
+}
+
+#slider {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    position: relative;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+#slider::-webkit-scrollbar {
+    display: none;
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scroll-left,
+.scroll-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    top: calc(50% - 24px);
 }
 
 @media (max-width: 768px) {

@@ -118,8 +118,8 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
                   Top 10 <span className="fw-medium">GTA</span> Projects
                 </Link>
               </li>
-              <li className="nav-item mx-1">
-                <Link className="nav-link" href="">
+              <li className="nav-item">
+                <Link className="nav-link" href="/blogs">
                   Blogs
                 </Link>
               </li>

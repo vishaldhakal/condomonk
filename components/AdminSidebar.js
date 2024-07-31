@@ -59,14 +59,14 @@ const AdminSidebar = () => {
         <li className="nav-item">
           <Link
             className={
-              pathname.startsWith("/admin/news")
+              pathname.startsWith("/admin/blog")
                 ? "nav-link active"
                 : "nav-link"
             }
-            href="/admin/news"
+            href="/admin/blog"
           >
             <i className="bi bi-newspaper"></i>
-            <span>News</span>
+            <span>Blogs</span>
           </Link>
         </li>
         <li className="nav-item">

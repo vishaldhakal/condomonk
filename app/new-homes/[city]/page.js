@@ -58,9 +58,8 @@ export default async function Home({ params }) {
         <div className="container">
           <div className="d-flex justify-content-center">
             <div className="">
-              <h1 className="main-title2 font-family2 pb-2 pb-md-0 text-center">
-                New homes in {CapitalizeFirst(params.city)}{" "}
-                <span className="nextline-sm"> ( 2024 )</span>
+              <h1 className="main-title2  font-family2 pb-2 pb-md-0 text-center">
+                New homes in {CapitalizeFirst(params.city)} ( 2024 )
               </h1>
             </div>
             {/* <div className="">
