@@ -25,7 +25,7 @@ export default function Home() {
   useEffect(() => {
     axios
       .get(
-        "https://api.condomonk.ca/api/preconstructions/?small=aaa&page=" +
+        "https://api.condomonk.ca/api/preconstructions/?small=aaa&page_size=10&page=" +
           page +
           "&city=" +
           filters.city

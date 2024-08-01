@@ -15,7 +15,7 @@ export async function generateMetadata({ params }, parent) {
     alternates: {
       canonical: `https://condomonk.ca/blogs/category/${params?.city}`,
     },
-    title: `Dolphy Blogs | ${params?.city} Insights on real Estate`,
+    title: `Condomonk Blogs | ${params?.city} Insights on real Estate`,
   };
 }
 
