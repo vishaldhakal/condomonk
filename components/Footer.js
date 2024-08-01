@@ -47,7 +47,7 @@ const Footer = ({ cities }) => {
             <div className="container footer-links">
               <h3 className="text-center fw-bold pb-2 fs-2 font-family2">
                 {" "}
-                New Construction homes in Canada
+                New homes in Canada
               </h3>
               <div className="footer-listcontainer text-center">
                 <ul className="two-column-list text-center">
@@ -55,8 +55,8 @@ const Footer = ({ cities }) => {
                     {cities &&
                       cities.map((city) => (
                         <li key={city.id}>
-                          <Link href={`/${city.slug}`}>
-                            <span>New construction in {city.name}</span>
+                          <Link href={`/new-homes/${city.slug}`}>
+                            <span>New homes in {city.name}</span>
                           </Link>
                         </li>
                       ))}
