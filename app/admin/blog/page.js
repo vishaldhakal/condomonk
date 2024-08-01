@@ -48,7 +48,7 @@ export default function UploadBlog() {
     }
 
     axios
-      .post("https://api.dolphy.ca/api/news/", newsdata, {
+      .post("https://api.condomonk.ca/api/news/", newsdata, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -104,11 +104,15 @@ export default function UploadBlog() {
     }
 
     axios
-      .put(`https://api.dolphy.ca/api/news/${newsdata.id}/`, updatenewsdata, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .put(
+        `https://api.condomonk.ca/api/news/${newsdata.id}/`,
+        updatenewsdata,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
         setModalNews(false);
         setIsEdit(false);
@@ -156,7 +160,7 @@ export default function UploadBlog() {
 
   function deleteNews(id) {
     axios
-      .delete(`https://api.dolphy.ca/api/news/${id}/`)
+      .delete(`https://api.condomonk.ca/api/news/${id}/`)
       .then((res) => {
         setRefetcch(!refetch);
       })
@@ -167,7 +171,7 @@ export default function UploadBlog() {
 
   useEffect(() => {
     axios
-      .get("https://api.dolphy.ca/api/news/")
+      .get("https://api.condomonk.ca/api/news/")
       .then((res) => {
         setNews(res.data);
       })
@@ -176,7 +180,7 @@ export default function UploadBlog() {
       });
 
     axios
-      .get("https://api.dolphy.ca/api/city/")
+      .get("https://api.condomonk.ca/api/city/")
       .then((res) => {
         setCities(res.data.results);
       })
@@ -196,7 +200,7 @@ export default function UploadBlog() {
   const handleEdit = (e, id) => {
     e.preventDefault();
     axios
-      .get(`https://api.dolphy.ca/api/news/${id}/`)
+      .get(`https://api.condomonk.ca/api/news/${id}/`)
       .then((res) => {
         setModalNews(true);
         setIsEdit(true);
