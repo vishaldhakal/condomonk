@@ -121,8 +121,7 @@ export default async function Home({ params }) {
                   className="link-black badge py-2 my-1  bg-white shadow-sm text-dark fs-small fw-m"
                   href={`/${params.city}/condos/`}
                 >
-                  New Condos
-                  {CapitalizeFirst(params.city)}
+                  New Condos {CapitalizeFirst(params.city)}
                 </Link>
               </div>
             </div>
