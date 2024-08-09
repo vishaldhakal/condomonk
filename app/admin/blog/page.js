@@ -21,7 +21,7 @@ export default function UploadBlog() {
   };
 
   const [isEdit, setIsEdit] = useState(false);
-  const [refetch, setRefetcch] = useState(true);
+  const [refetch, setRefetch] = useState(true);
   const [newsdata, setNewsData] = useState(stat);
   const [modalnews, setModalNews] = useState(false);
   const [news, setNews] = useState([]);
@@ -54,7 +54,7 @@ export default function UploadBlog() {
         },
       })
       .then((res) => {
-        setRefetcch(!refetch);
+        setRefetch(!refetch);
         setNewsData(stat);
         setModalNews(false);
       })
@@ -116,7 +116,7 @@ export default function UploadBlog() {
       .then((res) => {
         setModalNews(false);
         setIsEdit(false);
-        setRefetcch(!refetch);
+        setRefetch(!refetch);
         swal({
           text: newsdata.news_title + " has been updated!",
           icon: "success",
@@ -162,7 +162,7 @@ export default function UploadBlog() {
     axios
       .delete(`https://api.condomonk.ca/api/news/${id}/`)
       .then((res) => {
-        setRefetcch(!refetch);
+        setRefetch(!refetch);
       })
       .catch((err) => {
         console.log(err.data);

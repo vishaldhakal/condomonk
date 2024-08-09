@@ -40,7 +40,7 @@ export default function Home() {
         setTotalPages(Math.ceil(res.data.count / 10));
       })
       .catch((err) => {
-        console.log(err.data);
+        console.log(err.response ? err.response.data : err.message);
       });
 
     axios
@@ -117,7 +117,7 @@ export default function Home() {
                 id="city"
                 value={filters.city}
                 onChange={(e) => handleChange(e)}
-                aira-label="Floating label select example"
+                aria-label="Floating label select example"
               >
                 <option value="All">All</option>
                 {cities &&
@@ -137,7 +137,7 @@ export default function Home() {
                 id="project_type"
                 value={filters.project_type}
                 onChange={(e) => handleChange(e)}
-                aira-label="Floating label select example"
+                aria-label="Floating label select example"
               >
                 <option value="All">All</option>
                 <option value="Condo">Condo</option>
