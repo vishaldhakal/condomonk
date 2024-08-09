@@ -281,7 +281,7 @@ export default async function Home(props) {
                   {" "}
                   <span className="sm-center btn-outline-dark ">
                     Explore More Projects{" "}
-                    <i class="bi bi-arrow-up-right-circle sm-center "></i>
+                    <i className="bi bi-arrow-up-right-circle sm-center "></i>
                   </span>
                 </div>
               </Link>

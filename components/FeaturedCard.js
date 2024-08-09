@@ -66,8 +66,8 @@ export default function FeaturedCard(props) {
               </span>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="card-body">
+          <div className="col-md-6">
+            <div className="card-body">
               <Link
                 href={`/${props.city.slug}/${props.slug}`}
                 className="card-body text-decoration-none   shadow-lgg rounded-mine"
@@ -93,13 +93,13 @@ export default function FeaturedCard(props) {
                   <p className=" mb-4 text-dark">
                     Building Type: {props.project_type}
                   </p>
-                  <Link
-                    href={`/${props.city.slug}/${props.slug}#contact`}
-                    className=" btn btn-lg fbtn "
-                  >
-                    Register Now
-                  </Link>
                 </div>
+              </Link>
+              <Link
+                href={`/${props.city.slug}/${props.slug}#contact`}
+                className=" btn btn-lg fbtn "
+              >
+                Register Now
               </Link>
             </div>
           </div>
