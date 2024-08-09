@@ -9,7 +9,7 @@ export default function Home() {
   const [filters, setFilters] = useState({
     city: "All",
     status: "All",
-    typee: "All",
+    project_type: "All",
   });
   const [preconstructions, setPreConstructions] = useState([]);
   const [cities, setCities] = useState([]);
@@ -28,7 +28,11 @@ export default function Home() {
         "https://api.condomonk.ca/api/preconstructions/?small=aaa&page_size=10&page=" +
           page +
           "&city=" +
-          filters.city
+          filters.city +
+          "&status=" +
+          filters.status +
+          "&project_type=" +
+          filters.project_type
       )
       .then((res) => {
         console.log(res.data.results);
@@ -104,8 +108,8 @@ export default function Home() {
 
   return (
     <>
-      <div className="py-4 w-100 ">
-        <div className="row row-cols-1 row-cols-md-5 d-flex align-items-center mx-0">
+      <div className="py-md-4 py-0 w-100 ">
+        <div className="row row-cols-2 row-cols-md-5 d-flex align-items-center mx-0">
           <div className="col-md-3">
             <div className="form-floating">
               <select
@@ -130,8 +134,8 @@ export default function Home() {
             <div className="form-floating">
               <select
                 className="form-select"
-                id="typee"
-                value={filters.typee}
+                id="project_type"
+                value={filters.project_type}
                 onChange={(e) => handleChange(e)}
                 aira-label="Floating label select example"
               >
@@ -141,7 +145,7 @@ export default function Home() {
                 <option value="Detached">Detached</option>
                 <option value="Semi-Detached">Semi-Detached</option>
               </select>
-              <label htmlFor="typee">Select Project Type</label>
+              <label htmlFor="project_type">Select Project Type</label>
             </div>
           </div>
           <div className="col-md-3">
@@ -161,7 +165,7 @@ export default function Home() {
               <label htmlFor="status">Select Status</label>
             </div>
           </div>
-          <div className="col-md-3 d-flex justify-content-end">
+          <div className="col-md-3 my-md-0 my-2 d-flex justify-content-end">
             <Link href="/admin/upload/" className="btn btn-success py-3">
               Add New Preconstruction
             </Link>
@@ -177,7 +181,7 @@ export default function Home() {
           <i className="bi bi-arrow-left me-2"></i>
           Previous Page
         </button>
-        <span className="fw-bold">
+        <span className="fw-bold d-none d-md-block">
           Page {page} of {totalPages}
         </span>
         <button

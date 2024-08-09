@@ -62,7 +62,7 @@ export default async function Home({ params }) {
               </h1>
             </div>
             <div className="">
-              <span class="absolute-design-border">
+              <span className="absolute-design-border">
                 <svg
                   width="146"
                   height="14"
@@ -73,8 +73,8 @@ export default async function Home({ params }) {
                   <path
                     d="M2 4.5L144 2L2 12L144 9"
                     stroke="#FFC007"
-                    stroke-width="3"
-                    stroke-linecap="round"
+                    strokeWidth="3"
+                    strokeLinecap="round"
                   ></path>
                 </svg>
               </span>
