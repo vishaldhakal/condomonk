@@ -39,7 +39,6 @@ export default function CondoCard(props) {
                 layout="responsive"
                 className="img-fluid condocard-img-top"
                 alt={`${props.project_name} located at ${props.project_address} image`}
-                fetchPriority="high"
               />
             ) : (
               <img
@@ -48,7 +47,6 @@ export default function CondoCard(props) {
                 layout="responsive"
                 className="img-fluid condocard-img-top"
                 alt={`no image available for ${props.project_name}`}
-                fetchPriority="high"
               />
             )}
           </Link>
