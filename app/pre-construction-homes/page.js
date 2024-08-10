@@ -84,10 +84,7 @@ export default async function Home({ params }) {
               all_data.length > 0 &&
               all_data.map((item) => (
                 <div className="col">
-                  <Link
-                    href={"/" + item.slug}
-                    className="link-black"
-                  >
+                  <Link href={"/" + item.slug} className="link-black">
                     <h4 className="fs-4 fw-bold font-family2">{item.name}</h4>
                   </Link>
                   <div className="maxhh">
@@ -116,7 +113,7 @@ export default async function Home({ params }) {
               {cities &&
                 cities.map((item) => (
                   <Link
-                    href={"/pre-construction-homes/" + item.slug}
+                    href={"/" + item.slug}
                     className="btn btn-light link-black me-3 mb-3"
                   >
                     {item.name}
