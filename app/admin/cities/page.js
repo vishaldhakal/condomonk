@@ -18,20 +18,30 @@ export default function Cities() {
   const [citydata, setCityData] = useState(initialCityData);
   const [modalOpen, setModalOpen] = useState(false);
   const [cities, setCities] = useState([]);
+  const pageSize = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     fetchData();
-  }, [refetch]);
+  }, [refetch, currentPage]);
 
   const fetchData = () => {
     axios
-      .get("https://api.condomonk.ca/api/city/")
+      .get(
+        `https://api.condomonk.ca/api/city/?page_size=${pageSize}&page=${currentPage}`
+      )
       .then((res) => {
         setCities(res.data.results);
+        setTotalPages(Math.ceil(res.data.count / pageSize));
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
   };
 
   const handleCreateCity = (e) => {
@@ -269,6 +279,23 @@ export default function Cities() {
           <div className="row">
             <div className="col-md-8">
               <h5 className="fw-bold mb-0">Cities</h5>
+              <div className="pagination mt-4 d-flex gap-3 align-items-center">
+                <button
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className="btn btn-outline-dark"
+                >
+                  Previous
+                </button>
+                <span className="mx-5">{`Page ${currentPage} of ${totalPages}`}</span>
+                <button
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className="btn btn-outline-dark"
+                >
+                  Next
+                </button>
+              </div>
             </div>
             <div className="col-md-4 d-flex justify-content-end">
               <button
