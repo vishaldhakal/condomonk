@@ -34,7 +34,6 @@ export default function CondoCardHome(props) {
           >
             {props.image ? (
               <img
-                loading="lazy"
                 src={`${props.image.image}`}
                 layout="responsive"
                 className="img-fluid condocard-img-top"
@@ -42,7 +41,6 @@ export default function CondoCardHome(props) {
               />
             ) : (
               <img
-                loading="lazy"
                 src="/noimage.webp"
                 className="img-fluid condocard-img-top"
                 alt={`no image available for ${props.project_name}`}

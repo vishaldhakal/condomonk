@@ -34,7 +34,6 @@ export default function CondoCard(props) {
           >
             {props.image ? (
               <img
-                loading="lazy"
                 src={`https://api.condomonk.ca${props.image.image}`}
                 layout="responsive"
                 className="img-fluid condocard-img-top"
@@ -42,7 +41,6 @@ export default function CondoCard(props) {
               />
             ) : (
               <img
-                loading="lazy"
                 src="/noimage.webp"
                 layout="responsive"
                 className="img-fluid condocard-img-top"

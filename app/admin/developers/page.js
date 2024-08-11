@@ -19,6 +19,9 @@ export default function Developers() {
   const [developerdata, setDeveloperData] = useState(stat);
   const [modaldeveloper, setModalDeveloper] = useState(false);
   const [developers, setDevelopers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const pageSize = 10; // You can adjust this as needed
 
   const handleCreateDeveloper = (e) => {
     e.preventDefault();
@@ -161,15 +164,22 @@ export default function Developers() {
 
   useEffect(() => {
     axios
-      .get("https://api.condomonk.ca/api/developers/")
+      .get(
+        `https://api.condomonk.ca/api/developers/?page_size=${pageSize}&page=${currentPage}`
+      )
       .then((res) => {
         console.log(res.data.results);
         setDevelopers(res.data.results);
+        setTotalPages(res.data.count / pageSize);
       })
       .catch((err) => {
         console.log(err.data);
       });
-  }, [refetch]);
+  }, [refetch, currentPage]);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -343,6 +353,23 @@ export default function Developers() {
         <div className="row row-cols-1 row-cols-md-5 d-flex align-items-center mx-0">
           <div className="col-md-8">
             <h5 className="fw-bold mb-0">Developers</h5>
+            <div className="pagination mt-4 d-flex gap-3 align-items-center">
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="btn btn-outline-dark"
+              >
+                Previous
+              </button>
+              <span className="mx-5">{`Page ${currentPage} of ${totalPages}`}</span>
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="btn btn-outline-dark"
+              >
+                Next
+              </button>
+            </div>
           </div>
           <div className="col-md-4 d-flex justify-content-end">
             <button
@@ -359,7 +386,7 @@ export default function Developers() {
         developers={developers}
         handleEdit={handleEdit}
         handleDelete={handleDelete}
-      ></DeveloperTable>
+      />
     </>
   );
 }
