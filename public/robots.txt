@@ -1,0 +1,8 @@
+User-agent: *
+Disallow:
+
+Allow: /feed_rss.xml
+
+Sitemap: https://www.condomonk.ca/sitemap_4443076.xml
+Sitemap: https://www.condomonk.ca/sitemap_4443076_images.xml
+Sitemap: https://www.condomonk.ca/sitemap_4443076_video.xml
