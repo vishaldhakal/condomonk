@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Nformatter from "./Nformatter";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 export default function CondoCard(props) {
   function checkPricing(price) {
@@ -33,15 +33,19 @@ export default function CondoCard(props) {
             target="_blank"
           >
             {props.image ? (
-              <img
+              <Image
                 src={`https://api.condomonk.ca${props.image.image}`}
                 layout="responsive"
+                width={100}
+                height={400}
                 className="img-fluid condocard-img-top"
                 alt={`${props.project_name} located at ${props.project_address} image`}
               />
             ) : (
-              <img
+              <Image
                 src="/noimage.webp"
+                width={100}
+                height={400}
                 layout="responsive"
                 className="img-fluid condocard-img-top"
                 alt={`no image available for ${props.project_name}`}
