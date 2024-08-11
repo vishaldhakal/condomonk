@@ -326,3 +326,13 @@ export default async function Home({ params }) {
     </>
   );
 }
+
+export async function generateStaticParams() {
+  const cities = await fetch("https://api.condomonk.ca/api/all-city").then(
+    (res) => res.json()
+  );
+
+  return cities.map((city) => ({
+    city: city.slug,
+  }));
+}
