@@ -4,8 +4,6 @@ import { notFound } from "next/navigation";
 import PreconSchema from "@/components/PreconSchema";
 import Link from "next/link";
 
-export const dynamicParams = false;
-
 async function getData(city) {
   const res = await fetch(
     "https://api.condomonk.ca/api/preconstructions-city/" + city,
