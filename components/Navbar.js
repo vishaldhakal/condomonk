@@ -4,17 +4,11 @@ import Link from "next/link";
 // import ProjectSearch from "./ProjectSearch";
 import SearchSuggest from "./SerachSuggest";
 
-const Navbar = ({ cities, dropdown_cities, transparent }) => {
+const Navbar = ({ cities, transparent }) => {
   const [cityname, setCityname] = useState("");
   const [navbar, setNavbar] = useState(true);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [buttonClicked, setButtonClicked] = useState(false);
-
-  const filteredprojects = (value) => {
-    return dropdown_cities.filter((city) => {
-      return value.includes(city.name);
-    });
-  };
 
   const changeBackground = () => {
     if (window.scrollY >= 80) {

@@ -47,7 +47,8 @@
         "react-tooltip": "^5.26.3",
         "simple-datatables": "^8.0.0",
         "sweetalert": "^2.1.2",
-        "swiper": "^11.1.4"
+        "swiper": "^11.1.4",
+        "swr": "^2.2.5"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.18",

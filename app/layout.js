@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import NextTopLoader from "nextjs-toploader";
 import { Montserrat } from "next/font/google";
 import { Providers } from "./providers";
+import { allcities } from "@/datas/cities";
 
 const montserrat = Montserrat({ subsets: ["cyrillic"] });
 
@@ -43,31 +44,8 @@ export const viewport = {
   maximumScale: 1,
 };
 
-async function getCities() {
-  const res = await fetch("https://api.condomonk.ca/api/all-city", {
-    next: { revalidate: 10 },
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
-
-async function getCitiesandProjects() {
-  const res = await fetch("https://api.condomonk.ca/api/all-precons", {
-    next: { revalidate: 10 },
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
-
-export default async function RootLayout({ children }) {
-  let cities = await getCities();
-  let dropdown_cities = await getCitiesandProjects();
+export default function RootLayout({ children }) {
+  let cities = allcities;
   return (
     <html lang="en">
       <body className={montserrat.className}>
@@ -83,7 +61,7 @@ export default async function RootLayout({ children }) {
           shadow="0 0 10px #00A1FF,0 0 5px #00A1FF"
         />
 
-        <Navbar cities={cities} dropdown_cities={dropdown_cities}></Navbar>
+        <Navbar cities={cities}></Navbar>
         <Providers>
           <GoogleAnalytics />
           {children}
