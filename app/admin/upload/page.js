@@ -97,7 +97,7 @@ export default function Upload() {
 
   useEffect(() => {
     axios
-      .get("https://api.condomonk.ca/api/city/")
+      .get("https://api.condomonk.ca/api/city/?page_size=100")
       .then((res) => {
         console.log(res.data.results);
         setCities(res.data.results);
@@ -111,7 +111,7 @@ export default function Upload() {
       });
 
     axios
-      .get("https://api.condomonk.ca/api/developers/")
+      .get("https://api.condomonk.ca/api/developers/?page_size=1000")
       .then((res) => {
         console.log(res.data.results);
         setDevelopers(res.data.results);

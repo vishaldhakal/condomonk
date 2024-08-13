@@ -4,8 +4,18 @@ import Link from "next/link";
 import ListingTable from "@/components/ListingTable";
 import axios from "axios";
 import swal from "sweetalert";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const isAuthenticated = sessionStorage.getItem("isAuthenticated");
+    if (!isAuthenticated) {
+      router.push("/login");
+    }
+  }, []);
+
   const [filters, setFilters] = useState({
     city: "All",
     status: "All",
