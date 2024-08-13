@@ -25,6 +25,7 @@
         "leaflet-defaulticon-compatibility": "^0.1.2",
         "lightgallery": "^2.7.2",
         "next": "^14.2.3",
+        "next-auth": "^4.24.7",
         "next-share": "^0.27.0",
         "nextjs-toploader": "^1.6.4",
         "node-geocoder": "^4.3.0",
