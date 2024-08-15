@@ -153,7 +153,7 @@ export default async function Home({ params }) {
                 <div className="screenshot ">
                   <div className="row row-cols-1 row-cols-sm-2">
                     <div className="col-sm-12">
-                      <div className="d-flex gap-3 my-2">
+                      <div className="d-flex align-items-center gap-3 my-2">
                         <div className=" btn btn-sm bg-warning ">
                           <span className="col fs-esmall text-dark">
                             {data.preconstruction.status}
@@ -164,9 +164,16 @@ export default async function Home({ params }) {
                             {data.preconstruction.project_type}
                           </span>
                         </div>
+                        {data.preconstruction.is_featured == true && (
+                          <img
+                            src="/verified.svg"
+                            alt="verified icon"
+                            className="img-fluid smalli"
+                          />
+                        )}
                       </div>
 
-                      <h1 className="side  fw-mine font-family2">
+                      <h1 className="side fw-mine font-family2">
                         {data.preconstruction.project_name}
                       </h1>
                       <p className="mb-0">

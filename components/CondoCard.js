@@ -31,6 +31,15 @@ export default function CondoCard(props) {
             className="mylinkk"
             target="_blank"
           >
+            {props.is_featured && (
+              <span className="p-1 px-2 abs4 glow">
+                <img
+                  src="/verified.svg"
+                  alt="verified icon"
+                  className="img-fluid smalli"
+                />
+              </span>
+            )}
             {props.image ? (
               <img
                 src={`https://api.condomonk.ca${props.image.image}`}
@@ -45,9 +54,6 @@ export default function CondoCard(props) {
               />
             )}
           </Link>
-          {props.co_op_available && (
-            <span className="shadow-lg p-1 px-2 abs2">Co-op Available</span>
-          )}
           <span className="d-flex">
             <span className="shadow-lg p-1 ms-2 abs1">{props.status}</span>
             <span className="shadow-lg p-1 mx-2 abs3">

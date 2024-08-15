@@ -839,6 +839,15 @@ a:hover {
         color: #000;
         font-size: .9rem !important;
     }
+    .abs4 {
+        position: absolute;
+        top: 10px !important;
+        right: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        color: #000;
+        font-size: .9rem !important;
+    }
 
     .hero-img {
         width: 100%;
@@ -1555,6 +1564,17 @@ label {
     position: relative;
     bottom: 30px;
     left: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    color: #000;
+    font-size: .6rem;
+    font-weight: 500;
+    ;
+}
+.abs4 {
+    position: absolute;
+    top: 15px;
+    right: 10px;
     background-color: #fff;
     border-radius: 5px;
     color: #000;
@@ -2358,4 +2378,10 @@ textarea {
         display: flex;
         flex-direction: column;
     }
+}
+.smalli{
+    height: 27px !important;
+}
+.glow{
+    box-shadow: 0 0 30px 2px #0000003e !important;
 }

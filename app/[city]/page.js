@@ -19,6 +19,23 @@ async function getData(city) {
   return res.json();
 }
 
+async function getFeaturedData(city) {
+  const res = await fetch(
+    "https://api.condomonk.ca/api/preconstructions-city/" +
+      city +
+      "?is_featured=true",
+    {
+      next: { revalidate: 10 },
+    }
+  );
+
+  if (!res.ok) {
+    notFound();
+  }
+
+  return res.json();
+}
+
 const CapitalizeFirst = (city) => {
   return city.charAt(0).toUpperCase() + city.slice(1);
 };
@@ -26,6 +43,7 @@ const CapitalizeFirst = (city) => {
 export async function generateMetadata({ params }, parent) {
   let city = CapitalizeFirst(params.city);
   const data = await getData(params.city);
+
   return {
     ...parent,
     alternates: {
@@ -46,7 +64,7 @@ export async function generateMetadata({ params }, parent) {
 
 export default async function Home({ params }) {
   const data = await getData(params.city);
-
+  const featured_data = await getFeaturedData(params.city);
   const filteredprojects = (value) => {
     return data.preconstructions.filter((item) => item.status == value);
   };
@@ -118,6 +136,19 @@ export default async function Home({ params }) {
           </div>
           <div className="mt-md-5 mt-0"></div>
           <div className="row row-cols-1 row-cols-md-4  gy-4 gx-3 gx-lg-3 ">
+            {featured_data.preconstructions &&
+              featured_data.preconstructions.map((item, no) => (
+                <div className="col" key={item.id}>
+                  <script
+                    key={item.slug}
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                      __html: JSON.stringify(PreconSchema(item)),
+                    }}
+                  />
+                  <CondoCard {...item} no={no} />
+                </div>
+              ))}
             {data.preconstructions &&
               filteredprojects("Selling").map((item, no) => (
                 <div className="col" key={item.id}>
