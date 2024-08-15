@@ -68,6 +68,30 @@ export default async function Home({ params }) {
   const filteredprojects = (value) => {
     return data.preconstructions.filter((item) => item.status == value);
   };
+
+  function eventbanner() {
+    if (params.city == "mississauga") {
+      return (
+        <div className="mb-md-4 mt-md-3">
+          <Link href="/mississauga/exhale-condos" target="_blank">
+            <img
+              src="/exhale-condos.jpg"
+              alt="Exhale Condos Mississauga is a new condo project currently selling in Mississauga."
+              className="img-fluid pointer-c d-none d-md-block"
+            />
+            <img
+              src="/exhale-mobile.jpg"
+              alt="Exhale Condos Mississauga is a new condo project currently selling in Mississauga."
+              className="img-fluid pointer-c d-block d-md-none"
+            />
+          </Link>
+        </div>
+      );
+    } else {
+      return <></>;
+    }
+  }
+
   return (
     <>
       <div className="pt-lg-5 pt-3">
@@ -134,6 +158,7 @@ export default async function Home({ params }) {
               </div>
             </div>
           </div>
+          {eventbanner()}
           <div className="mt-md-5 mt-0"></div>
           <div className="row row-cols-1 row-cols-md-4  gy-4 gx-3 gx-lg-3 ">
             {featured_data.preconstructions &&
