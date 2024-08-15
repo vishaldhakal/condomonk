@@ -66,6 +66,19 @@ a:hover {
     color: #000 !important;
 }
 
+.icon-img {
+    height: 250px !important;
+}
+
+.img-call-height-dropdown {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    position: static;
+}
+
+
+
 @media (min-width: 1200px) {
     .fs-big {
         font-size: 4rem !important;
@@ -839,6 +852,7 @@ a:hover {
         color: #000;
         font-size: .9rem !important;
     }
+
     .abs4 {
         position: absolute;
         top: 10px !important;
@@ -1571,6 +1585,7 @@ label {
     font-weight: 500;
     ;
 }
+
 .abs4 {
     position: absolute;
     top: 15px;
@@ -2379,9 +2394,11 @@ textarea {
         flex-direction: column;
     }
 }
-.smalli{
+
+.smalli {
     height: 27px !important;
 }
-.glow{
+
+.glow {
     box-shadow: 0 0 30px 2px #0000003e !important;
 }

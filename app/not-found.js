@@ -22,16 +22,15 @@ export default async function NotFound() {
         <div className="d-flex flex-column align-items-center justify-content-center">
           <img src="/404.png" alt="condomonk" className="img-fluid icon-img" />
           <h4 className="text-center fs-md-2 fw-bold mb-0">
-            Oops! Looks like this page is off the map.
+            <span className="text-danger fs-1">Oops!</span> <br />
+            <span className="fs-2 ">Looks like this page is off the map.</span>
           </h4>
-          <p className="text-center fs-small fs-md-5 mt-2 fw-bold mt-md-0 mb-4">
-            Find your way home.
-          </p>
-          <div className="pb-1 ww">
+
+          <div className="pb-1 pt-5 ww">
             <SearchBar cities={cities} />
           </div>
         </div>
-        <div className="py-1 py-md-3 d-flex justify-content-center">
+        {/* <div className="py-1 py-md-3 d-flex justify-content-center">
           <Link
             href={"/calgary/"}
             className="fw-bold fs-top city-title position-relative mb-4 p-0"
@@ -51,17 +50,17 @@ export default async function NotFound() {
           >
             Toronto
           </Link>
-        </div>
+        </div> */}
         <div className="row p-3 pt-2 dopp">
           <div className="col-12 pb-5">
             <div
-              className="alert alert-success bg-lightyellow alert-dismissible fade show mt-2 mb-0 rounded-3 d-flex justify-content-sm-between align-items-sm-center flex-column flex-sm-row justify-content-start align-items-start gap-3"
+              className="alert   alert-dismissible fade show mt-2 mb-0 rounded-3 d-flex justify-content-sm-between align-items-sm-center flex-column flex-sm-row justify-content-start align-items-start gap-3"
               role="alert"
             >
               <div>
-                <div className="my-2 my-sm-0 d-flex text-dark align-items-center gap-2">
+                {/* <div className="my-2 my-sm-0 d-flex text-dark align-items-center gap-2">
                   <img
-                    src="/COA-agent-pic.jpg"
+                    src="/COA-agent-pic copy.jpg"
                     alt="agent pic"
                     className="img-fluid img-call-height-dropdown"
                   />
@@ -69,7 +68,7 @@ export default async function NotFound() {
                     <p className="mb-0 fw-bold">
                       Looking for New Construction Homes in Calgary ?
                     </p>
-                    <p className="fs-small mb-0">
+                    <p className="fs-6 mb-0">
                       Call us at
                       <Link href={"telto:(587) 887-2572"} className="me-2 ms-1">
                         (587) 887-2572
@@ -77,15 +76,15 @@ export default async function NotFound() {
                       to speak with our friendly new homes advisor.
                     </p>
                   </div>
-                </div>
+                </div> */}
               </div>
-              <Link
+              {/* <Link
                 className="btn btn-white link-black"
                 href={"/pre-construction-homes/"}
               >
                 Explore all projects
                 <i className="bi bi-arrow-right-short"></i>
-              </Link>
+              </Link> */}
             </div>
           </div>
           {/* <div className="col-12 col-sm-6 col-md-3 mb-3">
