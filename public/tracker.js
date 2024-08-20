@@ -19,16 +19,23 @@
       timestamp: new Date().toISOString(),
     };
 
-    fetch("/api/track", {
+    fetch("https://api.condomonk.ca/api/track/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     })
-      .then((response) => response.json())
-      .then((data) => console.log("Success:", data))
-      .catch((error) => console.error("Error:", error));
+      .then((response) => {
+        if (response.ok) {
+          console.log("Tracking data received");
+        } else {
+          console.error("Failed to process tracking data");
+        }
+      })
+      .catch((error) => {
+        console.error("Error sending tracking data:", error);
+      });
   };
 
   var instance = new CustomTracker();
