@@ -30,7 +30,7 @@ const Tracker = ({ siteId }) => {
     // Send pageview on route change
     const fullPath = pathname;
     window.customTracker("send", "pageview", fullPath);
-  }, [pathname, searchParams, mounted]);
+  }, [pathname, mounted]);
 
   return (
     <>
