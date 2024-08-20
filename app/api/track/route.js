@@ -5,7 +5,7 @@ export async function POST(request) {
   const trackingData = await request.json();
 
   // Forward the data to your Django backend
-  const response = await fetch("https://condomonk.ca/api/track/", {
+  const response = await fetch("https://api.condomonk.ca/api/track/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
