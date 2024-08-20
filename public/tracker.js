@@ -1,7 +1,7 @@
 // public/tracker.js
 (function (window) {
   var CustomTracker = function () {
-    this.siteId = null;
+    this.siteId = "Condomonk";
     this.queue = [];
   };
 
