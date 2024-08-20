@@ -11,11 +11,11 @@
 
   CustomTracker.prototype.send = function (hitType, eventCategory, eventData) {
     var data = {
-      siteId: this.siteId,
-      hitType: hitType,
-      eventCategory: eventCategory,
-      eventData: eventData,
-      pageUrl: window.location.href,
+      site_id: this.siteId,
+      hit_type: hitType,
+      event_category: eventCategory,
+      event_data: eventData,
+      page_url: window.location.href,
       timestamp: new Date().toISOString(),
     };
 
