@@ -1,34 +1,48 @@
 // components/Tracker.js
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Script from "next/script";
 import { usePathname, useSearchParams } from "next/navigation";
 
 const Tracker = ({ siteId }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     window.customTracker =
       window.customTracker ||
       function () {
         (window.customTracker.q = window.customTracker.q || []).push(arguments);
       };
     window.customTracker("create", siteId);
-  }, [siteId]);
+  }, [siteId, mounted]);
 
   useEffect(() => {
+    if (!mounted) return;
+
     // Send pageview on route change
-    window.customTracker(
-      "send",
-      "pageview",
-      pathname + searchParams.toString()
-    );
-  }, [pathname, searchParams]);
+    const fullPath = pathname + (searchParams ? searchParams.toString() : "");
+    window.customTracker("send", "pageview", fullPath);
+  }, [pathname, searchParams, mounted]);
 
   return (
-    <Script id="tracker-script" src="/tracker.js" strategy="afterInteractive" />
+    <>
+      {mounted && (
+        <Script
+          id="tracker-script"
+          src="/tracker.js"
+          strategy="afterInteractive"
+        />
+      )}
+    </>
   );
 };
 
