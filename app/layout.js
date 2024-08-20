@@ -11,6 +11,7 @@ import NextTopLoader from "nextjs-toploader";
 import { Montserrat } from "next/font/google";
 import { Providers } from "./providers";
 import { allcities } from "@/datas/cities";
+import Tracker from "@/components/Tracker";
 
 const montserrat = Montserrat({ subsets: ["cyrillic"] });
 
@@ -60,7 +61,7 @@ export default function RootLayout({ children }) {
           speed={200}
           shadow="0 0 10px #00A1FF,0 0 5px #00A1FF"
         />
-
+        <Tracker siteId="Condomonk" />
         <Navbar cities={cities}></Navbar>
         <Providers>
           <GoogleAnalytics />
