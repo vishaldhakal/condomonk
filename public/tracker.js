@@ -33,15 +33,22 @@
 
   var instance = new CustomTracker();
 
+  // Process any queued commands
   var queue = window.customTracker.q || [];
   for (var i = 0; i < queue.length; i++) {
-    instance[queue[i][0]].apply(instance, queue[i].slice(1));
+    if (Array.isArray(queue[i])) {
+      instance[queue[i][0]].apply(instance, queue[i].slice(1));
+    } else if (typeof queue[i] === "function") {
+      queue[i](instance);
+    }
   }
 
+  // Override the global customTracker function
   window.customTracker = function () {
-    instance[arguments[0]].apply(
-      instance,
-      Array.prototype.slice.call(arguments, 1)
-    );
+    var args = Array.prototype.slice.call(arguments);
+    var command = args.shift();
+    if (typeof instance[command] === "function") {
+      instance[command].apply(instance, args);
+    }
   };
 })(window);
