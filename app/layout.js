@@ -12,7 +12,6 @@ import { Montserrat } from "next/font/google";
 import { Providers } from "./providers";
 import { allcities } from "@/datas/cities";
 import Tracker from "@/components/Tracker";
-import { Suspense } from "react";
 
 const montserrat = Montserrat({ subsets: ["cyrillic"] });
 
@@ -49,31 +48,30 @@ export const viewport = {
 export default function RootLayout({ children }) {
   let cities = allcities;
   return (
-    <Suspense fallback="loading">
-      <html lang="en">
-        <body className={montserrat.className}>
-          <NextTopLoader
-            color="#FF0000"
-            initialPosition={0.08}
-            crawlSpeed={200}
-            height={3}
-            crawl={true}
-            showSpinner={true}
-            easing="ease"
-            speed={200}
-            shadow="0 0 10px #00A1FF,0 0 5px #00A1FF"
-          />
-          <Tracker siteId="Condomonk" />
-          <Navbar cities={cities}></Navbar>
-          <Providers>
-            <GoogleAnalytics />
-            {children}
-          </Providers>
-          <Footer cities={cities}></Footer>
-          <Script
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `
+    <html lang="en">
+      <body className={montserrat.className}>
+        <NextTopLoader
+          color="#FF0000"
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={3}
+          crawl={true}
+          showSpinner={true}
+          easing="ease"
+          speed={200}
+          shadow="0 0 10px #00A1FF,0 0 5px #00A1FF"
+        />
+        <Tracker siteId="Condomonk" />
+        <Navbar cities={cities}></Navbar>
+        <Providers>
+          <GoogleAnalytics />
+          {children}
+        </Providers>
+        <Footer cities={cities}></Footer>
+        <Script
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
             (function(w,i,d,g,e,t){w["WidgetTrackerObject"]=g;(w[g]=w[g]||function()
 {(w[g].q=w[g].q||[]).push(arguments);}),(w[g].ds=1*new Date());(e="script"),
 (t=d.createElement(e)),(e=d.getElementsByTagName(e)[0]);t.async=1;t.src=i;
@@ -82,16 +80,15 @@ e.parentNode.insertBefore(t,e);})
 window.widgetTracker("create", "WT-KPVDOHAU");
 window.widgetTracker("send", "pageview");
           `,
-            }}
-          />
-          <Script />
-          <Script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-BZlP8y3y1aP5dJt6z/74ukidT+PiZCzV5u5F5+1OW2F0k0yGBGvxXuVEvaO3dPbi"
-            crossOrigin="anonymous"
-          ></Script>
-        </body>
-      </html>
-    </Suspense>
+          }}
+        />
+        <Script />
+        <Script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-BZlP8y3y1aP5dJt6z/74ukidT+PiZCzV5u5F5+1OW2F0k0yGBGvxXuVEvaO3dPbi"
+          crossOrigin="anonymous"
+        ></Script>
+      </body>
+    </html>
   );
 }

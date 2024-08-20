@@ -3,11 +3,10 @@
 
 import { useEffect, useState } from "react";
 import Script from "next/script";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const Tracker = ({ siteId }) => {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -29,7 +28,7 @@ const Tracker = ({ siteId }) => {
     if (!mounted) return;
 
     // Send pageview on route change
-    const fullPath = pathname + (searchParams ? searchParams.toString() : "");
+    const fullPath = pathname;
     window.customTracker("send", "pageview", fullPath);
   }, [pathname, searchParams, mounted]);
 
