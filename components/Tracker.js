@@ -22,6 +22,22 @@ const Tracker = ({ siteId }) => {
         (window.customTracker.q = window.customTracker.q || []).push(arguments);
       };
     window.customTracker("create", siteId);
+
+    const trackFormSubmission = (event) => {
+      const form = event.target;
+      const formData = new FormData(form);
+      const formObject = Object.fromEntries(formData.entries());
+
+      window.customTracker("send", "form_submission", {
+        formId: form.id || "unknown",
+        formData: formObject,
+      });
+    };
+    document.addEventListener("submit", trackFormSubmission);
+
+    return () => {
+      document.removeEventListener("submit", trackFormSubmission);
+    };
   }, [siteId, mounted]);
 
   useEffect(() => {
