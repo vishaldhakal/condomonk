@@ -53,12 +53,13 @@ export async function generateMetadata({ params }, parent) {
       "Top " +
       data.preconstructions.length +
       " New Pre construction homes, condos and townhomes in " +
-      city,
-    description: "Pre Construction homes in " + city,
+      city +
+      " & New Homes for Sale.",
     description:
       "Discover stunning new construction homes, condos & townhouses in " +
       city +
-      ". Find your dream property in our latest developments. Tour new builds today!",
+      " & New Homes for Sale." +
+      "Find your dream property in our latest developments. Tour new builds today!",
   };
 }
 

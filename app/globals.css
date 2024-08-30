@@ -1721,7 +1721,6 @@ label {
 .footer .footer-links ul {
     list-style: none;
     padding: 0;
-    margin: 0;
 }
 
 .footer .footer-links ul li:first-child {
@@ -1729,7 +1728,6 @@ label {
 }
 
 .footer .footer-links ul li {
-    padding: 10px 0;
     display: flex;
     align-items: center;
 }
@@ -1737,7 +1735,13 @@ label {
 .footer .footer-links ul a {
     color: #000;
     display: inline-block;
-    line-height: 1.2rem;
+    line-height: 0.5rem;
+}
+
+.footer .footer-links ul a:hover {
+    color: #0039f6;
+    display: inline-block;
+    line-height: 0.5rem;
 }
 
 .properti_city {
@@ -2139,7 +2143,7 @@ textarea {
 .two-column-list li {
     font-size: 0.8rem;
     break-inside: avoid-column;
-    margin-bottom: 10px;
+    margin-bottom: 3px;
 }
 
 .footer-contact p {
