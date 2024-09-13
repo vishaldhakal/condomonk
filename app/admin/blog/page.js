@@ -180,7 +180,7 @@ export default function UploadBlog() {
       });
 
     axios
-      .get("https://api.condomonk.ca/api/city/")
+      .get("https://api.condomonk.ca/api/city/?page_size=100")
       .then((res) => {
         setCities(res.data.results);
       })
