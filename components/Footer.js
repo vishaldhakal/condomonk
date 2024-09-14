@@ -142,10 +142,13 @@ const Footer = ({ cities }) => {
         </div>
 
         <div className="container copyright text-start text-center py-5">
-          <p>
+          <p className="mb-0">
             ©2024 <span>Copyright</span>{" "}
             <strong className="px-1">Condomonk</strong>{" "}
             <span>All Rights Reserved</span>
+          </p>
+          <p className="mt-0">
+            Condomonk is a digital asset of Homebaba Technologies Inc.{" "}
           </p>
         </div>
       </footer>
