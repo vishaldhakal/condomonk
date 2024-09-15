@@ -118,28 +118,30 @@ export default async function Home({ params }) {
       <FixedContactButton></FixedContactButton>
       <div className="pt-lg-1 pt-0">
         <div className="container ">
-          <Breadcrumb
-            homeElement={"Home"}
-            separator={
-              <span>
-                {" "}
-                <svg
-                  className="svg minearr"
-                  viewBox="0 0 32 32"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M17.65 16.513l-7.147-7.055 1.868-1.893 9.068 8.951-9.069 8.927-1.866-1.896z"
-                    fill={"#869099"}
-                  ></path>
-                </svg>{" "}
-              </span>
-            }
-            activeClasses="text-dark"
-            containerClasses="d-flex align-items-center p-0 m-0 pt-lg-4 pt-2 breadcrumb"
-            listClasses="mx-1"
-            capitalizeLinks
-          />
+          <div className="sticky">
+            <Breadcrumb
+              homeElement={"Home"}
+              separator={
+                <span>
+                  {" "}
+                  <svg
+                    className="svg minearr"
+                    viewBox="0 0 32 32"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M17.65 16.513l-7.147-7.055 1.868-1.893 9.068 8.951-9.069 8.927-1.866-1.896z"
+                      fill={"#869099"}
+                    ></path>
+                  </svg>{" "}
+                </span>
+              }
+              activeClasses="text-dark "
+              containerClasses="d-flex align-items-center p-0 m-0 pt-lg-4 pt-2 breadcrumb"
+              listClasses="mx-1"
+              capitalizeLinks
+            />
+          </div>
 
           <Gallery
             images={data.preconstruction.image}

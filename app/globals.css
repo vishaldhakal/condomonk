@@ -2031,11 +2031,24 @@ textarea {
 
 .breadcrumb {
     list-style: none !important;
+
 }
 
 .breadcrumb li a {
     color: #000 !important;
     font-weight: 300;
+}
+
+.sticky {
+    position: sticky;
+    top: 60px;
+    /* Adjust this value to the exact position where you want the breadcrumb to be sticky */
+    z-index: 1000;
+    /* This will ensure the breadcrumb stays on top of other content */
+    background-color: white;
+    /* Optional: to avoid any content overlap */
+    padding-bottom: 5px;
+    /* Optional: adjust for better spacing */
 }
 
 .side-fix-contact {
@@ -2340,6 +2353,19 @@ textarea {
 }
 
 @media (max-width: 768px) {
+    .sticky {
+        position: sticky;
+        top: 0;
+        /* Adjust this value to the exact position where you want the breadcrumb to be sticky */
+        z-index: 1000;
+        /* This will ensure the breadcrumb stays on top of other content */
+        background-color: white;
+        /* Optional: to avoid any content overlap */
+        padding: 10px;
+        padding-top: 15px;
+        /* Optional: adjust for better spacing */
+    }
+
     .absolute-design-border {
         display: none !important;
     }
