@@ -1,60 +1,63 @@
-// components/Tracker.js
 "use client";
 
 import { useEffect, useState } from "react";
 import Script from "next/script";
 import { usePathname } from "next/navigation";
 
-const Tracker = ({ siteId }) => {
+const Tracker = ({ customerId }) => {
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
+  const [trackerLoaded, setTrackerLoaded] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   useEffect(() => {
-    if (!mounted) return;
+    if (!mounted || !trackerLoaded) return;
 
-    window.customTracker =
-      window.customTracker ||
-      function () {
-        (window.customTracker.q = window.customTracker.q || []).push(arguments);
-      };
-    window.customTracker("create", siteId);
+    // Initialize tracker
+    window.widgetTracker.create(customerId);
 
+    // Track initial pageview
+    window.widgetTracker.instance.trackPageview();
+
+    // Set up form tracking
     const trackFormSubmission = (event) => {
-      const form = event.target;
-      const formData = new FormData(form);
-      const formObject = Object.fromEntries(formData.entries());
-
-      window.customTracker("send", "form_submission", {
-        formId: form.id || "unknown",
-        formData: formObject,
-      });
+      if (event.target.tagName === "FORM") {
+        window.widgetTracker.instance.trackForm(event.target);
+      }
     };
     document.addEventListener("submit", trackFormSubmission);
 
     return () => {
       document.removeEventListener("submit", trackFormSubmission);
     };
-  }, [siteId, mounted]);
+  }, [customerId, mounted, trackerLoaded]);
 
   useEffect(() => {
-    if (!mounted) return;
+    if (!mounted || !trackerLoaded) return;
 
-    // Send pageview on route change
-    const fullPath = pathname;
-    window.customTracker("send", "pageview", fullPath);
-  }, [pathname, mounted]);
+    // Track pageview on route change
+    window.widgetTracker.instance.trackPageview();
+  }, [pathname, mounted, trackerLoaded]);
+
+  const handleScriptLoad = () => {
+    console.log("WidgetTracker script loaded successfully");
+    setTrackerLoaded(true);
+  };
 
   return (
     <>
       {mounted && (
         <Script
-          id="tracker-script"
-          src="/tracker.js"
+          id="widget-tracker-script"
+          src="/tracking.js"
           strategy="afterInteractive"
+          onLoad={handleScriptLoad}
+          onError={() => {
+            console.error("Failed to load WidgetTracker script");
+          }}
         />
       )}
     </>
