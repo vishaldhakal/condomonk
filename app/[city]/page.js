@@ -124,8 +124,9 @@ export default async function Home({ params }) {
             </div>
           </div>
           <p className="font-normal sm-center pb-2 pb-md-0 mb-0 fw-medium text-lg">
-            {data.preconstructions.length} New Pre construction homes, condos
-            and townhomes for sale in {CapitalizeFirst(params.city)}.
+            {data.preconstructions.length} Pre construction or new homes, condos
+            and townhomes for sale in {CapitalizeFirst(params.city)} on
+            condomonk.
           </p>
           <div className="d-flex sm-center  mb-lg-0 sticky-buttons pb-0 mb-0">
             <div className="d-flex flex-column flex-md-row mb-md-2 mb-0 mt-1 overflow-hidden">

@@ -80,7 +80,7 @@ export default async function Home({ params }) {
         <div className="container">
           <div className="">
             <h1 className="main-title  font-family2 mb-2">
-              {`Pre Construction Detached Homes in ${CapitalizeFirst(
+              {`Pre Construction & New Detached Homes in  ${CapitalizeFirst(
                 params.city
               )} `}
               <div className="relative inline-flex sm-center me-2 text-wrap">
