@@ -96,7 +96,9 @@ export default async function Home({ params }) {
               {`${
                 data.preconstructions.length
               } Upcoming Pre construction Detached,
-              Townhomes and Condos in ${CapitalizeFirst(params.city)} `}
+              Townhomes and Condos for sale in ${CapitalizeFirst(
+                params.city
+              )} on condomonk.`}
             </p>
           </div>
           <div className="d-flex sm-center pb-2 pb-md-0 sticky-buttons">

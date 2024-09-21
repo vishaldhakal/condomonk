@@ -88,9 +88,11 @@ export default async function Home({ params }) {
             <p className=" font-normal  mb-2 sm-center">
               {`${
                 data.preconstructions.length
-              } New Pre construction Condos for sale in ${CapitalizeFirst(
+              } New Pre Construction Condos for sale in  ${CapitalizeFirst(
                 params.city
-              )}  `}
+              )}. Checkout floor plans, pricing and availability of new condos for sale in ${CapitalizeFirst(
+                params.city
+              )} on condomonk. `}
             </p>
           </div>
           <div className="d-flex sm-center pb-2 pb-md-0 sticky-buttons">

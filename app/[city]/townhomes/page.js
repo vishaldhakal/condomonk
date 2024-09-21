@@ -78,7 +78,9 @@ export default async function Home({ params }) {
         <div className="container ">
           <div className="">
             <h1 className="main-title  font-family2 mb-2">
-              {`Pre Construction Townhomes in ${CapitalizeFirst(params.city)} `}
+              {`Pre Construction & New Townhomes in ${CapitalizeFirst(
+                params.city
+              )} `}
               <div className="relative inline-flex sm-center me-2 text-wrap">
                 <span className="absolute inset-x-0 bottom-0 "></span>
                 <span className="relative font-bold text-black whitespace-normal">
@@ -89,9 +91,11 @@ export default async function Home({ params }) {
             <p className=" font-normal  mb-2 sm-center">
               {`${
                 data.preconstructions.length
-              } New Pre Construction Townhouse for sale in ${CapitalizeFirst(
+              } New Pre Construction Townhouse for sale in  ${CapitalizeFirst(
                 params.city
-              )}  `}
+              )}. Checkout floor plans, pricing and availability of new town homes for sale in ${CapitalizeFirst(
+                params.city
+              )} on condomonk. `}
             </p>
           </div>
           <div className="d-flex sm-center pb-2 pb-md-0 sticky-buttons">

@@ -123,7 +123,7 @@ export default async function Home({ params }) {
               </span>
             </div>
           </div>
-          <p className="font-normal sm-center pb-2 pb-md-0 mb-0 fw-medium text-lg">
+          <p className="font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium text-lg">
             {data.preconstructions.length} Pre construction or new homes, condos
             and townhomes for sale in {CapitalizeFirst(params.city)} on
             condomonk.

@@ -93,9 +93,11 @@ export default async function Home({ params }) {
             <p className=" font-normal  mb-2 sm-center">
               {`${
                 data.preconstructions.length
-              } New Pre Construction Detached Homes for sale in ${CapitalizeFirst(
+              } New Pre Construction Detached Homes for sale in  ${CapitalizeFirst(
                 params.city
-              )}  `}
+              )}. Checkout floor plans, pricing and availability of new detached homes for sale in ${CapitalizeFirst(
+                params.city
+              )} on condomonk. `}
             </p>
           </div>
           <div className="d-flex sm-center pb-2 pb-md-0 sticky-buttons">
@@ -134,7 +136,7 @@ export default async function Home({ params }) {
 
         <div className="container">
           <div className="py-2"></div>
-          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-5 gy-4 gx-3 gx-lg-2">
+          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-4 gy-4 gx-3 gx-lg-2">
             {data.preconstructions &&
               data.preconstructions.map((item, no) => (
                 <div className="col" key={item.id}>
