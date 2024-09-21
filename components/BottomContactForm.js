@@ -25,6 +25,7 @@ export default function BottomContactForm(props) {
     console.log(credentials);
     ContactFormSubmit(credentials, setSubmitbtn, setCredentials);
   };
+
   return (
     <form
       method="POST"
@@ -32,7 +33,7 @@ export default function BottomContactForm(props) {
       onSubmit={(e) => handleFormSubmit(e)}
       id="contactForm"
     >
-      <div className="row me-0 row-cols-2 g-4 me-0">
+      <div className="row row-cols-2 g-4 me-0">
         <div className="col mb-2">
           <input
             type="text"
