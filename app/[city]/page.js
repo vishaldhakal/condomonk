@@ -93,6 +93,14 @@ export default async function Home({ params }) {
     }
   }
 
+  function getNo(no, no2) {
+    if (no != 0) {
+      return no2 + 1;
+    } else {
+      return no2;
+    }
+  }
+
   return (
     <>
       <div className="pt-lg-5 pt-3">
@@ -186,7 +194,10 @@ export default async function Home({ params }) {
                       __html: JSON.stringify(PreconSchema(item)),
                     }}
                   />
-                  <CondoCard {...item} no={no} />
+                  <CondoCard
+                    {...item}
+                    no={getNo(featured_data.preconstructions.length, no)}
+                  />
                 </div>
               ))}
           </div>
@@ -225,7 +236,10 @@ export default async function Home({ params }) {
                       __html: JSON.stringify(PreconSchema(item)),
                     }}
                   />
-                  <CondoCard {...item} no={no} />
+                  <CondoCard
+                    {...item}
+                    no={no + filteredprojects("Planning Phase").length}
+                  />
                 </div>
               ))}
           </div>
