@@ -1,7 +1,9 @@
 User-agent: *
 
 Sitemap: https://www.condomonk.ca/sitemap.xml
+Sitemap: https://www.condomonk.ca/sitemap.html
 Sitemap: https://www.condomonk.ca/sitemap_images.xml
 Sitemap: https://www.condomonk.ca/sitemap_video.xml
+
 
 

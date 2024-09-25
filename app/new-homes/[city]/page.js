@@ -31,7 +31,7 @@ export async function generateMetadata({ params }, parent) {
   return {
     ...parent,
     alternates: {
-      canonical: `https://condomonk.ca/${params.city}`,
+      canonical: `https://condomonk.ca/new-homes/${params.city}`,
     },
     title:
       "Top " +
