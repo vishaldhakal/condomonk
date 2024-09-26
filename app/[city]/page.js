@@ -109,7 +109,7 @@ export default async function Home({ params }) {
             <div>
               <h1 className="main-title font-family2 pb-2 pb-md-0">
                 New Pre Construction Homes in {CapitalizeFirst(params.city)}{" "}
-                <span className="nextline-sm"> ( 2024 )</span>
+                <span className=""> ( 2024 )</span>
               </h1>
             </div>
             <div className="">
