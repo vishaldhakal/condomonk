@@ -98,11 +98,9 @@ a:hover {
 }
 
 @media (min-width: 1200px) {
-    .nav-item:hover .dropdown-menu {
+    .nav-item .dropdown-menu {
         display: block;
-        animation-name: dropdown-animate;
-        animation-duration: .2s;
-        animation-fill-mode: both;
+
         border: 0;
         box-shadow: 0 5px 30px 0 rgba(82, 63, 105, 0.2);
         width: 520px;
@@ -249,6 +247,10 @@ a:hover {
     z-index: 1000;
     border-radius: 4px;
     padding: 10px 0;
+}
+
+.dropdown-menu.show {
+    display: block;
 }
 
 .dropdown-menu .dropdown-header,
@@ -536,11 +538,17 @@ a:hover {
 }
 
 .sticky-buttons {
-    position: -webkit-sticky;
     position: sticky;
-    top: 70px;
+    top: 7px;
+    /* Adjust this value to match your navbar height */
     z-index: 100;
     background-color: #fff;
+}
+
+@media (max-width: 768px) {
+    .sticky-buttons {
+        top: 0;
+    }
 }
 
 @media (max-width: 768px) {
@@ -559,7 +567,7 @@ a:hover {
 
     .sticky-buttons {
         position: -webkit-sticky;
-        position: sticky;
+        position: sticky !important;
         top: 0;
         z-index: 100;
         background-color: #fff;
@@ -717,8 +725,7 @@ a:hover {
 
     .main-title {
         text-align: center;
-        letter-spacing: .5px;
-        line-height: 2.4rem !important;
+        line-height: 2rem !important;
         font-weight: 900;
         margin-bottom: 10px;
         font-size: 1.88rem !important;
@@ -2043,13 +2050,15 @@ textarea {
     position: sticky;
     top: 60px;
     /* Adjust this value to the exact position where you want the breadcrumb to be sticky */
-    z-index: 1000;
+    z-index: 990;
     /* This will ensure the breadcrumb stays on top of other content */
     background-color: white;
     /* Optional: to avoid any content overlap */
     padding-bottom: 5px;
     /* Optional: adjust for better spacing */
 }
+
+
 
 .side-fix-contact {
     position: sticky;
@@ -2431,4 +2440,21 @@ textarea {
 
 .glow {
     box-shadow: 0 0 30px 2px #0000003e !important;
+}
+
+.dropdown-menu,
+.nav-item.dropdown:focus-within .dropdown-menu,
+.dropdown-menu.show {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+
+}
+
+.dropdown-menu {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+
 }
