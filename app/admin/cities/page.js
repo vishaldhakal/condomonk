@@ -33,7 +33,7 @@ export default function Cities() {
   const fetchData = () => {
     axios
       .get(
-        `http://condomonk.ca/api/city/?page_size=${pageSize}&page=${currentPage}`
+        `https://api.condomonk.ca/api/city/?page_size=${pageSize}&page=${currentPage}`
       )
       .then((res) => {
         setCities(res.data.results);
@@ -61,7 +61,7 @@ export default function Cities() {
     }
 
     axios
-      .post("http://condomonk.ca/api/city/", citydata)
+      .post("https://api.condomonk.ca/api/city/", citydata)
       .then((res) => {
         setRefetch(!refetch);
         setCityData(initialCityData);
@@ -91,7 +91,7 @@ export default function Cities() {
     }
 
     axios
-      .put(`http://condomonk.ca/api/city/${citydata.id}/`, citydata)
+      .put(`https://api.condomonk.ca/api/city/${citydata.id}/`, citydata)
       .then((res) => {
         setModalOpen(false);
         setIsEdit(false);
@@ -120,7 +120,7 @@ export default function Cities() {
     }).then((willDelete) => {
       if (willDelete) {
         axios
-          .delete(`http://condomonk.ca/api/city/${id}/`)
+          .delete(`https://api.condomonk.ca/api/city/${id}/`)
           .then((res) => {
             setRefetch(!refetch);
             swal({
@@ -156,7 +156,7 @@ export default function Cities() {
   const handleEdit = (e, id) => {
     e.preventDefault();
     axios
-      .get(`http://condomonk.ca/api/city/${id}/`)
+      .get(`https://api.condomonk.ca/api/city/${id}/`)
       .then((res) => {
         setModalOpen(true);
         setIsEdit(true);
