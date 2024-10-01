@@ -11,6 +11,9 @@ export default function Cities() {
     id: 0,
     name: "",
     details: "",
+    townhomes_details: "",
+    condos_details: "",
+    detached_details: "",
   };
 
   const [isEdit, setIsEdit] = useState(false);
@@ -21,6 +24,7 @@ export default function Cities() {
   const pageSize = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [propertyType, setPropertyType] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -29,7 +33,7 @@ export default function Cities() {
   const fetchData = () => {
     axios
       .get(
-        `https://api.condomonk.ca/api/city/?page_size=${pageSize}&page=${currentPage}`
+        `http://condomonk.ca/api/city/?page_size=${pageSize}&page=${currentPage}`
       )
       .then((res) => {
         setCities(res.data.results);
@@ -57,7 +61,7 @@ export default function Cities() {
     }
 
     axios
-      .post("https://api.condomonk.ca/api/city/", citydata)
+      .post("http://condomonk.ca/api/city/", citydata)
       .then((res) => {
         setRefetch(!refetch);
         setCityData(initialCityData);
@@ -87,7 +91,7 @@ export default function Cities() {
     }
 
     axios
-      .put(`https://api.condomonk.ca/api/city/${citydata.id}/`, citydata)
+      .put(`http://condomonk.ca/api/city/${citydata.id}/`, citydata)
       .then((res) => {
         setModalOpen(false);
         setIsEdit(false);
@@ -116,7 +120,7 @@ export default function Cities() {
     }).then((willDelete) => {
       if (willDelete) {
         axios
-          .delete(`https://api.condomonk.ca/api/city/${id}/`)
+          .delete(`http://condomonk.ca/api/city/${id}/`)
           .then((res) => {
             setRefetch(!refetch);
             swal({
@@ -152,7 +156,7 @@ export default function Cities() {
   const handleEdit = (e, id) => {
     e.preventDefault();
     axios
-      .get(`https://api.condomonk.ca/api/city/${id}/`)
+      .get(`http://condomonk.ca/api/city/${id}/`)
       .then((res) => {
         setModalOpen(true);
         setIsEdit(true);
@@ -161,6 +165,18 @@ export default function Cities() {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const handlePropertyTypeClick = (type) => {
+    setModalOpen(false);
+    setPropertyType(type);
+  };
+
+  const handlePropertyDetailsChange = (content) => {
+    setCityData((prevState) => ({
+      ...prevState,
+      [`${propertyType.toLowerCase()}_details`]: content,
+    }));
   };
 
   return (
@@ -184,6 +200,28 @@ export default function Cities() {
                 ></button>
               </div>
               <div className="modal-body">
+                {isEdit && (
+                  <div className="mb-3">
+                    <button
+                      className="btn btn-outline-primary me-2"
+                      onClick={() => handlePropertyTypeClick("Condos")}
+                    >
+                      Condos
+                    </button>
+                    <button
+                      className="btn btn-outline-primary me-2"
+                      onClick={() => handlePropertyTypeClick("Townhomes")}
+                    >
+                      Townhomes
+                    </button>
+                    <button
+                      className="btn btn-outline-primary"
+                      onClick={() => handlePropertyTypeClick("Detached")}
+                    >
+                      Detached
+                    </button>
+                  </div>
+                )}
                 <form>
                   <div className="mb-3">
                     <label htmlFor="name" className="form-label">
@@ -274,6 +312,90 @@ export default function Cities() {
           </div>
         </div>
       )}
+
+      {propertyType && (
+        <div className="modal" tabIndex="-1">
+          <div className="modal-dialog modal-lg">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">{`Edit ${propertyType}`}</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={() => {
+                    setPropertyType(null);
+                    setModalOpen(true);
+                  }}
+                ></button>
+              </div>
+              <div className="modal-body">
+                <div className="mb-3">
+                  <label
+                    htmlFor={`${propertyType.toLowerCase()}_details`}
+                    className="form-label"
+                  >
+                    {propertyType} Details
+                  </label>
+                  <ReactQuill
+                    theme="snow"
+                    value={citydata[`${propertyType.toLowerCase()}_details`]}
+                    onChange={handlePropertyDetailsChange}
+                    modules={{
+                      toolbar: [
+                        [{ header: "1" }, { header: "2" }, { font: [] }],
+                        [{ size: [] }],
+                        ["bold", "italic", "underline", "strike", "blockquote"],
+                        [
+                          { list: "ordered" },
+                          { list: "bullet" },
+                          { indent: "-1" },
+                          { indent: "+1" },
+                        ],
+                        ["link", "image", "video"],
+                        ["clean"],
+                      ],
+                      clipboard: {
+                        matchVisual: false,
+                      },
+                    }}
+                    formats={[
+                      "header",
+                      "bold",
+                      "italic",
+                      "underline",
+                      "strike",
+                      "blockquote",
+                      "list",
+                      "bullet",
+                      "link",
+                      "image",
+                      "video",
+                    ]}
+                  />
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => {
+                    // Handle saving changes for the specific property type
+                    console.log(
+                      `Saving ${propertyType} details:`,
+                      citydata[`${propertyType.toLowerCase()}_details`]
+                    );
+                    setPropertyType(null);
+                    setModalOpen(true);
+                  }}
+                >
+                  Save Changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="py-4">
         <div className="container">
           <div className="row">

@@ -2443,12 +2443,12 @@ textarea {
 }
 
 .dropdown-menu,
-.nav-item.dropdown:focus-within .dropdown-menu,
+.nav-item.dropdown:hover .dropdown-menu,
 .dropdown-menu.show {
     display: block;
     opacity: 1;
     visibility: visible;
-
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .dropdown-menu {
@@ -2456,5 +2456,5 @@ textarea {
     opacity: 0;
     visibility: hidden;
     position: absolute;
-
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
