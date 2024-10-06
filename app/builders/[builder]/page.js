@@ -71,20 +71,19 @@ export default async function BuilderSingle({ params }) {
             </h1>
           </div>
         </div>
-        <div className="container-fluid">
+        <div className="container">
           <div className="row row-cols-1 row-cols-md-1 position-relative">
             <div className="col mt-4">
               <div className="d-flex justify-content-center">
                 <DeveloperCardDetail {...developer} />
               </div>
               <div className="py-5 my-4"></div>
-              <div className="row row-cols-1 row-cols-md-3">
-                <div className="col-md-2"></div>
-                <div className="col-md-8">
+              <div className="row row-cols-1 row-cols-md-3 ">
+                <div className="col-md-12 ">
                   <h2 className="main-title text-center mb-4">
                     Projects by {CapitalizeFirst(params.builder)}
                   </h2>
-                  <div className="row row-cols-1 row-cols-md-3 row-cols-lg-3 gy-4 gx-3 gx-lg-2">
+                  <div className="row row-cols-1 row-cols-md-4 row-cols-lg-4 gy-4 gx-3">
                     {data &&
                       data.map((item) => (
                         <div className="col" key={item.id}>
