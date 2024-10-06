@@ -4,9 +4,12 @@ import { notFound } from "next/navigation";
 import FixedContactButton from "@/components/FixedContactButton";
 
 async function getData() {
-  const res = await fetch("https://api.condomonk.ca/api/developers/", {
-    next: { revalidate: 10 },
-  });
+  const res = await fetch(
+    "https://api.condomonk.ca/api/developers?page_size=800",
+    {
+      next: { revalidate: 10 },
+    }
+  );
 
   if (!res.ok) {
     notFound();
