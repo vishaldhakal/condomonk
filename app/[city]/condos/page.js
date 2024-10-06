@@ -182,7 +182,7 @@ export default async function Home({ params }) {
                   <div
                     className="col-12 mt-mine px-3 max-w-100"
                     dangerouslySetInnerHTML={{
-                      __html: data.city.details,
+                      __html: data.city.condos_details,
                     }}
                   ></div>
                 </div>
