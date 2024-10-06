@@ -86,6 +86,18 @@ export default async function Builders() {
             <div className="col-md-2"></div>
           </div>
           <div className="pt-5 mt-5"></div>
+          <div>
+            <p className="text-sm container">
+              Disclaimer: The information provided about the builder or
+              developer on this page, including but not limited to project
+              status, pricing, floor plans, and other project-related details,
+              is for general informational purposes only. While we strive to
+              keep the information up to date and accurate, there may be changes
+              or discrepancies that occur. We recommend verifying all details
+              directly with the builder to ensure accuracy. Homebaba is not
+              responsible for any outdated or inaccurate information
+            </p>
+          </div>
           <div className="pt-5 mt-5"></div>
           <div className="py-5 my-5" id="mycontact">
             <div className="container-fluid">
@@ -112,6 +124,7 @@ export default async function Builders() {
             </div>
           </div>
           <div className="pt-5 mt-5"></div>
+
           <div className="pt-5 mt-5"></div>
           <div className="pt-5 mt-5"></div>
         </div>
