@@ -230,9 +230,9 @@ export default async function Home({ params }) {
               <div className="container" id="make-img-responsive">
                 <div className="row row-cols-1 g-0">
                   <div
-                    className="col-12 mt-mine px-3 max-w-100 iframe-container "
+                    className="col-12 mt-mine px-3 max-w-100 iframe-container"
                     dangerouslySetInnerHTML={{
-                      __html: data.city.details,
+                      __html: data.city.details || "",
                     }}
                   ></div>
                   <div className="pt-5">
