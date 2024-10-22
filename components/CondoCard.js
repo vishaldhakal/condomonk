@@ -46,19 +46,14 @@ export default function CondoCard(props) {
                 <span>Featured</span>
               </span>
             )}
-            {props.image ? (
-              <img
-                src={`https://api.condomonk.ca${props.image.image}`}
-                className="img-fluid condocard-img-top"
-                alt={`${props.project_name} located at ${props.project_address} image`}
-              />
-            ) : (
-              <img
-                src="/noimage.webp"
-                className="img-fluid condocard-img-top"
-                alt={`no image available for ${props.project_name}`}
-              />
-            )}
+            <img
+              src={
+                props.image.image != null
+                  ? `https://api.condomonk.ca${props.image.image}`
+                  : "/noimage.webp"
+              }
+              className="img-fluid condocard-img-top"
+            />
           </Link>
           <span className="d-flex">
             <span className="shadow-lg p-1 ms-2 abs1">{props.status}</span>

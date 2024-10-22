@@ -4,13 +4,27 @@ import { notFound } from "next/navigation";
 import PreconSchema from "@/components/PreconSchema";
 import Link from "next/link";
 
-async function getData(city) {
-  const res = await fetch(
-    "https://api.condomonk.ca/api/preconstructions-city/" + city,
-    {
-      next: { revalidate: 10 },
+async function getData(city, priceFilter = null) {
+  let url = `https://api.condomonk.ca/api/preconstructions-city/${city}`;
+
+  if (priceFilter) {
+    if (priceFilter === "under-500k") {
+      url += "?price_to=500000";
+    } else if (priceFilter === "under-1m") {
+      url += "?price_to=1000000";
+    } else if (priceFilter === "under-1.5m") {
+      url += "?price_to=1500000";
+    } else if (priceFilter === "over-700k") {
+      url += "?price_starting_from=700000";
+    } else {
+      const [min, max] = priceFilter.split("-").map((p) => parseInt(p) * 1000);
+      url += `?price_starting_from=${min}&price_to=${max}`;
     }
-  );
+  }
+
+  const res = await fetch(url, {
+    next: { revalidate: 10 },
+  });
 
   if (!res.ok) {
     notFound();
@@ -37,35 +51,93 @@ async function getFeaturedData(city) {
 }
 
 const CapitalizeFirst = (city) => {
-  return city.charAt(0).toUpperCase() + city.slice(1);
+  return (
+    city.split("-")[0].charAt(0).toUpperCase() + city.split("-")[0].slice(1)
+  );
 };
 
 export async function generateMetadata({ params }, parent) {
-  let city = CapitalizeFirst(params.city);
-  const data = await getData(params.city);
+  const { city } = params;
+  const priceFilter = getPriceFilter(city);
+  const cleanCity = getCleanCity(city);
+  const data = await getData(cleanCity, priceFilter);
+
+  let title, description;
+  if (priceFilter) {
+    const formattedPrice = priceFilter
+      .replace("-", " to ")
+      .replace("k", ",000");
+    title = `New Pre-construction Homes in ${CapitalizeFirst(
+      cleanCity
+    )} - ${formattedPrice}`;
+    description = `Discover new construction homes, condos & townhouses in ${CapitalizeFirst(
+      cleanCity
+    )} priced ${formattedPrice}. Find your dream property in our latest developments.`;
+  } else {
+    title = `Top ${
+      data.preconstructions.length
+    } New Pre construction homes, condos and townhomes in ${CapitalizeFirst(
+      cleanCity
+    )} & New Homes for Sale.`;
+    description = `Discover stunning new construction homes, condos & townhouses in ${CapitalizeFirst(
+      cleanCity
+    )} & New Homes for Sale. Find your dream property in our latest developments. Tour new builds today!`;
+  }
 
   return {
     ...parent,
     alternates: {
-      canonical: `https://condomonk.ca/${params.city}`,
+      canonical: `https://condomonk.ca/${city}`,
     },
-    title:
-      "Top " +
-      data.preconstructions.length +
-      " New Pre construction homes, condos and townhomes in " +
-      city +
-      " & New Homes for Sale.",
-    description:
-      "Discover stunning new construction homes, condos & townhouses in " +
-      city +
-      " & New Homes for Sale." +
-      "Find your dream property in our latest developments. Tour new builds today!",
+    title,
+    description,
   };
 }
 
+function getPriceFilter(city) {
+  const priceFilters = [
+    "under-500k",
+    "under-1m",
+    "under-1.5m",
+    "over-700k",
+    "500k-600k",
+    "600k-700k",
+  ];
+  for (const filter of priceFilters) {
+    if (city.endsWith(`-homes-${filter}`)) {
+      return filter;
+    }
+  }
+  return null;
+}
+
+function getCleanCity(city) {
+  return city.split("-homes-")[0];
+}
+
 export default async function Home({ params }) {
-  const data = await getData(params.city);
-  const featured_data = await getFeaturedData(params.city);
+  const priceFilter = getPriceFilter(params.city);
+  const cleanCity = getCleanCity(params.city);
+  const data = await getData(cleanCity, priceFilter);
+  const featured_data = await getFeaturedData(cleanCity);
+
+  // Function to format the price filter for display
+  const formatPriceFilter = (filter) => {
+    if (filter.startsWith("under-")) {
+      return filter
+        .replace("under-", "under $")
+        .replace("K", ",000")
+        .replace("M", " million");
+    }
+    if (filter === "over-700K") {
+      return "Over $700,000";
+    }
+    return filter
+      .replace("-", " to $")
+      .replace("K", ",000")
+      .replace("M", " million");
+  };
+
   const filteredprojects = (value) => {
     return data.preconstructions.filter((item) => item.status == value);
   };
@@ -101,6 +173,18 @@ export default async function Home({ params }) {
     }
   }
 
+  // Add this function to generate the SEO paragraph
+  function getSEOParagraph(cleanCity, priceFilter) {
+    if (!priceFilter) {
+      return null; // No paragraph for general city pages
+    }
+
+    const cityName = CapitalizeFirst(cleanCity);
+    const priceDesc = formatPriceFilter(priceFilter);
+
+    return `Discover an extensive selection of pre-construction homes in ${cityName} priced ${priceDesc}. Our curated list showcases the latest developments, offering a range of options from affordable condos to luxurious townhomes. Whether you're a first-time buyer or looking to invest, these new construction properties in ${cityName} provide excellent opportunities in various neighborhoods. Explore modern designs, innovative amenities, and the chance to customize your future home. Start your journey to homeownership or expand your real estate portfolio with these exciting pre-construction projects in ${cityName}.`;
+  }
+
   return (
     <>
       <div className="pt-lg-5 pt-3">
@@ -108,8 +192,16 @@ export default async function Home({ params }) {
           <div className="d-flex ">
             <div>
               <h1 className="main-title font-family2 pb-2 pb-md-0">
-                New Pre Construction Homes in {CapitalizeFirst(params.city)}{" "}
-                <span className=""> ( 2024 )</span>
+                {priceFilter ? (
+                  `New Pre-construction Homes in ${CapitalizeFirst(
+                    cleanCity
+                  )} ${formatPriceFilter(priceFilter)} (2024) `
+                ) : (
+                  <>
+                    New Pre Construction Homes in {CapitalizeFirst(cleanCity)}{" "}
+                    <span className=""> ( 2024 )</span>
+                  </>
+                )}
               </h1>
             </div>
             <div className="">
@@ -133,7 +225,8 @@ export default async function Home({ params }) {
           </div>
           <p className="font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium text-lg">
             {data.preconstructions.length} Pre construction or new homes, condos
-            and townhomes for sale in {CapitalizeFirst(params.city)} on
+            and townhomes for sale in {CapitalizeFirst(cleanCity)}
+            {priceFilter ? ` priced ${formatPriceFilter(priceFilter)}` : ""} on
             condomonk.
           </p>
           <div className="d-flex sm-center  mb-lg-0 sticky-buttons pb-0 mb-0">
@@ -141,13 +234,13 @@ export default async function Home({ params }) {
               <div className="d-flex gap-2">
                 <Link
                   className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m"
-                  href={`/${params.city}/upcoming/`}
+                  href={`/${params.city.split("-homes-")[0]}/upcoming/`}
                 >
                   Upcoming Projects {CapitalizeFirst(params.city)}
                 </Link>
                 <Link
                   className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 me-2"
-                  href={`/${params.city}/townhomes/`}
+                  href={`/${params.city.split("-homes-")[0]}/townhomes/`}
                 >
                   New Townhomes {CapitalizeFirst(params.city)}
                 </Link>
@@ -155,19 +248,40 @@ export default async function Home({ params }) {
               <div className="d-flex gap-2">
                 <Link
                   className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m"
-                  href={`/${params.city}/detached/`}
+                  href={`/${params.city.split("-homes-")[0]}/detached/`}
                 >
                   New Detached Homes {CapitalizeFirst(params.city)}
                 </Link>
                 <Link
                   className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0"
-                  href={`/${params.city}/condos/`}
+                  href={`/${params.city.split("-homes-")[0]}/condos/`}
                 >
                   New Condos {CapitalizeFirst(params.city)}
                 </Link>
               </div>
+              <div className="d-flex gap-2 justify-content-center mx-3">
+                <Link
+                  className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-warning"
+                  href={`/${params.city.split("-homes-")[0]}-homes-under-500k`}
+                >
+                  Under $500k
+                </Link>
+                <Link
+                  className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-warning"
+                  href={`/${params.city.split("-homes-")[0]}-homes-under-1m`}
+                >
+                  Under $1M
+                </Link>
+                <Link
+                  className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-warning"
+                  href={`/${params.city.split("-homes-")[0]}-homes-under-1.5m`}
+                >
+                  Under $1.5M
+                </Link>
+              </div>
             </div>
           </div>
+
           {eventbanner()}
           <div className="mt-md-5 mt-0"></div>
           <div className="row row-cols-1 row-cols-md-4  gy-4 gx-3 gx-lg-3 ">
@@ -338,6 +452,7 @@ export default async function Home({ params }) {
                     proj_name="City Page"
                     city={data.city.name}
                   ></BottomContactForm>
+
                   <div className="d-flex text-center">
                     <p className="small-text2 mb-3 text-center">
                       Condomonk.ca serves as an online database for
@@ -359,6 +474,15 @@ export default async function Home({ params }) {
           </div>
           <div className="pt-5 mt-5"></div>
           <div className="pt-5 mt-5"></div>
+          {getSEOParagraph(cleanCity, priceFilter) && (
+            <div className="row justify-content-start mb-5">
+              <div className="col-md-12">
+                <p className="text-center fs-small p-4 rounded-xl">
+                  {getSEOParagraph(cleanCity, priceFilter)}
+                </p>
+              </div>
+            </div>
+          )}
           <div className="pt-5 mt-5"></div>
           <div className="py-5">
             {data.city && (
@@ -404,7 +528,19 @@ export async function generateStaticParams() {
     (res) => res.json()
   );
 
-  return cities.map((city) => ({
-    city: city.slug,
-  }));
+  const priceRanges = [
+    "under-500k",
+    "under-1m",
+    "under-1.5m",
+    "over-700k",
+    "500k-600k",
+    "600k-700k",
+  ];
+
+  const params = cities.flatMap((city) => [
+    { city: city.slug },
+    ...priceRanges.map((price) => ({ city: `${city.slug}-homes-${price}` })),
+  ]);
+
+  return params;
 }
