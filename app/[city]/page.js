@@ -10,9 +10,9 @@ async function getData(city, priceFilter = null) {
   if (priceFilter) {
     if (priceFilter === "under-500k") {
       url += "?price_to=500000";
-    } else if (priceFilter === "under-1m") {
+    } else if (priceFilter === "under-1-million") {
       url += "?price_to=1000000";
-    } else if (priceFilter === "under-1.5m") {
+    } else if (priceFilter === "under-1.5-million") {
       url += "?price_to=1500000";
     } else if (priceFilter === "over-700k") {
       url += "?price_starting_from=700000";
@@ -67,12 +67,12 @@ export async function generateMetadata({ params }, parent) {
     const formattedPrice = priceFilter
       .replace("-", " to ")
       .replace("k", ",000");
-    title = `New Pre-construction Homes in ${CapitalizeFirst(
+    title = `New Pre construction Homes in ${CapitalizeFirst(
       cleanCity
-    )} - ${formattedPrice}`;
+    )}  ${formattedPrice}`;
     description = `Discover new construction homes, condos & townhouses in ${CapitalizeFirst(
       cleanCity
-    )} priced ${formattedPrice}. Find your dream property in our latest developments.`;
+    )}  ${formattedPrice}. Find your dream property in our latest developments.`;
   } else {
     title = `Top ${
       data.preconstructions.length
@@ -97,8 +97,8 @@ export async function generateMetadata({ params }, parent) {
 function getPriceFilter(city) {
   const priceFilters = [
     "under-500k",
-    "under-1m",
-    "under-1.5m",
+    "under-1-million",
+    "under-1.5-million",
     "over-700k",
     "500k-600k",
     "600k-700k",
@@ -125,9 +125,11 @@ export default async function Home({ params }) {
   const formatPriceFilter = (filter) => {
     if (filter.startsWith("under-")) {
       return filter
-        .replace("under-", "under $")
+        .replace("under-500k", "under $500k")
+        .replace("under-1-million", "under $1 million")
+        .replace("under-1.5-million", "under $1.5 million")
         .replace("K", ",000")
-        .replace("M", " million");
+        .replace("M", "million");
     }
     if (filter === "over-700K") {
       return "Over $700,000";
@@ -182,7 +184,7 @@ export default async function Home({ params }) {
     const cityName = CapitalizeFirst(cleanCity);
     const priceDesc = formatPriceFilter(priceFilter);
 
-    return `Discover an extensive selection of pre-construction homes in ${cityName} priced ${priceDesc}. Our curated list showcases the latest developments, offering a range of options from affordable condos to luxurious townhomes. Whether you're a first-time buyer or looking to invest, these new construction properties in ${cityName} provide excellent opportunities in various neighborhoods. Explore modern designs, innovative amenities, and the chance to customize your future home. Start your journey to homeownership or expand your real estate portfolio with these exciting pre-construction projects in ${cityName}.`;
+    return `Discover an extensive selection of pre construction homes in ${cityName}  ${priceDesc}. Our curated list showcases the latest developments, offering a range of options from affordable condos to luxurious townhomes. Whether you're a first-time buyer or looking to invest, these new construction properties in ${cityName} provide excellent opportunities in various neighborhoods. Explore modern designs, innovative amenities, and the chance to customize your future home. Start your journey to homeownership or expand your real estate portfolio with these exciting pre construction projects in ${cityName}.`;
   }
 
   return (
@@ -193,7 +195,7 @@ export default async function Home({ params }) {
             <div>
               <h1 className="main-title font-family2 pb-2 pb-md-0">
                 {priceFilter ? (
-                  `New Pre-construction Homes in ${CapitalizeFirst(
+                  `New Pre construction Homes in ${CapitalizeFirst(
                     cleanCity
                   )} ${formatPriceFilter(priceFilter)} (2024) `
                 ) : (
@@ -226,7 +228,7 @@ export default async function Home({ params }) {
           <p className="font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium text-lg">
             {data.preconstructions.length} Pre construction or new homes, condos
             and townhomes for sale in {CapitalizeFirst(cleanCity)}
-            {priceFilter ? ` priced ${formatPriceFilter(priceFilter)}` : ""} on
+            {priceFilter ? ` ${formatPriceFilter(priceFilter)}` : ""} on
             condomonk.
           </p>
           <div className="d-flex sm-center  mb-lg-0 sticky-buttons pb-0 mb-0">
@@ -268,13 +270,17 @@ export default async function Home({ params }) {
                 </Link>
                 <Link
                   className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-warning"
-                  href={`/${params.city.split("-homes-")[0]}-homes-under-1m`}
+                  href={`/${
+                    params.city.split("-homes-")[0]
+                  }-homes-under-1-million`}
                 >
                   Under $1M
                 </Link>
                 <Link
                   className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-warning"
-                  href={`/${params.city.split("-homes-")[0]}-homes-under-1.5m`}
+                  href={`/${
+                    params.city.split("-homes-")[0]
+                  }-homes-under-1.5-million`}
                 >
                   Under $1.5M
                 </Link>
