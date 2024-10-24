@@ -33,16 +33,8 @@ export async function generateMetadata({ params }, parent) {
     alternates: {
       canonical: `https://condomonk.ca/new-homes/${params.city}`,
     },
-    title:
-      "Top " +
-      data.preconstructions.length +
-      " New homes, condos and townhomes in " +
-      city,
-    description: "New homes in " + city,
-    description:
-      "Discover stunning new homes, condos & townhouses in " +
-      city +
-      ". Find your dream property in our latest developments. Tour new builds today!",
+    title: `Top ${data.preconstructions.length} New homes in ${city}`,
+    description: `Discover stunning new homes, condos & townhouses for Sale in ${city}. Find your dream property. Book your tour today!`,
   };
 }
 

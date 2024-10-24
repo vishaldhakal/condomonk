@@ -44,26 +44,19 @@ async function getRelatedData(city) {
 export async function generateMetadata({ params }, parent) {
   const data = await getData(params.slug);
 
+  const projectName = data.preconstruction.project_name;
+  const projectType = data.preconstruction.project_type || "Condos"; // Default to "Condos" if not available
+  const projectCity = data.preconstruction.city.name;
+
   return {
     ...parent,
     alternates: {
       canonical: `https://condomonk.ca/${params.city}/${params.slug}`,
     },
-    title:
-      data.preconstruction.project_name +
-      " in " +
-      data.preconstruction.city.name +
-      " by " +
-      data.preconstruction.developer.name,
+    title: `${projectName} ${projectType} | ${projectCity} | Plans, Pricing & Availability`,
     description:
-      data.preconstruction.project_name +
-      " in " +
-      data.preconstruction.city.name +
-      " by " +
-      data.preconstruction.developer.name +
-      " prices starting from " +
-      Nformatter(data.preconstruction.price_starting_from, 2) +
-      " CAD",
+      `${projectName} in ${projectCity}. Check out pricing, floor plans, and availability for ` +
+      `${projectName} development by ${data.preconstruction.developer.name}. Register Today!`,
   };
 }
 
@@ -186,26 +179,35 @@ export default async function Home({ params }) {
                       <h1 className="side fw-mine font-family2">
                         {data.preconstruction.project_name}
                       </h1>
-                      <p className="mb-0">
-                        By{" "}
-                        <strong>{data.preconstruction.developer.name}</strong>
-                      </p>
+                      <h2 className="mb-0 fs-6 fw-bold">
+                        <Link
+                          href={`/builders/${data.preconstruction.developer.slug}`}
+                          className="text-decoration-none text-dark"
+                        >
+                          {data.preconstruction.developer.name}
+                        </Link>
+                      </h2>
 
-                      <h2 className="text-mine fs-3 fw-mine mt-1 mb-0 brand-color font-family2 mb-4">
+                      <p className="text-mine fs-3 fw-mine mt-1 mb-0 brand-color font-family2 mb-4">
                         {checkPricing(
                           data.preconstruction.price_starting_from,
                           data.preconstruction.price_to
                         )}
-                      </h2>
+                      </p>
                       <div className="rounded-mine">
                         <div>
                           <div className="mb-1">
                             <span className="me-2 fw-mine2 mb-2 fs-mine3">
                               Project Location:
                             </span>
-                            <span scope="col">
-                              {data.preconstruction.project_address}
-                            </span>
+                            <Link
+                              href={`/${params.city}`}
+                              className="text-decoration-none text-primary"
+                            >
+                              <span scope="col">
+                                {data.preconstruction.project_address}
+                              </span>
+                            </Link>
                           </div>
                           <div className="mb-1">
                             <span className="me-2 fw-mine2 mb-2 fs-mine3">
