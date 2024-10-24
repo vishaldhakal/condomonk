@@ -9,6 +9,7 @@ import Gallery from "@/components/Gallery";
 import Link from "next/link";
 import CustomModal from "@/components/Modal";
 import Map from "@/components/Map";
+import ExpandableContent from "@/components/ExpandableContent";
 
 // Define your functions outside of the component
 async function getData(slug) {
@@ -327,12 +328,10 @@ export default async function Home({ params }) {
                         {data.preconstruction.city.name}
                       </h2>
                       <div className="text-start my-3 text-inside">
-                        <div
-                          className="iframe-container custom-description-container leading-8"
-                          dangerouslySetInnerHTML={{
-                            __html: data.preconstruction.description,
-                          }}
-                        ></div>
+                        <ExpandableContent
+                          content={data.preconstruction.description}
+                          maxWords={100}
+                        />
                       </div>
                       <CustomModal
                         linkText={
