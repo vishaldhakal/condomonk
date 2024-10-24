@@ -34,7 +34,7 @@ export default function DeveloperCardDetail(props) {
             </>
           )} */}
           <div
-            className="iframe-container mb-0 pt-3 text-center"
+            className="iframe-container mb-0 pt-3 text-center textt"
             dangerouslySetInnerHTML={{
               __html: props.details,
             }}

@@ -310,7 +310,7 @@ export default async function Home({ params }) {
                   <div className="">
                     <CustomModal
                       linkText={
-                        <span className="custom-button mt-5">
+                        <span className="custom-button mb-5">
                           Click here to get the latest information today!
                         </span>
                       }
@@ -322,7 +322,7 @@ export default async function Home({ params }) {
                       }
                       city={data.preconstruction.city.name}
                     />
-                    <div className="pb-5 ">
+                    <div className="pb-5 pt-3">
                       <h2 className="fw-bold fs-3 font-family2">
                         Information about {data.preconstruction.project_name} in{" "}
                         {data.preconstruction.city.name}
@@ -333,7 +333,7 @@ export default async function Home({ params }) {
                           maxWords={100}
                         />
                       </div>
-                      <CustomModal
+                      {/* <CustomModal
                         linkText={
                           <span className="btn  btn-warning rounded-pill shadow-lg">
                             Send me more info about{" "}
@@ -347,7 +347,7 @@ export default async function Home({ params }) {
                           ".  Thank you"
                         }
                         city={data.preconstruction.city.name}
-                      />
+                      /> */}
                     </div>
                   </div>
                 </div>

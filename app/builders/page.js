@@ -88,14 +88,19 @@ export default async function Builders() {
           <div className="pt-5 mt-5"></div>
           <div>
             <p className="text-sm container">
-              Disclaimer: The information provided about the builder or
-              developer on this page, including but not limited to project
-              status, pricing, floor plans, and other project-related details,
-              is for general informational purposes only. While we strive to
-              keep the information up to date and accurate, there may be changes
-              or discrepancies that occur. We recommend verifying all details
-              directly with the builder to ensure accuracy. Homebaba is not
-              responsible for any outdated or inaccurate information
+              *Disclaimer: The information on this page about the builder or
+              developer, including project status, pricing, floor plans, and
+              other related details, is for general informational purposes only.
+              It may have been sourced from the builder’s website or publicly
+              available data. While we strive to keep the information up to date
+              and accurate, changes or discrepancies may occur. For the most
+              accurate details, we recommend verifying directly with the
+              builder. Condomonk is not responsible for any outdated or
+              incorrect information.
+              <br />
+              If you are a builder and wish to request updates or modifications
+              to the information on this page, please contact us at
+              info@condomonk.ca.
             </p>
           </div>
           <div className="pt-5 mt-5"></div>

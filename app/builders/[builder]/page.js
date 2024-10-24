@@ -65,11 +65,7 @@ export default async function BuilderSingle({ params }) {
       <FixedContactButton></FixedContactButton>
       <div className="pt-4 position-relative font-family2">
         <div className="container-fluid">
-          <div className="pb-4">
-            <h1 className="main-title text-center">
-              {`New Construction Homes by ${CapitalizeFirst(params.builder)}`}
-            </h1>
-          </div>
+          <div className="pb-4"></div>
         </div>
         <div className="container">
           <div className="row row-cols-1 row-cols-md-1 position-relative">
@@ -80,9 +76,11 @@ export default async function BuilderSingle({ params }) {
               <div className="py-5 my-4"></div>
               <div className="row row-cols-1 row-cols-md-3 ">
                 <div className="col-md-12 ">
-                  <h2 className="main-title text-center mb-4">
-                    Projects by {CapitalizeFirst(params.builder)}
-                  </h2>
+                  <h1 className="main-title text-center pb-5">
+                    {`New Construction Homes by ${CapitalizeFirst(
+                      params.builder
+                    )}`}
+                  </h1>
                   <div className="row row-cols-1 row-cols-md-4 row-cols-lg-4 gy-4 gx-3">
                     {data &&
                       data.map((item) => (
@@ -107,14 +105,19 @@ export default async function BuilderSingle({ params }) {
           <div className="pt-5 mt-5"></div>
           <div>
             <p className="text-sm">
-              Disclaimer: The information provided about the builder or
-              developer on this page, including but not limited to project
-              status, pricing, floor plans, and other project-related details,
-              is for general informational purposes only. While we strive to
-              keep the information up to date and accurate, there may be changes
-              or discrepancies that occur. We recommend verifying all details
-              directly with the builder to ensure accuracy. Homebaba is not
-              responsible for any outdated or inaccurate information
+              *Disclaimer: The information on this page about the builder or
+              developer, including project status, pricing, floor plans, and
+              other related details, is for general informational purposes only.
+              It may have been sourced from the builder’s website or publicly
+              available data. While we strive to keep the information up to date
+              and accurate, changes or discrepancies may occur. For the most
+              accurate details, we recommend verifying directly with the
+              builder. Condomonk is not responsible for any outdated or
+              incorrect information.
+              <br />
+              If you are a builder and wish to request updates or modifications
+              to the information on this page, please contact us at
+              info@condomonk.ca.
             </p>
           </div>
           <div className="pt-5 mt-5"></div>

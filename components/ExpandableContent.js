@@ -60,7 +60,7 @@ export default function ExpandableContent({ content, maxHeight = 500 }) {
           onClick={toggleExpand}
           className="mt-2 text-blue-600 hover:text-blue-800 focus:outline-none transition-colors duration-300 ease-in-out font-bold"
         >
-          {isExpanded ? "Read Less" : "Read More"}
+          {isExpanded ? "Read Less →" : "Read More →"}
         </button>
       )}
     </div>
