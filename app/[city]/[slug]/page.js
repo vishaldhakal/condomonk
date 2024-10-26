@@ -8,8 +8,11 @@ import { notFound } from "next/navigation";
 import Gallery from "@/components/Gallery";
 import Link from "next/link";
 import CustomModal from "@/components/Modal";
-import Map from "@/components/Map";
 import ExpandableContent from "@/components/ExpandableContent";
+import dynamic from "next/dynamic";
+
+// Dynamically import the Map component with no SSR
+const Map = dynamic(() => import("@/components/Map"), { ssr: false });
 
 // Define your functions outside of the component
 async function getData(slug) {
@@ -333,26 +336,22 @@ export default async function Home({ params }) {
                           maxWords={100}
                         />
                       </div>
-                      {/* <CustomModal
-                        linkText={
-                          <span className="btn  btn-warning rounded-pill shadow-lg">
-                            Send me more info about{" "}
-                            {data.preconstruction.project_name}
-                          </span>
-                        }
-                        proj_name={data.preconstruction.project_name}
-                        defaultmessage={
-                          "Please send me more information about " +
-                          data.preconstruction.project_name +
-                          ".  Thank you"
-                        }
-                        city={data.preconstruction.city.name}
-                      /> */}
                     </div>
                   </div>
                 </div>
+                <div className=" my-5 pb-5">
+                  <h2 className="fw-bold fs-3 pb-3 font-family2 ">
+                    Project Location of {data.preconstruction.project_name}
+                  </h2>
+                  <div
+                    className="px-2 mx-md-0"
+                    style={{ height: "400px", width: "100%" }}
+                  >
+                    <Map address={data.preconstruction.project_address} />
+                  </div>
+                </div>
                 <div className="py-3 my-5">
-                  <h2 className="fw-bold fs-4 pb-3 font-family2">
+                  <h2 className="fw-bold fs-3 pb-3 font-family2 ">
                     Walk Score for {data.preconstruction.project_name}
                   </h2>
 
