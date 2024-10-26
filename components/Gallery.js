@@ -12,12 +12,15 @@ import lgZoom from "lightgallery/plugins/zoom";
 const Map = dynamic(() => import("./Map"), { ssr: false });
 
 export default function Gallery(props) {
-  const onInit = () => {
+  let lightGalleryInstance = null;
+
+  const onInit = (detail) => {
     console.log("lightGallery has been initialized");
+    lightGalleryInstance = detail.instance;
   };
 
   const newImages = (images) => {
-    let neImgs = images.slice(0, 6); // Take only the first 6 images
+    let neImgs = images.slice(0, 6); // Take only the first 6 images for desktop view
     neImgs.forEach((image) => {
       if (!image.image.startsWith("https://api.condomonk.ca")) {
         image.image = "https://api.condomonk.ca" + image.image;
@@ -32,25 +35,51 @@ export default function Gallery(props) {
     return neImgs;
   };
 
+  const scrollToMap = (e) => {
+    e.preventDefault();
+    e.stopPropagation(); // Prevent LightGallery from opening
+    if (lightGalleryInstance) {
+      lightGalleryInstance.closeGallery(); // Close LightGallery if open
+    }
+    const mapElement = document.getElementById("project-map");
+    if (mapElement) {
+      mapElement.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="my-3 grid-cont">
       <LightGallery onInit={onInit} speed={500} plugins={[lgThumbnail, lgZoom]}>
-        {newImages(props.images).map((image, no) => (
-          <Link
-            href={`${image.image}`}
-            className={`position-relative g-item grid-item${parseInt(no + 1)}`}
-            key={no}
-          >
-            <img
-              alt={`${props.project_name} located at ${
-                props.project_address
-              } image ${no + 1}`}
-              className="img-fluid w-100 h-100 rounded-mine2 lazy"
-              src={`${image.image}`}
-            />
-          </Link>
-        ))}
-        <div className={`position-relative g-item grid-item7`}>
+        {newImages(props.images)
+          .slice(0, 6)
+          .map(
+            (
+              image,
+              no // Show only 5 images for mobile view
+            ) => (
+              <Link
+                href={`${image.image}`}
+                className={`position-relative g-item grid-item${parseInt(
+                  no + 1
+                )}`}
+                key={no}
+              >
+                <img
+                  alt={`${props.project_name} located at ${
+                    props.project_address
+                  } image ${no + 1}`}
+                  className="img-fluid w-100 h-100 rounded-mine2 lazy"
+                  src={`${image.image}`}
+                />
+              </Link>
+            )
+          )}
+
+        <div
+          className={`position-relative g-item grid-item7`}
+          onClick={scrollToMap}
+          style={{ cursor: "pointer", height: "150px" }}
+        >
           <Map address={props.project_address} />
         </div>
       </LightGallery>

@@ -339,8 +339,8 @@ export default async function Home({ params }) {
                     </div>
                   </div>
                 </div>
-                <div className=" my-5 pb-5">
-                  <h2 className="fw-bold fs-3 pb-3 font-family2 ">
+                <div className=" my-5 pb-5" id="project-map">
+                  <h2 className="fw-bold fs-3 pb-3 font-family2">
                     Project Location of {data.preconstruction.project_name}
                   </h2>
                   <div
@@ -348,6 +348,10 @@ export default async function Home({ params }) {
                     style={{ height: "400px", width: "100%" }}
                   >
                     <Map address={data.preconstruction.project_address} />
+                    <span className="text-xs">
+                      Note: The exact location of the project may vary from the
+                      address shown here
+                    </span>
                   </div>
                 </div>
                 <div className="py-3 my-5">
