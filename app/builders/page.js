@@ -4,18 +4,30 @@ import { notFound } from "next/navigation";
 import FixedContactButton from "@/components/FixedContactButton";
 
 async function getData() {
-  const res = await fetch(
-    "https://api.condomonk.ca/api/developers?page_size=800",
-    {
-      next: { revalidate: 10 },
-    }
-  );
+  try {
+    const res = await fetch(
+      "https://api.condomonk.ca/api/developers?page_size=800",
+      {
+        next: { revalidate: 10 },
+      }
+    );
 
-  if (!res.ok) {
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
+    const text = await res.text(); // Get response as text first
+    try {
+      return JSON.parse(text); // Then try to parse it
+    } catch (e) {
+      console.error("JSON Parse Error:", e);
+      console.error("Received data:", text);
+      throw new Error("Invalid JSON response");
+    }
+  } catch (error) {
+    console.error("Fetch error:", error);
     notFound();
   }
-
-  return res.json();
 }
 
 const CapitalizeFirst = (city) => {

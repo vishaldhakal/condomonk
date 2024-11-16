@@ -7,17 +7,30 @@ import PreconSchema from "@/components/PreconSchema";
 import FixedContactButton from "@/components/FixedContactButton";
 
 async function getData(developer) {
-  const res = await fetch(
-    "https://api.condomonk.ca/api/preconstructions-developer/" + developer,
-    {
-      next: { revalidate: 10 },
+  try {
+    const res = await fetch(
+      "https://api.condomonk.ca/api/preconstructions-developer/" + developer,
+      {
+        next: { revalidate: 10 },
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
     }
-  );
-  if (!res.ok) {
+
+    const text = await res.text();
+    try {
+      return JSON.parse(text);
+    } catch (e) {
+      console.error("JSON Parse Error:", e);
+      console.error("Received data:", text);
+      throw new Error("Invalid JSON response");
+    }
+  } catch (error) {
+    console.error("Fetch error:", error);
     notFound();
   }
-
-  return res.json();
 }
 
 const CapitalizeFirst = (city) => {
