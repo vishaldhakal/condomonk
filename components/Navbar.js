@@ -1,8 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-// import ProjectSearch from "./ProjectSearch";
-import SearchSuggest from "./SerachSuggest";
+import dynamic from "next/dynamic";
+// import SearchSuggest from "./SerachSuggest";
+
+const ProjectSearch = dynamic(() => import("./ProjectSearch"), {
+  loading: () => <div className="loading-spinner">Loading...</div>,
+  ssr: false,
+});
 
 const Navbar = ({ cities, transparent }) => {
   const [cityname, setCityname] = useState("");
@@ -49,8 +54,8 @@ const Navbar = ({ cities, transparent }) => {
               className="input-group input-group-search
              me-md-0"
             >
-              {/* <ProjectSearch /> */}
-              <SearchSuggest cities={cities} />
+              <ProjectSearch />
+              {/* <SearchSuggest cities={cities} /> */}
             </div>
             <button
               className={`navbar-toggler ${buttonClicked ? "bg-white" : ""}`}

@@ -588,7 +588,7 @@ a:hover {
         font-weight: 500 !important;
         box-shadow: none !important;
         color: #3e3e3e !important;
-        border: 1px solid #dfdfdf !important;
+
         background-color: #fff !important;
     }
 
@@ -2127,13 +2127,13 @@ textarea {
 }
 
 .fs-small {
-    font-size: .85rem !important;
+    font-size: .95rem !important;
     font-weight: 500 !important;
     padding: .2rem auto !important;
     margin-right: .2rem;
     box-shadow: none !important;
     color: #3e3e3e !important;
-    border: 1px solid #dfdfdf !important;
+
     background-color: #fff !important;
 }
 
@@ -2231,7 +2231,8 @@ textarea {
 }
 
 .fs-vvsmall {
-    font-size: .6rem !important;
+    font-size: .9rem !important;
+    line-height: normal;
 }
 
 .image-section {
@@ -2483,4 +2484,8 @@ textarea {
     visibility: hidden;
     position: absolute;
     transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.z-50 {
+    z-index: 50;
 }

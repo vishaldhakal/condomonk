@@ -23,7 +23,9 @@ async function getData(city, priceFilter = null) {
   }
 
   const res = await fetch(url, {
-    next: { revalidate: 10 },
+    next: {
+      revalidate: 3600, // Cache for 1 hour
+    },
   });
 
   if (!res.ok) {
