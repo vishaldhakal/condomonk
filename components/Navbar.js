@@ -14,6 +14,7 @@ const Navbar = ({ cities, transparent }) => {
   const [navbar, setNavbar] = useState(true);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [buttonClicked, setButtonClicked] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const changeBackground = () => {
     if (window.scrollY >= 80) {
@@ -32,9 +33,46 @@ const Navbar = ({ cities, transparent }) => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest(".dropdown-fullwidth")) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    // Import Bootstrap JavaScript
+    import("bootstrap/dist/js/bootstrap.bundle.min.js");
+  }, []);
+
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
     setButtonClicked(!buttonClicked);
+  };
+
+  const toggleDropdown = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Force close any open Bootstrap dropdowns
+    const dropdowns = document.querySelectorAll(".dropdown-menu.show");
+    dropdowns.forEach((dropdown) => {
+      dropdown.classList.remove("show");
+    });
+
+    // Toggle our dropdown
+    setIsDropdownOpen((prev) => !prev);
+  };
+
+  const handleCityClick = (e) => {
+    setIsDropdownOpen(false);
+    setIsCollapsed(false);
   };
 
   return (
@@ -75,20 +113,23 @@ const Navbar = ({ cities, transparent }) => {
             id="collapsibleNavId"
           >
             <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
-              <li className="nav-item dropdown mx-1">
+              <li className="nav-item dropdown dropdown-fullwidth mx-1">
                 <Link
-                  className="nav-link dropdown-toggle active fw-medium  rounded-2"
+                  className={`nav-link dropdown-toggle active fw-medium rounded-2 ${
+                    isDropdownOpen ? "show" : ""
+                  }`}
                   href="#"
-                  id="dropdownId"
-                  data-bs-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
+                  role="button"
+                  onClick={toggleDropdown}
+                  aria-expanded={isDropdownOpen}
                 >
                   Cities
                 </Link>
                 <div
-                  className="dropdown-menu mt-1"
-                  aria-labelledby="dropdownId"
+                  className={`dropdown-menu mt-1 ${
+                    isDropdownOpen ? "show" : ""
+                  }`}
+                  onClick={(e) => e.stopPropagation()}
                 >
                   <div className="container">
                     <div className="row row-cols-md-4 row-cols-2">
@@ -98,6 +139,7 @@ const Navbar = ({ cities, transparent }) => {
                             <Link
                               className="dropdown-item"
                               href={`/${city.slug}`}
+                              onClick={handleCityClick}
                             >
                               {city.name}
                             </Link>
