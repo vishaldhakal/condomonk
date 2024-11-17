@@ -13,7 +13,7 @@ async function getData() {
           Accept: "application/json",
           "Cache-Control": "no-cache",
         },
-        timeout: 15000, // 15 seconds timeout
+        timeout: 15000,
       }
     );
 
@@ -23,7 +23,7 @@ async function getData() {
     }
 
     const text = await res.text();
-    console.log("API Response:", text.substring(0, 200)); // Log first 200 chars for debugging
+    console.log("API Response:", text.substring(0, 200));
 
     try {
       const data = JSON.parse(text);
@@ -38,7 +38,7 @@ async function getData() {
     }
   } catch (error) {
     console.error("Fetch error:", error);
-    return { results: [], count: 0 }; // Return fallback data instead of notFound()
+    return { results: [], count: 0 };
   }
 }
 

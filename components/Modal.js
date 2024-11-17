@@ -36,13 +36,6 @@ export default function CustomModal({
           {(onClose) => (
             <>
               <div className="row  align-items-start">
-                {/* <div className="col-4">
-                        <img
-                          src="/contact-image.png"
-                          alt="contact image"
-                          className="agent-img"
-                        />
-                      </div> */}
                 <div className="text-center">
                   <h5 className="fw-bold text-center linem fs-4  mb-0 pt-3">
                     GET PLATINUM ACCESS!!
