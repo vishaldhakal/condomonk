@@ -16,6 +16,7 @@ import Tracker from "@/components/Tracker";
 const montserrat = Montserrat({ subsets: ["cyrillic"] });
 
 export const metadata = {
+  metadataBase: new URL("https://condomonk.ca"),
   alternates: {
     canonical: `https://condomonk.ca/`,
   },
