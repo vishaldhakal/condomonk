@@ -3,52 +3,90 @@ import BottomContactForm from "@/components/BottomContactForm";
 import { notFound } from "next/navigation";
 import FixedContactButton from "@/components/FixedContactButton";
 
+// Add a timeout promise
+const timeoutPromise = (ms) => {
+  return new Promise((_, reject) => {
+    setTimeout(() => reject(new Error(`Request timed out after ${ms}ms`)), ms);
+  });
+};
+
+// Add fallback data
+const FALLBACK_DATA = {
+  results: [],
+  count: 0,
+};
+
 async function getData() {
   try {
-    const res = await fetch(
-      "https://api.condomonk.ca/api/developers?page_size=800",
-      {
+    // Race between fetch and timeout
+    const response = await Promise.race([
+      fetch("https://api.condomonk.ca/api/developers?page_size=800", {
         next: { revalidate: 10 },
         headers: {
           Accept: "application/json",
+          "Content-Type": "application/json",
           "Cache-Control": "no-cache",
         },
-        timeout: 15000, // 15 seconds timeout
-      }
-    );
+      }),
+      timeoutPromise(15000),
+    ]);
 
-    if (!res.ok) {
-      console.error("API Response not OK:", res.status, res.statusText);
-      throw new Error(`HTTP error! status: ${res.status}`);
+    // Check if response is valid
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const text = await res.text();
-    console.log("API Response:", text.substring(0, 200)); // Log first 200 chars for debugging
-
+    // Get the response text
+    let text;
     try {
-      const data = JSON.parse(text);
-      if (!data || !data.results) {
-        throw new Error("Invalid data structure received");
+      text = await response.text();
+
+      // Check if text is empty or whitespace
+      if (!text || !text.trim()) {
+        console.error("Empty response received");
+        return FALLBACK_DATA;
       }
+
+      // Try to parse the JSON
+      const data = JSON.parse(text);
+
+      // Validate the data structure
+      if (!data || typeof data !== "object") {
+        throw new Error("Invalid data structure - not an object");
+      }
+
+      // Ensure results is an array
+      if (!Array.isArray(data.results)) {
+        data.results = [];
+      }
+
+      // Ensure count is a number
+      if (typeof data.count !== "number") {
+        data.count = data.results.length;
+      }
+
       return data;
-    } catch (e) {
-      console.error("JSON Parse Error:", e);
-      console.error("Raw response:", text);
-      throw new Error("Invalid JSON response");
+    } catch (parseError) {
+      console.error("JSON Parse Error:", parseError);
+      console.error(
+        "Raw response:",
+        text ? text.substring(0, 200) : "empty response"
+      );
+      return FALLBACK_DATA;
     }
   } catch (error) {
     console.error("Fetch error:", error);
-    return { results: [], count: 0 }; // Return fallback data instead of notFound()
+    return FALLBACK_DATA;
   }
 }
 
-const CapitalizeFirst = (city) => {
-  return city.charAt(0).toUpperCase() + city.slice(1);
-};
+// Add static generation hint
+export const revalidate = 3600; // Revalidate every hour
 
 export async function generateMetadata({ params }, parent) {
-  let city = "Calgary, Alberta";
   const data = await getData();
+  const builderCount = data.count || "many"; // Fallback if count is 0 or undefined
+
   return {
     ...parent,
     alternates: {
@@ -57,16 +95,21 @@ export async function generateMetadata({ params }, parent) {
     openGraph: {
       images: "/social/condomonk-builders.jpg",
     },
-    title: `Discover condomonk's Premier Selection of Over ${data.count}+ Preconstruction Home Builders`,
-    description: `From industry veteran builders to up-and-coming talent, condomonk's ${data.count}+ partnered builders offeryears of experience along with creative vision and attentive service.`,
+    title: `Discover condomonk's Premier Selection of Over ${builderCount}+ Preconstruction Home Builders`,
+    description: `From industry veteran builders to up-and-coming talent, condomonk's ${builderCount}+ partnered builders offer years of experience along with creative vision and attentive service.`,
   };
 }
 
 export default async function Builders() {
   const data = await getData();
+
+  // Ensure we have an array of results even if data fetch failed
+  const builders = Array.isArray(data.results) ? data.results : [];
+
   return (
     <>
-      <FixedContactButton></FixedContactButton>
+      <FixedContactButton />
+
       <div className="pt-4 position-relative">
         <div className="container-fluid">
           <div className="py-4 pt-5 text-center">
@@ -99,12 +142,11 @@ export default async function Builders() {
             <div className="col-md-2"></div>
             <div className="col-md-8">
               <div className="row row-cols-1 row-cols-md-4 row-cols-lg-4 gy-4 gx-3 gx-lg-3">
-                {data.results &&
-                  data.results.map((item) => (
-                    <div className="col" key={item.id}>
-                      <DeveloperCard {...item} />
-                    </div>
-                  ))}
+                {builders.map((item) => (
+                  <div className="col" key={item.id || Math.random()}>
+                    <DeveloperCard {...item} />
+                  </div>
+                ))}
               </div>
             </div>
             <div className="col-md-2"></div>
