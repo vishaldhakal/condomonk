@@ -66,7 +66,6 @@ const Navbar = ({ cities, transparent }) => {
       dropdown.classList.remove("show");
     });
 
-    // Toggle our dropdown
     setIsDropdownOpen((prev) => !prev);
   };
 
