@@ -9,36 +9,24 @@ async function getData() {
       "https://api.condomonk.ca/api/developers?page_size=800",
       {
         next: { revalidate: 10 },
-        headers: {
-          Accept: "application/json",
-          "Cache-Control": "no-cache",
-        },
-        timeout: 15000,
       }
     );
 
     if (!res.ok) {
-      console.error("API Response not OK:", res.status, res.statusText);
       throw new Error(`HTTP error! status: ${res.status}`);
     }
 
-    const text = await res.text();
-    console.log("API Response:", text.substring(0, 200));
-
+    const text = await res.text(); // Get response as text first
     try {
-      const data = JSON.parse(text);
-      if (!data || !data.results) {
-        throw new Error("Invalid data structure received");
-      }
-      return data;
+      return JSON.parse(text); // Then try to parse it
     } catch (e) {
       console.error("JSON Parse Error:", e);
-      console.error("Raw response:", text);
+      console.error("Received data:", text);
       throw new Error("Invalid JSON response");
     }
   } catch (error) {
     console.error("Fetch error:", error);
-    return { results: [], count: 0 };
+    notFound();
   }
 }
 

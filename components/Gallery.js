@@ -20,7 +20,7 @@ export default function Gallery(props) {
   };
 
   const newImages = (images) => {
-    let neImgs = images.slice(0, 6);
+    let neImgs = images.slice(0, 6); // Take only the first 6 images for desktop view
     neImgs.forEach((image) => {
       if (!image.image.startsWith("https://api.condomonk.ca")) {
         image.image = "https://api.condomonk.ca" + image.image;
@@ -37,9 +37,9 @@ export default function Gallery(props) {
 
   const scrollToMap = (e) => {
     e.preventDefault();
-    e.stopPropagation();
+    e.stopPropagation(); // Prevent LightGallery from opening
     if (lightGalleryInstance) {
-      lightGalleryInstance.closeGallery();
+      lightGalleryInstance.closeGallery(); // Close LightGallery if open
     }
     const mapElement = document.getElementById("project-map");
     if (mapElement) {
@@ -52,23 +52,28 @@ export default function Gallery(props) {
       <LightGallery onInit={onInit} speed={500} plugins={[lgThumbnail, lgZoom]}>
         {newImages(props.images)
           .slice(0, 6)
-          .map((image, no) => (
-            <Link
-              href={`${image.image}`}
-              className={`position-relative g-item grid-item${parseInt(
-                no + 1
-              )}`}
-              key={no}
-            >
-              <img
-                alt={`${props.project_name} located at ${
-                  props.project_address
-                } image ${no + 1}`}
-                className="img-fluid w-100 h-100 rounded-mine2 lazy"
-                src={`${image.image}`}
-              />
-            </Link>
-          ))}
+          .map(
+            (
+              image,
+              no // Show only 5 images for mobile view
+            ) => (
+              <Link
+                href={`${image.image}`}
+                className={`position-relative g-item grid-item${parseInt(
+                  no + 1
+                )}`}
+                key={no}
+              >
+                <img
+                  alt={`${props.project_name} located at ${
+                    props.project_address
+                  } image ${no + 1}`}
+                  className="img-fluid w-100 h-100 rounded-mine2 lazy"
+                  src={`${image.image}`}
+                />
+              </Link>
+            )
+          )}
 
         <div
           className={`position-relative g-item grid-item7`}
