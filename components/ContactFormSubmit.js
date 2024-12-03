@@ -25,7 +25,11 @@ function ContactFormSubmit(msgdata, setSubmitbtn, setCredentials) {
       lastName: msgdata.name.split(" ").slice(1).join(" "),
       emails: [{ value: msgdata.email }],
       phones: [{ value: msgdata.phone }],
-      tags: [msgdata.city, msgdata.proj_name],
+      tags: [
+        msgdata.city,
+        msgdata.proj_name,
+        msgdata.realtor == "Yes" ? "Agent" : "",
+      ],
     },
     source: "condomonk.ca",
     system: "Custom Website",
