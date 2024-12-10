@@ -197,16 +197,11 @@ export default async function Home({ params }) {
                   ></BottomContactForm>
                   <div className="d-flex text-center">
                     <p className="small-text2 mb-3 text-center">
-                      Condomonk.ca serves as an online database for
-                      pre-construction homes. Condomonk compiles a list of
-                      projects available publicly on the internet and does not
-                      engage in real estate transactions. Please note that the
-                      information provided on this page may be outdated or
-                      inaccurate. By submitting the above form, you consent to
-                      being contacted by real estate agents advertising on this
-                      page. Your information may be shared with our partners or
-                      advertisers to assist with your inquiries. You can
-                      unsubscribe at any time by emailing us.
+                      I agree to receive marketing and customer service calls
+                      and text messages from Homebaba Technologies. Consent is
+                      not a condition of purchase. Msg/data rates may apply. Msg
+                      frequency varies. Reply STOP to unsubscribe. Privacy
+                      Policy & Terms of Service.
                     </p>
                   </div>
                 </div>
