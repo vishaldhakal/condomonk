@@ -56,12 +56,16 @@ export default function ExpandableContent({ content, maxHeight = 500 }) {
         )}
       </div>
       {shouldShowButton && (
-        <button
-          onClick={toggleExpand}
-          className="mt-2 text-blue-600 hover:text-blue-800 focus:outline-none transition-colors duration-300 ease-in-out font-bold"
-        >
-          {isExpanded ? "Read Less →" : "Read More →"}
-        </button>
+        <div className="flex items-center gap-4 mt-4">
+          <div className="flex-1 h-px bg-gray-200"></div>
+          <button
+            onClick={toggleExpand}
+            className="text-blue-600 hover:text-blue-800 focus:outline-none transition-colors duration-300 ease-in-out font-bold whitespace-nowrap text-sm"
+          >
+            {isExpanded ? "Read Less ↑" : "Read More ↓"}
+          </button>
+          <div className="flex-1 h-px bg-gray-200"></div>
+        </div>
       )}
     </div>
   );
