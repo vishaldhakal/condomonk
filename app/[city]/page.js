@@ -199,11 +199,11 @@ export default async function Home({ params }) {
                 {priceFilter ? (
                   `New Pre construction Homes in ${CapitalizeFirst(
                     cleanCity
-                  )} ${formatPriceFilter(priceFilter)} (2024) `
+                  )} ${formatPriceFilter(priceFilter)} (2025) `
                 ) : (
                   <>
                     New Pre Construction Homes in {CapitalizeFirst(cleanCity)}{" "}
-                    <span className=""> ( 2024 )</span>
+                    <span className=""> ( 2025 )</span>
                   </>
                 )}
               </h1>

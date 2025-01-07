@@ -51,7 +51,7 @@ export default async function Home({ params }) {
           <div className="d-flex ">
             <div className="">
               <h1 className="main-title2  font-family2 pb-2 pb-md-0">
-                New homes in {CapitalizeFirst(params.city)} ( 2024 )
+                New homes in {CapitalizeFirst(params.city)} ( 2025 )
               </h1>
             </div>
             <div className="pt-3">

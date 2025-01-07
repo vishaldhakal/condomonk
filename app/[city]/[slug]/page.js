@@ -528,7 +528,7 @@ export default async function Home({ params }) {
                     in {data.preconstruction.city.name}
                   </span>
                 </div>
-                ( 2024 )
+                ( 2025 )
               </h2>
             </div>
             <div className="py-2"></div>
