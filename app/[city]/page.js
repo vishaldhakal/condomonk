@@ -3,6 +3,7 @@ import BottomContactForm from "@/components/BottomContactForm";
 import { notFound } from "next/navigation";
 import PreconSchema from "@/components/PreconSchema";
 import Link from "next/link";
+import Newsletter from "@/components/Newsletter";
 
 async function getData(city, priceFilter = null) {
   let url = `https://api.condomonk.ca/api/preconstructions-city/${city}`;
@@ -393,90 +394,7 @@ export default async function Home({ params }) {
           </div>
           <div className="pt-5 mt-5"></div>
           <div className="pt-5 mt-5"></div>
-          <div className="py-5 my-5" id="contact">
-            <div className="container">
-              {/* <div className="row justify-content-center">
-                <img
-                  src="/contact-bottom-2.png"
-                  alt="dce"
-                  className="img-fluid w-25 w-smm-50 mb-3"
-                />
-              </div> */}
-              <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3"></h2>
-
-              <div className="row row-cols-1 row-cols-md-3 mt-5">
-                <div className="col-md-3"></div>
-                <div className="col-md-6" id="contact">
-                  <div className="d-flex gap-5 justify-content-center align-items-center pb-4">
-                    <div className="text-center">
-                      {data.partner[0] && (
-                        <img
-                          src={`https://api.condomonk.ca${data.partner[0].image}`}
-                          alt="dce"
-                          className="partner-img"
-                        />
-                      )}
-                      {!data.partner[0] && (
-                        <img
-                          src="/contact-bottom-2.png"
-                          alt="dce"
-                          className="partner-img "
-                        />
-                      )}
-                    </div>
-                    <div className="text-center">
-                      <h5 className="fw-bold  fs-5 ">
-                        {data.partner[0] &&
-                          data.partner[0].partner_type != "Brokerage" && (
-                            <>{data.partner[0].name}</>
-                          )}
-
-                        {!data.partner[0] && "Receive a Call"}
-                      </h5>
-
-                      <span className="mt-5 fs-6 text-center">
-                        {data.partner[0] && data.partner[0].brokerage_name}
-                      </span>
-
-                      <p
-                        className="mb-0 bva2  mt-1 text-xs d-flex justify-content-center"
-                        data-tip
-                        data-for="registerTip"
-                      >
-                        Condomonk Verified Partner
-                        <span>
-                          <sup>
-                            <img
-                              src="/cc.png"
-                              alt="verfied"
-                              className="img-fluid small-i ms-1"
-                            />
-                          </sup>
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                  <BottomContactForm
-                    proj_name="City Page"
-                    city={data.city.name}
-                  ></BottomContactForm>
-
-                  <div className="d-flex text-center">
-                    <p className="small-text2 mb-3 text-center">
-                      I agree to receive marketing and customer service calls
-                      and text messages from Homebaba Technologies. Consent is
-                      not a condition of purchase. Msg/data rates may apply. Msg
-                      frequency varies. Reply STOP to unsubscribe. Privacy
-                      Policy & Terms of Service.
-                    </p>
-                  </div>
-                </div>
-                <div className="col-md-3"></div>
-              </div>
-            </div>
-          </div>
-          <div className="pt-5 mt-5"></div>
-          <div className="pt-5 mt-5"></div>
+          <Newsletter />
           {getSEOParagraph(cleanCity, priceFilter) && (
             <div className="row justify-content-start mb-5">
               <div className="col-md-12">

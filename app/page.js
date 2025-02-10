@@ -6,6 +6,7 @@ import BottomContactForm from "@/components/BottomContactForm";
 import MainSearch from "@/components/MainSearch";
 import "./icons.css";
 import FeaturedCard from "@/components/FeaturedCard";
+import Newsletter from "@/components/Newsletter";
 
 async function getData(city) {
   const res = await fetch(
@@ -561,6 +562,9 @@ export default async function Home(props) {
           </div> */}
 
           <div className="pt-md-5 pt-0 mt-md-5 mt-0"></div>
+          <div className="pt-5 mt-5"></div>
+          <div className="pt-5 mt-5"></div>
+          <Newsletter />
           <div className="py-5 my-md-5 my-0" id="contact">
             <div className="container">
               <div className="row justify-content-center">

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import PreconSchema from "@/components/PreconSchema";
 import FixedContactButton from "@/components/FixedContactButton";
+import Newsletter from "@/components/Newsletter";
 
 import Link from "next/link";
 
@@ -150,6 +151,7 @@ export default async function Home({ params }) {
           </div>
           <div className="pt-5 mt-5"></div>
           <div className="pt-5 mt-5"></div>
+          <Newsletter />
           <div className="py-5 my-5" id="contact">
             <div className="container">
               <div className="row justify-content-center">
