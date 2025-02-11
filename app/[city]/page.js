@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import PreconSchema from "@/components/PreconSchema";
 import Link from "next/link";
 import Newsletter from "@/components/Newsletter";
+import Image from "next/legacy/image";
 
 async function getData(city, priceFilter = null) {
   let url = `https://api.condomonk.ca/api/preconstructions-city/${city}`;
@@ -391,6 +392,42 @@ export default async function Home({ params }) {
                   <CondoCard {...item} no={no} />
                 </div>
               ))}
+          </div>
+          <div className="py-5 my-md-5 my-0" id="contact">
+            <div className="container">
+              <div className="row justify-content-center">
+                <Image
+                  src="/contact-bottom-2.png"
+                  alt="Contact bottom"
+                  width={300}
+                  height={250}
+                  className="img-fluid w-25 w-smm-50 mb-3"
+                />
+              </div>
+              <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3 ">
+                Looking to buy a preconstruction home ?
+              </h2>
+
+              <div className="row row-cols-1 row-cols-md-3 mt-5">
+                <div className="col-md-2"></div>
+                <div className="col-md-8">
+                  <BottomContactForm
+                    proj_name="All"
+                    city="Home Page"
+                  ></BottomContactForm>
+                  <div className="d-flex">
+                    <p className="small-text2 mb-3 text-center">
+                      I agree to receive marketing and customer service calls
+                      and text messages from Homebaba Technologies. Consent is
+                      not a condition of purchase. Msg/data rates may apply. Msg
+                      frequency varies. Reply STOP to unsubscribe. Privacy
+                      Policy & Terms of Service.
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-2"></div>
+              </div>
+            </div>
           </div>
           <div className="pt-5 mt-5"></div>
           <div className="pt-5 mt-5"></div>
