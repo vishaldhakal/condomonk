@@ -10,13 +10,14 @@ export default function BookingForm({
   transactionType,
 }) {
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     phone: "",
     date: "",
-    time: "",
-    message: "",
+    isVeteran: false,
   });
+
+  const [selectedDate, setSelectedDate] = useState("Feb 11"); // Default date
+  const dates = ["Feb 11", "Feb 12", "Feb 13", "Feb 14"]; // Example dates
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,30 +26,36 @@ export default function BookingForm({
   };
 
   return (
-    <div>
-      <h3 className="text-xl font-bold mb-4">Schedule a Viewing</h3>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Name
-          </label>
-          <input
-            type="text"
-            required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          />
-        </div>
+    <div className="bg-white rounded-lg shadow-lg p-6 sticky top-24">
+      <h2 className="text-2xl font-bold mb-4">Schedule tour</h2>
+      <p className="text-gray-600 mb-6">Tour with a local buyer's agent</p>
 
+      {/* Date Selection */}
+      <div className="flex gap-2 mb-2 overflow-x-auto">
+        {dates.map((date, index) => (
+          <button
+            key={date}
+            onClick={() => setSelectedDate(date)}
+            className={`flex-shrink-0 p-4 rounded-lg border ${
+              selectedDate === date
+                ? "bg-black text-white"
+                : "bg-white text-black"
+            } ${index === dates.length - 1 ? "" : ""}`}
+          >
+            <div className="text-sm">{date.split(" ")[0]}</div>
+            <div className="font-bold">{date.split(" ")[1]}</div>
+          </button>
+        ))}
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Email Input */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Email
-          </label>
           <input
             type="email"
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            placeholder="Email*"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={formData.email}
             onChange={(e) =>
               setFormData({ ...formData, email: e.target.value })
@@ -56,14 +63,13 @@ export default function BookingForm({
           />
         </div>
 
+        {/* Phone Input */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Phone
-          </label>
           <input
             type="tel"
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            placeholder="Phone*"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={formData.phone}
             onChange={(e) =>
               setFormData({ ...formData, phone: e.target.value })
@@ -71,58 +77,52 @@ export default function BookingForm({
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Date
-            </label>
-            <input
-              type="date"
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md"
-              value={formData.date}
-              onChange={(e) =>
-                setFormData({ ...formData, date: e.target.value })
-              }
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Time
-            </label>
-            <input
-              type="time"
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md"
-              value={formData.time}
-              onChange={(e) =>
-                setFormData({ ...formData, time: e.target.value })
-              }
-            />
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Message
-          </label>
-          <textarea
-            rows={3}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-            value={formData.message}
+        {/* Veteran Checkbox */}
+        <div className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            id="veteran"
+            className="w-4 h-4 rounded border-gray-300"
+            checked={formData.isVeteran}
             onChange={(e) =>
-              setFormData({ ...formData, message: e.target.value })
+              setFormData({ ...formData, isVeteran: e.target.checked })
             }
           />
+          <label htmlFor="veteran" className="flex items-center gap-1">
+            I've served in the U.S. military
+            <span className="text-gray-500">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                className="w-4 h-4"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 16v-4M12 8h.01" />
+              </svg>
+            </span>
+          </label>
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-primary text-white py-3 rounded-md hover:bg-primary/90 transition-colors"
+          className="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition-colors"
         >
-          Schedule Viewing
+          Request tour
         </button>
       </form>
+
+      {/* Terms Text */}
+      <p className="mt-4 text-xs text-gray-500 leading-relaxed">
+        By proceeding, you consent to receive calls and texts at the number you
+        provided, including marketing by autodialer and prerecorded and
+        artificial voice, and email, from realtor.com and{" "}
+        <button className="text-gray-700 underline">others</button> about your
+        inquiry and other home-related matters.{" "}
+        <button className="text-gray-700 underline">More...</button>
+      </p>
     </div>
   );
 }

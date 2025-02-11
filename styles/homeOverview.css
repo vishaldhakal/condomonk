@@ -1,0 +1,32 @@
+.collapse-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+#collapse-toggle:checked~.collapse-content {
+    max-height: 3000px;
+}
+
+.collapse-less {
+    display: none;
+}
+
+#collapse-toggle:checked~label .collapse-more {
+    display: none;
+}
+
+#collapse-toggle:checked~label .collapse-less {
+    display: inline;
+}
+
+/* Fix for mobile responsiveness */
+.grid {
+    flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+    .grid {
+        flex-wrap: nowrap;
+    }
+}

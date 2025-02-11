@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import TimeAgo from "@/components/TimeAgo";
 
 const NO_IMAGE_URL = "/noimage.webp";
 
@@ -85,7 +86,7 @@ export default function PropertyCard({ property }) {
                   )}
                 </h2>
                 <div className="text-xs font-medium text-black mb-1 sm:mb-0">
-                  {timeAgo}
+                  <TimeAgo timestamp={property.ModificationTimestamp} />
                 </div>
               </div>
 
