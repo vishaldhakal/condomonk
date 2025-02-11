@@ -141,6 +141,71 @@ const Footer = ({ cities }) => {
           </div>
         </div>
 
+        {/* footer description */}
+        <div className="container my-5 ">
+          <div className="row d-flex justify-center items-center max-w-7xl mx-auto">
+            <div className="col-12 mb-4 ">
+              <p className="small text-muted max-w-2xl text-center mx-auto ">
+                Condomonk refers potential buyers to real estate agents that are
+                licensed in the province where the respective property is
+                located. DOLPHIN REALTY INC. is licensed as a real estate
+                brokerage in Ontario. Dolphin Realty is a boutique real estate
+                firm that empowers clients and agents to achieve success in real
+                estate. With state-of-the-art technology, professionalism, and
+                strong culture, Dolphin Realty aims to become your most trusted
+                real estate partner. Founded in January 1, 2022, Dolphin has
+                completed over 500 million in transaction volume by 2023.
+              </p>
+            </div>
+            <div className="col-md-6 text-center">
+              <div className="flex justify-center pb-3">
+                <img
+                  src="/trebb.png"
+                  alt="Toronto Regional Real Estate Board"
+                  className="h-6 text-center"
+                />
+              </div>
+              <p className="small text-muted text-center">
+                The listing data is provided under copyright by the Toronto
+                Regional Real Estate Board (TRREB). The information provided
+                herein must only be used by consumers that have a bona fide
+                interest in the purchase, sale or lease of real estate and may
+                not be used for any commercial purpose or any other purpose. The
+                data is deemed reliable but is not guaranteed accurate by the
+                Toronto Regional Real Estate Board nor Homebaba INC. The
+                information provided on this page, including the Affordability,
+                Afford Score™, and Affordability Coach, are provided for
+                informational purposes only and should not be used or construed
+                as financial or investment advice by any individual. No
+                representations or warranties, express or implied, are made by
+                Homebaba INC or its affiliates as to the accuracy or
+                completeness of the information on this page. Last Updated: Tue,
+                11 Feb 2025 15:08:48 GMT UTC
+              </p>
+            </div>
+            <div className="col-md-6">
+              <div className="flex justify-center">
+                <img
+                  src="/crea.png"
+                  alt="MLS Logo"
+                  className="h-6 text-center"
+                />
+              </div>
+              <p className="small text-muted mt-3">
+                The REALTOR® trademark is controlled by The Canadian Real Estate
+                Association (CREA) and identifies real estate professionals who
+                are members of CREA. The trademarks MLS®, Multiple Listing
+                Service® and the associated logos identify professional services
+                rendered by REALTOR® members of CREA to effect the purchase,
+                sale and lease of real estate as part of a cooperative selling
+                system. The listing data displayed is deemed reliable but is not
+                guaranteed accurate by CREA®. Data last updated on Tue, 11 Feb
+                2025 15:08:48 GMT UTC
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div className="container copyright text-start text-center py-5">
           <p className="mb-0">
             ©2025 <span>Copyright</span>{" "}

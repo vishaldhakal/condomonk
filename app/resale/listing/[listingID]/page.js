@@ -104,7 +104,7 @@ export default async function PropertyDetailPage({ params }) {
           {/* Main Content */}
           <div className="md:col-span-2 space-y-8">
             {/* Property Header */}
-            <div className="mb-6">
+            <div className="pb-8">
               {/* Status and Type */}
               <div className="flex items-center gap-2 mb-2">
                 <span className="inline-flex items-center gap-1">
@@ -119,11 +119,9 @@ export default async function PropertyDetailPage({ params }) {
               <h1 className="text-4xl font-bold mb-2">
                 ${property.ListPrice.toLocaleString()}
               </h1>
-              {/* Listed By */}
 
-              <div className=" pb-4">
-                <div className="">Listed by{property.ListOfficeName}</div>
-                <div className="">MLS-{property.ListingKey}</div>
+              <div className=" pb-2">
+                <div className="">MLS - #{property.ListingKey}</div>
               </div>
 
               {/* Key Details */}
@@ -252,21 +250,28 @@ export default async function PropertyDetailPage({ params }) {
             </div>
             {/* Description */}
             <div>
-              <h2 className="text-2xl font-bold mb-4">About this property</h2>
+              <h2 className="text-3xl font-bold mb-4">About this property</h2>
               <p className="text-gray-600 whitespace-pre-wrap">
                 {property.PublicRemarks}
               </p>
             </div>
 
             <HomeOverview property={property} />
+            <div className="mt-0 text-sm">
+              Listed by {property.ListOfficeName}
+            </div>
 
             {/* Features */}
             <div>
-              <h2 className="text-2xl font-bold mb-4">Property Features</h2>
+              <h2 className="text-3xl font-bold mb-4 pt-8">
+                Property Features
+              </h2>
               <div className="grid md:grid-cols-2 gap-6">
                 {property.InteriorFeatures?.length > 0 && (
                   <div>
-                    <h3 className="font-bold mb-2">Interior Features</h3>
+                    <h3 className="font-bold mb-2 text-xl">
+                      Interior Features
+                    </h3>
                     <ul className="list-disc list-inside space-y-1">
                       {property.InteriorFeatures.map((feature, index) => (
                         <li key={index} className="text-gray-600">
@@ -278,7 +283,9 @@ export default async function PropertyDetailPage({ params }) {
                 )}
                 {property.ExteriorFeatures?.length > 0 && (
                   <div>
-                    <h3 className="font-bold mb-2">Exterior Features</h3>
+                    <h3 className="font-bold mb-2 text-xl">
+                      Exterior Features
+                    </h3>
                     <ul className="list-disc list-inside space-y-1">
                       {property.ExteriorFeatures.map((feature, index) => (
                         <li key={index} className="text-gray-600">
@@ -292,8 +299,8 @@ export default async function PropertyDetailPage({ params }) {
             </div>
 
             {/* Additional Details */}
-            <div>
-              <h2 className="text-2xl font-bold mb-4">Additional Details</h2>
+            <div className="pt-3">
+              <h2 className="text-3xl font-bold mb-4">Additional Details</h2>
               <div className="grid md:grid-cols-2 gap-x-8 gap-y-4">
                 {property.Basement && (
                   <div>
@@ -328,7 +335,7 @@ export default async function PropertyDetailPage({ params }) {
               </div>
             </div>
 
-            <div className="mt-12 col-12 md:mt-24 md:col-12">
+            <div className="mt-12 col-12 md:pt-24 md:col-12">
               <CompactMortgageCalculator
                 price={property?.ListPrice}
                 showDetails={false}
