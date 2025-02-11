@@ -5,6 +5,18 @@ import PropertyGallery from "@/components/PropertyGallery";
 import Link from "next/link";
 import HomeOverview from "@/components/HomeOverview";
 import CompactMortgageCalculator from "@/components/CompactMortgageCalculator";
+import {
+  ListingAnalytics,
+  CommercialAnalytics,
+  LeaseAnalytics,
+} from "@/components/Analytics";
+import {
+  getListingAnalytics,
+  getCommercialAnalytics,
+  getLeaseAnalytics,
+} from "@/lib/analytics";
+import MarketComparisonChart from "@/components/MarketComparisonChart";
+import { formatPrice } from "@/utils/formatting";
 
 export default async function PropertyDetailPage({ params }) {
   try {
@@ -12,6 +24,26 @@ export default async function PropertyDetailPage({ params }) {
 
     if (!property) {
       notFound();
+    }
+
+    // Determine which analytics to fetch based on property type and transaction type
+    let analyticsData = null;
+
+    if (property.PropertyType === "Commercial") {
+      analyticsData = await getCommercialAnalytics({
+        listing: property,
+        city: property.City,
+      });
+    } else if (property.TransactionType === "For Lease") {
+      analyticsData = await getLeaseAnalytics({
+        listing: property,
+        city: property.City,
+      });
+    } else {
+      analyticsData = await getListingAnalytics({
+        listing: property,
+        city: property.City,
+      });
     }
 
     const totalBathrooms =
@@ -248,6 +280,105 @@ export default async function PropertyDetailPage({ params }) {
                 </div>
               </div>
             </div>
+            {/* Render appropriate analytics component based on property type */}
+            {property.PropertyType === "Commercial" ? (
+              <CommercialAnalytics analyticsData={analyticsData} />
+            ) : property.TransactionType === "For Lease" ? (
+              <LeaseAnalytics analyticsData={analyticsData} />
+            ) : (
+              <ListingAnalytics analyticsData={analyticsData} />
+            )}
+            {/* Market Analytics */}
+            <div className="bg-white rounded-lg border border-gray-100 p-6 space-y-6">
+              <h2 className="text-2xl font-bold">Market Analysis</h2>
+
+              {/* Summary Stats */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
+                  <div className="text-sm text-blue-800 font-medium">
+                    Similar Homes Found
+                  </div>
+                  <div className="text-2xl font-bold text-blue-900 mt-1">
+                    {analyticsData?.totalSimilar || 0}
+                  </div>
+                  <div className="text-xs text-blue-700 mt-1">
+                    {property.PropertySubType} homes with{" "}
+                    {property.BedroomsTotal} beds,{" "}
+                    {property.BathroomsTotalInteger} baths in {property.City}
+                  </div>
+                </div>
+
+                <div className="p-6 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-xl">
+                  <div className="text-sm text-emerald-800 font-medium">
+                    Average Price
+                  </div>
+                  <div className="text-2xl font-bold text-emerald-900 mt-1">
+                    ${formatPrice(analyticsData?.avgPrice || 0)}
+                  </div>
+                  <div className="text-xs text-emerald-700 mt-1">
+                    Similar homes in {property.City}
+                  </div>
+                </div>
+
+                <div className="p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
+                  <div className="text-sm text-gray-800 font-medium">
+                    Price Difference
+                  </div>
+                  <div
+                    className={`text-2xl font-bold mt-1 ${
+                      property.ListPrice > (analyticsData?.avgPrice || 0)
+                        ? "text-red-600"
+                        : "text-emerald-600"
+                    }`}
+                  >
+                    {(
+                      ((property.ListPrice - (analyticsData?.avgPrice || 0)) /
+                        (analyticsData?.avgPrice || 1)) *
+                      100
+                    ).toFixed(1)}
+                    %
+                  </div>
+                  <div className="text-xs text-gray-700 mt-1">
+                    {property.ListPrice > (analyticsData?.avgPrice || 0)
+                      ? "Higher than average"
+                      : "Lower than average"}
+                  </div>
+                </div>
+              </div>
+
+              {/* Market Comparison Chart */}
+              <div className="mt-8">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                  Price Comparison
+                </h3>
+                <div className="bg-white rounded-lg">
+                  <MarketComparisonChart
+                    currentPrice={property.ListPrice}
+                    comparisons={[
+                      {
+                        name: `Similar Homes in ${property.City}`,
+                        description: `${analyticsData?.totalSimilar} homes with ${property.BedroomsTotal} beds, ${property.BathroomsTotalInteger} baths`,
+                        price: analyticsData?.avgPrice || 0,
+                      },
+                      {
+                        name: `${property.BedroomsTotal} Bed Homes`,
+                        description: `Average of ${
+                          analyticsData?.bedroomCount || 0
+                        } homes`,
+                        price: analyticsData?.avgPriceBedrooms || 0,
+                      },
+                      {
+                        name: property.PropertyType,
+                        description: `Average of ${
+                          analyticsData?.propertyTypeCount || 0
+                        } homes in ${property.City}`,
+                        price: analyticsData?.avgPriceType || 0,
+                      },
+                    ]}
+                  />
+                </div>
+              </div>
+            </div>
             {/* Description */}
             <div>
               <h2 className="text-3xl font-bold mb-4">About this property</h2>
@@ -255,12 +386,10 @@ export default async function PropertyDetailPage({ params }) {
                 {property.PublicRemarks}
               </p>
             </div>
-
             <HomeOverview property={property} />
             <div className="mt-0 text-sm">
               Listed by {property.ListOfficeName}
             </div>
-
             {/* Features */}
             <div>
               <h2 className="text-3xl font-bold mb-4 pt-8">
@@ -297,7 +426,6 @@ export default async function PropertyDetailPage({ params }) {
                 )}
               </div>
             </div>
-
             {/* Additional Details */}
             <div className="pt-3">
               <h2 className="text-3xl font-bold mb-4">Additional Details</h2>
@@ -334,7 +462,6 @@ export default async function PropertyDetailPage({ params }) {
                 )}
               </div>
             </div>
-
             <div className="mt-12 col-12 md:pt-24 md:col-12">
               <CompactMortgageCalculator
                 price={property?.ListPrice}
