@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import TimeAgo from "@/components/TimeAgo";
+import TimeAgo from "@/helper/timeAgo";
 
 const NO_IMAGE_URL = "/noimage.webp";
 

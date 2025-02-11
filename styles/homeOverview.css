@@ -5,7 +5,8 @@
 }
 
 #collapse-toggle:checked~.collapse-content {
-    max-height: 3000px;
+    max-height: 2000px;
+    transition: max-height 0.5s ease-in;
 }
 
 .collapse-less {
