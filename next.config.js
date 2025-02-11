@@ -7,6 +7,6 @@ const nextConfig = {
 
 module.exports = {
   images: {
-    domains: ["api.condomonk.ca"],
+    domains: ["api.condomonk.ca", "trreb-image.ampre.ca"],
   },
 };

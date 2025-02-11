@@ -62,7 +62,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className={montserrat.className}>
         <NextTopLoader
-          color="#FF0000"
+          color="black"
           initialPosition={0.08}
           crawlSpeed={200}
           height={3}
