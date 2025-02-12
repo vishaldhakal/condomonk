@@ -78,7 +78,7 @@ export default function FilterBar({ currentFilters }) {
     : "";
 
   const getFilterUrl = (newFilter) => {
-    const base = `${baseUrl}${cityPath}`;
+    const base = baseUrl;
     let filters = { ...currentFilters };
 
     // Apply new filters while maintaining others
@@ -90,34 +90,25 @@ export default function FilterBar({ currentFilters }) {
       }
     });
 
-    // Ensure city is maintained from the current URL
-    if (cityPath) {
-      filters.city = currentFilters.city;
-    }
-
     // Build URL parts in a specific order
     let urlPath = "";
 
-    // 1. Start with base path (homes or property type)
+    // If we have a city, it should be the first part of the path
+    if (filters.city && filters.city !== "Ontario") {
+      urlPath = filters.city.toLowerCase().replace(/ /g, "-") + "/";
+    }
+
+    // Add property type or 'homes'
     if (filters.propertyType) {
-      // Find the property type path
       const propertyPath = propertyTypes.find(
         (p) => p.label === filters.propertyType
       )?.path;
-      // Only use the property path if it exists
-      urlPath = propertyPath || "homes";
-    } else if (currentFilters.propertyType && !newFilter.propertyType) {
-      // If we're not explicitly clearing property type, maintain the current one
-      const propertyPath = propertyTypes.find(
-        (p) => p.label === currentFilters.propertyType
-      )?.path;
-      urlPath = propertyPath || "homes";
-      filters.propertyType = currentFilters.propertyType;
+      urlPath += propertyPath || "homes";
     } else {
-      urlPath = "homes";
+      urlPath += "homes";
     }
 
-    // 2. Add price range if present
+    // Add price range if present
     if (filters.maxPrice && !filters.minPrice) {
       urlPath += `-under-${(filters.maxPrice / 1000).toFixed(0)}k`;
     } else if (filters.minPrice && !filters.maxPrice) {
@@ -128,12 +119,12 @@ export default function FilterBar({ currentFilters }) {
       ).toFixed(0)}k`;
     }
 
-    // 3. Add transaction type
+    // Add transaction type
     urlPath += `-for-${
       filters.transactionType === "For Lease" ? "lease" : "sale"
     }`;
 
-    // 4. Add beds and baths as additional path segments
+    // Add beds and baths as additional path segments only if they exist
     const specParts = [];
     if (filters.minBeds) {
       specParts.push(`${filters.minBeds}-plus-bed`);
@@ -159,10 +150,7 @@ export default function FilterBar({ currentFilters }) {
 
   // Update the "All" selection handlers
   const handleAllProperties = () => {
-    // When selecting "All Properties", ensure we use "homes" as base
     const { propertyType, ...restFilters } = currentFilters;
-
-    // Build URL parts in a specific order
     let urlPath = "homes";
 
     // Add price range if present
@@ -176,15 +164,12 @@ export default function FilterBar({ currentFilters }) {
       ).toFixed(0)}k`;
     }
 
-    // Add transaction type
     urlPath += `-for-${
       restFilters.transactionType === "For Lease" ? "lease" : "sale"
     }`;
 
-    // Build base URL with main filters
     let finalUrl = `${baseUrl}${cityPath}/${urlPath}`;
 
-    // Add beds and baths as additional segments if present
     const specParts = [];
     if (restFilters.minBeds) {
       specParts.push(`${restFilters.minBeds}-plus-bed`);
@@ -202,12 +187,12 @@ export default function FilterBar({ currentFilters }) {
 
   const handleAnyBeds = () => {
     const { minBeds, ...restFilters } = currentFilters;
-    return getFilterUrl(restFilters);
+    return getFilterUrl({ minBeds: null });
   };
 
   const handleAnyBaths = () => {
     const { minBaths, ...restFilters } = currentFilters;
-    return getFilterUrl(restFilters);
+    return getFilterUrl({ minBaths: null });
   };
 
   const handleAnyPrice = () => {
@@ -251,7 +236,7 @@ export default function FilterBar({ currentFilters }) {
   };
 
   return (
-    <div className="space-y-4 pt-2 pb-1">
+    <div className="space-y-4">
       <div className="flex items-center gap-4">
         {/* City Search */}
         <div>
@@ -268,7 +253,7 @@ export default function FilterBar({ currentFilters }) {
                 <Search className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="p-0 w-[300px] z-20" align="start">
+            <DropdownMenuContent className="p-0 w-[300px]" align="start">
               <Command>
                 <CommandInput
                   placeholder="Search cities..."
