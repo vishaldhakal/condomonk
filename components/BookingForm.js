@@ -10,8 +10,10 @@ export default function BookingForm({
   transactionType,
 }) {
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     phone: "",
+    description: "",
     date: "",
     isVeteran: false,
   });
@@ -27,16 +29,16 @@ export default function BookingForm({
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 sticky top-24">
-      <h2 className="text-2xl font-bold mb-4">Schedule tour</h2>
+      <h2 className="text-2xl font-bold mb-0">Schedule tour</h2>
       <p className="text-gray-600 mb-6">Tour with a local buyer's agent</p>
 
       {/* Date Selection */}
-      <div className="flex gap-2 mb-2 overflow-x-auto">
+      <div className="flex gap-2 mb-2 overflow-x-auto ">
         {dates.map((date, index) => (
           <button
             key={date}
             onClick={() => setSelectedDate(date)}
-            className={`flex-shrink-0 p-4 rounded-lg border ${
+            className={`flex-shrink-0 p-3 rounded-lg border ${
               selectedDate === date
                 ? "bg-black text-white"
                 : "bg-white text-black"
@@ -48,28 +50,23 @@ export default function BookingForm({
         ))}
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Email Input */}
-        <div>
+      <form onSubmit={handleSubmit} className="space-y-2">
+        {/* Name and Phone on same row */}
+        <div className="grid grid-cols-2 gap-2">
           <input
-            type="email"
+            type="text"
             required
-            placeholder="Email*"
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
+            placeholder="Name"
+            className="w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
-        </div>
 
-        {/* Phone Input */}
-        <div>
           <input
             type="tel"
             required
-            placeholder="Phone*"
-            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Phone"
+            className="w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
             value={formData.phone}
             onChange={(e) =>
               setFormData({ ...formData, phone: e.target.value })
@@ -77,33 +74,26 @@ export default function BookingForm({
           />
         </div>
 
-        {/* Veteran Checkbox */}
-        <div className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            id="veteran"
-            className="w-4 h-4 rounded border-gray-300"
-            checked={formData.isVeteran}
-            onChange={(e) =>
-              setFormData({ ...formData, isVeteran: e.target.checked })
-            }
-          />
-          <label htmlFor="veteran" className="flex items-center gap-1">
-            I've served in the U.S. military
-            <span className="text-gray-500">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                className="w-4 h-4"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 16v-4M12 8h.01" />
-              </svg>
-            </span>
-          </label>
-        </div>
+        {/* Email Input */}
+        <input
+          type="email"
+          required
+          placeholder="Your email"
+          className="w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+        />
+
+        {/* Description Textarea */}
+        <textarea
+          required
+          placeholder={`Please send me additional information about ${address}. Thank you`}
+          className="w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[120px] resize-none text-sm"
+          value={formData.description}
+          onChange={(e) =>
+            setFormData({ ...formData, description: e.target.value })
+          }
+        />
 
         {/* Submit Button */}
         <button
@@ -115,13 +105,11 @@ export default function BookingForm({
       </form>
 
       {/* Terms Text */}
-      <p className="mt-4 text-xs text-gray-500 leading-relaxed">
-        By proceeding, you consent to receive calls and texts at the number you
-        provided, including marketing by autodialer and prerecorded and
-        artificial voice, and email, from realtor.com and{" "}
-        <button className="text-gray-700 underline">others</button> about your
-        inquiry and other home-related matters.{" "}
-        <button className="text-gray-700 underline">More...</button>
+      <p className="mt-4 text-[10px] text-gray-500 leading-relaxed">
+        I agree to receive marketing and customer service calls and text
+        messages from Condomonk. Consent is not a condition of purchase.
+        Msg/data rates may apply. Msg frequency varies. Reply STOP to
+        unsubscribe. Privacy Policy & Terms of Service.
       </p>
     </div>
   );

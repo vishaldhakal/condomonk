@@ -17,6 +17,7 @@ import {
 } from "@/lib/analytics";
 import MarketComparisonChart from "@/components/MarketComparisonChart";
 import { formatPrice } from "@/utils/formatting";
+import Map from "@/components/Map";
 
 export default async function PropertyDetailPage({ params }) {
   try {
@@ -468,6 +469,68 @@ export default async function PropertyDetailPage({ params }) {
                 showDetails={false}
                 align="left"
               />
+            </div>
+
+            {/* Map Section */}
+            <div className="mt-12">
+              <h2 className="text-3xl font-bold mb-4">Location</h2>
+              <div className="h-[400px] w-full rounded-lg overflow-hidden border border-gray-200">
+                <Map
+                  address={`${property.StreetNumber} ${property.StreetName} ${property.StreetSuffix}, ${property.City}, ${property.StateOrProvince}, ${property.PostalCode}`}
+                />
+              </div>
+            </div>
+
+            {/* Walk Score Section */}
+            <div className="pt-16">
+              {/* Title with walking icon */}
+              <div className="flex items-center gap-2 mb-4">
+                <div className="flex items-center">
+                  <img
+                    src="/walking.svg"
+                    alt="Walking Icon"
+                    className="w-8 h-8 mr-2"
+                  />
+                  <h2 className="text-2xl font-bold">
+                    Walk Score for {property.StreetNumber} {property.StreetName}{" "}
+                    {property.StreetSuffix}
+                  </h2>
+                </div>
+              </div>
+
+              {/* Address subtitle */}
+              <h3 className="text-xl text-gray-700 mb-4">
+                {property.StreetNumber} {property.StreetName}{" "}
+                {property.StreetSuffix},{property.City} {property.PostalCode}
+              </h3>
+
+              {/* Walk Score iframe */}
+              <div className="walkscore-container rounded-lg overflow-hidden">
+                <iframe
+                  height="500"
+                  title="Walk Score"
+                  className="w-full"
+                  src={`https://www.walkscore.com/serve-walkscore-tile.php?wsid=&amp;s=${
+                    property.StreetNumber
+                  }+${property.StreetName.replace(/ /g, "+")}+${
+                    property.StreetSuffix
+                  }+${property.City}+${property.StateOrProvince}+${
+                    property.PostalCode
+                  }&amp;o=h&amp;c=f&amp;h=500&amp;fh=0&amp;w=737`}
+                  style={{ border: "none" }}
+                ></iframe>
+                <script
+                  type="text/javascript"
+                  src="https://www.walkscore.com/tile/show-walkscore-tile.php"
+                ></script>
+              </div>
+
+              {/* View map link */}
+              <div className="mt-4">
+                <a href="#" className="text-blue-500 hover:text-blue-600">
+                  View map of nearby restaurants, grocery stores, and more.
+                </a>
+              </div>
             </div>
           </div>
 
