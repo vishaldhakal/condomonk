@@ -2,11 +2,22 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { X } from "lucide-react";
+import LightGallery from "lightgallery/react";
+import "lightgallery/css/lightgallery.css";
+import "lightgallery/css/lg-zoom.css";
+import "lightgallery/css/lg-thumbnail.css";
+
+import lgThumbnail from "lightgallery/plugins/thumbnail";
+import lgZoom from "lightgallery/plugins/zoom";
 
 export default function PropertyGallery({ images }) {
   const [showGallery, setShowGallery] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  let lightGalleryInstance = null;
+
+  const onInit = (detail) => {
+    lightGalleryInstance = detail.instance;
+  };
 
   if (!images?.length) return null;
 
@@ -19,19 +30,21 @@ export default function PropertyGallery({ images }) {
   };
 
   return (
-    <>
-      {/* Main Grid */}
-      <div className="relative grid grid-cols-4 gap-4 mb-8">
+    <div className="relative">
+      <LightGallery
+        onInit={onInit}
+        speed={500}
+        plugins={[lgThumbnail, lgZoom]}
+        elementClassNames="grid grid-cols-4 gap-4 mb-8"
+      >
         {images.slice(0, 5).map((image, index) => (
-          <div
+          <a
             key={index}
-            onClick={() => {
-              setCurrentImageIndex(index);
-              setShowGallery(true);
-            }}
+            href={image.url}
             className={`relative cursor-pointer group ${
               index === 0 ? "col-span-2 row-span-2" : ""
             } ${index >= 5 ? "hidden" : ""}`}
+            data-lg-size="1600-2400"
           >
             <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
               <Image
@@ -43,63 +56,35 @@ export default function PropertyGallery({ images }) {
               />
               <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-300" />
             </div>
-          </div>
+          </a>
         ))}
-        {images.length > 5 && (
-          <button
-            onClick={() => {
-              setCurrentImageIndex(4);
-              setShowGallery(true);
-            }}
-            className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg text-sm font-medium hover:bg-white transition-colors"
-          >
-            +{images.length - 5} more photos
-          </button>
-        )}
-      </div>
 
-      {/* Full Screen Gallery */}
-      {showGallery && (
-        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center">
-          <button
-            onClick={() => setShowGallery(false)}
-            className="absolute top-4 right-4 text-white hover:text-gray-300"
+        {/* Hidden images for LightGallery */}
+        {images.slice(5).map((image, index) => (
+          <a
+            key={`hidden-${index}`}
+            href={image.url}
+            className="hidden"
+            data-lg-size="1600-2400"
           >
-            <X size={24} />
-          </button>
-
-          <button
-            onClick={handlePrevious}
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 p-2 rounded-full"
-          >
-            ←
-          </button>
-
-          <div className="relative h-[80vh] w-[80vw]">
             <Image
-              src={images[currentImageIndex].url}
-              alt={
-                images[currentImageIndex].description ||
-                `Property image ${currentImageIndex + 1}`
-              }
-              fill
-              className="object-contain"
-              priority
+              src={image.url}
+              alt={image.description || `Property image ${index + 6}`}
+              width={1600}
+              height={2400}
             />
-          </div>
+          </a>
+        ))}
+      </LightGallery>
 
-          <button
-            onClick={handleNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 p-2 rounded-full"
-          >
-            →
-          </button>
-
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white">
-            {currentImageIndex + 1} / {images.length}
-          </div>
-        </div>
+      {images.length > 5 && (
+        <button
+          onClick={() => lightGalleryInstance?.openGallery(4)}
+          className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg text-sm font-medium hover:bg-white transition-colors"
+        >
+          +{images.length - 5} more photos
+        </button>
       )}
-    </>
+    </div>
   );
 }

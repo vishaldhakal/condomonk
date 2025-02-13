@@ -18,6 +18,7 @@ import {
 import MarketComparisonChart from "@/components/MarketComparisonChart";
 import { formatPrice } from "@/utils/formatting";
 import Map from "@/components/Map";
+import TimeAgo from "@/helper/timeAgo";
 
 export const revalidate = 60; // 1 minute
 
@@ -233,8 +234,9 @@ export default async function PropertyDetailPage({ params }) {
                     />
                   </svg>
                   <div>
-                    <span className="font-medium">6</span>
-                    <span className="text-gray-500 ml-1">Days on MLS</span>
+                    <span className="font-medium">
+                      <TimeAgo timestamp={property.ModificationTimestamp} />
+                    </span>
                   </div>
                 </div>
 
