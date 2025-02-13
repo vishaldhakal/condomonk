@@ -218,17 +218,17 @@ export default async function DynamicPage({ params, searchParams }) {
   const subtitle = generateSubtitle(filters);
 
   return (
-    <div className="max-w-[2000px] mx-auto px-4 py-6">
-      <div className="sticky top-0 z-10 bg-white py-4">
-        <FilterBar currentFilters={filters} />
-      </div>
-      <div className="flex justify-between items-center mb-8 pt-3">
+    <div className="max-w-[1370px] mx-auto px-4 py-6">
+      <div className="flex justify-between items-center pt-1">
         <div>
-          <h1 className="text-3xl font-extrabold">
+          <h1 className="text-3xl font-extrabold leading-tight">
             {total.toLocaleString()} {title}
           </h1>
-          <h2 className="text-gray-600">{subtitle}</h2>
+          <h2 className="text-gray-600 text-sm leading-tight">{subtitle}</h2>
         </div>
+      </div>
+      <div className="sticky top-0 z-10 bg-white py-2 flex justify-between items-center mb-3">
+        <FilterBar currentFilters={filters} />
         <div className="flex bg-gray-100 p-1 rounded-lg">
           <button className="px-3 py-1 rounded-md bg-white shadow-sm">
             List
@@ -236,7 +236,6 @@ export default async function DynamicPage({ params, searchParams }) {
           <button className="px-3 py-1 rounded-md">Map</button>
         </div>
       </div>
-
       <PropertyList
         properties={properties}
         total={total}

@@ -47,13 +47,10 @@ export default function PropertyCard({ property }) {
           <div className="flex flex-col overflow-hidden relative">
             <div className="h-52 sm:h-52 overflow-hidden relative">
               <div className="h-52 sm:h-52 relative z-10 rounded-t-2xl rounded-b-2xl overflow-hidden">
-                <Image
+                <img
                   src={hasImage ? property.imageUrl.medium : NO_IMAGE_URL}
                   alt={`${property.StreetNumber} ${property.StreetName}`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover transition-all duration-200 transform group-hover:scale-110"
-                  loading="lazy"
                 />
               </div>
 
