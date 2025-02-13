@@ -3,6 +3,8 @@ import FilterBar from "@/components/FilterBar";
 import PropertyList from "@/components/PropertyList";
 import { notFound } from "next/navigation";
 
+export const revalidate = 60; // 1 minute
+
 // Helper to determine the type of page and parse filters
 function parseSlug(slug) {
   const filters = {};
