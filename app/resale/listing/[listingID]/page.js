@@ -19,6 +19,8 @@ import MarketComparisonChart from "@/components/MarketComparisonChart";
 import { formatPrice } from "@/utils/formatting";
 import Map from "@/components/Map";
 
+export const revalidate = 60; // 1 minute
+
 export default async function PropertyDetailPage({ params }) {
   try {
     const property = await getListingDetail(params.listingID);
