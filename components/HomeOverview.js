@@ -29,7 +29,7 @@ const HomeOverview = ({ property }) => {
         <h1 className="text-[32px] font-semibold mb-6">Home Overview</h1>
 
         {/* Basic Info Grid - Always visible */}
-        <div className="grid grid-cols-4 gap-x-2">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-2 ">
           <InfoRow
             label="Last updated"
             value={<TimeAgo timestamp={property.ModificationTimestamp} />}

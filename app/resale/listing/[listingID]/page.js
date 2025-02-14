@@ -64,14 +64,14 @@ export default async function PropertyDetailPage({ params }) {
       (property.WashroomsType1Pcs || 0) + (property.WashroomsType2Pcs || 0);
 
     return (
-      <div className="max-w-[1370px] mx-auto px-4 pt-6">
+      <div className="max-w-[1370px] mx-auto px-4 md:pt-6">
         {/* Header with Breadcrumb and Share/Save */}
-        <div className="flex justify-between items-center mb-0 sticky top-0 bg-white">
+        <div className="flex justify-between items-center mb-0 sticky top-0 bg-white ">
           {/* Breadcrumb Navigation */}
-          <nav className="flex items-center gap-2 text-sm">
+          <nav className="flex items-center gap-2 md:text-sm text-[13px]">
             <Link
               href="/resale"
-              className="text-gray-500 hover:text-gray-700 flex items-center gap-2"
+              className="text-gray-500 hover:text-gray-700 flex items-center gap-2 hidden md:flex"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -85,9 +85,9 @@ export default async function PropertyDetailPage({ params }) {
               >
                 <path d="M15 18l-6-6 6-6" />
               </svg>
-              Back
+              <span className="hidden md:block">Back</span>
             </Link>
-            <span className="text-gray-400">/</span>
+            <span className="text-gray-400 hidden md:block">/</span>
             <Link
               href={`/resale/ontario/homes-${property.TransactionType.toLowerCase().replace(
                 / /g,
@@ -118,8 +118,8 @@ export default async function PropertyDetailPage({ params }) {
           </nav>
 
           {/* Share/Save Buttons */}
-          <div className="flex gap-2">
-            <button className="inline-flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 text-xs">
+          <div className="flex md:gap-2 gap-0 ">
+            <button className="inline-flex md:items-center items-start gap-2 md:px-4 px-2 py-2 text-gray-600 hover:text-gray-900 md:text-xs text-[10px] ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -133,9 +133,9 @@ export default async function PropertyDetailPage({ params }) {
                 <polyline points="16 6 12 2 8 6" />
                 <line x1="12" y1="2" x2="12" y2="15" />
               </svg>
-              Share
+              <span className="hidden md:block">Share</span>
             </button>
-            <button className="inline-flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 text-xs">
+            <button className="inline-flex items-center gap-2 md:px-4 px-2 py-2 text-gray-600 hover:text-gray-900 md:text-xs text-[10px]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -147,7 +147,7 @@ export default async function PropertyDetailPage({ params }) {
               >
                 <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
               </svg>
-              Save
+              <span className="hidden md:block">Save</span>
             </button>
           </div>
         </div>
@@ -157,13 +157,13 @@ export default async function PropertyDetailPage({ params }) {
 
         <div className="grid md:grid-cols-3 gap-2 max-w-5xl mx-auto">
           {/* Main Content */}
-          <div className="md:col-span-2 space-y-8 md:pe-4">
+          <div className="md:col-span-2 space-y-8  md:pe-4">
             {/* Property Header */}
             <div className="pb-0">
               {/* Status and Type */}
-              <div className="flex flex-col items-start gap-2 mb-2">
+              <div className="flex flex-col items-start gap-2 mb-2 ">
                 {property.OriginalEntryTimestamp && (
-                  <span className="inline-flex items-center gap-1 text-black py-0.5 rounded-full text-xs py-1 px-3 bg-yellow-400 shadow-xl">
+                  <span className="inline-flex items-center gap-1 text-black py-0.5 rounded-full text-xs py-1 px-3 bg-yellow-400 shadow-xl mt-4 mt-md-0">
                     <TimeAgo timestamp={property.OriginalEntryTimestamp} />
                   </span>
                 )}
@@ -176,7 +176,7 @@ export default async function PropertyDetailPage({ params }) {
               </div>
 
               {/* Price */}
-              <h2 className="text-3xl md:text-6xl font-bold mb-2">
+              <h2 className="text-4xl md:text-6xl font-bold mb-2">
                 ${property.ListPrice.toLocaleString()}
               </h2>
 
@@ -218,7 +218,7 @@ export default async function PropertyDetailPage({ params }) {
               </div>
 
               {/* Address */}
-              <h1 className="text-xl mb-2">
+              <h1 className="text-lg md:text-xl mb-2">
                 {property.StreetNumber} {property.StreetName}{" "}
                 {property.StreetSuffix}, {property.City},{" "}
                 {property.StateOrProvince} {property.PostalCode}
