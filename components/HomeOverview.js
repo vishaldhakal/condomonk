@@ -15,10 +15,10 @@ const HomeOverview = ({ property }) => {
   const InfoRow = ({ label, value }) => (
     <>
       <div className="col-span-1 py-1 border-b border-gray-100">
-        <p className="text-[16px] text-gray-900">{label}</p>
+        <p className="text-[14px] text-gray-900">{label}</p>
       </div>
       <div className="col-span-1 py-1 border-b border-gray-100">
-        <p className="text-[16px] text-gray-900">{value}</p>
+        <p className="text-[14px] text-gray-500">{value}</p>
       </div>
     </>
   );
@@ -29,10 +29,10 @@ const HomeOverview = ({ property }) => {
         <h1 className="text-[32px] font-semibold mb-6">Home Overview</h1>
 
         {/* Basic Info Grid - Always visible */}
-        <div className="grid grid-cols-4 gap-x-8 ">
+        <div className="grid grid-cols-4 gap-x-2">
           <InfoRow
-            label="Last check for updates"
-            value={<TimeAgo timestamp={property.LastCheckForUpdates} />}
+            label="Last updated"
+            value={<TimeAgo timestamp={property.ModificationTimestamp} />}
           />
           <InfoRow
             label="Virtual tour"
@@ -60,7 +60,7 @@ const HomeOverview = ({ property }) => {
           />
         </div>
 
-        <div className="grid grid-cols-4 gap-x-8">
+        <div className="grid grid-cols-4 gap-x-2">
           <InfoRow
             label="Status"
             value={property.Status === "A" ? "Active" : "In-Active"}
@@ -80,7 +80,7 @@ const HomeOverview = ({ property }) => {
         <div className={`block ${collapse ? "hidden" : "block"}`}>
           {/* Interior Section */}
           <h2 className="text-[20px] font-medium mt-6 mb-3">Interior</h2>
-          <div className="grid grid-cols-4 gap-x-8">
+          <div className="grid grid-cols-4 gap-x-2">
             <InfoRow
               label="Total bathrooms"
               value={property.BathroomsTotalInteger || "1"}
@@ -102,7 +102,7 @@ const HomeOverview = ({ property }) => {
             />
           </div>
 
-          <div className="grid grid-cols-4 gap-x-8">
+          <div className="grid grid-cols-4 gap-x-2">
             <InfoRow
               label="Family room available"
               value={property?.DenFamilyroomYN || "--"}
@@ -120,7 +120,7 @@ const HomeOverview = ({ property }) => {
 
           {/* Exterior Section */}
           <h2 className="text-[20px] font-medium mt-6 mb-3">Exterior</h2>
-          <div className="grid grid-cols-4 gap-x-8">
+          <div className="grid grid-cols-4 gap-x-2">
             <InfoRow
               label="Construction materials"
               value={property.ConstructionMaterials?.join(", ") || "--"}

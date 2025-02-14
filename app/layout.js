@@ -11,7 +11,6 @@ import NextTopLoader from "nextjs-toploader";
 import { Montserrat } from "next/font/google";
 import { Providers } from "./providers";
 import { allcities } from "@/datas/cities";
-import Tracker from "@/components/Tracker";
 
 const montserrat = Montserrat({ subsets: ["cyrillic"] });
 

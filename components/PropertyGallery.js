@@ -33,9 +33,20 @@ export default function PropertyGallery({ images }) {
     <div className="relative">
       <LightGallery
         onInit={onInit}
-        speed={500}
+        speed={0}
         plugins={[lgThumbnail, lgZoom]}
-        elementClassNames="grid grid-cols-4 gap-4 mb-8"
+        elementClassNames="grid grid-cols-4 gap-2 mb-8"
+        mode="lg-fade"
+        cssEasing="none"
+        hideScrollbar={true}
+        closable={true}
+        escKey={true}
+        showZoomInOutIcons={false}
+        actualSize={false}
+        startAnimationDuration={0}
+        backdropDuration={0}
+        zoomFromOrigin={false}
+        addClass="lg-thumb-align-middle"
       >
         {images.slice(0, 5).map((image, index) => (
           <a
@@ -51,10 +62,10 @@ export default function PropertyGallery({ images }) {
                 src={image.url}
                 alt={image.description || `Property image ${index + 1}`}
                 fill
-                className="object-cover transition-transform duration-300 group-hover:scale-110"
+                className="object-cover"
                 priority={index < 2}
               />
-              <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-300" />
+              <div className="absolute inset-0 bg-black/10" />
             </div>
           </a>
         ))}

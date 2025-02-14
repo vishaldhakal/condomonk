@@ -19,6 +19,7 @@ import MarketComparisonChart from "@/components/MarketComparisonChart";
 import { formatPrice } from "@/utils/formatting";
 import Map from "@/components/Map";
 import TimeAgo from "@/helper/timeAgo";
+import WalkScore from "@/components/WalkScore";
 
 export const revalidate = 60; // 1 minute
 
@@ -56,7 +57,7 @@ export default async function PropertyDetailPage({ params }) {
     return (
       <div className="max-w-[1370px] mx-auto px-4 pt-6">
         {/* Header with Breadcrumb and Share/Save */}
-        <div className="flex justify-between items-center mb-6 sticky top-0 bg-white">
+        <div className="flex justify-between items-center mb-0 sticky top-0 bg-white">
           {/* Breadcrumb Navigation */}
           <nav className="flex items-center gap-2 text-sm">
             <Link
@@ -79,14 +80,23 @@ export default async function PropertyDetailPage({ params }) {
             </Link>
             <span className="text-gray-400">/</span>
             <Link
-              href="/resale/ontario"
+              href={`/resale/ontario/homes-${property.TransactionType.toLowerCase().replace(
+                / /g,
+                "-"
+              )}`}
               className="text-gray-500 hover:text-gray-700"
             >
               Ontario
             </Link>
             <span className="text-gray-400">/</span>
             <Link
-              href={`/resale/ontario/${property.City.toLowerCase()}`}
+              href={`/resale/ontario/${property.City.toLowerCase().replace(
+                / /g,
+                "-"
+              )}/homes-${property.TransactionType.toLowerCase().replace(
+                / /g,
+                "-"
+              )}`}
               className="text-gray-500 hover:text-gray-700"
             >
               {property.City}
@@ -100,11 +110,11 @@ export default async function PropertyDetailPage({ params }) {
 
           {/* Share/Save Buttons */}
           <div className="flex gap-2">
-            <button className="inline-flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900">
+            <button className="inline-flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 text-xs">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -116,11 +126,11 @@ export default async function PropertyDetailPage({ params }) {
               </svg>
               Share
             </button>
-            <button className="inline-flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900">
+            <button className="inline-flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 text-xs">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -136,199 +146,98 @@ export default async function PropertyDetailPage({ params }) {
         {/* Property Gallery */}
         <PropertyGallery images={property.images} />
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-2 max-w-5xl mx-auto">
           {/* Main Content */}
-          <div className="md:col-span-2 space-y-8">
+          <div className="md:col-span-2 space-y-8 md:pe-4">
             {/* Property Header */}
-            <div className="pb-8">
+            <div className="pb-0">
               {/* Status and Type */}
-              <div className="flex items-center gap-2 mb-2">
+              <div className="flex flex-col items-start gap-2 mb-2">
+                {property.OriginalEntryTimestamp && (
+                  <span className="inline-flex items-center gap-1 text-black py-0.5 rounded-full text-xs py-1 px-3 bg-yellow-400 shadow-xl">
+                    <TimeAgo timestamp={property.OriginalEntryTimestamp} />
+                  </span>
+                )}
                 <span className="inline-flex items-center gap-1">
                   <span className="w-2.5 h-2.5 bg-green-500 rounded-full"></span>
-                  <span className="text-base text-gray-600">
-                    House for sale
+                  <span className="text-base">
+                    {property.PropertySubType} {property.TransactionType}
                   </span>
                 </span>
               </div>
 
               {/* Price */}
-              <h1 className="text-4xl font-bold mb-2">
+              <h2 className="text-3xl md:text-6xl font-bold mb-2">
                 ${property.ListPrice.toLocaleString()}
-              </h1>
-
-              <div className=" pb-2">
-                <div className="">MLS - #{property.ListingKey}</div>
-              </div>
+              </h2>
 
               {/* Key Details */}
               <div className="flex items-center gap-4 text-base mb-1">
                 <div className="flex items-center gap-1">
+                  <img
+                    src="/bedrooms.svg"
+                    className="w-3 mr-[2px] inline"
+                    alt="bedrooms"
+                  />
                   <span className="font-bold">{property.BedroomsTotal}</span>
-                  <span className="text-gray-600">bed</span>
+                  <span>bed</span>
                 </div>
                 <div className="flex items-center gap-1">
+                  <img
+                    src="/bathrooms.svg"
+                    className="w-3 mr-[2px] inline"
+                    alt="washrooms"
+                  />
                   <span className="font-bold">{totalBathrooms}</span>
-                  <span className="text-gray-600">bath</span>
+                  <span>bath</span>
                 </div>
-                <div className="flex items-center gap-1">
-                  <span className="font-bold">
-                    {property.BuildingAreaTotal || "1,484"}
-                  </span>
-                  <span className="text-gray-600">sqft</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <span className="font-bold">
-                    {property.LotSize ||
-                      `${property.LotWidth} x ${property.LotDepth}`}
-                  </span>
-                  <span className="text-gray-600">sqft lot</span>
+                {property.LotSize && (
+                  <div className="flex items-center gap-1">
+                    <img
+                      src="/ruler.svg"
+                      className="w-3 mr-[2px] inline"
+                      alt="area"
+                    />
+                    <span className="font-bold">{property.LotSize}</span>
+                    <span>sqft lot</span>
+                  </div>
+                )}
+
+                <div>
+                  <div>MLS - #{property.ListingKey}</div>
                 </div>
               </div>
 
               {/* Address */}
-              <p className="text-lg text-gray-700 mb-2">
+              <h1 className="text-xl mb-2">
                 {property.StreetNumber} {property.StreetName}{" "}
                 {property.StreetSuffix}, {property.City},{" "}
                 {property.StateOrProvince} {property.PostalCode}
-              </p>
-
-              {/* Additional Info */}
-              <div className="grid grid-cols-4 gap-4 mb-4">
-                {/* Property Type */}
-                <div className="flex items-center gap-2 text-sm">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    className="w-5 h-5 text-gray-500"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                    />
-                  </svg>
-                  <div>
-                    <span className="font-medium">
-                      {property.PropertyType || "Single family"}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Days on Market */}
-                <div className="flex items-center gap-2 text-sm">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    className="w-5 h-5 text-gray-500"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                  <div>
-                    <span className="font-medium">
-                      <TimeAgo timestamp={property.ModificationTimestamp} />
-                    </span>
-                  </div>
-                </div>
-
-                {/* Garage */}
-                <div className="flex items-center gap-2 text-sm">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    className="w-5 h-5 text-gray-500"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 3h18v18H3z M3 12h18"
-                    />
-                  </svg>
-                  <div>
-                    <span className="font-medium">2 Cars</span>
-                  </div>
-                </div>
-
-                {/* Year Built */}
-                <div className="flex items-center gap-2 text-sm">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    className="w-5 h-5 text-gray-500"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"
-                    />
-                  </svg>
-                  <div>
-                    <span className="font-medium">
-                      Built in {property.YearBuilt || "2014"}
-                    </span>
-                  </div>
-                </div>
-              </div>
+              </h1>
             </div>
-            {/* Render appropriate analytics component based on property type */}
-            {property.PropertyType === "Commercial" ? (
-              <CommercialAnalytics analyticsData={analyticsData} />
-            ) : property.TransactionType === "For Lease" ? (
-              <LeaseAnalytics analyticsData={analyticsData} />
-            ) : (
-              <ListingAnalytics analyticsData={analyticsData} />
-            )}
             {/* Market Analytics */}
-            <div className="bg-white rounded-lg border border-gray-100 p-6 space-y-6">
-              <h2 className="text-2xl font-bold">Market Analysis</h2>
-
+            <div className="bg-white rounded-lg py-6 space-y-6">
               {/* Summary Stats */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
-                  <div className="text-sm text-blue-800 font-medium">
-                    Similar Homes Found
-                  </div>
-                  <div className="text-2xl font-bold text-blue-900 mt-1">
+                <div className="p-6 bg-gray-100 rounded-xl">
+                  <div className="text-2xl font-bold black mt-1">
                     {analyticsData?.totalSimilar || 0}
                   </div>
-                  <div className="text-xs text-blue-700 mt-1">
-                    {property.PropertySubType} homes with{" "}
-                    {property.BedroomsTotal} beds,{" "}
-                    {property.BathroomsTotalInteger} baths in {property.City}
+                  <div className="text-sm text-black font-medium">
+                    Similar Homes Found
                   </div>
                 </div>
 
-                <div className="p-6 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-xl">
-                  <div className="text-sm text-emerald-800 font-medium">
-                    Average Price
-                  </div>
-                  <div className="text-2xl font-bold text-emerald-900 mt-1">
+                <div className="p-6 bg-gray-100 rounded-xl">
+                  <div className="text-2xl font-bold text-black mt-1">
                     ${formatPrice(analyticsData?.avgPrice || 0)}
                   </div>
-                  <div className="text-xs text-emerald-700 mt-1">
-                    Similar homes in {property.City}
+                  <div className="text-sm text-black font-medium">
+                    Average Price
                   </div>
                 </div>
 
                 <div className="p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
-                  <div className="text-sm text-gray-800 font-medium">
-                    Price Difference
-                  </div>
                   <div
                     className={`text-2xl font-bold mt-1 ${
                       property.ListPrice > (analyticsData?.avgPrice || 0)
@@ -343,7 +252,7 @@ export default async function PropertyDetailPage({ params }) {
                     ).toFixed(1)}
                     %
                   </div>
-                  <div className="text-xs text-gray-700 mt-1">
+                  <div className="text-sm text-gray-800 font-medium">
                     {property.ListPrice > (analyticsData?.avgPrice || 0)
                       ? "Higher than average"
                       : "Lower than average"}
@@ -362,7 +271,12 @@ export default async function PropertyDetailPage({ params }) {
                     comparisons={[
                       {
                         name: `Similar Homes in ${property.City}`,
-                        description: `${analyticsData?.totalSimilar} homes with ${property.BedroomsTotal} beds, ${property.BathroomsTotalInteger} baths`,
+                        description: `${
+                          analyticsData?.totalSimilar
+                        } homes with ${property.BedroomsTotal} beds, ${
+                          (property.WashroomsType1Pcs || 0) +
+                          (property.WashroomsType2Pcs || 0)
+                        } baths`,
                         price: analyticsData?.avgPrice || 0,
                       },
                       {
@@ -373,10 +287,12 @@ export default async function PropertyDetailPage({ params }) {
                         price: analyticsData?.avgPriceBedrooms || 0,
                       },
                       {
-                        name: property.PropertyType,
+                        name: property.PropertySubType,
                         description: `Average of ${
                           analyticsData?.propertyTypeCount || 0
-                        } homes in ${property.City}`,
+                        } ${property.PropertySubType} homes in ${
+                          property.City
+                        }`,
                         price: analyticsData?.avgPriceType || 0,
                       },
                     ]}
@@ -386,8 +302,11 @@ export default async function PropertyDetailPage({ params }) {
             </div>
             {/* Description */}
             <div>
-              <h2 className="text-3xl font-bold mb-4">About this property</h2>
-              <p className="text-gray-600 whitespace-pre-wrap">
+              <h2 className="text-3xl font-bold mb-2">
+                About {property.StreetNumber} {property.StreetName}{" "}
+                {property.StreetSuffix}
+              </h2>
+              <p className="text-gray-500 tracking-normal whitespace-pre-wrap leading-7">
                 {property.PublicRemarks}
               </p>
             </div>
@@ -480,7 +399,11 @@ export default async function PropertyDetailPage({ params }) {
               <h2 className="text-3xl font-bold mb-4">Location</h2>
               <div className="h-[400px] w-full rounded-lg overflow-hidden border border-gray-200">
                 <Map
-                  address={`${property.StreetNumber} ${property.StreetName} ${property.StreetSuffix}, ${property.City}, ${property.StateOrProvince}, ${property.PostalCode}`}
+                  address={`${property.StreetNumber} ${property.StreetName} ${
+                    property.StreetSuffix
+                  }, ${property.City.split(" ")[0]}, ${
+                    property.StateOrProvince
+                  }`}
                 />
               </div>
             </div>
@@ -502,31 +425,15 @@ export default async function PropertyDetailPage({ params }) {
                 </div>
               </div>
 
-              {/* Address subtitle */}
-              <h3 className="text-xl text-gray-700 mb-4">
-                {property.StreetNumber} {property.StreetName}{" "}
-                {property.StreetSuffix},{property.City} {property.PostalCode}
-              </h3>
-
               {/* Walk Score iframe */}
               <div className="walkscore-container rounded-lg overflow-hidden">
-                <iframe
-                  height="500"
-                  title="Walk Score"
-                  className="w-full"
-                  src={`https://www.walkscore.com/serve-walkscore-tile.php?wsid=&amp;s=${
-                    property.StreetNumber
-                  }+${property.StreetName.replace(/ /g, "+")}+${
+                <WalkScore
+                  address={`${property.StreetNumber} ${property.StreetName} ${
                     property.StreetSuffix
-                  }+${property.City}+${property.StateOrProvince}+${
-                    property.PostalCode
-                  }&amp;o=h&amp;c=f&amp;h=500&amp;fh=0&amp;w=737`}
-                  style={{ border: "none" }}
-                ></iframe>
-                <script
-                  type="text/javascript"
-                  src="https://www.walkscore.com/tile/show-walkscore-tile.php"
-                ></script>
+                  }, ${property.City.split(" ")[0]}, ${
+                    property.StateOrProvince
+                  }`}
+                />
               </div>
 
               {/* View map link */}
@@ -541,7 +448,7 @@ export default async function PropertyDetailPage({ params }) {
           {/* Sidebar */}
           <div className="space-y-6  top-6">
             {/* Booking Form */}
-            <div className="bg-white p-6 rounded-lg sticky top-6">
+            <div className="bg-white p-1 rounded-lg sticky top-6">
               <BookingForm
                 propertyId={property.ListingKey}
                 address={`${property.StreetNumber} ${property.StreetName}`}
