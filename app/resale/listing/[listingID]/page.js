@@ -6,11 +6,6 @@ import Link from "next/link";
 import HomeOverview from "@/components/HomeOverview";
 import CompactMortgageCalculator from "@/components/CompactMortgageCalculator";
 import {
-  ListingAnalytics,
-  CommercialAnalytics,
-  LeaseAnalytics,
-} from "@/components/Analytics";
-import {
   getListingAnalytics,
   getCommercialAnalytics,
   getLeaseAnalytics,
@@ -21,6 +16,8 @@ import dynamic from "next/dynamic";
 import TimeAgo from "@/helper/timeAgo";
 import WalkScore from "@/components/WalkScore";
 import SimilarHomes from "@/components/SimilarHomes";
+import BottomContactForm from "@/components/BottomContactForm";
+import Image from "next/image";
 
 // Dynamic import for Map component with ssr disabled
 const Map = dynamic(() => import("@/components/Map"), {
@@ -472,6 +469,38 @@ export default async function PropertyDetailPage({ params }) {
                 price={property.ListPrice}
                 transactionType={property.TransactionType}
               />
+            </div>
+          </div>
+        </div>
+        <div className="py-5 my-md-5 my-0" id="contact">
+          <div className="max-w-2xl mx-auto px-4 pt-6">
+            <div className="row justify-content-center">
+              <Image
+                src="/contact-bottom-2.png"
+                alt="Contact bottom"
+                width={300}
+                height={250}
+                className="img-fluid w-25 w-smm-50 mb-3"
+              />
+            </div>
+            <h2 className="fw-bolder fw-boldie text-center fs-3 ">
+              Looking to buy a preconstruction home ?
+            </h2>
+
+            <div>
+              <BottomContactForm
+                proj_name="All"
+                city="Home Page"
+              ></BottomContactForm>
+              <div className="d-flex">
+                <p className="small-text2 mb-3 text-center">
+                  I agree to receive marketing and customer service calls and
+                  text messages from Homebaba Technologies. Consent is not a
+                  condition of purchase. Msg/data rates may apply. Msg frequency
+                  varies. Reply STOP to unsubscribe. Privacy Policy & Terms of
+                  Service.
+                </p>
+              </div>
             </div>
           </div>
         </div>
