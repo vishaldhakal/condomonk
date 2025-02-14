@@ -1,4 +1,4 @@
-import { getListingDetail } from "@/lib/properties";
+import { getListingDetail, getSimilarListings } from "@/lib/properties";
 import { notFound } from "next/navigation";
 import BookingForm from "@/components/BookingForm";
 import PropertyGallery from "@/components/PropertyGallery";
@@ -17,9 +17,18 @@ import {
 } from "@/lib/analytics";
 import MarketComparisonChart from "@/components/MarketComparisonChart";
 import { formatPrice } from "@/utils/formatting";
-import Map from "@/components/Map";
+import dynamic from "next/dynamic";
 import TimeAgo from "@/helper/timeAgo";
 import WalkScore from "@/components/WalkScore";
+import SimilarHomes from "@/components/SimilarHomes";
+
+// Dynamic import for Map component with ssr disabled
+const Map = dynamic(() => import("@/components/Map"), {
+  ssr: false,
+  loading: () => (
+    <div className="h-[400px] w-full bg-gray-100 animate-pulse rounded-lg" />
+  ),
+});
 
 export const revalidate = 60; // 1 minute
 
@@ -30,6 +39,9 @@ export default async function PropertyDetailPage({ params }) {
     if (!property) {
       notFound();
     }
+
+    // Fetch similar properties
+    const similarProperties = await getSimilarListings({ property });
 
     // Determine which analytics to fetch based on property type and transaction type
     let analyticsData = null;
@@ -392,6 +404,11 @@ export default async function PropertyDetailPage({ params }) {
                 showDetails={false}
                 align="left"
               />
+            </div>
+
+            {/* Similar Homes Section */}
+            <div className="">
+              <SimilarHomes properties={similarProperties} />
             </div>
 
             {/* Map Section */}
