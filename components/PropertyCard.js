@@ -50,7 +50,7 @@ export default function PropertyCard({ property }) {
                 <img
                   src={hasImage ? property.imageUrl.medium : NO_IMAGE_URL}
                   alt={`${property.StreetNumber} ${property.StreetName}`}
-                  className="object-cover transition-all duration-200 transform group-hover:scale-110"
+                  className="object-cover object-center w-full transition-all duration-200 transform group-hover:scale-110 h-52 sm:h-52"
                 />
               </div>
 
