@@ -155,7 +155,7 @@ export default async function PropertyDetailPage({ params }) {
         {/* Property Gallery */}
         <PropertyGallery images={property.images} />
 
-        <div className="grid md:grid-cols-3 gap-2 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 max-w-5xl mx-auto">
           {/* Main Content */}
           <div className="md:col-span-2 space-y-8  md:pe-4">
             {/* Property Header */}
