@@ -153,14 +153,14 @@ const Navbar = ({ cities, transparent }) => {
                   Pre Construction Homes
                 </Link>
               </li>
-              {/* <li className="nav-item">
+              <li className="nav-item">
                 <Link
                   className="nav-link"
                   href="/resale/ontario/homes-for-sale"
                 >
                   Resale Homes
                 </Link>
-              </li> */}
+              </li>
               <li className="nav-item rounded-2  mx-1">
                 <Link className="nav-link" href="/top-10-gta-projects">
                   Top 10 <span className="fw-medium">GTA</span> Projects
