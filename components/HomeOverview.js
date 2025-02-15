@@ -60,7 +60,7 @@ const HomeOverview = ({ property }) => {
           />
         </div>
 
-        <div className="grid grid-cols-4 gap-x-2">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-2">
           <InfoRow
             label="Status"
             value={property.Status === "A" ? "Active" : "In-Active"}
@@ -80,7 +80,7 @@ const HomeOverview = ({ property }) => {
         <div className={`block ${collapse ? "hidden" : "block"}`}>
           {/* Interior Section */}
           <h2 className="text-[20px] font-medium mt-6 mb-3">Interior</h2>
-          <div className="grid grid-cols-4 gap-x-2">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-2">
             <InfoRow
               label="Total bathrooms"
               value={property.BathroomsTotalInteger || "1"}
@@ -102,7 +102,7 @@ const HomeOverview = ({ property }) => {
             />
           </div>
 
-          <div className="grid grid-cols-4 gap-x-2">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-2">
             <InfoRow
               label="Family room available"
               value={property?.DenFamilyroomYN || "--"}
@@ -120,7 +120,7 @@ const HomeOverview = ({ property }) => {
 
           {/* Exterior Section */}
           <h2 className="text-[20px] font-medium mt-6 mb-3">Exterior</h2>
-          <div className="grid grid-cols-4 gap-x-2">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-2">
             <InfoRow
               label="Construction materials"
               value={property.ConstructionMaterials?.join(", ") || "--"}

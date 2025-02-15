@@ -462,7 +462,7 @@ export default async function PropertyDetailPage({ params }) {
           {/* Sidebar */}
           <div className="space-y-6  top-6">
             {/* Booking Form */}
-            <div className="bg-white p-1 rounded-lg sticky top-6">
+            <div className="bg-white p-1 rounded-lg sticky top-6 mt-16 mt-md-0">
               <BookingForm
                 propertyId={property.ListingKey}
                 address={`${property.StreetNumber} ${property.StreetName}`}
