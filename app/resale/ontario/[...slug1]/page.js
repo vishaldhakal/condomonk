@@ -3,7 +3,6 @@ import FilterBar from "@/components/FilterBar";
 import PropertyList from "@/components/PropertyList";
 import { notFound } from "next/navigation";
 import { formatPrice } from "@/utils/formatting";
-import MarketComparisonChart from "@/components/MarketComparisonChart";
 import { getCityAnalytics } from "@/lib/analytics";
 import BottomContactForm from "@/components/BottomContactForm";
 import Image from "next/image";
@@ -278,52 +277,6 @@ export default async function DynamicPage({ params, searchParams }) {
     city: filters.city,
     transactionType: filters.transactionType,
   });
-
-  // Update the Market Insights section to handle potential null values better
-  const marketInsights = {
-    avgPrice:
-      analyticsData?.insights?.avgPrice || analyticsData?.averagePrice || 0,
-    totalListings:
-      analyticsData?.insights?.totalListings ||
-      analyticsData?.totalListings ||
-      0,
-    avgDaysOnMarket:
-      analyticsData?.insights?.avgDaysOnMarket ||
-      analyticsData?.averageDaysOnMarket ||
-      0,
-    priceHistory:
-      analyticsData?.insights?.priceHistory ||
-      analyticsData?.priceHistory ||
-      [],
-    priceChange: {
-      threeMonth:
-        analyticsData?.insights?.priceChange?.threeMonth ||
-        (((analyticsData?.priceHistory?.[2]?.price || 0) -
-          (analyticsData?.averagePrice || 0)) /
-          (analyticsData?.averagePrice || 1)) *
-          100 ||
-        0,
-      sixMonth:
-        analyticsData?.insights?.priceChange?.sixMonth ||
-        (((analyticsData?.priceHistory?.[5]?.price || 0) -
-          (analyticsData?.averagePrice || 0)) /
-          (analyticsData?.averagePrice || 1)) *
-          100 ||
-        0,
-    },
-    nearbyListings:
-      analyticsData?.insights?.nearbyListings ||
-      analyticsData?.nearbyListings ||
-      [],
-    marketTrends:
-      analyticsData?.insights?.marketTrends ||
-      analyticsData?.marketTrends ||
-      {},
-    propertyTypeCounts:
-      analyticsData?.insights?.propertyTypeCounts ||
-      analyticsData?.propertyTypeCounts ||
-      {},
-  };
 
   // Add city-specific analytics section
   const CityAnalytics = ({ data }) => {

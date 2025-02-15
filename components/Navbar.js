@@ -1,13 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-// import SearchSuggest from "./SerachSuggest";
-
-const ProjectSearch = dynamic(() => import("./ProjectSearch"), {
-  loading: () => <div className="loading-spinner">Loading...</div>,
-  ssr: false,
-});
+import ProjectSearch from "./ProjectSearch";
 
 const Navbar = ({ cities, transparent }) => {
   const [cityname, setCityname] = useState("");
