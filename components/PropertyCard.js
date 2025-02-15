@@ -77,7 +77,7 @@ export default function PropertyCard({ property }) {
             <div className="flex-1 sm:px-3 pt-2 pb-4 px-2">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
                 <h2 className="font-bold text-2xl sm:text-2xl items-center justify-start mt-2 sm:my-2">
-                  ${property.ListPrice?.toLocaleString()}
+                  ${property.ListPrice.toLocaleString()}
                   {property.TransactionType === "For Lease" && (
                     <span className="text-xs text-gray-600"> /mo</span>
                   )}

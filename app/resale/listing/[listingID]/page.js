@@ -18,6 +18,7 @@ import WalkScore from "@/components/WalkScore";
 import SimilarHomes from "@/components/SimilarHomes";
 import BottomContactForm from "@/components/BottomContactForm";
 import Image from "next/image";
+import PriceHistory from "@/components/PriceHistory";
 
 // Dynamic import for Map component with ssr disabled
 const Map = dynamic(() => import("@/components/Map"), {
@@ -62,6 +63,49 @@ export default async function PropertyDetailPage({ params }) {
 
     const totalBathrooms =
       (property.WashroomsType1Pcs || 0) + (property.WashroomsType2Pcs || 0);
+
+    // Helper function to get available virtual tour URLs
+    const getVirtualTourUrls = (property) => {
+      const tours = [];
+      if (property.VirtualTourURLBranded) {
+        tours.push({ url: property.VirtualTourURLBranded, type: "branded" });
+      }
+      if (property.VirtualTourURLBranded2) {
+        tours.push({ url: property.VirtualTourURLBranded2, type: "branded" });
+      }
+      if (property.VirtualTourURLUnbranded) {
+        tours.push({
+          url: property.VirtualTourURLUnbranded,
+          type: "unbranded",
+        });
+      }
+      if (property.VirtualTourURLUnbranded2) {
+        tours.push({
+          url: property.VirtualTourURLUnbranded2,
+          type: "unbranded",
+        });
+      }
+      return tours;
+    };
+
+    const virtualTours = getVirtualTourUrls(property);
+
+    const priceHistory = [
+      {
+        price: property.ListPrice,
+        date: property.ModificationTimestamp || property.OriginalEntryTimestamp,
+      },
+    ];
+
+    if (
+      property.OriginalListPrice &&
+      property.OriginalListPrice !== property.ListPrice
+    ) {
+      priceHistory.push({
+        price: property.OriginalListPrice,
+        date: property.OriginalEntryTimestamp,
+      });
+    }
 
     return (
       <div className="max-w-[1370px] mx-auto px-4 md:pt-6">
@@ -176,9 +220,72 @@ export default async function PropertyDetailPage({ params }) {
               </div>
 
               {/* Price */}
-              <h2 className="text-4xl md:text-6xl font-bold mb-2">
-                ${property.ListPrice.toLocaleString()}
-              </h2>
+              <div className="mb-6">
+                <div className="flex items-center gap-3">
+                  <h2 className="text-4xl md:text-6xl font-bold">
+                    ${property.ListPrice.toLocaleString()}
+                  </h2>
+                  {property.OriginalListPrice &&
+                    property.ListPrice < property.OriginalListPrice && (
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                        Price Reduced
+                        <span className="ml-1 font-bold">
+                          {(
+                            ((property.ListPrice - property.OriginalListPrice) /
+                              property.OriginalListPrice) *
+                            100
+                          ).toFixed(1)}
+                          %
+                        </span>
+                      </span>
+                    )}
+                </div>
+
+                {property.PriceChangeTimestamp && (
+                  <p className="text-sm text-gray-500 mt-1">
+                    Last price change{" "}
+                    <TimeAgo timestamp={property.PriceChangeTimestamp} />
+                  </p>
+                )}
+
+                <div className="mt-4 flex items-center gap-4">
+                  <button className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 mr-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                      />
+                    </svg>
+                    Set Price Alert
+                  </button>
+
+                  <button className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 mr-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                      />
+                    </svg>
+                    View Price Trends
+                  </button>
+                </div>
+              </div>
 
               {/* Key Details */}
               <div className="flex items-center gap-4 text-base mb-1">
@@ -224,6 +331,67 @@ export default async function PropertyDetailPage({ params }) {
                 {property.StateOrProvince} {property.PostalCode}
               </h1>
             </div>
+            {virtualTours.length > 0 && (
+              <div className="max-w-5xl mx-auto mb-8">
+                <div className="bg-white rounded-lg p-6">
+                  <div className="flex items-center gap-3 mb-6">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 text-blue-600"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v5" />
+                      <path d="M19 12v5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-5" />
+                      <rect x="6" y="9" width="12" height="6" rx="2" />
+                    </svg>
+                    <h3 className="text-lg font-medium">Virtual Tours</h3>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {virtualTours.map((tour, index) => (
+                      <div key={index} className="group">
+                        <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden mb-3">
+                          <iframe
+                            src={tour.url}
+                            className="w-full h-full"
+                            allowFullScreen
+                            loading="lazy"
+                            title={`Virtual Tour ${index + 1}`}
+                          />
+                        </div>
+                        <a
+                          href={tour.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800 transition-colors"
+                        >
+                          <span className="mr-2">View {tour.type} Tour</span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-4 w-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                            />
+                          </svg>
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
             {/* Market Analytics */}
             <div className="bg-white rounded-lg py-6 space-y-6">
               {/* Summary Stats */}
@@ -457,6 +625,9 @@ export default async function PropertyDetailPage({ params }) {
                 </a>
               </div>
             </div>
+
+            {/* Add Price History component */}
+            <PriceHistory priceHistory={priceHistory} />
           </div>
 
           {/* Sidebar */}
