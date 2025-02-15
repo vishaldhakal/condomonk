@@ -9,8 +9,8 @@ export default function SimilarHomes({ properties }) {
   }
 
   return (
-    <div className="bg-white rounded-lg py-4">
-      <h2 className="text-xl font-bold mb-3">
+    <div className="bg-white rounded-lg py-12 ">
+      <h2 className="text-2xl md:text-3xl font-bold mb-3">
         Similar {properties[0].PropertySubType} in {properties[0].City} with{" "}
         {properties[0].BedroomsTotal} bedrooms
       </h2>

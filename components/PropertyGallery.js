@@ -83,7 +83,7 @@ export default function PropertyGallery({ images }) {
           </button>
 
           {/* Thumbnail Strip */}
-          <div className="flex gap-2 mt-2 px-2 overflow-x-auto pb-2">
+          <div className="flex gap-2 mt-2 px-2 overflow-x-auto pb-2 hide-scrollbar">
             {images.map((image, index) => (
               <button
                 key={index}

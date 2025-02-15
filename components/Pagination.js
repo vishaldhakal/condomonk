@@ -14,10 +14,10 @@ export default function Pagination({ currentPage, totalPages }) {
   };
 
   return (
-    <div className="flex justify-center gap-2 mt-8">
+    <div className="flex justify-center gap-2 mt-8 md:text-sm text-xs ">
       <Link
         href={`${pathname}?${createQueryString(currentPage - 1)}`}
-        className={`px-4 py-2 border rounded ${
+        className={`md:px-4 px-2 py-2 border rounded ${
           currentPage <= 1 ? "pointer-events-none opacity-50" : ""
         }`}
       >
@@ -35,7 +35,7 @@ export default function Pagination({ currentPage, totalPages }) {
             <Link
               key={page}
               href={`${pathname}?${createQueryString(page)}`}
-              className={`px-4 py-2 border rounded ${
+              className={`md:px-4 px-2 py-2 border rounded ${
                 currentPage === page
                   ? "bg-black text-white"
                   : "hover:bg-gray-100"
@@ -57,7 +57,7 @@ export default function Pagination({ currentPage, totalPages }) {
 
       <Link
         href={`${pathname}?${createQueryString(currentPage + 1)}`}
-        className={`px-4 py-2 border rounded ${
+        className={`md:px-4 px-2 py-2 border rounded ${
           currentPage >= totalPages ? "pointer-events-none opacity-50" : ""
         }`}
       >

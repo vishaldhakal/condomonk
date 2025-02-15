@@ -288,7 +288,7 @@ export default async function PropertyDetailPage({ params }) {
               </div>
 
               {/* Key Details */}
-              <div className="flex items-center gap-4 text-base mb-1">
+              <div className="flex items-center gap-4 text-base mb-0">
                 <div className="flex items-center gap-1">
                   <img
                     src="/bedrooms.svg"
@@ -332,9 +332,9 @@ export default async function PropertyDetailPage({ params }) {
               </h1>
             </div>
             {virtualTours.length > 0 && (
-              <div className="max-w-5xl mx-auto mb-8">
-                <div className="bg-white rounded-lg p-6">
-                  <div className="flex items-center gap-3 mb-6">
+              <div className="max-w-5xl mx-auto mb-8 pt-2">
+                <div className="bg-white rounded-lg ">
+                  <div className="flex items-center gap-3 mb-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-5 w-5 text-blue-600"
@@ -349,16 +349,16 @@ export default async function PropertyDetailPage({ params }) {
                       <path d="M19 12v5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-5" />
                       <rect x="6" y="9" width="12" height="6" rx="2" />
                     </svg>
-                    <h3 className="text-lg font-medium">Virtual Tours</h3>
+                    <h3 className="text-lg font-medium ">Virtual Tours</h3>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-3/4 gap-2 ">
                     {virtualTours.map((tour, index) => (
                       <div key={index} className="group">
-                        <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden mb-3">
+                        <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden mb-1">
                           <iframe
                             src={tour.url}
-                            className="w-full h-full"
+                            className="w-full h-64"
                             allowFullScreen
                             loading="lazy"
                             title={`Virtual Tour ${index + 1}`}
@@ -499,12 +499,12 @@ export default async function PropertyDetailPage({ params }) {
               <div className="grid md:grid-cols-2 gap-6">
                 {property.InteriorFeatures?.length > 0 && (
                   <div>
-                    <h3 className="font-bold mb-2 text-xl">
+                    <h3 className="font-medium mb-2 text-lg">
                       Interior Features
                     </h3>
                     <ul className="list-disc list-inside space-y-1">
                       {property.InteriorFeatures.map((feature, index) => (
-                        <li key={index} className="text-gray-600">
+                        <li key={index} className="text-gray-600 text-[14px]">
                           {feature}
                         </li>
                       ))}
@@ -513,12 +513,12 @@ export default async function PropertyDetailPage({ params }) {
                 )}
                 {property.ExteriorFeatures?.length > 0 && (
                   <div>
-                    <h3 className="font-bold mb-2 text-xl">
+                    <h3 className="font-medium mb-2 text-lg">
                       Exterior Features
                     </h3>
                     <ul className="list-disc list-inside space-y-1">
                       {property.ExteriorFeatures.map((feature, index) => (
-                        <li key={index} className="text-gray-600">
+                        <li key={index} className="text-gray-600 text-[14px]">
                           {feature}
                         </li>
                       ))}
@@ -530,7 +530,7 @@ export default async function PropertyDetailPage({ params }) {
             {/* Additional Details */}
             <div className="pt-3">
               <h2 className="text-3xl font-bold mb-4">Additional Details</h2>
-              <div className="grid md:grid-cols-2 gap-x-8 gap-y-4">
+              <div className="grid grid-cols-2 gap-x-0 gap-y-4">
                 {property.Basement && (
                   <div>
                     <div className="text-gray-600">Basement</div>
@@ -563,7 +563,7 @@ export default async function PropertyDetailPage({ params }) {
                 )}
               </div>
             </div>
-            <div className="mt-12 col-12 md:pt-24 md:col-12">
+            <div className="pt-16 col-12 md:pt-24 md:col-12">
               <CompactMortgageCalculator
                 price={property?.ListPrice}
                 showDetails={false}
@@ -643,7 +643,7 @@ export default async function PropertyDetailPage({ params }) {
             </div>
           </div>
         </div>
-        <div className="py-5 my-md-5 my-0" id="contact">
+        {/* <div className="py-5 my-md-5 my-0" id="contact">
           <div className="max-w-2xl mx-auto px-4 pt-6">
             <div className="row justify-content-center">
               <Image
@@ -674,7 +674,7 @@ export default async function PropertyDetailPage({ params }) {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   } catch (error) {

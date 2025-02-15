@@ -57,12 +57,12 @@ export default function PropertyCard({ property }) {
               {/* Property Type Badge */}
               <div className="absolute bottom-3 left-2 flex sm:flex-row z-20">
                 {property.PropertySubType?.trim() && (
-                  <div className="text-black text-[0.7rem] p-[3px] px-2 shadow-2xl rounded-md mx-1 bg-white flex items-center">
+                  <div className="text-black md:text-[0.7rem] text-[0.52rem] p-[3px] px-2 shadow-2xl rounded-md mx-1 bg-white flex items-center">
                     {property.PropertySubType?.trim()}
                   </div>
                 )}
                 {isNew && (
-                  <div className="text-black text-[0.7rem] p-[3px] px-2 shadow-2xl rounded-md mx-1 bg-[#f0fff4] items-center flex gap-1">
+                  <div className="text-black md:text-[0.7rem] text-[0.52rem] p-[3px] px-2 shadow-2xl rounded-md mx-1 bg-[#f0fff4] items-center flex gap-1">
                     <span className="relative flex h-1 w-1">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-1 w-1 bg-green-500"></span>

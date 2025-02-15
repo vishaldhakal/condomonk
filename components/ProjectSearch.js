@@ -95,9 +95,9 @@ const SearchWithAutocomplete = () => {
       {isFocused &&
         (searchResults.cities.length > 0 ||
           searchResults.projects.length > 0) && (
-          <div className="autocomplete-results position-absolute bg-white shadow rounded">
+          <div className="autocomplete-results position-absolute bg-white shadow rounded z-3">
             {searchResults.cities.length > 0 && (
-              <div>
+              <div className>
                 <h3 className="h4 bg-light fs-small p-3 fw-bold">Cities</h3>
                 <ul className="list-unstyled px-3">
                   {searchResults.cities.map((city, index) => (

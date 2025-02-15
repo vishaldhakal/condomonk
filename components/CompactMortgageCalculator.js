@@ -84,7 +84,7 @@ export default function CompactMortgageCalculator({
       }  bg-white rounded-lg overflow-hidden sm:mb-20`}
     >
       <div className="">
-        <h2 className={`font-semibold pb-3 text-2xl sm:text-3xl`}>
+        <h2 className={`font-semibold pb-3 text-3xl md:text-4xl`}>
           Mortgage Calculator
         </h2>
         <p
@@ -96,7 +96,7 @@ export default function CompactMortgageCalculator({
         </p>
         {/* <div className="mb-10"></div> */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-          <div className="grid grid-cols-1 gap-4">
+          <div className="grid grid-cols-1 gap-2">
             <FloatingLabelInput
               id="hvalue"
               label="Home Value"
@@ -104,7 +104,7 @@ export default function CompactMortgageCalculator({
               onChange={handleChange}
               prefix="$"
             />
-            <div className="flex">
+            <div className="flex gap-2">
               <FloatingLabelInput
                 id="dpay"
                 label="Down Payment"
