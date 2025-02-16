@@ -5,6 +5,7 @@ import PropertyGallery from "@/components/PropertyGallery";
 import Link from "next/link";
 import HomeOverview from "@/components/HomeOverview";
 import CompactMortgageCalculator from "@/components/CompactMortgageCalculator";
+import FloatingResaleButton from "@/components/FloatingResaleButton";
 import {
   getListingAnalytics,
   getCommercialAnalytics,
@@ -19,16 +20,51 @@ import SimilarHomes from "@/components/SimilarHomes";
 import BottomContactForm from "@/components/BottomContactForm";
 import Image from "next/image";
 import PriceHistory from "@/components/PriceHistory";
+import { Metadata } from "next";
+import ResaleFAQ from "@/components/ResaleFAQ";
 
 // Dynamic import for Map component with ssr disabled
 const Map = dynamic(() => import("@/components/Map"), {
   ssr: false,
   loading: () => (
-    <div className="h-[400px] w-full bg-gray-100 animate-pulse rounded-lg" />
+    <div className="h-[400px] w-full bg-gray-100 animate-pulse rounded-lg " />
   ),
 });
 
 export const revalidate = 60; // 1 minute
+
+export async function generateMetadata({ params }) {
+  try {
+    const property = await getListingDetail(params.listingID);
+
+    if (!property) {
+      return {
+        title: "Property Not Found | Condomonk",
+        description: "The requested property listing could not be found.",
+      };
+    }
+
+    const title = `${property.StreetNumber} ${property.StreetName} ${property.StreetSuffix} in ${property.City} MLS # ${property.ListingKey} - Condomonk`;
+
+    const description = `Book a showing for ${property.StreetNumber} ${property.StreetName} ${property.StreetSuffix} with MLS # ${property.ListingKey} in ${property.City} with us - Condomonk`;
+
+    return {
+      title,
+      description,
+      openGraph: {
+        title,
+        description,
+        images: property.images?.[0] ? [property.images[0]] : [],
+      },
+    };
+  } catch (error) {
+    return {
+      title: "Resale Homes for Sale | Condomonk",
+      description:
+        "View detailed information about this property listing on Condomonk.",
+    };
+  }
+}
 
 export default async function PropertyDetailPage({ params }) {
   try {
@@ -577,9 +613,9 @@ export default async function PropertyDetailPage({ params }) {
             </div>
 
             {/* Map Section */}
-            <div className="mt-12">
+            <div className="mt-12 z-0">
               <h2 className="text-3xl font-bold mb-4">Location</h2>
-              <div className="h-[400px] w-full rounded-lg overflow-hidden border border-gray-200">
+              <div className="h-[400px] w-full rounded-lg overflow-hidden border border-gray-200 z-1">
                 <Map
                   address={`${property.StreetNumber} ${property.StreetName} ${
                     property.StreetSuffix
@@ -630,6 +666,9 @@ export default async function PropertyDetailPage({ params }) {
             <PriceHistory priceHistory={priceHistory} />
           </div>
 
+          {/* Floating Resale Button */}
+          <FloatingResaleButton />
+
           {/* Sidebar */}
           <div className="space-y-6  top-6">
             {/* Booking Form */}
@@ -641,8 +680,11 @@ export default async function PropertyDetailPage({ params }) {
                 transactionType={property.TransactionType}
               />
             </div>
+
+            {/* FAQ Section */}
           </div>
         </div>
+
         {/* <div className="py-5 my-md-5 my-0" id="contact">
           <div className="max-w-2xl mx-auto px-4 pt-6">
             <div className="row justify-content-center">
@@ -675,6 +717,10 @@ export default async function PropertyDetailPage({ params }) {
             </div>
           </div>
         </div> */}
+
+        <div className="mt-6 ">
+          <ResaleFAQ property={property} />
+        </div>
       </div>
     );
   } catch (error) {
