@@ -20,6 +20,11 @@ function ContactFormSubmit(msgdata, setSubmitbtn, setCredentials) {
 
   console.log('URL parsed values:', { city, proj_name }); // Debug log
 
+  // Get the root domain name
+  const hostname = window.location.hostname;
+  const source = hostname === 'localhost' ? 'localhost' : 
+                 hostname.split('.')[hostname.startsWith('www.') ? 1 : 0];
+
   let form_data = new FormData();
   form_data.append("name", msgdata.name);
   form_data.append("email", msgdata.email);
@@ -28,6 +33,7 @@ function ContactFormSubmit(msgdata, setSubmitbtn, setCredentials) {
   form_data.append("proj_name", msgdata.proj_name);
   form_data.append("realtor", msgdata.realtor);
   form_data.append("cityy", msgdata.city);
+  form_data.append("source", source);
 
   // New form data for homebaba API
   let homebaba_form_data = new FormData();
@@ -38,6 +44,7 @@ function ContactFormSubmit(msgdata, setSubmitbtn, setCredentials) {
   homebaba_form_data.append("realtor", msgdata.realtor);
   homebaba_form_data.append("proj_name", proj_name || '');  // Send empty string if null
   homebaba_form_data.append("cityy", city || '');  // Send empty string if null
+  homebaba_form_data.append("source", source);
 
   let url = `${baseUrl}/api/contact-form-submission/`;
 
