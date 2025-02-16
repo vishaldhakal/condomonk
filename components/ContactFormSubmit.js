@@ -22,8 +22,11 @@ function ContactFormSubmit(msgdata, setSubmitbtn, setCredentials) {
 
   // Get the root domain name
   const hostname = window.location.hostname;
-  const source = hostname === 'localhost' ? 'localhost' : 
-                 hostname.split('.')[hostname.startsWith('www.') ? 1 : 0];
+  let source = 'localhost';
+  if (hostname !== 'localhost') {
+    const parts = hostname.split('.');
+    source = parts.length >= 2 ? parts[parts.length - 2] : parts[0];
+  }
 
   let form_data = new FormData();
   form_data.append("name", msgdata.name);
