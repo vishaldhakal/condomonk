@@ -18,7 +18,6 @@ const citiesWithProvinces = [
   { city: "Richmond Hill", province: "Ontario" },
   { city: "Aurora", province: "Ontario" },
   { city: "Newmarket", province: "Ontario" },
-  { city: "Barrie", province: "Ontario" },
   { city: "East Gwillimbury", province: "Ontario" },
 ];
 
