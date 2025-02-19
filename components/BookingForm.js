@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ContactFormSubmit from "./ContactFormSubmit";
 import { CalendarIcon } from "lucide-react";
 
 export default function BookingForm({
@@ -9,12 +10,16 @@ export default function BookingForm({
   price,
   transactionType,
 }) {
+  const [submitBtn, setSubmitBtn] = useState("Book a Showing");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     description: "",
     date: "",
+    realtor: "No",
+    proj_name: address,
+    message: "",
   });
 
   // Generate dates for next 14 days
@@ -42,7 +47,20 @@ export default function BookingForm({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", { ...formData, date: selectedDate });
+    const submissionData = {
+      ...formData,
+      date: selectedDate,
+      message: formData.description,
+    };
+    ContactFormSubmit(submissionData, setSubmitBtn, setFormData);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   return (
@@ -109,53 +127,63 @@ export default function BookingForm({
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-2">
-        {/* Name and Phone on same row */}
         <div className="grid grid-cols-2 gap-2">
           <input
             type="text"
             required
+            name="name"
             placeholder="Name"
             className="w-full p-3 border rounded-lg focus:outline-none focus:ring-black text-sm"
             value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            onChange={handleChange}
           />
 
           <input
             type="tel"
             required
+            name="phone"
             placeholder="Phone"
             className="w-full p-3 border rounded-lg focus:outline-none focus:ring-black text-sm"
             value={formData.phone}
-            onChange={(e) =>
-              setFormData({ ...formData, phone: e.target.value })
-            }
+            onChange={handleChange}
           />
         </div>
 
         <input
           type="email"
           required
+          name="email"
           placeholder="Your email"
           className="w-full p-3 border rounded-lg focus:outline-none focus:ring-black text-sm"
           value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          onChange={handleChange}
         />
+
+        <select
+          name="realtor"
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-black text-sm"
+          value={formData.realtor}
+          onChange={handleChange}
+          required
+        >
+          <option value="No">Not working with a realtor</option>
+          <option value="Yes">Working with a realtor</option>
+        </select>
 
         <textarea
           required
+          name="description"
           placeholder={`Please send me additional information about ${address}. Thank you`}
           className="w-full p-3 border rounded-lg focus:outline-none focus:ring-black min-h-[110px] resize-none text-sm"
           value={formData.description}
-          onChange={(e) =>
-            setFormData({ ...formData, description: e.target.value })
-          }
+          onChange={handleChange}
         />
 
         <button
           type="submit"
           className="w-full bg-yellow-400 text-black font-normal py-3 rounded-lg transition-colors"
         >
-          Book a Showing
+          {submitBtn}
         </button>
       </form>
 
