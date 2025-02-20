@@ -26,115 +26,58 @@ const priceRanges = [
 const transactionTypes = ["sale", "lease"];
 
 export default function OntarioCitiesGrid() {
-  const generateLinks = (city) => {
+  const generateCategorizedLinks = (city) => {
     const citySlug = city.toLowerCase().replace(/ /g, "-");
-    const links = [];
 
-    // Open Houses
-    links.push({
-      href: `/resale/ontario/${citySlug}/open-houses`,
-      text: `Open Houses in ${city}`,
-    });
-
-    // Basic property type links
-    propertyTypes.forEach((propType) => {
-      transactionTypes.forEach((transType) => {
-        links.push({
-          href: `/resale/ontario/${citySlug}/${propType.path}-for-${transType}`,
-          text: `${propType.label} for ${transType} in ${city}`,
-        });
-      });
-    });
-
-    // Bedroom combinations
-    bedrooms.forEach((beds) => {
-      transactionTypes.forEach((transType) => {
-        links.push({
-          href: `/resale/ontario/${citySlug}/homes-for-${transType}/${beds}-plus-bed`,
-          text: `${beds} bedroom homes for ${transType} in ${city}`,
-        });
-      });
-    });
-
-    // Bathroom combinations
-    bathrooms.forEach((baths) => {
-      transactionTypes.forEach((transType) => {
-        links.push({
-          href: `/resale/ontario/${citySlug}/homes-for-${transType}/${baths}-plus-bath`,
-          text: `${baths} bathroom homes for ${transType} in ${city}`,
-        });
-      });
-    });
-
-    // Price range combinations
-    priceRanges.forEach((range) => {
-      propertyTypes.forEach((propType) => {
-        if (range.minPrice && range.maxPrice) {
-          links.push({
-            href: `/resale/ontario/${citySlug}/${propType.path}-between-${range.label}`,
-            text: `${
-              propType.label
-            } in ${city} between $${range.minPrice.toLocaleString()} - $${range.maxPrice.toLocaleString()}`,
-          });
-        } else if (range.maxPrice) {
-          links.push({
-            href: `/resale/ontario/${citySlug}/${propType.path}-under-${range.label}`,
-            text: `${
-              propType.label
-            } in ${city} under $${range.maxPrice.toLocaleString()}`,
-          });
-        } else {
-          links.push({
-            href: `/resale/ontario/${citySlug}/${propType.path}-over-${range.label}`,
-            text: `${
-              propType.label
-            } in ${city} over $${range.minPrice.toLocaleString()}`,
-          });
-        }
-      });
-    });
-
-    // Combined bedroom and bathroom combinations
-    bedrooms.forEach((beds) => {
-      bathrooms.forEach((baths) => {
-        transactionTypes.forEach((transType) => {
-          links.push({
-            href: `/resale/ontario/${citySlug}/homes-for-${transType}/${beds}-plus-bed/${baths}-plus-bath`,
-            text: `${beds} bedroom, ${baths} bathroom homes for ${transType} in ${city}`,
-          });
-        });
-      });
-    });
-
-    // Property types with bedrooms, bathrooms and price ranges
-    propertyTypes.forEach((propType) => {
-      bedrooms.forEach((beds) => {
-        bathrooms.forEach((baths) => {
-          priceRanges.forEach((range) => {
+    // Organize links by category
+    const categories = {
+      openHouses: [
+        {
+          href: `/resale/ontario/${citySlug}/open-houses`,
+          text: `Open Houses in ${city}`,
+        },
+      ],
+      propertyTypes: propertyTypes.map((propType) => ({
+        href: `/resale/ontario/${citySlug}/${propType.path}-for-sale`,
+        text: `${propType.label} for sale in ${city}`,
+      })),
+      priceRanges: propertyTypes.flatMap((propType) =>
+        priceRanges
+          .filter((range) => range.maxPrice || range.minPrice) // Only include valid price ranges
+          .map((range) => {
             if (range.minPrice && range.maxPrice) {
-              links.push({
-                href: `/resale/ontario/${citySlug}/${propType.path}/${beds}-plus-bed/${baths}-plus-bath/between-${range.label}`,
-                text: `${beds} bedroom, ${baths} bathroom ${
+              return {
+                href: `/resale/ontario/${citySlug}/${propType.path}-between-${range.label}`,
+                text: `${
                   propType.label
                 } in ${city} between $${range.minPrice.toLocaleString()} - $${range.maxPrice.toLocaleString()}`,
-              });
+              };
             } else if (range.maxPrice) {
-              links.push({
-                href: `/resale/ontario/${citySlug}/${propType.path}/${beds}-plus-bed/${baths}-plus-bath/under-${range.label}`,
-                text: `${beds} bedroom, ${baths} bathroom ${
+              return {
+                href: `/resale/ontario/${citySlug}/${propType.path}-under-${range.label}`,
+                text: `${
                   propType.label
                 } in ${city} under $${range.maxPrice.toLocaleString()}`,
-              });
+              };
+            } else {
+              return {
+                href: `/resale/ontario/${citySlug}/${propType.path}-over-${range.label}`,
+                text: `${
+                  propType.label
+                } in ${city} over $${range.minPrice.toLocaleString()}`,
+              };
             }
-          });
-        });
-      });
-    });
+          })
+      ),
+      bedrooms: bedrooms.map((beds) => ({
+        href: `/resale/ontario/${citySlug}/homes-for-sale/${beds}-plus-bed`,
+        text: `${beds} bedroom homes for sale in ${city}`,
+      })),
+    };
 
-    return links;
+    return categories;
   };
 
-  // Sort cities alphabetically
   const sortedCities = [...allCities].sort((a, b) =>
     a.city.localeCompare(b.city)
   );
@@ -151,12 +94,73 @@ export default function OntarioCitiesGrid() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {sortedCities.map((cityObj) => {
-          const links = generateLinks(cityObj.city);
+          const categories = generateCategorizedLinks(cityObj.city);
           return (
-            <div key={cityObj.city} className="space-y-2">
-              <h2 className="text-xl font-bold mb-4">{cityObj.city}</h2>
-              <div className="space-y-0">
-                {links.map((link, index) => (
+            <div key={cityObj.city} className="space-y-4">
+              <Link
+                href={`/resale/ontario/${cityObj.city
+                  .toLowerCase()
+                  .replace(/ /g, "-")}`}
+              >
+                <h2 className="text-3xl font-bold mb-6 text-black hover:text-blue-800 pt-6">
+                  {cityObj.city}
+                </h2>
+              </Link>
+
+              {/* Open Houses */}
+              <div className="">
+                {categories.openHouses.map((link, index) => (
+                  <div key={index}>
+                    <Link
+                      href={link.href}
+                      className="text-gray-700 hover:text-blue-800 text-[14px]"
+                    >
+                      {link.text}
+                    </Link>
+                  </div>
+                ))}
+              </div>
+
+              {/* Property Types */}
+              <div className="">
+                <h3 className="text-lg font-semibold">
+                  Homes for sale by Property Type
+                </h3>
+                {categories.propertyTypes.map((link, index) => (
+                  <div key={index}>
+                    <Link
+                      href={link.href}
+                      className="text-gray-700 hover:text-blue-800 text-[14px]"
+                    >
+                      {link.text}
+                    </Link>
+                  </div>
+                ))}
+              </div>
+
+              {/* Price Ranges */}
+              <div className="">
+                <h3 className="text-lg font-semibold">
+                  Homes for sale by Price Range
+                </h3>
+                {categories.priceRanges.map((link, index) => (
+                  <div key={index}>
+                    <Link
+                      href={link.href}
+                      className="text-gray-700 hover:text-blue-800 text-[14px]"
+                    >
+                      {link.text}
+                    </Link>
+                  </div>
+                ))}
+              </div>
+
+              {/* Bedrooms */}
+              <div className="">
+                <h3 className="text-lg font-semibold">
+                  Homes for sale by Number of Bedrooms
+                </h3>
+                {categories.bedrooms.map((link, index) => (
                   <div key={index}>
                     <Link
                       href={link.href}

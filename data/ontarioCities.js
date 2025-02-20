@@ -7,7 +7,6 @@ const citiesWithProvinces = [
   { city: "Welland", province: "Ontario" },
   { city: "Windsor", province: "Ontario" },
   { city: "Woodstock", province: "Ontario" },
-  // Add more cities here
   { city: "Ajax", province: "Ontario" },
   { city: "Whitby", province: "Ontario" },
   { city: "Courtice", province: "Ontario" },
@@ -67,7 +66,6 @@ export const allCities = [
   { city: "Temiskaming Shores", province: "Ontario" },
   { city: "Thorold", province: "Ontario" },
   { city: "Thunder Bay", province: "Ontario" },
-  { city: "Markham", province: "Ontario" },
   { city: "Timmins", province: "Ontario" },
   { city: "Toronto", province: "Ontario" },
   { city: "Vaughan", province: "Ontario" },
@@ -75,7 +73,6 @@ export const allCities = [
   { city: "Welland", province: "Ontario" },
   { city: "Windsor", province: "Ontario" },
   { city: "Woodstock", province: "Ontario" },
-  // Add more cities here
   { city: "Ajax", province: "Ontario" },
   { city: "Whitby", province: "Ontario" },
   { city: "Courtice", province: "Ontario" },
@@ -83,10 +80,8 @@ export const allCities = [
   { city: "Innisfil", province: "Ontario" },
   { city: "Bradford", province: "Ontario" },
   { city: "Calgary", province: "Ontario" },
-  { city: "Richmond Hill", province: "Ontario" },
   { city: "Aurora", province: "Ontario" },
   { city: "Newmarket", province: "Ontario" },
-  { city: "Barrie", province: "Ontario" },
   { city: "East Gwillimbury", province: "Ontario" },
 ];
 
