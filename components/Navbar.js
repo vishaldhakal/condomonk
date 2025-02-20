@@ -9,6 +9,7 @@ const Navbar = ({ cities, transparent }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [buttonClicked, setButtonClicked] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [resaleDropdownOpen, setResaleDropdownOpen] = useState(false);
 
   const changeBackground = () => {
     if (window.scrollY >= 80) {
@@ -66,6 +67,15 @@ const Navbar = ({ cities, transparent }) => {
   const handleCityClick = (e) => {
     setIsDropdownOpen(false);
     setIsCollapsed(false);
+  };
+
+  // Add hover handlers for resale dropdown
+  const handleResaleMouseEnter = () => {
+    setResaleDropdownOpen(true);
+  };
+
+  const handleResaleMouseLeave = () => {
+    setResaleDropdownOpen(false);
   };
 
   return (
@@ -147,13 +157,98 @@ const Navbar = ({ cities, transparent }) => {
                   Pre Construction Homes
                 </Link>
               </li>
-              <li className="nav-item">
+              <li
+                className="nav-item dropdown"
+                onMouseEnter={handleResaleMouseEnter}
+                onMouseLeave={handleResaleMouseLeave}
+              >
                 <Link
-                  className="nav-link"
-                  href="/resale/ontario/homes-for-sale"
+                  className={`nav-link dropdown-toggle ${
+                    resaleDropdownOpen ? "show" : ""
+                  }`}
+                  href=""
+                  role="button"
+                  aria-expanded={resaleDropdownOpen}
                 >
-                  Resale Homes
+                  Homes for Sale & Lease
                 </Link>
+                <div
+                  className={`absolute z-50 bg-white shadow-lg py-2 mt-0 rounded-xl ${
+                    resaleDropdownOpen ? "block" : "hidden"
+                  }`}
+                >
+                  <div className="grid md:grid-cols-2 grid-cols-1 md:min-w-[520px] min-w-[250px] mt-2">
+                    <div className="col px-4 ">
+                      <div className="text-sm font-bold text-black mb-3 border-b border-gray-200">
+                        HOMES FOR SALE
+                      </div>
+                      <div className="flex flex-col space-y-2">
+                        <Link
+                          className="text-gray-600  hover:text-gray-900 text-sm"
+                          href="/resale/ontario/semi-detached-homes-for-sale"
+                        >
+                          Semi Detached Homes for Sale
+                        </Link>
+                        <Link
+                          className="text-gray-600  hover:text-gray-900 text-sm"
+                          href="/resale/ontario/detached-homes-for-sale"
+                        >
+                          Detached Homes for Sale
+                        </Link>
+                        <Link
+                          className="text-gray-600  hover:text-gray-900 text-sm"
+                          href="/resale/ontario/townhomes-for-sale"
+                        >
+                          Townhomes for Sale
+                        </Link>
+                        <Link
+                          className="text-gray-600  hover:text-gray-900 text-sm"
+                          href="/resale/ontario/condos-for-sale"
+                        >
+                          Condos for Sale
+                        </Link>
+                        <Link
+                          className="text-gray-600  hover:text-gray-900 text-sm"
+                          href="/resale/ontario/homes-for-sale"
+                        >
+                          All Homes
+                        </Link>
+                      </div>
+                    </div>
+
+                    <div className="col px-4 border-l border-gray-200 mt-md-0 mt-5">
+                      <div className="text-sm font-bold text-black mb-3 border-b border-gray-200">
+                        HOMES FOR LEASE
+                      </div>
+                      <div className="flex flex-col space-y-2">
+                        <Link
+                          className="text-gray-600 hover:text-gray-900 text-sm"
+                          href="/resale/ontario/semi-detached-homes-for-lease"
+                        >
+                          Semi Detached Homes for Lease
+                        </Link>
+                        <Link
+                          className="text-gray-600 hover:text-gray-900 text-sm"
+                          href="/resale/ontario/detached-homes-for-lease"
+                        >
+                          Detached Homes for Lease
+                        </Link>
+                        <Link
+                          className="text-gray-600 hover:text-gray-900 text-sm"
+                          href="/resale/ontario/townhomes-for-lease"
+                        >
+                          Townhomes for Lease
+                        </Link>
+                        <Link
+                          className="text-gray-600 hover:text-gray-900 text-sm"
+                          href="/resale/ontario/condos-for-lease"
+                        >
+                          Condos for Lease
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </li>
               <li className="nav-item rounded-2  mx-1">
                 <Link className="nav-link" href="/top-10-gta-projects">

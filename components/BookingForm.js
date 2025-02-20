@@ -173,9 +173,8 @@ export default function BookingForm({
         <textarea
           required
           name="description"
-          placeholder={`Please send me additional information about ${address}. Thank you`}
           className="w-full p-3 border rounded-lg focus:outline-none focus:ring-black min-h-[110px] resize-none text-sm"
-          value={formData.description}
+          value={`Please send me additional information about ${address}. Thank you`}
           onChange={handleChange}
         />
 

@@ -322,6 +322,118 @@ export default async function Home(props) {
         </div>
       </div>
 
+      <div className="py-5 my-2"></div>
+      <Link href={"/resale/ontario"}>
+        <h2 className="fw-mine text-center mb-5 accent-line fs-1 font-family2 text-black">
+          Explore Resale Homes For Sale in Ontario
+        </h2>
+      </Link>
+      <div className="container">
+        <div className="row row-cols-md-5 row-cols-2">
+          <div className="col">
+            <Link
+              className="d-block properti_city"
+              href={"/resale/ontario/toronto"}
+            >
+              <div className="thumb">
+                <img
+                  src="/cities/toronto.jpg"
+                  alt="toronto"
+                  className="img-fluid lazy"
+                />
+              </div>
+              <div className="overlay">
+                <div className="details">
+                  <h4>Toronto</h4>
+                  <p>Explore Resale Properties in Toronto</p>
+                </div>
+              </div>
+            </Link>
+          </div>
+          <div className="col">
+            <Link
+              className="d-block properti_city"
+              href={"/resale/ontario/brampton"}
+            >
+              <div className="thumb">
+                <img
+                  src="/cities/brampton.jpg"
+                  alt="brampton"
+                  className="img-fluid lazy"
+                />
+              </div>
+              <div className="overlay">
+                <div className="details">
+                  <h4>Brampton</h4>
+                  <p>Explore Resale Properties in Brampton</p>
+                </div>
+              </div>
+            </Link>
+          </div>
+          <div className="col">
+            <Link
+              className="d-block properti_city"
+              href={"/resale/ontario/milton"}
+            >
+              <div className="thumb">
+                <img
+                  src="/cities/etobicoke.jpg"
+                  alt="etobicoke"
+                  className="img-fluid lazy"
+                />
+              </div>
+              <div className="overlay">
+                <div className="details">
+                  <h4>Milton</h4>
+                  <p>Explore Resale Properties in Milton</p>
+                </div>
+              </div>
+            </Link>
+          </div>
+          <div className="col">
+            <Link
+              className="d-block properti_city"
+              href={"/resale/ontario/barrie"}
+            >
+              <div className="thumb">
+                <img
+                  src="/cities/calgary.jpeg"
+                  alt="calgary"
+                  className="img-fluid lazy"
+                />
+              </div>
+              <div className="overlay">
+                <div className="details">
+                  <h4>Barrie</h4>
+                  <p>Explore Resale Properties in Barrie</p>
+                </div>
+              </div>
+            </Link>
+          </div>
+          <div className="col">
+            <Link
+              className="d-block properti_city"
+              href={"/resale/ontario/mississauga"}
+            >
+              <div className="thumb">
+                <img
+                  src="/cities/mississauga.jpg"
+                  alt="mississauga"
+                  className="img-fluid lazy"
+                />
+              </div>
+              <div className="overlay">
+                <div className="details">
+                  <h4>Mississauga</h4>
+                  <p>Explore Resale Properties in Mississauga</p>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="py-5 my-2"></div>
+
       <div className="pt-5 ">
         <div className="container pt-5 " id="projects">
           <div className="d-flex align-items-center justify-content-center">

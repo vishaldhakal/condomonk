@@ -123,7 +123,7 @@ export default function OntarioCitiesGrid() {
 
               {/* Property Types */}
               <div className="">
-                <h3 className="text-lg font-semibold">
+                <h3 className="text-[16px] font-semibold">
                   Homes for sale by Property Type
                 </h3>
                 {categories.propertyTypes.map((link, index) => (
@@ -140,7 +140,7 @@ export default function OntarioCitiesGrid() {
 
               {/* Price Ranges */}
               <div className="">
-                <h3 className="text-lg font-semibold">
+                <h3 className="text-[16px] font-semibold">
                   Homes for sale by Price Range
                 </h3>
                 {categories.priceRanges.map((link, index) => (
@@ -157,7 +157,7 @@ export default function OntarioCitiesGrid() {
 
               {/* Bedrooms */}
               <div className="">
-                <h3 className="text-lg font-semibold">
+                <h3 className="text-[16px] font-semibold">
                   Homes for sale by Number of Bedrooms
                 </h3>
                 {categories.bedrooms.map((link, index) => (
