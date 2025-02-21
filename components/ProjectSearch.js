@@ -114,7 +114,7 @@ const SearchWithAutocomplete = () => {
       </div>
 
       {isFocused && searchTerm && (
-        <div className="autocomplete-results position-absolute bg-white shadow rounded z-3">
+        <div className="autocomplete-results position-absolute bg-white shadow rounded zzz">
           {searchResults.resaleCities.length > 0 && (
             <div>
               <h3 className="h4 bg-light fs-small p-3 fw-bold">
