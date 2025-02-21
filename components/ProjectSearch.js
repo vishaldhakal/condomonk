@@ -25,7 +25,8 @@ const SearchWithAutocomplete = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://api.condomonk.ca/api/all-precons-search/"
+          "https://api.condomonk.ca/api/all-precons-search/?search=" +
+            searchTerm.toLowerCase()
         );
         // Merge API data with local resale cities
         setData({
