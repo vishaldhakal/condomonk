@@ -5,9 +5,9 @@ import Link from "next/link";
 import { allCities } from "@/data/ontarioCities";
 
 const propertyTypes = [
-  { label: "Detached", path: "detached-homes" },
-  { label: "Semi-Detached", path: "semi-detached-homes" },
-  { label: "Townhouse", path: "townhouses" },
+  { label: "Detached Homes", path: "detached-homes" },
+  { label: "Semi-Detached Homes", path: "semi-detached-homes" },
+  { label: "Townhomes", path: "townhouses" },
   { label: "Condo Townhouse", path: "condo-townhouses" },
   { label: "Condos", path: "condos" },
 ];
@@ -92,7 +92,7 @@ export default function OntarioCitiesGrid() {
           Discover homes and properties in cities throughout Ontario
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {sortedCities.map((cityObj) => {
           const categories = generateCategorizedLinks(cityObj.city);
           return (
@@ -122,7 +122,7 @@ export default function OntarioCitiesGrid() {
               </div>
 
               {/* Property Types */}
-              <div className="">
+              <div className="py-2">
                 <h3 className="text-[16px] font-semibold">
                   Homes for sale by Property Type
                 </h3>
@@ -156,7 +156,7 @@ export default function OntarioCitiesGrid() {
               </div>
 
               {/* Bedrooms */}
-              <div className="">
+              <div className="py-2">
                 <h3 className="text-[16px] font-semibold">
                   Homes for sale by Number of Bedrooms
                 </h3>

@@ -185,6 +185,12 @@ const Navbar = ({ cities, transparent }) => {
                       <div className="flex flex-col space-y-2">
                         <Link
                           className="text-gray-600  hover:text-gray-900 text-sm"
+                          href="/resale/ontario/homes-for-sale"
+                        >
+                          All Homes
+                        </Link>
+                        <Link
+                          className="text-gray-600  hover:text-gray-900 text-sm"
                           href="/resale/ontario/semi-detached-homes-for-sale"
                         >
                           Semi Detached Homes for Sale
@@ -206,12 +212,6 @@ const Navbar = ({ cities, transparent }) => {
                           href="/resale/ontario/condos-for-sale"
                         >
                           Condos for Sale
-                        </Link>
-                        <Link
-                          className="text-gray-600  hover:text-gray-900 text-sm"
-                          href="/resale/ontario/homes-for-sale"
-                        >
-                          All Homes
                         </Link>
                       </div>
                     </div>
