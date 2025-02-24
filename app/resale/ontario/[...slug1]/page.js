@@ -162,48 +162,60 @@ function generateTitle(filters) {
   return parts.join(" ");
 }
 
-function generateSubtitle(filters) {
-  const parts = [];
+function generateSubtitle(filters, total) {
+  const location = filters.city || "Ontario";
 
-  // Base description
-  parts.push("Browse the latest listings");
-
-  // Add property type with beds/baths specifics
-  if (filters.propertyType || filters.minBeds || filters.minBaths) {
-    const specs = [];
-    if (filters.propertyType) {
-      specs.push(filters.propertyType.toLowerCase());
-    }
-    if (filters.minBeds) {
-      specs.push(`${filters.minBeds}+ bedrooms`);
-    }
-    if (filters.minBaths) {
-      specs.push(`${filters.minBaths}+ bathrooms`);
-    }
-    if (specs.length > 0) {
-      parts.push(`for ${specs.join(" with ")}`);
-    }
+  // Handle bedroom-specific condo listings
+  if (filters.propertyType === "Condo Apartment" && filters.minBeds) {
+    return `${total.toLocaleString()} ${
+      filters.minBeds
+    }-Bedroom Condos for Sale in ${location} | Affordable ${
+      filters.minBeds
+    }-Bedroom Condos ${
+      filters.maxPrice
+        ? `under $${formatPrice(filters.maxPrice)}`
+        : filters.minPrice
+        ? `from $${formatPrice(filters.minPrice)}`
+        : "from $300K to $1M"
+    } | Open Houses Available`;
   }
 
-  // Add location
-  if (filters.city) {
-    parts.push(`in ${filters.city}`);
-  } else {
-    parts.push("across Ontario");
+  // Handle property type specific pages
+  if (filters.propertyType) {
+    return `${total.toLocaleString()} ${location} ${
+      filters.propertyType
+    }s for Sale | Affordable ${
+      filters.minBeds
+        ? `${filters.minBeds}-${filters.minBeds + 3} Bedroom `
+        : ""
+    }${filters.propertyType}s in ${location} ${
+      filters.maxPrice
+        ? `under $${formatPrice(filters.maxPrice)}`
+        : filters.minPrice && filters.maxPrice
+        ? `from $${formatPrice(filters.minPrice)} to $${formatPrice(
+            filters.maxPrice
+          )}`
+        : "from $1 to $5M"
+    } | Open Houses Available`;
   }
 
-  // Add price context
-  if (filters.maxPrice && !filters.minPrice) {
-    parts.push(`priced under $${filters.maxPrice.toLocaleString()}`);
-  } else if (filters.minPrice && !filters.maxPrice) {
-    parts.push(`priced above $${filters.minPrice.toLocaleString()}`);
-  } else if (filters.minPrice && filters.maxPrice) {
-    parts.push(
-      `with prices from $${filters.minPrice.toLocaleString()} to $${filters.maxPrice.toLocaleString()}`
-    );
+  // Handle price range specific pages
+  if (filters.maxPrice || filters.minPrice) {
+    return `${total.toLocaleString()} ${location} homes for sale | Affordable homes in ${location} ${
+      filters.maxPrice
+        ? `under $${formatPrice(filters.maxPrice)}`
+        : filters.minPrice
+        ? `over $${formatPrice(filters.minPrice)}`
+        : filters.minPrice && filters.maxPrice
+        ? `between $${formatPrice(filters.minPrice)} - $${formatPrice(
+            filters.maxPrice
+          )}`
+        : ""
+    } | Open Houses & New Listings Available`;
   }
 
-  return parts.join(" ");
+  // Default subtitle for general listings
+  return `${total.toLocaleString()} ${location} homes for sale | Affordable 1 - 4 bedroom homes in ${location} from $1 to $5M | Open Houses & New Listings Available`;
 }
 
 export default async function DynamicPage({ params, searchParams }) {
@@ -222,7 +234,7 @@ export default async function DynamicPage({ params, searchParams }) {
   });
 
   const title = generateTitle(filters);
-  const subtitle = generateSubtitle(filters);
+  const subtitle = generateSubtitle(filters, total);
 
   // Prepare analytics parameters with defaults
   const analyticsParams = {
