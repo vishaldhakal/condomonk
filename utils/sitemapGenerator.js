@@ -112,9 +112,6 @@ class SitemapGenerator {
       cities.forEach((city) => {
         const cityBase = `/resale/ontario/${city}`;
 
-        // Add base city URL
-        this.addUrl(cityBase, 0.8);
-
         // Add transaction type variations
         transactionTypes.forEach((transType) => {
           const transBase = `${cityBase}/homes-${transType}`;
@@ -124,11 +121,6 @@ class SitemapGenerator {
           propertyTypes.forEach((propType) => {
             const propBase = `${cityBase}/${propType.path}-${transType}`;
             this.addUrl(propBase, 0.7);
-
-            // Add price range variations
-            priceRanges.forEach((priceRange) => {
-              this.addUrl(`${propBase}/${priceRange.path}`, 0.65);
-            });
           });
         });
       });
