@@ -411,7 +411,7 @@ export default async function DynamicPage({ params, searchParams }) {
   };
 
   return (
-    <div className="max-w-[1370px] mx-auto px-2 md:px-3 py-2">
+    <div className="max-w-[1370px] mx-auto px-2 md:px-4 py-2">
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-xl md:text-3xl font-extrabold leading-tight">
