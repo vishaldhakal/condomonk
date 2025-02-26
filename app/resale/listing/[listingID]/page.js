@@ -13,23 +13,12 @@ import {
 } from "@/lib/analytics";
 import MarketComparisonChart from "@/components/MarketComparisonChart";
 import { formatPrice } from "@/utils/formatting";
-import dynamic from "next/dynamic";
 import TimeAgo from "@/helper/timeAgo";
 import WalkScore from "@/components/WalkScore";
 import SimilarHomes from "@/components/SimilarHomes";
-import BottomContactForm from "@/components/BottomContactForm";
-import Image from "next/image";
 import PriceHistory from "@/components/PriceHistory";
-import { Metadata } from "next";
 import ResaleFAQ from "@/components/ResaleFAQ";
-
-// Dynamic import for Map component with ssr disabled
-const Map = dynamic(() => import("@/components/Map"), {
-  ssr: false,
-  loading: () => (
-    <div className="h-[400px] w-full bg-gray-100 animate-pulse rounded-lg " />
-  ),
-});
+import GoogleMap from "@/components/GoogleMap";
 
 export const revalidate = 60; // 1 minute
 
@@ -616,12 +605,15 @@ export default async function PropertyDetailPage({ params }) {
             <div className="mt-12 z-0">
               <h2 className="text-3xl font-bold mb-4">Location</h2>
               <div className="h-[400px] w-full rounded-lg overflow-hidden border border-gray-200 z-1">
-                <Map
-                  address={`${property.StreetNumber} ${property.StreetName} ${
+                <GoogleMap
+                  width={600}
+                  height={400}
+                  location={`${property.StreetNumber} ${property.StreetName} ${
                     property.StreetSuffix
                   }, ${property.City.split(" ")[0]}, ${
                     property.StateOrProvince
                   }`}
+                  zoom={17}
                 />
               </div>
             </div>

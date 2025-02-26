@@ -1,6 +1,5 @@
 import Nformatter from "@/components/Nformatter";
 import CondoCard from "@/components/CondoCard";
-import BottomContactForm from "@/components/BottomContactForm";
 import Breadcrumb from "@/components/Breadcrumb";
 import SideContactForm from "@/components/SideContactForm";
 import FixedContactButton from "@/components/FixedContactButton";
@@ -10,6 +9,7 @@ import Link from "next/link";
 import CustomModal from "@/components/Modal";
 import ExpandableContent from "@/components/ExpandableContent";
 import dynamic from "next/dynamic";
+import GoogleMap from "@/components/GoogleMap";
 
 // Dynamically import the Map component with no SSR
 const Map = dynamic(() => import("@/components/Map"), { ssr: false });
@@ -347,7 +347,13 @@ export default async function Home({ params }) {
                     className="px-2 mx-md-0"
                     style={{ height: "400px", width: "100%" }}
                   >
-                    <Map address={data.preconstruction.project_address} />
+                    {/* <Map address={data.preconstruction.project_address} /> */}
+                    <GoogleMap
+                      width={600}
+                      height={400}
+                      location={data.preconstruction.project_address}
+                      zoom={20}
+                    />
                     <span className="text-xs">
                       Note: The exact location of the project may vary from the
                       address shown here

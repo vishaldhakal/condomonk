@@ -7,6 +7,7 @@ import MainSearch from "@/components/MainSearch";
 import "./icons.css";
 import FeaturedCard from "@/components/FeaturedCard";
 import Newsletter from "@/components/Newsletter";
+import GoogleMap from "@/components/GoogleMap";
 
 async function getData(city) {
   const res = await fetch(
@@ -99,7 +100,6 @@ export default async function Home(props) {
                   homes Platform
                 </span>
               </h1>
-
               <p className="mt-3 text-base text-black sm:text-xl sm-center font-light me-md-5 me-0">
                 Get first updates on New Construction Homes Projects across
                 Canada.
