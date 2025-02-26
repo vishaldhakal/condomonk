@@ -255,7 +255,7 @@ export default function FilterBar({ currentFilters }) {
             <Button
               variant="outline"
               size="sm"
-              className="rounded-full border-gray-300 hover:bg-slate-100 min-w-[120px] justify-between"
+              className="rounded-lg border-gray-300 hover:bg-slate-100 min-w-[120px] justify-between"
             >
               <span className="text-gray-700">
                 {currentFilters.transactionType || "For Sale"}
@@ -289,7 +289,7 @@ export default function FilterBar({ currentFilters }) {
             <Button
               variant="outline"
               size="sm"
-              className="rounded-full border-gray-300 hover:bg-slate-100 min-w-[120px] justify-between"
+              className="rounded-lg border-gray-300 hover:bg-slate-100 min-w-[120px] justify-between"
             >
               <span className="text-gray-700">
                 {currentFilters.minPrice || currentFilters.maxPrice
@@ -342,7 +342,7 @@ export default function FilterBar({ currentFilters }) {
             <Button
               variant="outline"
               size="sm"
-              className={`rounded-full border-gray-300 hover:bg-slate-100 min-w-[100px] justify-between ${
+              className={`rounded-lg border-gray-300 hover:bg-slate-100 min-w-[100px] justify-between ${
                 currentFilters.minBeds ? "bg-gray-200" : ""
               }`}
             >
@@ -382,7 +382,7 @@ export default function FilterBar({ currentFilters }) {
             <Button
               variant="outline"
               size="sm"
-              className="rounded-full border-gray-300 hover:bg-slate-100 min-w-[140px] justify-between"
+              className="rounded-lg border-gray-300 hover:bg-slate-100 min-w-[140px] justify-between"
             >
               <span className="text-gray-700">
                 {currentFilters.propertyType || "All Home Types"}
@@ -418,7 +418,7 @@ export default function FilterBar({ currentFilters }) {
             <Button
               variant="outline"
               size="sm"
-              className="rounded-full border-gray-300 hover:bg-slate-100 min-w-[100px] justify-between"
+              className="rounded-lg border-gray-300 hover:bg-slate-100 min-w-[100px] justify-between"
             >
               <span className="text-gray-700">More</span>
               <ChevronDown className="ml-2 h-4 w-4 text-gray-500 shrink-0" />
@@ -451,7 +451,7 @@ export default function FilterBar({ currentFilters }) {
         <Button
           variant="outline"
           size="sm"
-          className="rounded-full text-black hover:bg-white"
+          className="rounded-lg text-black hover:bg-white"
         >
           Save Search
         </Button>
