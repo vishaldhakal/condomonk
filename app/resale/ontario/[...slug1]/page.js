@@ -3,10 +3,10 @@ import FilterBar from "@/components/FilterBar";
 import PropertyList from "@/components/PropertyList";
 import { notFound } from "next/navigation";
 import { formatPrice } from "@/utils/formatting";
-import { getCityAnalytics } from "@/lib/analytics";
+/* import { getCityAnalytics } from "@/lib/analytics"; */
 import BottomContactForm from "@/components/BottomContactForm";
 import Image from "next/image";
-import CityAnalyticsCharts from "@/components/CityAnalyticsCharts";
+/* import CityAnalyticsCharts from "@/components/CityAnalyticsCharts"; */
 
 // Helper to determine the type of page and parse filters
 function parseSlug(slug) {
@@ -283,10 +283,10 @@ export default async function DynamicPage({ params, searchParams }) {
   };
 
   // Fetch appropriate analytics based on whether it's a city page
-  const analyticsData = await getCityAnalytics({
+  /* const analyticsData = await getCityAnalytics({
     city: filters.city,
     transactionType: filters.transactionType,
-  });
+  }); */
 
   // Add city-specific analytics section
   const CityAnalytics = ({ data }) => {
@@ -438,10 +438,10 @@ export default async function DynamicPage({ params, searchParams }) {
       />
 
       {/* Market Insights Section */}
-      <div className="mt-12 border-t pt-12">
+      {/* <div className="mt-12 border-t pt-12">
         <h2 className="text-3xl font-bold mb-6">Market Insights</h2>
         <CityAnalytics data={analyticsData} />
-      </div>
+      </div> */}
 
       {/* Contact Section */}
       <div className="mt-16 max-w-2xl mx-auto text-center">
