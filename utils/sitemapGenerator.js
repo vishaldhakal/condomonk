@@ -101,21 +101,6 @@ class SitemapGenerator {
         { label: "Condos", path: "condos" },
       ];
 
-      // Price ranges from FilterBar
-      const priceRanges = [
-        { path: "homes-under-500k" },
-        { path: "homes-between-500k-750k" },
-        { path: "homes-between-750k-1000k" },
-        { path: "homes-between-1000k-1500k" },
-        { path: "homes-over-1500k" },
-      ];
-
-      // Bed options from FilterBar
-      const bedOptions = [1, 2, 3, 4, 5];
-
-      // Bath options from FilterBar
-      const bathOptions = [1, 2, 3, 4];
-
       // Transaction types
       const transactionTypes = ["for-sale", "for-lease"];
 
@@ -144,46 +129,6 @@ class SitemapGenerator {
             priceRanges.forEach((priceRange) => {
               this.addUrl(`${propBase}/${priceRange.path}`, 0.65);
             });
-
-            // Add bed/bath combinations
-            bedOptions.forEach((beds) => {
-              this.addUrl(`${propBase}/${beds}-plus-bed`, 0.65);
-
-              bathOptions.forEach((baths) => {
-                this.addUrl(
-                  `${propBase}/${beds}-plus-bed/${baths}-plus-bath`,
-                  0.6
-                );
-              });
-            });
-
-            // Add price range with bed/bath combinations
-            priceRanges.forEach((priceRange) => {
-              bedOptions.forEach((beds) => {
-                bathOptions.forEach((baths) => {
-                  this.addUrl(
-                    `${propBase}/${priceRange.path}/${beds}-plus-bed/${baths}-plus-bath`,
-                    0.55
-                  );
-                });
-              });
-            });
-          });
-
-          // Add combinations without property type
-          priceRanges.forEach((priceRange) => {
-            this.addUrl(`${transBase}/${priceRange.path}`, 0.65);
-          });
-
-          bedOptions.forEach((beds) => {
-            this.addUrl(`${transBase}/${beds}-plus-bed`, 0.65);
-
-            bathOptions.forEach((baths) => {
-              this.addUrl(
-                `${transBase}/${beds}-plus-bed/${baths}-plus-bath`,
-                0.6
-              );
-            });
           });
         });
       });
@@ -198,27 +143,6 @@ class SitemapGenerator {
         propertyTypes.forEach((propType) => {
           const propBase = `${ontarioBase}/${propType.path}-${transType}`;
           this.addUrl(propBase, 0.7);
-
-          priceRanges.forEach((priceRange) => {
-            this.addUrl(`${propBase}/${priceRange.path}`, 0.65);
-          });
-        });
-
-        // Add price ranges without property type
-        priceRanges.forEach((priceRange) => {
-          this.addUrl(`${transBase}/${priceRange.path}`, 0.65);
-        });
-
-        // Add bed/bath combinations
-        bedOptions.forEach((beds) => {
-          this.addUrl(`${transBase}/${beds}-plus-bed`, 0.65);
-
-          bathOptions.forEach((baths) => {
-            this.addUrl(
-              `${transBase}/${beds}-plus-bed/${baths}-plus-bath`,
-              0.6
-            );
-          });
         });
       });
     } catch (error) {

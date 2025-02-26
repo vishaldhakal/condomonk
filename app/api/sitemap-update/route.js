@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
-import sitemapGenerator from '../../../utils/sitemapGenerator';
-import { revalidatePath } from 'next/cache';
+import { NextResponse } from "next/server";
+import sitemapGenerator from "../../../utils/sitemapGenerator";
+import { revalidatePath } from "next/cache";
 
 export async function GET() {
   try {
@@ -8,25 +8,22 @@ export async function GET() {
 
     if (result.success) {
       // Revalidate the sitemap.xml path
-      revalidatePath('/sitemap.xml');
-      
+      revalidatePath("/sitemap.xml");
+
       return NextResponse.json(
-        { 
+        {
           message: result.message,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         },
         { status: 200 }
       );
     } else {
-      return NextResponse.json(
-        { error: result.message },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: result.message }, { status: 500 });
     }
   } catch (error) {
-    console.error('Sitemap generation error:', error);
+    console.error("Sitemap generation error:", error);
     return NextResponse.json(
-      { error: 'Internal Server Error' },
+      { error: "Internal Server Error" },
       { status: 500 }
     );
   }
