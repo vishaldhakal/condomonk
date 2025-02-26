@@ -7,7 +7,6 @@ import MainSearch from "@/components/MainSearch";
 import "./icons.css";
 import FeaturedCard from "@/components/FeaturedCard";
 import Newsletter from "@/components/Newsletter";
-import GoogleMap from "@/components/GoogleMap";
 
 async function getData(city) {
   const res = await fetch(
