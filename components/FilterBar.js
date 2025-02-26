@@ -249,6 +249,40 @@ export default function FilterBar({ currentFilters }) {
   return (
     <div className="bg-white">
       <div className="flex items-center gap-2 py-1">
+        {/* Transaction Type Dropdown */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="outline"
+              size="sm"
+              className="rounded-lg border-gray-300 hover:bg-gray-50 min-w-[120px] justify-between"
+            >
+              <span className="text-gray-700">
+                {currentFilters.transactionType || "For Sale"}
+              </span>
+              <ChevronDown className="ml-2 h-4 w-4 text-gray-500 shrink-0" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start" className="shadow-lg mt-2">
+            <DropdownMenuItem className="p-0">
+              <Link
+                href={getFilterUrl({ transactionType: "For Sale" })}
+                className="px-3 py-2 w-full text-black hover:bg-gray-50"
+              >
+                For Sale
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="p-0">
+              <Link
+                href={getFilterUrl({ transactionType: "For Lease" })}
+                className="px-3 py-2 w-full text-black hover:bg-gray-50"
+              >
+                For Lease
+              </Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
         {/* Price Range Dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

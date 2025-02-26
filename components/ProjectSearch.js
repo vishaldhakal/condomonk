@@ -125,7 +125,7 @@ const SearchWithAutocomplete = () => {
                   <Link
                     href={`/resale/ontario/${city.city
                       .toLowerCase()
-                      .replace(/ /g, "-")}`}
+                      .replace(/ /g, "-")}/homes-for-sale`}
                     key={index}
                   >
                     <li

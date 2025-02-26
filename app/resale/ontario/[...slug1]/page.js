@@ -8,8 +8,6 @@ import BottomContactForm from "@/components/BottomContactForm";
 import Image from "next/image";
 import CityAnalyticsCharts from "@/components/CityAnalyticsCharts";
 
-export const revalidate = 60; // 1 minute
-
 // Helper to determine the type of page and parse filters
 function parseSlug(slug) {
   const filters = {};
