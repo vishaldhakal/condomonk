@@ -566,3 +566,156 @@ function generateMarketDescription(filters, insights) {
 
   return paragraphs.map((p) => p.trim()).join("\n\n");
 }
+
+export async function generateMetadata({ params, searchParams }, parent) {
+  const filters = parseSlug(params.slug1);
+  const { total } = await getProperties({ ...filters, ...searchParams });
+
+  const title = generateTitle(filters);
+  const subtitle = generateSubtitle(filters, total);
+  const location = filters.city || "Ontario";
+
+  // Generate canonical URL
+  let canonicalPath = "/resale/ontario";
+
+  // Check if this is just the base resale page
+  const isBaseResalePage =
+    params.slug1.length === 1 && params.slug1[0] === "homes-for-sale";
+  if (isBaseResalePage) {
+    // For base resale page, just use /resale/ontario
+    return {
+      title: `${title} | Real Estate Listings`,
+      description: subtitle,
+      alternates: {
+        canonical: `https://condomonk.ca${canonicalPath}`,
+      },
+      openGraph: {
+        title: `${title} | Real Estate Listings`,
+        description: subtitle,
+        url: `https://condomonk.ca${canonicalPath}`,
+        siteName: "Condomonk",
+        type: "website",
+        images: [
+          {
+            url: "https://condomonk.ca/cities/brampton.jpg",
+            width: 1200,
+            height: 630,
+            alt: `Real Estate Listings in ${location}`,
+          },
+        ],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${title} | Real Estate Listings`,
+        description: subtitle,
+        images: ["https://condomonk.ca/cities/brampton.jpg"],
+      },
+      robots: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+      other: {
+        "og:locale": "en_CA",
+        "og:type": "website",
+      },
+    };
+  }
+
+  // Build URL parts in a specific order (following FilterBar.js logic)
+  let urlPath = "";
+
+  // 1. Add city if present (should be first in the path)
+  if (filters.city && filters.city !== "Ontario") {
+    urlPath = filters.city.toLowerCase().replace(/ /g, "-") + "/";
+  }
+
+  // Property type mapping
+  const propertyTypeMapping = {
+    Detached: "detached-homes",
+    "Semi-Detached": "semi-detached-homes",
+    Townhouse: "townhouses",
+    "Condo Townhouse": "condo-townhouses",
+    "Condo Apartment": "condos",
+  };
+
+  // 2. Add property type or 'homes'
+  if (filters.propertyType && propertyTypeMapping[filters.propertyType]) {
+    urlPath += propertyTypeMapping[filters.propertyType];
+  } else {
+    urlPath += "homes";
+  }
+
+  // 3. Add price range if present
+  if (filters.maxPrice && !filters.minPrice) {
+    urlPath += `-under-${(filters.maxPrice / 1000).toFixed(0)}k`;
+  } else if (filters.minPrice && !filters.maxPrice) {
+    urlPath += `-over-${(filters.minPrice / 1000).toFixed(0)}k`;
+  } else if (filters.minPrice && filters.maxPrice) {
+    urlPath += `-between-${(filters.minPrice / 1000).toFixed(0)}k-${(
+      filters.maxPrice / 1000
+    ).toFixed(0)}k`;
+  }
+
+  // 4. Add transaction type
+  urlPath += `-for-${
+    filters.transactionType === "For Lease" ? "lease" : "sale"
+  }`;
+
+  // 5. Add beds and baths as additional path segments
+  const specParts = [];
+  if (filters.minBeds) {
+    specParts.push(`${filters.minBeds}-plus-bed`);
+  }
+  if (filters.minBaths) {
+    specParts.push(`${filters.minBaths}-plus-bath`);
+  }
+
+  // Combine all parts
+  canonicalPath = `${canonicalPath}/${urlPath}`;
+  if (specParts.length > 0) {
+    canonicalPath += `/${specParts.join("/")}`;
+  }
+
+  return {
+    title: `${title} | Real Estate Listings`,
+    description: subtitle,
+    alternates: {
+      canonical: `https://condomonk.ca${canonicalPath}`,
+    },
+    openGraph: {
+      title: `${title} | Real Estate Listings`,
+      description: subtitle,
+      url: `https://condomonk.ca${canonicalPath}`,
+      siteName: "Condomonk",
+      type: "website",
+      images: [
+        {
+          url: "https://condomonk.ca/cities/brampton.jpg",
+          width: 1200,
+          height: 630,
+          alt: `Real Estate Listings in ${location}`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | Real Estate Listings`,
+      description: subtitle,
+      images: ["https://condomonk.ca/cities/brampton.jpg"],
+    },
+    robots: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+    other: {
+      "og:locale": "en_CA",
+      "og:type": "website",
+    },
+  };
+}

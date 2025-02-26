@@ -37,10 +37,22 @@ export async function generateMetadata({ params }) {
 
     const description = `Book a showing for ${property.StreetNumber} ${property.StreetName} ${property.StreetSuffix} with MLS # ${property.ListingKey} in ${property.City} with us - Condomonk`;
 
+    const canonical = `https://condomonk.ca/resale/listing/${params.listingID}`;
+
     return {
       title,
       description,
+      alternates: {
+        canonical,
+      },
       openGraph: {
+        title,
+        description,
+        url: canonical,
+        images: property.images?.[0] ? [property.images[0]] : [],
+      },
+      twitter: {
+        card: "summary_large_image",
         title,
         description,
         images: property.images?.[0] ? [property.images[0]] : [],
