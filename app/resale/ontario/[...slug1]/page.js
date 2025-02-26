@@ -411,16 +411,16 @@ export default async function DynamicPage({ params, searchParams }) {
   };
 
   return (
-    <div className="max-w-[1370px] mx-auto px-4 py-6">
-      <div className="flex justify-between items-center pt-1">
+    <div className="max-w-[1370px] mx-auto px-2 md:px-3 py-2">
+      <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl md:text-3xl font-extrabold leading-tight">
+          <h1 className="text-xl md:text-3xl font-extrabold leading-tight">
             {total.toLocaleString()} {title}
           </h1>
           <h2 className="text-gray-600 text-sm leading-tight">{subtitle}</h2>
         </div>
       </div>
-      <div className="sticky top-0 bg-white py-2 flex justify-between items-center  mb-3 z-0 overflow-x-auto hide-scrollbar ps-0">
+      <div className="sticky top-0 bg-white py-1 flex justify-between items-center mb-2 z-20 overflow-x-auto hide-scrollbar ps-0">
         <FilterBar currentFilters={filters} />
         <div className="flex bg-gray-100 p-1 rounded-lg">
           <button className="px-3 py-1 rounded-md bg-white shadow-sm">
@@ -680,7 +680,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
   }
 
   return {
-    title: `${title} | Real Estate Listings`,
+    title: `${total.toLocaleString()} ${title} | Real Estate Listings`,
     description: subtitle,
     alternates: {
       canonical: `https://condomonk.ca${canonicalPath}`,

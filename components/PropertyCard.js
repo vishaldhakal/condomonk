@@ -45,8 +45,8 @@ export default function PropertyCard({ property }) {
       <Link href={`/resale/listing/${streetAndMLS}`} className="text-black">
         <div className="lg:px-0 h-full w-full">
           <div className="flex flex-col overflow-hidden relative">
-            <div className="h-52 sm:h-52 overflow-hidden relative">
-              <div className="h-52 sm:h-52 relative z-10 rounded-t-2xl rounded-b-2xl overflow-hidden">
+            <div className="h-36 sm:h-52 overflow-hidden relative">
+              <div className="h-36 sm:h-52 relative z-10 rounded-t-2xl rounded-b-2xl overflow-hidden">
                 <img
                   src={hasImage ? property.imageUrl.medium : NO_IMAGE_URL}
                   alt={`${property.StreetNumber} ${property.StreetName}`}
@@ -61,13 +61,17 @@ export default function PropertyCard({ property }) {
                     {property.PropertySubType?.trim()}
                   </div>
                 )}
-                {isNew && (
+                {isNew ? (
                   <div className="text-black md:text-[0.7rem] text-[0.52rem] p-[3px] px-2 shadow-2xl rounded-md mx-1 bg-[#f0fff4] items-center flex gap-1">
                     <span className="relative flex h-1 w-1">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-1 w-1 bg-green-500"></span>
                     </span>
-                    <span>New Listing</span>
+                    <span>Just Listed</span>
+                  </div>
+                ) : (
+                  <div className="text-black md:text-[0.7rem] text-[0.52rem] p-[3px] px-2 shadow-2xl rounded-md mx-1 bg-white items-center flex gap-1">
+                    <TimeAgo timestamp={property.ModificationTimestamp} />
                   </div>
                 )}
               </div>
@@ -76,15 +80,12 @@ export default function PropertyCard({ property }) {
             {/* Content */}
             <div className="flex-1 sm:px-3 pt-2 pb-4 px-2">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-                <h2 className="font-bold text-2xl sm:text-2xl items-center justify-start mt-2 sm:my-2">
+                <h2 className="font-bold text-2xl sm:text-2xl items-center justify-start mt-0 sm:my-2">
                   ${property.ListPrice.toLocaleString()}
                   {property.TransactionType === "For Lease" && (
                     <span className="text-xs text-gray-600"> /mo</span>
                   )}
                 </h2>
-                <div className="text-xs font-medium text-black mb-1 sm:mb-0">
-                  <TimeAgo timestamp={property.ModificationTimestamp} />
-                </div>
               </div>
 
               <span className="text-black text-xs">
@@ -131,14 +132,10 @@ export default function PropertyCard({ property }) {
                 </div>
               </span>
 
-              <div className="text-dark text-xs mt-1">
+              <div className="text-dark text-xs mt-1 truncate">
                 {property.StreetNumber} {property.StreetName}{" "}
                 {property.StreetSuffix} {property.City},{" "}
                 {property.StateOrProvince}
-              </div>
-
-              <div className="text-xs text-gray-600 mt-1">
-                MLS® {property.ListingKey}
               </div>
               <p className="text-[10px] text-gray-600 mt-0 whitespace-nowrap">
                 Listed by : {property.ListOfficeName}
