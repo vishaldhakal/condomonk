@@ -17,6 +17,11 @@ function parseSlug(slug) {
   // Set default transaction type
   filters.transactionType = "For Sale";
 
+  // Check for price reduced listings
+  if (path.includes("price-reduced-homes")) {
+    filters.mlsStatus = "Price Change";
+  }
+
   // Check if first part contains for-sale or for-lease
   const firstPart = parts[0] || "";
   const isTransactionPath =
@@ -226,13 +231,42 @@ export default async function DynamicPage({ params, searchParams }) {
     notFound();
   }
 
-  const { properties, total, currentPage, totalPages } = await getProperties({
+  const {
+    properties: allProperties,
+    total,
+    currentPage,
+    totalPages,
+  } = await getProperties({
     ...filters,
     ...searchParams,
   });
 
-  const title = generateTitle(filters);
-  const subtitle = generateSubtitle(filters, total);
+  // If this is a price drop page, filter out properties without a price drop
+  const properties =
+    filters.mlsStatus === "Price Change"
+      ? allProperties.filter(
+          (property) =>
+            property.PreviousListPrice &&
+            property.ListPrice < property.PreviousListPrice
+        )
+      : allProperties;
+
+  const actualTotal =
+    filters.mlsStatus === "Price Change" ? properties.length : total;
+
+  const title =
+    filters.mlsStatus === "Price Change"
+      ? `Price Reduced Homes ${
+          filters.city ? `in ${filters.city}` : "in Ontario"
+        }`
+      : generateTitle(filters);
+
+  const subtitle =
+    filters.mlsStatus === "Price Change"
+      ? `${actualTotal.toLocaleString()} Recently Reduced Properties ${
+          filters.city ? `in ${filters.city}` : "in Ontario"
+        } | Find Great Deals on Homes with Recent Price Drops`
+      : generateSubtitle(filters, actualTotal);
 
   // Prepare analytics parameters with defaults
   const analyticsParams = {
@@ -415,7 +449,7 @@ export default async function DynamicPage({ params, searchParams }) {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-xl md:text-3xl font-extrabold leading-tight">
-            {total.toLocaleString()} {title}
+            {actualTotal.toLocaleString()} {title}
           </h1>
           <h2 className="text-gray-600 text-sm leading-tight">{subtitle}</h2>
         </div>
@@ -432,9 +466,9 @@ export default async function DynamicPage({ params, searchParams }) {
 
       <PropertyList
         properties={properties}
-        total={total}
+        total={actualTotal}
         currentPage={currentPage}
-        totalPages={totalPages}
+        totalPages={Math.ceil(actualTotal / 30)}
       />
 
       {/* Market Insights Section */}
@@ -571,8 +605,20 @@ export async function generateMetadata({ params, searchParams }, parent) {
   const filters = parseSlug(params.slug1);
   const { total } = await getProperties({ ...filters, ...searchParams });
 
-  const title = generateTitle(filters);
-  const subtitle = generateSubtitle(filters, total);
+  const title =
+    filters.mlsStatus === "Price Change"
+      ? `Price Reduced Homes ${
+          filters.city ? `in ${filters.city}` : "in Ontario"
+        }`
+      : generateTitle(filters);
+
+  const subtitle =
+    filters.mlsStatus === "Price Change"
+      ? `${total.toLocaleString()} Recently Reduced Properties ${
+          filters.city ? `in ${filters.city}` : "in Ontario"
+        } | Find Great Deals on Homes with Recent Price Drops`
+      : generateSubtitle(filters, total);
+
   const location = filters.city || "Ontario";
 
   // Generate canonical URL

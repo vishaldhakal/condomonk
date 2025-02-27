@@ -246,6 +246,26 @@ export default function FilterBar({ currentFilters }) {
     return finalUrl;
   };
 
+  const getPriceDropUrl = () => {
+    const base = baseUrl;
+    let urlPath = "";
+
+    // If we have a city, it should be the first part of the path
+    if (currentFilters.city && currentFilters.city !== "Ontario") {
+      urlPath = currentFilters.city.toLowerCase().replace(/ /g, "-") + "/";
+    }
+
+    // Add 'price-reduced' to the path
+    urlPath += "price-reduced-homes";
+
+    // Add transaction type
+    urlPath += `-for-${
+      currentFilters.transactionType === "For Lease" ? "lease" : "sale"
+    }`;
+
+    return `${base}/${urlPath}`;
+  };
+
   return (
     <div className="bg-white">
       <div className="flex items-center gap-2 py-1">
@@ -455,6 +475,18 @@ export default function FilterBar({ currentFilters }) {
         >
           Save Search
         </Button>
+
+        {/* Price Drop Button */}
+        <Link href={getPriceDropUrl()}>
+          <Button
+            variant="outline"
+            size="sm"
+            className="rounded-lg text-red-600  border-red-200 flex items-center gap-1"
+          >
+            <span className="text-red-600">↓</span>
+            <span className="text-green-500">Price Drop</span>
+          </Button>
+        </Link>
       </div>
     </div>
   );

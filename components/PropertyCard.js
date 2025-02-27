@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import TimeAgo from "@/helper/timeAgo";
+import React from "react";
 
 const NO_IMAGE_URL = "/noimage.webp";
 
@@ -39,6 +40,24 @@ export default function PropertyCard({ property }) {
     if (property.ListingKey) parts.push(property.ListingKey);
     return parts.filter(Boolean).join("-");
   })();
+
+  // Calculate price drop amount and percentage
+  const priceDropInfo = React.useMemo(() => {
+    if (
+      !property.PreviousListPrice ||
+      property.ListPrice >= property.PreviousListPrice
+    ) {
+      return null;
+    }
+
+    const dropAmount = property.PreviousListPrice - property.ListPrice;
+    const dropPercentage = (dropAmount / property.PreviousListPrice) * 100;
+
+    return {
+      amount: dropAmount,
+      percentage: dropPercentage.toFixed(1),
+    };
+  }, [property.ListPrice, property.PreviousListPrice]);
 
   return (
     <section className="relative transition-all duration-200 transform bg-white group rounded-2xl p-0 hover:shadow-lg hover:rounded-t-2xl hover:-translate-y-1 overflow-hidden">
@@ -80,12 +99,22 @@ export default function PropertyCard({ property }) {
             {/* Content */}
             <div className="flex-1 sm:px-3 pt-2 pb-4 px-2">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-                <h2 className="font-bold text-2xl sm:text-2xl items-center justify-start mt-0 sm:my-2">
-                  ${property.ListPrice.toLocaleString()}
-                  {property.TransactionType === "For Lease" && (
-                    <span className="text-xs text-gray-600"> /mo</span>
+                {/* Price section with drop percentage */}
+                <div className="flex flex-col">
+                  {priceDropInfo && (
+                    <div className="text-green-500 text-[13px] font-bold">
+                      <span className="text-red-500">↓</span> $
+                      {priceDropInfo.amount.toLocaleString()} (
+                      {priceDropInfo.percentage}% reduced)
+                    </div>
                   )}
-                </h2>
+                  <h2 className="font-bold text-2xl sm:text-2xl items-center justify-start mt-0 sm:my-2">
+                    ${property.ListPrice.toLocaleString()}
+                    {property.TransactionType === "For Lease" && (
+                      <span className="text-xs text-gray-600"> /mo</span>
+                    )}
+                  </h2>
+                </div>
               </div>
 
               <span className="text-black text-xs">
