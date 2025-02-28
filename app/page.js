@@ -465,10 +465,19 @@ export default async function Home(props) {
             <h2 className="fw-mine text-center mb-2 fs-1 font-family2 fw-mine fs-bi">
               Homes For Sale in Toronto
             </h2>
-            <h3 className=" text-center mb-4 fs-6">
+            <h3 className=" text-center mb-2 fs-6">
               Toronto homes for sale | Affordable 1 - 4 bedroom homes in Toronto
               from $1 to $5M
             </h3>
+            <div className="text-center mb-4">
+              <Link
+                href="/resale/ontario/toronto/homes-for-sale"
+                className="text-primary"
+              >
+                View more homes for sale in Toronto{" "}
+                <i className="bi bi-arrow-right"></i>
+              </Link>
+            </div>
             <div className="row row-cols-2 row-cols-md-4 g-2 mb-5">
               {toronto_resale.properties?.slice(0, 4).map((property) => (
                 <div className="col" key={property.ListingKey}>
@@ -484,10 +493,19 @@ export default async function Home(props) {
             <h2 className="fw-mine text-center mb-2 fs-1 font-family2 fw-mine fs-bi">
               Homes For Sale in Barrie
             </h2>
-            <h3 className=" text-center mb-4 fs-6">
+            <h3 className=" text-center mb-2 fs-6">
               Barrie homes for sale | Affordable 1 - 4 bedroom homes in Barrie
               from $1 to $5M
             </h3>
+            <div className="text-center mb-4">
+              <Link
+                href="/resale/ontario/barrie/homes-for-sale"
+                className="text-primary"
+              >
+                View more homes for sale in Barrie{" "}
+                <i className="bi bi-arrow-right"></i>
+              </Link>
+            </div>
             <div className="row row-cols-2 row-cols-md-4 g-2 mb-5">
               {barrie_resale.properties?.slice(0, 4).map((property) => (
                 <div className="col" key={property.ListingKey}>
@@ -503,10 +521,19 @@ export default async function Home(props) {
             <h2 className="fw-mine text-center mb-2 fs-1 font-family2 fw-mine fs-bi">
               Homes For Sale in Milton
             </h2>
-            <h3 className=" text-center mb-4 fs-6">
+            <h3 className=" text-center mb-2 fs-6">
               Milton homes for sale | Affordable 1 - 4 bedroom homes in Milton
               from $1 to $5M
             </h3>
+            <div className="text-center mb-4">
+              <Link
+                href="/resale/ontario/milton/homes-for-sale"
+                className="text-primary"
+              >
+                View more homes for sale in Milton{" "}
+                <i className="bi bi-arrow-right"></i>
+              </Link>
+            </div>
             <div className="row row-cols-2 row-cols-md-4 g-2">
               {milton_resale.properties?.slice(0, 4).map((property) => (
                 <div className="col" key={property.ListingKey}>
@@ -518,7 +545,7 @@ export default async function Home(props) {
         </div>
 
         <div className="text-center mt-3 mb-5">
-          <Link href="/resale/ontario" className="btn btn-dark">
+          <Link href="resale/ontario/homes-for-sale" className="btn btn-dark">
             View All Ontario Homes For Sale
           </Link>
         </div>
