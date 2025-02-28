@@ -267,7 +267,7 @@ export default function FilterBar({ currentFilters }) {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-white relative" style={{ zIndex: 40 }}>
       <div className="flex items-center gap-2 py-1">
         {/* Transaction Type Dropdown */}
         <DropdownMenu>
@@ -481,10 +481,23 @@ export default function FilterBar({ currentFilters }) {
           <Button
             variant="outline"
             size="sm"
-            className="rounded-lg text-red-600  border-red-200 flex items-center gap-1"
+            className="rounded-lg  border-red-200 flex items-center gap-1 "
           >
-            <span className="text-red-600">↓</span>
-            <span className="text-green-500">Price Drop</span>
+            <span className="">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 text-red-500"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </span>
+            <span className=" text-black ">Price Drop</span>
           </Button>
         </Link>
       </div>

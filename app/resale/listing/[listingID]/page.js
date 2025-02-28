@@ -264,11 +264,20 @@ export default async function PropertyDetailPage({ params }) {
                   </h2>
                   {property.OriginalListPrice &&
                     property.ListPrice < property.OriginalListPrice && (
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                        <span className="text-red-500 pe-2 font-extrabold">
-                          ↓
-                        </span>{" "}
-                        Price Reduced
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-yellow-400 ">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-4 w-4 text-green-700 "
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"
+                            clip-rule="evenodd"
+                          ></path>
+                        </svg>
+                        <span className="ps-1"> Price Reduced</span>
                         <span className="ml-1 font-bold">
                           {(
                             ((property.ListPrice - property.OriginalListPrice) /
@@ -282,49 +291,45 @@ export default async function PropertyDetailPage({ params }) {
                 </div>
 
                 {property.PriceChangeTimestamp && (
-                  <p className="text-sm text-gray-500 mt-1">
-                    Last price change{" "}
-                    <TimeAgo timestamp={property.PriceChangeTimestamp} />
-                  </p>
+                  <div>
+                    <p className="text-sm text-gray-500 mt-1">
+                      Last price change{" "}
+                      <TimeAgo timestamp={property.PriceChangeTimestamp} />
+                    </p>
+                    <PriceHistory
+                      priceHistory={[
+                        // Current price
+                        {
+                          price: property.ListPrice,
+                          date:
+                            property.PriceChangeTimestamp ||
+                            property.ModificationTimestamp,
+                        },
+                        // Previous price if it exists
+                        ...(property.PreviousListPrice
+                          ? [
+                              {
+                                price: property.PreviousListPrice,
+                                date: property.OriginalEntryTimestamp,
+                              },
+                            ]
+                          : []),
+                        // Original price if different from previous prices
+                        ...(property.OriginalListPrice &&
+                        property.OriginalListPrice !==
+                          property.PreviousListPrice &&
+                        property.OriginalListPrice !== property.ListPrice
+                          ? [
+                              {
+                                price: property.OriginalListPrice,
+                                date: property.OriginalEntryTimestamp,
+                              },
+                            ]
+                          : []),
+                      ].filter((record) => record.price && record.date)} // Filter out any invalid records
+                    />
+                  </div>
                 )}
-
-                <div className="mt-4 flex items-center gap-4">
-                  <button className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4 mr-1"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                      />
-                    </svg>
-                    Set Price Alert
-                  </button>
-
-                  <button className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4 mr-1"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                      />
-                    </svg>
-                    View Price Trends
-                  </button>
-                </div>
               </div>
 
               {/* Key Details */}
@@ -668,9 +673,6 @@ export default async function PropertyDetailPage({ params }) {
                 </a>
               </div>
             </div>
-
-            {/* Add Price History component */}
-            <PriceHistory priceHistory={priceHistory} />
           </div>
 
           {/* Floating Resale Button */}

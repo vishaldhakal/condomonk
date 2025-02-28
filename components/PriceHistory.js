@@ -1,49 +1,70 @@
+"use client";
+import { useState } from "react";
 import { formatPrice } from "@/utils/formatting";
-import TimeAgo from "@/helper/timeAgo";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export default function PriceHistory({ priceHistory }) {
-  if (!priceHistory || priceHistory.length === 0) {
-    return null;
-  }
+  const [isOpen, setIsOpen] = useState(false);
+
+  if (!priceHistory || priceHistory.length === 0) return null;
 
   return (
-    <div className="bg-white rounded-lg p-6 mb-6">
-      <h3 className="text-lg font-semibold mb-4">Price History</h3>
-      <div className="space-y-4">
-        {priceHistory.map((record, index) => {
-          const priceChange =
-            index < priceHistory.length - 1
-              ? record.price - priceHistory[index + 1].price
-              : 0;
+    <div className="">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center text-sm text-blue-600 "
+      >
+        {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+        <span className="ml-1">See price history</span>
+      </button>
 
-          return (
-            <div
-              key={record.date}
-              className="flex items-center justify-between"
-            >
-              <div>
-                <div className="font-medium">${formatPrice(record.price)}</div>
-                <div className="text-sm text-gray-500">
-                  <TimeAgo timestamp={record.date} />
-                </div>
-              </div>
-              {priceChange !== 0 && (
-                <div
-                  className={`text-sm font-medium ${
-                    priceChange > 0 ? "text-red-600" : "text-green-600"
-                  }`}
-                >
-                  {priceChange > 0 ? "+" : ""}
-                  {formatPrice(priceChange)}
-                  <span className="text-gray-500 ml-1">
-                    ({((priceChange / record.price) * 100).toFixed(1)}%)
-                  </span>
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
+      {isOpen && (
+        <div className="mt-2 bg-gray-50 rounded-lg p-3">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-left text-gray-600">
+                <th className="pb-2">Date</th>
+                <th className="pb-2">Price</th>
+                <th className="pb-2">Change</th>
+              </tr>
+            </thead>
+            <tbody>
+              {priceHistory.map((record, index) => {
+                const previousPrice = priceHistory[index + 1]?.price;
+                const priceChange = previousPrice
+                  ? record.price - previousPrice
+                  : 0;
+
+                return (
+                  <tr key={record.date} className="border-t border-gray-200">
+                    <td className="py-2">
+                      {new Date(record.date).toLocaleDateString()}
+                    </td>
+                    <td className="py-2">${formatPrice(record.price)}</td>
+                    <td
+                      className={`py-2 ${
+                        priceChange > 0
+                          ? "text-red-600"
+                          : priceChange < 0
+                          ? "text-green-600"
+                          : "text-gray-600"
+                      }`}
+                    >
+                      {priceChange !== 0 && (
+                        <>
+                          {priceChange > 0 ? "+" : ""}$
+                          {formatPrice(Math.abs(priceChange))} (
+                          {((priceChange / previousPrice) * 100).toFixed(1)}%)
+                        </>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }

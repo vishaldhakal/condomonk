@@ -102,10 +102,27 @@ export default function PropertyCard({ property }) {
                 {/* Price section with drop percentage */}
                 <div className="flex flex-col">
                   {priceDropInfo && (
-                    <div className="text-green-500 text-[13px]">
-                      <span className="text-red-500 font-extrabold">↓</span> $
-                      {priceDropInfo.amount.toLocaleString()} (
-                      {priceDropInfo.percentage}% reduced)
+                    <div className="text-green-500 text-[13px] d-flex">
+                      <span className="text-red-500 font-extrabold pe-1">
+                        {" "}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-4 w-4 text-red-500"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"
+                            clip-rule="evenodd"
+                          ></path>
+                        </svg>
+                      </span>{" "}
+                      ${priceDropInfo.amount.toLocaleString()}
+                      <span className="text-black ps-1">
+                        {" "}
+                        ({priceDropInfo.percentage}% reduced)
+                      </span>
                     </div>
                   )}
                   <h2 className="font-bold text-2xl sm:text-2xl items-center justify-start mt-0 sm:my-2">

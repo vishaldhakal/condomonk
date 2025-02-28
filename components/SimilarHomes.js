@@ -22,17 +22,17 @@ export default function SimilarHomes({ properties }) {
             <Link
               href={`/resale/listing/${property.StreetNumber}-${property.StreetName}-${property.ListingKey}`}
               key={property.ListingKey}
-              className="flex-none w-[280px] group transition-all duration-300 rounded-xl overflow-hidden bg-white border hover:border-gray-300"
+              className="flex-none w-[180px] group transition-all duration-300 rounded-xl overflow-hidden bg-white border hover:border-gray-300"
             >
               {/* Property Image Container */}
-              <div className="relative w-full h-44 overflow-hidden">
+              <div className="relative w-full h-36 overflow-hidden">
                 <img
                   src={property.images?.[0] || "/placeholder-house.png"}
                   alt={`${property.StreetNumber} ${property.StreetName}`}
                   className="object-cover h-full w-full group-hover:scale-110 transition-transform duration-500"
                 />
                 {/* Price Tag Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent py-2 px-3">
                   <div className="font-bold text-white text-xl">
                     ${formatPrice(property.ListPrice)}
                   </div>
@@ -40,13 +40,13 @@ export default function SimilarHomes({ properties }) {
               </div>
 
               {/* Property Details */}
-              <div className="p-3">
+              <div className="py-2 px-3">
                 {/* Location with truncate */}
                 <div className="text-sm font-medium text-gray-900 truncate">
                   {property.StreetNumber} {property.StreetName}{" "}
                   {property.StreetSuffix}
                 </div>
-                <div className="text-xs text-gray-500 mb-2">
+                <div className="text-xs text-gray-500 truncate">
                   {property.City}, {property.StateOrProvince}
                 </div>
 
@@ -56,7 +56,7 @@ export default function SimilarHomes({ properties }) {
                     <span className="flex items-center text-gray-700">
                       <img
                         src="/bedrooms.svg"
-                        className="w-4 h-4 mr-1 opacity-75"
+                        className="w-3 h-3 mr-1 opacity-75"
                         alt="bedrooms"
                       />
                       {property.BedroomsTotal}
@@ -64,17 +64,17 @@ export default function SimilarHomes({ properties }) {
                     <span className="flex items-center text-gray-700">
                       <img
                         src="/bathrooms.svg"
-                        className="w-4 h-4 mr-1 opacity-75"
+                        className="w-3 h-3 mr-1 opacity-75"
                         alt="bathrooms"
                       />
                       {(property.WashroomsType1Pcs || 0) +
                         (property.WashroomsType2Pcs || 0)}
                     </span>
                   </div>
-                  <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-                    MLS #{property.ListingKey}
-                  </span>
                 </div>
+                <span className="text-xs text-gray-500  py-1 rounded-full">
+                  MLS #{property.ListingKey}
+                </span>
               </div>
             </Link>
           ))}

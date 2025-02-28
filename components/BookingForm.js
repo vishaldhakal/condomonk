@@ -68,13 +68,23 @@ export default function BookingForm({
       className="bg-white rounded-lg shadow-lg p-3 sticky top-24"
       id="contactForm"
     >
-      <h2 className="text-2xl font-bold mb-1 text-center">Book a Showing</h2>
+      <div className="d-flex items-center justify-center">
+        {" "}
+        <img
+          src="/contact-bottom-2.png"
+          className="h-24 w-26 object-contain "
+          alt=""
+        />
+      </div>
+      <h2 className="text-2xl font-extrabold mb-1 text-center pt-3">
+        Book a Showing
+      </h2>
       <p className="text-gray-500 text-sm mb-3 text-center">
         Find your dream home ✨
       </p>
 
       {/* Date Selection - Horizontal Scroll */}
-      <div className="mb-3">
+      {/* <div className="mb-3">
         <div
           className="flex gap-1.5 overflow-x-auto scrolling-touch hide-scrollbar"
           style={{
@@ -124,7 +134,7 @@ export default function BookingForm({
             </button>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <form onSubmit={handleSubmit} className="space-y-2">
         <div className="grid grid-cols-2 gap-2">
@@ -180,7 +190,7 @@ export default function BookingForm({
 
         <button
           type="submit"
-          className="w-full bg-yellow-400 text-black font-normal py-3 rounded-lg transition-colors"
+          className="w-full bg-yellow-400 text-black font-bold py-3 rounded-lg transition-colors text-xl"
         >
           {submitBtn}
         </button>

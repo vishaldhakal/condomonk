@@ -81,6 +81,7 @@ const Navbar = ({ cities, transparent }) => {
   return (
     <div
       className={navbar ? "navbar-transparent active" : "navbar-transparent"}
+      style={{ zIndex: 50 }}
     >
       <nav className="navbar navbar-expand-lg py-lg-3">
         <div className="container justify-content-start">
@@ -173,9 +174,15 @@ const Navbar = ({ cities, transparent }) => {
                   Homes for Sale & Lease
                 </Link>
                 <div
-                  className={`absolute z-50 bg-white shadow-lg py-2 mt-0 rounded-xl ${
+                  className={`absolute z-3 bg-white shadow-lg py-2 mt-0 rounded-xl border border-gray-200 ${
                     resaleDropdownOpen ? "block" : "hidden"
                   }`}
+                  style={{
+                    minWidth: "520px",
+                    transform: "translateX(-50%)",
+                    left: "50%",
+                    marginTop: "0.5rem",
+                  }}
                 >
                   <div className="grid md:grid-cols-2 grid-cols-1 md:min-w-[520px] min-w-[250px] mt-2">
                     <div className="col px-4 ">

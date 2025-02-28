@@ -256,16 +256,18 @@ export default async function DynamicPage({ params, searchParams }) {
 
   const title =
     filters.mlsStatus === "Price Change"
-      ? `Price Reduced Homes ${
-          filters.city ? `in ${filters.city}` : "in Ontario"
-        }`
+      ? `${actualTotal} Price Reduced Homes in ${
+          filters.city || "Ontario"
+        } | Price Drop ${filters.city || "Ontario"}`
       : generateTitle(filters);
 
   const subtitle =
     filters.mlsStatus === "Price Change"
-      ? `${actualTotal.toLocaleString()} Recently Reduced Properties ${
-          filters.city ? `in ${filters.city}` : "in Ontario"
-        } | Find Great Deals on Homes with Recent Price Drops`
+      ? `${actualTotal}+ Recently Price Reduced Homes in ${
+          filters.city || "Ontario"
+        } | Find Price Drop on Detached, Semi-detached, Townhomes & Condos in ${
+          filters.city || "Ontario"
+        }`
       : generateSubtitle(filters, actualTotal);
 
   // Prepare analytics parameters with defaults
@@ -449,12 +451,12 @@ export default async function DynamicPage({ params, searchParams }) {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-xl md:text-3xl font-extrabold leading-tight">
-            {actualTotal.toLocaleString()} {title}
+            {title}
           </h1>
           <h2 className="text-gray-600 text-sm leading-tight">{subtitle}</h2>
         </div>
       </div>
-      <div className="sticky top-0 bg-white py-1 flex justify-between items-center mb-2 z-20 overflow-x-auto hide-scrollbar ps-0">
+      <div className="sticky top-0 bg-white py-1 flex justify-between items-center mb-2 z-2 overflow-x-auto hide-scrollbar ps-0">
         <FilterBar currentFilters={filters} />
         <div className="flex bg-gray-100 p-1 rounded-lg">
           <button className="px-3 py-1 rounded-md bg-white shadow-sm">
@@ -605,18 +607,26 @@ export async function generateMetadata({ params, searchParams }, parent) {
   const filters = parseSlug(params.slug1);
   const { total } = await getProperties({ ...filters, ...searchParams });
 
+  // Get the actual total for price reduced properties
+  const actualTotal = filters.mlsStatus === "Price Change" ? total : total;
+
+  // Generate title and description for price reduced listings
   const title =
     filters.mlsStatus === "Price Change"
-      ? `Price Reduced Homes ${
-          filters.city ? `in ${filters.city}` : "in Ontario"
-        }`
-      : generateTitle(filters);
+      ? `${actualTotal} Price Reduced Homes in ${
+          filters.city || "Ontario"
+        } | Price Drop ${filters.city || "Ontario"}`
+      : `${total.toLocaleString()} ${generateTitle(
+          filters
+        )} | Real Estate Listings`;
 
-  const subtitle =
+  const description =
     filters.mlsStatus === "Price Change"
-      ? `${total.toLocaleString()} Recently Reduced Properties ${
-          filters.city ? `in ${filters.city}` : "in Ontario"
-        } | Find Great Deals on Homes with Recent Price Drops`
+      ? `${actualTotal}+ Recently Price Reduced Homes in ${
+          filters.city || "Ontario"
+        } | Find Price Drop on Detached, Semi-detached, Townhomes & Condos in ${
+          filters.city || "Ontario"
+        }`
       : generateSubtitle(filters, total);
 
   const location = filters.city || "Ontario";
@@ -631,13 +641,13 @@ export async function generateMetadata({ params, searchParams }, parent) {
     // For base resale page, just use /resale/ontario
     return {
       title: `${title} | Real Estate Listings`,
-      description: subtitle,
+      description: description,
       alternates: {
         canonical: `https://condomonk.ca${canonicalPath}`,
       },
       openGraph: {
         title: `${title} | Real Estate Listings`,
-        description: subtitle,
+        description: description,
         url: `https://condomonk.ca${canonicalPath}`,
         siteName: "Condomonk",
         type: "website",
@@ -653,7 +663,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
       twitter: {
         card: "summary_large_image",
         title: `${title} | Real Estate Listings`,
-        description: subtitle,
+        description: description,
         images: ["https://condomonk.ca/cities/brampton.jpg"],
       },
       robots: {
@@ -726,14 +736,14 @@ export async function generateMetadata({ params, searchParams }, parent) {
   }
 
   return {
-    title: `${total.toLocaleString()} ${title} | Real Estate Listings`,
-    description: subtitle,
+    title: title,
+    description: description,
     alternates: {
       canonical: `https://condomonk.ca${canonicalPath}`,
     },
     openGraph: {
-      title: `${title} | Real Estate Listings`,
-      description: subtitle,
+      title: title,
+      description: description,
       url: `https://condomonk.ca${canonicalPath}`,
       siteName: "Condomonk",
       type: "website",
@@ -748,8 +758,8 @@ export async function generateMetadata({ params, searchParams }, parent) {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} | Real Estate Listings`,
-      description: subtitle,
+      title: title,
+      description: description,
       images: ["https://condomonk.ca/cities/brampton.jpg"],
     },
     robots: {
