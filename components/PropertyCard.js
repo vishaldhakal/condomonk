@@ -102,8 +102,8 @@ export default function PropertyCard({ property }) {
                 {/* Price section with drop percentage */}
                 <div className="flex flex-col">
                   {priceDropInfo && (
-                    <div className="text-green-500 text-[13px] font-bold">
-                      <span className="text-red-500">↓</span> $
+                    <div className="text-green-500 text-[13px]">
+                      <span className="text-red-500 font-extrabold">↓</span> $
                       {priceDropInfo.amount.toLocaleString()} (
                       {priceDropInfo.percentage}% reduced)
                     </div>

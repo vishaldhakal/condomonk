@@ -265,6 +265,9 @@ export default async function PropertyDetailPage({ params }) {
                   {property.OriginalListPrice &&
                     property.ListPrice < property.OriginalListPrice && (
                       <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                        <span className="text-red-500 pe-2 font-extrabold">
+                          ↓
+                        </span>{" "}
                         Price Reduced
                         <span className="ml-1 font-bold">
                           {(
