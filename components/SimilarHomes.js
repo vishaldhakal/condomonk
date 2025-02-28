@@ -22,7 +22,7 @@ export default function SimilarHomes({ properties }) {
             <Link
               href={`/resale/listing/${property.StreetNumber}-${property.StreetName}-${property.ListingKey}`}
               key={property.ListingKey}
-              className="flex-none w-[180px] group transition-all duration-300 rounded-xl overflow-hidden bg-white border hover:border-gray-300"
+              className="flex-none md:w-[180px] w-[150px] group transition-all duration-300 rounded-xl overflow-hidden bg-white border hover:border-gray-300"
             >
               {/* Property Image Container */}
               <div className="relative w-full h-36 overflow-hidden">

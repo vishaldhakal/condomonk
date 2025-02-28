@@ -7,6 +7,8 @@ import MainSearch from "@/components/MainSearch";
 import "./icons.css";
 import FeaturedCard from "@/components/FeaturedCard";
 import Newsletter from "@/components/Newsletter";
+import PropertyCard from "@/components/PropertyCard";
+import { getProperties } from "@/lib/properties";
 
 async function getData(city) {
   const res = await fetch(
@@ -45,6 +47,22 @@ async function getFeaturedData() {
   }
   return res.json();
 }
+
+async function getResaleProperties(city) {
+  const { properties } = await getProperties({
+    city: city,
+    transactionType: "For Sale",
+    pageSize: 4,
+    page: 1,
+  });
+
+  console.log(`Fetching properties for ${city}:`, properties);
+
+  return {
+    properties: properties || [],
+  };
+}
+
 export default async function Home(props) {
   const data = await getData("calgary");
   const mississauga_data = await getData("mississauga");
@@ -53,6 +71,14 @@ export default async function Home(props) {
   let cities = await getCities();
   // let dropdown_cities = await getCitiesandProjects();
   const featured = await getFeaturedData();
+
+  const toronto_resale = await getResaleProperties("Toronto");
+  const barrie_resale = await getResaleProperties("Barrie");
+  const milton_resale = await getResaleProperties("Milton");
+
+  console.log("Toronto properties:", toronto_resale.properties);
+  console.log("Barrie properties:", barrie_resale.properties);
+  console.log("Milton properties:", milton_resale.properties);
 
   const filteredprojects = (value) => {
     return dropdown_cities.filter((city) => {
@@ -432,6 +458,71 @@ export default async function Home(props) {
         </div>
       </div>
       <div className="py-5 my-2"></div>
+
+      <div className="container mt-4">
+        <div className="row">
+          <div className="col-12">
+            <h2 className="fw-mine text-center mb-2 fs-1 font-family2 fw-mine fs-bi">
+              Homes For Sale in Toronto
+            </h2>
+            <h3 className=" text-center mb-4 fs-6">
+              Toronto homes for sale | Affordable 1 - 4 bedroom homes in Toronto
+              from $1 to $5M
+            </h3>
+            <div className="row row-cols-2 row-cols-md-4 g-2 mb-5">
+              {toronto_resale.properties?.slice(0, 4).map((property) => (
+                <div className="col" key={property.ListingKey}>
+                  <PropertyCard property={property} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="py-2 "></div>
+        <div className="row">
+          <div className="col-12">
+            <h2 className="fw-mine text-center mb-2 fs-1 font-family2 fw-mine fs-bi">
+              Homes For Sale in Barrie
+            </h2>
+            <h3 className=" text-center mb-4 fs-6">
+              Barrie homes for sale | Affordable 1 - 4 bedroom homes in Barrie
+              from $1 to $5M
+            </h3>
+            <div className="row row-cols-2 row-cols-md-4 g-2 mb-5">
+              {barrie_resale.properties?.slice(0, 4).map((property) => (
+                <div className="col" key={property.ListingKey}>
+                  <PropertyCard property={property} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="py-2 "></div>
+        <div className="row">
+          <div className="col-12">
+            <h2 className="fw-mine text-center mb-2 fs-1 font-family2 fw-mine fs-bi">
+              Homes For Sale in Milton
+            </h2>
+            <h3 className=" text-center mb-4 fs-6">
+              Milton homes for sale | Affordable 1 - 4 bedroom homes in Milton
+              from $1 to $5M
+            </h3>
+            <div className="row row-cols-2 row-cols-md-4 g-2">
+              {milton_resale.properties?.slice(0, 4).map((property) => (
+                <div className="col" key={property.ListingKey}>
+                  <PropertyCard property={property} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center mt-3 mb-5">
+          <Link href="/resale/ontario" className="btn btn-dark">
+            View All Ontario Homes For Sale
+          </Link>
+        </div>
+      </div>
 
       <div className="pt-5 ">
         <div className="container pt-5 " id="projects">
