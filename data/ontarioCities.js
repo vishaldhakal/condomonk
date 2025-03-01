@@ -37,6 +37,7 @@ export const allCities = [
   { city: "Guelph", province: "Ontario" },
   { city: "Haldimand County", province: "Ontario" },
   { city: "Hamilton", province: "Ontario" },
+  { city: "Milton", province: "Ontario" },
   { city: "Kawartha Lakes", province: "Ontario" },
   { city: "Kenora", province: "Ontario" },
   { city: "Kingston", province: "Ontario" },
