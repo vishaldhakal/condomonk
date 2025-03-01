@@ -84,6 +84,10 @@ export const allCities = [
   { city: "Aurora", province: "Ontario" },
   { city: "Newmarket", province: "Ontario" },
   { city: "East Gwillimbury", province: "Ontario" },
+  { city: "Midland", province: "Ontario" },
+  { city: "Orangeville", province: "Ontario" },
+  { city: "Leamington", province: "Ontario" },
+  { city: "Tillsonburg", province: "Ontario" },
 ];
 
 export default citiesWithProvinces;
