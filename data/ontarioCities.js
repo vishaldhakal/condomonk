@@ -88,6 +88,8 @@ export const allCities = [
   { city: "Orangeville", province: "Ontario" },
   { city: "Leamington", province: "Ontario" },
   { city: "Tillsonburg", province: "Ontario" },
+  { city: "Parry Sound", province: "Ontario" },
+  { city: "Wasaga Beach", province: "Ontario" },
 ];
 
 export default citiesWithProvinces;
