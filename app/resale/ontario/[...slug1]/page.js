@@ -17,26 +17,7 @@ function parseSlug(slug) {
   // Set default transaction type
   filters.transactionType = "For Sale";
 
-  // Check for price reduced listings
-  if (path.includes("price-reduced-homes")) {
-    filters.mlsStatus = "Price Change";
-  }
-
-  // Check if first part contains for-sale or for-lease
-  const firstPart = parts[0] || "";
-  const isTransactionPath =
-    firstPart.includes("for-sale") || firstPart.includes("for-lease");
-
-  // If first part doesn't contain transaction type, it's a city
-  if (!isTransactionPath && parts[0]) {
-    const cityName = parts[0]
-      .split("-")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-    filters.city = cityName;
-  }
-
-  // Parse property types and price ranges together
+  // Define property types mapping
   const propertyTypes = {
     "detached-homes": { label: "Detached", subtypes: ["Detached"] },
     "semi-detached-homes": {
@@ -51,24 +32,54 @@ function parseSlug(slug) {
     condos: { label: "Condo Apartment", subtypes: ["Condo Apartment"] },
   };
 
-  // Find the part that contains property type and/or price range
-  const relevantPart =
-    parts.find(
-      (part) =>
-        part.includes("homes") ||
-        Object.keys(propertyTypes).some((type) => part.includes(type))
-    ) || "";
+  // Check for price reduced listings
+  if (path.includes("price-reduced-homes")) {
+    filters.mlsStatus = "Price Change";
 
-  // Check for property type
-  for (const [urlPath, propertyType] of Object.entries(propertyTypes)) {
-    if (relevantPart.includes(urlPath)) {
-      filters.propertyType = propertyType.label;
-      filters.propertySubTypes = propertyType.subtypes;
-      break;
+    // Look for property type before "price-reduced-homes"
+    for (const [urlPath, propertyType] of Object.entries(propertyTypes)) {
+      if (
+        path.includes(`${urlPath}-price-reduced`) ||
+        path.includes(`${urlPath.replace("-homes", "")}-price-reduced`)
+      ) {
+        filters.propertyType = propertyType.label;
+        filters.propertySubTypes = propertyType.subtypes;
+        break;
+      }
+    }
+  } else {
+    // Regular property type parsing for non-price-reduced listings
+    for (const [urlPath, propertyType] of Object.entries(propertyTypes)) {
+      if (path.includes(urlPath)) {
+        filters.propertyType = propertyType.label;
+        filters.propertySubTypes = propertyType.subtypes;
+        break;
+      }
     }
   }
 
-  // Parse price ranges from the relevant part
+  // Check if first part is a city
+  const firstPart = parts[0] || "";
+  const isTransactionPath =
+    firstPart.includes("for-sale") || firstPart.includes("for-lease");
+
+  if (!isTransactionPath && parts[0] && !parts[0].includes("price-reduced")) {
+    const cityName = parts[0]
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+    filters.city = cityName;
+  }
+
+  // Parse price ranges
+  const relevantPart =
+    parts.find(
+      (part) =>
+        part.includes("-under-") ||
+        part.includes("-over-") ||
+        part.includes("-between-")
+    ) || "";
+
   if (relevantPart.includes("-under-")) {
     const match = relevantPart.match(/under-(\d+)k/);
     if (match) {
@@ -109,6 +120,14 @@ function parseSlug(slug) {
 }
 
 function generateTitle(filters) {
+  if (filters.mlsStatus === "Price Change") {
+    const propertyTypeText = filters.propertyType
+      ? `${filters.propertyType} `
+      : "";
+    const locationText = filters.city ? `in ${filters.city}` : "in Ontario";
+    return `${propertyTypeText}Homes with Recent Price Drops ${locationText}`;
+  }
+
   const parts = [];
 
   // Add property type
@@ -166,6 +185,17 @@ function generateTitle(filters) {
 }
 
 function generateSubtitle(filters, total) {
+  if (filters.mlsStatus === "Price Change") {
+    const propertyTypeText = filters.propertyType
+      ? `${filters.propertyType} `
+      : "";
+    const locationText = filters.city || "Ontario";
+    const propertySpecificText = filters.propertyType
+      ? ` | Find Price Reduced ${filters.propertyType}s`
+      : " | Find Recently Reduced Properties";
+    return `${total.toLocaleString()} ${propertyTypeText}Homes with Price Reductions in ${locationText}${propertySpecificText} & Great Deals`;
+  }
+
   const location = filters.city || "Ontario";
 
   // Handle bedroom-specific condo listings

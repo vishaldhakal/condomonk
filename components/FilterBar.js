@@ -109,7 +109,7 @@ export default function FilterBar({ currentFilters }) {
       urlPath = filters.city.toLowerCase().replace(/ /g, "-") + "/";
     }
 
-    // Add property type or 'homes'
+    // Add property type if present
     if (filters.propertyType) {
       const propertyPath = propertyTypes.find(
         (p) => p.label === filters.propertyType
@@ -119,15 +119,20 @@ export default function FilterBar({ currentFilters }) {
       urlPath += "homes";
     }
 
-    // Add price range if present
-    if (filters.maxPrice && !filters.minPrice) {
-      urlPath += `-under-${(filters.maxPrice / 1000).toFixed(0)}k`;
-    } else if (filters.minPrice && !filters.maxPrice) {
-      urlPath += `-over-${(filters.minPrice / 1000).toFixed(0)}k`;
-    } else if (filters.minPrice && filters.maxPrice) {
-      urlPath += `-between-${(filters.minPrice / 1000).toFixed(0)}k-${(
-        filters.maxPrice / 1000
-      ).toFixed(0)}k`;
+    // If we're on a price reduced page, maintain that filter
+    if (filters.mlsStatus === "Price Change") {
+      urlPath = urlPath.replace("-homes", "") + "-price-reduced-homes";
+    } else {
+      // Add price range if present
+      if (filters.maxPrice && !filters.minPrice) {
+        urlPath += `-under-${(filters.maxPrice / 1000).toFixed(0)}k`;
+      } else if (filters.minPrice && !filters.maxPrice) {
+        urlPath += `-over-${(filters.minPrice / 1000).toFixed(0)}k`;
+      } else if (filters.minPrice && filters.maxPrice) {
+        urlPath += `-between-${(filters.minPrice / 1000).toFixed(0)}k-${(
+          filters.maxPrice / 1000
+        ).toFixed(0)}k`;
+      }
     }
 
     // Add transaction type
@@ -135,7 +140,7 @@ export default function FilterBar({ currentFilters }) {
       filters.transactionType === "For Lease" ? "lease" : "sale"
     }`;
 
-    // Add beds and baths as additional path segments only if they exist
+    // Add beds and baths as additional path segments
     const specParts = [];
     if (filters.minBeds) {
       specParts.push(`${filters.minBeds}-plus-bed`);
@@ -164,15 +169,20 @@ export default function FilterBar({ currentFilters }) {
     const { propertyType, ...restFilters } = currentFilters;
     let urlPath = "homes";
 
-    // Add price range if present
-    if (restFilters.maxPrice && !restFilters.minPrice) {
-      urlPath += `-under-${(restFilters.maxPrice / 1000).toFixed(0)}k`;
-    } else if (restFilters.minPrice && !restFilters.maxPrice) {
-      urlPath += `-over-${(restFilters.minPrice / 1000).toFixed(0)}k`;
-    } else if (restFilters.minPrice && restFilters.maxPrice) {
-      urlPath += `-between-${(restFilters.minPrice / 1000).toFixed(0)}k-${(
-        restFilters.maxPrice / 1000
-      ).toFixed(0)}k`;
+    // If we're on a price reduced page, maintain that filter
+    if (restFilters.mlsStatus === "Price Change") {
+      urlPath += "-price-reduced";
+    } else {
+      // Add price range if present
+      if (restFilters.maxPrice && !restFilters.minPrice) {
+        urlPath += `-under-${(restFilters.maxPrice / 1000).toFixed(0)}k`;
+      } else if (restFilters.minPrice && !restFilters.maxPrice) {
+        urlPath += `-over-${(restFilters.minPrice / 1000).toFixed(0)}k`;
+      } else if (restFilters.minPrice && restFilters.maxPrice) {
+        urlPath += `-between-${(restFilters.minPrice / 1000).toFixed(0)}k-${(
+          restFilters.maxPrice / 1000
+        ).toFixed(0)}k`;
+      }
     }
 
     urlPath += `-for-${
@@ -253,6 +263,14 @@ export default function FilterBar({ currentFilters }) {
     // If we have a city, it should be the first part of the path
     if (currentFilters.city && currentFilters.city !== "Ontario") {
       urlPath = currentFilters.city.toLowerCase().replace(/ /g, "-") + "/";
+    }
+
+    // Add property type if selected
+    if (currentFilters.propertyType) {
+      const propertyPath = propertyTypes.find(
+        (p) => p.label === currentFilters.propertyType
+      )?.path;
+      urlPath += propertyPath ? `${propertyPath}-` : "";
     }
 
     // Add 'price-reduced' to the path
