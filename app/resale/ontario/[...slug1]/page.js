@@ -636,8 +636,6 @@ function generateMarketDescription(filters, insights) {
 export async function generateMetadata({ params, searchParams }, parent) {
   const filters = parseSlug(params.slug1);
   const { total } = await getProperties({ ...filters, ...searchParams });
-
-  // Get the actual total for price reduced properties
   const actualTotal = filters.mlsStatus === "Price Change" ? total : total;
 
   // Generate title and description for price reduced listings
@@ -661,24 +659,29 @@ export async function generateMetadata({ params, searchParams }, parent) {
 
   const location = filters.city || "Ontario";
 
-  // Generate canonical URL
-  let canonicalPath = "/resale/ontario";
+  // Define exact property type paths mapping
+  const propertyTypePaths = {
+    "homes-for-sale": "homes-for-sale",
+    "detached-homes-for-sale": "detached-homes-for-sale",
+    "semi-detached-homes-for-sale": "semi-detached-homes-for-sale",
+    "condo-townhouses-for-sale": "condo-townhouses-for-sale",
+    "townhouses-for-sale": "townhouses-for-sale",
+    "condos-for-sale": "condos-for-sale",
+  };
 
-  // Check if this is just the base resale page
-  const isBaseResalePage =
-    params.slug1.length === 1 && params.slug1[0] === "homes-for-sale";
-  if (isBaseResalePage) {
-    // For base resale page, just use /resale/ontario
+  // Check if the current path matches any of our property type paths
+  const currentPath = params.slug1[0];
+  if (propertyTypePaths[currentPath]) {
     return {
       title: `${title} | Real Estate Listings`,
       description: description,
       alternates: {
-        canonical: `https://condomonk.ca${canonicalPath}`,
+        canonical: `https://condomonk.ca/resale/ontario/${propertyTypePaths[currentPath]}`,
       },
       openGraph: {
         title: `${title} | Real Estate Listings`,
         description: description,
-        url: `https://condomonk.ca${canonicalPath}`,
+        url: `https://condomonk.ca/resale/ontario/${propertyTypePaths[currentPath]}`,
         siteName: "Condomonk",
         type: "website",
         images: [
@@ -710,61 +713,8 @@ export async function generateMetadata({ params, searchParams }, parent) {
     };
   }
 
-  // Build URL parts in a specific order (following FilterBar.js logic)
-  let urlPath = "";
-
-  // 1. Add city if present (should be first in the path)
-  if (filters.city && filters.city !== "Ontario") {
-    urlPath = filters.city.toLowerCase().replace(/ /g, "-") + "/";
-  }
-
-  // Property type mapping
-  const propertyTypeMapping = {
-    Detached: "detached-homes",
-    "Semi-Detached": "semi-detached-homes",
-    Townhouse: "townhouses",
-    "Condo Townhouse": "condo-townhouses",
-    "Condo Apartment": "condos",
-  };
-
-  // 2. Add property type or 'homes'
-  if (filters.propertyType && propertyTypeMapping[filters.propertyType]) {
-    urlPath += propertyTypeMapping[filters.propertyType];
-  } else {
-    urlPath += "homes";
-  }
-
-  // 3. Add price range if present
-  if (filters.maxPrice && !filters.minPrice) {
-    urlPath += `-under-${(filters.maxPrice / 1000).toFixed(0)}k`;
-  } else if (filters.minPrice && !filters.maxPrice) {
-    urlPath += `-over-${(filters.minPrice / 1000).toFixed(0)}k`;
-  } else if (filters.minPrice && filters.maxPrice) {
-    urlPath += `-between-${(filters.minPrice / 1000).toFixed(0)}k-${(
-      filters.maxPrice / 1000
-    ).toFixed(0)}k`;
-  }
-
-  // 4. Add transaction type
-  urlPath += `-for-${
-    filters.transactionType === "For Lease" ? "lease" : "sale"
-  }`;
-
-  // 5. Add beds and baths as additional path segments
-  const specParts = [];
-  if (filters.minBeds) {
-    specParts.push(`${filters.minBeds}-plus-bed`);
-  }
-  if (filters.minBaths) {
-    specParts.push(`${filters.minBaths}-plus-bath`);
-  }
-
-  // Combine all parts
-  canonicalPath = `${canonicalPath}/${urlPath}`;
-  if (specParts.length > 0) {
-    canonicalPath += `/${specParts.join("/")}`;
-  }
-
+  // For all other URLs, use the exact path from params
+  const canonicalPath = `/resale/ontario/${params.slug1.join("/")}`;
   return {
     title: title,
     description: description,
