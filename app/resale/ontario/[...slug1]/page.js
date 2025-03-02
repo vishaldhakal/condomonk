@@ -7,6 +7,7 @@ import { formatPrice } from "@/utils/formatting";
 import BottomContactForm from "@/components/BottomContactForm";
 import Image from "next/image";
 /* import CityAnalyticsCharts from "@/components/CityAnalyticsCharts"; */
+import PropertyCard from "@/components/PropertyCard";
 
 // Helper to determine the type of page and parse filters
 function parseSlug(slug) {
@@ -19,14 +20,14 @@ function parseSlug(slug) {
 
   // Define property types mapping
   const propertyTypes = {
-    "detached-homes": { label: "Detached", subtypes: ["Detached"] },
+    "detached-homes": { label: "Detached Home", subtypes: ["Detached"] },
     "semi-detached-homes": {
-      label: "Semi-Detached",
+      label: "Semi-Detached Homes",
       subtypes: ["Semi-Detached"],
     },
-    townhouses: { label: "Townhouse", subtypes: ["Att/Row/Townhouse"] },
-    "condo-townhouses": {
-      label: "Condo Townhouse",
+    townhomes: { label: "Townhomes", subtypes: ["Att/Row/Townhouse"] },
+    "condo-townhomes": {
+      label: "Condo Townhome",
       subtypes: ["Condo Townhouse"],
     },
     condos: { label: "Condo Apartment", subtypes: ["Condo Apartment"] },
@@ -215,13 +216,16 @@ function generateSubtitle(filters, total) {
 
   // Handle property type specific pages
   if (filters.propertyType) {
-    return `${total.toLocaleString()} ${location} ${
-      filters.propertyType
-    }s for Sale | Affordable ${
+    // Don't add 's' if the property type already ends in 's'
+    const pluralType = filters.propertyType.endsWith("s")
+      ? filters.propertyType
+      : `${filters.propertyType}s`;
+
+    return `${total.toLocaleString()} ${location} ${pluralType} for Sale | Affordable ${
       filters.minBeds
         ? `${filters.minBeds}-${filters.minBeds + 3} Bedroom `
         : ""
-    }${filters.propertyType}s in ${location} ${
+    }${pluralType} in ${location} ${
       filters.maxPrice
         ? `under $${formatPrice(filters.maxPrice)}`
         : filters.minPrice && filters.maxPrice
@@ -249,6 +253,44 @@ function generateSubtitle(filters, total) {
 
   // Default subtitle for general listings
   return `${total.toLocaleString()} ${location} homes for sale | Affordable 1 - 4 bedroom homes in ${location} from $1 to $5M | Open Houses & New Listings Available`;
+}
+
+// Add this helper function to fetch similar properties
+async function getSimilarProperties(filters) {
+  const popularCities = [
+    "Ajax",
+    "Brampton",
+    "Mississauga",
+    "Barrie",
+    "Toronto",
+    "Ottawa",
+    "Milton",
+    "Pickering",
+    "Hamilton",
+  ];
+
+  // If we're already on a city page, filter out that city
+  const citiesToShow = filters.city
+    ? popularCities.filter(
+        (city) => city.toLowerCase() !== filters.city.toLowerCase()
+      )
+    : popularCities;
+
+  // Fetch one property from each city with similar characteristics
+  const similarProperties = await Promise.all(
+    citiesToShow.slice(0, 8).map(async (city) => {
+      const { properties } = await getProperties({
+        city,
+        propertyType: filters.propertyType,
+        propertySubTypes: filters.propertySubTypes,
+        transactionType: filters.transactionType,
+        limit: 1,
+      });
+      return properties[0];
+    })
+  );
+
+  return similarProperties.filter(Boolean); // Remove any null results
 }
 
 export default async function DynamicPage({ params, searchParams }) {
@@ -476,6 +518,9 @@ export default async function DynamicPage({ params, searchParams }) {
     );
   };
 
+  // Fetch similar properties
+  const similarProperties = await getSimilarProperties(filters);
+
   return (
     <div className="max-w-[1370px] mx-auto px-2 md:px-4 py-2">
       <div className="flex justify-between items-center">
@@ -509,6 +554,24 @@ export default async function DynamicPage({ params, searchParams }) {
         <CityAnalytics data={analyticsData} />
       </div> */}
 
+      {/* Similar Homes Section */}
+      {similarProperties.length > 0 && (
+        <div className="mt-16 border-t pt-12">
+          <h3 className="text-2xl font-bold mb-6">
+            Check out {filters.propertyType || "Homes"} for sale near{" "}
+            {filters.city} | 1000+ Detached homes listed on MLS
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {similarProperties.map((property, index) => (
+              <PropertyCard
+                key={property.ListingKey || index}
+                property={property}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Contact Section */}
       <div className="mt-16 max-w-2xl mx-auto text-center">
         <Image
@@ -518,9 +581,9 @@ export default async function DynamicPage({ params, searchParams }) {
           height={250}
           className="mx-auto mb-6"
         />
-        <h2 className="text-3xl font-bold mb-6">
+        <h3 className="text-3xl font-bold mb-6">
           Looking to buy a home in {filters.city || "Ontario"}?
-        </h2>
+        </h3>
         <BottomContactForm
           proj_name={filters.city || "Ontario"}
           city={filters.city || "Ontario"}
@@ -610,7 +673,7 @@ function generateMarketDescription(filters, insights) {
         ? "first-time homebuyers and investors"
         : filters.propertyType === "Detached"
         ? "families looking for more space"
-        : filters.propertyType === "Townhouse"
+        : filters.propertyType === "Townhome"
         ? "those seeking a balance between space and affordability"
         : "buyers"
     }.
@@ -644,9 +707,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
       ? `${actualTotal} Price Reduced Homes in ${
           filters.city || "Ontario"
         } | Price Drop ${filters.city || "Ontario"}`
-      : `${total.toLocaleString()} ${generateTitle(
-          filters
-        )} | Real Estate Listings`;
+      : `${total.toLocaleString()} ${generateTitle(filters)}`;
 
   const description =
     filters.mlsStatus === "Price Change"
@@ -664,8 +725,8 @@ export async function generateMetadata({ params, searchParams }, parent) {
     "homes-for-sale": "homes-for-sale",
     "detached-homes-for-sale": "detached-homes-for-sale",
     "semi-detached-homes-for-sale": "semi-detached-homes-for-sale",
-    "condo-townhouses-for-sale": "condo-townhouses-for-sale",
-    "townhouses-for-sale": "townhouses-for-sale",
+    "condo-townhomes-for-sale": "condo-townhomes-for-sale",
+    "townhomes-for-sale": "townhomes-for-sale",
     "condos-for-sale": "condos-for-sale",
   };
 

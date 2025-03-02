@@ -125,12 +125,12 @@ export default function PropertyCard({ property }) {
                       </span>
                     </div>
                   )}
-                  <h2 className="font-bold text-2xl sm:text-2xl items-center justify-start mt-0 sm:my-2">
+                  <span className="font-bold text-2xl sm:text-2xl items-center justify-start mt-0 sm:my-2">
                     ${property.ListPrice.toLocaleString()}
                     {property.TransactionType === "For Lease" && (
                       <span className="text-xs text-gray-600"> /mo</span>
                     )}
-                  </h2>
+                  </span>
                 </div>
               </div>
 

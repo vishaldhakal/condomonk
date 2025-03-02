@@ -58,10 +58,10 @@ const propertyTypes = [
     path: "semi-detached-homes",
     subtypes: ["Semi-Detached"],
   },
-  { label: "Townhouse", path: "townhouses", subtypes: ["Att/Row/Townhouse"] },
+  { label: "Townhome", path: "townhomes", subtypes: ["Att/Row/Townhouse"] },
   {
-    label: "Condo Townhouse",
-    path: "condo-townhouses",
+    label: "Condo Townhome",
+    path: "condo-townhomes",
     subtypes: ["Condo Townhouse"],
   },
   { label: "Condos", path: "condos", subtypes: ["Condo Apartment"] },
