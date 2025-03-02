@@ -735,13 +735,13 @@ export async function generateMetadata({ params, searchParams }, parent) {
   const currentPath = params.slug1[0];
   if (propertyTypePaths[currentPath]) {
     return {
-      title: `${title} | Real Estate Listings`,
+      title: `${title} | Real Estate Listings | MLS Homes`,
       description: description,
       alternates: {
         canonical: `https://condomonk.ca/resale/ontario/${propertyTypePaths[currentPath]}`,
       },
       openGraph: {
-        title: `${title} | Real Estate Listings`,
+        title: `${title} | Real Estate Listings | MLS Homes`,
         description: description,
         url: `https://condomonk.ca/resale/ontario/${propertyTypePaths[currentPath]}`,
         siteName: "Condomonk",
@@ -757,7 +757,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
       },
       twitter: {
         card: "summary_large_image",
-        title: `${title} | Real Estate Listings`,
+        title: `${title} | Real Estate Listings | MLS Homes`,
         description: description,
         images: ["https://condomonk.ca/cities/brampton.jpg"],
       },
