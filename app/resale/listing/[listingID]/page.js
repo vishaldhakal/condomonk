@@ -147,9 +147,9 @@ export default async function PropertyDetailPage({ params }) {
     return (
       <div className="max-w-[1370px] mx-auto px-4 md:pt-6">
         {/* Header with Breadcrumb and Share/Save */}
-        <div className="flex justify-between items-center mb-0 sticky top-0 bg-white ">
+        <div className="flex justify-between items-center mb-0 sticky top-0 bg-white z-1">
           {/* Breadcrumb Navigation */}
-          <nav className="flex items-center gap-2 md:text-sm text-[13px]">
+          <nav className="flex items-center gap-2 md:text-sm text-[13px] z-0">
             <Link
               href="/resale"
               className="text-gray-500 hover:text-gray-700 flex items-center gap-2 hidden md:flex"
