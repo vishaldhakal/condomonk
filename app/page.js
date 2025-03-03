@@ -56,8 +56,6 @@ async function getResaleProperties(city) {
     page: 1,
   });
 
-  console.log(`Fetching properties for ${city}:`, properties);
-
   return {
     properties: properties || [],
   };
@@ -75,10 +73,6 @@ export default async function Home(props) {
   const toronto_resale = await getResaleProperties("Toronto");
   const barrie_resale = await getResaleProperties("Barrie");
   const milton_resale = await getResaleProperties("Milton");
-
-  console.log("Toronto properties:", toronto_resale.properties);
-  console.log("Barrie properties:", barrie_resale.properties);
-  console.log("Milton properties:", milton_resale.properties);
 
   const filteredprojects = (value) => {
     return dropdown_cities.filter((city) => {
