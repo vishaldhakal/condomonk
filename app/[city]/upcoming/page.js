@@ -101,7 +101,7 @@ export default async function Home({ params }) {
               )} on condomonk.`}
             </p>
           </div>
-          <div className="d-flex sm-center pb-2 pb-md-0 sticky-buttons">
+          <div className="d-flex sm-center pb-2 pb-md-0 sticky-buttons z-0">
             <div className="d-flex flex-column flex-md-row mb-md-4 mb-0 mt-1 overflow-hidden">
               <div className="d-flex gap-2">
                 <Link

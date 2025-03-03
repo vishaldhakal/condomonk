@@ -235,7 +235,7 @@ export default async function Home({ params }) {
             {priceFilter ? ` ${formatPriceFilter(priceFilter)}` : ""} on
             condomonk.
           </p>
-          <div className="d-flex sm-center  mb-lg-0 sticky-buttons pb-0 mb-0">
+          <div className="d-flex sm-center  mb-lg-0 sticky-buttons pb-0 mb-0 z-0">
             <div className="d-flex flex-column flex-md-row mb-md-2 mb-0 mt-1 overflow-hidden">
               <div className="d-flex gap-2">
                 <Link

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import ProjectSearch from "./ProjectSearch";
+import { usePathname } from "next/navigation";
 
 const Navbar = ({ cities, transparent }) => {
   const [cityname, setCityname] = useState("");
@@ -10,6 +11,7 @@ const Navbar = ({ cities, transparent }) => {
   const [buttonClicked, setButtonClicked] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [resaleDropdownOpen, setResaleDropdownOpen] = useState(false);
+  const pathname = usePathname();
 
   const changeBackground = () => {
     if (window.scrollY >= 80) {
@@ -77,6 +79,27 @@ const Navbar = ({ cities, transparent }) => {
   const handleResaleMouseLeave = () => {
     setResaleDropdownOpen(false);
   };
+
+  // Helper function to determine if we're on a resale page
+  const isResalePage = pathname.includes("/resale/");
+
+  // Helper function to extract city name from path
+  const getCurrentCity = () => {
+    if (isResalePage) {
+      // Extract city from resale path pattern /resale/ontario/city-name/...
+      const matches = pathname.match(/\/resale\/ontario\/([^\/]+)/);
+      return matches ? matches[1].split("-")[0] : null;
+    } else {
+      // Extract city from preconstruction path pattern /city-name/...
+      const city = pathname.split("/")[1];
+      return city && city !== "resale" ? city : null;
+    }
+  };
+
+  const currentCity = getCurrentCity();
+  const cityName = currentCity
+    ? currentCity.charAt(0).toUpperCase() + currentCity.slice(1)
+    : "";
 
   return (
     <div
@@ -153,11 +176,6 @@ const Navbar = ({ cities, transparent }) => {
                   </div>
                 </div>
               </li>
-              <li className="nav-item mx-1">
-                <Link className="nav-link" href="/pre-construction-homes">
-                  Pre Construction Homes
-                </Link>
-              </li>
               <li
                 className="nav-item dropdown"
                 onMouseEnter={handleResaleMouseEnter}
@@ -171,89 +189,143 @@ const Navbar = ({ cities, transparent }) => {
                   role="button"
                   aria-expanded={resaleDropdownOpen}
                 >
-                  Homes for Sale & Lease
+                  {isResalePage ? "Pre Construction" : "Homes for Sale & Lease"}
                 </Link>
                 <div
                   className={`absolute z-3 bg-white shadow-lg py-2 mt-0 rounded-xl border border-gray-200 ${
                     resaleDropdownOpen ? "block" : "hidden"
                   }`}
                   style={{
-                    minWidth: "520px",
+                    minWidth: isResalePage ? "300px" : "520px",
                     transform: "translateX(-50%)",
                     left: "50%",
                     marginTop: "0.5rem",
+                    whiteSpace: "nowrap",
                   }}
                 >
-                  <div className="grid md:grid-cols-2 grid-cols-1 md:min-w-[520px] min-w-[250px] mt-2">
-                    <div className="col px-4 ">
-                      <div className="text-sm font-bold text-black mb-3 border-b border-gray-200">
-                        HOMES FOR SALE
+                  <div
+                    className={`grid ${
+                      isResalePage ? "grid-cols-1" : "md:grid-cols-2"
+                    } grid-cols-1 min-w-[250px] mt-2`}
+                  >
+                    {isResalePage ? (
+                      // Show preconstruction options when on resale pages
+                      <div className="col px-4">
+                        <div className="text-sm font-bold text-black mb-3 border-b border-gray-200">
+                          PRE CONSTRUCTION HOMES
+                        </div>
+                        <div className="flex flex-col space-y-2">
+                          <Link
+                            className="text-gray-600 hover:text-gray-900 text-sm whitespace-nowrap"
+                            href={`/${currentCity}`}
+                          >
+                            All Pre Construction Homes{" "}
+                            {cityName && `in ${cityName}`}
+                          </Link>
+                          <Link
+                            className="text-gray-600 hover:text-gray-900 text-sm whitespace-nowrap"
+                            href={`/${currentCity}/condos`}
+                          >
+                            Pre Construction Condos{" "}
+                            {cityName && `in ${cityName}`}
+                          </Link>
+                          <Link
+                            className="text-gray-600 hover:text-gray-900 text-sm whitespace-nowrap"
+                            href={`/${currentCity}/townhomes`}
+                          >
+                            Pre Construction Townhomes{" "}
+                            {cityName && `in ${cityName}`}
+                          </Link>
+                          <Link
+                            className="text-gray-600 hover:text-gray-900 text-sm whitespace-nowrap"
+                            href={`/${currentCity}/detached`}
+                          >
+                            Pre Construction Detached Homes{" "}
+                            {cityName && `in ${cityName}`}
+                          </Link>
+                          <Link
+                            className="text-gray-600 hover:text-gray-900 text-sm whitespace-nowrap"
+                            href={`/${currentCity}/upcoming`}
+                          >
+                            Upcoming Pre Construction{" "}
+                            {cityName && `in ${cityName}`}
+                          </Link>
+                        </div>
                       </div>
-                      <div className="flex flex-col space-y-2">
-                        <Link
-                          className="text-gray-600  hover:text-gray-900 text-sm"
-                          href="/resale/ontario/homes-for-sale"
-                        >
-                          All Homes
-                        </Link>
-                        <Link
-                          className="text-gray-600  hover:text-gray-900 text-sm"
-                          href="/resale/ontario/semi-detached-homes-for-sale"
-                        >
-                          Semi Detached Homes for Sale
-                        </Link>
-                        <Link
-                          className="text-gray-600  hover:text-gray-900 text-sm"
-                          href="/resale/ontario/detached-homes-for-sale"
-                        >
-                          Detached Homes for Sale
-                        </Link>
-                        <Link
-                          className="text-gray-600  hover:text-gray-900 text-sm"
-                          href="/resale/ontario/townhomes-for-sale"
-                        >
-                          Townhomes for Sale
-                        </Link>
-                        <Link
-                          className="text-gray-600  hover:text-gray-900 text-sm"
-                          href="/resale/ontario/condos-for-sale"
-                        >
-                          Condos for Sale
-                        </Link>
-                      </div>
-                    </div>
+                    ) : (
+                      // Show resale options when on preconstruction pages
+                      <>
+                        <div className="col px-4">
+                          <div className="text-sm font-bold text-black mb-3 border-b border-gray-200">
+                            HOMES FOR SALE
+                          </div>
+                          <div className="flex flex-col space-y-2">
+                            <Link
+                              className="text-gray-600 hover:text-gray-900 text-sm"
+                              href={`/resale/ontario/${currentCity}/homes-for-sale`}
+                            >
+                              All Homes {cityName && `in ${cityName}`}
+                            </Link>
+                            <Link
+                              className="text-gray-600 hover:text-gray-900 text-sm"
+                              href={`/resale/ontario/${currentCity}/semi-detached-homes-for-sale`}
+                            >
+                              Semi Detached Homes {cityName && `in ${cityName}`}
+                            </Link>
+                            <Link
+                              className="text-gray-600 hover:text-gray-900 text-sm"
+                              href={`/resale/ontario/${currentCity}/detached-homes-for-sale`}
+                            >
+                              Detached Homes {cityName && `in ${cityName}`}
+                            </Link>
+                            <Link
+                              className="text-gray-600 hover:text-gray-900 text-sm"
+                              href={`/resale/ontario/${currentCity}/townhomes-for-sale`}
+                            >
+                              Townhomes {cityName && `in ${cityName}`}
+                            </Link>
+                            <Link
+                              className="text-gray-600 hover:text-gray-900 text-sm"
+                              href={`/resale/ontario/${currentCity}/condos-for-sale`}
+                            >
+                              Condos {cityName && `in ${cityName}`}
+                            </Link>
+                          </div>
+                        </div>
 
-                    <div className="col px-4 border-l border-gray-200 mt-md-0 mt-5">
-                      <div className="text-sm font-bold text-black mb-3 border-b border-gray-200">
-                        HOMES FOR LEASE
-                      </div>
-                      <div className="flex flex-col space-y-2">
-                        <Link
-                          className="text-gray-600 hover:text-gray-900 text-sm"
-                          href="/resale/ontario/semi-detached-homes-for-lease"
-                        >
-                          Semi Detached Homes for Lease
-                        </Link>
-                        <Link
-                          className="text-gray-600 hover:text-gray-900 text-sm"
-                          href="/resale/ontario/detached-homes-for-lease"
-                        >
-                          Detached Homes for Lease
-                        </Link>
-                        <Link
-                          className="text-gray-600 hover:text-gray-900 text-sm"
-                          href="/resale/ontario/townhomes-for-lease"
-                        >
-                          Townhomes for Lease
-                        </Link>
-                        <Link
-                          className="text-gray-600 hover:text-gray-900 text-sm"
-                          href="/resale/ontario/condos-for-lease"
-                        >
-                          Condos for Lease
-                        </Link>
-                      </div>
-                    </div>
+                        <div className="col px-4 border-l border-gray-200 mt-md-0 mt-5">
+                          <div className="text-sm font-bold text-black mb-3 border-b border-gray-200">
+                            HOMES FOR LEASE
+                          </div>
+                          <div className="flex flex-col space-y-2">
+                            <Link
+                              className="text-gray-600 hover:text-gray-900 text-sm"
+                              href={`/resale/ontario/${currentCity}/semi-detached-homes-for-lease`}
+                            >
+                              Semi Detached Homes {cityName && `in ${cityName}`}
+                            </Link>
+                            <Link
+                              className="text-gray-600 hover:text-gray-900 text-sm"
+                              href={`/resale/ontario/${currentCity}/detached-homes-for-lease`}
+                            >
+                              Detached Homes {cityName && `in ${cityName}`}
+                            </Link>
+                            <Link
+                              className="text-gray-600 hover:text-gray-900 text-sm"
+                              href={`/resale/ontario/${currentCity}/townhomes-for-lease`}
+                            >
+                              Townhomes {cityName && `in ${cityName}`}
+                            </Link>
+                            <Link
+                              className="text-gray-600 hover:text-gray-900 text-sm"
+                              href={`/resale/ontario/${currentCity}/condos-for-lease`}
+                            >
+                              Condos {cityName && `in ${cityName}`}
+                            </Link>
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </li>
