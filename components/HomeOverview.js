@@ -15,10 +15,10 @@ const HomeOverview = ({ property }) => {
   const InfoRow = ({ label, value }) => (
     <>
       <div className="col-span-1 py-1 border-b border-gray-100">
-        <p className="text-[14px] text-gray-900">{label}</p>
+        <p className="text-[14px] text-gray-900 mb-1">{label}</p>
       </div>
       <div className="col-span-1 py-1 border-b border-gray-100">
-        <p className="text-[14px] text-gray-500">{value}</p>
+        <p className="text-[14px] text-gray-500 mb-1">{value}</p>
       </div>
     </>
   );

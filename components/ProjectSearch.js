@@ -98,12 +98,12 @@ const SearchWithAutocomplete = () => {
 
   return (
     <div className="position-relative">
-      <div>
+      <div className="position-relative">
         <input
           type="text"
-          className="form-control py-2 w-mine5"
+          className="form-control py-2 w-mine5 pe-5"
           id="searchInput"
-          placeholder="Search for a city or project"
+          placeholder="Search for a city or project..."
           autoComplete="off"
           value={searchTerm}
           onChange={handleSearch}
@@ -111,6 +111,10 @@ const SearchWithAutocomplete = () => {
           onBlur={handleBlur}
           ref={inputRef}
         />
+        <i
+          className="fa-solid fa-magnifying-glass position-absolute top-50 translate-middle-y"
+          style={{ color: "#FFC007", right: "15px" }}
+        ></i>
       </div>
 
       {isFocused && searchTerm && (

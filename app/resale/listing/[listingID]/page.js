@@ -257,7 +257,7 @@ export default async function PropertyDetailPage({ params }) {
               </div>
 
               {/* Price */}
-              <div className="mb-6">
+              <div className="mb-2">
                 <div className="flex items-center gap-3">
                   <h2 className="text-4xl md:text-6xl font-bold">
                     ${property.ListPrice.toLocaleString()}
@@ -616,11 +616,6 @@ export default async function PropertyDetailPage({ params }) {
               />
             </div>
 
-            {/* Similar Homes Section */}
-            <div className="">
-              <SimilarHomes properties={similarProperties} />
-            </div>
-
             {/* Map Section */}
             <div className="mt-12 z-0">
               <h2 className="text-3xl font-bold mb-4">Location</h2>
@@ -673,6 +668,9 @@ export default async function PropertyDetailPage({ params }) {
                 </a>
               </div>
             </div>
+            <div className="mt-6 ">
+              <ResaleFAQ property={property} />
+            </div>
           </div>
 
           {/* Floating Resale Button */}
@@ -689,8 +687,6 @@ export default async function PropertyDetailPage({ params }) {
                 transactionType={property.TransactionType}
               />
             </div>
-
-            {/* FAQ Section */}
           </div>
         </div>
 
@@ -726,9 +722,8 @@ export default async function PropertyDetailPage({ params }) {
             </div>
           </div>
         </div> */}
-
-        <div className="mt-6 ">
-          <ResaleFAQ property={property} />
+        <div className="max-w-6xl mx-auto md:px-4 px-0">
+          <SimilarHomes properties={similarProperties} />
         </div>
       </div>
     );
