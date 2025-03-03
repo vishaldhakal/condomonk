@@ -29,19 +29,29 @@ const SearchWithAutocomplete = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [preconResponse, propertyResponse] = await Promise.all([
-          axios.get(
+        let propertyResponse = { value: [] };
+
+        // Only fetch properties if searchTerm is 2 or more characters
+        if (searchTerm.length >= 2) {
+          const response = await fetch(
+            `/api/search?term=${encodeURIComponent(searchTerm)}`
+          );
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          propertyResponse = await response.json();
+        }
+
+        // Only fetch preconstruction data if in preconstruction tab
+        let preconResponse = { data: { cities: [], projects: [] } };
+        if (searchType === "preconstruction") {
+          preconResponse = await axios.get(
             "https://api.condomonk.ca/api/all-precons-search/?search=" +
               searchTerm.toLowerCase()
-          ),
-          searchTerm.length >= 2
-            ? fetch(`/api/search?term=${encodeURIComponent(searchTerm)}`).then(
-                (res) => res.json()
-              )
-            : Promise.resolve({ value: [] }),
-        ]);
+          );
+        }
 
-        // Limit each category to 5 items
+        // Update the data state
         setData({
           cities: (preconResponse.data.cities || []).slice(0, 5),
           projects: (preconResponse.data.projects || []).slice(0, 5),
@@ -49,7 +59,7 @@ const SearchWithAutocomplete = () => {
           properties: propertyResponse.value || [],
         });
 
-        // Also update search results directly with limits
+        // Update search results
         setSearchResults({
           cities: (preconResponse.data.cities || []).slice(0, 5),
           projects: (preconResponse.data.projects || []).slice(0, 5),
@@ -57,38 +67,42 @@ const SearchWithAutocomplete = () => {
             .filter((cityObj) =>
               cityObj.city.toLowerCase().includes(searchTerm.toLowerCase())
             )
-            .slice(0, 5), // Limit resale cities to 5
+            .slice(0, 5),
           properties: propertyResponse.value || [],
         });
       } catch (error) {
         console.error("Error fetching data:", error);
+        // Keep the UI working even if the API calls fail
+        setSearchResults({
+          cities: [],
+          projects: [],
+          resaleCities: [],
+          properties: [],
+        });
       }
     };
 
-    // Only fetch if searchTerm has at least 2 characters
-    if (searchTerm.length >= 2) {
+    // Debounce the search to avoid too many API calls
+    const timeoutId = setTimeout(() => {
       fetchData();
-    } else {
-      // Clear results if search term is too short
-      setSearchResults({
-        cities: [],
-        projects: [],
-        resaleCities: [],
-        properties: [],
-      });
-    }
-  }, [searchTerm]);
+    }, 300);
 
-  // Add this useEffect to handle route changes
+    return () => clearTimeout(timeoutId);
+  }, [searchTerm, searchType]);
+
+  // Modify the handleRouteChange function in useEffect
   useEffect(() => {
     const handleRouteChange = () => {
       setIsFocused(false);
+      setSearchTerm("");
       setSearchResults({
         cities: [],
         projects: [],
         resaleCities: [],
         properties: [],
       });
+      // Remove focus from the input
+      inputRef.current?.blur();
     };
 
     // Listen for route changes
@@ -136,6 +150,14 @@ const SearchWithAutocomplete = () => {
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
+    setIsFocused(false);
+    setSearchResults({
+      cities: [],
+      projects: [],
+      resaleCities: [],
+      properties: [],
+    });
+
     // Handle different option types
     if (option.name) {
       setSearchTerm(option.name); // Pre-construction city
@@ -144,36 +166,42 @@ const SearchWithAutocomplete = () => {
     } else if (option.city) {
       setSearchTerm(option.city); // Resale city
     }
-    setSearchResults({
-      cities: [],
-      projects: [],
-      resaleCities: [],
-      properties: [],
-    });
   };
 
+  // Modify the handleTabClick function
   const handleTabClick = (type) => {
     setSearchType(type);
-    // Ensure input stays focused
-    inputRef.current?.focus();
+    // Remove the auto-focus line
+    // inputRef.current?.focus();
   };
 
   const handleFocus = () => {
     setIsFocused(true);
   };
 
+  // Modify the handleBlur function
   const handleBlur = (e) => {
     // Check if the related target is within our dropdown
     if (dropdownRef.current?.contains(e.relatedTarget)) {
-      // If clicking within dropdown, keep focus
-      inputRef.current?.focus();
-      return;
+      return; // Don't keep focus, just return
     }
 
-    // Otherwise, close after a short delay
-    setTimeout(() => {
-      setIsFocused(false);
-    }, 100);
+    // Close immediately without delay
+    setIsFocused(false);
+  };
+
+  // Modify the clearSearch function
+  const clearSearch = () => {
+    setIsFocused(false);
+    setSearchTerm("");
+    setSearchResults({
+      cities: [],
+      projects: [],
+      resaleCities: [],
+      properties: [],
+    });
+    // Remove focus from the input
+    inputRef.current?.blur();
   };
 
   return (
@@ -233,38 +261,57 @@ const SearchWithAutocomplete = () => {
           <div className="max-h-[400px] overflow-y-auto">
             {searchType !== "preconstruction" && (
               <>
-                {/* Resale Cities */}
-                {searchResults.resaleCities.map((city, index) => (
-                  <Link
-                    href={`/resale/ontario/${city.city
-                      .toLowerCase()
-                      .replace(/ /g, "-")}/homes-for-sale`}
-                    key={index}
-                    className="flex items-center px-4 py-2 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0"
-                  >
-                    <i className="fa-solid fa-location-dot text-gray-400 text-xs w-6"></i>
-                    <span className="text-xs text-gray-700">{city.city}</span>
-                  </Link>
-                ))}
-
-                {/* Resale Properties */}
-                {searchResults.properties.map((property, index) => (
-                  <Link
-                    href={`/resale/listing/${property.ListingKey}`}
-                    key={index}
-                    className="flex items-center px-4 py-2 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0"
-                  >
-                    <i className="fa-solid fa-location-dot text-gray-400 text-xs w-6"></i>
-                    <div className="min-w-0 flex-1">
-                      <div className="text-xs text-gray-700 truncate">
-                        {property.UnparsedAddress}
-                      </div>
-                      <div className="text-[10px] text-gray-500">
-                        {property.City}
-                      </div>
+                {/* Properties Section */}
+                {searchResults.properties.length > 0 && (
+                  <div className="py-2">
+                    <div className="px-4 py-1 text-xs font-medium text-gray-500">
+                      Properties
                     </div>
-                  </Link>
-                ))}
+                    {searchResults.properties.map((property, index) => (
+                      <Link
+                        href={`/resale/listing/${property.ListingKey}`}
+                        key={index}
+                        onClick={clearSearch}
+                        className="flex items-center px-4 py-2 hover:bg-gray-50 transition-colors"
+                      >
+                        <i className="fa-solid fa-home text-gray-400 text-xs w-6"></i>
+                        <div className="min-w-0 flex-1">
+                          <div className="text-xs text-gray-700 truncate">
+                            {property.UnparsedAddress}
+                          </div>
+                          <div className="text-[10px] text-gray-500">
+                            {property.City} - $
+                            {property.ListPrice?.toLocaleString()}
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+
+                {/* Resale Cities Section */}
+                {searchResults.resaleCities.length > 0 && (
+                  <div className="py-2 border-t border-gray-100">
+                    <div className="px-4 py-1 text-xs font-medium text-gray-500">
+                      Cities
+                    </div>
+                    {searchResults.resaleCities.map((city, index) => (
+                      <Link
+                        href={`/resale/ontario/${city.city
+                          .toLowerCase()
+                          .replace(/ /g, "-")}/homes-for-sale`}
+                        key={index}
+                        onClick={clearSearch}
+                        className="flex items-center px-4 py-2 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0"
+                      >
+                        <i className="fa-solid fa-location-dot text-gray-400 text-xs w-6"></i>
+                        <span className="text-xs text-gray-700">
+                          {city.city}
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </>
             )}
 
@@ -275,6 +322,7 @@ const SearchWithAutocomplete = () => {
                   <Link
                     href={"/" + city.slug}
                     key={index}
+                    onClick={clearSearch}
                     className="flex items-center px-4 py-2 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0"
                   >
                     <i className="fa-solid fa-location-dot text-gray-400 text-xs w-6"></i>
@@ -287,6 +335,7 @@ const SearchWithAutocomplete = () => {
                   <Link
                     href={"/" + project.city.slug + "/" + project.slug}
                     key={index}
+                    onClick={clearSearch}
                     className="flex items-center px-4 py-2 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0"
                   >
                     <i className="fa-solid fa-building text-gray-400 text-xs w-6"></i>
