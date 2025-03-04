@@ -83,23 +83,52 @@ const Navbar = ({ cities, transparent }) => {
   // Helper function to determine if we're on a resale page
   const isResalePage = pathname.includes("/resale/");
 
-  // Helper function to extract city name from path
+  // Helper function to determine if we're on the main resale page
+  const isMainResalePage = pathname === "/resale/ontario/homes-for-sale";
+
+  // Helper function to determine if we're on a city-specific resale page
+  const isCityResalePage =
+    isResalePage && !isMainResalePage && pathname.includes("/resale/ontario/");
+
+  // Helper function to determine if we're on a special page
+  const isSpecialPage =
+    pathname.startsWith("/blogs") ||
+    pathname.startsWith("/top-10-gta-projects") ||
+    pathname.startsWith("/pre-construction-homes");
+
+  // Update the getCurrentCity function
   const getCurrentCity = () => {
-    if (isResalePage) {
+    if (isMainResalePage || isSpecialPage) {
+      return null;
+    }
+
+    if (isCityResalePage) {
       // Extract city from resale path pattern /resale/ontario/city-name/...
       const matches = pathname.match(/\/resale\/ontario\/([^\/]+)/);
-      return matches ? matches[1].split("-")[0] : null;
+      if (matches) {
+        return matches[1].split("/")[0]; // Get the city name before any additional path segments
+      }
     } else {
       // Extract city from preconstruction path pattern /city-name/...
       const city = pathname.split("/")[1];
       return city && city !== "resale" ? city : null;
     }
+
+    return null;
   };
 
   const currentCity = getCurrentCity();
   const cityName = currentCity
     ? currentCity.charAt(0).toUpperCase() + currentCity.slice(1)
     : "";
+
+  // Helper function to generate resale links
+  const getResaleLink = (type) => {
+    if (currentCity && !isSpecialPage) {
+      return `/resale/ontario/${currentCity}/${type}`;
+    }
+    return `/resale/ontario/${type}`;
+  };
 
   return (
     <div
@@ -197,10 +226,10 @@ const Navbar = ({ cities, transparent }) => {
                   }`}
                   style={{
                     minWidth: isResalePage ? "300px" : "520px",
+                    maxWidth: "90vw",
                     transform: "translateX(-50%)",
                     left: "50%",
                     marginTop: "0.5rem",
-                    whiteSpace: "nowrap",
                   }}
                 >
                   <div
@@ -209,47 +238,67 @@ const Navbar = ({ cities, transparent }) => {
                     } grid-cols-1 min-w-[250px] mt-2`}
                   >
                     {isResalePage ? (
-                      // Show preconstruction options when on resale pages
                       <div className="col px-4">
                         <div className="text-sm font-bold text-black mb-3 border-b border-gray-200">
                           PRE CONSTRUCTION HOMES
                         </div>
                         <div className="flex flex-col space-y-2">
-                          <Link
-                            className="text-gray-600 hover:text-gray-900 text-sm whitespace-nowrap"
-                            href={`/${currentCity}`}
-                          >
-                            All Pre Construction Homes{" "}
-                            {cityName && `in ${cityName}`}
-                          </Link>
-                          <Link
-                            className="text-gray-600 hover:text-gray-900 text-sm whitespace-nowrap"
-                            href={`/${currentCity}/condos`}
-                          >
-                            Pre Construction Condos{" "}
-                            {cityName && `in ${cityName}`}
-                          </Link>
-                          <Link
-                            className="text-gray-600 hover:text-gray-900 text-sm whitespace-nowrap"
-                            href={`/${currentCity}/townhomes`}
-                          >
-                            Pre Construction Townhomes{" "}
-                            {cityName && `in ${cityName}`}
-                          </Link>
-                          <Link
-                            className="text-gray-600 hover:text-gray-900 text-sm whitespace-nowrap"
-                            href={`/${currentCity}/detached`}
-                          >
-                            Pre Construction Detached Homes{" "}
-                            {cityName && `in ${cityName}`}
-                          </Link>
-                          <Link
-                            className="text-gray-600 hover:text-gray-900 text-sm whitespace-nowrap"
-                            href={`/${currentCity}/upcoming`}
-                          >
-                            Upcoming Pre Construction{" "}
-                            {cityName && `in ${cityName}`}
-                          </Link>
+                          {isMainResalePage ? (
+                            // Links for main resale page
+                            <>
+                              <Link
+                                className="text-gray-600 hover:text-gray-900 text-sm break-words"
+                                href="/pre-construction-homes"
+                              >
+                                All Pre Construction Homes
+                              </Link>
+                              <Link
+                                className="text-gray-600 hover:text-gray-900 text-sm break-words"
+                                href="/top-10-gta-projects"
+                              >
+                                Top 10 GTA Projects
+                              </Link>
+                            </>
+                          ) : (
+                            // City-specific links
+                            <>
+                              <Link
+                                className="text-gray-600 hover:text-gray-900 text-sm break-words"
+                                href={`/${currentCity}`}
+                              >
+                                All Pre Construction Homes{" "}
+                                {cityName && `in ${cityName}`}
+                              </Link>
+                              <Link
+                                className="text-gray-600 hover:text-gray-900 text-sm break-words"
+                                href={`/${currentCity}/condos`}
+                              >
+                                Pre Construction Condos{" "}
+                                {cityName && `in ${cityName}`}
+                              </Link>
+                              <Link
+                                className="text-gray-600 hover:text-gray-900 text-sm break-words"
+                                href={`/${currentCity}/townhomes`}
+                              >
+                                Pre Construction Townhomes{" "}
+                                {cityName && `in ${cityName}`}
+                              </Link>
+                              <Link
+                                className="text-gray-600 hover:text-gray-900 text-sm break-words"
+                                href={`/${currentCity}/detached`}
+                              >
+                                Pre Construction Detached Homes{" "}
+                                {cityName && `in ${cityName}`}
+                              </Link>
+                              <Link
+                                className="text-gray-600 hover:text-gray-900 text-sm break-words"
+                                href={`/${currentCity}/upcoming`}
+                              >
+                                Upcoming Pre Construction{" "}
+                                {cityName && `in ${cityName}`}
+                              </Link>
+                            </>
+                          )}
                         </div>
                       </div>
                     ) : (
@@ -261,34 +310,38 @@ const Navbar = ({ cities, transparent }) => {
                           </div>
                           <div className="flex flex-col space-y-2">
                             <Link
-                              className="text-gray-600 hover:text-gray-900 text-sm"
-                              href={`/resale/ontario/${currentCity}/homes-for-sale`}
+                              className="text-gray-600 hover:text-gray-900 text-sm break-words"
+                              href={getResaleLink("homes-for-sale")}
                             >
-                              All Homes {cityName && `in ${cityName}`}
+                              All Homes For Sale {cityName && `in ${cityName}`}
                             </Link>
                             <Link
-                              className="text-gray-600 hover:text-gray-900 text-sm"
-                              href={`/resale/ontario/${currentCity}/semi-detached-homes-for-sale`}
+                              className="text-gray-600 hover:text-gray-900 text-sm break-words"
+                              href={getResaleLink(
+                                "semi-detached-homes-for-sale"
+                              )}
                             >
-                              Semi Detached Homes {cityName && `in ${cityName}`}
+                              Semi Detached Homes For Sale{" "}
+                              {cityName && `in ${cityName}`}
                             </Link>
                             <Link
-                              className="text-gray-600 hover:text-gray-900 text-sm"
-                              href={`/resale/ontario/${currentCity}/detached-homes-for-sale`}
+                              className="text-gray-600 hover:text-gray-900 text-sm break-words"
+                              href={getResaleLink("detached-homes-for-sale")}
                             >
-                              Detached Homes {cityName && `in ${cityName}`}
+                              Detached Homes For Sale{" "}
+                              {cityName && `in ${cityName}`}
                             </Link>
                             <Link
-                              className="text-gray-600 hover:text-gray-900 text-sm"
-                              href={`/resale/ontario/${currentCity}/townhomes-for-sale`}
+                              className="text-gray-600 hover:text-gray-900 text-sm break-words"
+                              href={getResaleLink("townhomes-for-sale")}
                             >
-                              Townhomes {cityName && `in ${cityName}`}
+                              Townhomes For Sale {cityName && `in ${cityName}`}
                             </Link>
                             <Link
-                              className="text-gray-600 hover:text-gray-900 text-sm"
-                              href={`/resale/ontario/${currentCity}/condos-for-sale`}
+                              className="text-gray-600 hover:text-gray-900 text-sm break-words"
+                              href={getResaleLink("condos-for-sale")}
                             >
-                              Condos {cityName && `in ${cityName}`}
+                              Condos For Sale {cityName && `in ${cityName}`}
                             </Link>
                           </div>
                         </div>
@@ -299,28 +352,32 @@ const Navbar = ({ cities, transparent }) => {
                           </div>
                           <div className="flex flex-col space-y-2">
                             <Link
-                              className="text-gray-600 hover:text-gray-900 text-sm"
-                              href={`/resale/ontario/${currentCity}/semi-detached-homes-for-lease`}
+                              className="text-gray-600 hover:text-gray-900 text-sm break-words"
+                              href={getResaleLink(
+                                "semi-detached-homes-for-lease"
+                              )}
                             >
-                              Semi Detached Homes {cityName && `in ${cityName}`}
+                              Semi Detached Homes For Lease{" "}
+                              {cityName && `in ${cityName}`}
                             </Link>
                             <Link
-                              className="text-gray-600 hover:text-gray-900 text-sm"
-                              href={`/resale/ontario/${currentCity}/detached-homes-for-lease`}
+                              className="text-gray-600 hover:text-gray-900 text-sm break-words"
+                              href={getResaleLink("detached-homes-for-lease")}
                             >
-                              Detached Homes {cityName && `in ${cityName}`}
+                              Detached Homes For Lease{" "}
+                              {cityName && `in ${cityName}`}
                             </Link>
                             <Link
-                              className="text-gray-600 hover:text-gray-900 text-sm"
-                              href={`/resale/ontario/${currentCity}/townhomes-for-lease`}
+                              className="text-gray-600 hover:text-gray-900 text-sm break-words"
+                              href={getResaleLink("townhomes-for-lease")}
                             >
-                              Townhomes {cityName && `in ${cityName}`}
+                              Townhomes For Lease {cityName && `in ${cityName}`}
                             </Link>
                             <Link
-                              className="text-gray-600 hover:text-gray-900 text-sm"
-                              href={`/resale/ontario/${currentCity}/condos-for-lease`}
+                              className="text-gray-600 hover:text-gray-900 text-sm break-words"
+                              href={getResaleLink("condos-for-lease")}
                             >
-                              Condos {cityName && `in ${cityName}`}
+                              Condos For Lease {cityName && `in ${cityName}`}
                             </Link>
                           </div>
                         </div>

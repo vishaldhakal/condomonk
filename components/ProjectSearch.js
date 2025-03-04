@@ -22,12 +22,14 @@ const SearchWithAutocomplete = () => {
   const [isFocused, setIsFocused] = useState(false);
   const [searchType, setSearchType] = useState("all"); // "all", "resale", or "preconstruction"
   const [isTabbing, setIsTabbing] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const inputRef = useRef(null);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
         let propertyResponse = { value: [] };
 
@@ -72,13 +74,14 @@ const SearchWithAutocomplete = () => {
         });
       } catch (error) {
         console.error("Error fetching data:", error);
-        // Keep the UI working even if the API calls fail
         setSearchResults({
           cities: [],
           projects: [],
           resaleCities: [],
           properties: [],
         });
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -358,10 +361,29 @@ const SearchWithAutocomplete = () => {
               !searchResults.resaleCities.length &&
               !searchResults.projects.length &&
               searchTerm && (
-                <div className="py-6 text-center">
-                  <div className="text-xs text-gray-400">
-                    No results found for "{searchTerm}"
-                  </div>
+                <div className="py-8 text-center">
+                  {isLoading ? (
+                    <div className="space-y-3">
+                      <div className="flex justify-center">
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FFC007]"></div>
+                      </div>
+                      <div className="text-sm text-gray-500">Searching...</div>
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      <div className="flex justify-center">
+                        <i className="fas fa-search text-2xl text-gray-300"></i>
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium text-gray-600">
+                          No matches found
+                        </div>
+                        <div className="text-xs text-gray-400 mt-1">
+                          Try adjusting your search terms
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
           </div>
