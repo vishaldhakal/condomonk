@@ -80,8 +80,9 @@ const Navbar = ({ cities, transparent }) => {
     setResaleDropdownOpen(false);
   };
 
-  // Helper function to determine if we're on a resale page
-  const isResalePage = pathname.includes("/resale/");
+  // Update the isResalePage helper function to exclude listing pages
+  const isResalePage =
+    pathname.includes("/resale/") && !pathname.includes("/resale/listing/");
 
   // Helper function to determine if we're on the main resale page
   const isMainResalePage = pathname === "/resale/ontario/homes-for-sale";
