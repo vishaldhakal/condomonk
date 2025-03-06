@@ -1,4 +1,8 @@
-import { getListingDetail, getSimilarListings } from "@/lib/properties";
+import {
+  getListingDetail,
+  getSimilarListings,
+  getRoomInformation,
+} from "@/lib/properties";
 import { notFound } from "next/navigation";
 import BookingForm from "@/components/BookingForm";
 import PropertyGallery from "@/components/PropertyGallery";
@@ -19,6 +23,7 @@ import SimilarHomes from "@/components/SimilarHomes";
 import PriceHistory from "@/components/PriceHistory";
 import ResaleFAQ from "@/components/ResaleFAQ";
 import GoogleMap from "@/components/GoogleMap";
+import RoomInformation from "@/components/RoomInformation";
 
 export const revalidate = 60; // 1 minute
 
@@ -73,6 +78,15 @@ export default async function PropertyDetailPage({ params }) {
 
     if (!property) {
       notFound();
+    }
+
+    // Fetch room info with error handling
+    let roomInfo = [];
+    try {
+      roomInfo = await getRoomInformation(property.ListingKey);
+    } catch (error) {
+      console.error("Error fetching room information:", error);
+      // Continue with empty room info
     }
 
     // Fetch similar properties
@@ -570,6 +584,8 @@ export default async function PropertyDetailPage({ params }) {
                 )}
               </div>
             </div>
+            {/* Add RoomInformation component before Additional Details */}
+            <RoomInformation rooms={roomInfo} />
             {/* Additional Details */}
             <div className="pt-3">
               <h2 className="text-3xl font-bold mb-4">Additional Details</h2>

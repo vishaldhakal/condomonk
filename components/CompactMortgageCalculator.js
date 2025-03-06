@@ -78,210 +78,155 @@ export default function CompactMortgageCalculator({
   const priceNumber = formatCurrency(calculatordata.hvalue).replace("$", "");
 
   return (
-    <div
-      className={`max-w-3xl ${
-        align == "center" ? "mx-auto" : ""
-      }  bg-white rounded-lg overflow-hidden sm:mb-20`}
-    >
-      <div className="">
-        <h2 className={`font-semibold pb-3 text-3xl md:text-4xl`}>
-          Mortgage Calculator
+    <div className={`max-w-4xl ${align == "center" ? "mx-auto" : ""}`}>
+      <div className="bg-white rounded-2xl shadow-sm p-8">
+        <h2 className="text-2xl font-semibold text-gray-700 mb-6">
+          MORTGAGE INFO
         </h2>
-        <p
-          className={`text-gray-500 mt-2  ${
-            align === "center" ? "text-center" : ""
-          }`}
-        >
-          Calculate your monthly mortgage payments based on the home value,
-        </p>
-        {/* <div className="mb-10"></div> */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-          <div className="grid grid-cols-1 gap-2">
-            <FloatingLabelInput
-              id="hvalue"
-              label="Home Value"
-              value={priceNumber ? priceNumber : ""}
-              onChange={handleChange}
-              prefix="$"
-            />
-            <div className="flex gap-2">
-              <FloatingLabelInput
-                id="dpay"
-                label="Down Payment"
-                value={formatCurrency(calculatordata.dpay).replace("$", "")}
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Left Column - Input Fields */}
+          <div className="space-y-6">
+            <div>
+              <label className="text-sm font-medium text-gray-500 mb-2 block">
+                SALE PRICE
+              </label>
+              <input
+                type="text"
+                id="hvalue"
+                value={priceNumber ? `$${priceNumber}` : ""}
                 onChange={handleChange}
-                prefix="$"
-              />
-              <FloatingLabelInput
-                id="dper"
-                label="Down Payment %"
-                value={calculatordata.dper}
-                onChange={handleChange}
-                suffix="%"
+                className="w-full h-12 px-4 bg-gray-50 border-0 rounded-lg text-gray-900 text-lg font-medium focus:ring-0"
               />
             </div>
-            <FloatingLabelInput
-              id="loanamt"
-              label="Mortgage Amount"
-              value={formatCurrency(calculatordata.loanamt).replace("$", "")}
-              onChange={handleChange}
-              prefix="$"
-              disabled
-            />
-            <FloatingLabelInput
-              id="intrate"
-              label="Interest Rate"
-              value={calculatordata.intrate}
-              onChange={handleChange}
-              suffix="%"
-            />
-            <FloatingLabelInput
-              id="loanterm"
-              label="Mortgage Term"
-              value={calculatordata.loanterm}
-              onChange={handleChange}
-              suffix="Yrs"
-            />
+
+            <div>
+              <label className="text-sm font-medium text-gray-500 mb-2 block">
+                PERCENT DOWN PAYMENT
+              </label>
+              <input
+                type="text"
+                id="dper"
+                value={`${calculatordata.dper}`}
+                onChange={handleChange}
+                className="w-full h-12 px-4 bg-gray-50 border-0 rounded-lg text-gray-900 text-lg font-medium focus:ring-0"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium text-gray-500 mb-2 block">
+                DOWN PAYMENT
+              </label>
+              <input
+                type="text"
+                id="dpay"
+                value={`$${formatCurrency(calculatordata.dpay).replace(
+                  "$",
+                  ""
+                )}`}
+                onChange={handleChange}
+                className="w-full h-12 px-4 bg-gray-50 border-0 rounded-lg text-gray-900 text-lg font-medium focus:ring-0"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium text-gray-500 mb-2 block">
+                AMORTIZATION PERIOD (YEARS)
+              </label>
+              <input
+                type="text"
+                id="loanterm"
+                value={calculatordata.loanterm}
+                onChange={handleChange}
+                className="w-full h-12 px-4 bg-gray-50 border-0 rounded-lg text-gray-900 text-lg font-medium focus:ring-0"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium text-gray-500 mb-2 block">
+                INTEREST RATE
+              </label>
+              <input
+                type="text"
+                id="intrate"
+                value={calculatordata.intrate}
+                onChange={handleChange}
+                className="w-full h-12 px-4 bg-gray-50 border-0 rounded-lg text-gray-900 text-lg font-medium focus:ring-0"
+              />
+            </div>
           </div>
 
-          <div className="mt-8">
-            <svg width="400" height="250">
-              {(calculatordata.loanamt > 10 || intrest > 10) && (
-                <>
-                  <VictoryPie
-                    standalone={false}
-                    width={350}
-                    height={200}
-                    data={[
-                      {
-                        x: `Mortgage \n$ ${parseInt(
-                          calculatordata.loanamt
-                        ).toLocaleString()}`,
-                        y: parseInt(calculatordata.loanamt),
-                      },
-                      {
-                        x: `Interest \n $ ${parseInt(
-                          intrest
-                        ).toLocaleString()}`,
-                        y: parseInt(intrest),
-                      },
-                    ]}
-                    innerRadius={68}
-                    labelRadius={80}
-                    colorScale={["rgb(82 170 146)", "rgb(82 130 146)"]}
-                  />
-                  <VictoryLabel
-                    textAnchor="middle"
-                    style={{ fontSize: 16 }}
-                    x={190}
-                    y={145}
-                    text={"$" + calculated + "/mo"}
-                  />
-                </>
-              )}
-            </svg>
-            <div className="mt-8 text-center">
-              <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                ${calculated} <span className="text-lg text-gray-600">/mo</span>
-              </h3>
-              <p className="text-gray-600">
-                Your Estimated Monthly Mortgage Payment
-              </p>
+          {/* Right Column - Payment Display */}
+          <div>
+            <h3 className="text-sm font-medium text-gray-500 mb-6">
+              ESTIMATED PAYMENT
+            </h3>
+            <div className="relative">
+              <svg width="100%" height="300">
+                {(calculatordata.loanamt > 10 || intrest > 10) && (
+                  <>
+                    <VictoryPie
+                      standalone={false}
+                      width={300}
+                      height={300}
+                      data={[
+                        {
+                          x: "Principal and Interest",
+                          y: parseInt(calculatordata.loanamt),
+                        },
+                        {
+                          x: "Property Taxes",
+                          y: parseInt(intrest),
+                        },
+                      ]}
+                      innerRadius={85}
+                      labelRadius={1}
+                      colorScale={["#4299E1", "#FC8181"]}
+                      style={{
+                        labels: { display: "none" },
+                        data: {
+                          fillOpacity: 0.9,
+                          stroke: "#fff",
+                          strokeWidth: 2,
+                        },
+                      }}
+                    />
+                    <VictoryLabel
+                      textAnchor="middle"
+                      verticalAnchor="middle"
+                      x={150}
+                      y={150}
+                      style={[
+                        { fontSize: 32, fontWeight: "bold" },
+                        { fontSize: 16, fill: "#718096" },
+                      ]}
+                      text={[`$${calculated}`, "/ month"]}
+                    />
+                  </>
+                )}
+              </svg>
+            </div>
+
+            <div className="space-y-3 mt-4">
+              <div className="flex items-center">
+                <div className="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
+                <span className="text-gray-600">
+                  ${formatCurrency(calculatordata.loanamt).replace("$", "")}{" "}
+                  Principal and Interest
+                </span>
+              </div>
+              <div className="flex items-center">
+                <div className="w-3 h-3 rounded-full bg-red-400 mr-2"></div>
+                <span className="text-gray-600">
+                  ${formatCurrency(intrest).replace("$", "")} Property Taxes
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {showDetails && (
-        <>
-          <div className="bg-gray-50 p-8">
-            <h3 className="text-2xl font-bold mb-4">
-              Steps to Calculate Your Payments
-            </h3>
-            <ol className="list-decimal list-inside space-y-2 text-gray-700">
-              <li>Determine the purchase price of the home.</li>
-              <li>
-                Calculate the down payment (usually 5-20% of the purchase price
-                in Canada).
-              </li>
-              <li>
-                Subtract the down payment from the purchase price to get the
-                mortgage amount.
-              </li>
-              <li>
-                Choose a mortgage term (typically 5 years in Canada) and
-                amortization period (usually 25-30 years).
-              </li>
-              <li>
-                Determine the interest rate (check current rates from Canadian
-                lenders).
-              </li>
-              <li>
-                Use a mortgage calculator to determine the monthly payment.
-              </li>
-              <li>
-                Factor in additional costs like property taxes and home
-                insurance.
-              </li>
-              <li>
-                Consider the impact of making accelerated bi-weekly payments.
-              </li>
-              <li>
-                Review the total interest paid over the life of the mortgage.
-              </li>
-              <li>
-                Ensure the monthly payments fit within your budget (typically
-                not exceeding 32% of your gross monthly income for housing
-                costs).
-              </li>
-            </ol>
-          </div>
-          <div className="p-8">
-            <h3 className="text-2xl font-bold mb-4">Terms Explained</h3>
-            <dl className="space-y-4">
-              {[
-                {
-                  term: "Home Value",
-                  def: "The current market value or purchase price of the property.",
-                },
-                {
-                  term: "Down Payment",
-                  def: "The initial upfront portion of the total home purchase price paid by the buyer.",
-                },
-                {
-                  term: "Mortgage Amount",
-                  def: "The amount borrowed from a lender to purchase the home (Home Value minus Down Payment).",
-                },
-                {
-                  term: "Interest Rate",
-                  def: "The percentage charged by the lender for borrowing the money, usually expressed as an annual rate.",
-                },
-                {
-                  term: "Mortgage Term",
-                  def: "The length of time your mortgage agreement and interest rate are in effect (typically 1-5 years in Canada).",
-                },
-              ].map(({ term, def }) => (
-                <div key={term}>
-                  <dt className="font-semibold text-gray-800">{term}</dt>
-                  <dd className="text-gray-600 mt-1">{def}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </>
-      )}
-
-      <div
-        className={`bg-gray-100 p-4 mt-8 ${
-          align === "center" ? "text-center" : ""
-        } text-sm text-gray-600`}
-      >
-        <p>
-          This calculator is for demonstration purposes only. Always consult a
-          professional financial advisor before making personal financial
-          decisions.
-        </p>
-      </div>
+      {/* Remove or update showDetails section as needed */}
     </div>
   );
 }
@@ -296,15 +241,16 @@ const FloatingLabelInput = ({
   disabled,
   type = "text",
 }) => (
-  <div className="relative mt-4">
+  <div className="relative">
     <input
       type={type}
       id={id}
       className={`
-        peer w-full h-[60px] px-4 pt-4 pb-1 rounded-md
-        bg-white border border-gray-300 text-gray-900 text-base
-        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
-        ${disabled ? "bg-gray-100 cursor-not-allowed" : ""}
+        peer w-full h-14 px-4 pt-4 pb-1 rounded-lg
+        bg-white border-2 border-gray-200 text-gray-900 text-base
+        focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500
+        transition-colors duration-200
+        ${disabled ? "bg-gray-50 cursor-not-allowed" : ""}
         ${prefix ? "pl-8" : ""}
         ${suffix ? "pr-8" : ""}
       `}
@@ -317,18 +263,18 @@ const FloatingLabelInput = ({
       htmlFor={id}
       className={`
         absolute top-1 left-4 text-gray-500 text-xs transition-all duration-200
-        peer-placeholder-shown:text-xs peer-placeholder-shown:top-3.5
-        peer-focus:top-1 peer-focus:text-xs 
+        peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5
+        peer-focus:top-1 peer-focus:text-xs peer-focus:text-indigo-600
         ${prefix ? "left-8" : ""}
       `}
     >
       {label}
     </label>
     {prefix && (
-      <span className="absolute left-3 top-3.5 text-gray-500">{prefix}</span>
+      <span className="absolute left-3 top-4 text-gray-500">{prefix}</span>
     )}
     {suffix && (
-      <span className="absolute right-3 top-3.5 text-gray-500">{suffix}</span>
+      <span className="absolute right-3 top-4 text-gray-500">{suffix}</span>
     )}
   </div>
 );
