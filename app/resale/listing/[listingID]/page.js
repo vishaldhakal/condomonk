@@ -239,10 +239,84 @@ export default async function PropertyDetailPage({ params }) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2 max-w-5xl mx-auto">
           {/* Main Content */}
           <div className="md:col-span-2 space-y-8  md:pe-4">
-            {/* Property Header */}
-            <div className="pb-0">
+            {/* Price */}
+            <div className="mb-0">
+              <div className="flex items-center gap-3">
+                <h2 className="text-4xl md:text-6xl font-bold mb-0">
+                  ${property.ListPrice.toLocaleString()}
+                </h2>
+                {property.OriginalListPrice &&
+                  property.ListPrice < property.OriginalListPrice && (
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-yellow-400 ">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4 text-green-700 "
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"
+                          clip-rule="evenodd"
+                        ></path>
+                      </svg>
+                      <span className="ps-1"> Price Reduced</span>
+                      <span className="ml-1 font-bold">
+                        {(
+                          ((property.ListPrice - property.OriginalListPrice) /
+                            property.OriginalListPrice) *
+                          100
+                        ).toFixed(1)}
+                        %
+                      </span>
+                    </span>
+                  )}
+              </div>
+
+              {property.PriceChangeTimestamp && (
+                <div>
+                  <p className="text-sm text-gray-500 mt-1">
+                    Last price change{" "}
+                    <TimeAgo timestamp={property.PriceChangeTimestamp} />
+                  </p>
+                  <PriceHistory
+                    priceHistory={[
+                      // Current price
+                      {
+                        price: property.ListPrice,
+                        date:
+                          property.PriceChangeTimestamp ||
+                          property.ModificationTimestamp,
+                      },
+                      // Previous price if it exists
+                      ...(property.PreviousListPrice
+                        ? [
+                            {
+                              price: property.PreviousListPrice,
+                              date: property.OriginalEntryTimestamp,
+                            },
+                          ]
+                        : []),
+                      // Original price if different from previous prices
+                      ...(property.OriginalListPrice &&
+                      property.OriginalListPrice !==
+                        property.PreviousListPrice &&
+                      property.OriginalListPrice !== property.ListPrice
+                        ? [
+                            {
+                              price: property.OriginalListPrice,
+                              date: property.OriginalEntryTimestamp,
+                            },
+                          ]
+                        : []),
+                    ].filter((record) => record.price && record.date)} // Filter out any invalid records
+                  />
+                </div>
+              )}
+            </div>
+            <div className="mt-2">
               {/* Status and Type */}
-              <div className="flex flex-col items-start gap-2 mb-2 ">
+              <div className="flex  items-start gap-2 mb-2 ">
                 {property.OriginalEntryTimestamp && (
                   <span className="inline-flex items-center gap-1 text-black py-0.5 rounded-full text-xs py-1 px-3 bg-yellow-400 shadow-xl mt-4 mt-md-0">
                     <TimeAgo timestamp={property.OriginalEntryTimestamp} />
@@ -254,82 +328,6 @@ export default async function PropertyDetailPage({ params }) {
                     {property.PropertySubType} {property.TransactionType}
                   </span>
                 </span>
-              </div>
-
-              {/* Price */}
-              <div className="mb-2">
-                <div className="flex items-center gap-3">
-                  <h2 className="text-4xl md:text-6xl font-bold">
-                    ${property.ListPrice.toLocaleString()}
-                  </h2>
-                  {property.OriginalListPrice &&
-                    property.ListPrice < property.OriginalListPrice && (
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-yellow-400 ">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="h-4 w-4 text-green-700 "
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"
-                            clip-rule="evenodd"
-                          ></path>
-                        </svg>
-                        <span className="ps-1"> Price Reduced</span>
-                        <span className="ml-1 font-bold">
-                          {(
-                            ((property.ListPrice - property.OriginalListPrice) /
-                              property.OriginalListPrice) *
-                            100
-                          ).toFixed(1)}
-                          %
-                        </span>
-                      </span>
-                    )}
-                </div>
-
-                {property.PriceChangeTimestamp && (
-                  <div>
-                    <p className="text-sm text-gray-500 mt-1">
-                      Last price change{" "}
-                      <TimeAgo timestamp={property.PriceChangeTimestamp} />
-                    </p>
-                    <PriceHistory
-                      priceHistory={[
-                        // Current price
-                        {
-                          price: property.ListPrice,
-                          date:
-                            property.PriceChangeTimestamp ||
-                            property.ModificationTimestamp,
-                        },
-                        // Previous price if it exists
-                        ...(property.PreviousListPrice
-                          ? [
-                              {
-                                price: property.PreviousListPrice,
-                                date: property.OriginalEntryTimestamp,
-                              },
-                            ]
-                          : []),
-                        // Original price if different from previous prices
-                        ...(property.OriginalListPrice &&
-                        property.OriginalListPrice !==
-                          property.PreviousListPrice &&
-                        property.OriginalListPrice !== property.ListPrice
-                          ? [
-                              {
-                                price: property.OriginalListPrice,
-                                date: property.OriginalEntryTimestamp,
-                              },
-                            ]
-                          : []),
-                      ].filter((record) => record.price && record.date)} // Filter out any invalid records
-                    />
-                  </div>
-                )}
               </div>
 
               {/* Key Details */}
