@@ -24,6 +24,10 @@ const sitemapConfig = {
       priority: 0.8,
     },
     {
+      pattern: "/[city]/[slug]",
+      priority: 0.64,
+    },
+    {
       pattern: "/[city]/[propertyType]",
       priority: 0.8,
     },

@@ -108,6 +108,15 @@ class SitemapGenerator {
       this.addUrl("/resale", 0.8);
       this.addUrl("/resale/ontario", 0.8);
 
+      // Add city-specific routes
+      cities.forEach((city) => {
+        // Add base city route
+        this.addUrl(`/${city}`, 0.8);
+
+        // Add city/slug routes by fetching from API
+        this.addCityProjectRoutes(city);
+      });
+
       // Generate all possible combinations for each city
       cities.forEach((city) => {
         const cityBase = `/resale/ontario/${city}`;
@@ -140,6 +149,28 @@ class SitemapGenerator {
     } catch (error) {
       console.error("Error adding dynamic routes:", error);
       throw error;
+    }
+  }
+
+  async addCityProjectRoutes(city) {
+    try {
+      // Fetch projects for this city from API
+      const response = await fetch(
+        `https://api.condomonk.ca/api/preconstructions-city/${city}`,
+        {
+          next: { revalidate: 10 },
+        }
+      );
+      const data = await response.json();
+
+      // Add URL for each project
+      if (data.preconstructions) {
+        data.preconstructions.forEach((project) => {
+          this.addUrl(`/${city}/${project.slug}`, 0.64);
+        });
+      }
+    } catch (error) {
+      console.error(`Error fetching projects for ${city}:`, error);
     }
   }
 
