@@ -44,157 +44,34 @@ class SitemapGenerator {
 
   async addDynamicRoutes() {
     try {
-      // All cities
-      const cities = [
-        "ajax",
-        "aurora",
-        "barrie",
-        "baxter",
-        "bolton",
-        "bradford",
-        "brampton",
-        "brantford",
-        "burlington",
-        "burnaby",
-        "caledon",
-        "calgary",
-        "cambridge",
-        "east-gwillimbury",
-        "etobicoke",
-        "georgetown",
-        "grimsby",
-        "guelph",
-        "hamilton",
-        "innisfil",
-        "kingston",
-        "kitchener",
-        "maple",
-        "markham",
-        "milton",
-        "mississauga",
-        "newmarket",
-        "niagara-falls",
-        "north-york",
-        "oakville",
-        "orangeville",
-        "oshawa",
-        "pickering",
-        "richmond-hill",
-        "scarborough",
-        "st-catharines",
-        "stoney-creek",
-        "toronto",
-        "unionville",
-        "vaughan",
-        "waterdown",
-        "waterloo",
-        "whitby",
-        "woodbridge",
-      ];
-
-      // Property types from FilterBar
-      const propertyTypes = [
-        { label: "Detached", path: "detached-homes" },
-        { label: "Semi-Detached", path: "semi-detached-homes" },
-        { label: "Townhouse", path: "townhouses" },
-        { label: "Condo Townhouse", path: "condo-townhouses" },
-        { label: "Condos", path: "condos" },
-      ];
-
-      // Transaction types
-      const transactionTypes = ["for-sale", "for-lease"];
-
-      // Add base routes
-      this.addUrl("/resale", 0.8);
-      this.addUrl("/resale/ontario", 0.8);
-
-      // Add city-specific routes
-      cities.forEach((city) => {
-        // Add base city route
-        this.addUrl(`/${city}`, 0.8);
-
-        // Add city/slug routes by fetching from API
-        this.addCityProjectRoutes(city);
-
-        // Add builder routes for each city
-        this.addUrl(`/${city}/builders`, 0.7);
-      });
-
-      // Add builder-related routes
-      this.addBuilderRoutes();
-
-      // Add blog routes
-      this.addBlogRoutes();
-
-      // Add additional dynamic routes from page.js
-      this.addUrl("/new-homes", 0.8);
-      this.addUrl("/pre-construction-homes", 0.8);
-      this.addUrl("/resale", 0.8);
-      this.addUrl("/top-10-gta-projects", 0.8);
-      this.addUrl("/blogs", 0.8);
-      this.addUrl("/builders", 0.8);
-
-      // Generate city + property type combinations
-      cities.forEach((city) => {
-        propertyTypes.forEach((propType) => {
-          this.addUrl(`/${city}/${propType.path}`, 0.7);
-        });
-      });
-
-      // Generate all possible combinations for each city
-      cities.forEach((city) => {
-        const cityBase = `/resale/ontario/${city}`;
-
-        // Add transaction type variations
-        transactionTypes.forEach((transType) => {
-          const transBase = `${cityBase}/homes-${transType}`;
-          this.addUrl(transBase, 0.7);
-
-          // Add property type variations
-          propertyTypes.forEach((propType) => {
-            const propBase = `${cityBase}/${propType.path}-${transType}`;
-            this.addUrl(propBase, 0.7);
-          });
-        });
-      });
-
-      // Add Ontario-wide combinations (without city)
-      const ontarioBase = "/resale/ontario";
-
-      transactionTypes.forEach((transType) => {
-        const transBase = `${ontarioBase}/homes-${transType}`;
-        this.addUrl(transBase, 0.75);
-
-        propertyTypes.forEach((propType) => {
-          const propBase = `${ontarioBase}/${propType.path}-${transType}`;
-          this.addUrl(propBase, 0.7);
-        });
-      });
-    } catch (error) {
-      console.error("Error adding dynamic routes:", error);
-      throw error;
-    }
-  }
-
-  async addCityProjectRoutes(city) {
-    try {
-      // Fetch projects for this city from API
+      // Fetch all preconstruction projects
       const response = await fetch(
-        `https://api.condomonk.ca/api/preconstructions-city/${city}`,
+        "https://api.condomonk.ca/api/all-precons/",
         {
           next: { revalidate: 10 },
         }
       );
       const data = await response.json();
 
-      // Add URL for each project
-      if (data.preconstructions) {
-        data.preconstructions.forEach((project) => {
-          this.addUrl(`/${city}/${project.slug}`, 0.64);
+      // Add URLs for each city and its projects
+      data.forEach((city) => {
+        // Add city URL
+        this.addUrl(`/pre-construction-homes/${city.slug}`, 0.8);
+
+        // Add URLs for each project in the city
+        city.preconstructions.forEach((project) => {
+          this.addUrl(`/${city.slug}/${project.slug}`, 0.64);
         });
-      }
+      });
+
+      // Keep all existing routes
+      await this.addBuilderRoutes();
+      await this.addBlogRoutes();
+      await this.addResaleRoutes();
+      await this.addNewHomesRoutes();
+      await this.addTopProjectsRoutes();
     } catch (error) {
-      console.error(`Error fetching projects for ${city}:`, error);
+      console.error("Error fetching preconstruction data:", error);
     }
   }
 
