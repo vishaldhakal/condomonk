@@ -589,32 +589,32 @@ export default async function PropertyDetailPage({ params }) {
             {/* Additional Details */}
             <div className="pt-3">
               <h2 className="text-3xl font-bold mb-4">Additional Details</h2>
-              <div className="grid grid-cols-2 gap-x-0 gap-y-4">
+              <div className="grid grid-cols-2 gap-x-0 gap-y-2 text-sm">
                 {property.Basement && (
-                  <div>
-                    <div className="text-gray-600">Basement</div>
+                  <div className="d-flex">
+                    <div className="text-gray-600 pe-2">Basement: </div>
                     <div className="font-semibold">
                       {property.Basement.join(", ")}
                     </div>
                   </div>
                 )}
                 {property.Cooling && (
-                  <div>
-                    <div className="text-gray-600">Cooling</div>
+                  <div className="d-flex">
+                    <div className="text-gray-600 pe-2">Cooling: </div>
                     <div className="font-semibold">
                       {property.Cooling.join(", ")}
                     </div>
                   </div>
                 )}
                 {property.HeatType && (
-                  <div>
-                    <div className="text-gray-600">Heating</div>
+                  <div className="d-flex">
+                    <div className="text-gray-600 pe-2">Heating: </div>
                     <div className="font-semibold">{property.HeatType}</div>
                   </div>
                 )}
                 {property.ParkingFeatures && (
-                  <div>
-                    <div className="text-gray-600">Parking Features</div>
+                  <div className="d-flex">
+                    <div className="text-gray-600 pe-2">Parking Features: </div>
                     <div className="font-semibold">
                       {property.ParkingFeatures.join(", ")}
                     </div>
@@ -631,7 +631,7 @@ export default async function PropertyDetailPage({ params }) {
             </div>
 
             {/* Map Section */}
-            <div className="mt-12 z-0">
+            <div className="pt-12 z-0">
               <h2 className="text-3xl font-bold mb-4">Location</h2>
               <div className="h-[400px] w-full rounded-lg overflow-hidden border border-gray-200 z-1">
                 <GoogleMap
