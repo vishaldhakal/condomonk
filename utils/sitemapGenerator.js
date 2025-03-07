@@ -104,7 +104,7 @@ class SitemapGenerator {
       // Transaction types
       const transactionTypes = ["for-sale", "for-lease"];
 
-      // Add base resale routes
+      // Add base routes
       this.addUrl("/resale", 0.8);
       this.addUrl("/resale/ontario", 0.8);
 
@@ -115,6 +115,30 @@ class SitemapGenerator {
 
         // Add city/slug routes by fetching from API
         this.addCityProjectRoutes(city);
+
+        // Add builder routes for each city
+        this.addUrl(`/${city}/builders`, 0.7);
+      });
+
+      // Add builder-related routes
+      this.addBuilderRoutes();
+
+      // Add blog routes
+      this.addBlogRoutes();
+
+      // Add additional dynamic routes from page.js
+      this.addUrl("/new-homes", 0.8);
+      this.addUrl("/pre-construction-homes", 0.8);
+      this.addUrl("/resale", 0.8);
+      this.addUrl("/top-10-gta-projects", 0.8);
+      this.addUrl("/blogs", 0.8);
+      this.addUrl("/builders", 0.8);
+
+      // Generate city + property type combinations
+      cities.forEach((city) => {
+        propertyTypes.forEach((propType) => {
+          this.addUrl(`/${city}/${propType.path}`, 0.7);
+        });
       });
 
       // Generate all possible combinations for each city
@@ -171,6 +195,44 @@ class SitemapGenerator {
       }
     } catch (error) {
       console.error(`Error fetching projects for ${city}:`, error);
+    }
+  }
+
+  async addBuilderRoutes() {
+    try {
+      // Fetch builders from API
+      const response = await fetch("https://api.condomonk.ca/api/developers", {
+        next: { revalidate: 10 },
+      });
+      const data = await response.json();
+
+      // Add URL for each builder
+      if (data.developers) {
+        data.developers.forEach((builder) => {
+          this.addUrl(`/builders/${builder.slug}`, 0.6);
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching builders:", error);
+    }
+  }
+
+  async addBlogRoutes() {
+    try {
+      // Fetch blogs from API
+      const response = await fetch("https://api.condomonk.ca/api/blogs", {
+        next: { revalidate: 10 },
+      });
+      const data = await response.json();
+
+      // Add URL for each blog post
+      if (data.blogs) {
+        data.blogs.forEach((blog) => {
+          this.addUrl(`/blogs/${blog.slug}`, 0.6);
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching blogs:", error);
     }
   }
 
