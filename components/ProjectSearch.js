@@ -27,6 +27,14 @@ const SearchWithAutocomplete = () => {
   const inputRef = useRef(null);
   const dropdownRef = useRef(null);
 
+  // Add this helper function to capitalize first letter of each word
+  const capitalizeWords = (str) => {
+    return str
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ");
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -35,8 +43,9 @@ const SearchWithAutocomplete = () => {
 
         // Only fetch properties if searchTerm is 2 or more characters
         if (searchTerm.length >= 2) {
+          const capitalizedTerm = capitalizeWords(searchTerm);
           const response = await fetch(
-            `/api/search?term=${encodeURIComponent(searchTerm)}`
+            `/api/search?term=${encodeURIComponent(capitalizedTerm)}`
           );
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
