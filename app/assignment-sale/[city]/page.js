@@ -78,43 +78,59 @@ export default async function AssignmentSalePage({ params, searchParams }) {
             Check out Pre-construction Condos, Townhomes & Detached home
             assignments for sale in Ontario, Canada.
           </p>
-          <ol className="space-y-4">
+          <ol className="list-decimal pl-6 space-y-4">
             <li>
               <h5 className="text-lg font-semibold">
-                Is an Assignment legal in Ontario?
+                Why do buyers choose assignment sales in Ontario?
               </h5>
               <p className="text-gray-600">
-                Unless prohibited in writing in the original agreement, it is
-                mostly legally permitted. Some developers may charge a fee for
-                assignment sales. It's best to confirm with the builder directly
-                regarding any restrictions and fees.
+                Buyers opt for assignment sales to secure a pre-construction
+                property at an earlier price before completion. This allows them
+                to benefit from market appreciation and sometimes better deals
+                compared to resale properties. Additionally, assignment sales
+                provide access to new developments that may already be sold out.
               </p>
             </li>
             <li>
               <h5 className="text-lg font-semibold">
-                What is a preconstruction assignment sale?
+                What are the benefits of purchasing an assignment sale property?
               </h5>
               <p className="text-gray-600">
-                An assignment is a sales transaction where the original buyer of
-                a property (the "assignor") allows another buyer (the
-                "assignee") to take over the buyer's rights and obligations of
-                the Agreement of Purchase and Sale before the original buyer
-                closes on the property.
+                <ul className="list-disc pl-6 space-y-1">
+                  <li>
+                    <strong>Lower Prices:</strong> Buyers may get a better price
+                    than the current market value.
+                  </li>
+                  <li>
+                    <strong>Brand-New Homes:</strong> Since the unit is still
+                    under construction, buyers receive a never-lived-in
+                    property.
+                  </li>
+                  <li>
+                    <strong>Potential for Appreciation:</strong> Buyers benefit
+                    from property value increases before taking ownership.
+                  </li>
+                  <li>
+                    <strong>Flexible Move-In Timeline:</strong> Since the
+                    closing date depends on construction progress, it allows
+                    time for financial planning.
+                  </li>
+                </ul>
               </p>
             </li>
           </ol>
           <p className="text-gray-500 italic">
-            Homebaba is one of the leading online marketplaces for
+            Condomonk is one of the leading online marketplaces for
             pre-construction and assignment sales in Ontario. Check out hundreds
             of Ontario Assignment Sales advertised by Licensed Real Estate
             Agents.
             <br />
             Toronto Assignment Sale -{" "}
             <a
-              href="https://homebaba.ca/assignment-sale"
+              href="https://condomonk.ca/assignment-sale"
               className="text-blue-600 underline"
             >
-              Homebaba
+              Condomonk
             </a>
             .
           </p>

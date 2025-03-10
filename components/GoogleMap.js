@@ -8,7 +8,7 @@ const GoogleMap = ({
 }) => {
   const mapSrc = `https://maps.google.com/maps?hl=en&q=${encodeURIComponent(
     location
-  )}&t=k&z=${zoom}&ie=UTF8&iwloc=B&output=embed`;
+  )}&t=m&z=${zoom}&ie=UTF8&iwloc=B&output=embed`;
 
   return (
     <div className="relative text-right max-w-full">

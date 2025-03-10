@@ -32,8 +32,14 @@ const AssignmentDetail = ({ assignment }) => {
     { label: "Home", href: "/" },
     { label: "Assignment Sale", href: "/assignment-sale" },
     {
+      label: assignment.region || "City",
+      href: `/assignment-sale/${(assignment.region || "").toLowerCase()}`,
+    },
+    {
       label: assignment.project_name,
-      href: `/`,
+      href: `/assignment-sale/${(assignment.region || "").toLowerCase()}/${
+        assignment.id
+      }`,
       isLast: true,
     },
   ];
@@ -41,12 +47,25 @@ const AssignmentDetail = ({ assignment }) => {
   return (
     <div className="max-w-6xl mx-auto px-3 py-4">
       {/* Back Button and Breadcrumbs */}
-      <div className="sticky top-[0rem] z-20 bg-white w-full border-b">
-        <div className="overflow-hidden">
-          <Breadcrumb
-            items={breadcrumbItems}
-            className="scrollbar-hide no-scrollbar border-0"
-          />
+      <div className="sticky-top top-[0rem] z-2 bg-white w-full ">
+        <div className="overflow-x-auto whitespace-nowrap py-2">
+          <nav className="flex items-center space-x-1 text-sm">
+            {breadcrumbItems.map((item, index) => (
+              <span key={index} className="flex items-center">
+                {index > 0 && <span className="mx-2 text-gray-400">/</span>}
+                <a
+                  href={item.href}
+                  className={`hover:text-blue-600 ${
+                    item.isLast
+                      ? "text-gray-600 pointer-events-none"
+                      : "text-black"
+                  }`}
+                >
+                  {item.label}
+                </a>
+              </span>
+            ))}
+          </nav>
         </div>
       </div>
 
@@ -126,9 +145,9 @@ const AssignmentDetail = ({ assignment }) => {
             <h2 className="text-lg md:text-2xl font-semibold md:font-bold mb-3 border-b border-gray-200 pb-2">
               Listing Description
             </h2>
-            <div className="text-sm text-gray-700 space-y-2">
+            <div className="text-sm text-gray-700 space-y-2 mb-0">
               {features.map((feature, index) => (
-                <p key={index} className="flex items-center">
+                <p key={index} className="flex items-center mb-0">
                   <FaCheck className="text-black mr-2 text-xs" />
                   <span>{feature}</span>
                 </p>
@@ -142,38 +161,40 @@ const AssignmentDetail = ({ assignment }) => {
               Price Information
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              <div>
-                <p className="text-xs text-gray-500">Current Price</p>
+              <div className="space-y-1">
+                <p className="text-xs text-gray-500 mb-0">Current Price</p>
                 <p className="text-sm font-medium">
                   {formatCurrency(assignment.price)}
                 </p>
               </div>
-              <div>
-                <p className="text-xs text-gray-500">Original Purchase Price</p>
+              <div className="space-y-1">
+                <p className="text-xs text-gray-500 mb-0">
+                  Original Purchase Price
+                </p>
                 <p className="text-sm font-medium">
                   {formatCurrency(assignment.original_purchase_price)}
                 </p>
               </div>
-              <div>
-                <p className="text-xs text-gray-500">Price Per SqFt</p>
+              <div className="space-y-1">
+                <p className="text-xs text-gray-500 mb-0">Price Per SqFt</p>
                 <p className="text-sm font-medium">
                   ${assignment.pps || "N/A"}
                 </p>
               </div>
-              <div>
-                <p className="text-xs text-gray-500">Deposit Paid</p>
+              <div className="space-y-1">
+                <p className="text-xs text-gray-500 mb-0">Deposit Paid</p>
                 <p className="text-sm font-medium">
                   {formatCurrency(assignment.deposit_paid)}
                 </p>
               </div>
-              <div>
-                <p className="text-xs text-gray-500">Total Payment</p>
+              <div className="space-y-1">
+                <p className="text-xs text-gray-500 mb-0">Total Payment</p>
                 <p className="text-sm font-medium">
                   {formatCurrency(assignment.total_payment)}
                 </p>
               </div>
-              <div>
-                <p className="text-xs text-gray-500">Assignment Fee</p>
+              <div className="space-y-1">
+                <p className="text-xs text-gray-500 mb-0">Assignment Fee</p>
                 <p className="text-sm font-medium">
                   {formatCurrency(assignment.assignment_fee)}
                 </p>
@@ -187,76 +208,76 @@ const AssignmentDetail = ({ assignment }) => {
               Property Details
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              <div>
-                <p className="text-xs text-gray-500">Project Name</p>
+              <div className="space-y-1">
+                <p className="text-xs text-gray-500 mb-0">Project Name</p>
                 <p className="text-sm font-medium">{assignment.project_name}</p>
               </div>
-              <div>
-                <p className="text-xs text-gray-500">Developer</p>
+              <div className="space-y-1">
+                <p className="text-xs text-gray-500 mb-0">Developer</p>
                 <p className="text-sm font-medium">
                   {assignment.developer || "N/A"}
                 </p>
               </div>
-              <div>
-                <p className="text-xs text-gray-500">Region</p>
+              <div className="space-y-1">
+                <p className="text-xs text-gray-500 mb-0">Region</p>
                 <p className="text-sm font-medium">
                   {assignment.region || "N/A"}
                 </p>
               </div>
-              <div>
-                <p className="text-xs text-gray-500">Address</p>
+              <div className="space-y-1">
+                <p className="text-xs text-gray-500 mb-0">Address</p>
                 <p className="text-sm font-medium">
                   {assignment.address || "N/A"}
                 </p>
               </div>
-              <div>
-                <p className="text-xs text-gray-500">House Type</p>
+              <div className="space-y-1">
+                <p className="text-xs text-gray-500 mb-0">House Type</p>
                 <p className="text-sm font-medium">
                   {assignment.house_type === "E"
                     ? "Townhouse"
                     : assignment.house_type || "N/A"}
                 </p>
               </div>
-              <div>
-                <p className="text-xs text-gray-500">Property Status</p>
+              <div className="space-y-1">
+                <p className="text-xs text-gray-500 mb-0">Property Status</p>
                 <p className="text-sm font-medium">
                   {assignment.property_status === "T"
                     ? "Townhouse"
                     : assignment.property_status || "N/A"}
                 </p>
               </div>
-              <div>
-                <p className="text-xs text-gray-500">Exposure</p>
+              <div className="space-y-1">
+                <p className="text-xs text-gray-500 mb-0">Exposure</p>
                 <p className="text-sm font-medium">
                   {assignment.exposure || "N/A"}
                 </p>
               </div>
-              <div>
-                <p className="text-xs text-gray-500">Parking</p>
+              <div className="space-y-1">
+                <p className="text-xs text-gray-500 mb-0">Parking</p>
                 <p className="text-sm font-medium">
                   {assignment.parking || "N/A"}
                 </p>
               </div>
-              <div>
-                <p className="text-xs text-gray-500">Garage</p>
+              <div className="space-y-1">
+                <p className="text-xs text-gray-500 mb-0">Garage</p>
                 <p className="text-sm font-medium">
                   {assignment.garage || "N/A"}
                 </p>
               </div>
-              <div>
-                <p className="text-xs text-gray-500">Locker</p>
+              <div className="space-y-1">
+                <p className="text-xs text-gray-500 mb-0">Locker</p>
                 <p className="text-sm font-medium">
                   {assignment.locker || "N/A"}
                 </p>
               </div>
-              <div>
-                <p className="text-xs text-gray-500">Balcony</p>
+              <div className="space-y-1">
+                <p className="text-xs text-gray-500 mb-0">Balcony</p>
                 <p className="text-sm font-medium">
                   {assignment.balcony || "N/A"}
                 </p>
               </div>
-              <div>
-                <p className="text-xs text-gray-500">Legal Description</p>
+              <div className="space-y-1">
+                <p className="text-xs text-gray-500 mb-0">Legal Description</p>
                 <p className="text-sm font-medium">
                   {assignment.legal_desc || "N/A"}
                 </p>
@@ -270,7 +291,7 @@ const AssignmentDetail = ({ assignment }) => {
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               <div>
-                <p className="text-xs text-gray-500">Developer Name</p>
+                <p className="text-xs text-gray-500 mb-0">Developer Name</p>
                 <p className="text-sm font-medium">
                   {assignment.developer || "N/A"}
                 </p>
@@ -282,21 +303,27 @@ const AssignmentDetail = ({ assignment }) => {
             <h2 className="text-lg md:text-2xl font-semibold md:font-bold mb-3 border-b border-gray-200 pb-2">
               Map View of {assignment.project_name} at {assignment.address}
             </h2>
-            <Map location={assignment.address} />
+            <div className="h-[400px] w-full rounded-lg overflow-hidden border border-gray-200">
+              <Map location={assignment.address} />
+            </div>
           </div>
 
+          {/* Walk Score Section */}
           <div className="mb-12">
             <h2 className="text-lg md:text-2xl font-semibold md:font-bold mb-3 border-b border-gray-200 pb-2">
               Walk Score of {assignment.project_name} at {assignment.address}
             </h2>
-            <WalkScore
-              address={assignment.address}
-              width={isMobileView ? 350 : 600}
-            />
+            <div className="w-full">
+              <WalkScore
+                address={assignment.address}
+                width={isMobileView ? 350 : 600}
+                height={400}
+              />
+            </div>
           </div>
 
           {/* What is an Assignment */}
-          <div className="mb-8 bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <div className="mb-12 bg-gray-50 p-4 rounded-lg border border-gray-200">
             <h3 className="text-base font-semibold mb-2">
               What is an Assignment for Sale?
             </h3>
@@ -311,7 +338,7 @@ const AssignmentDetail = ({ assignment }) => {
             </p>
             <div className="flex justify-end">
               <div className="text-sm font-semibold">
-                <span>homebaba</span>
+                <span>Condomonk</span>
                 <span className="ml-1">🍁</span>
               </div>
             </div>
@@ -321,22 +348,39 @@ const AssignmentDetail = ({ assignment }) => {
         {/* Right Column - Contact Form */}
         <div className="lg:col-span-1">
           <div
-            className="p-6 rounded-lg sticky top-5 border-gray-200"
+            className="p-6 rounded-lg sticky top-5 border-gray-200 shadow-xl"
             id="mycontact"
           >
-            <div className="flex justify-center mb-4">
-              <Image
-                src="/aa.png"
-                alt="Register Now"
-                width={200}
-                height={60}
-                className="shadow-lg"
-              />
+            <div className="flex items-center gap-2 mb-4">
+              <div className="">
+                <Image
+                  src="/contact-bottom-2.png"
+                  alt="Agent"
+                  width={120}
+                  height={120}
+                  className="rounded-full "
+                />
+              </div>
+              <div className=" text-center">
+                <h5 className="font-bold text-xl mb-1">Receive a Call</h5>
+                <p className="text-[10px] flex items-center justify-center gap-1">
+                  Condomonk Verified Partner
+                  <span>
+                    <Image
+                      src="/cc.png"
+                      alt="verified"
+                      width={16}
+                      height={16}
+                      className="inline-block"
+                    />
+                  </span>
+                </p>
+              </div>
             </div>
             <SideContactForm
               projectName={assignment.project_name}
               city={assignment.region}
-              message={`I am interested in the ${assignment.project_name} assignment in ${assignment.region}. Please send me more information.`}
+              defaultmessage={`I am interested in the ${assignment.project_name} assignment in ${assignment.region}. Please send me more information.`}
             />
           </div>
         </div>

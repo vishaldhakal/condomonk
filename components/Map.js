@@ -3,12 +3,13 @@ import { useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-const Map = ({ address }) => {
+const Map = ({ location }) => {
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
+  const markerRef = useRef(null);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && mapRef.current) {
       // Create a custom red icon
       const redIcon = new L.Icon({
         iconUrl:
@@ -23,28 +24,68 @@ const Map = ({ address }) => {
 
       // Initialize the map only if it hasn't been initialized yet
       if (!mapInstanceRef.current) {
-        mapInstanceRef.current = L.map(mapRef.current).setView([0, 0], 2);
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          attribution: "© OpenStreetMap contributors",
-        }).addTo(mapInstanceRef.current);
+        mapInstanceRef.current = L.map(mapRef.current, {
+          scrollWheelZoom: false,
+          dragging: true,
+        }).setView([43.653226, -79.383184], 13); // Default to Toronto
+
+        // Define the base layers
+        const streetLayer = L.tileLayer(
+          "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          {
+            attribution:
+              '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19,
+          }
+        );
+
+        const satelliteLayer = L.tileLayer(
+          "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          {
+            attribution:
+              "Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community",
+            maxZoom: 19,
+          }
+        );
+
+        // Add the street layer by default
+        streetLayer.addTo(mapInstanceRef.current);
+
+        // Create and add layer control
+        const baseLayers = {
+          "Street View": streetLayer,
+          "Satellite View": satelliteLayer,
+        };
+
+        L.control.layers(baseLayers).addTo(mapInstanceRef.current);
+      }
+
+      // Remove existing marker if any
+      if (markerRef.current) {
+        markerRef.current.remove();
       }
 
       // Geocode the address and set the map view
-      fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-          address
-        )}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          if (data && data.length > 0) {
-            const { lat, lon } = data[0];
-            mapInstanceRef.current.setView([lat, lon], 15);
-            L.marker([lat, lon], { icon: redIcon }).addTo(
-              mapInstanceRef.current
-            );
-          }
-        });
+      if (location) {
+        fetch(
+          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+            location
+          )}`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            if (data && data.length > 0) {
+              const { lat, lon } = data[0];
+              mapInstanceRef.current.setView([lat, lon], 15);
+              markerRef.current = L.marker([lat, lon], { icon: redIcon })
+                .addTo(mapInstanceRef.current)
+                .bindPopup(location);
+            }
+          })
+          .catch((error) => {
+            console.error("Error geocoding address:", error);
+          });
+      }
     }
 
     // Cleanup function
@@ -54,14 +95,14 @@ const Map = ({ address }) => {
         mapInstanceRef.current = null;
       }
     };
-  }, [address]);
+  }, [location]);
 
   return (
     <div
-      className="z-0"
       ref={mapRef}
       style={{ height: "100%", width: "100%" }}
-    ></div>
+      className="z-0"
+    />
   );
 };
 

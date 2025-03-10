@@ -72,7 +72,7 @@ const AssignmentCityNav = () => {
     { city_name: "belleville", city_name_cap: "Belleville" },
   ];
   return (
-    <nav className="relative mb-2">
+    <nav className="relative ">
       {/* Left Arrow */}
       <button
         onClick={() => scroll("left")}
@@ -90,7 +90,7 @@ const AssignmentCityNav = () => {
       </button>
 
       {/* Navigation Container */}
-      <div className="relative mx-auto py-3 px-8 overflow-hidden">
+      <div className="relative mx-auto py-4 px-8 overflow-hidden">
         <div
           ref={scrollRef}
           className="flex space-x-4 overflow-x-auto scrollbar-hide scroll-smooth"
@@ -99,7 +99,7 @@ const AssignmentCityNav = () => {
             <Link
               key={city.city_name}
               href={`/assignment-sale/${city.city_name}`}
-              className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-black whitespace-nowrap hover:bg-gray-100 rounded-full transition-colors"
+              className="px-2 py-2 text-sm font-medium text-gray-700 hover:text-black whitespace-nowrap hover:bg-gray-100 rounded-full transition-colors"
             >
               {city.city_name_cap}
             </Link>

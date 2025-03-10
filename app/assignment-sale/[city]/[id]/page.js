@@ -30,26 +30,26 @@ export async function generateMetadata({ params }) {
 
   if (!assignment) {
     return {
-      title: "Assignment Not Found | Homebaba",
+      title: "Assignment Not Found | Condomonk",
       description: "The requested assignment could not be found.",
     };
   }
 
   return {
-    title: `${assignment.project_name} - ${assignment.unit_type} Assignment | Homebaba`,
+    title: `${assignment.project_name} - ${assignment.unit_type} Assignment | Condomonk`,
     description: `${assignment.unit_type} assignment for sale at ${assignment.project_name} by ${assignment.developer} in ${assignment.region}. Occupancy: ${assignment.occupancy_date}. Price: ${assignment.price}.`,
     openGraph: {
-      title: `${assignment.project_name} - ${assignment.unit_type} Assignment | Homebaba`,
+      title: `${assignment.project_name} - ${assignment.unit_type} Assignment | Condomonk`,
       description: `${assignment.unit_type} assignment for sale at ${assignment.project_name} by ${assignment.developer} in ${assignment.region}. Occupancy: ${assignment.occupancy_date}. Price: ${assignment.price}.`,
       images: assignment.image1 ? [{ url: assignment.image1 }] : [],
     },
     twitter: {
-      title: `${assignment.project_name} - ${assignment.unit_type} Assignment | Homebaba`,
+      title: `${assignment.project_name} - ${assignment.unit_type} Assignment | Condomonk`,
       description: `${assignment.unit_type} assignment for sale at ${assignment.project_name} by ${assignment.developer} in ${assignment.region}. Occupancy: ${assignment.occupancy_date}. Price: ${assignment.price}.`,
       images: assignment.image1 ? [{ url: assignment.image1 }] : [],
     },
     alternates: {
-      canonical: `https://homebaba.ca/assignment-sale/${params.city}/${params.id}`,
+      canonical: `https://condomonk.ca/assignment-sale/${params.city}/${params.id}`,
     },
   };
 }

@@ -95,6 +95,7 @@ const Navbar = ({ cities, transparent }) => {
   const isSpecialPage =
     pathname.startsWith("/blogs") ||
     pathname.startsWith("/top-10-gta-projects") ||
+    pathname.startsWith("/assignment-sale") ||
     pathname.startsWith("/pre-construction-homes");
 
   // Update the getCurrentCity function
@@ -390,6 +391,11 @@ const Navbar = ({ cities, transparent }) => {
               <li className="nav-item rounded-2  mx-1">
                 <Link className="nav-link" href="/top-10-gta-projects">
                   Top 10 <span className="fw-medium">GTA</span> Projects
+                </Link>
+              </li>
+              <li className="nav-item rounded-2  mx-1">
+                <Link className="nav-link" href="/assignment-sale">
+                  Assignment
                 </Link>
               </li>
               <li className="nav-item">

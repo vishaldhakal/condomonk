@@ -16,7 +16,7 @@ const AssignmentCard = ({ assignment, index }) => {
   }
 
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+    <div className="bg-white rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300">
       <Link
         href={`/assignment-sale/${assignment.region
           .replace(/-/g, "-")
@@ -26,13 +26,13 @@ const AssignmentCard = ({ assignment, index }) => {
           .toLowerCase()}-${assignment.id}`}
         className="block"
       >
-        <div className="relative h-56 w-full overflow-hidden">
+        <div className="relative h-48 w-full overflow-hidden group">
           {assignment.image1 ? (
             <Image
               src={assignment.image1}
               alt={`${assignment.project_name} - ${assignment.unit_type}`}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className="object-cover transition-all duration-300 ease-in-out group-hover:scale-110"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           ) : (
@@ -49,7 +49,7 @@ const AssignmentCard = ({ assignment, index }) => {
           .toLowerCase()}/${assignment.project_name
           .replace(/\s+/g, "-")
           .toLowerCase()}-${assignment.id}`}
-        className={`block p-4 bg-white rounded-b-xl no-underline`}
+        className={`block py-2 px-3 bg-white rounded-b-xl no-underline`}
       >
         {/* <div className="space-y-1">
           <h3 className="text-[1.2rem] font-bold my-0 leading-tight line-clamp-1">
@@ -73,7 +73,7 @@ const AssignmentCard = ({ assignment, index }) => {
             </span>
           </div>
 
-          <div className="flex items-center text-sm text-gray-600 mt-1">
+          <div className="flex items-center text-sm text-gray-600">
             <span>{assignment.unit_type || "N/A"}</span>
             <span className="mx-2">•</span>
             <span>{assignment.bathrooms || "N/A"} Baths</span>
@@ -85,11 +85,11 @@ const AssignmentCard = ({ assignment, index }) => {
             </span>
           </div>
 
-          <div className="flex items-center text-sm mt-1">
+          <div className="flex items-center text-sm">
             <span className="text-gray-600">{assignment.address || "N/A"}</span>
           </div>
 
-          <div className="flex items-center text-sm mt-1">
+          <div className="flex items-center text-sm">
             <span className="text-gray-600">
               Occupancy - {assignment.occupancy_date || "N/A"}
             </span>
