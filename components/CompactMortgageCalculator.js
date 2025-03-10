@@ -79,7 +79,7 @@ export default function CompactMortgageCalculator({
 
   return (
     <div className={`max-w-4xl ${align == "center" ? "mx-auto" : ""}`}>
-      <div className="bg-white rounded-2xl shadow-sm p-8">
+      <div className="bg-white  ">
         <h2 className="text-2xl font-semibold text-gray-700 mb-6">
           MORTGAGE INFO
         </h2>

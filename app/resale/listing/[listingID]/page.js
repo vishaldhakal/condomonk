@@ -80,13 +80,12 @@ export default async function PropertyDetailPage({ params }) {
       notFound();
     }
 
-    // Fetch room info with error handling
+    // Fetch room info with error handling and logging
     let roomInfo = [];
     try {
       roomInfo = await getRoomInformation(property.ListingKey);
     } catch (error) {
-      console.error("Error fetching room information:", error);
-      // Continue with empty room info
+      console.error("Error fetching room information:");
     }
 
     // Fetch similar properties
@@ -531,11 +530,78 @@ export default async function PropertyDetailPage({ params }) {
                       },
                     ]}
                   />
+                  <div className="text-sm text-gray-600">
+                    Note <span className="text-red-500">*</span> Price
+                    comparison is based on the similar properties listed in the
+                    area and may not be accurate. Consult licensed real estate
+                    agent for accurate comparison.
+                  </div>
                 </div>
               </div>
             </div>
+            {/* Property Description Section */}
+            <div className="pt-4 mt-8 ">
+              <div className="rounded-md">
+                <h1 className="text-[32px] font-semibold">
+                  Property Description
+                </h1>
+
+                {/* Basic Info Grid */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-x-2">
+                  <div className="col-span-1 py-1 border-b border-gray-100">
+                    <p className="text-[14px] text-gray-900 mb-1">
+                      Property type
+                    </p>
+                  </div>
+                  <div className="col-span-1 py-1 border-b border-gray-100">
+                    <p className="text-[14px] text-gray-500 mb-1">
+                      {property.PropertySubType || "N/A"}
+                    </p>
+                  </div>
+
+                  <div className="col-span-1 py-1 border-b border-gray-100">
+                    <p className="text-[14px] text-gray-900 mb-1">Lot size</p>
+                  </div>
+                  <div className="col-span-1 py-1 border-b border-gray-100">
+                    <p className="text-[14px] text-gray-500 mb-1">
+                      {property.LotSizeRangeAcres
+                        ? `${property.LotSizeRangeAcres} acres`
+                        : "N/A"}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-x-2">
+                  <div className="col-span-1 py-1 border-b border-gray-100">
+                    <p className="text-[14px] text-gray-900 mb-1">Style</p>
+                  </div>
+                  <div className="col-span-1 py-1 border-b border-gray-100">
+                    <p className="text-[14px] text-gray-500 mb-1">
+                      {property.ArchitecturalStyle || "N/A"}
+                    </p>
+                  </div>
+
+                  <div className="col-span-1 py-1 border-b border-gray-100">
+                    <p className="text-[14px] text-gray-900 mb-1">
+                      Approx. Area
+                    </p>
+                  </div>
+                  <div className="col-span-1 py-1 border-b border-gray-100">
+                    <p className="text-[14px] text-gray-500 mb-1">
+                      {property.LivingArea
+                        ? `${property.LivingArea} Sqft`
+                        : "N/A"}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Add RoomInformation component before Additional Details */}
+            <RoomInformation rooms={roomInfo} />
+
             {/* Description */}
-            <div>
+            <div className="pt-10">
               <h2 className="text-3xl font-bold mb-2">
                 About {property.StreetNumber} {property.StreetName}{" "}
                 {property.StreetSuffix}
@@ -544,85 +610,112 @@ export default async function PropertyDetailPage({ params }) {
                 {property.PublicRemarks}
               </p>
             </div>
+
             <HomeOverview property={property} />
             <div className="mt-0 text-sm">
               Listed by {property.ListOfficeName}
             </div>
-            {/* Features */}
-            <div>
-              <h2 className="text-3xl font-bold mb-4 pt-8">
-                Property Features
-              </h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                {property.InteriorFeatures?.length > 0 && (
-                  <div>
-                    <h3 className="font-medium mb-2 text-lg">
-                      Interior Features
-                    </h3>
-                    <ul className="list-disc list-inside space-y-1">
-                      {property.InteriorFeatures.map((feature, index) => (
-                        <li key={index} className="text-gray-600 text-[14px]">
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                {property.ExteriorFeatures?.length > 0 && (
-                  <div>
-                    <h3 className="font-medium mb-2 text-lg">
-                      Exterior Features
-                    </h3>
-                    <ul className="list-disc list-inside space-y-1">
-                      {property.ExteriorFeatures.map((feature, index) => (
-                        <li key={index} className="text-gray-600 text-[14px]">
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </div>
-            {/* Add RoomInformation component before Additional Details */}
-            <RoomInformation rooms={roomInfo} />
+
             {/* Additional Details */}
-            <div className="pt-3">
-              <h2 className="text-3xl font-bold mb-4">Additional Details</h2>
-              <div className="grid grid-cols-2 gap-x-0 gap-y-2 text-sm">
-                {property.Basement && (
-                  <div className="d-flex">
-                    <div className="text-gray-600 pe-2">Basement: </div>
-                    <div className="font-semibold">
-                      {property.Basement.join(", ")}
-                    </div>
+            <div className="pt-8">
+              <h2 className="text-3xl font-bold ">Additional Details</h2>
+              <div className="grid grid-cols-1 gap-y-3 text-sm">
+                {/* Basement */}
+                <div className="flex items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-green-500 flex-shrink-0"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <div className="flex gap-2">
+                    <span className="text-gray-600">Basement:</span>
+                    <span className="font-semibold">
+                      {property.Basement?.length > 0
+                        ? property.Basement.join(", ")
+                        : "N/A"}
+                    </span>
                   </div>
-                )}
-                {property.Cooling && (
-                  <div className="d-flex">
-                    <div className="text-gray-600 pe-2">Cooling: </div>
-                    <div className="font-semibold">
-                      {property.Cooling.join(", ")}
-                    </div>
+                </div>
+
+                {/* Cooling */}
+                <div className="flex items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-green-500 flex-shrink-0"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <div className="flex gap-2">
+                    <span className="text-gray-600">Cooling:</span>
+                    <span className="font-semibold">
+                      {property.Cooling?.length > 0
+                        ? property.Cooling.join(", ")
+                        : "N/A"}
+                    </span>
                   </div>
-                )}
-                {property.HeatType && (
-                  <div className="d-flex">
-                    <div className="text-gray-600 pe-2">Heating: </div>
-                    <div className="font-semibold">{property.HeatType}</div>
+                </div>
+
+                {/* Heating */}
+                <div className="flex items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-green-500 flex-shrink-0"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <div className="flex gap-2">
+                    <span className="text-gray-600">Heating:</span>
+                    <span className="font-semibold">
+                      {property.HeatType || "N/A"}
+                    </span>
                   </div>
-                )}
-                {property.ParkingFeatures && (
-                  <div className="d-flex">
-                    <div className="text-gray-600 pe-2">Parking Features: </div>
-                    <div className="font-semibold">
-                      {property.ParkingFeatures.join(", ")}
-                    </div>
+                </div>
+
+                {/* Parking Features */}
+                <div className="flex items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-green-500 flex-shrink-0"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <div className="flex gap-2">
+                    <span className="text-gray-600">Parking Features:</span>
+                    <span className="font-semibold">
+                      {property.ParkingFeatures?.length > 0
+                        ? property.ParkingFeatures.join(", ")
+                        : "N/A"}
+                    </span>
                   </div>
-                )}
+                </div>
               </div>
             </div>
-            <div className="pt-16 col-12 md:pt-24 md:col-12">
+            <div className="pt-6 col-12 md:pt-20 md:col-12">
               <CompactMortgageCalculator
                 price={property?.ListPrice}
                 showDetails={false}
@@ -632,7 +725,7 @@ export default async function PropertyDetailPage({ params }) {
 
             {/* Map Section */}
             <div className="pt-12 z-0">
-              <h2 className="text-3xl font-bold mb-4">Location</h2>
+              <h2 className="text-3xl font-bold mb-2">Location</h2>
               <div className="h-[400px] w-full rounded-lg overflow-hidden border border-gray-200 z-1">
                 <GoogleMap
                   width={600}

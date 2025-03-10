@@ -26,7 +26,7 @@ const HomeOverview = ({ property }) => {
   return (
     <div className="pt-4 mt-8">
       <div className="rounded-md">
-        <h1 className="text-[32px] font-semibold mb-6">Home Overview</h1>
+        <h1 className="text-[32px] font-semibold ">Home Overview</h1>
 
         {/* Basic Info Grid - Always visible */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-2 ">

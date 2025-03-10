@@ -418,27 +418,36 @@ export default async function DynamicPage({ params, searchParams }) {
 
 export async function generateMetadata({ params, searchParams }, parent) {
   const filters = parseSlug(params.slug1);
-  const { total } = await getProperties({ ...filters, ...searchParams });
-  const actualTotal = filters.mlsStatus === "Price Change" ? total : total;
+  const { properties, total } = await getProperties({
+    ...filters,
+    ...searchParams,
+  });
+
+  // Filter properties to get actual count of price reduced properties
+  const priceReducedProperties =
+    filters.mlsStatus === "Price Change"
+      ? properties.filter(
+          (p) => p.PreviousListPrice && p.ListPrice < p.PreviousListPrice
+        )
+      : properties;
+
+  const actualTotal =
+    filters.mlsStatus === "Price Change"
+      ? priceReducedProperties.length
+      : total;
+
+  const location = filters.city || "Ontario";
 
   // Generate title and description for price reduced listings
   const title =
     filters.mlsStatus === "Price Change"
-      ? `${actualTotal} Price Reduced Homes in ${
-          filters.city || "Ontario"
-        } | Price Drop ${filters.city || "Ontario"}`
+      ? `${location} Homes for Sale | Price Dropped`
       : `${total.toLocaleString()} ${generateTitle(filters)}`;
 
   const description =
     filters.mlsStatus === "Price Change"
-      ? `${actualTotal}+ Recently Price Reduced Homes in ${
-          filters.city || "Ontario"
-        } | Find Price Drop on Detached, Semi-detached, Townhomes & Condos in ${
-          filters.city || "Ontario"
-        }`
+      ? `${actualTotal}+ price-dropped homes in ${location}. Find price reduced homes - detached, semi-detached, townhomes & condos on Condomonk. Don't miss out.`
       : generateSubtitle(filters, total);
-
-  const location = filters.city || "Ontario";
 
   // Define exact property type paths mapping
   const propertyTypePaths = {
