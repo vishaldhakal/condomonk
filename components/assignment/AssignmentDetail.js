@@ -346,7 +346,7 @@ const AssignmentDetail = ({ assignment }) => {
         </div>
 
         {/* Right Column - Contact Form */}
-        <div className="lg:col-span-1">
+        <div className="lg:col-span-1 z-2">
           <div
             className="p-6 rounded-lg sticky top-5 border-gray-200 shadow-xl"
             id="mycontact"
