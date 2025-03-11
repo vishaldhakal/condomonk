@@ -58,11 +58,11 @@ export default async function PricePage({ params }) {
       <h1 className="main-title font-family2 pb-2 pb-md-0">
         New Pre construction Homes in {formattedCity} - {formattedPrice}
       </h1>
-      <p className="font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium text-lg">
+      <h2 className="font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium text-lg">
         {data.preconstructions.length} Pre construction or new homes, condos and
         townhomes for sale in {formattedCity} priced {formattedPrice} on
         condomonk.
-      </p>
+      </h2>
 
       <div className="row row-cols-1 row-cols-md-4 gy-4 gx-3">
         {data.preconstructions.map((item) => (

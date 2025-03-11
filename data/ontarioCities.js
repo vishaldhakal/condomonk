@@ -90,6 +90,7 @@ export const allCities = [
   { city: "Whitby", province: "Ontario" },
   { city: "Windsor", province: "Ontario" },
   { city: "Woodstock", province: "Ontario" },
+  { city: "Caledon", province: "Ontario" },
 ];
 
 export default citiesWithProvinces;

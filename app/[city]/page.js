@@ -229,65 +229,81 @@ export default async function Home({ params }) {
               </span>
             </div>
           </div>
-          <p className="font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium text-lg">
+          <h2 className="font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium text-lg">
             {data.preconstructions.length} Pre construction or new homes, condos
             and townhomes for sale in {CapitalizeFirst(cleanCity)}
             {priceFilter ? ` ${formatPriceFilter(priceFilter)}` : ""} on
             condomonk.
-          </p>
-          <div className="d-flex sm-center  mb-lg-0 sticky-buttons pb-0 mb-0 z-0">
+          </h2>
+          <div className="d-flex sm-center  mb-lg-0 sticky-buttons pb-0 mb-0 z-2 sticky-top">
             <div className="d-flex flex-column flex-md-row mb-md-2 mb-0 mt-1 overflow-hidden">
               <div className="d-flex gap-2">
-                <Link
-                  className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m"
-                  href={`/${params.city.split("-homes-")[0]}/upcoming/`}
-                >
-                  Upcoming Projects {CapitalizeFirst(params.city)}
-                </Link>
-                <Link
-                  className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 me-2"
-                  href={`/${params.city.split("-homes-")[0]}/townhomes/`}
-                >
-                  New Townhomes {CapitalizeFirst(params.city)}
-                </Link>
+                <h3>
+                  <Link
+                    className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m"
+                    href={`/${params.city.split("-homes-")[0]}/upcoming/`}
+                  >
+                    Upcoming Projects {CapitalizeFirst(params.city)}
+                  </Link>
+                </h3>
+                <h3>
+                  <Link
+                    className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 me-2"
+                    href={`/${params.city.split("-homes-")[0]}/townhomes/`}
+                  >
+                    New Townhomes {CapitalizeFirst(params.city)}
+                  </Link>
+                </h3>
               </div>
               <div className="d-flex gap-2">
-                <Link
-                  className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m"
-                  href={`/${params.city.split("-homes-")[0]}/detached/`}
-                >
-                  New Detached Homes {CapitalizeFirst(params.city)}
-                </Link>
-                <Link
-                  className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0"
-                  href={`/${params.city.split("-homes-")[0]}/condos/`}
-                >
-                  New Condos {CapitalizeFirst(params.city)}
-                </Link>
+                <h3>
+                  <Link
+                    className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m"
+                    href={`/${params.city.split("-homes-")[0]}/detached/`}
+                  >
+                    New Detached Homes {CapitalizeFirst(params.city)}
+                  </Link>
+                </h3>
+                <h3>
+                  <Link
+                    className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0"
+                    href={`/${params.city.split("-homes-")[0]}/condos/`}
+                  >
+                    New Condos {CapitalizeFirst(params.city)}
+                  </Link>
+                </h3>
               </div>
               <div className="d-flex gap-2 justify-content-center mx-3">
-                <Link
-                  className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-warning"
-                  href={`/${params.city.split("-homes-")[0]}-homes-under-500k`}
-                >
-                  Under $500k
-                </Link>
-                <Link
-                  className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-warning"
-                  href={`/${
-                    params.city.split("-homes-")[0]
-                  }-homes-under-1-million`}
-                >
-                  Under $1M
-                </Link>
-                <Link
-                  className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-warning"
-                  href={`/${
-                    params.city.split("-homes-")[0]
-                  }-homes-under-1.5-million`}
-                >
-                  Under $1.5M
-                </Link>
+                <h4>
+                  <Link
+                    className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-warning"
+                    href={`/${
+                      params.city.split("-homes-")[0]
+                    }-homes-under-500k`}
+                  >
+                    Under $500k
+                  </Link>
+                </h4>
+                <h4>
+                  <Link
+                    className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-warning"
+                    href={`/${
+                      params.city.split("-homes-")[0]
+                    }-homes-under-1-million`}
+                  >
+                    Under $1M
+                  </Link>
+                </h4>
+                <h4>
+                  <Link
+                    className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-warning"
+                    href={`/${
+                      params.city.split("-homes-")[0]
+                    }-homes-under-1.5-million`}
+                  >
+                    Under $1.5M
+                  </Link>
+                </h4>
               </div>
             </div>
           </div>
@@ -327,7 +343,7 @@ export default async function Home({ params }) {
           </div>
           <div className="pt-5 mt-5"></div>
           <div className="pt-5"></div>
-          <h2 className="fw-bold fs-2 mb-4 font-family2">
+          <h3 className="fw-bold fs-2 mb-4 font-family2">
             {filteredprojects("Upcoming").length > 0 ? (
               `Launching Soon - New Construction Projects in ${CapitalizeFirst(
                 data.city.name
@@ -335,7 +351,7 @@ export default async function Home({ params }) {
             ) : (
               <></>
             )}
-          </h2>
+          </h3>
           <div className="row row-cols-1 row-cols-md-4 gy-4 gx-3">
             {data.preconstructions &&
               filteredprojects("Planning Phase").map((item, no) => (
@@ -404,9 +420,9 @@ export default async function Home({ params }) {
                   className="img-fluid w-25 w-smm-50 mb-3"
                 />
               </div>
-              <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3 ">
+              <h3 className="fw-bolder fw-boldie text-center px-md-4 fs-3 ">
                 Looking to buy a preconstruction home ?
-              </h2>
+              </h3>
 
               <div className="row row-cols-1 row-cols-md-3 mt-5">
                 <div className="col-md-2"></div>
