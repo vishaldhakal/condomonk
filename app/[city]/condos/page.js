@@ -86,7 +86,7 @@ export default async function Home({ params }) {
                 </span>
               </div>
             </h1>
-            <h2 className=" font-normal  mb-2 sm-center">
+            <h2 className="font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium text-lg">
               {`${
                 data.preconstructions.length
               } New Pre Construction Condos for sale in  ${CapitalizeFirst(
