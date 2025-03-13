@@ -254,41 +254,43 @@ export default async function PropertyDetailPage({ params }) {
           <div className="md:col-span-2 space-y-8  md:pe-4">
             {/* Price */}
             <div className="mb-0">
-              <div className="flex items-center gap-3">
-                <h2 className="text-4xl md:text-6xl font-bold mb-0">
+              <div>
+                <h2 className="text-4xl md:text-6xl font-bold mb-1">
                   ${property.ListPrice.toLocaleString()}
                 </h2>
-                {property.OriginalListPrice &&
-                  property.ListPrice < property.OriginalListPrice && (
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-yellow-400 ">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-4 w-4 text-green-700 "
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"
-                          clip-rule="evenodd"
-                        ></path>
-                      </svg>
-                      <span className="ps-1"> Price Reduced</span>
-                      <span className="ml-1 font-bold">
+                {property.PreviousListPrice &&
+                  property.ListPrice < property.PreviousListPrice && (
+                    <div className="flex items-center gap-3">
+                      <span className="text-xl md:text-3xl font-bold text-gray-600 line-through decoration-red-600 decoration-3">
+                        ${property.PreviousListPrice.toLocaleString()}
+                      </span>
+                      <div className="inline-flex items-center text-sm font-bold text-green-700">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4 mr-1"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
                         {(
-                          ((property.ListPrice - property.OriginalListPrice) /
-                            property.OriginalListPrice) *
+                          ((property.PreviousListPrice - property.ListPrice) /
+                            property.PreviousListPrice) *
                           100
                         ).toFixed(1)}
-                        %
-                      </span>
-                    </span>
+                        % dropped
+                      </div>
+                    </div>
                   )}
               </div>
 
               {property.PriceChangeTimestamp && (
                 <div>
-                  <p className="text-sm text-gray-500 mt-1">
+                  <p className="text-sm text-gray-500 my-1">
                     Last price change{" "}
                     <TimeAgo timestamp={property.PriceChangeTimestamp} />
                   </p>

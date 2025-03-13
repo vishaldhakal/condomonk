@@ -253,8 +253,34 @@ function generateSubtitle(filters, total) {
   return `${total.toLocaleString()} ${location} homes for sale | Affordable 1 - 4 bedroom homes in ${location} from $1 to $5M | Open Houses & New Listings Available`;
 }
 
-// Add this helper function to fetch similar properties
+// Update the getSimilarProperties function
 async function getSimilarProperties(filters) {
+  // For price reduced pages, get latest price reduced properties from Brampton and Mississauga
+  if (filters.mlsStatus === "Price Change") {
+    const featuredCities = ["Brampton", "Mississauga"];
+    const priceReducedProperties = await Promise.all(
+      featuredCities.map(async (city) => {
+        const { properties } = await getProperties({
+          city,
+          mlsStatus: "Price Change",
+          limit: 4,
+          sortBy: "ListDate",
+          sortOrder: "DESC",
+        });
+        return {
+          city,
+          properties: properties
+            .filter(
+              (p) => p.PreviousListPrice && p.ListPrice < p.PreviousListPrice
+            )
+            .slice(0, 4),
+        };
+      })
+    );
+    return { priceReducedProperties, type: "priceReduced" };
+  }
+
+  // Original logic for non-price-reduced pages
   const popularCities = [
     "Ajax",
     "Brampton",
@@ -267,15 +293,13 @@ async function getSimilarProperties(filters) {
     "Hamilton",
   ];
 
-  // If we're already on a city page, filter out that city
   const citiesToShow = filters.city
     ? popularCities.filter(
         (city) => city.toLowerCase() !== filters.city.toLowerCase()
       )
     : popularCities;
 
-  // Fetch one property from each city with similar characteristics
-  const similarProperties = await Promise.all(
+  const properties = await Promise.all(
     citiesToShow.slice(0, 8).map(async (city) => {
       const { properties } = await getProperties({
         city,
@@ -288,7 +312,7 @@ async function getSimilarProperties(filters) {
     })
   );
 
-  return similarProperties.filter(Boolean); // Remove any null results
+  return { properties: properties.filter(Boolean), type: "regular" };
 }
 
 export default async function DynamicPage({ params, searchParams }) {
@@ -326,9 +350,9 @@ export default async function DynamicPage({ params, searchParams }) {
 
   const title =
     filters.mlsStatus === "Price Change"
-      ? `${actualTotal} Price Reduced Homes in ${
+      ? `${actualTotal} ${
           filters.city || "Ontario"
-        } | Price Drop ${filters.city || "Ontario"}`
+        } Homes for Sale | Price Dropped`
       : generateTitle(filters);
 
   const subtitle =
@@ -371,21 +395,81 @@ export default async function DynamicPage({ params, searchParams }) {
       />
 
       {/* Similar Homes Section */}
-      {similarProperties.length > 0 && (
+      {similarProperties && (
         <div className="mt-16 border-t pt-12">
-          <h3 className="text-2xl font-bold mb-6">
-            Check out {filters.propertyType || "Homes"} for sale near{" "}
-            {filters.city || "Ontario"} | 1000+{" "}
-            {filters.propertyType || "Homes"} listed on MLS
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {similarProperties.map((property, index) => (
-              <PropertyCard
-                key={property.ListingKey || index}
-                property={property}
-              />
-            ))}
-          </div>
+          {filters.mlsStatus === "Price Change" ? (
+            <>
+              <h4 className="text-4xl font-bold mb-8">
+                Price Reduced Homes by City
+              </h4>
+
+              {/* Featured cities with price reduced properties */}
+              {similarProperties.priceReducedProperties.map(
+                ({ city, properties }) => (
+                  <div key={city} className="mb-8">
+                    <h5 className="text-2xl font-semibold mb-2">
+                      Price Reduced Homes in {city}
+                    </h5>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                      {properties.map((property, index) => (
+                        <PropertyCard
+                          key={property.ListingKey || index}
+                          property={property}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )
+              )}
+
+              {/* List of other cities */}
+              <div className="mt-10">
+                <h5 className="text-2lg font-semibold mb-4">
+                  Find Price Reduced Homes in Other Cities
+                </h5>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {[
+                    "Toronto",
+                    "Ottawa",
+                    "Hamilton",
+                    "London",
+                    "Kitchener",
+                    "Windsor",
+                    "Burlington",
+                    "Oakville",
+                    "Milton",
+                    "Vaughan",
+                    "Richmond Hill",
+                    "Markham",
+                  ].map((city) => (
+                    <a
+                      key={city}
+                      href={`/resale/ontario/${city.toLowerCase()}/price-reduced-homes`}
+                      className="text-blue-600 hover:text-blue-800"
+                    >
+                      Price Reduced Homes in {city}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <h3 className="text-2xl font-bold mb-6">
+                Check out {filters.propertyType || "Homes"} for sale near{" "}
+                {filters.city || "Ontario"} | 1000+{" "}
+                {filters.propertyType || "Homes"} listed on MLS
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {similarProperties.properties.map((property, index) => (
+                  <PropertyCard
+                    key={property.ListingKey || index}
+                    property={property}
+                  />
+                ))}
+              </div>
+            </>
+          )}
         </div>
       )}
 
@@ -441,7 +525,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
   // Generate title and description for price reduced listings
   const title =
     filters.mlsStatus === "Price Change"
-      ? `${location} Homes for Sale | Price Dropped`
+      ? `${actualTotal} ${location} Homes for Sale | Price Dropped`
       : `${total.toLocaleString()} ${generateTitle(filters)}`;
 
   const description =

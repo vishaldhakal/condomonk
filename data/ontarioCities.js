@@ -95,6 +95,7 @@ export const allCities = [
   { city: "North York", province: "Ontario" },
   { city: "Etobicoke", province: "Ontario" },
   { city: "Stoney Creek", province: "Ontario" },
+  { city: "Clarington", province: "Ontario" },
 ];
 
 export default citiesWithProvinces;
