@@ -2535,7 +2535,7 @@ textarea {
     }
 
     .w-mine5 {
-        width: 200px !important;
+        width: 227px !important;
         margin-right: 3px;
     }
 
@@ -2751,6 +2751,7 @@ textarea {
         font-size: 0.75rem;
     }
 }
-.zzz{
+
+.zzz {
     z-index: 999999px !important;
 }

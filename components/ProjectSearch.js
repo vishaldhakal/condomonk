@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { allCities } from "@/data/ontarioCities";
+import { cityRegions } from "@/data/postalCodeCities";
 
 const SearchWithAutocomplete = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -62,19 +63,22 @@ const SearchWithAutocomplete = () => {
           );
         }
 
+        // Don't add cityRegions here since they're already in allCities
+        const combinedCities = allCities;
+
         // Update the data state
         setData({
           cities: (preconResponse.data.cities || []).slice(0, 5),
           projects: (preconResponse.data.projects || []).slice(0, 5),
-          resaleCities: allCities,
+          resaleCities: combinedCities,
           properties: propertyResponse.value || [],
         });
 
-        // Update search results
+        // Update search results with filtered cities including postal code regions
         setSearchResults({
           cities: (preconResponse.data.cities || []).slice(0, 5),
           projects: (preconResponse.data.projects || []).slice(0, 5),
-          resaleCities: allCities
+          resaleCities: combinedCities
             .filter((cityObj) =>
               cityObj.city.toLowerCase().includes(searchTerm.toLowerCase())
             )
@@ -217,7 +221,7 @@ const SearchWithAutocomplete = () => {
   };
 
   return (
-    <div className="position-relative">
+    <div className="position-relative pe-2">
       <div className="position-relative">
         <input
           type="text"
@@ -273,9 +277,39 @@ const SearchWithAutocomplete = () => {
           <div className="max-h-[400px] overflow-y-auto">
             {searchType !== "preconstruction" && (
               <>
-                {/* Properties Section */}
-                {searchResults.properties.length > 0 && (
+                {/* Resale Cities Section - Moved to top */}
+                {searchResults.resaleCities.length > 0 && (
                   <div className="py-2">
+                    <div className="px-4 py-1 text-xs font-medium text-gray-500">
+                      Cities
+                    </div>
+                    {searchResults.resaleCities.map((city, index) => {
+                      // Special handling for Stoney Creek
+                      const cityPath =
+                        city.city.toLowerCase() === "stoney creek"
+                          ? "stoney-creek"
+                          : city.city.toLowerCase().replace(/ /g, "-");
+
+                      return (
+                        <Link
+                          href={`/resale/ontario/${cityPath}/homes-for-sale`}
+                          key={index}
+                          onClick={clearSearch}
+                          className="flex items-center px-4 py-2 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0"
+                        >
+                          <i className="fa-solid fa-location-dot text-gray-400 text-xs w-6"></i>
+                          <span className="text-xs text-gray-700">
+                            {city.city}
+                          </span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {/* Properties Section - Moved below cities */}
+                {searchResults.properties.length > 0 && (
+                  <div className="py-2 border-t border-gray-100">
                     <div className="px-4 py-1 text-xs font-medium text-gray-500">
                       Properties
                     </div>
@@ -296,30 +330,6 @@ const SearchWithAutocomplete = () => {
                             {property.ListPrice?.toLocaleString()}
                           </div>
                         </div>
-                      </Link>
-                    ))}
-                  </div>
-                )}
-
-                {/* Resale Cities Section */}
-                {searchResults.resaleCities.length > 0 && (
-                  <div className="py-2 border-t border-gray-100">
-                    <div className="px-4 py-1 text-xs font-medium text-gray-500">
-                      Cities
-                    </div>
-                    {searchResults.resaleCities.map((city, index) => (
-                      <Link
-                        href={`/resale/ontario/${city.city
-                          .toLowerCase()
-                          .replace(/ /g, "-")}/homes-for-sale`}
-                        key={index}
-                        onClick={clearSearch}
-                        className="flex items-center px-4 py-2 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0"
-                      >
-                        <i className="fa-solid fa-location-dot text-gray-400 text-xs w-6"></i>
-                        <span className="text-xs text-gray-700">
-                          {city.city}
-                        </span>
                       </Link>
                     ))}
                   </div>

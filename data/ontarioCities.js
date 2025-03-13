@@ -91,6 +91,10 @@ export const allCities = [
   { city: "Windsor", province: "Ontario" },
   { city: "Woodstock", province: "Ontario" },
   { city: "Caledon", province: "Ontario" },
+  { city: "Scarborough", province: "Ontario" },
+  { city: "North York", province: "Ontario" },
+  { city: "Etobicoke", province: "Ontario" },
+  { city: "Stoney Creek", province: "Ontario" },
 ];
 
 export default citiesWithProvinces;
