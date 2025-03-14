@@ -162,9 +162,9 @@ export default async function PropertyDetailPage({ params }) {
         {/* Header with Breadcrumb and Share/Save */}
         <div className="flex justify-between items-center mb-0 sticky top-0 bg-white z-1">
           {/* Breadcrumb Navigation */}
-          <nav className="flex items-center gap-2 md:text-sm text-[13px] z-0">
+          <nav className="flex items-center gap-2 md:text-sm text-[13px] z-0 pe-2">
             <Link
-              href="/resale"
+              href="/"
               className="text-gray-500 hover:text-gray-700 flex items-center gap-2 hidden md:flex"
             >
               <svg
@@ -179,7 +179,7 @@ export default async function PropertyDetailPage({ params }) {
               >
                 <path d="M15 18l-6-6 6-6" />
               </svg>
-              <span className="hidden md:block">Back</span>
+              <span className="hidden md:block">Home</span>
             </Link>
             <span className="text-gray-400 hidden md:block">/</span>
             <Link
@@ -205,15 +205,15 @@ export default async function PropertyDetailPage({ params }) {
               {property.City}
             </Link>
             <span className="text-gray-400">/</span>
-            <span className="text-gray-900">
+            <span className="text-gray-900 truncate max-w-[150px] md:max-w-none">
               {property.StreetNumber} {property.StreetName}{" "}
               {property.StreetSuffix}
             </span>
           </nav>
 
           {/* Share/Save Buttons */}
-          <div className="flex md:gap-2 gap-0 ">
-            <button className="inline-flex md:items-center items-start gap-2 md:px-4 px-2 py-2 text-gray-600 hover:text-gray-900 md:text-xs text-[10px] ">
+          <div className="flex md:gap-2 gap-0 flex-shrink-0">
+            <button className="inline-flex md:items-center items-start gap-2 md:px-4 px-2 py-2 text-gray-600 hover:text-gray-900 md:text-xs text-[10px]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -331,9 +331,9 @@ export default async function PropertyDetailPage({ params }) {
             </div>
             <div className="mt-2">
               {/* Status and Type */}
-              <div className="flex  items-start gap-2 mb-2 ">
+              <div className="flex items-center gap-2 mb-2">
                 {property.OriginalEntryTimestamp && (
-                  <span className="inline-flex items-center gap-1 text-black py-0.5 rounded-full text-xs py-1 px-3 bg-yellow-400 shadow-xl mt-4 mt-md-0">
+                  <span className="inline-flex items-center gap-1 text-black py-0.5 rounded-full text-xs py-1 px-3 bg-yellow-400 shadow-xl">
                     <TimeAgo timestamp={property.OriginalEntryTimestamp} />
                   </span>
                 )}

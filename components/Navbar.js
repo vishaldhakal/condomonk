@@ -398,20 +398,17 @@ const Navbar = ({ cities, transparent }) => {
                   Assignment
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item mx-1 rounded-2">
                 <Link className="nav-link" href="/blogs">
                   Blogs
                 </Link>
               </li>
+              <li className="nav-item rounded-2  mx-1">
+                <Link className="nav-link text-black " href="#contact">
+                  Contact
+                </Link>
+              </li>
             </ul>
-            <button
-              className="btn bg-warning btn-warning my-2 my-sm-0 rounded ms-md-4 py-2 px-3 fs-6"
-              type="submit"
-            >
-              <Link className="nav-link text-black " href="#contact">
-                Contact Now
-              </Link>
-            </button>
           </div>
         </div>
       </nav>
