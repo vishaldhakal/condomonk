@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import ProjectSearch from "./ProjectSearch";
 import { usePathname } from "next/navigation";
+import MobileNavbar from "./MobileNavbar";
 
 const Navbar = ({ cities, transparent }) => {
   const [cityname, setCityname] = useState("");
@@ -139,37 +140,31 @@ const Navbar = ({ cities, transparent }) => {
     >
       <nav className="navbar navbar-expand-lg py-lg-3">
         <div className="container justify-content-start">
-          <div className="d-flex">
-            <Link
-              href="/"
-              className="logo d-flex justify-content-center align-items-center pe-1 font-family2 text-xs"
-            >
-              <span>Condomonk</span>
-            </Link>
-            <div
-              className="input-group input-group-search
-             me-md-0"
-            >
-              <ProjectSearch />
-              {/* <SearchSuggest cities={cities} /> */}
+          <div className="d-flex w-100 align-items-center justify-content-between">
+            <div className="d-flex align-items-center">
+              <Link
+                href="/"
+                className="logo d-flex justify-content-center align-items-center pe-1 font-family2 text-xs"
+              >
+                <span>Condomonk</span>
+              </Link>
+              <div
+                className="input-group input-group-search
+               me-md-0"
+              >
+                <ProjectSearch />
+                {/* <SearchSuggest cities={cities} /> */}
+              </div>
             </div>
-            <button
-              className={`navbar-toggler ${buttonClicked ? "bg-white" : ""}`}
-              type="button"
-              onClick={toggleCollapse}
-              aria-controls="collapsibleNavId"
-              aria-expanded={isCollapsed}
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
+
+            {/* Mobile Menu moved to right */}
+            <div className="lg:hidden">
+              <MobileNavbar cities={cities} />
+            </div>
           </div>
-          <div
-            className={`collapse navbar-collapse ${isCollapsed ? "show" : ""} ${
-              isCollapsed ? "bg-white" : ""
-            }`}
-            id="collapsibleNavId"
-          >
+
+          {/* Desktop Navigation */}
+          <div className="navbar-collapse hidden lg:flex" id="collapsibleNavId">
             <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
               <li className="nav-item dropdown dropdown-fullwidth mx-1">
                 <Link
@@ -388,12 +383,15 @@ const Navbar = ({ cities, transparent }) => {
                   </div>
                 </div>
               </li>
-              <li className="nav-item rounded-2  mx-1">
-                <Link className="nav-link" href="/top-10-gta-projects">
-                  Top 10 <span className="fw-medium">GTA</span> Projects
+              <li className="nav-item rounded-2 mx-1">
+                <Link
+                  className="nav-link whitespace-nowrap"
+                  href="/top-10-gta-projects"
+                >
+                  Top 10 GTA Projects
                 </Link>
               </li>
-              <li className="nav-item rounded-2  mx-1">
+              <li className="nav-item rounded-2 mx-1">
                 <Link className="nav-link" href="/assignment-sale">
                   Assignment
                 </Link>
@@ -403,8 +401,8 @@ const Navbar = ({ cities, transparent }) => {
                   Blogs
                 </Link>
               </li>
-              <li className="nav-item rounded-2  mx-1">
-                <Link className="nav-link text-black " href="#contact">
+              <li className="nav-item rounded-2 mx-1">
+                <Link className="nav-link" href="#contact">
                   Contact
                 </Link>
               </li>
