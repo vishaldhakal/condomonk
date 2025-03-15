@@ -6,6 +6,8 @@ import { formatPrice } from "@/utils/formatting";
 import BottomContactForm from "@/components/BottomContactForm";
 import Image from "next/image";
 import PropertyCard from "@/components/PropertyCard";
+import Script from "next/script";
+import { createSearchResultsSchema } from "@/helper/createSchema";
 
 // Helper to determine the type of page and parse filters
 function parseSlug(slug) {
@@ -316,188 +318,224 @@ async function getSimilarProperties(filters) {
 }
 
 export default async function DynamicPage({ params, searchParams }) {
-  console.log("Received params:", params);
+  try {
+    console.log("Received params:", params);
 
-  const filters = parseSlug(params.slug1);
-  console.log("Parsed filters:", filters);
+    const filters = parseSlug(params.slug1);
+    console.log("Parsed filters:", filters);
 
-  if (!filters) {
-    notFound();
-  }
+    if (!filters) {
+      notFound();
+    }
 
-  const {
-    properties: allProperties,
-    total,
-    currentPage,
-    totalPages,
-  } = await getProperties({
-    ...filters,
-    ...searchParams,
-  });
+    const {
+      properties: allProperties,
+      total,
+      currentPage,
+      totalPages,
+    } = await getProperties({
+      ...filters,
+      ...searchParams,
+    });
 
-  // If this is a price drop page, filter out properties without a price drop
-  const properties =
-    filters.mlsStatus === "Price Change"
-      ? allProperties.filter(
-          (property) =>
-            property.PreviousListPrice &&
-            property.ListPrice < property.PreviousListPrice
-        )
-      : allProperties;
+    // If this is a price drop page, filter out properties without a price drop
+    const properties =
+      filters.mlsStatus === "Price Change"
+        ? allProperties.filter(
+            (property) =>
+              property.PreviousListPrice &&
+              property.ListPrice < property.PreviousListPrice
+          )
+        : allProperties;
 
-  const actualTotal =
-    filters.mlsStatus === "Price Change" ? properties.length : total;
+    const actualTotal =
+      filters.mlsStatus === "Price Change" ? properties.length : total;
 
-  const title =
-    filters.mlsStatus === "Price Change"
-      ? `${actualTotal} ${
-          filters.city || "Ontario"
-        } Homes for Sale | Price Dropped`
-      : generateTitle(filters);
+    const title =
+      filters.mlsStatus === "Price Change"
+        ? `${actualTotal} ${
+            filters.city || "Ontario"
+          } Homes for Sale | Price Dropped`
+        : generateTitle(filters);
 
-  const subtitle =
-    filters.mlsStatus === "Price Change"
-      ? `${actualTotal}+ Recently Price Reduced Homes in ${
-          filters.city || "Ontario"
-        } | Find Price Drop on Detached, Semi-detached, Townhomes & Condos in ${
-          filters.city || "Ontario"
-        }`
-      : generateSubtitle(filters, actualTotal);
+    const subtitle =
+      filters.mlsStatus === "Price Change"
+        ? `${actualTotal}+ Recently Price Reduced Homes in ${
+            filters.city || "Ontario"
+          } | Find Price Drop on Detached, Semi-detached, Townhomes & Condos in ${
+            filters.city || "Ontario"
+          }`
+        : generateSubtitle(filters, actualTotal);
 
-  // Fetch similar properties
-  const similarProperties = await getSimilarProperties(filters);
+    // Fetch similar properties
+    const similarProperties = await getSimilarProperties(filters);
 
-  return (
-    <div className="max-w-[1370px] mx-auto px-2 md:px-4 py-2">
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-xl md:text-3xl font-extrabold leading-tight">
-            {title}
-          </h1>
-          <h2 className="text-gray-600 text-sm leading-tight">{subtitle}</h2>
-        </div>
-      </div>
-      <div className="sticky top-0 bg-white py-1 flex justify-between items-center mb-2 z-2 overflow-x-auto hide-scrollbar ps-0">
-        <FilterBar currentFilters={filters} />
-        <div className="flex bg-gray-100 p-1 rounded-lg">
-          <button className="px-3 py-1 rounded-md bg-white shadow-sm">
-            List
-          </button>
-          <button className="px-3 py-1 rounded-md">Map</button>
-        </div>
-      </div>
+    // Create schema with error handling
+    let schemaScript = null;
+    try {
+      const schemas = createSearchResultsSchema({
+        properties,
+        title,
+        subtitle,
+        actualTotal,
+        filters,
+        slug: params.slug1,
+      });
 
-      <PropertyList
-        properties={properties}
-        total={actualTotal}
-        currentPage={currentPage}
-        totalPages={Math.ceil(actualTotal / 30)}
-      />
+      schemaScript = (
+        <Script
+          id="search-results-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(schemas, null, 2),
+          }}
+          strategy="afterInteractive"
+        />
+      );
+    } catch (schemaError) {
+      console.error("Error creating search results schema:", schemaError);
+    }
 
-      {/* Similar Homes Section */}
-      {similarProperties && (
-        <div className="mt-16 border-t pt-12">
-          {filters.mlsStatus === "Price Change" ? (
-            <>
-              <h4 className="text-4xl font-bold mb-8">
-                Price Reduced Homes by City
-              </h4>
+    return (
+      <>
+        {schemaScript}
+        <div className="max-w-[1370px] mx-auto px-2 md:px-4 py-2">
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-xl md:text-3xl font-extrabold leading-tight">
+                {title}
+              </h1>
+              <h2 className="text-gray-600 text-sm leading-tight">
+                {subtitle}
+              </h2>
+            </div>
+          </div>
+          <div className="sticky top-0 bg-white py-1 flex justify-between items-center mb-2 z-2 overflow-x-auto hide-scrollbar ps-0">
+            <FilterBar currentFilters={filters} />
+            <div className="flex bg-gray-100 p-1 rounded-lg">
+              <button className="px-3 py-1 rounded-md bg-white shadow-sm">
+                List
+              </button>
+              <button className="px-3 py-1 rounded-md">Map</button>
+            </div>
+          </div>
 
-              {/* Featured cities with price reduced properties */}
-              {similarProperties.priceReducedProperties.map(
-                ({ city, properties }) => (
-                  <div key={city} className="mb-8">
-                    <h5 className="text-2xl font-semibold mb-2">
-                      Price Reduced Homes in {city}
+          <PropertyList
+            properties={properties}
+            total={actualTotal}
+            currentPage={currentPage}
+            totalPages={Math.ceil(actualTotal / 30)}
+          />
+
+          {/* Similar Homes Section */}
+          {similarProperties && (
+            <div className="mt-16 border-t pt-12">
+              {filters.mlsStatus === "Price Change" ? (
+                <>
+                  <h4 className="md:text-4xl text-2xl font-bold mb-8">
+                    Price Reduced Homes by City
+                  </h4>
+
+                  {/* Featured cities with price reduced properties */}
+                  {similarProperties.priceReducedProperties.map(
+                    ({ city, properties }) => (
+                      <div key={city} className="mb-8">
+                        <h5 className="md:text-2xl text-xl font-semibold mb-2">
+                          Price Reduced Homes in {city}
+                        </h5>
+                        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                          {properties.map((property, index) => (
+                            <PropertyCard
+                              key={property.ListingKey || index}
+                              property={property}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    )
+                  )}
+
+                  {/* List of other cities */}
+                  <div className="mt-10">
+                    <h5 className="text-2xl font-semibold mb-4">
+                      Find Price Reduced Homes in Other Cities
                     </h5>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                      {properties.map((property, index) => (
-                        <PropertyCard
-                          key={property.ListingKey || index}
-                          property={property}
-                        />
+                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 ">
+                      {[
+                        "Toronto",
+                        "Ottawa",
+                        "Hamilton",
+                        "London",
+                        "Kitchener",
+                        "Windsor",
+                        "Burlington",
+                        "Oakville",
+                        "Milton",
+                        "Vaughan",
+                        "Richmond Hill",
+                        "Markham",
+                      ].map((city) => (
+                        <a
+                          key={city}
+                          href={`/resale/ontario/${city.toLowerCase()}/price-reduced-homes`}
+                          className="text-blue-600 hover:text-blue-800"
+                        >
+                          Price Reduced Homes in {city}
+                        </a>
                       ))}
                     </div>
                   </div>
-                )
+                </>
+              ) : (
+                <>
+                  <h3 className="text-2xl font-bold mb-6">
+                    Check out {filters.propertyType || "Homes"} for sale near{" "}
+                    {filters.city || "Ontario"} | 1000+{" "}
+                    {filters.propertyType || "Homes"} listed on MLS
+                  </h3>
+                  <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {similarProperties.properties.map((property, index) => (
+                      <PropertyCard
+                        key={property.ListingKey || index}
+                        property={property}
+                      />
+                    ))}
+                  </div>
+                </>
               )}
-
-              {/* List of other cities */}
-              <div className="mt-10">
-                <h5 className="text-2lg font-semibold mb-4">
-                  Find Price Reduced Homes in Other Cities
-                </h5>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {[
-                    "Toronto",
-                    "Ottawa",
-                    "Hamilton",
-                    "London",
-                    "Kitchener",
-                    "Windsor",
-                    "Burlington",
-                    "Oakville",
-                    "Milton",
-                    "Vaughan",
-                    "Richmond Hill",
-                    "Markham",
-                  ].map((city) => (
-                    <a
-                      key={city}
-                      href={`/resale/ontario/${city.toLowerCase()}/price-reduced-homes`}
-                      className="text-blue-600 hover:text-blue-800"
-                    >
-                      Price Reduced Homes in {city}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </>
-          ) : (
-            <>
-              <h3 className="text-2xl font-bold mb-6">
-                Check out {filters.propertyType || "Homes"} for sale near{" "}
-                {filters.city || "Ontario"} | 1000+{" "}
-                {filters.propertyType || "Homes"} listed on MLS
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {similarProperties.properties.map((property, index) => (
-                  <PropertyCard
-                    key={property.ListingKey || index}
-                    property={property}
-                  />
-                ))}
-              </div>
-            </>
+            </div>
           )}
-        </div>
-      )}
 
-      {/* Contact Section */}
-      <div className="mt-16 max-w-2xl mx-auto text-center">
-        <Image
-          src="/contact-bottom-2.png"
-          alt="Contact bottom"
-          width={300}
-          height={250}
-          className="mx-auto mb-6"
-        />
-        <h3 className="text-3xl font-bold mb-6">
-          Looking to buy a home in {filters.city || "Ontario"}?
-        </h3>
-        <BottomContactForm
-          proj_name={filters.city || "Ontario"}
-          city={filters.city || "Ontario"}
-        />
-        <p className="text-sm text-gray-500 mt-4">
-          I agree to receive marketing and customer service communications from
-          Homebaba Technologies. Consent is not a condition of purchase.
-          Msg/data rates may apply. Msg frequency varies. Reply STOP to
-          unsubscribe.
-        </p>
-      </div>
-    </div>
-  );
+          {/* Contact Section */}
+          <div className="mt-16 max-w-2xl mx-auto text-center">
+            <Image
+              src="/contact-bottom-2.png"
+              alt="Contact bottom"
+              width={300}
+              height={250}
+              className="mx-auto mb-6"
+            />
+            <h3 className="text-3xl font-bold mb-6">
+              Looking to buy a home in {filters.city || "Ontario"}?
+            </h3>
+            <BottomContactForm
+              proj_name={filters.city || "Ontario"}
+              city={filters.city || "Ontario"}
+            />
+            <p className="text-sm text-gray-500 mt-4">
+              I agree to receive marketing and customer service communications
+              from Homebaba Technologies. Consent is not a condition of
+              purchase. Msg/data rates may apply. Msg frequency varies. Reply
+              STOP to unsubscribe.
+            </p>
+          </div>
+        </div>
+      </>
+    );
+  } catch (error) {
+    console.error("Error in DynamicPage:", error);
+    notFound();
+  }
 }
 
 export async function generateMetadata({ params, searchParams }, parent) {
