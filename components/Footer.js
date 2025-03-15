@@ -8,6 +8,10 @@ const Footer = ({ cities }) => {
   if (pathname.startsWith("/Linkdmin")) {
     return <></>;
   }
+
+  // Check if we're on a resale page
+  const isResalePage = pathname.startsWith("/resale");
+
   return (
     <div className="pt-5">
       <footer className="footer mt-5  shadow-lg">
@@ -46,16 +50,27 @@ const Footer = ({ cities }) => {
           <div className=" container pt-5 mt-md-5 mt-0">
             <div className="container footer-links">
               <h3 className="text-center fw-bold pb-2 fs-2 font-family2">
-                {" "}
-                New homes in Canada
+                {isResalePage
+                  ? "Homes for sale in Ontario"
+                  : "New homes in Canada"}
               </h3>
               <div className=" text-center footer-listcontainer pt-2">
                 <ul className="row row-cols-md-4 row-cols-1 list-unstyled d-flex align-items-center justify-content-center">
                   {cities &&
                     cities.map((city) => (
                       <li key={city.id} className="col mb-4">
-                        <Link href={`/new-homes/${city.slug}`}>
-                          <span>New homes in {city.name}</span>
+                        <Link
+                          href={
+                            isResalePage
+                              ? `/resale/ontario/${city.slug.toLowerCase()}/homes-for-sale`
+                              : `/new-homes/${city.slug}`
+                          }
+                        >
+                          <span>
+                            {isResalePage
+                              ? `Homes for sale in ${city.name}`
+                              : `New homes in ${city.name}`}
+                          </span>
                         </Link>
                       </li>
                     ))}
@@ -69,16 +84,27 @@ const Footer = ({ cities }) => {
           <div className=" container pt-5 mt-md-5 mt-0">
             <div className="container footer-links">
               <h3 className="text-center fw-bold pb-2 fs-2 font-family2">
-                {" "}
-                Pre construction townhomes in Canada
+                {isResalePage
+                  ? "Detached Homes for sale in Ontario"
+                  : "Pre construction townhomes in Canada"}
               </h3>
               <div className=" text-center footer-listcontainer pt-2">
                 <ul className="row row-cols-md-3 row-cols-1 list-unstyled d-flex align-items-center justify-content-center">
                   {cities &&
                     cities.map((city) => (
                       <li key={city.id} className="col mb-4">
-                        <Link href={`/${city.slug}/townhomes`}>
-                          <span>Pre construction townhomes in {city.name}</span>
+                        <Link
+                          href={
+                            isResalePage
+                              ? `/resale/ontario/${city.slug.toLowerCase()}/detached-homes-for-sale`
+                              : `/${city.slug}/townhomes`
+                          }
+                        >
+                          <span>
+                            {isResalePage
+                              ? `Detached Homes for sale in ${city.name}`
+                              : `Pre construction townhomes in ${city.name}`}
+                          </span>
                         </Link>
                       </li>
                     ))}
