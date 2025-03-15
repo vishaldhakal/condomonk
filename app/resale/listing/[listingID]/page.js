@@ -269,7 +269,10 @@ export default async function PropertyDetailPage({ params }) {
           </div>
 
           {/* Property Gallery */}
-          <PropertyGallery images={property.images} />
+          <PropertyGallery
+            images={property.images}
+            propertyAddress={`${property.StreetNumber} ${property.StreetName} ${property.StreetSuffix}`}
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2 max-w-5xl mx-auto">
             {/* Main Content */}

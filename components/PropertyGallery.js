@@ -10,7 +10,7 @@ import "lightgallery/css/lg-thumbnail.css";
 import lgThumbnail from "lightgallery/plugins/thumbnail";
 import lgZoom from "lightgallery/plugins/zoom";
 
-export default function PropertyGallery({ images }) {
+export default function PropertyGallery({ images, propertyAddress }) {
   const [showGallery, setShowGallery] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   let lightGalleryInstance = null;
@@ -38,10 +38,7 @@ export default function PropertyGallery({ images }) {
           <div className="relative w-full h-[300px]">
             <Image
               src={images[currentImageIndex].url}
-              alt={
-                images[currentImageIndex].description ||
-                `Property image ${currentImageIndex + 1}`
-              }
+              alt={`${propertyAddress} Image ${currentImageIndex + 1}`}
               fill
               className="object-cover"
               priority
@@ -94,7 +91,7 @@ export default function PropertyGallery({ images }) {
               >
                 <Image
                   src={image.url}
-                  alt={image.description || `Thumbnail ${index + 1}`}
+                  alt={`${propertyAddress} Image ${index + 1}`}
                   fill
                   className="object-cover"
                 />
@@ -135,7 +132,7 @@ export default function PropertyGallery({ images }) {
               <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                 <Image
                   src={image.url}
-                  alt={image.description || `Property image ${index + 1}`}
+                  alt={`${propertyAddress} Image ${index + 1}`}
                   fill
                   className="object-cover"
                   priority={index < 2}
@@ -155,7 +152,7 @@ export default function PropertyGallery({ images }) {
             >
               <Image
                 src={image.url}
-                alt={image.description || `Property image ${index + 6}`}
+                alt={`${propertyAddress} Image ${index + 6}`}
                 width={1600}
                 height={2400}
               />
