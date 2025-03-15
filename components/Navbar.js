@@ -85,8 +85,11 @@ const Navbar = ({ cities, transparent }) => {
   const isResalePage =
     pathname.includes("/resale/") && !pathname.includes("/resale/listing/");
 
-  // Helper function to determine if we're on the main resale page
-  const isMainResalePage = pathname === "/resale/ontario/homes-for-sale";
+  // Update the isMainResalePage helper function
+  const isMainResalePage =
+    pathname === "/resale/ontario/homes-for-sale" ||
+    pathname === "/resale/ontario/" ||
+    pathname === "/resale/ontario";
 
   // Helper function to determine if we're on a city-specific resale page
   const isCityResalePage =
@@ -240,8 +243,9 @@ const Navbar = ({ cities, transparent }) => {
                           PRE CONSTRUCTION HOMES
                         </div>
                         <div className="flex flex-col space-y-2">
-                          {isMainResalePage ? (
-                            // Links for main resale page
+                          {isMainResalePage ||
+                          pathname === "/resale/ontario/" ? (
+                            // Links for main resale page and /resale/ontario/
                             <>
                               <Link
                                 className="text-gray-600 hover:text-gray-900 text-sm break-words"

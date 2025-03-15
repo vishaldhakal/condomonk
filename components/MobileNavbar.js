@@ -24,7 +24,10 @@ const MobileNavbar = ({ cities }) => {
   // Reuse the same helper functions from Navbar
   const isResalePage =
     pathname.includes("/resale/") && !pathname.includes("/resale/listing/");
-  const isMainResalePage = pathname === "/resale/ontario/homes-for-sale";
+  const isMainResalePage =
+    pathname === "/resale/ontario/homes-for-sale" ||
+    pathname === "/resale/ontario/" ||
+    pathname === "/resale/ontario";
   const isCityResalePage =
     isResalePage && !isMainResalePage && pathname.includes("/resale/ontario/");
   const isSpecialPage =
@@ -134,7 +137,7 @@ const MobileNavbar = ({ cities }) => {
                         <div className="font-semibold text-black">
                           PRE CONSTRUCTION HOMES
                         </div>
-                        {isMainResalePage ? (
+                        {isMainResalePage || pathname === "/resale/ontario/" ? (
                           <>
                             <Link
                               href="/pre-construction-homes"
