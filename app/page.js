@@ -10,6 +10,21 @@ import Newsletter from "@/components/Newsletter";
 import PropertyCard from "@/components/PropertyCard";
 import { getProperties } from "@/lib/properties";
 
+const fetchPropertyData = async (city) => {
+  try {
+    const response = await fetch(
+      `https://query.ampre.ca/odata/Property?$filter=ContractStatus eq 'Available' and StandardStatus eq 'Active' and TransactionType eq 'For Sale' and contains(City, '${city}')...`,
+      {
+        // Add any necessary headers or options
+      }
+    );
+    return await response.json();
+  } catch (error) {
+    // Handle error appropriately
+    console.error("Error fetching property data:", error);
+  }
+};
+
 async function getData(city) {
   const res = await fetch(
     "https://api.condomonk.ca/api/preconstructions-city/" +

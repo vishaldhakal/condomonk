@@ -38,13 +38,44 @@ const SearchWithAutocomplete = () => {
       .join(" ");
   };
 
+  // Update the generateListingUrl function to handle UnparsedAddress when StreetNumber/StreetName are missing
+  const generateListingUrl = (property) => {
+    const parts = [];
+
+    // If we have UnparsedAddress but no StreetNumber/StreetName, parse it
+    if (
+      property.UnparsedAddress &&
+      (!property.StreetNumber || !property.StreetName)
+    ) {
+      // Split address into parts and take the first two parts as street number and name
+      const addressParts = property.UnparsedAddress.split(" ");
+      if (addressParts.length >= 2) {
+        const streetNumber = addressParts[0];
+        const streetName = addressParts[1];
+
+        if (streetNumber) parts.push(streetNumber.replace("/", "-"));
+        if (streetName) parts.push(streetName.trim().replace(/ /g, "-"));
+      }
+    } else {
+      // Use existing StreetNumber and StreetName if available
+      if (property.StreetNumber)
+        parts.push(property.StreetNumber.replace("/", "-"));
+      if (property.StreetName)
+        parts.push(property.StreetName.trim().replace(/ /g, "-"));
+    }
+
+    // Always add the ListingKey
+    if (property.ListingKey) parts.push(property.ListingKey);
+
+    return parts.filter(Boolean).join("-");
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
         let propertyResponse = { value: [] };
 
-        // Only fetch properties if searchTerm is 2 or more characters
         if (searchTerm.length >= 2) {
           const capitalizedTerm = capitalizeWords(searchTerm);
           const response = await fetch(
@@ -54,6 +85,24 @@ const SearchWithAutocomplete = () => {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
           propertyResponse = await response.json();
+
+          // Process the property data to ensure we have street information
+          propertyResponse.value = propertyResponse.value.map((property) => {
+            if (
+              property.UnparsedAddress &&
+              (!property.StreetNumber || !property.StreetName)
+            ) {
+              const addressParts = property.UnparsedAddress.split(" ");
+              if (addressParts.length >= 2) {
+                return {
+                  ...property,
+                  StreetNumber: addressParts[0],
+                  StreetName: addressParts[1],
+                };
+              }
+            }
+            return property;
+          });
         }
 
         // Only fetch preconstruction data if in preconstruction tab
@@ -349,14 +398,16 @@ const SearchWithAutocomplete = () => {
                   </div>
                 )}
 
-                {/* Properties Section - Moved below cities */}
+                {/* Properties Section */}
                 {searchResults.properties.length > 0 && (
                   <div className="py-2 border-t border-gray-100">
                     <div className="px-4 py-1 text-xs font-medium text-gray-500">
                       Properties
                     </div>
                     {searchResults.properties.map((property, index) => {
-                      const href = `/resale/listing/${property.ListingKey}`;
+                      const href = `/resale/listing/${generateListingUrl(
+                        property
+                      )}`;
                       return (
                         <Link
                           href={href}
