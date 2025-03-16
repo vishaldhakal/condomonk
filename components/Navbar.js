@@ -388,14 +388,6 @@ const Navbar = ({ cities, transparent }) => {
                 </div>
               </li>
               <li className="nav-item rounded-2 mx-1">
-                <Link
-                  className="nav-link whitespace-nowrap"
-                  href="/top-10-gta-projects"
-                >
-                  Top 10 GTA Projects
-                </Link>
-              </li>
-              <li className="nav-item rounded-2 mx-1">
                 <Link className="nav-link" href="/assignment-sale">
                   Assignment
                 </Link>

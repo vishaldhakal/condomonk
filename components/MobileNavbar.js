@@ -294,13 +294,6 @@ const MobileNavbar = ({ cities }) => {
 
               <div className="flex flex-col space-y-5 mt-4">
                 <Link
-                  href="/top-10-gta-projects"
-                  onClick={handleLinkClick}
-                  className="text-black hover:text-gray-600 transition-all duration-200 text-sm transform hover:translate-x-1"
-                >
-                  Top 10 <span className="font-medium">GTA</span> Projects
-                </Link>
-                <Link
                   href="/assignment-sale"
                   onClick={handleLinkClick}
                   className="text-black hover:text-gray-600 transition-all duration-200 text-sm transform hover:translate-x-1"

@@ -6,7 +6,7 @@ import { allCities } from "@/data/ontarioCities";
 import { cityRegions } from "@/data/postalCodeCities";
 import { useRouter } from "next/navigation";
 
-const SearchWithAutocomplete = () => {
+const SearchWithAutocomplete = ({ isHomepage = false }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState({
     cities: [],
@@ -310,14 +310,35 @@ const SearchWithAutocomplete = () => {
     router.push(href);
   };
 
+  // Apply different classes based on whether this is the homepage or not
+  const inputClasses = isHomepage
+    ? "form-control py-3 pe-5 fs-5 rounded-lg w-100"
+    : "form-control py-2 w-mine5 pe-5";
+
+  const iconClasses = isHomepage
+    ? "fa-solid fa-magnifying-glass position-absolute top-50 translate-middle-y fs-4 search-icon"
+    : "fa-solid fa-magnifying-glass position-absolute top-50 translate-middle-y";
+
+  const iconStyle = isHomepage
+    ? { color: "#FFC007", right: "20px" }
+    : { color: "#FFC007", right: "15px" };
+
+  const placeholderText = isHomepage
+    ? "Search for cities, projects, or properties..."
+    : "Search for a city or project...";
+
   return (
-    <div className="position-relative pe-2">
+    <div
+      className={`position-relative pe-2 ${
+        isHomepage ? "w-100 search-container" : ""
+      }`}
+    >
       <div className="position-relative">
         <input
           type="text"
-          className="form-control py-2 w-mine5 pe-5"
+          className={inputClasses}
           id="searchInput"
-          placeholder="Search for a city or project..."
+          placeholder={placeholderText}
           autoComplete="off"
           value={searchTerm}
           onChange={handleSearch}
@@ -325,24 +346,58 @@ const SearchWithAutocomplete = () => {
           onBlur={handleBlur}
           ref={inputRef}
         />
-        <i
-          className="fa-solid fa-magnifying-glass position-absolute top-50 translate-middle-y"
-          style={{ color: "#FFC007", right: "15px" }}
-        ></i>
+        <i className={iconClasses} style={iconStyle}></i>
       </div>
+
+      {/* Add the CSS for the glass effect */}
+      {isHomepage && (
+        <style jsx global>{`
+          .search-glass {
+            background: rgba(255, 255, 255, 0.2) !important;
+            backdrop-filter: blur(10px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+            color: #333 !important;
+            transition: all 0.3s ease !important;
+          }
+
+          .search-glass::placeholder {
+            color: rgba(51, 51, 51, 0.8) !important;
+          }
+
+          .search-glass:focus {
+            background: rgba(255, 255, 255, 0.25) !important;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2) !important;
+            border: 1px solid rgba(255, 255, 255, 0.4) !important;
+          }
+
+          .search-icon {
+            color: rgba(51, 51, 51, 0.8) !important;
+            transition: all 0.3s ease !important;
+          }
+
+          .search-container:hover .search-glass {
+            background: rgba(255, 255, 255, 0.25) !important;
+          }
+        `}</style>
+      )}
 
       {/* Dropdown Panel */}
       {isFocused && (
         <div
           ref={dropdownRef}
-          className="absolute w-full mt-2 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden z-3"
+          className={`absolute w-full mt-2 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden z-3 ${
+            isHomepage ? "max-h-[450px]" : "max-h-[400px]"
+          }`}
         >
           {/* Tabs */}
           <div className="flex border-b border-gray-200">
             <button
               onClick={() => handleTabClick("resale")}
               onMouseDown={(e) => e.preventDefault()}
-              className={`flex-1 px-4 py-2.5 text-xs font-medium border-b-2 transition-colors ${
+              className={`flex-1 px-4 py-2.5 ${
+                isHomepage ? "py-3 text-sm" : "text-xs"
+              } font-medium border-b-2 transition-colors ${
                 searchType !== "preconstruction"
                   ? "border-[#FFA725] text-[#FFA725]"
                   : "border-transparent text-gray-500 hover:text-gray-700"
@@ -353,7 +408,9 @@ const SearchWithAutocomplete = () => {
             <button
               onClick={() => handleTabClick("preconstruction")}
               onMouseDown={(e) => e.preventDefault()}
-              className={`flex-1 px-4 py-2.5 text-xs font-medium border-b-2 transition-colors ${
+              className={`flex-1 px-4 py-2.5 ${
+                isHomepage ? "py-3 text-sm" : "text-xs"
+              } font-medium border-b-2 transition-colors ${
                 searchType === "preconstruction"
                   ? "border-[#FFC007] text-[#FFC007]"
                   : "border-transparent text-gray-500 hover:text-gray-700"
@@ -364,13 +421,21 @@ const SearchWithAutocomplete = () => {
           </div>
 
           {/* Results Section */}
-          <div className="max-h-[400px] overflow-y-auto">
+          <div
+            className={`${
+              isHomepage ? "max-h-[450px]" : "max-h-[400px]"
+            } overflow-y-auto`}
+          >
             {searchType !== "preconstruction" && (
               <>
                 {/* Resale Cities Section - Moved to top */}
                 {searchResults.resaleCities.length > 0 && (
                   <div className="py-2">
-                    <div className="px-4 py-1 text-xs font-medium text-gray-500">
+                    <div
+                      className={`px-4 py-1 ${
+                        isHomepage ? "text-sm" : "text-xs"
+                      } font-medium text-gray-500`}
+                    >
                       Cities
                     </div>
                     {searchResults.resaleCities.map((city, index) => {
@@ -386,10 +451,20 @@ const SearchWithAutocomplete = () => {
                           key={index}
                           onClick={(e) => handleLinkClick(e, href)}
                           onTouchStart={(e) => handleTouchStart(e, href)}
-                          className="flex items-center px-4 py-2 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0"
+                          className={`flex items-center px-4 ${
+                            isHomepage ? "py-3" : "py-2"
+                          } hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0`}
                         >
-                          <i className="fa-solid fa-location-dot text-gray-400 text-xs w-6"></i>
-                          <span className="text-xs text-gray-700">
+                          <i
+                            className={`fa-solid fa-location-dot text-gray-400 ${
+                              isHomepage ? "text-sm" : "text-xs"
+                            } w-6`}
+                          ></i>
+                          <span
+                            className={`${
+                              isHomepage ? "text-sm" : "text-xs"
+                            } text-gray-700`}
+                          >
                             {city.city}
                           </span>
                         </Link>
@@ -401,7 +476,11 @@ const SearchWithAutocomplete = () => {
                 {/* Properties Section */}
                 {searchResults.properties.length > 0 && (
                   <div className="py-2 border-t border-gray-100">
-                    <div className="px-4 py-1 text-xs font-medium text-gray-500">
+                    <div
+                      className={`px-4 py-1 ${
+                        isHomepage ? "text-sm" : "text-xs"
+                      } font-medium text-gray-500`}
+                    >
                       Properties
                     </div>
                     {searchResults.properties.map((property, index) => {
@@ -414,14 +493,28 @@ const SearchWithAutocomplete = () => {
                           key={index}
                           onClick={(e) => handleLinkClick(e, href)}
                           onTouchStart={(e) => handleTouchStart(e, href)}
-                          className="flex items-center px-4 py-2 hover:bg-gray-50 transition-colors"
+                          className={`flex items-center px-4 ${
+                            isHomepage ? "py-3" : "py-2"
+                          } hover:bg-gray-50 transition-colors`}
                         >
-                          <i className="fa-solid fa-home text-gray-400 text-xs w-6"></i>
+                          <i
+                            className={`fa-solid fa-home text-gray-400 ${
+                              isHomepage ? "text-sm" : "text-xs"
+                            } w-6`}
+                          ></i>
                           <div className="min-w-0 flex-1">
-                            <div className="text-xs text-gray-700 truncate">
+                            <div
+                              className={`${
+                                isHomepage ? "text-sm" : "text-xs"
+                              } text-gray-700 truncate`}
+                            >
                               {property.UnparsedAddress}
                             </div>
-                            <div className="text-[10px] text-gray-500">
+                            <div
+                              className={`${
+                                isHomepage ? "text-xs" : "text-[10px]"
+                              } text-gray-500`}
+                            >
                               {property.City} - $
                               {property.ListPrice?.toLocaleString()}
                             </div>
@@ -445,10 +538,22 @@ const SearchWithAutocomplete = () => {
                       key={index}
                       onClick={(e) => handleLinkClick(e, href)}
                       onTouchStart={(e) => handleTouchStart(e, href)}
-                      className="flex items-center px-4 py-2 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0"
+                      className={`flex items-center px-4 ${
+                        isHomepage ? "py-3" : "py-2"
+                      } hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0`}
                     >
-                      <i className="fa-solid fa-location-dot text-gray-400 text-xs w-6"></i>
-                      <span className="text-xs text-gray-700">{city.name}</span>
+                      <i
+                        className={`fa-solid fa-location-dot text-gray-400 ${
+                          isHomepage ? "text-sm" : "text-xs"
+                        } w-6`}
+                      ></i>
+                      <span
+                        className={`${
+                          isHomepage ? "text-sm" : "text-xs"
+                        } text-gray-700`}
+                      >
+                        {city.name}
+                      </span>
                     </Link>
                   );
                 })}
@@ -462,14 +567,28 @@ const SearchWithAutocomplete = () => {
                       key={index}
                       onClick={(e) => handleLinkClick(e, href)}
                       onTouchStart={(e) => handleTouchStart(e, href)}
-                      className="flex items-center px-4 py-2 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0"
+                      className={`flex items-center px-4 ${
+                        isHomepage ? "py-3" : "py-2"
+                      } hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0`}
                     >
-                      <i className="fa-solid fa-building text-gray-400 text-xs w-6"></i>
+                      <i
+                        className={`fa-solid fa-building text-gray-400 ${
+                          isHomepage ? "text-sm" : "text-xs"
+                        } w-6`}
+                      ></i>
                       <div className="min-w-0 flex-1">
-                        <div className="text-xs text-gray-700 truncate">
+                        <div
+                          className={`${
+                            isHomepage ? "text-sm" : "text-xs"
+                          } text-gray-700 truncate`}
+                        >
                           {project.project_name}
                         </div>
-                        <div className="text-[10px] text-gray-500">
+                        <div
+                          className={`${
+                            isHomepage ? "text-xs" : "text-[10px]"
+                          } text-gray-500`}
+                        >
                           {project.city.name}
                         </div>
                       </div>
@@ -491,18 +610,36 @@ const SearchWithAutocomplete = () => {
                       <div className="flex justify-center">
                         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FFC007]"></div>
                       </div>
-                      <div className="text-sm text-gray-500">Searching...</div>
+                      <div
+                        className={`${
+                          isHomepage ? "text-base" : "text-sm"
+                        } text-gray-500`}
+                      >
+                        Searching...
+                      </div>
                     </div>
                   ) : (
                     <div className="space-y-3">
                       <div className="flex justify-center">
-                        <i className="fas fa-search text-2xl text-gray-300"></i>
+                        <i
+                          className={`fas fa-search ${
+                            isHomepage ? "text-3xl" : "text-2xl"
+                          } text-gray-300`}
+                        ></i>
                       </div>
                       <div>
-                        <div className="text-sm font-medium text-gray-600">
+                        <div
+                          className={`${
+                            isHomepage ? "text-base" : "text-sm"
+                          } font-medium text-gray-600`}
+                        >
                           No matches found
                         </div>
-                        <div className="text-xs text-gray-400 mt-1">
+                        <div
+                          className={`${
+                            isHomepage ? "text-sm" : "text-xs"
+                          } text-gray-400 mt-1`}
+                        >
                           Try adjusting your search terms
                         </div>
                       </div>

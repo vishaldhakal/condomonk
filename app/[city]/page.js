@@ -235,76 +235,87 @@ export default async function Home({ params }) {
             {priceFilter ? ` ${formatPriceFilter(priceFilter)}` : ""} on
             condomonk.
           </h2>
-          <div className="d-flex sm-center  mb-lg-0 sticky-buttons pb-0 mb-0 z-2 sticky-top">
-            <div className="d-flex flex-column flex-md-row mb-md-2 mb-0 mt-1 overflow-hidden">
-              <div className="d-flex gap-2">
-                <h3>
-                  <Link
-                    className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m"
-                    href={`/${params.city.split("-homes-")[0]}/upcoming/`}
-                  >
-                    Upcoming Projects {CapitalizeFirst(params.city)}
-                  </Link>
-                </h3>
-                <h3>
-                  <Link
-                    className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 me-2"
-                    href={`/${params.city.split("-homes-")[0]}/townhomes/`}
-                  >
-                    New Townhomes {CapitalizeFirst(params.city)}
-                  </Link>
-                </h3>
+          <div className="d-flex sm-center mb-lg-0 sticky-buttons pb-0 mb-0 z-2 sticky-top">
+            <div className="position-relative w-100">
+              <div className="d-flex flex-nowrap overflow-auto pb-2 hide-scrollbar">
+                <div className="d-flex gap-2 flex-nowrap">
+                  <h3>
+                    <Link
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m whitespace-nowrap"
+                      href={`/${params.city.split("-homes-")[0]}/upcoming/`}
+                    >
+                      Upcoming Projects {CapitalizeFirst(params.city)}
+                    </Link>
+                  </h3>
+                  <h3>
+                    <Link
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 me-2 whitespace-nowrap"
+                      href={`/${params.city.split("-homes-")[0]}/townhomes/`}
+                    >
+                      New Townhomes {CapitalizeFirst(params.city)}
+                    </Link>
+                  </h3>
+
+                  <h3>
+                    <Link
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m whitespace-nowrap"
+                      href={`/${params.city.split("-homes-")[0]}/detached/`}
+                    >
+                      New Detached Homes {CapitalizeFirst(params.city)}
+                    </Link>
+                  </h3>
+                  <h3>
+                    <Link
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 whitespace-nowrap"
+                      href={`/${params.city.split("-homes-")[0]}/condos/`}
+                    >
+                      New Condos {CapitalizeFirst(params.city)}
+                    </Link>
+                  </h3>
+
+                  <h4>
+                    <Link
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-warning whitespace-nowrap"
+                      href={`/${
+                        params.city.split("-homes-")[0]
+                      }-homes-under-500k`}
+                    >
+                      Under $500k
+                    </Link>
+                  </h4>
+                  <h4>
+                    <Link
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-warning whitespace-nowrap"
+                      href={`/${
+                        params.city.split("-homes-")[0]
+                      }-homes-under-1-million`}
+                    >
+                      Under $1M
+                    </Link>
+                  </h4>
+                  <h4>
+                    <Link
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-warning whitespace-nowrap"
+                      href={`/${
+                        params.city.split("-homes-")[0]
+                      }-homes-under-1.5-million`}
+                    >
+                      Under $1.5M
+                    </Link>
+                  </h4>
+                </div>
               </div>
-              <div className="d-flex gap-2">
-                <h3>
-                  <Link
-                    className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m"
-                    href={`/${params.city.split("-homes-")[0]}/detached/`}
-                  >
-                    New Detached Homes {CapitalizeFirst(params.city)}
-                  </Link>
-                </h3>
-                <h3>
-                  <Link
-                    className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0"
-                    href={`/${params.city.split("-homes-")[0]}/condos/`}
-                  >
-                    New Condos {CapitalizeFirst(params.city)}
-                  </Link>
-                </h3>
-              </div>
-              <div className="d-flex gap-2 justify-content-center mx-3">
-                <h4>
-                  <Link
-                    className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-warning"
-                    href={`/${
-                      params.city.split("-homes-")[0]
-                    }-homes-under-500k`}
-                  >
-                    Under $500k
-                  </Link>
-                </h4>
-                <h4>
-                  <Link
-                    className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-warning"
-                    href={`/${
-                      params.city.split("-homes-")[0]
-                    }-homes-under-1-million`}
-                  >
-                    Under $1M
-                  </Link>
-                </h4>
-                <h4>
-                  <Link
-                    className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-warning"
-                    href={`/${
-                      params.city.split("-homes-")[0]
-                    }-homes-under-1.5-million`}
-                  >
-                    Under $1.5M
-                  </Link>
-                </h4>
-              </div>
+
+              {/* Gradient fade effect on the right side to indicate more content */}
+              <div
+                className="d-md-none position-absolute top-0 end-0 h-100"
+                style={{
+                  width: "40px",
+                  background:
+                    "linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.9))",
+                  pointerEvents: "none",
+                }}
+              ></div>
             </div>
           </div>
 

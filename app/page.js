@@ -9,6 +9,7 @@ import FeaturedCard from "@/components/FeaturedCard";
 import Newsletter from "@/components/Newsletter";
 import PropertyCard from "@/components/PropertyCard";
 import { getProperties } from "@/lib/properties";
+import ProjectSearch from "@/components/ProjectSearch";
 
 const fetchPropertyData = async (city) => {
   try {
@@ -97,68 +98,35 @@ export default async function Home(props) {
 
   return (
     <>
-      {/* 
-      <section id="hero">
-        <div className="container">
-          <div className=" hero-container">
-            <div>
-              <h1 className="main-titlee pb-0  mb-0 mt-2 mt-md-0 ">
-                <span className="d-block ">Canada's</span> leading{" "}
-                <span className="text-warning">pre construction </span>homes
-                Platform
-              </h1>
-              <p className="titlee text-center mt-0 pt-1 text-white">
-                Get first updates on New Construction Homes Projects across
-                Canada
-              </p>
-            </div>
-
-            <div className="pb-1 pt-3 d-flex justify-content-center align-items-center">
-            </div>
-          </div>
+      <section className="relative w-full h-[90vh] overflow-hidden">
+        {/* Hero Background Image */}
+        <div className="absolute inset-0 w-full h-full">
+          <img
+            src="/Tiny_house-1.jpg"
+            alt="Modern pre-construction homes"
+            className="w-full h-full object-cover"
+            fetchPriority="high"
+          />
+          <div className="absolute inset-0 bg-black/20"></div>
         </div>
-      </section> */}
-      <section className=" py-3 py-lg-5 container">
-        <div className=" mt-lg-5 mt-0">
-          <div className="grid items-center  grid-cols-1 gap-12 lg:grid-cols-2 ">
-            <div className="order-md-1 order-2 ">
-              <h1 className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl font-family2 sm-center">
-                Canada's leading
-                <div className="relative inline-block">
-                  <span className="absolute inset-x-0 bottom-0 h-[30px] bg-yellow-400"></span>
-                  <span className="relative text-3xl font-bold text-black sm:text-6xl lg:text-7xl">
-                    pre construction
-                  </span>
-                </div>
-                <span className="text-4xl font-bold text-black sm:text-6xl lg:text-7xl">
-                  homes Platform
-                </span>
-              </h1>
-              <p className="mt-3 text-base text-black sm:text-xl sm-center font-light me-md-5 me-0">
-                Get first updates on New Construction Homes Projects across
-                Canada.
-              </p>
 
-              <div className=" mt-12 lg:mt-20 ">
-                <img
-                  src="/search top image.png"
-                  className="search-top-image mx-3 img-fluid"
-                  alt="Search top image"
-                />
-              </div>
-              <div className=" ">
-                <MainSearch cities={cities} />
-              </div>
-            </div>
+        {/* Content Overlay */}
+        <div className="absolute inset-0 flex flex-col items-center md:px-4 px-0 md:pt-20 pt-28">
+          <div className="w-full max-w-5xl mx-auto">
+            <h1 className="text-center mb-8 text-5xl md:text-5xl lg:text-6xl font-bold text-gray-900">
+              <span className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-yellow-500 block ">
+                Pre Construction
+              </span>
+              <span className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 block">
+                Homes Platform in Canada
+              </span>
+            </h1>
 
-            <div className="order-1 order-md-2">
-              <img
-                className="w-full hero-img"
-                src="/hero-photo.avif"
-                alt="Hero image"
-                layout="responsive"
-                fetchPriority="high"
-              />
+            {/* Enhanced search container with larger size */}
+            <div className="mx-auto max-w-5xl w-75">
+              <div className="w-full hero-search-container p-0">
+                <ProjectSearch isHomepage={true} />
+              </div>
             </div>
           </div>
         </div>
@@ -329,17 +297,24 @@ export default async function Home(props) {
         <div className="container pt-5 ">
           <div className="d-flex flex-column align-items-center justify-content-center">
             <h2 className="fw-mine fs-big ">
-              <span className="link-black font-family2">Featured Project</span>
+              <span className="link-black font-family2 mb-2">
+                Featured Project
+              </span>
             </h2>
-            <p className="fs-5  text-center">
+            <p className="fs-5  text-center mb-2">
               Explore Top 10 Pre Construction Project for sale in GTA
             </p>
+            <div className="text-center mb-2 ">
+              <Link href="/top-10-gta-projects" className="text-primary ">
+                View all top 10 GTA Projects{" "}
+              </Link>
+            </div>
           </div>
 
           <div className="">
             <div className="row row-cols-1 row-cols-md-2 my-md-2 my-3 gy-3 g-4">
               {featured.results &&
-                featured.results.slice(0, 8).map((item) => (
+                featured.results.slice(0, 4).map((item) => (
                   <div className="col" key={item.id}>
                     <script
                       key={item.slug}
