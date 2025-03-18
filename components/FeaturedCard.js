@@ -58,7 +58,7 @@ export default function FeaturedCard(props) {
                 <span className="shadow-lg abs2">Co-op Available</span>
               )}
               <span className="d-flex">
-                <span className="shadow-lg fstatus">{props.status}</span>
+                <span className="shadow-lg fstatus ">{props.status}</span>
               </span>
 
               <span className="px-2 abs2">
@@ -73,25 +73,25 @@ export default function FeaturedCard(props) {
                 className="card-body text-decoration-none   shadow-lgg rounded-mine"
                 target="_blank"
               >
-                <div className="card-content pt-2 col">
-                  <h3 className="mb-1 cardd-title text-dark font-family2 fs-3">
+                <div className="card-content pt-md-2 pt-0 col">
+                  <h3 className="mb-1 cardd-title text-dark font-family2 ">
                     {props.project_name}
                   </h3>
-                  <p className="mb-2 cardd-subtitle ">
+                  <p className=" mb-1 cardd-subtitle ">
                     By {props.developer.name}
                   </p>
-                  <h4 className="mb-1 text-yellow-500 cardd-price fs-5">
+                  <p className="mb-1 text-yellow-500 cardd-price ">
                     {checkPricing(props.price_starting_from)}
-                  </h4>
+                  </p>
 
-                  <p className="mb-2 cardd-subtitle  text-dark">
+                  <p className="mb-1 cardd-subtitle  text-dark">
                     {props.project_address}
                   </p>
-                  <p className="mb-1 cardd-subtitle  text-secondary">
-                    Approx completion: {props.occupancy}
-                  </p>
-                  <p className=" mb-4 text-dark">
+                  <p className="mb-1 text-dark cardd-subtitle">
                     Building Type: {props.project_type}
+                  </p>
+                  <p className="mb-4 cardd-subtitle  text-secondary">
+                    Approx completion: {props.occupancy}
                   </p>
                 </div>
               </Link>

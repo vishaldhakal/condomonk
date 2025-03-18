@@ -166,21 +166,21 @@ export default async function Home(props) {
                 <div className="carousel-item active">
                   <img
                     src="/image1.jpeg"
-                    className="d-block w-100"
+                    className="d-block w-100 carousel-img-responsive"
                     alt="Image 1"
                   />
                 </div>
                 <div className="carousel-item">
                   <img
                     src="/image2.jpeg"
-                    className="d-block w-100"
+                    className="d-block w-100 carousel-img-responsive"
                     alt="Image 2"
                   />
                 </div>
                 <div className="carousel-item">
                   <img
                     src="/image3.jpeg"
-                    className="d-block w-100"
+                    className="d-block w-100 carousel-img-responsive"
                     alt="Image 3"
                   />
                 </div>
@@ -312,7 +312,7 @@ export default async function Home(props) {
           </div>
 
           <div className="">
-            <div className="row row-cols-1 row-cols-md-2 my-md-2 my-3 gy-3 g-4">
+            <div className="row row-cols-2 row-cols-md-2 my-md-2 my-3 gy-3 g-2">
               {featured.results &&
                 featured.results.slice(0, 4).map((item) => (
                   <div className="col" key={item.id}>
@@ -348,7 +348,7 @@ export default async function Home(props) {
                 <img
                   src="/cities/toronto.jpg"
                   alt="toronto"
-                  className="img-fluid lazy"
+                  className="img-fluid lazy "
                 />
               </div>
               <div className="overlay">
@@ -553,7 +553,7 @@ export default async function Home(props) {
               <i className="bi bi-arrow-right-short"></i>
             </Link>
           </div>
-          <div className="row row-cols-1 row-cols-md-4 gy-md-5 gx-3">
+          <div className="row row-cols-2 row-cols-md-4 gy-md-5 gx-3">
             {data.preconstructions &&
               data.preconstructions.slice(0, 8).map((item) => (
                 <div className="col" key={item.id}>
@@ -678,7 +678,7 @@ export default async function Home(props) {
               <i className="bi bi-arrow-right-short"></i>
             </Link>
           </div>
-          <div className="row row-cols-1 row-cols-md-4 gy-md-5 gy-3 gx-3">
+          <div className="row row-cols-2 row-cols-md-4 gy-md-5 gy-3 gx-3">
             {mississauga_data.preconstructions &&
               mississauga_data.preconstructions.slice(0, 8).map((item) => (
                 <div className="col" key={item.id}>
@@ -711,7 +711,7 @@ export default async function Home(props) {
               <i className="bi bi-arrow-right-short"></i>
             </Link>
           </div>
-          <div className="row row-cols-1 row-cols-md-4 gy-md-5 gy-3 gx-3">
+          <div className="row row-cols-2 row-cols-md-4 gy-md-5 gy-3 gx-3">
             {edmonton_data.preconstructions &&
               edmonton_data.preconstructions.slice(0, 8).map((item) => (
                 <div className="col" key={item.id}>
@@ -744,7 +744,7 @@ export default async function Home(props) {
               <i className="bi bi-arrow-right-short"></i>
             </Link>
           </div>
-          <div className="row row-cols-1 row-cols-md-4 gy-md-5 gy-3 gx-3">
+          <div className="row row-cols-2 row-cols-md-4 gy-md-5 gy-3 gx-3">
             {cambridge_data.preconstructions &&
               cambridge_data.preconstructions.slice(0, 8).map((item) => (
                 <div className="col" key={item.id}>

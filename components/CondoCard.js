@@ -72,14 +72,14 @@ export default function CondoCard(props) {
           className="card-body text-decoration-none text-dark bg-white shadow-lgg rounded-mine"
           target="_blank"
         >
-          <div className="card-content pt-2">
-            <p className="mb-1 cardd-title text-dark font-family2">
+          <div className="card-content pt-md-2 pt-0">
+            <p className="mb-md-1 mb-0 cardd-title text-dark font-family2">
               {props.project_name}
             </p>
             <p className="mb-1 text-yellow-500 cardd-price">
               {checkPricing(props.price_starting_from)}
             </p>
-            <p className="mb-1 cardd-subtitle cardd-subtitle-sm">
+            <p className="mb-md-1 mb-0 cardd-subtitle cardd-subtitle-sm">
               By {props.developer.name}
             </p>
             <p className="mb-1 cardd-subtitle ">{props.project_address}</p>
