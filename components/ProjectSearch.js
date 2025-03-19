@@ -312,7 +312,7 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
 
   // Apply different classes based on whether this is the homepage or not
   const inputClasses = isHomepage
-    ? "form-control py-3 pe-5 fs-5 rounded-lg w-100"
+    ? "form-control py-3 pe-5 fs-5 rounded-lg w-100 border-0 focus:outline-none"
     : "form-control py-2 w-mine5 pe-5";
 
   const iconClasses = isHomepage
@@ -324,7 +324,7 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
     : { color: "#FFC007", right: "15px" };
 
   const placeholderText = isHomepage
-    ? "Search for cities, projects, or properties..."
+    ? "Search for cities or project..."
     : "Search for a city or project...";
 
   return (
@@ -345,6 +345,7 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
           onFocus={handleFocus}
           onBlur={handleBlur}
           ref={inputRef}
+          style={isHomepage ? { outline: "none", boxShadow: "none" } : {}}
         />
         <i className={iconClasses} style={iconStyle}></i>
       </div>
@@ -369,6 +370,7 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
             background: rgba(255, 255, 255, 0.25) !important;
             box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2) !important;
             border: 1px solid rgba(255, 255, 255, 0.4) !important;
+            outline: none !important;
           }
 
           .search-icon {
@@ -379,6 +381,17 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
           .search-container:hover .search-glass {
             background: rgba(255, 255, 255, 0.25) !important;
           }
+
+          /* Remove focus ring */
+          input:focus {
+            outline: none !important;
+            box-shadow: none !important;
+          }
+
+          /* Fix city alignment in dropdown */
+          .px-4.py-1 {
+            text-align: left !important;
+          }
         `}</style>
       )}
 
@@ -386,7 +399,7 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
       {isFocused && (
         <div
           ref={dropdownRef}
-          className={`absolute w-full mt-2 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden z-3 ${
+          className={`absolute w-full mt-2 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden z-3   ${
             isHomepage ? "max-h-[450px]" : "max-h-[400px]"
           }`}
         >
@@ -434,7 +447,7 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
                     <div
                       className={`px-4 py-1 ${
                         isHomepage ? "text-sm" : "text-xs"
-                      } font-medium text-gray-500`}
+                      } font-medium text-gray-500 text-left`}
                     >
                       Cities
                     </div>

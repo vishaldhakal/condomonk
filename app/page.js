@@ -98,119 +98,60 @@ export default async function Home(props) {
 
   return (
     <>
-      <section className="relative w-full h-[90vh] overflow-hidden">
-        {/* Hero Background Image */}
-        <div className="absolute inset-0 w-full h-full">
-          <img
-            src="/Tiny_house-1.jpg"
-            alt="Modern pre-construction homes"
-            className="w-full h-full object-cover"
-            fetchPriority="high"
-          />
-          <div className="absolute inset-0 bg-black/20"></div>
-        </div>
+      <div className="bg-yellow-50">
+        <section className="max-w-[85rem] mx-auto py-20 px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          {/* Image first on mobile */}
+          <div className="relative flex justify-end order-1">
+            <img src="/hero-new.png" className="rounded-lg" />
+          </div>
 
-        {/* Content Overlay */}
-        <div className="absolute inset-0 flex flex-col items-center md:px-4 px-0 md:pt-20 pt-28">
-          <div className="w-full max-w-5xl mx-auto">
-            <h1 className="text-center mb-8 text-5xl md:text-5xl lg:text-6xl font-bold text-gray-900">
-              <span className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-yellow-500 block ">
-                Pre Construction
-              </span>
-              <span className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 block">
-                Homes Platform in Canada
-              </span>
-            </h1>
+          {/* Text content */}
+          <div className="sm-center">
+            <p className="text-yellow-500 uppercase font-semibold mb-1 md:text-lg text-sm">
+              Condos, Townhouse and Detached
+            </p>
+            <h2 className="md:text-6xl text-4xl font-black text-black leading-tight">
+              Home For Everyone!
+            </h2>
+            <p className="text-black md:text-2xl text-md">
+              Leading Real Estate Homes Platform in Canada.
+            </p>
 
-            {/* Enhanced search container with larger size */}
-            <div className="mx-auto max-w-5xl w-75">
-              <div className="w-full hero-search-container p-0">
-                <ProjectSearch isHomepage={true} />
+            <div className="shadow-xl rounded-xl pt-3">
+              <ProjectSearch isHomepage={true} />
+            </div>
+            <div className="pt-3 d-flex gap-3 text-sm">
+              <p>Popular:</p>
+              <Link href="/resale/ontario/toronto/homes-for-sale">
+                <p className="text-blue-500 hover:underline">Toronto</p>
+              </Link>
+              <Link href="/resale/ontario/brampton/homes-for-sale">
+                <p className="text-blue-500 hover:underline ml-2">Brampton</p>
+              </Link>
+              <Link href="/resale/ontario/milton/homes-for-sale">
+                <p className="text-blue-500 hover:underline ml-2">Milton</p>
+              </Link>
+              <Link href="/resale/ontario/vaughan/homes-for-sale">
+                <p className="text-blue-500 hover:underline ml-2">Vaughan</p>
+              </Link>
+              <div className="d-none d-md-flex gap-3">
+                <Link href="/resale/ontario/Markham/homes-for-sale">
+                  <p className="text-blue-500 hover:underline ml-2">Markham</p>
+                </Link>
+                <Link href="/resale/ontario/Etobicoke/homes-for-sale">
+                  <p className="text-blue-500 hover:underline ml-2">
+                    Etobicoke
+                  </p>
+                </Link>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
-      <div className="container my-4">
-        <div className="row pt-5 mt-md-5 align-items-center justify-content-between">
-          <div className="col-md-6">
-            <div
-              id="carouselExampleIndicators"
-              className="carousel slide"
-              data-bs-ride="carousel"
-            >
-              <div className="carousel-indicators">
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleIndicators"
-                  data-bs-slide-to="0"
-                  className="active"
-                  aria-current="true"
-                  aria-label="Slide 1"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleIndicators"
-                  data-bs-slide-to="1"
-                  aria-label="Slide 2"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleIndicators"
-                  data-bs-slide-to="2"
-                  aria-label="Slide 3"
-                ></button>
-              </div>
-              <div className="carousel-inner">
-                <div className="carousel-item active">
-                  <img
-                    src="/image1.jpeg"
-                    className="d-block w-100 carousel-img-responsive"
-                    alt="Image 1"
-                  />
-                </div>
-                <div className="carousel-item">
-                  <img
-                    src="/image2.jpeg"
-                    className="d-block w-100 carousel-img-responsive"
-                    alt="Image 2"
-                  />
-                </div>
-                <div className="carousel-item">
-                  <img
-                    src="/image3.jpeg"
-                    className="d-block w-100 carousel-img-responsive"
-                    alt="Image 3"
-                  />
-                </div>
-              </div>
-              <button
-                className="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev"
-              >
-                <span
-                  className="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
-                <span className="visually-hidden">Previous</span>
-              </button>
-              <button
-                className="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next"
-              >
-                <span
-                  className="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
-                <span className="visually-hidden">Next</span>
-              </button>
-            </div>
-          </div>
+      {/* carrousel */}
+      <div className="container my-4 ">
+        <div className="row md:pt-20 pt-10 align-items-center justify-content-between ">
           <div className="col-md-6">
             <h1 className="font-family2 fw-bold sm-center mt-4 mt-md-0 text-4xl">
               Looking For A Pre Construction Home?
@@ -288,6 +229,83 @@ export default async function Home(props) {
                   </span>
                 </div>
               </Link>
+            </div>
+          </div>
+          <div className="col-md-6 d-none d-md-block">
+            <div
+              id="carouselExampleIndicators"
+              className="carousel slide"
+              data-bs-ride="carousel"
+            >
+              <div className="carousel-indicators">
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide-to="0"
+                  className="active"
+                  aria-current="true"
+                  aria-label="Slide 1"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide-to="1"
+                  aria-label="Slide 2"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide-to="2"
+                  aria-label="Slide 3"
+                ></button>
+              </div>
+              <div className="carousel-inner">
+                <div className="carousel-item active">
+                  <img
+                    src="/image1.jpeg"
+                    className="d-block w-100 carousel-img-responsive"
+                    alt="Image 1"
+                  />
+                </div>
+                <div className="carousel-item">
+                  <img
+                    src="/image2.jpeg"
+                    className="d-block w-100 carousel-img-responsive"
+                    alt="Image 2"
+                  />
+                </div>
+                <div className="carousel-item">
+                  <img
+                    src="/image3.jpeg"
+                    className="d-block w-100 carousel-img-responsive"
+                    alt="Image 3"
+                  />
+                </div>
+              </div>
+              <button
+                className="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev"
+              >
+                <span
+                  className="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span className="visually-hidden">Previous</span>
+              </button>
+              <button
+                className="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next"
+              >
+                <span
+                  className="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span className="visually-hidden">Next</span>
+              </button>
             </div>
           </div>
         </div>

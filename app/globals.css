@@ -95,9 +95,11 @@ body {
     background: #fff !important;
     font-family: "Montserrat", sans-serif !important;
     font-weight: 500;
+    z-index: 0px;
 }
 
 .container {
+
     padding-left: 0 !important;
     padding-right: 0 !important;
 }
@@ -2445,7 +2447,7 @@ textarea {
 
 .img-small {
     width: 100%;
-    height: 150px !important;
+    height: 100px !important;
     object-fit: cover;
     border-radius: 10px;
 }
@@ -2571,11 +2573,6 @@ textarea {
         /* Adjust this value to the exact position where you want the breadcrumb to be sticky */
         z-index: 1000;
         /* This will ensure the breadcrumb stays on top of other content */
-        background-color: white;
-        /* Optional: to avoid any content overlap */
-        padding: 10px;
-        padding-top: 15px;
-        /* Optional: adjust for better spacing */
     }
 
     .absolute-design-border {
@@ -2809,7 +2806,7 @@ textarea {
 }
 
 .carousel-img-responsive {
-    max-height: 500px;
+    max-height: 600px;
     object-fit: cover;
 }
 
@@ -2824,10 +2821,7 @@ textarea {
         border-bottom-right-radius: 0 !important;
     }
 
-    .carousel-img-responsive {
-        max-height: 250px;
-        object-fit: cover;
-    }
+
 }
 
 /* City card styles */
@@ -2838,11 +2832,6 @@ textarea {
 
 .city-card:hover {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-}
-
-.carousel-img-responsive {
-    max-height: 500px;
-    object-fit: cover;
 }
 
 .city-img-responsive {
@@ -2858,7 +2847,7 @@ textarea {
 /* Mobile specific styles */
 @media (max-width: 768px) {
     .carousel-img-responsive {
-        max-height: 200px;
+        max-height: 400px;
     }
 
     .city-img-responsive {
@@ -2891,4 +2880,20 @@ textarea {
     .city-card p {
         font-size: 0.75rem;
     }
+}
+
+/* Add this to your globals.css if needed */
+.homepage-search {
+    position: relative;
+}
+
+.homepage-search .search-suggestions {
+    position: absolute;
+    z-index: 50;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
