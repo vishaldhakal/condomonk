@@ -82,7 +82,7 @@ export async function generateMetadata({ params }, parent) {
   } else {
     title = `Top ${
       data.preconstructions.length
-    } Pre construction Homes in  ${CapitalizeFirst(cleanCity)}`;
+    } Pre construction Homes in  ${CapitalizeFirst(cleanCity)} | Condomonk`;
     description = `${
       data.preconstructions.length
     } Pre Construction homes in ${CapitalizeFirst(
