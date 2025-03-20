@@ -74,18 +74,20 @@ export async function generateMetadata({ params }, parent) {
     title = `New Pre construction Homes in ${CapitalizeFirst(
       cleanCity
     )}  ${formattedPrice}`;
-    description = `Discover new construction homes, condos & townhouses in ${CapitalizeFirst(
+    description = `${
+      data.preconstructions.length
+    } Pre Construction homes in ${CapitalizeFirst(
       cleanCity
-    )}  ${formattedPrice}. Find your dream property in our latest developments.`;
+    )}. View floor plans, pricing, map & availability. Find latest new construction homes on Condomonk.`;
   } else {
     title = `Top ${
       data.preconstructions.length
-    } New Pre construction homes, condos and townhomes in ${CapitalizeFirst(
+    } Pre construction Homes in  ${CapitalizeFirst(cleanCity)}`;
+    description = `${
+      data.preconstructions.length
+    } Pre Construction homes in ${CapitalizeFirst(
       cleanCity
-    )} & New Homes for Sale.`;
-    description = `Discover stunning new construction homes, condos & townhouses in ${CapitalizeFirst(
-      cleanCity
-    )} & New Homes for Sale. Find your dream property in our latest developments. Tour new builds today!`;
+    )}. View floor plans, pricing, map & availability. Find latest new construction homes on Condomonk.`;
   }
 
   return {
