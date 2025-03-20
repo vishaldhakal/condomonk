@@ -57,7 +57,7 @@ export async function generateMetadata({ params }, parent) {
     alternates: {
       canonical: `https://condomonk.ca/${params.city}/${params.slug}`,
     },
-    title: `${projectName} ${projectType} | ${projectCity} | Plans, Pricing & Availability`,
+    title: `${projectName} ${projectCity} | Book Today`,
     description:
       `${projectName} in ${projectCity}. Check out pricing, floor plans, and availability for ` +
       `${projectName} development by ${data.preconstruction.developer.name}. Register Today!`,
