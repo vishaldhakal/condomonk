@@ -464,8 +464,8 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
                           key={index}
                           onClick={(e) => handleLinkClick(e, href)}
                           onTouchStart={(e) => handleTouchStart(e, href)}
-                          className={`flex items-center px-4 ${
-                            isHomepage ? "py-3" : "py-2"
+                          className={`flex items-start px-4 ${
+                            isHomepage ? "py-3 text-left" : "py-2"
                           } hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0`}
                         >
                           <i
@@ -492,7 +492,7 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
                     <div
                       className={`px-4 py-1 ${
                         isHomepage ? "text-sm" : "text-xs"
-                      } font-medium text-gray-500`}
+                      } font-medium text-gray-500 text-left`}
                     >
                       Properties
                     </div>
@@ -506,9 +506,9 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
                           key={index}
                           onClick={(e) => handleLinkClick(e, href)}
                           onTouchStart={(e) => handleTouchStart(e, href)}
-                          className={`flex items-center px-4 ${
-                            isHomepage ? "py-3" : "py-2"
-                          } hover:bg-gray-50 transition-colors`}
+                          className={`flex items-start px-4 ${
+                            isHomepage ? "py-3 text-left" : "py-2"
+                          } hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0`}
                         >
                           <i
                             className={`fa-solid fa-home text-gray-400 ${

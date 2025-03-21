@@ -98,55 +98,92 @@ export default async function Home(props) {
 
   return (
     <>
-      <div className="bg-yellow-50">
-        <section className="max-w-[85rem] mx-auto py-20 px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          {/* Image first on mobile */}
-          <div className="relative flex justify-end order-1">
-            <img src="/hero-new.png" className="rounded-lg" />
+      <div className="bg-gray-50">
+        <div className="relative overflow-hidden bg-gradient-to-b from-white to-gray-200 md:min-h-screen min-h-[75vh] flex md:pt-40  pt-32 justify-center z-0">
+          <div className="absolute bottom-0 left-0 right-0 z-0">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1440 320"
+              className="w-full"
+            >
+              <path
+                fill="#ffffff"
+                fill-opacity="1"
+                d="M0,192L48,202.7C96,213,192,235,288,229.3C384,224,480,192,576,186.7C672,181,768,203,864,213.3C960,224,1056,224,1152,208C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+              ></path>
+            </svg>
           </div>
 
-          {/* Text content */}
-          <div className="sm-center">
-            <p className="text-yellow-500 uppercase font-semibold mb-1 md:text-lg text-sm">
-              Condos, Townhouse and Detached
-            </p>
-            <h2 className="md:text-6xl text-4xl font-black text-black leading-tight">
-              Home For Everyone!
-            </h2>
-            <p className="text-black md:text-2xl text-md">
-              Leading Real Estate Homes Platform in Canada.
-            </p>
+          <div className="container mx-auto  text-center relative">
+            <div className="max-w-3xl mx-auto">
+              <div className="">
+                <span className="inline-block bg-yellow-400 text-white p-3 rounded-full">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-8 w-8"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                    />
+                  </svg>
+                </span>
+              </div>
 
-            <div className="shadow-xl rounded-xl pt-3">
-              <ProjectSearch isHomepage={true} />
-            </div>
-            <div className="pt-3 d-flex gap-3 text-sm">
-              <p>Popular:</p>
-              <Link href="/resale/ontario/toronto/homes-for-sale">
-                <p className="text-blue-500 hover:underline">Toronto</p>
-              </Link>
-              <Link href="/resale/ontario/brampton/homes-for-sale">
-                <p className="text-blue-500 hover:underline ml-2">Brampton</p>
-              </Link>
-              <Link href="/resale/ontario/milton/homes-for-sale">
-                <p className="text-blue-500 hover:underline ml-2">Milton</p>
-              </Link>
-              <Link href="/resale/ontario/vaughan/homes-for-sale">
-                <p className="text-blue-500 hover:underline ml-2">Vaughan</p>
-              </Link>
-              <div className="d-none d-md-flex gap-3">
-                <Link href="/resale/ontario/Markham/homes-for-sale">
-                  <p className="text-blue-500 hover:underline ml-2">Markham</p>
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-black pt-4">
+                Home For Everyone!
+              </h1>
+
+              <p className="text-[16px] md:text-3xl text-black mb-8">
+                Leading Real Estate Homes Platform in Canada.
+              </p>
+
+              <div className="shadow-xl rounded-xl mx-2">
+                <ProjectSearch isHomepage={true} />
+              </div>
+              <div className="pt-3 d-flex gap-3 text-sm mx-2">
+                <p>Popular:</p>
+                <Link href="/resale/ontario/toronto/homes-for-sale">
+                  <p className="text-blue-500 hover:underline">Toronto</p>
                 </Link>
-                <Link href="/resale/ontario/Etobicoke/homes-for-sale">
-                  <p className="text-blue-500 hover:underline ml-2">
-                    Etobicoke
-                  </p>
+                <Link href="/resale/ontario/brampton/homes-for-sale">
+                  <p className="text-blue-500 hover:underline ml-2">Brampton</p>
                 </Link>
+                <Link href="/resale/ontario/milton/homes-for-sale">
+                  <p className="text-blue-500 hover:underline ml-2">Milton</p>
+                </Link>
+                <Link href="/resale/ontario/vaughan/homes-for-sale">
+                  <p className="text-blue-500 hover:underline ml-2">Vaughan</p>
+                </Link>
+                <div className="d-none d-md-flex gap-3">
+                  <Link href="/resale/ontario/markham/homes-for-sale">
+                    <p className="text-blue-500 hover:underline ml-2">
+                      Markham
+                    </p>
+                  </Link>
+                  <Link href="/resale/ontario/etobicoke/homes-for-sale">
+                    <p className="text-blue-500 hover:underline ml-2">
+                      Etobicoke
+                    </p>
+                  </Link>
+                  <Link href="/resale/ontario/hamilton/homes-for-sale">
+                    <p className="text-blue-500 hover:underline ml-2">
+                      Hamilton
+                    </p>
+                  </Link>
+                  <Link href="/resale/ontario/ottawa/homes-for-sale">
+                    <p className="text-blue-500 hover:underline ml-2">Ottawa</p>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
       </div>
 
       {/* carrousel */}
