@@ -62,33 +62,20 @@ const CapitalizeFirst = (city) => {
 
 export async function generateMetadata({ params }, parent) {
   const { city } = params;
-  const priceFilter = getPriceFilter(city);
   const cleanCity = getCleanCity(city);
-  const data = await getData(cleanCity, priceFilter);
+  const data = await getData(cleanCity);
 
   let title, description;
-  if (priceFilter) {
-    const formattedPrice = priceFilter
-      .replace("-", " to ")
-      .replace("k", ",000");
-    title = `New Pre construction Homes in ${CapitalizeFirst(
-      cleanCity
-    )}  ${formattedPrice}`;
-    description = `${
-      data.preconstructions.length
-    } Pre Construction homes in ${CapitalizeFirst(
-      cleanCity
-    )}. View floor plans, pricing, map & availability. Find latest new construction homes on Condomonk.`;
-  } else {
-    title = `Top ${
-      data.preconstructions.length
-    } Pre construction Homes in  ${CapitalizeFirst(cleanCity)} | Condomonk`;
-    description = `${
-      data.preconstructions.length
-    } Pre Construction homes in ${CapitalizeFirst(
-      cleanCity
-    )}. View floor plans, pricing, map & availability. Find latest new construction homes on Condomonk.`;
-  }
+  title = `${
+    data.preconstructions.length
+  }+ Pre construction Homes in  ${CapitalizeFirst(cleanCity)}`;
+  description = `${
+    data.preconstructions.length
+  } Pre Construction homes in ${CapitalizeFirst(
+    cleanCity
+  )}. View floor plans, pricing, map & availability. Check the latest ${CapitalizeFirst(
+    cleanCity
+  )} pre construction home projects.`;
 
   return {
     ...parent,
