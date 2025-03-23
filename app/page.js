@@ -98,88 +98,77 @@ export default async function Home(props) {
 
   return (
     <>
-      <div className="bg-gray-50">
-        <div className="relative overflow-hidden bg-gradient-to-b from-white to-gray-200 md:min-h-screen min-h-[75vh] flex md:pt-40  pt-32 justify-center z-0">
-          <div className="absolute bottom-0 left-0 right-0 z-0">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1440 320"
-              className="w-full"
-            >
-              <path
-                fill="#ffffff"
-                fill-opacity="1"
-                d="M0,192L48,202.7C96,213,192,235,288,229.3C384,224,480,192,576,186.7C672,181,768,203,864,213.3C960,224,1056,224,1152,208C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-              ></path>
-            </svg>
-          </div>
+      <div className="relative bg-gray-100 overflow-hidden py-16 md:py-24 lg:py-32 md:min-h-[90vh] min-h-[80vh] ">
+        <div className="absolute bottom-0 left-0 right-0 z-0">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1440 320"
+            className="w-full"
+          >
+            <path
+              fill="#ffffff"
+              fill-opacity="1"
+              d="M0,192L48,202.7C96,213,192,235,288,229.3C384,224,480,192,576,186.7C672,181,768,203,864,213.3C960,224,1056,224,1152,208C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            ></path>
+          </svg>
+        </div>
+        <div className="relative inset-0 z-0">
+          <div className="absolute -top-10 -right-10 w-64 h-64 rounded-full bg-blue-100 opacity-70"></div>
 
-          <div className="container mx-auto  text-center relative">
-            <div className="max-w-3xl mx-auto">
-              <div className="">
-                <span className="inline-block bg-yellow-400 text-white p-3 rounded-full">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                    />
-                  </svg>
-                </span>
-              </div>
+          <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-blue-50 opacity-60"></div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-black pt-4">
-                Home For Everyone!
-              </h1>
+          <div className="absolute top-1/3 -left-6 w-24 h-24 rounded-full bg-blue-200 opacity-60"></div>
 
-              <p className="text-[16px] md:text-3xl text-black mb-8">
-                Leading Real Estate Homes Platform in Canada.
-              </p>
+          <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-blue-100 opacity-40 rotate-12"></div>
+          <div className="absolute top-1/4 left-1/3 w-16 h-16 bg-blue-300 opacity-20 rotate-45"></div>
 
-              <div className="shadow-xl rounded-xl mx-2">
-                <ProjectSearch isHomepage={true} />
-              </div>
-              <div className="pt-3 d-flex gap-3 text-sm mx-2">
-                <p>Popular:</p>
-                <Link href="/resale/ontario/toronto/homes-for-sale">
-                  <p className="text-blue-500 hover:underline">Toronto</p>
+          <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        </div>
+
+        <div className="container mx-auto  text-center relative">
+          <div className="max-w-3xl mx-auto">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-black md:pt-4 pt-48">
+              Home For Everyone
+            </h1>
+
+            <p className="text-[16px] md:text-3xl text-black md:mb-10 mb-4 font-medium">
+              Leading Real Estate Homes Platform in Canada.
+            </p>
+
+            <div className=" bg-white transition delay-150 duration-300 ease-in-out  rounded-xl shadow-lg">
+              <ProjectSearch isHomepage={true} />
+            </div>
+            <div className="pt-3 d-flex gap-3 text-sm mx-2">
+              <p className="text-black font-medium">Popular:</p>
+              <Link href="/resale/ontario/toronto/homes-for-sale">
+                <p className="text-blue-600  hover:underline">Toronto</p>
+              </Link>
+              <Link href="/resale/ontario/brampton/homes-for-sale">
+                <p className="text-blue-600  hover:underline ml-2">Brampton</p>
+              </Link>
+              <Link href="/resale/ontario/milton/homes-for-sale">
+                <p className="text-blue-600  hover:underline ml-2">Milton</p>
+              </Link>
+              <Link href="/resale/ontario/vaughan/homes-for-sale">
+                <p className="text-blue-600  hover:underline ml-2">Vaughan</p>
+              </Link>
+              <div className="d-none d-md-flex gap-3">
+                <Link href="/resale/ontario/markham/homes-for-sale">
+                  <p className="text-blue-600  hover:underline ml-2">Markham</p>
                 </Link>
-                <Link href="/resale/ontario/brampton/homes-for-sale">
-                  <p className="text-blue-500 hover:underline ml-2">Brampton</p>
+                <Link href="/resale/ontario/etobicoke/homes-for-sale">
+                  <p className="text-blue-600  hover:underline ml-2">
+                    Etobicoke
+                  </p>
                 </Link>
-                <Link href="/resale/ontario/milton/homes-for-sale">
-                  <p className="text-blue-500 hover:underline ml-2">Milton</p>
+                <Link href="/resale/ontario/hamilton/homes-for-sale">
+                  <p className="text-blue-600  hover:underline ml-2">
+                    Hamilton
+                  </p>
                 </Link>
-                <Link href="/resale/ontario/vaughan/homes-for-sale">
-                  <p className="text-blue-500 hover:underline ml-2">Vaughan</p>
+                <Link href="/resale/ontario/ottawa/homes-for-sale">
+                  <p className="text-blue-600  hover:underline ml-2">Ottawa</p>
                 </Link>
-                <div className="d-none d-md-flex gap-3">
-                  <Link href="/resale/ontario/markham/homes-for-sale">
-                    <p className="text-blue-500 hover:underline ml-2">
-                      Markham
-                    </p>
-                  </Link>
-                  <Link href="/resale/ontario/etobicoke/homes-for-sale">
-                    <p className="text-blue-500 hover:underline ml-2">
-                      Etobicoke
-                    </p>
-                  </Link>
-                  <Link href="/resale/ontario/hamilton/homes-for-sale">
-                    <p className="text-blue-500 hover:underline ml-2">
-                      Hamilton
-                    </p>
-                  </Link>
-                  <Link href="/resale/ontario/ottawa/homes-for-sale">
-                    <p className="text-blue-500 hover:underline ml-2">Ottawa</p>
-                  </Link>
-                </div>
               </div>
             </div>
           </div>

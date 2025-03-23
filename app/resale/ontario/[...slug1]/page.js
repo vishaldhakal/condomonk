@@ -8,6 +8,7 @@ import Image from "next/image";
 import PropertyCard from "@/components/PropertyCard";
 import Script from "next/script";
 import { createSearchResultsSchema } from "@/helper/createSchema";
+import RealEstateLinks from "@/components/RealEstateLinks";
 
 // Helper to determine the type of page and parse filters
 function parseSlug(slug) {
@@ -505,6 +506,9 @@ export default async function DynamicPage({ params, searchParams }) {
               )}
             </div>
           )}
+
+          {/* Real Estate Links Section - NEW */}
+          <RealEstateLinks city={filters.city || "Ontario"} />
 
           {/* Contact Section */}
           <div className="mt-16 max-w-2xl mx-auto text-center">

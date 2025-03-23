@@ -316,7 +316,7 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
     : "form-control py-2 w-mine5 pe-5";
 
   const iconClasses = isHomepage
-    ? "fa-solid fa-magnifying-glass position-absolute top-50 translate-middle-y fs-4 search-icon"
+    ? "fa-solid fa-magnifying-glass position-absolute top-50 translate-middle-y fs-4 "
     : "fa-solid fa-magnifying-glass position-absolute top-50 translate-middle-y";
 
   const iconStyle = isHomepage
@@ -358,7 +358,7 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
             backdrop-filter: blur(10px) !important;
             border: 1px solid rgba(255, 255, 255, 0.3) !important;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
-            color: #333 !important;
+            color: yellow !important;
             transition: all 0.3s ease !important;
           }
 
