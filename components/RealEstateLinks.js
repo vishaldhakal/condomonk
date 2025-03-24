@@ -31,7 +31,7 @@ export default function RealEstateLinks({ city = "Ontario" }) {
 
   return (
     <div className="my-10 border-t border-b py-6">
-      <h2 className="text-xl md:text-2xl font-bold mb-4">
+      <h2 className="text-xl md:text-4xl font-bold mb-4">
         {city} Real Estate | Homes for Sale
       </h2>
       <p className="mb-6 text-sm md:text-base">
@@ -39,10 +39,10 @@ export default function RealEstateLinks({ city = "Ontario" }) {
         Open houses available. Price Dropped Homes Available.
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
         {/* Property Type Column */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">
+          <h3 className="text-xl font-semibold mb-3">
             {city} Homes by Property Type
           </h3>
           <ul className="space-y-1 px-0">
@@ -91,7 +91,7 @@ export default function RealEstateLinks({ city = "Ontario" }) {
 
         {/* Price Range Column */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">
+          <h3 className="text-xl font-semibold mb-3">
             {city} Homes by Price Range
           </h3>
           <ul className="space-y-1 px-0">
@@ -140,7 +140,7 @@ export default function RealEstateLinks({ city = "Ontario" }) {
 
         {/* Bedrooms & Bathrooms Column */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">
+          <h3 className="text-xl font-semibold mb-3">
             {city} Homes by Bedrooms & Bathrooms
           </h3>
           <div className="grid grid-cols-2 gap-x-2">
@@ -217,11 +217,11 @@ export default function RealEstateLinks({ city = "Ontario" }) {
       </div>
 
       {/* Price Dropped and Open Houses Section */}
-      <div className="mt-6">
-        <h3 className="text-lg font-semibold mb-3">
+      <div className="mt-16">
+        <h3 className="text-2xl font-semibold mb-3">
           Price Dropped and Open Houses in {city}
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-2  max-w-2xl">
           <Link
             href={getUrl("open-houses")}
             className="text-black hover:underline text-sm"
@@ -238,18 +238,18 @@ export default function RealEstateLinks({ city = "Ontario" }) {
       </div>
 
       {/* Cities Grid Section */}
-      <div className="mt-8">
-        <h3 className="text-lg font-semibold mb-4">
+      <div className="mt-16">
+        <h3 className="text-2xl font-semibold mb-4">
           Explore Homes for Sale Nearby {city}
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-x-6 gap-y-8">
           {cities.map((cityName) => (
             <div key={cityName} className="mb-2">
-              <h4 className="font-bold mb-2 text-base">
+              <h4 className="font-bold mb-2 text-lg">
                 Homes for Sale in {cityName}
               </h4>
-              <p className="text-sm text-black mb-1 font-semibold">
+              <p className="text-base text-black mb-1 font-semibold">
                 By Property Types
               </p>
               <ul className="text-sm space-y-1 px-0">
@@ -304,7 +304,9 @@ export default function RealEstateLinks({ city = "Ontario" }) {
                   </Link>
                 </li>
               </ul>
-              <p className="text-sm text-black mt-2 mb-1 font-bold">Featured</p>
+              <p className="text-base text-black mt-2 mb-1 font-bold">
+                Featured
+              </p>
               <ul className="text-sm space-y-1 px-0">
                 <li>
                   <Link

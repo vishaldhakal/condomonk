@@ -141,10 +141,10 @@ const Navbar = ({ cities, transparent }) => {
       className={navbar ? "navbar-transparent active" : "navbar-transparent"}
       style={{ zIndex: 50 }}
     >
-      <nav className="navbar navbar-expand-lg py-lg-3">
+      <nav className="navbar navbar-expand-lg py-lg-3 ">
         <div className="container justify-content-start">
-          <div className="d-flex w-100 align-items-center justify-content-between">
-            <div className="d-flex align-items-center">
+          <div className="d-flex  align-items-center justify-content-between">
+            <div className="d-flex align-items-center md:m-[-14px]">
               <Link
                 href="/"
                 className="logo d-flex justify-content-center align-items-center pe-1 font-family2 text-xs"

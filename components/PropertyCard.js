@@ -97,7 +97,7 @@ export default function PropertyCard({ property }) {
             </div>
 
             {/* Content */}
-            <div className="flex-1 sm:px-3 pt-2 pb-4 px-2">
+            <div className="flex-1 sm:px-3 pt-2  px-2">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
                 {/* Price section with drop percentage */}
                 <div className="flex flex-col">
