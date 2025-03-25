@@ -28,16 +28,6 @@ function ContactFormSubmit(msgdata, setSubmitbtn, setCredentials) {
     source = parts.length >= 2 ? parts[parts.length - 2] : parts[0];
   }
 
-  let form_data = new FormData();
-  form_data.append("name", msgdata.name);
-  form_data.append("email", msgdata.email);
-  form_data.append("phone", msgdata.phone);
-  form_data.append("message", msgdata.message);
-  form_data.append("proj_name", msgdata.proj_name);
-  form_data.append("realtor", msgdata.realtor);
-  form_data.append("cityy", msgdata.city);
-  form_data.append("source", source);
-
   // New form data for homebaba API
   let homebaba_form_data = new FormData();
   homebaba_form_data.append("name", msgdata.name);
@@ -48,8 +38,6 @@ function ContactFormSubmit(msgdata, setSubmitbtn, setCredentials) {
   homebaba_form_data.append("proj_name", proj_name || ""); // Send empty string if null
   homebaba_form_data.append("cityy", city || ""); // Send empty string if null
   homebaba_form_data.append("source", source);
-
-  let url = `${baseUrl}/api/contact-form-submission/`;
 
   // Follow Up Boss payload
   const fubPayload = {

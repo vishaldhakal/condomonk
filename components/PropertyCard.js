@@ -153,7 +153,7 @@ export default function PropertyCard({ property }) {
                     <div className="flex items-center mr-1">
                       <img
                         src="/bathrooms.svg"
-                        className="w-3 mr-[2px] inline"
+                        className="w-4 mr-[2px] inline"
                         alt="washrooms"
                       />
                       <span>
@@ -162,16 +162,15 @@ export default function PropertyCard({ property }) {
                       </span>
                     </div>
                   )}
-                  {property.LotWidth && (
-                    <div>
+                  {property.LivingAreaRange && (
+                    <div className="flex items-center">
                       <img
-                        src="/ruler.svg"
-                        className="w-3 mr-[2px] inline"
-                        alt="area"
+                        src="/scan.svg"
+                        className="w-4 mr-[2px] inline"
+                        alt="ruler"
                       />
-                      <span>
-                        {Math.floor(property.LotWidth * property.LotDepth)}{" "}
-                        Sq.Ft.
+                      <span className="hidden sm:inline">
+                        {property.LivingAreaRange} Sqft.
                       </span>
                     </div>
                   )}

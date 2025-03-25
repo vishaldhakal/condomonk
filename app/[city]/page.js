@@ -186,16 +186,13 @@ export default async function Home({ params }) {
         <div className="container">
           <div className="d-flex ">
             <div>
-              <h1 className="main-title font-family2 pb-2 pb-md-0">
+              <h1 className="main-title font-family2 pb-md-2">
                 {priceFilter ? (
-                  `New Pre construction Homes in ${CapitalizeFirst(
+                  ` Pre construction Homes in ${CapitalizeFirst(
                     cleanCity
-                  )} ${formatPriceFilter(priceFilter)} (2025) `
+                  )} ${formatPriceFilter(priceFilter)} `
                 ) : (
-                  <>
-                    New Pre Construction Homes in {CapitalizeFirst(cleanCity)}{" "}
-                    <span className=""> ( 2025 )</span>
-                  </>
+                  <>Pre Construction Homes in {CapitalizeFirst(cleanCity)} </>
                 )}
               </h1>
             </div>
@@ -218,7 +215,7 @@ export default async function Home({ params }) {
               </span>
             </div>
           </div>
-          <h2 className="font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium text-lg">
+          <h2 className="font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium text-lg leading-tight">
             {data.preconstructions.length} Pre construction or new homes, condos
             and townhomes for sale in {CapitalizeFirst(cleanCity)}
             {priceFilter ? ` ${formatPriceFilter(priceFilter)}` : ""} on
@@ -310,7 +307,7 @@ export default async function Home({ params }) {
 
           {eventbanner()}
           <div className="mt-md-5 mt-0"></div>
-          <div className="row row-cols-1 row-cols-md-4  gy-4 gx-3 gx-lg-3 ">
+          <div className="row row-cols-2 row-cols-md-4 gy-2 gy-lg-4  gx-3 gx-lg-3 ">
             {featured_data.preconstructions &&
               featured_data.preconstructions.map((item, no) => (
                 <div className="col" key={item.id}>
@@ -352,7 +349,7 @@ export default async function Home({ params }) {
               <></>
             )}
           </h3>
-          <div className="row row-cols-1 row-cols-md-4 gy-4 gx-3">
+          <div className="row row-cols-1 row-cols-md-4 gy-2 gy-lg-4 gx-3">
             {data.preconstructions &&
               filteredprojects("Planning Phase").map((item, no) => (
                 <div className="col" key={item.id}>
@@ -394,7 +391,7 @@ export default async function Home({ params }) {
               <></>
             )}
           </h2>
-          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-6 gy-4 gx-3 ">
+          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-6 gy-2 gy-lg-4 gx-3 ">
             {data.preconstructions &&
               filteredprojects("Sold out").map((item, no) => (
                 <div className="col" key={item.id}>
