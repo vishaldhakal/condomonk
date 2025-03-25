@@ -37,7 +37,7 @@ export default function Newsletter() {
 
   return (
     <section className="bg-gradient-to-b from-gray-100 to-white ">
-      <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl pt-20">
+      <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl md:pt-20 pt-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-between">
           {/* Left side - Image */}
           <div className="relative h-[500px] rounded-2xl overflow-hidden">
@@ -49,8 +49,8 @@ export default function Newsletter() {
           </div>
 
           {/* Right side - Content */}
-          <div className="h-[500px] flex flex-col justify-center">
-            <div className="">
+          <div className=" flex flex-col justify-center ">
+            <div className=" sm-center">
               <div className="text-4xl font-bold text-orange-500 pb-4">
                 Newsletter Subscription
               </div>

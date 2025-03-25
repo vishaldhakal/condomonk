@@ -706,6 +706,7 @@ a:hover {
         font-size: 3rem !important;
         font-weight: 800 !important;
         color: #2c2c2c !important;
+        line-height: 0.7 !important;
     }
 
     .fs-gta {

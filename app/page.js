@@ -397,7 +397,7 @@ export default async function Home(props) {
             <img
               src="/city-images/toronto.jpg"
               alt="Toronto"
-              className="w-full h-64 object-cover"
+              className="w-full md:h-64 h-48 object-cover"
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-4">
               <h3 className="text-white text-xl font-semibold mb-0">Toronto</h3>
@@ -412,7 +412,7 @@ export default async function Home(props) {
             <img
               src="/city-images/mississauga.jpg"
               alt="Mississauga"
-              className="w-full h-64 object-cover"
+              className="w-full md:h-64 h-48 object-cover"
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
               <h3 className="text-white text-xl font-semibold mb-0">
@@ -429,7 +429,7 @@ export default async function Home(props) {
             <img
               src="/city-images/brampton.jpg"
               alt="Brampton"
-              className="w-full h-64 object-cover"
+              className="w-full md:h-64 h-48 object-cover"
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
               <h3 className="text-white text-xl font-semibold mb-0">
@@ -446,7 +446,7 @@ export default async function Home(props) {
             <img
               src="/city-images/oakville.jpg"
               alt="Oakville"
-              className="w-full h-64 object-cover"
+              className="w-full md:h-64 h-48 object-cover"
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
               <h3 className="text-white text-xl font-semibold mb-0">
@@ -463,7 +463,7 @@ export default async function Home(props) {
             <img
               src="/city-images/barrie.jpg"
               alt="Barrie"
-              className="w-full h-64 object-cover"
+              className="w-full md:h-64 h-48 object-cover"
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
               <h3 className="text-white text-xl font-semibold mb-0">Barrie</h3>
@@ -478,7 +478,7 @@ export default async function Home(props) {
             <img
               src="/city-images/ajax.jpg"
               alt="Ajax"
-              className="w-full h-64 object-cover"
+              className="w-full md:h-64 h-48 object-cover"
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
               <h3 className="text-white text-xl font-semibold mb-0">Ajax</h3>
@@ -493,7 +493,7 @@ export default async function Home(props) {
             <img
               src="/city-images/ottawa.jpg"
               alt="Ottawa"
-              className="w-full h-64 object-cover"
+              className="w-full md:h-64 h-48 object-cover"
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
               <h3 className="text-white text-xl font-semibold mb-0">Ottawa</h3>
@@ -508,7 +508,7 @@ export default async function Home(props) {
             <img
               src="/city-images/hamilton.jpg"
               alt="Hamilton"
-              className="w-full h-64 object-cover"
+              className="w-full md:h-64 h-48 object-cover"
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
               <h3 className="text-white text-xl font-semibold mb-0">
@@ -573,11 +573,11 @@ export default async function Home(props) {
 
       <div className="pt-5">
         <div className="container " id="projects">
-          <div className="d-flex align-items-center justify-content-center">
-            <h2 className="fw-mine ccent-line fs-big mb-0 ">
+          <div className="d-flex align-items-center justify-content-center sm-center">
+            <h2 className="fw-mine ccent-line fs-big mb-0 pb-0 sm-center">
               <Link
                 href={"/calgary"}
-                className="fw-mine text-center mb-0 fs-1 font-family2 fw-mine fs-bi text-black"
+                className="fw-mine text-center mb-0 fs-1 font-family2 fw-mine fs-bi text-black leading-none"
               >
                 Pre Construction Homes in Calgary
               </Link>
