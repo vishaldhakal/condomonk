@@ -10,6 +10,8 @@ import Newsletter from "@/components/Newsletter";
 import PropertyCard from "@/components/PropertyCard";
 import { getProperties } from "@/lib/properties";
 import ProjectSearch from "@/components/ProjectSearch";
+import BlogCard from "@/components/blogCard";
+import { fetchAllBlogPosts } from "@/api/blogs";
 
 const fetchPropertyData = async (city) => {
   try {
@@ -77,6 +79,10 @@ async function getResaleProperties(city) {
   };
 }
 
+async function getBlogs() {
+  return await fetchAllBlogPosts();
+}
+
 export default async function Home(props) {
   const data = await getData("calgary");
   const mississauga_data = await getData("mississauga");
@@ -85,6 +91,7 @@ export default async function Home(props) {
   let cities = await getCities();
   // let dropdown_cities = await getCitiesandProjects();
   const featured = await getFeaturedData();
+  const blogs = await getBlogs();
 
   const toronto_resale = await getResaleProperties("Toronto");
   const barrie_resale = await getResaleProperties("Barrie");
@@ -98,7 +105,7 @@ export default async function Home(props) {
 
   return (
     <>
-      <div className="relative bg-gray-100 overflow-hidden py-16 md:py-24 lg:py-32 md:min-h-[90vh] min-h-[80vh] ">
+      <div className="relative bg-yellow-50 overflow-hidden py-16 md:py-24 lg:py-32 md:min-h-[90vh] min-h-[80vh] ">
         <div className="absolute bottom-0 left-0 right-0 z-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -113,14 +120,14 @@ export default async function Home(props) {
           </svg>
         </div>
         <div className="relative inset-0 z-0">
-          <div className="absolute -top-10 -right-10 w-64 h-64 rounded-full bg-blue-100 opacity-70"></div>
+          <div className="absolute -top-10 -right-10 w-64 h-64 rounded-full bg-yellow-100 opacity-70"></div>
 
-          <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-blue-50 opacity-60"></div>
+          <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-yellow-50 opacity-60"></div>
 
-          <div className="absolute top-1/3 -left-6 w-24 h-24 rounded-full bg-blue-200 opacity-60"></div>
+          <div className="absolute top-1/3 -left-6 w-24 h-24 rounded-full bg-yellow-200 opacity-60"></div>
 
-          <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-blue-100 opacity-40 rotate-12"></div>
-          <div className="absolute top-1/4 left-1/3 w-16 h-16 bg-blue-300 opacity-20 rotate-45"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-yellow-100 opacity-40 rotate-12"></div>
+          <div className="absolute top-1/4 left-1/3 w-16 h-16 bg-yellow-300 opacity-20 rotate-45"></div>
 
           <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         </div>
@@ -128,7 +135,7 @@ export default async function Home(props) {
         <div className="container mx-auto  text-center relative">
           <div className="max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-black md:pt-4 pt-48">
-              Home For Everyone
+              Home For <span className="text-orange-500">Everyone</span>
             </h1>
 
             <p className="text-[16px] md:text-3xl text-black md:mb-10 mb-4 font-medium">
@@ -139,35 +146,31 @@ export default async function Home(props) {
               <ProjectSearch isHomepage={true} />
             </div>
             <div className="pt-3 d-flex gap-3 text-sm mx-2">
-              <p className="text-black font-medium">Popular:</p>
+              <p className="text-black font-bold">Popular:</p>
               <Link href="/resale/ontario/toronto/homes-for-sale">
-                <p className="text-blue-600  hover:underline">Toronto</p>
+                <p className="text-black  hover:underline">Toronto</p>
               </Link>
               <Link href="/resale/ontario/brampton/homes-for-sale">
-                <p className="text-blue-600  hover:underline ml-2">Brampton</p>
+                <p className="text-black  hover:underline ml-2">Brampton</p>
               </Link>
               <Link href="/resale/ontario/milton/homes-for-sale">
-                <p className="text-blue-600  hover:underline ml-2">Milton</p>
+                <p className="text-black  hover:underline ml-2">Milton</p>
               </Link>
               <Link href="/resale/ontario/vaughan/homes-for-sale">
-                <p className="text-blue-600  hover:underline ml-2">Vaughan</p>
+                <p className="text-black  hover:underline ml-2">Vaughan</p>
               </Link>
               <div className="d-none d-md-flex gap-3">
                 <Link href="/resale/ontario/markham/homes-for-sale">
-                  <p className="text-blue-600  hover:underline ml-2">Markham</p>
+                  <p className="text-black  hover:underline ml-2">Markham</p>
                 </Link>
                 <Link href="/resale/ontario/etobicoke/homes-for-sale">
-                  <p className="text-blue-600  hover:underline ml-2">
-                    Etobicoke
-                  </p>
+                  <p className="text-black  hover:underline ml-2">Etobicoke</p>
                 </Link>
                 <Link href="/resale/ontario/hamilton/homes-for-sale">
-                  <p className="text-blue-600  hover:underline ml-2">
-                    Hamilton
-                  </p>
+                  <p className="text-black  hover:underline ml-2">Hamilton</p>
                 </Link>
                 <Link href="/resale/ontario/ottawa/homes-for-sale">
-                  <p className="text-blue-600  hover:underline ml-2">Ottawa</p>
+                  <p className="text-black  hover:underline ml-2">Ottawa</p>
                 </Link>
               </div>
             </div>
@@ -187,7 +190,11 @@ export default async function Home(props) {
                 <button className="button btn btn-dark  mr-2">
                   Request Information
                 </button>
-                <button className="button btn btn-warning">Contact Now</button>
+                <button className="button btn">
+                  <span className="text-white bg-orange-500 px-3 py-2.5 rounded-lg">
+                    Contact Now
+                  </span>
+                </button>
               </Link>
             </div>
             <p className="pt-2">
@@ -337,7 +344,7 @@ export default async function Home(props) {
         </div>
       </div>
 
-      <div className="pt-5 " id="top10gta">
+      {/* <div className="pt-5 " id="top10gta">
         <div className="container pt-5 ">
           <div className="d-flex flex-column align-items-center justify-content-center">
             <h2 className="fw-mine fs-big ">
@@ -373,7 +380,7 @@ export default async function Home(props) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="py-5 my-2"></div>
       <Link href={"/resale/ontario"}>
@@ -381,114 +388,161 @@ export default async function Home(props) {
           Explore Resale Homes For Sale in Ontario
         </h2>
       </Link>
-      <div className="container">
-        <div className="row row-cols-md-5 row-cols-2">
-          <div className="col">
-            <Link
-              className="d-block properti_city"
-              href={"/resale/ontario/toronto"}
+      <div className="container mx-auto px-4 mb-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <Link
+            href="/resale/ontario/toronto/homes-for-sale"
+            className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
+          >
+            <img
+              src="/city-images/toronto.jpg"
+              alt="Toronto"
+              className="w-full h-64 object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-4">
+              <h3 className="text-white text-xl font-semibold mb-0">Toronto</h3>
+              <p className="text-gray-300 text-sm">11k+ Properties</p>
+            </div>
+          </Link>
+
+          <Link
+            href="/resale/ontario/mississauga/homes-for-sale"
+            className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
+          >
+            <img
+              src="/city-images/mississauga.jpg"
+              alt="Mississauga"
+              className="w-full h-64 object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
+              <h3 className="text-white text-xl font-semibold mb-0">
+                Mississauga
+              </h3>
+              <p className="text-gray-300 text-sm">2k+ Properties</p>
+            </div>
+          </Link>
+
+          <Link
+            href="/resale/ontario/brampton/homes-for-sale"
+            className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
+          >
+            <img
+              src="/city-images/brampton.jpg"
+              alt="Brampton"
+              className="w-full h-64 object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
+              <h3 className="text-white text-xl font-semibold mb-0">
+                Brampton
+              </h3>
+              <p className="text-gray-300 text-sm">2k+ Properties</p>
+            </div>
+          </Link>
+
+          <Link
+            href="/resale/ontario/oakville/homes-for-sale"
+            className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
+          >
+            <img
+              src="/city-images/oakville.jpg"
+              alt="Oakville"
+              className="w-full h-64 object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
+              <h3 className="text-white text-xl font-semibold mb-0">
+                Oakville
+              </h3>
+              <p className="text-gray-300 text-sm">1k+ Properties</p>
+            </div>
+          </Link>
+
+          <Link
+            href="/resale/ontario/barrie/homes-for-sale"
+            className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
+          >
+            <img
+              src="/city-images/barrie.jpg"
+              alt="Barrie"
+              className="w-full h-64 object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
+              <h3 className="text-white text-xl font-semibold mb-0">Barrie</h3>
+              <p className="text-gray-300 text-sm">800+ Properties</p>
+            </div>
+          </Link>
+
+          <Link
+            href="/resale/ontario/ajax/homes-for-sale"
+            className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
+          >
+            <img
+              src="/city-images/ajax.jpg"
+              alt="Ajax"
+              className="w-full h-64 object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
+              <h3 className="text-white text-xl font-semibold mb-0">Ajax</h3>
+              <p className="text-gray-300 text-sm">275+ Properties</p>
+            </div>
+          </Link>
+
+          <Link
+            href="/resale/ontario/ottawa/homes-for-sale"
+            className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
+          >
+            <img
+              src="/city-images/ottawa.jpg"
+              alt="Ottawa"
+              className="w-full h-64 object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
+              <h3 className="text-white text-xl font-semibold mb-0">Ottawa</h3>
+              <p className="text-gray-300 text-sm">280+ Properties</p>
+            </div>
+          </Link>
+
+          <Link
+            href="/resale/ontario/hamilton/homes-for-sale"
+            className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
+          >
+            <img
+              src="/city-images/hamilton.jpg"
+              alt="Hamilton"
+              className="w-full h-64 object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
+              <h3 className="text-white text-xl font-semibold mb-0">
+                Hamilton
+              </h3>
+              <p className="text-gray-300 text-sm">2k+ Properties</p>
+            </div>
+          </Link>
+        </div>
+
+        <div className="text-center mt-8">
+          <Link
+            href="/resale/ontario/homes-for-sale"
+            className="inline-flex items-center justify-center px-6 py-3 border bg-orange-500 text-white rounded-full font-medium "
+          >
+            View All Ontario Properties
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 ml-2"
+              viewBox="0 0 20 20"
+              fill="currentColor"
             >
-              <div className="thumb">
-                <img
-                  src="/cities/toronto.jpg"
-                  alt="toronto"
-                  className="img-fluid lazy "
-                />
-              </div>
-              <div className="overlay">
-                <div className="details">
-                  <h4>Toronto</h4>
-                  <p>Explore Resale Properties in Toronto</p>
-                </div>
-              </div>
-            </Link>
-          </div>
-          <div className="col">
-            <Link
-              className="d-block properti_city"
-              href={"/resale/ontario/brampton"}
-            >
-              <div className="thumb">
-                <img
-                  src="/cities/brampton.jpg"
-                  alt="brampton"
-                  className="img-fluid lazy"
-                />
-              </div>
-              <div className="overlay">
-                <div className="details">
-                  <h4>Brampton</h4>
-                  <p>Explore Resale Properties in Brampton</p>
-                </div>
-              </div>
-            </Link>
-          </div>
-          <div className="col">
-            <Link
-              className="d-block properti_city"
-              href={"/resale/ontario/milton"}
-            >
-              <div className="thumb">
-                <img
-                  src="/cities/etobicoke.jpg"
-                  alt="etobicoke"
-                  className="img-fluid lazy"
-                />
-              </div>
-              <div className="overlay">
-                <div className="details">
-                  <h4>Milton</h4>
-                  <p>Explore Resale Properties in Milton</p>
-                </div>
-              </div>
-            </Link>
-          </div>
-          <div className="col">
-            <Link
-              className="d-block properti_city"
-              href={"/resale/ontario/barrie"}
-            >
-              <div className="thumb">
-                <img
-                  src="/cities/calgary.jpeg"
-                  alt="calgary"
-                  className="img-fluid lazy"
-                />
-              </div>
-              <div className="overlay">
-                <div className="details">
-                  <h4>Barrie</h4>
-                  <p>Explore Resale Properties in Barrie</p>
-                </div>
-              </div>
-            </Link>
-          </div>
-          <div className="col">
-            <Link
-              className="d-block properti_city"
-              href={"/resale/ontario/mississauga"}
-            >
-              <div className="thumb">
-                <img
-                  src="/cities/mississauga.jpg"
-                  alt="mississauga"
-                  className="img-fluid lazy"
-                />
-              </div>
-              <div className="overlay">
-                <div className="details">
-                  <h4>Mississauga</h4>
-                  <p>Explore Resale Properties in Mississauga</p>
-                </div>
-              </div>
-            </Link>
-          </div>
+              <path
+                fillRule="evenodd"
+                d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </Link>
         </div>
       </div>
-      <div className="py-5 my-2"></div>
 
-      <div className="container mt-4">
-        <div className="row">
+      <div className="container mt-5">
+        <div className="row pt-5">
           <div className="col-12">
             <h2 className="fw-mine text-center mb-2 fs-1 font-family2 fw-mine fs-bi">
               Homes For Sale in Toronto
@@ -506,85 +560,26 @@ export default async function Home(props) {
                 <i className="bi bi-arrow-right"></i>
               </Link>
             </div>
-            <div className="row row-cols-2 row-cols-md-4 g-2 mb-5">
-              {toronto_resale.properties?.slice(0, 4).map((property) => (
+            <div className="row row-cols-2 row-cols-md-5 g-2 mb-5">
+              {toronto_resale.properties?.slice(0, 5).map((property) => (
                 <div className="col" key={property.ListingKey}>
                   <PropertyCard property={property} />
                 </div>
               ))}
             </div>
           </div>
-        </div>
-        <div className="py-2 "></div>
-        <div className="row">
-          <div className="col-12">
-            <h2 className="fw-mine text-center mb-2 fs-1 font-family2 fw-mine fs-bi">
-              Homes For Sale in Barrie
-            </h2>
-            <h3 className=" text-center mb-2 fs-6">
-              Barrie homes for sale | Affordable 1 - 4 bedroom homes in Barrie
-              from $1 to $5M
-            </h3>
-            <div className="text-center mb-4">
-              <Link
-                href="/resale/ontario/barrie/homes-for-sale"
-                className="text-primary"
-              >
-                View more homes for sale in Barrie{" "}
-                <i className="bi bi-arrow-right"></i>
-              </Link>
-            </div>
-            <div className="row row-cols-2 row-cols-md-4 g-2 mb-5">
-              {barrie_resale.properties?.slice(0, 4).map((property) => (
-                <div className="col" key={property.ListingKey}>
-                  <PropertyCard property={property} />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="py-2 "></div>
-        <div className="row">
-          <div className="col-12">
-            <h2 className="fw-mine text-center mb-2 fs-1 font-family2 fw-mine fs-bi">
-              Homes For Sale in Milton
-            </h2>
-            <h3 className=" text-center mb-2 fs-6">
-              Milton homes for sale | Affordable 1 - 4 bedroom homes in Milton
-              from $1 to $5M
-            </h3>
-            <div className="text-center mb-4">
-              <Link
-                href="/resale/ontario/milton/homes-for-sale"
-                className="text-primary"
-              >
-                View more homes for sale in Milton{" "}
-                <i className="bi bi-arrow-right"></i>
-              </Link>
-            </div>
-            <div className="row row-cols-2 row-cols-md-4 g-2">
-              {milton_resale.properties?.slice(0, 4).map((property) => (
-                <div className="col" key={property.ListingKey}>
-                  <PropertyCard property={property} />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="text-center mt-3 mb-5">
-          <Link href="resale/ontario/homes-for-sale" className="btn btn-dark">
-            View All Ontario Homes For Sale
-          </Link>
         </div>
       </div>
 
-      <div className="pt-5 ">
-        <div className="container pt-5 " id="projects">
+      <div className="pt-5">
+        <div className="container " id="projects">
           <div className="d-flex align-items-center justify-content-center">
-            <h2 className="fw-mine ccent-line fs-big ">
-              <Link href={"/calgary"} className="link-black font-family2">
-                Calgary
+            <h2 className="fw-mine ccent-line fs-big mb-0 ">
+              <Link
+                href={"/calgary"}
+                className="fw-mine text-center mb-0 fs-1 font-family2 fw-mine fs-bi text-black"
+              >
+                Pre Construction Homes in Calgary
               </Link>
             </h2>
           </div>
@@ -612,216 +607,33 @@ export default async function Home(props) {
                 </div>
               ))}
           </div>
-          <div className="py-5 my-2"></div>
-          <h2 className="fw-mine text-center mb-5 accent-line fs-1 font-family2">
-            Explore New Pre Construction Homes In Ontario & Alberta
-          </h2>
-          <div className="container">
-            <div className="row row-cols-md-5 row-cols-2">
-              <div className="col">
-                <Link className="d-block properti_city" href={"/toronto"}>
-                  <div className="thumb">
-                    <img
-                      src="/cities/toronto.jpg"
-                      alt="toronto"
-                      className="img-fluid lazy"
-                    />
-                  </div>
-                  <div className="overlay">
-                    <div className="details">
-                      <h4>Toronto</h4>
-                      <p>Explore pre constructions projects in Toronto</p>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="col">
-                <Link className="d-block properti_city" href={"/brampton"}>
-                  <div className="thumb">
-                    <img
-                      src="/cities/brampton.jpg"
-                      alt="brampton"
-                      className="img-fluid lazy"
-                    />
-                  </div>
-                  <div className="overlay">
-                    <div className="details">
-                      <h4>Brampton</h4>
-                      <p>Explore pre constructions projects in Brampton</p>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="col">
-                <Link className="d-block properti_city" href={"/etobicoke"}>
-                  <div className="thumb">
-                    <img
-                      src="/cities/etobicoke.jpg"
-                      alt="etobicoke"
-                      className="img-fluid lazy"
-                    />
-                  </div>
-                  <div className="overlay">
-                    <div className="details">
-                      <h4>Etobicoke</h4>
-                      <p>Explore pre constructions projects in Etobicoke</p>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="col">
-                <Link className="d-block properti_city" href={"/calgary"}>
-                  <div className="thumb">
-                    <img
-                      src="/cities/calgary.jpeg"
-                      alt="calgary"
-                      className="img-fluid lazy"
-                    />
-                  </div>
-                  <div className="overlay">
-                    <div className="details">
-                      <h4>Calgary</h4>
-                      <p>Explore pre constructions projects in Calgary</p>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="col">
-                <Link className="d-block properti_city" href={"/mississauga"}>
-                  <div className="thumb">
-                    <img
-                      src="/cities/mississauga.jpg"
-                      alt="mississauga"
-                      className="img-fluid lazy"
-                    />
-                  </div>
-                  <div className="overlay">
-                    <div className="details">
-                      <h4>Mississauga</h4>
-                      <p>Explore pre constructions projects in Mississauga</p>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div className="py-5 my-2"></div>
-          <div className="d-flex align-items-center justify-content-center ">
-            <h2 className="fw-mine ccent-line fs-big">
-              <Link href={"/mississauga"} className="link-black font-family2">
-                Mississauga
+
+          <div className="py-5 my-4"></div>
+          <div className="d-flex align-items-center justify-content-center">
+            <h2 className="fw-mine text-center mb-0 fs-1 font-family2 fw-mine fs-bi">
+              <Link href="/blogs" className="text-black">
+                Latest Real Estate News & Insights
               </Link>
             </h2>
           </div>
-          <div className="d-flex flex-column justify-content-center flex-column align-items-center mb-5">
+          <div className="d-flex flex-column justify-content-center flex-column align-items-center mb-4">
             <p className="fs-5 mb-0 text-center">
-              Explore 30+ pre construction homes for sale in Mississauga
+              Stay updated with the latest news and trends in Canadian real
+              estate
             </p>
-            <Link href={"/mississauga"} className="mt-1 text-mine text-primary">
-              More developments in Mississauga{" "}
-              <i className="bi bi-arrow-right-short"></i>
+            <Link href="/blogs" className="mt-1 text-mine text-primary">
+              View all articles <i className="bi bi-arrow-right-short"></i>
             </Link>
           </div>
-          <div className="row row-cols-2 row-cols-md-4 gy-md-5 gy-3 gx-3">
-            {mississauga_data.preconstructions &&
-              mississauga_data.preconstructions.slice(0, 8).map((item) => (
-                <div className="col" key={item.id}>
-                  <script
-                    key={item.slug}
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{
-                      __html: JSON.stringify(PreconSchema(item)),
-                    }}
-                  />
-                  <CondoCard {...item} />
+          <div className="row row-cols-1 row-cols-md-4 g-4 mb-5">
+            {blogs &&
+              blogs.slice(0, 4).map((blog) => (
+                <div className="col" key={blog.id}>
+                  <BlogCard blog={blog} />
                 </div>
               ))}
           </div>
 
-          <div className="py-5 my-2"></div>
-          <div className="d-flex align-items-center justify-content-center ">
-            <h2 className="fw-mine ccent-line fs-big ">
-              <Link href={"/edmonton"} className="link-black font-family2">
-                Edmonton
-              </Link>
-            </h2>
-          </div>
-          <div className="d-flex flex-column justify-content-center flex-column align-items-center mb-5">
-            <p className="fs-5 mb-0 text-center">
-              Explore 30+ pre construction homes for sale in Edmonton
-            </p>
-            <Link href={"/edmonton"} className="mt-1 text-mine text-primary">
-              More developments in Edmonton{" "}
-              <i className="bi bi-arrow-right-short"></i>
-            </Link>
-          </div>
-          <div className="row row-cols-2 row-cols-md-4 gy-md-5 gy-3 gx-3">
-            {edmonton_data.preconstructions &&
-              edmonton_data.preconstructions.slice(0, 8).map((item) => (
-                <div className="col" key={item.id}>
-                  <script
-                    key={item.slug}
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{
-                      __html: JSON.stringify(PreconSchema(item)),
-                    }}
-                  />
-                  <CondoCard {...item} />
-                </div>
-              ))}
-          </div>
-
-          <div className="py-5 my-2"></div>
-          <div className="d-flex align-items-center justify-content-center ">
-            <h2 className="fw-mine ccent-line fs-big ">
-              <Link href={"/cambridge"} className="link-black font-family2">
-                Cambridge
-              </Link>
-            </h2>
-          </div>
-          <div className="d-flex flex-column justify-content-center flex-column align-items-center mb-5">
-            <p className="fs-5 mb-0 text-center">
-              Explore 30+ pre construction homes for sale in cambridge
-            </p>
-            <Link href={"/cambridge"} className="mt-1 text-mine text-primary">
-              More developments in cambridge{" "}
-              <i className="bi bi-arrow-right-short"></i>
-            </Link>
-          </div>
-          <div className="row row-cols-2 row-cols-md-4 gy-md-5 gy-3 gx-3">
-            {cambridge_data.preconstructions &&
-              cambridge_data.preconstructions.slice(0, 8).map((item) => (
-                <div className="col" key={item.id}>
-                  <script
-                    key={item.slug}
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{
-                      __html: JSON.stringify(PreconSchema(item)),
-                    }}
-                  />
-                  <CondoCard {...item} />
-                </div>
-              ))}
-          </div>
-          {/* <div className="py-5 mt-md-5 mt-0">
-            <div className="text-center py-5 my-5 overlay-container">
-              <img
-                src="/heroBanner.png"
-                className="img-fluid d-md-block d-none"
-                alt=""
-              />
-              <img
-                src="/heroBanner-sm.png"
-                className="img-fluid d-md-none d-block"
-                alt=""
-              />
-            </div>
-          </div> */}
-
-          <div className="pt-md-5 pt-0 mt-md-5 mt-0"></div>
-          <div className="pt-5 mt-5"></div>
-          <div className="pt-5 mt-5"></div>
-          <Newsletter />
           <div className="py-5 my-md-5 my-0" id="contact">
             <div className="container">
               <div className="row justify-content-center">
@@ -839,7 +651,7 @@ export default async function Home(props) {
 
               <div className="row row-cols-1 row-cols-md-3 mt-5">
                 <div className="col-md-2"></div>
-                <div className="col-md-8">
+                <div className="col-md-7 mx-auto">
                   <BottomContactForm
                     proj_name="All"
                     city="Home Page"

@@ -1,6 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Newsletter from "./Newsletter";
 
 const Footer = ({ cities }) => {
   const pathname = usePathname();
@@ -14,38 +15,8 @@ const Footer = ({ cities }) => {
 
   return (
     <div className="pt-5">
-      <footer className="footer mt-5  shadow-lg">
-        <div className="">
-          <div className="text-center pt-5 bg-yellow-500 px-3">
-            <p className="fs-2 fw-bold font-family2">
-              Get Exclusive Preconstruction Updates.
-            </p>
-            <p className="textt">
-              Be the First to Know! Subscribe to Our Newsletter and Receive
-              Timely Updates on Exclusive Preconstruction projects from
-              reputable builders across Canada – Condomonk.ca curates the latest
-              updates on any new construction townhomes, condos & detached homes
-              launching across canada.
-            </p>
-
-            <form action="">
-              <div className="d-flex textt py-5 ">
-                <input
-                  type="text"
-                  name="email"
-                  className="fields mx-2"
-                  placeholder="email"
-                />
-                <Link
-                  href=""
-                  className="btn btn-dark d-flex fw-bold align-items-center"
-                >
-                  Sign Up{" "}
-                </Link>
-              </div>
-            </form>
-          </div>
-        </div>
+      <Newsletter />
+      <footer className="footer pt-5  ">
         <div className="container">
           <div className=" container pt-5 mt-md-5 mt-0">
             <div className="container footer-links">

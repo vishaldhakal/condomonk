@@ -312,19 +312,19 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
 
   // Apply different classes based on whether this is the homepage or not
   const inputClasses = isHomepage
-    ? "form-control py-3 pe-5 fs-5 rounded-lg w-100 border-0 focus:outline-none"
+    ? "form-control py-3 pe-5 fs-5 rounded-pill w-100 border-0 shadow-lg"
     : "form-control py-2 w-mine5 pe-5";
 
   const iconClasses = isHomepage
-    ? "fa-solid fa-magnifying-glass position-absolute top-50 translate-middle-y fs-4 "
+    ? "fa-solid fa-magnifying-glass position-absolute top-50 translate-middle-y fs-4"
     : "fa-solid fa-magnifying-glass position-absolute top-50 translate-middle-y";
 
   const iconStyle = isHomepage
-    ? { color: "#FFC007", right: "20px" }
+    ? { color: "#f8a100", right: "30px" }
     : { color: "#FFC007", right: "15px" };
 
   const placeholderText = isHomepage
-    ? "Search for cities or project..."
+    ? "Enter location, neighborhood, or property"
     : "Search for a city or project...";
 
   return (
@@ -345,52 +345,68 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
           onFocus={handleFocus}
           onBlur={handleBlur}
           ref={inputRef}
-          style={isHomepage ? { outline: "none", boxShadow: "none" } : {}}
+          style={
+            isHomepage
+              ? { outline: "none", boxShadow: "0 4px 12px rgba(0,0,0,0.1)" }
+              : {}
+          }
         />
-        <i className={iconClasses} style={iconStyle}></i>
+        {isHomepage && (
+          <button
+            className="btn btn-warning position-absolute end-0 top-50 translate-middle-y rounded-pill px-4 py-2 me-2"
+            style={{
+              background: "#f8a100",
+              border: "none",
+              color: "white",
+              fontWeight: "bold",
+            }}
+            onClick={() => {
+              if (searchTerm.trim()) {
+                router.push(`/search?q=${encodeURIComponent(searchTerm)}`);
+              }
+            }}
+          >
+            Search
+          </button>
+        )}
+        {!isHomepage && <i className={iconClasses} style={iconStyle}></i>}
       </div>
 
-      {/* Add the CSS for the glass effect */}
+      {/* Add the CSS for the homepage search styling */}
       {isHomepage && (
         <style jsx global>{`
-          .search-glass {
-            background: rgba(255, 255, 255, 0.2) !important;
-            backdrop-filter: blur(10px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.3) !important;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
-            color: yellow !important;
-            transition: all 0.3s ease !important;
+          .search-container input {
+            height: 60px;
+            padding-left: 25px !important;
+            padding-right: 120px !important;
+            font-size: 16px !important;
           }
 
-          .search-glass::placeholder {
-            color: rgba(51, 51, 51, 0.8) !important;
+          .search-container input::placeholder {
+            color: #888;
           }
 
-          .search-glass:focus {
-            background: rgba(255, 255, 255, 0.25) !important;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2) !important;
-            border: 1px solid rgba(255, 255, 255, 0.4) !important;
-            outline: none !important;
+          .search-container input:focus {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
           }
 
-          .search-icon {
-            color: rgba(51, 51, 51, 0.8) !important;
-            transition: all 0.3s ease !important;
+          .search-container .btn-warning {
+            z-index: 5;
+            height: 48px;
+            margin-right: 6px !important;
           }
 
-          .search-container:hover .search-glass {
-            background: rgba(255, 255, 255, 0.25) !important;
-          }
+          @media (max-width: 768px) {
+            .search-container input {
+              height: 50px;
+              font-size: 14px !important;
+            }
 
-          /* Remove focus ring */
-          input:focus {
-            outline: none !important;
-            box-shadow: none !important;
-          }
-
-          /* Fix city alignment in dropdown */
-          .px-4.py-1 {
-            text-align: left !important;
+            .search-container .btn-warning {
+              height: 40px;
+              font-size: 14px;
+              padding: 0.25rem 1rem !important;
+            }
           }
         `}</style>
       )}
