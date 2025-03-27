@@ -6,7 +6,11 @@ import { allCities } from "@/data/ontarioCities";
 import { cityRegions } from "@/data/postalCodeCities";
 import { useRouter } from "next/navigation";
 
-const SearchWithAutocomplete = ({ isHomepage = false }) => {
+const SearchWithAutocomplete = ({
+  isHomepage = false,
+  searchType = "sale",
+  generateCityUrl,
+}) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState({
     cities: [],
@@ -22,7 +26,6 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
     properties: [],
   });
   const [isFocused, setIsFocused] = useState(false);
-  const [searchType, setSearchType] = useState("all"); // "all", "resale", or "preconstruction"
   const [isTabbing, setIsTabbing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -312,7 +315,7 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
 
   // Apply different classes based on whether this is the homepage or not
   const inputClasses = isHomepage
-    ? "form-control py-3 pe-5 fs-5 rounded-pill w-100 border-0 shadow-lg"
+    ? "form-control py-4 pe-5 fs-5 rounded-pill w-100 border-0 shadow-lg"
     : "form-control py-2 w-mine5 pe-5";
 
   const iconClasses = isHomepage
@@ -355,7 +358,7 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
           <button
             className="btn btn-warning position-absolute end-0 top-50 translate-middle-y rounded-pill px-4 py-2 me-2"
             style={{
-              background: "#f8a100",
+              background: "green",
               border: "none",
               color: "white",
               fontWeight: "bold",
@@ -376,7 +379,7 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
       {isHomepage && (
         <style jsx global>{`
           .search-container input {
-            height: 60px;
+            height: 70px;
             padding-left: 25px !important;
             padding-right: 120px !important;
             font-size: 16px !important;
@@ -392,18 +395,18 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
 
           .search-container .btn-warning {
             z-index: 5;
-            height: 48px;
+            height: 50px;
             margin-right: 6px !important;
           }
 
           @media (max-width: 768px) {
             .search-container input {
-              height: 50px;
+              height: 62px;
               font-size: 14px !important;
             }
 
             .search-container .btn-warning {
-              height: 40px;
+              height: 42px;
               font-size: 14px;
               padding: 0.25rem 1rem !important;
             }
@@ -419,35 +422,33 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
             isHomepage ? "max-h-[450px]" : "max-h-[400px]"
           }`}
         >
-          {/* Tabs */}
-          <div className="flex border-b border-gray-200">
-            <button
-              onClick={() => handleTabClick("resale")}
-              onMouseDown={(e) => e.preventDefault()}
-              className={`flex-1 px-4 py-2.5 ${
-                isHomepage ? "py-3 text-sm" : "text-xs"
-              } font-medium border-b-2 transition-colors ${
-                searchType !== "preconstruction"
-                  ? "border-[#FFA725] text-[#FFA725]"
-                  : "border-transparent text-gray-500 hover:text-gray-700"
-              }`}
-            >
-              Homes for Sale
-            </button>
-            <button
-              onClick={() => handleTabClick("preconstruction")}
-              onMouseDown={(e) => e.preventDefault()}
-              className={`flex-1 px-4 py-2.5 ${
-                isHomepage ? "py-3 text-sm" : "text-xs"
-              } font-medium border-b-2 transition-colors ${
-                searchType === "preconstruction"
-                  ? "border-[#FFC007] text-[#FFC007]"
-                  : "border-transparent text-gray-500 hover:text-gray-700"
-              }`}
-            >
-              Pre Construction
-            </button>
-          </div>
+          {/* Tabs - Only show if not homepage */}
+          {!isHomepage && (
+            <div className="flex border-b border-gray-200">
+              <button
+                onClick={() => handleTabClick("resale")}
+                onMouseDown={(e) => e.preventDefault()}
+                className={`flex-1 px-4 py-2.5 text-xs font-medium border-b-2 transition-colors ${
+                  searchType !== "preconstruction"
+                    ? "border-[#FFA725] text-[#FFA725]"
+                    : "border-transparent text-gray-500 hover:text-gray-700"
+                }`}
+              >
+                Homes for Sale
+              </button>
+              <button
+                onClick={() => handleTabClick("preconstruction")}
+                onMouseDown={(e) => e.preventDefault()}
+                className={`flex-1 px-4 py-2.5 text-xs font-medium border-b-2 transition-colors ${
+                  searchType === "preconstruction"
+                    ? "border-[#FFC007] text-[#FFC007]"
+                    : "border-transparent text-gray-500 hover:text-gray-700"
+                }`}
+              >
+                Pre Construction
+              </button>
+            </div>
+          )}
 
           {/* Results Section */}
           <div
@@ -472,7 +473,11 @@ const SearchWithAutocomplete = ({ isHomepage = false }) => {
                         city.city.toLowerCase() === "stoney creek"
                           ? "stoney-creek"
                           : city.city.toLowerCase().replace(/ /g, "-");
-                      const href = `/resale/ontario/${cityPath}/homes-for-sale`;
+
+                      // Use the generateCityUrl prop if provided, otherwise use default URL structure
+                      const href = generateCityUrl
+                        ? generateCityUrl(cityPath)
+                        : `/resale/ontario/${cityPath}/homes-for-sale`;
 
                       return (
                         <Link

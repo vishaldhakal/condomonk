@@ -103,9 +103,9 @@ body {
     padding-right: 0 !important;
 }
 
-.font-family2 {
+/* .font-family2 {
     font-family: "Merriweather", serif !important;
-}
+} */
 
 a {
     color: #161f69;
@@ -2896,4 +2896,27 @@ textarea {
     background-color: white;
     border-radius: 0.5rem;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Add these styles to your global CSS */
+.from-black\/50 {
+    --tw-gradient-from: rgb(0 0 0 / 0.5);
+    --tw-gradient-to: rgb(0 0 0 / 0);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.to-black\/20 {
+    --tw-gradient-to: rgb(0 0 0 / 0.2);
+}
+
+.backdrop-blur-sm {
+    --tw-backdrop-blur: blur(4px);
+    backdrop-filter: var(--tw-backdrop-blur);
+}
+
+.hero-section {
+    min-height: 90vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }

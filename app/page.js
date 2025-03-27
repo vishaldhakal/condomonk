@@ -12,6 +12,7 @@ import { getProperties } from "@/lib/properties";
 import ProjectSearch from "@/components/ProjectSearch";
 import BlogCard from "@/components/blogCard";
 import { fetchAllBlogPosts } from "@/api/blogs";
+import HomeSearch from "@/components/HomeSearch";
 
 const fetchPropertyData = async (city) => {
   try {
@@ -105,75 +106,47 @@ export default async function Home(props) {
 
   return (
     <>
-      <div className="relative bg-yellow-50 overflow-hidden py-16 md:py-24 lg:py-32 md:min-h-[90vh] min-h-[80vh] ">
+      <div className="relative bg-gradient-to-b from-[#f4f8fb] to-white overflow-hidden max-h-[90vh]">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/pexels-bg.jpeg"
+            alt="Background"
+            className="w-full h-full object-cover"
+          />
+          {/* Overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/20"></div>
+        </div>
+
+        {/* Wave SVG at bottom */}
         <div className="absolute bottom-0 left-0 right-0 z-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1440 320"
             className="w-full"
+            preserveAspectRatio="none"
+            style={{ height: "120px" }}
           >
             <path
               fill="#ffffff"
-              fill-opacity="1"
-              d="M0,192L48,202.7C96,213,192,235,288,229.3C384,224,480,192,576,186.7C672,181,768,203,864,213.3C960,224,1056,224,1152,208C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+              fillOpacity="1"
+              d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,106.7C960,117,1056,139,1152,138.7C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
             ></path>
           </svg>
         </div>
-        <div className="relative inset-0 z-0">
-          <div className="absolute -top-10 -right-10 w-64 h-64 rounded-full bg-yellow-100 opacity-70"></div>
 
-          <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-yellow-50 opacity-60"></div>
-
-          <div className="absolute top-1/3 -left-6 w-24 h-24 rounded-full bg-yellow-200 opacity-60"></div>
-
-          <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-yellow-100 opacity-40 rotate-12"></div>
-          <div className="absolute top-1/4 left-1/3 w-16 h-16 bg-yellow-300 opacity-20 rotate-45"></div>
-
-          <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-        </div>
-
-        <div className="container mx-auto  text-center relative">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-black md:pt-4 pt-48">
-              Home For <span className="text-orange-500">Everyone</span>
+        {/* Content */}
+        <div className="relative z-0 container mx-auto px-4 min-h-screen flex md:pt-32 pt-44">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-white ">
+              Home for everyone
             </h1>
-
-            <p className="text-[16px] md:text-3xl text-black md:mb-10 mb-4 font-medium">
+            <p className="text-xl md:text-3xl text-white/90 mb-8 md:px-1 px-5">
               Leading Real Estate Homes Platform in Canada.
             </p>
 
-            <div className=" bg-white transition delay-150 duration-300 ease-in-out  rounded-xl shadow-lg">
-              <ProjectSearch isHomepage={true} />
-            </div>
-            <div className="pt-3 d-flex gap-3 text-sm mx-2">
-              <p className="text-black font-bold">Popular:</p>
-              <Link href="/resale/ontario/toronto/homes-for-sale">
-                <p className="text-black  hover:underline">Toronto</p>
-              </Link>
-              <Link href="/resale/ontario/brampton/homes-for-sale">
-                <p className="text-black  hover:underline ml-2">Brampton</p>
-              </Link>
-              <Link href="/resale/ontario/milton/homes-for-sale">
-                <p className="text-black  hover:underline ml-2">Milton</p>
-              </Link>
-              <Link href="/resale/ontario/vaughan/homes-for-sale">
-                <p className="text-black  hover:underline ml-2">Vaughan</p>
-              </Link>
-              <div className="d-none d-md-flex gap-3">
-                <Link href="/resale/ontario/markham/homes-for-sale">
-                  <p className="text-black  hover:underline ml-2">Markham</p>
-                </Link>
-                <Link href="/resale/ontario/etobicoke/homes-for-sale">
-                  <p className="text-black  hover:underline ml-2">Etobicoke</p>
-                </Link>
-                <Link href="/resale/ontario/hamilton/homes-for-sale">
-                  <p className="text-black  hover:underline ml-2">Hamilton</p>
-                </Link>
-                <Link href="/resale/ontario/ottawa/homes-for-sale">
-                  <p className="text-black  hover:underline ml-2">Ottawa</p>
-                </Link>
-              </div>
-            </div>
+            {/* Search Component */}
+            <HomeSearch />
           </div>
         </div>
       </div>
