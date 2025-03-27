@@ -147,7 +147,7 @@ const Navbar = ({ cities, transparent }) => {
             <div className="d-flex align-items-center md:m-[-14px]">
               <Link
                 href="/"
-                className="logo d-flex justify-content-center align-items-center pe-1 font-family2 text-xs"
+                className="logo d-flex justify-content-center align-items-center pe-1 font-family2 text-xs "
               >
                 <span>Condomonk</span>
               </Link>

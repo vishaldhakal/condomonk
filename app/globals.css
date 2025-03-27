@@ -263,7 +263,7 @@ a:hover {
 }
 
 .logo span {
-    font-size: 40px;
+    font-size: 20px;
     font-weight: 800;
     color: #000;
 }
@@ -275,7 +275,7 @@ a:hover {
     }
 
     .logo span {
-        font-size: 36px;
+        font-size: 24px;
         color: #222;
     }
 
