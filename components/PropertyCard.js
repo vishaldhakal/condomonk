@@ -137,7 +137,7 @@ export default function PropertyCard({ property }) {
               <span className="text-black text-xs">
                 <div className="flex flex-row justify-start">
                   {property.BedroomsTotal && (
-                    <div className="flex items-center mr-1">
+                    <div className="flex items-center mr-2">
                       <img
                         src="/bedrooms.svg"
                         className="w-3 mr-[2px] inline"
@@ -166,12 +166,10 @@ export default function PropertyCard({ property }) {
                     <div className="flex items-center">
                       <img
                         src="/scan.svg"
-                        className="w-4 mr-[2px] inline"
+                        className="w-4  inline"
                         alt="ruler"
                       />
-                      <span className="hidden sm:inline">
-                        {property.LivingAreaRange} Sqft.
-                      </span>
+                      <span className="">{property.LivingAreaRange} Sqft.</span>
                     </div>
                   )}
                 </div>

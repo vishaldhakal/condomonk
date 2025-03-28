@@ -271,7 +271,8 @@ export default async function PropertyDetailPage({ params }) {
           {/* Property Gallery */}
           <PropertyGallery
             images={property.images}
-            propertyAddress={`${property.StreetNumber} ${property.StreetName} ${property.StreetSuffix}`}
+            propertyAddress={`${property.StreetNumber} ${property.StreetName} ${property.StreetSuffix}, ${property.City}, ${property.StateOrProvince}`}
+            virtualTours={virtualTours}
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2 max-w-5xl mx-auto">
@@ -414,158 +415,7 @@ export default async function PropertyDetailPage({ params }) {
                   {property.StateOrProvince} {property.PostalCode}
                 </h1>
               </div>
-              {virtualTours.length > 0 && (
-                <div className="max-w-5xl mx-auto mb-8 pt-2">
-                  <div className="bg-white rounded-lg ">
-                    <div className="flex items-center gap-3 mb-2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 text-blue-600"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v5" />
-                        <path d="M19 12v5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-5" />
-                        <rect x="6" y="9" width="12" height="6" rx="2" />
-                      </svg>
-                      <h3 className="text-lg font-medium ">Virtual Tours</h3>
-                    </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3/4 gap-2 ">
-                      {virtualTours.map((tour, index) => (
-                        <div key={index} className="group">
-                          <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden mb-1">
-                            <iframe
-                              src={tour.url}
-                              className="w-full h-64"
-                              allowFullScreen
-                              loading="lazy"
-                              title={`Virtual Tour ${index + 1}`}
-                            />
-                          </div>
-                          <a
-                            href={tour.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800 transition-colors"
-                          >
-                            <span className="mr-2">View {tour.type} Tour</span>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="h-4 w-4"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                              />
-                            </svg>
-                          </a>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-              {/* Market Analytics */}
-              <div className="bg-white rounded-lg py-6 space-y-6">
-                {/* Summary Stats */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="p-6 bg-gray-100 rounded-xl">
-                    <div className="text-2xl font-bold black mt-1">
-                      {analyticsData?.totalSimilar || 0}
-                    </div>
-                    <div className="text-sm text-black font-medium">
-                      Similar Homes Found
-                    </div>
-                  </div>
-
-                  <div className="p-6 bg-gray-100 rounded-xl">
-                    <div className="text-2xl font-bold text-black mt-1">
-                      ${formatPrice(analyticsData?.avgPrice || 0)}
-                    </div>
-                    <div className="text-sm text-black font-medium">
-                      Average Price
-                    </div>
-                  </div>
-
-                  <div className="p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
-                    <div
-                      className={`text-2xl font-bold mt-1 ${
-                        property.ListPrice > (analyticsData?.avgPrice || 0)
-                          ? "text-red-600"
-                          : "text-emerald-600"
-                      }`}
-                    >
-                      {(
-                        ((property.ListPrice - (analyticsData?.avgPrice || 0)) /
-                          (analyticsData?.avgPrice || 1)) *
-                        100
-                      ).toFixed(1)}
-                      %
-                    </div>
-                    <div className="text-sm text-gray-800 font-medium">
-                      {property.ListPrice > (analyticsData?.avgPrice || 0)
-                        ? "Higher than average"
-                        : "Lower than average"}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Market Comparison Chart */}
-                <div className="mt-8">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                    Price Comparison
-                  </h3>
-                  <div className="bg-white rounded-lg">
-                    <MarketComparisonChart
-                      currentPrice={property.ListPrice}
-                      comparisons={[
-                        {
-                          name: `Similar Homes in ${property.City}`,
-                          description: `${
-                            analyticsData?.totalSimilar
-                          } homes with ${property.BedroomsTotal} beds, ${
-                            (property.WashroomsType1Pcs || 0) +
-                            (property.WashroomsType2Pcs || 0)
-                          } baths`,
-                          price: analyticsData?.avgPrice || 0,
-                        },
-                        {
-                          name: `${property.BedroomsTotal} Bed Homes`,
-                          description: `Average of ${
-                            analyticsData?.bedroomCount || 0
-                          } homes`,
-                          price: analyticsData?.avgPriceBedrooms || 0,
-                        },
-                        {
-                          name: property.PropertySubType,
-                          description: `Average of ${
-                            analyticsData?.propertyTypeCount || 0
-                          } ${property.PropertySubType} homes in ${
-                            property.City
-                          }`,
-                          price: analyticsData?.avgPriceType || 0,
-                        },
-                      ]}
-                    />
-                    <div className="text-sm text-gray-600">
-                      Note <span className="text-red-500">*</span> Price
-                      comparison is based on the similar properties listed in
-                      the area and may not be accurate. Consult licensed real
-                      estate agent for accurate comparison.
-                    </div>
-                  </div>
-                </div>
-              </div>
               {/* Property Description Section */}
               <div className="pt-4 mt-8 ">
                 <div className="rounded-md">
@@ -742,6 +592,97 @@ export default async function PropertyDetailPage({ params }) {
                   </div>
                 </div>
               </div>
+              {/* Market Analytics */}
+              <div className="bg-white rounded-lg py-6 space-y-6">
+                {/* Summary Stats */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="p-6 bg-gray-100 rounded-xl">
+                    <div className="text-2xl font-bold black mt-1">
+                      {analyticsData?.totalSimilar || 0}
+                    </div>
+                    <div className="text-sm text-black font-medium">
+                      Similar Homes Found
+                    </div>
+                  </div>
+
+                  <div className="p-6 bg-gray-100 rounded-xl">
+                    <div className="text-2xl font-bold text-black mt-1">
+                      ${formatPrice(analyticsData?.avgPrice || 0)}
+                    </div>
+                    <div className="text-sm text-black font-medium">
+                      Average Price
+                    </div>
+                  </div>
+
+                  <div className="p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
+                    <div
+                      className={`text-2xl font-bold mt-1 ${
+                        property.ListPrice > (analyticsData?.avgPrice || 0)
+                          ? "text-red-600"
+                          : "text-emerald-600"
+                      }`}
+                    >
+                      {(
+                        ((property.ListPrice - (analyticsData?.avgPrice || 0)) /
+                          (analyticsData?.avgPrice || 1)) *
+                        100
+                      ).toFixed(1)}
+                      %
+                    </div>
+                    <div className="text-sm text-gray-800 font-medium">
+                      {property.ListPrice > (analyticsData?.avgPrice || 0)
+                        ? "Higher than average"
+                        : "Lower than average"}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Market Comparison Chart */}
+                <div className="mt-8">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                    Price Comparison
+                  </h3>
+                  <div className="bg-white rounded-lg">
+                    <MarketComparisonChart
+                      currentPrice={property.ListPrice}
+                      comparisons={[
+                        {
+                          name: `Similar Homes in ${property.City}`,
+                          description: `${
+                            analyticsData?.totalSimilar
+                          } homes with ${property.BedroomsTotal} beds, ${
+                            (property.WashroomsType1Pcs || 0) +
+                            (property.WashroomsType2Pcs || 0)
+                          } baths`,
+                          price: analyticsData?.avgPrice || 0,
+                        },
+                        {
+                          name: `${property.BedroomsTotal} Bed Homes`,
+                          description: `Average of ${
+                            analyticsData?.bedroomCount || 0
+                          } homes`,
+                          price: analyticsData?.avgPriceBedrooms || 0,
+                        },
+                        {
+                          name: property.PropertySubType,
+                          description: `Average of ${
+                            analyticsData?.propertyTypeCount || 0
+                          } ${property.PropertySubType} homes in ${
+                            property.City
+                          }`,
+                          price: analyticsData?.avgPriceType || 0,
+                        },
+                      ]}
+                    />
+                    <div className="text-sm text-gray-600">
+                      Note <span className="text-red-500">*</span> Price
+                      comparison is based on the similar properties listed in
+                      the area and may not be accurate. Consult licensed real
+                      estate agent for accurate comparison.
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div className="pt-6 col-12 md:pt-20 md:col-12">
                 <CompactMortgageCalculator
                   price={property?.ListPrice}
@@ -813,7 +754,7 @@ export default async function PropertyDetailPage({ params }) {
             {/* Sidebar */}
             <div className="space-y-6  top-6">
               {/* Booking Form */}
-              <div className="bg-white p-1 rounded-lg sticky top-6 mt-16 mt-md-0">
+              <div className="bg-white p-1 rounded-lg sticky top-6 mt-16 mt-md-0 z-2">
                 <BookingForm
                   propertyId={property.ListingKey}
                   address={`${property.StreetNumber} ${property.StreetName}`}
