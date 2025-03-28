@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 const SearchWithAutocomplete = ({
   isHomepage = false,
-  searchType = "sale",
+  initialSearchType = "sale",
   generateCityUrl,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -28,6 +28,7 @@ const SearchWithAutocomplete = ({
   const [isFocused, setIsFocused] = useState(false);
   const [isTabbing, setIsTabbing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [searchType, setSearchType] = useState(initialSearchType);
 
   const inputRef = useRef(null);
   const dropdownRef = useRef(null);
@@ -241,8 +242,14 @@ const SearchWithAutocomplete = ({
   // Modify the handleTabClick function
   const handleTabClick = (type) => {
     setSearchType(type);
-    // Remove the auto-focus line
-    // inputRef.current?.focus();
+    // Clear the search results when switching tabs
+    setSearchTerm("");
+    setSearchResults({
+      cities: [],
+      projects: [],
+      resaleCities: [],
+      properties: [],
+    });
   };
 
   const handleFocus = () => {
@@ -573,7 +580,7 @@ const SearchWithAutocomplete = ({
                       onClick={(e) => handleLinkClick(e, href)}
                       onTouchStart={(e) => handleTouchStart(e, href)}
                       className={`flex items-center px-4 ${
-                        isHomepage ? "py-3" : "py-2"
+                        isHomepage ? "py-3 text-left" : "py-2"
                       } hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0`}
                     >
                       <i
@@ -602,7 +609,7 @@ const SearchWithAutocomplete = ({
                       onClick={(e) => handleLinkClick(e, href)}
                       onTouchStart={(e) => handleTouchStart(e, href)}
                       className={`flex items-center px-4 ${
-                        isHomepage ? "py-3" : "py-2"
+                        isHomepage ? "py-3 text-left" : "py-2"
                       } hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0`}
                     >
                       <i
