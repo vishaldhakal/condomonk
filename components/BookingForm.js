@@ -71,16 +71,16 @@ export default function BookingForm({
       <div className="d-flex items-center justify-center">
         {" "}
         <img
-          src="/contact-bottom-2.png"
-          className="h-24 w-26 object-contain "
-          alt=""
+          src="/shally.jpg"
+          className="h-40 w-full  object-contain "
+          alt="shally image"
         />
       </div>
-      <h2 className="text-2xl font-extrabold mb-1 text-center pt-3">
+      <h2 className="text-2xl font-extrabold mb-1 text-center ">
         Book a Showing
       </h2>
       <p className="text-gray-500 text-sm mb-3 text-center">
-        Find your dream home ✨
+        Tour this home with Shally ✨
       </p>
 
       {/* Date Selection - Horizontal Scroll */}

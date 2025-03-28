@@ -27,6 +27,18 @@ import RoomInformation from "@/components/RoomInformation";
 import Script from "next/script";
 import { createListingSchema } from "@/helper/createSchema";
 
+import {
+  Bed,
+  Bath,
+  Home,
+  Car,
+  House,
+  Languages,
+  Building2,
+  Scan,
+} from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+
 export const revalidate = 60; // 1 minute
 
 export async function generateMetadata({ params }) {
@@ -357,63 +369,73 @@ export default async function PropertyDetailPage({ params }) {
               </div>
               <div className="mt-2">
                 {/* Status and Type */}
-                <div className="flex items-center gap-2 mb-2">
-                  {property.OriginalEntryTimestamp && (
-                    <span className="inline-flex items-center gap-1 text-black py-0.5 rounded-full text-xs py-1 px-3 bg-yellow-400 shadow-xl">
-                      <TimeAgo timestamp={property.OriginalEntryTimestamp} />
-                    </span>
-                  )}
+                <div className="flex items-center gap-2 mb-2 text-gray-700">
                   <span className="inline-flex items-center gap-1">
-                    <span className="w-2.5 h-2.5 bg-green-500 rounded-full"></span>
-                    <span className="text-base">
+                    <span className="text-sm">
+                      <span className="inline-flex items-center gap-1 text-green-500">
+                        <svg
+                          className="w-3 h-3 mr-2"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <circle cx="10" cy="10" r="10" />
+                        </svg>
+                      </span>
                       {property.PropertySubType} {property.TransactionType}
+                    </span>
+                    <Separator className="h-4 mx-2 w-[1.5px] bg-black" />
+                    <span className="text-sm">
+                      MLS - #{property.ListingKey}
                     </span>
                   </span>
                 </div>
-
-                {/* Key Details */}
-                <div className="flex items-center gap-4 text-base mb-0">
-                  <div className="flex items-center gap-1">
-                    <img
-                      src="/bedrooms.svg"
-                      className="w-3 mr-[2px] inline"
-                      alt="bedrooms"
-                    />
-                    <span className="font-bold">{property.BedroomsTotal}</span>
-                    <span>bed</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <img
-                      src="/bathrooms.svg"
-                      className="w-3 mr-[2px] inline"
-                      alt="washrooms"
-                    />
-                    <span className="font-bold">{totalBathrooms}</span>
-                    <span>bath</span>
-                  </div>
-                  {property.LotSize && (
-                    <div className="flex items-center gap-1">
-                      <img
-                        src="/ruler.svg"
-                        className="w-3 mr-[2px] inline"
-                        alt="area"
-                      />
-                      <span className="font-bold">{property.LotSize}</span>
-                      <span>sqft lot</span>
-                    </div>
+                <div className="flex items-center gap-2 text-gray-700">
+                  {property.OriginalEntryTimestamp && (
+                    <span className="inline-flex items-center  text-sm  ">
+                      <TimeAgo timestamp={property.ModificationTimestamp} />
+                    </span>
                   )}
-
-                  <div>
-                    <div>MLS - #{property.ListingKey}</div>
-                  </div>
+                  <span className="inline-flex items-center text-xs">
+                    - By {property?.ListOfficeName}
+                  </span>
                 </div>
 
                 {/* Address */}
-                <h1 className="text-lg md:text-xl mb-2">
+                <h1 className="text-lg md:text-2xl mb-4">
                   {property.StreetNumber} {property.StreetName}{" "}
                   {property.StreetSuffix}, {property.City},{" "}
                   {property.StateOrProvince} {property.PostalCode}
                 </h1>
+                {/* Key Details */}
+                <div className="flex space-x-6 items-center justify-start mt-2">
+                  <div className="flex justify-center items-center gap-1.5 text-sm text-gray-700 flex-col text-center">
+                    <Bed className="w-6 h-6 text-gray-700" strokeWidth={1.5} />
+                    {property.BedroomsTotal} Bed
+                  </div>
+                  <div className="flex justify-center items-center gap-1.5 text-sm text-gray-700 flex-col text-center">
+                    <Bath className="w-6 h-6 text-gray-700" strokeWidth={1.5} />
+                    {property.BathroomsTotalInteger} Bath
+                  </div>
+                  {(property.BuildingAreaTotal || property.LivingAreaRange) && (
+                    <div className="flex justify-center items-center gap-1.5 text-sm text-gray-700 flex-col">
+                      <Scan
+                        className="w-6 h-6 text-gray-700"
+                        strokeWidth={1.5}
+                      />
+                      {property.BuildingAreaTotal || property.LivingAreaRange}{" "}
+                      Sqft.
+                    </div>
+                  )}
+                  {property.GarageType && (
+                    <div className="flex justify-center items-center gap-1.5 text-sm text-gray-700 flex-col text-center">
+                      <Car
+                        className="w-6 h-6 text-gray-700"
+                        strokeWidth={1.5}
+                      />
+                      {property.GarageType} Garage
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Property Description Section */}
@@ -441,9 +463,7 @@ export default async function PropertyDetailPage({ params }) {
                     </div>
                     <div className="col-span-1 py-1 border-b border-gray-100">
                       <p className="text-[14px] text-gray-500 mb-1">
-                        {property.LotSizeRangeAcres
-                          ? `${property.LotSizeRangeAcres} acres`
-                          : "N/A"}
+                        {property.LotSizeRangeAcres || "N/A"}
                       </p>
                     </div>
                   </div>
@@ -465,9 +485,10 @@ export default async function PropertyDetailPage({ params }) {
                     </div>
                     <div className="col-span-1 py-1 border-b border-gray-100">
                       <p className="text-[14px] text-gray-500 mb-1">
-                        {property.LivingArea
-                          ? `${property.LivingArea} Sqft`
-                          : "N/A"}
+                        {property.BuildingAreaTotal ||
+                          property.LivingAreaRange ||
+                          "N/A"}{" "}
+                        Sqft
                       </p>
                     </div>
                   </div>
@@ -489,9 +510,6 @@ export default async function PropertyDetailPage({ params }) {
               </div>
 
               <HomeOverview property={property} />
-              <div className="mt-0 text-sm">
-                Listed by {property.ListOfficeName}
-              </div>
 
               {/* Additional Details */}
               <div className="pt-8">
@@ -683,13 +701,6 @@ export default async function PropertyDetailPage({ params }) {
                   </div>
                 </div>
               </div>
-              <div className="pt-6 col-12 md:pt-20 md:col-12">
-                <CompactMortgageCalculator
-                  price={property?.ListPrice}
-                  showDetails={false}
-                  align="left"
-                />
-              </div>
 
               {/* Map Section */}
               <div className="pt-12 z-0">
@@ -743,6 +754,64 @@ export default async function PropertyDetailPage({ params }) {
                   </a>
                 </div>
               </div>
+
+              <div className="col-12 mt-6">
+                <div className="bg-white rounded-xl border p-6">
+                  <div className="flex flex-col sm:flex-row gap-6 items-start">
+                    <div className="flex-shrink-0">
+                      <img
+                        src="/shally.webp"
+                        alt="Sales Representative"
+                        className="rounded-full object-cover w-24 h-24"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
+                        <div>
+                          <h3 className="text-xl font-semibold leading-0">
+                            Shally Shi
+                          </h3>
+                          <p className="text-gray-600 leading-0">
+                            Sales Representative, Dolphin Realty Inc
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 text-gray-700 mb-4">
+                        <Languages className="w-5 h-5" />
+                        <span className="text-sm leading-0">
+                          English, Mandarin
+                        </span>
+                      </div>
+
+                      <div className="space-y-4">
+                        <div className="flex flex-wrap gap-4">
+                          <span className="flex items-center gap-1.5 text-sm bg-gray-100 px-3 py-1 rounded-full">
+                            <Home className="w-4 h-4" />
+                            Residential Resale
+                          </span>
+                          <span className="flex items-center gap-1.5 text-sm bg-gray-100 px-3 py-1 rounded-full">
+                            <Building2 className="w-4 h-4" />
+                            Property Management
+                          </span>
+                          <span className="flex items-center gap-1.5 text-sm bg-gray-100 px-3 py-1 rounded-full">
+                            <Building2 className="w-4 h-4" />
+                            Pre Construction
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="pt-6 col-12 md:pt-20 md:col-12">
+                <CompactMortgageCalculator
+                  price={property?.ListPrice}
+                  showDetails={false}
+                  align="left"
+                />
+              </div>
+
               <div className="mt-6 ">
                 <ResaleFAQ property={property} />
               </div>

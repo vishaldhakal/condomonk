@@ -54,10 +54,9 @@ export default function PropertyGallery({
             {/* Bottom Left Buttons */}
             <div className="absolute bottom-4 left-4 flex flex-row gap-2 items-center">
               <div className="flex flex-col gap-2">
-                {virtualTours.map((tour, index) => (
+                {virtualTours.length > 0 && (
                   <a
-                    key={index}
-                    href={tour.url}
+                    href={virtualTours[0].url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex text-black items-center px-2 py-2 bg-white backdrop-blur-sm rounded-lg text-xs font-medium hover:bg-white transition-colors"
@@ -73,7 +72,7 @@ export default function PropertyGallery({
                       <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                       <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                     </svg>
-                    {tour.type.charAt(0).toUpperCase() + tour.type.slice(1)}{" "}
+                    Virtual Tour
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-4 w-4 ml-2"
@@ -89,7 +88,7 @@ export default function PropertyGallery({
                       />
                     </svg>
                   </a>
-                ))}
+                )}
               </div>
               <div className="flex flex-col gap-2">
                 <button
@@ -212,17 +211,16 @@ export default function PropertyGallery({
                     onClick={(e) => e.stopPropagation()}
                   >
                     <div className="flex flex-col gap-2">
-                      {virtualTours.map((tour, index) => (
+                      {virtualTours.length > 0 && (
                         <a
-                          key={index}
-                          href={tour.url}
+                          href={virtualTours[0].url}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex text-black items-center px-2 py-2 bg-white backdrop-blur-sm rounded-lg text-sm font-medium hover:bg-white transition-colors"
                           onClick={(e) => {
                             e.stopPropagation();
                             window.open(
-                              tour.url,
+                              virtualTours[0].url,
                               "_blank",
                               "noopener,noreferrer"
                             );
@@ -238,9 +236,7 @@ export default function PropertyGallery({
                             <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                           </svg>
-                          {tour.type.charAt(0).toUpperCase() +
-                            tour.type.slice(1)}{" "}
-                          Tour
+                          Virtual Tour
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-4 w-4 ml-2"
@@ -256,7 +252,7 @@ export default function PropertyGallery({
                             />
                           </svg>
                         </a>
-                      ))}
+                      )}
                     </div>
 
                     <div className="flex flex-col gap-2">
