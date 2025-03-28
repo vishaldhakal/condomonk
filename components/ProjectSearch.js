@@ -8,8 +8,10 @@ import { useRouter } from "next/navigation";
 
 const SearchWithAutocomplete = ({
   isHomepage = false,
-  initialSearchType = "sale",
+  searchType = "sale",
+  showOnlyPreconstruction = false,
   generateCityUrl,
+  onNavigationStart,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState({
@@ -28,7 +30,6 @@ const SearchWithAutocomplete = ({
   const [isFocused, setIsFocused] = useState(false);
   const [isTabbing, setIsTabbing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [searchType, setSearchType] = useState(initialSearchType);
 
   const inputRef = useRef(null);
   const dropdownRef = useRef(null);
@@ -79,66 +80,62 @@ const SearchWithAutocomplete = ({
       setIsLoading(true);
       try {
         let propertyResponse = { value: [] };
+        let preconResponse = { data: { cities: [], projects: [] } };
 
         if (searchTerm.length >= 2) {
-          const capitalizedTerm = capitalizeWords(searchTerm);
-          const response = await fetch(
-            `/api/search?term=${encodeURIComponent(capitalizedTerm)}`
-          );
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          propertyResponse = await response.json();
-
-          // Process the property data to ensure we have street information
-          propertyResponse.value = propertyResponse.value.map((property) => {
-            if (
-              property.UnparsedAddress &&
-              (!property.StreetNumber || !property.StreetName)
-            ) {
-              const addressParts = property.UnparsedAddress.split(" ");
-              if (addressParts.length >= 2) {
-                return {
-                  ...property,
-                  StreetNumber: addressParts[0],
-                  StreetName: addressParts[1],
-                };
-              }
+          // Only fetch property data if not showing only preconstruction
+          if (!showOnlyPreconstruction) {
+            const capitalizedTerm = capitalizeWords(searchTerm);
+            const response = await fetch(
+              `/api/search?term=${encodeURIComponent(capitalizedTerm)}`
+            );
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
             }
-            return property;
-          });
+            propertyResponse = await response.json();
+          }
+
+          // Always fetch preconstruction data if in preconstruction tab or showOnlyPreconstruction is true
+          if (searchType === "preconstruction" || showOnlyPreconstruction) {
+            preconResponse = await axios.get(
+              "https://api.condomonk.ca/api/all-precons-search/?search=" +
+                searchTerm.toLowerCase()
+            );
+          }
         }
 
-        // Only fetch preconstruction data if in preconstruction tab
-        let preconResponse = { data: { cities: [], projects: [] } };
-        if (searchType === "preconstruction") {
-          preconResponse = await axios.get(
-            "https://api.condomonk.ca/api/all-precons-search/?search=" +
-              searchTerm.toLowerCase()
-          );
-        }
-
-        // Don't add cityRegions here since they're already in allCities
-        const combinedCities = allCities;
-
-        // Update the data state
+        // Update the data state based on showOnlyPreconstruction
         setData({
-          cities: (preconResponse.data.cities || []).slice(0, 5),
-          projects: (preconResponse.data.projects || []).slice(0, 5),
-          resaleCities: combinedCities,
-          properties: propertyResponse.value || [],
+          cities: showOnlyPreconstruction
+            ? preconResponse.data.cities || []
+            : [],
+          projects: showOnlyPreconstruction
+            ? preconResponse.data.projects || []
+            : [],
+          resaleCities: showOnlyPreconstruction ? [] : allCities,
+          properties: showOnlyPreconstruction
+            ? []
+            : propertyResponse.value || [],
         });
 
-        // Update search results with filtered cities including postal code regions
+        // Update search results similarly
         setSearchResults({
-          cities: (preconResponse.data.cities || []).slice(0, 5),
-          projects: (preconResponse.data.projects || []).slice(0, 5),
-          resaleCities: combinedCities
-            .filter((cityObj) =>
-              cityObj.city.toLowerCase().includes(searchTerm.toLowerCase())
-            )
-            .slice(0, 5),
-          properties: propertyResponse.value || [],
+          cities: showOnlyPreconstruction
+            ? preconResponse.data.cities || []
+            : [],
+          projects: showOnlyPreconstruction
+            ? preconResponse.data.projects || []
+            : [],
+          resaleCities: showOnlyPreconstruction
+            ? []
+            : allCities
+                .filter((cityObj) =>
+                  cityObj.city.toLowerCase().includes(searchTerm.toLowerCase())
+                )
+                .slice(0, 5),
+          properties: showOnlyPreconstruction
+            ? []
+            : propertyResponse.value || [],
         });
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -153,13 +150,13 @@ const SearchWithAutocomplete = ({
       }
     };
 
-    // Debounce the search to avoid too many API calls
+    // Debounce the search
     const timeoutId = setTimeout(() => {
       fetchData();
     }, 300);
 
     return () => clearTimeout(timeoutId);
-  }, [searchTerm, searchType]);
+  }, [searchTerm, searchType, showOnlyPreconstruction]);
 
   // Modify the handleRouteChange function in useEffect
   useEffect(() => {
@@ -290,11 +287,10 @@ const SearchWithAutocomplete = ({
     e.preventDefault();
     e.stopPropagation();
 
-    // Prevent the dropdown from closing immediately
-    e.persist();
+    // Show loading state
+    onNavigationStart?.();
 
     try {
-      // Use router.push and wait for it to complete
       await router.push(href);
 
       // Clear the search after successful navigation
@@ -311,12 +307,15 @@ const SearchWithAutocomplete = ({
     }
   };
 
-  // Add this new function to handle touch events
+  // Update the handleTouchStart function
   const handleTouchStart = (e, href) => {
     e.preventDefault();
     e.stopPropagation();
 
-    // Navigate immediately on touch
+    // Show loading state
+    onNavigationStart?.();
+
+    // Navigate
     router.push(href);
   };
 

@@ -4,13 +4,23 @@ import ProjectSearch from "./ProjectSearch";
 
 const HomeSearch = () => {
   const [activeSearchType, setActiveSearchType] = useState("sale");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const handleSearchTypeChange = (type) => {
     setActiveSearchType(type);
   };
 
+  const handleSearchStart = () => {
+    setIsLoading(true);
+  };
+
+  const handleNavigationStart = () => {
+    setIsNavigating(true);
+  };
+
   return (
-    <div className="w-full max-w-2xl mx-auto">
+    <div className="w-full max-w-2xl mx-auto relative">
       {/* Search Type Buttons - Styled like the navigation */}
       <div className="w-full md:max-w-sm max-w-xs mx-auto">
         <div className="flex  mb-6 bg-white  rounded-xl">
@@ -52,6 +62,8 @@ const HomeSearch = () => {
         <ProjectSearch
           isHomepage={true}
           searchType={activeSearchType}
+          onSearchStart={handleSearchStart}
+          onNavigationStart={handleNavigationStart}
           generateCityUrl={(cityPath) => {
             switch (activeSearchType) {
               case "sale":
@@ -64,8 +76,24 @@ const HomeSearch = () => {
                 return `/resale/ontario/${cityPath}/homes-for-sale`;
             }
           }}
+          showOnlyPreconstruction={activeSearchType === "preconstruction"}
         />
       </div>
+
+      {/* Loading Overlay */}
+      {isLoading && (
+        <div className="fixed inset-0 bg-white bg-opacity-80 z-50 flex items-center justify-center md:hidden">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#32a953]"></div>
+        </div>
+      )}
+
+      {/* Navigation Loading Overlay */}
+      {isNavigating && (
+        <div className="fixed inset-0 bg-white/70 backdrop-blur-sm z-50 flex flex-col items-center justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#32a953] border-t-transparent mb-4"></div>
+          <p className="text-gray-600 font-medium">Loading...</p>
+        </div>
+      )}
     </div>
   );
 };

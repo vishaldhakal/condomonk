@@ -11,6 +11,7 @@ import NextTopLoader from "nextjs-toploader";
 import { Montserrat } from "next/font/google";
 import { Providers } from "./providers";
 import { allcities } from "@/datas/cities";
+import LoadingOverlay from "@/components/LoadingOverlay";
 
 const montserrat = Montserrat({ subsets: ["cyrillic"] });
 
@@ -156,16 +157,17 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={montserrat.className}>
+        <LoadingOverlay />
         <NextTopLoader
-          color="black"
+          color="#32a953"
           initialPosition={0.08}
           crawlSpeed={200}
-          height={3}
+          height={4}
           crawl={true}
           showSpinner={true}
           easing="ease"
           speed={200}
-          shadow="0 0 10px #00A1FF,0 0 5px #00A1FF"
+          shadow="0 0 10px #32a953,0 0 5px #32a953"
         />
         {/* <Tracker siteId="ABC-123" /> */}
         <Navbar cities={cities}></Navbar>
