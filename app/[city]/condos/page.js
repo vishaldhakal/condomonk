@@ -78,7 +78,7 @@ export default async function Home({ params }) {
         <div className="container">
           <div className="">
             <h1 className="main-title  font-family2 mb-2">
-              {` New Construction Condos in  ${CapitalizeFirst(params.city)} `}{" "}
+              {`Pre Construction Condos in  ${CapitalizeFirst(params.city)} `}{" "}
               <div className="relative inline-flex sm-center me-2 text-wrap">
                 <span className="absolute inset-x-0 bottom-0 b"></span>
                 <span className="relative font-bold text-black whitespace-normal">
@@ -86,14 +86,13 @@ export default async function Home({ params }) {
                 </span>
               </div>
             </h1>
-            <h2 className="font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium text-lg">
-              {`${
-                data.preconstructions.length
-              } New Pre Construction Condos for sale in  ${CapitalizeFirst(
-                params.city
-              )}. Checkout floor plans, pricing and availability of new condos for sale in ${CapitalizeFirst(
-                params.city
-              )} on condomonk. `}
+            <h2 className="font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium md:text-base text-xs">
+              {data.preconstructions.length}+ Pre construction condos in{" "}
+              {CapitalizeFirst(params.city)}. Affordable 1-4 bedroom new
+              construction condos in highly desirable communities. Discover{" "}
+              {CapitalizeFirst(params.city)} new developments by reputable home
+              builders, check pricing, floor plans, and get the early updates on
+              new construction condo projects.
             </h2>
           </div>
           <div className="d-flex sm-center pb-2 pb-md-0 sticky-buttons z-0">

@@ -35,6 +35,13 @@ const Breadcrumb = ({
             : link;
           // Remove "-" from itemLink
           itemLink = itemLink.replace(/-/g, " ");
+
+          // Modify city name display in breadcrumb
+          if (index === 0) {
+            // First path segment is typically the city
+            itemLink = `Pre construction homes ${itemLink}`;
+          }
+
           return (
             <React.Fragment key={index}>
               <li className={itemClasses} key={index}>

@@ -66,16 +66,14 @@ export async function generateMetadata({ params }, parent) {
   const data = await getData(cleanCity);
 
   let title, description;
-  title = `${
-    data.preconstructions.length
-  }+ Pre construction Homes in  ${CapitalizeFirst(cleanCity)}`;
+  title = `Pre construction Homes in  ${CapitalizeFirst(cleanCity)}`;
   description = `${
     data.preconstructions.length
-  } Pre Construction homes in ${CapitalizeFirst(
+  }+ Pre-Construction Homes & New Developments in ${CapitalizeFirst(
     cleanCity
-  )}. View floor plans, pricing, map & availability. Check the latest ${CapitalizeFirst(
+  )}| Check out plans, pricing, and availability for pre-construction homes in ${CapitalizeFirst(
     cleanCity
-  )} pre construction home projects.`;
+  )} `;
 
   return {
     ...parent,
@@ -215,11 +213,13 @@ export default async function Home({ params }) {
               </span>
             </div>
           </div>
-          <h2 className="font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium text-lg leading-tight">
-            {data.preconstructions.length} Pre construction or new homes, condos
-            and townhomes for sale in {CapitalizeFirst(cleanCity)}
-            {priceFilter ? ` ${formatPriceFilter(priceFilter)}` : ""} on
-            condomonk.
+          <h2 className="font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium text-lg leading-tight md:text-base text-xs">
+            {data.preconstructions.length}+ Pre construction homes in{" "}
+            {CapitalizeFirst(cleanCity)}. Affordable 1-4 bedroom new
+            construction homes in highly desirable communities. Discover{" "}
+            {CapitalizeFirst(cleanCity)} new developments by reputable home
+            builders, check pricing, floor plans, and get the early updates on
+            new construction home projects.
           </h2>
           <div className="d-flex sm-center mb-lg-0 sticky-buttons pb-0 mb-0 z-2 sticky-top">
             <div className="position-relative w-100">

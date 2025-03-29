@@ -91,14 +91,13 @@ export default async function Home({ params }) {
                 </span>
               </div>
             </h1>
-            <h2 className=" font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium text-lg">
-              {`${
-                data.preconstructions.length
-              } New Pre Construction Detached Homes for sale in  ${CapitalizeFirst(
-                params.city
-              )}. Checkout floor plans, pricing and availability of new detached homes for sale in ${CapitalizeFirst(
-                params.city
-              )} on condomonk. `}
+            <h2 className=" font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium md:text-base text-xs">
+              {data.preconstructions.length}+ Pre construction detached homes in{" "}
+              {CapitalizeFirst(params.city)}. Affordable 1-4 bedroom new
+              construction detached homes in highly desirable communities.
+              Discover {CapitalizeFirst(params.city)} new developments by
+              reputable home builders, check pricing, floor plans, and get the
+              early updates on new construction detached home projects.
             </h2>
           </div>
           <div className="d-flex sm-center pb-2 pb-md-0 sticky-buttons z-0">

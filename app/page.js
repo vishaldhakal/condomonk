@@ -362,134 +362,364 @@ export default async function Home(props) {
         </h2>
       </Link>
       <div className="container mx-auto px-4 mb-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Link
-            href="/resale/ontario/toronto/homes-for-sale"
-            className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
-          >
-            <img
-              src="/city-images/toronto.jpg"
-              alt="Toronto"
-              className="w-full md:h-64 h-48 object-cover"
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-4">
-              <h3 className="text-white text-xl font-semibold mb-0">Toronto</h3>
-              <p className="text-gray-300 text-sm">11k+ Properties</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 md:gap-x-4 md:gap-y-8 gap-y-4 gap-x-3">
+          <div className="flex flex-col">
+            <Link
+              href="/resale/ontario/toronto/homes-for-sale"
+              className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
+            >
+              <img
+                src="/city-images/toronto.jpg"
+                alt="Toronto"
+                className="w-full md:h-64 h-48 object-cover"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-4">
+                <h3 className="text-white text-xl font-semibold mb-0">
+                  Toronto
+                </h3>
+                <p className="text-gray-300 text-sm">11k+ Properties</p>
+              </div>
+            </Link>
+            <div className="mt-2 space-y-1 md:text-sm text-xs">
+              <Link
+                href="/resale/ontario/toronto/semi-detached-homes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Semi Detached Homes in Toronto
+              </Link>
+              <Link
+                href="/resale/ontario/toronto/detached-homes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Detached Homes in Toronto
+              </Link>
+              <Link
+                href="/resale/ontario/toronto/townhomes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Townhomes in Toronto
+              </Link>
+              <Link
+                href="/resale/ontario/toronto/condos-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Condos in Toronto
+              </Link>
             </div>
-          </Link>
+          </div>
 
-          <Link
-            href="/resale/ontario/mississauga/homes-for-sale"
-            className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
-          >
-            <img
-              src="/city-images/mississauga.jpg"
-              alt="Mississauga"
-              className="w-full md:h-64 h-48 object-cover"
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
-              <h3 className="text-white text-xl font-semibold mb-0">
-                Mississauga
-              </h3>
-              <p className="text-gray-300 text-sm">2k+ Properties</p>
+          <div className="flex flex-col">
+            <Link
+              href="/resale/ontario/mississauga/homes-for-sale"
+              className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
+            >
+              <img
+                src="/city-images/mississauga.jpg"
+                alt="Mississauga"
+                className="w-full md:h-64 h-48 object-cover"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-4">
+                <h3 className="text-white text-xl font-semibold mb-0">
+                  Mississauga
+                </h3>
+                <p className="text-gray-300 text-sm">2k+ Properties</p>
+              </div>
+            </Link>
+            <div className="mt-2 space-y-1 md:text-sm text-xs">
+              <Link
+                href="/resale/ontario/mississauga/semi-detached-homes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Semi Detached Homes in Mississauga
+              </Link>
+              <Link
+                href="/resale/ontario/mississauga/detached-homes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Detached Homes in Mississauga
+              </Link>
+              <Link
+                href="/resale/ontario/mississauga/townhomes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Townhomes in Mississauga
+              </Link>
+              <Link
+                href="/resale/ontario/mississauga/condos-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Condos in Mississauga
+              </Link>
             </div>
-          </Link>
+          </div>
 
-          <Link
-            href="/resale/ontario/brampton/homes-for-sale"
-            className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
-          >
-            <img
-              src="/city-images/brampton.jpg"
-              alt="Brampton"
-              className="w-full md:h-64 h-48 object-cover"
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
-              <h3 className="text-white text-xl font-semibold mb-0">
-                Brampton
-              </h3>
-              <p className="text-gray-300 text-sm">2k+ Properties</p>
+          <div className="flex flex-col">
+            <Link
+              href="/resale/ontario/brampton/homes-for-sale"
+              className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
+            >
+              <img
+                src="/city-images/brampton.jpg"
+                alt="Brampton"
+                className="w-full md:h-64 h-48 object-cover"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-4">
+                <h3 className="text-white text-xl font-semibold mb-0">
+                  Brampton
+                </h3>
+                <p className="text-gray-300 text-sm">2k+ Properties</p>
+              </div>
+            </Link>
+            <div className="mt-2 space-y-1 md:text-sm text-xs">
+              <Link
+                href="/resale/ontario/brampton/semi-detached-homes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Semi Detached Homes in Brampton
+              </Link>
+              <Link
+                href="/resale/ontario/brampton/detached-homes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Detached Homes in Brampton
+              </Link>
+              <Link
+                href="/resale/ontario/brampton/townhomes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Townhomes in Brampton
+              </Link>
+              <Link
+                href="/resale/ontario/brampton/condos-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Condos in Brampton
+              </Link>
             </div>
-          </Link>
+          </div>
 
-          <Link
-            href="/resale/ontario/oakville/homes-for-sale"
-            className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
-          >
-            <img
-              src="/city-images/oakville.jpg"
-              alt="Oakville"
-              className="w-full md:h-64 h-48 object-cover"
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
-              <h3 className="text-white text-xl font-semibold mb-0">
-                Oakville
-              </h3>
-              <p className="text-gray-300 text-sm">1k+ Properties</p>
+          <div className="flex flex-col">
+            <Link
+              href="/resale/ontario/oakville/homes-for-sale"
+              className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
+            >
+              <img
+                src="/city-images/oakville.jpg"
+                alt="Oakville"
+                className="w-full md:h-64 h-48 object-cover"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-4">
+                <h3 className="text-white text-xl font-semibold mb-0">
+                  Oakville
+                </h3>
+                <p className="text-gray-300 text-sm">1k+ Properties</p>
+              </div>
+            </Link>
+            <div className="mt-2 space-y-1 md:text-sm text-xs">
+              <Link
+                href="/resale/ontario/oakville/semi-detached-homes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Semi Detached Homes in Oakville
+              </Link>
+              <Link
+                href="/resale/ontario/oakville/detached-homes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Detached Homes in Oakville
+              </Link>
+              <Link
+                href="/resale/ontario/oakville/townhomes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Townhomes in Oakville
+              </Link>
+              <Link
+                href="/resale/ontario/oakville/condos-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Condos in Oakville
+              </Link>
             </div>
-          </Link>
+          </div>
 
-          <Link
-            href="/resale/ontario/barrie/homes-for-sale"
-            className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
-          >
-            <img
-              src="/city-images/barrie.jpg"
-              alt="Barrie"
-              className="w-full md:h-64 h-48 object-cover"
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
-              <h3 className="text-white text-xl font-semibold mb-0">Barrie</h3>
-              <p className="text-gray-300 text-sm">800+ Properties</p>
+          <div className="flex flex-col">
+            <Link
+              href="/resale/ontario/barrie/homes-for-sale"
+              className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
+            >
+              <img
+                src="/city-images/barrie.jpg"
+                alt="Barrie"
+                className="w-full md:h-64 h-48 object-cover"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-4">
+                <h3 className="text-white text-xl font-semibold mb-0">
+                  Barrie
+                </h3>
+                <p className="text-gray-300 text-sm">800+ Properties</p>
+              </div>
+            </Link>
+            <div className="mt-2 space-y-1 md:text-sm text-xs">
+              <Link
+                href="/resale/ontario/barrie/semi-detached-homes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Semi Detached Homes in Barrie
+              </Link>
+              <Link
+                href="/resale/ontario/barrie/detached-homes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Detached Homes in Barrie
+              </Link>
+              <Link
+                href="/resale/ontario/barrie/townhomes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Townhomes in Barrie
+              </Link>
+              <Link
+                href="/resale/ontario/barrie/condos-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Condos in Barrie
+              </Link>
             </div>
-          </Link>
+          </div>
 
-          <Link
-            href="/resale/ontario/ajax/homes-for-sale"
-            className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
-          >
-            <img
-              src="/city-images/ajax.jpg"
-              alt="Ajax"
-              className="w-full md:h-64 h-48 object-cover"
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
-              <h3 className="text-white text-xl font-semibold mb-0">Ajax</h3>
-              <p className="text-gray-300 text-sm">275+ Properties</p>
+          <div className="flex flex-col">
+            <Link
+              href="/resale/ontario/ajax/homes-for-sale"
+              className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
+            >
+              <img
+                src="/city-images/ajax.jpg"
+                alt="Ajax"
+                className="w-full md:h-64 h-48 object-cover"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-4">
+                <h3 className="text-white text-xl font-semibold mb-0">Ajax</h3>
+                <p className="text-gray-300 text-sm">275+ Properties</p>
+              </div>
+            </Link>
+            <div className="mt-2 space-y-1 md:text-sm text-xs">
+              <Link
+                href="/resale/ontario/ajax/semi-detached-homes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Semi Detached Homes in Ajax
+              </Link>
+              <Link
+                href="/resale/ontario/ajax/detached-homes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Detached Homes in Ajax
+              </Link>
+              <Link
+                href="/resale/ontario/ajax/townhomes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Townhomes in Ajax
+              </Link>
+              <Link
+                href="/resale/ontario/ajax/condos-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Condos in Ajax
+              </Link>
             </div>
-          </Link>
+          </div>
 
-          <Link
-            href="/resale/ontario/ottawa/homes-for-sale"
-            className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
-          >
-            <img
-              src="/city-images/ottawa.jpg"
-              alt="Ottawa"
-              className="w-full md:h-64 h-48 object-cover"
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
-              <h3 className="text-white text-xl font-semibold mb-0">Ottawa</h3>
-              <p className="text-gray-300 text-sm">280+ Properties</p>
+          <div className="flex flex-col">
+            <Link
+              href="/resale/ontario/ottawa/homes-for-sale"
+              className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
+            >
+              <img
+                src="/city-images/ottawa.jpg"
+                alt="Ottawa"
+                className="w-full md:h-64 h-48 object-cover"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-4">
+                <h3 className="text-white text-xl font-semibold mb-0">
+                  Ottawa
+                </h3>
+                <p className="text-gray-300 text-sm">280+ Properties</p>
+              </div>
+            </Link>
+            <div className="mt-2 space-y-1 md:text-sm text-xs">
+              <Link
+                href="/resale/ontario/ottawa/semi-detached-homes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Semi Detached Homes in Ottawa
+              </Link>
+              <Link
+                href="/resale/ontario/ottawa/detached-homes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Detached Homes in Ottawa
+              </Link>
+              <Link
+                href="/resale/ontario/ottawa/townhomes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Townhomes in Ottawa
+              </Link>
+              <Link
+                href="/resale/ontario/ottawa/condos-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Condos in Ottawa
+              </Link>
             </div>
-          </Link>
+          </div>
 
-          <Link
-            href="/resale/ontario/hamilton/homes-for-sale"
-            className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
-          >
-            <img
-              src="/city-images/hamilton.jpg"
-              alt="Hamilton"
-              className="w-full md:h-64 h-48 object-cover"
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-3">
-              <h3 className="text-white text-xl font-semibold mb-0">
-                Hamilton
-              </h3>
-              <p className="text-gray-300 text-sm">2k+ Properties</p>
+          <div className="flex flex-col">
+            <Link
+              href="/resale/ontario/hamilton/homes-for-sale"
+              className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
+            >
+              <img
+                src="/city-images/hamilton.jpg"
+                alt="Hamilton"
+                className="w-full md:h-64 h-48 object-cover"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent py-2 px-4">
+                <h3 className="text-white text-xl font-semibold mb-0">
+                  Hamilton
+                </h3>
+                <p className="text-gray-300 text-sm">2k+ Properties</p>
+              </div>
+            </Link>
+            <div className="mt-2 space-y-1 md:text-sm text-xs">
+              <Link
+                href="/resale/ontario/hamilton/semi-detached-homes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Semi Detached Homes in Hamilton
+              </Link>
+              <Link
+                href="/resale/ontario/hamilton/detached-homes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Detached Homes in Hamilton
+              </Link>
+              <Link
+                href="/resale/ontario/hamilton/townhomes-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Townhomes in Hamilton
+              </Link>
+              <Link
+                href="/resale/ontario/hamilton/condos-for-sale"
+                className="block text-gray-500 hover:text-black"
+              >
+                Condos in Hamilton
+              </Link>
             </div>
-          </Link>
+          </div>
         </div>
 
         <div className="text-center mt-8">

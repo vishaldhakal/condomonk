@@ -23,7 +23,7 @@ const Footer = ({ cities }) => {
               <h3 className="text-center fw-bold pb-2 fs-2 font-family2">
                 {isResalePage
                   ? "Homes for sale in Ontario"
-                  : "New homes in Canada"}
+                  : "Pre construction homes in Canada"}
               </h3>
               <div className=" text-center footer-listcontainer pt-2">
                 <ul className="row row-cols-md-4 row-cols-1 list-unstyled d-flex align-items-center justify-content-center">
@@ -34,13 +34,13 @@ const Footer = ({ cities }) => {
                           href={
                             isResalePage
                               ? `/resale/ontario/${city.slug.toLowerCase()}/homes-for-sale`
-                              : `/new-homes/${city.slug}`
+                              : `/${city.slug}`
                           }
                         >
                           <span>
                             {isResalePage
                               ? `Homes for sale in ${city.name}`
-                              : `New homes in ${city.name}`}
+                              : `Pre construction homes in ${city.name}`}
                           </span>
                         </Link>
                       </li>
