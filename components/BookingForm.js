@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import ContactFormSubmit from "./ContactFormSubmit";
+import axios from "axios";
+import swal from "sweetalert";
 import { CalendarIcon } from "lucide-react";
 
 export default function BookingForm({
@@ -10,6 +11,7 @@ export default function BookingForm({
   price,
   transactionType,
 }) {
+  const [loading, setLoading] = useState(false);
   const [submitBtn, setSubmitBtn] = useState("Book a Showing");
   const [formData, setFormData] = useState({
     name: "",
@@ -47,12 +49,66 @@ export default function BookingForm({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const submissionData = {
-      ...formData,
-      date: selectedDate,
-      message: formData.description,
-    };
-    ContactFormSubmit(submissionData, setSubmitBtn, setFormData);
+    setLoading(true);
+    setSubmitBtn("Submitting...");
+
+    try {
+      // Get the full URL for source
+      const fullUrl = window.location.href;
+
+      let form_data = new FormData();
+      form_data.append("full_name", formData.name);
+      form_data.append("email", formData.email);
+      form_data.append("phone", formData.phone);
+      form_data.append(
+        "message",
+        formData.description || `Showing request for ${address}`
+      );
+      form_data.append("realtor", formData.realtor);
+      form_data.append("proj_name", address || "");
+      form_data.append("source", fullUrl);
+
+      if (formData.date) {
+        form_data.append("preferred_date", formData.date);
+      }
+
+      const url = "https://api.homebaba.ca/api/contact-form-resale-submit/";
+      const response = await axios.post(url, form_data, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+        mode: "no-cors",
+      });
+
+      setLoading(false);
+      setSubmitBtn("Successfully Submitted");
+      await swal(
+        `Thank You, ${formData.name}`,
+        "Please expect an email or call from us shortly",
+        "success"
+      );
+
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        description: "",
+        date: "",
+        realtor: "No",
+        proj_name: address,
+        message: "",
+      });
+    } catch (error) {
+      console.error("Failed to submit form:", error);
+      setLoading(false);
+      setSubmitBtn("Book a Showing");
+      await swal(
+        "Message Failed",
+        "Cannot send your message. Please try again.",
+        "error"
+      );
+    }
   };
 
   const handleChange = (e) => {
@@ -184,15 +240,19 @@ export default function BookingForm({
           required
           name="description"
           className="w-full p-3 border rounded-lg focus:outline-none focus:ring-black min-h-[110px] resize-none text-sm"
-          value={`Please send me additional information about ${address}. Thank you`}
+          value={
+            formData.description ||
+            `Please send me additional information about ${address}. Thank you`
+          }
           onChange={handleChange}
         />
 
         <button
           type="submit"
-          className="w-full bg-yellow-400 text-black font-bold py-3 rounded-lg transition-colors text-xl"
+          disabled={loading}
+          className="w-full bg-yellow-400 text-black font-bold py-3 rounded-lg transition-colors text-xl disabled:opacity-75"
         >
-          {submitBtn}
+          {loading ? "Submitting..." : submitBtn}
         </button>
       </form>
 

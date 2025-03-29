@@ -115,7 +115,7 @@ export default async function Home({ params }) {
       <FixedContactButton></FixedContactButton>
       <div className="pt-lg-1 pt-0">
         <div className="container ">
-          <div className="sticky top-0 z-1">
+          <div className="sticky top-0 z-1 md:text-base text-xs">
             <Breadcrumb
               homeElement={"Home"}
               separator={
