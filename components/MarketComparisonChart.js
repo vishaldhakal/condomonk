@@ -42,7 +42,7 @@ export default function MarketComparisonChart({ currentPrice, comparisons }) {
   };
 
   return (
-    <div className="w-full h-[400px]">
+    <div className="w-full h-[400px] ml-[-30px]">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}

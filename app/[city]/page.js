@@ -213,7 +213,7 @@ export default async function Home({ params }) {
               </span>
             </div>
           </div>
-          <h2 className="font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium text-lg leading-tight md:text-base text-xs">
+          <h2 className="font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium text-lg leading-tight md:text-lg text-xs">
             {data.preconstructions.length}+ Pre construction homes in{" "}
             {CapitalizeFirst(cleanCity)}. Affordable 1-4 bedroom new
             construction homes in highly desirable communities. Discover{" "}
@@ -224,10 +224,10 @@ export default async function Home({ params }) {
           <div className="d-flex sm-center mb-lg-0 sticky-buttons pb-0 mb-0 z-2 sticky-top">
             <div className="position-relative w-100">
               <div className="d-flex flex-nowrap overflow-auto pb-2 hide-scrollbar">
-                <div className="d-flex gap-2 flex-nowrap">
-                  <h3>
+                <div className="d-flex gap-2 flex-nowrap ">
+                  <h3 className="">
                     <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m whitespace-nowrap"
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m whitespace-nowrap border-2 border-transparent hover:border-b-[#FFC007]"
                       href={`/${params.city.split("-homes-")[0]}/upcoming/`}
                     >
                       Upcoming Projects {CapitalizeFirst(params.city)}
@@ -235,16 +235,15 @@ export default async function Home({ params }) {
                   </h3>
                   <h3>
                     <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 me-2 whitespace-nowrap"
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 me-2 whitespace-nowrap border-2 border-transparent hover:border-b-[#FFC007]"
                       href={`/${params.city.split("-homes-")[0]}/townhomes/`}
                     >
                       New Townhomes {CapitalizeFirst(params.city)}
                     </Link>
                   </h3>
-
                   <h3>
                     <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m whitespace-nowrap"
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m whitespace-nowrap border-2 border-transparent hover:border-b-[#FFC007]"
                       href={`/${params.city.split("-homes-")[0]}/detached/`}
                     >
                       New Detached Homes {CapitalizeFirst(params.city)}
@@ -252,16 +251,15 @@ export default async function Home({ params }) {
                   </h3>
                   <h3>
                     <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 whitespace-nowrap"
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 whitespace-nowrap border-2 border-transparent hover:border-b-[#FFC007]"
                       href={`/${params.city.split("-homes-")[0]}/condos/`}
                     >
                       New Condos {CapitalizeFirst(params.city)}
                     </Link>
                   </h3>
-
                   <h4>
                     <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-warning whitespace-nowrap"
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-2 border-transparent hover:border-b-[#FFC007]"
                       href={`/${
                         params.city.split("-homes-")[0]
                       }-homes-under-500k`}
@@ -271,7 +269,7 @@ export default async function Home({ params }) {
                   </h4>
                   <h4>
                     <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-warning whitespace-nowrap"
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-2 border-transparent hover:border-b-[#FFC007]"
                       href={`/${
                         params.city.split("-homes-")[0]
                       }-homes-under-1-million`}
@@ -281,7 +279,7 @@ export default async function Home({ params }) {
                   </h4>
                   <h4>
                     <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-warning whitespace-nowrap"
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-2 border-transparent hover:border-b-[#FFC007]"
                       href={`/${
                         params.city.split("-homes-")[0]
                       }-homes-under-1.5-million`}

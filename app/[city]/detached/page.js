@@ -91,7 +91,7 @@ export default async function Home({ params }) {
                 </span>
               </div>
             </h1>
-            <h2 className=" font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium md:text-base text-xs">
+            <h2 className=" font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium md:text-lg text-xs">
               {data.preconstructions.length}+ Pre construction detached homes in{" "}
               {CapitalizeFirst(params.city)}. Affordable 1-4 bedroom new
               construction detached homes in highly desirable communities.
@@ -101,11 +101,11 @@ export default async function Home({ params }) {
             </h2>
           </div>
           <div className="d-flex sm-center pb-2 pb-md-0 sticky-buttons z-0">
-            <div className="d-flex flex-column flex-md-row mb-md-4 mb-0 mt-1 overflow-hidden ">
+            <div className="d-flex flex-column flex-md-row mb-md-4 mb-0 mt-1 overflow-hidden">
               <div className="d-flex gap-2">
                 <h3>
                   <Link
-                    className="link-black badge py-2 my-1  bg-white shadow-sm text-dark fs-small fw-m"
+                    className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m border-2 border-transparent hover:border-b-[#FFC007]"
                     href={`/${params.city}/`}
                   >
                     All Projects in {CapitalizeFirst(params.city)}
@@ -113,7 +113,7 @@ export default async function Home({ params }) {
                 </h3>
                 <h3>
                   <Link
-                    className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m  mx-0 me-2"
+                    className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 me-2 border-2 border-transparent hover:border-b-[#FFC007]"
                     href={`/${params.city}/upcoming/`}
                   >
                     Upcoming Projects in {CapitalizeFirst(params.city)}
@@ -123,7 +123,7 @@ export default async function Home({ params }) {
               <div className="d-flex gap-2">
                 <h3>
                   <Link
-                    className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m"
+                    className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m border-2 border-transparent hover:border-b-[#FFC007]"
                     href={`/${params.city}/townhomes/`}
                   >
                     New Townhomes {CapitalizeFirst(params.city)}
@@ -131,7 +131,7 @@ export default async function Home({ params }) {
                 </h3>
                 <h3>
                   <Link
-                    className="link-black badge py-2 my-1  bg-white shadow-sm text-dark fs-small fw-m"
+                    className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m border-2 border-transparent hover:border-b-[#FFC007]"
                     href={`/${params.city}/condos/`}
                   >
                     New Condos {CapitalizeFirst(params.city)}

@@ -284,7 +284,6 @@ export default async function PropertyDetailPage({ params }) {
           <PropertyGallery
             images={property.images}
             propertyAddress={`${property.StreetNumber} ${property.StreetName} ${property.StreetSuffix}, ${property.City}, ${property.StateOrProvince}`}
-            virtualTours={virtualTours}
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2 max-w-5xl mx-auto">
@@ -660,7 +659,7 @@ export default async function PropertyDetailPage({ params }) {
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">
                     Price Comparison
                   </h3>
-                  <div className="bg-white rounded-lg">
+                  <div className="bg-white rounded-lg ">
                     <MarketComparisonChart
                       currentPrice={property.ListPrice}
                       comparisons={[
