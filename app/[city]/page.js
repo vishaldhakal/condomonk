@@ -5,6 +5,9 @@ import PreconSchema from "@/components/PreconSchema";
 import Link from "next/link";
 import Newsletter from "@/components/Newsletter";
 import Image from "next/legacy/image";
+import CityDirectory from "@/components/CityDirectory";
+import AssignmentCard from "@/components/assignment/AssignmentCard";
+import BlogCard from "@/components/blogCard";
 
 async function getData(city, priceFilter = null) {
   let url = `https://api.condomonk.ca/api/preconstructions-city/${city}`;
@@ -52,6 +55,74 @@ async function getFeaturedData(city) {
   }
 
   return res.json();
+}
+
+async function getDevData() {
+  try {
+    const res = await fetch(
+      "https://api.condomonk.ca/api/developers?page_size=800",
+      {
+        next: { revalidate: 10 }, // Cache for 10 seconds like in builders page
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
+    const text = await res.text(); // Get response as text first
+    try {
+      return JSON.parse(text); // Then try to parse it
+    } catch (e) {
+      console.error("JSON Parse Error:", e);
+      console.error("Received data:", text);
+      throw new Error("Invalid JSON response");
+    }
+  } catch (error) {
+    console.error("Fetch error:", error);
+    return { results: [] }; // Return empty results on error
+  }
+}
+
+async function getAssignments(city) {
+  let cityFormat = city
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+
+  try {
+    const res = await fetch(
+      `https://api.toassign.com/public/assignments?status=Available&regions=${cityFormat}`,
+      {
+        next: { revalidate: 3600 }, // Cache for 1 hour
+      }
+    );
+
+    if (!res.ok) {
+      return { data: [] };
+    }
+    return res.json();
+  } catch (error) {
+    console.error(`Error loading assignments for ${city}:`, error);
+    return { data: [] };
+  }
+}
+
+async function getCityBlogs(city) {
+  try {
+    const res = await fetch(`https://api.condomonk.ca/api/news/?city=${city}`, {
+      next: { revalidate: 3600 }, // Cache for 1 hour
+    });
+
+    if (!res.ok) {
+      return [];
+    }
+
+    const blogs = await res.json();
+    return Array.isArray(blogs) ? blogs.slice(0, 4).reverse() : [];
+  } catch (error) {
+    console.error(`Error loading blogs for ${city}:`, error);
+    return [];
+  }
 }
 
 const CapitalizeFirst = (city) => {
@@ -107,10 +178,53 @@ function getCleanCity(city) {
 }
 
 export default async function Home({ params }) {
-  const priceFilter = getPriceFilter(params.city);
-  const cleanCity = getCleanCity(params.city);
-  const data = await getData(cleanCity, priceFilter);
-  const featured_data = await getFeaturedData(cleanCity);
+  const { city } = params;
+  const cleanCity = getCleanCity(city);
+  const priceFilter = getPriceFilter(city);
+
+  // Fetch all data in parallel using Promise.all
+  const [data, featuredData, devData, assignments, cityBlogs] =
+    await Promise.all([
+      getData(cleanCity, priceFilter),
+      getFeaturedData(cleanCity),
+      getDevData(),
+      getAssignments(cleanCity),
+      getCityBlogs(cleanCity),
+    ]);
+
+  // Filter developers for this city
+  const cityDevelopers = devData.results.filter((dev) => {
+    // Check if developer has projects in this city
+    return data.preconstructions.some(
+      (project) => project.developer_name === dev.name
+    );
+  });
+
+  // Prepare data for CityDirectory
+  const cityDirectoryData = {
+    city_data: {
+      developers: cityDevelopers.map((dev) => ({
+        id: dev.id,
+        name: dev.name || "", // Provide default empty string
+        slug: dev.slug || "", // Provide default empty string
+        project_count: data.preconstructions.filter(
+          (p) => p.developer_name === dev.name
+        ).length,
+      })),
+      project_types: [
+        ...new Set(data.preconstructions.map((p) => p.project_type)),
+      ],
+      status_summary: {},
+    },
+    all_projects: data.preconstructions.map((p) => ({
+      id: p.id,
+      project_name: p.project_name || "", // Provide default empty string
+      slug: p.slug || "", // Provide default empty string
+      developer_name: p.developer_name || "Unknown Developer", // Provide default value
+      project_type: p.project_type || "", // Provide default empty string
+      status: p.status || "", // Provide default empty string
+    })),
+  };
 
   // Function to format the price filter for display
   const formatPriceFilter = (filter) => {
@@ -306,8 +420,8 @@ export default async function Home({ params }) {
           {eventbanner()}
           <div className="mt-md-5 mt-0"></div>
           <div className="row row-cols-2 row-cols-md-4 gy-2 gy-lg-4  gx-3 gx-lg-3 ">
-            {featured_data.preconstructions &&
-              featured_data.preconstructions.map((item, no) => (
+            {featuredData.preconstructions &&
+              featuredData.preconstructions.map((item, no) => (
                 <div className="col" key={item.id}>
                   <script
                     key={item.slug}
@@ -331,7 +445,7 @@ export default async function Home({ params }) {
                   />
                   <CondoCard
                     {...item}
-                    no={getNo(featured_data.preconstructions.length, no)}
+                    no={getNo(featuredData.preconstructions.length, no)}
                   />
                 </div>
               ))}
@@ -404,6 +518,67 @@ export default async function Home({ params }) {
                 </div>
               ))}
           </div>
+
+          {/* Assignment Sale Section */}
+          {assignments.data && assignments.data.length > 0 && (
+            <>
+              <div className="pt-5"></div>
+              <div className="d-flex">
+                <div>
+                  <h2 className="main-title font-family2 pb-md-2 pb-2">
+                    Assignment for sale in {CapitalizeFirst(cleanCity)}
+                  </h2>
+                  <p>
+                    Discover the best deals on price-reduced assignments in{" "}
+                    {CapitalizeFirst(cleanCity)}.
+                  </p>
+                </div>
+              </div>
+
+              <div className="row row-cols-1 row-cols-md-4 gy-4 gx-3">
+                {assignments.data.map((assignment, index) => (
+                  <div className="col" key={assignment.id}>
+                    <AssignmentCard assignment={assignment} index={index} />
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+          {/* Blog Section */}
+          {cityBlogs.length > 0 && (
+            <>
+              <div className="pt-5 mt-5"></div>
+              <div className="pt-5"></div>
+              <div className="d-flex">
+                <div>
+                  <h2 className="main-title font-family2 pb-md-2">
+                    Latest News and Insights in {CapitalizeFirst(cleanCity)}
+                  </h2>
+                </div>
+              </div>
+              <p className="mb-4">
+                Stay updated with the latest real estate news, market trends,
+                and insights from {CapitalizeFirst(cleanCity)}.
+              </p>
+              <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 gy-4 gx-3">
+                {cityBlogs.map((blog) => (
+                  <div className="col" key={blog.id}>
+                    <BlogCard blog={blog} />
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+          <div className="pt-5 mt-5"></div>
+          <div className="pt-5 mt-5"></div>
+
+          <CityDirectory
+            cityData={cityDirectoryData}
+            cityName={CapitalizeFirst(cleanCity)}
+            citySlug={cleanCity}
+            devData={devData}
+          />
           <div className="py-5 my-md-5 my-0" id="contact">
             <div className="container">
               <div className="row justify-content-center">
@@ -442,6 +617,7 @@ export default async function Home({ params }) {
           </div>
           <div className="pt-5 mt-5"></div>
           <div className="pt-5 mt-5"></div>
+
           <Newsletter />
           {getSEOParagraph(cleanCity, priceFilter) && (
             <div className="row justify-content-start mb-5">

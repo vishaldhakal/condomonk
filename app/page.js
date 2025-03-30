@@ -155,9 +155,14 @@ export default async function Home(props) {
       <div className="container my-4 ">
         <div className="row md:pt-20 pt-10 align-items-center justify-content-between ">
           <div className="col-md-6">
-            <h1 className="font-family2 fw-bold sm-center mt-4 mt-md-0 text-4xl">
-              Looking For A Pre Construction Home?
-            </h1>
+            <h2 className="font-family2 fw-bold sm-center mt-4 mt-md-0 text-2xl text-black no-underline hover:underline ">
+              <Link
+                href="/pre-construction-homes"
+                className="text-black hover:underline "
+              >
+                2500+ Pre construction homes across Canada
+              </Link>
+            </h2>
             <div className="buttons my-3 sm-center">
               <Link href="#contact">
                 <button className="button btn btn-dark  mr-2">
@@ -744,73 +749,8 @@ export default async function Home(props) {
         </div>
       </div>
 
-      <div className="container mt-5">
-        <div className="row pt-5">
-          <div className="col-12">
-            <h2 className="fw-mine text-center mb-2 fs-1 font-family2 fw-mine fs-bi">
-              Homes For Sale in Toronto
-            </h2>
-            <h3 className=" text-center mb-2 fs-6">
-              Toronto homes for sale | Affordable 1 - 4 bedroom homes in Toronto
-              from $1 to $5M
-            </h3>
-            <div className="text-center mb-4">
-              <Link
-                href="/resale/ontario/toronto/homes-for-sale"
-                className="text-primary"
-              >
-                View more homes for sale in Toronto{" "}
-                <i className="bi bi-arrow-right"></i>
-              </Link>
-            </div>
-            <div className="row row-cols-2 row-cols-md-5 g-2 mb-5">
-              {toronto_resale.properties?.slice(0, 5).map((property) => (
-                <div className="col" key={property.ListingKey}>
-                  <PropertyCard property={property} />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className="pt-5">
         <div className="container " id="projects">
-          <div className="d-flex align-items-center justify-content-center sm-center">
-            <h2 className="fw-mine ccent-line fs-big mb-0 pb-0 sm-center">
-              <Link
-                href={"/calgary"}
-                className="fw-mine text-center mb-0 fs-1 font-family2 fw-mine fs-bi text-black leading-none"
-              >
-                Pre Construction Homes in Calgary
-              </Link>
-            </h2>
-          </div>
-          <div className="d-flex flex-column justify-content-center flex-column align-items-center mb-lg-5 mb-2">
-            <p className="fs-5 mb-0 text-center">
-              Explore 20+ pre construction homes for sale in Calgary
-            </p>
-            <Link href={"/calgary"} className="mt-1 text-mine text-primary">
-              More communities in Calgary{" "}
-              <i className="bi bi-arrow-right-short"></i>
-            </Link>
-          </div>
-          <div className="row row-cols-2 row-cols-md-4 gy-md-5 gx-3">
-            {data.preconstructions &&
-              data.preconstructions.slice(0, 8).map((item) => (
-                <div className="col" key={item.id}>
-                  <script
-                    key={item.slug}
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{
-                      __html: JSON.stringify(PreconSchema(item)),
-                    }}
-                  />
-                  <CondoCard {...item} />
-                </div>
-              ))}
-          </div>
-
           <div className="py-5 my-4"></div>
           <div className="d-flex align-items-center justify-content-center">
             <h2 className="fw-mine text-center mb-0 fs-1 font-family2 fw-mine fs-bi">

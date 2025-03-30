@@ -51,14 +51,30 @@ export default async function PricePage({ params }) {
   const { city, price } = params;
   const data = await getData(city, price);
   const formattedCity = CapitalizeFirst(city);
-  const formattedPrice = price.replace("-", " ").replace("k", ",000");
+
+  // Modified to handle different price formats
+  let formattedPrice;
+  if (
+    price.includes("-") &&
+    price.includes("k") &&
+    !price.startsWith("under-")
+  ) {
+    // For price ranges like "500k-600k", keep the hyphen
+    formattedPrice = price;
+  } else if (price.startsWith("under-") || price.startsWith("over-")) {
+    // For "under-500k" or "over-700k", remove the hyphen
+    formattedPrice = price.replace("-", " ").replace("k", "K");
+  } else {
+    // For other formats
+    formattedPrice = price.replace("-", " ").replace("000", "K");
+  }
 
   return (
     <div className="container">
-      <h1 className="main-title font-family2 pb-2 pb-md-0">
+      <h1 className="main-title font-family2 pb-2 pb-md-0 pt-10">
         New Pre construction Homes in {formattedCity} - {formattedPrice}
       </h1>
-      <h2 className="font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium text-lg">
+      <h2 className="font-normal sm-center pb-2 pt-1 pb-md-0 mb-0 fw-medium text-lg mb-3">
         {data.preconstructions.length} Pre construction or new homes, condos and
         townhomes for sale in {formattedCity} priced {formattedPrice} on
         condomonk.

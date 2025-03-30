@@ -57,7 +57,7 @@ export default async function Home({ params }) {
           <div className="col">
             <div className="py-md-4"></div>
             <h1 className=" text-center fs-1 fw-bold fs-gta pt-5 my-4 font-family2">
-              List of Pre Construction Projects in <br /> Canada
+              List of Pre Construction Projects in Canada
             </h1>
             <h2 className="text-success mt-4 text-center">
               Register Today For VIP First Access
@@ -70,60 +70,72 @@ export default async function Home({ params }) {
                 Register Now
               </button>
             </div>
-            <div className="d-flex flex-column align-items-center justify-content-center">
-              <div className="pb-1 ww">
-                <SearchBar cities={cities} />
-              </div>
-            </div>
           </div>
         </div>
-        <div className="py-5 my-3"></div>
         <div className="container">
-          <div className="row row-cols-1 row-cols-md-1 gy-4">
-            {all_data &&
-              all_data.length > 0 &&
-              all_data.map((item) => (
-                <div className="col">
-                  <Link href={"/" + item.slug} className="link-black">
-                    <h4 className="fs-4 fw-bold font-family2">{item.name}</h4>
-                  </Link>
-                  <div className="maxhh">
-                    <div className="row row-cols-2 row-cols-md-5">
-                      {item.preconstructions &&
-                        item.preconstructions.map((precon, no) => (
-                          <Link
-                            href={`/${item.slug}/${precon.slug}`}
-                            className="mb-0 fs-6 text-dark col"
-                            target="_blank"
-                          >
-                            {precon.project_name}
-                          </Link>
-                        ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </div>
+          {cities &&
+            cities.map((city) => (
+              <div key={city.slug} className="mb-5">
+                {/* City Name */}
+                <h2 className="fs-2 fw-bold font-family2 mb-3">{city.name}</h2>
 
-          <div className="mt-5 pt-5">
-            <h3 className="fs-2 font-family2">
-              <strong>Explore more citites </strong>
-            </h3>
-            <div>
-              {cities &&
-                cities.map((item) => (
+                {/* Property Types */}
+                <div className="mb-4">
                   <Link
-                    href={"/" + item.slug}
-                    className="btn btn-light link-black me-3 mb-3"
+                    href={`/${city.slug}`}
+                    className="d-block mb-2 text-gray-600 hover:text-black"
                   >
-                    {item.name}
+                    Pre Construction Homes in {city.name}
                   </Link>
-                ))}
-            </div>
-          </div>
-          <div className="py-2"></div>
-          <div className="pt-5 mt-5"></div>
-          {/* <DolphyAdvantage /> */}
+                  <Link
+                    href={`/${city.slug}/townhomes`}
+                    className="d-block mb-2 text-gray-600 hover:text-black"
+                  >
+                    Pre Construction Townhomes in {city.name}
+                  </Link>
+                  <Link
+                    href={`/${city.slug}/condos`}
+                    className="d-block mb-2 text-gray-600 hover:text-black"
+                  >
+                    Pre Construction Condos in {city.name}
+                  </Link>
+                  <Link
+                    href={`/${city.slug}/detached`}
+                    className="d-block mb-2 text-gray-600 hover:text-black"
+                  >
+                    Pre Construction Detached Homes in {city.name}
+                  </Link>
+                </div>
+
+                {/* Projects in this city */}
+                <div className="mb-5">
+                  <h3 className="fs-4 fw-bold font-family2 mb-3">
+                    List of Pre Construction Projects in {city.name}
+                  </h3>
+                  {all_data
+                    .filter((item) => item.slug === city.slug)
+                    .map((item) => (
+                      <div key={item.slug} className="mb-4">
+                        <div className="row row-cols-2 row-cols-md-4 gx-3 gy-2">
+                          {item.preconstructions &&
+                            item.preconstructions.map((precon) => (
+                              <div className="col" key={precon.slug}>
+                                <Link
+                                  href={`/${item.slug}/${precon.slug}`}
+                                  className="text-gray-600 hover:text-black text-decoration-none"
+                                >
+                                  {precon.project_name}
+                                </Link>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            ))}
+
+          {/* Contact Form Section */}
           <div className="py-5 my-5" id="mycontact">
             <div className="container-fluid">
               <div className="row justify-content-center">
@@ -134,7 +146,7 @@ export default async function Home({ params }) {
                 />
               </div>
               <h2 className="fw-mine text-center px-md-4 fs-4">
-                Contact Dolphy Team Today
+                Contact Condomonk Team Today
               </h2>
               <div className="row row-cols-1 row-cols-md-3 mt-3">
                 <div className="col-md-3"></div>
@@ -148,9 +160,6 @@ export default async function Home({ params }) {
               </div>
             </div>
           </div>
-          <div className="pt-5 mt-5"></div>
-          <div className="pt-5 mt-5"></div>
-          <div className="pt-5 mt-5"></div>
         </div>
       </div>
     </>
