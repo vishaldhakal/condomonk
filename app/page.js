@@ -322,15 +322,234 @@ export default async function Home(props) {
         </div>
       </div>
 
-      {/* <div className="pt-5 " id="top10gta">
+      {/* Pre Construction Homes across Canada Section */}
+      <div className="pt-5 mt-5"></div>
+      <div className="pt-5"></div>
+
+      <div className="bg-white py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center ">
+            Pre Construction Homes across Canada
+          </h2>
+          <p className="text-center text-base mb-12">
+            Over 1,000 Pre Construction Homes Available Nationwide on the
+            Homebaba Platform
+          </p>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <Link href="/toronto" className="group">
+              <div className="relative rounded-lg overflow-hidden shadow-md h-48">
+                <img
+                  src="/city-images/toronto.jpg"
+                  alt="Toronto"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 p-4 text-white">
+                  <h3 className="text-xl font-bold mb-1">Toronto</h3>
+                  <p className="text-sm">200+ Projects</p>
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/ottawa" className="group">
+              <div className="relative rounded-lg overflow-hidden shadow-md h-48">
+                <img
+                  src="/city-images/ottawa.jpg"
+                  alt="Ottawa"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 p-4 text-white">
+                  <h3 className="text-xl font-bold mb-1">Ottawa</h3>
+                  <p className="text-sm">120+ Projects</p>
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/mississauga" className="group">
+              <div className="relative rounded-lg overflow-hidden shadow-md h-48">
+                <img
+                  src="/city-images/mississauga.jpg"
+                  alt="Mississauga"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 p-4 text-white">
+                  <h3 className="text-xl font-bold mb-1">Mississauga</h3>
+                  <p className="text-sm">100+ Projects</p>
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/calgary" className="group">
+              <div className="relative rounded-lg overflow-hidden shadow-md h-48">
+                <img
+                  src="/city-images/calgary.jpg"
+                  alt="Calgary"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 p-4 text-white">
+                  <h3 className="text-xl font-bold mb-1">Calgary</h3>
+                  <p className="text-sm">50+ Projects</p>
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/barrie" className="group">
+              <div className="relative rounded-lg overflow-hidden shadow-md h-48">
+                <img
+                  src="/city-images/barrie.jpg"
+                  alt="Barrie"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 p-4 text-white">
+                  <h3 className="text-xl font-bold mb-1">Barrie</h3>
+                  <p className="text-sm">40+ Projects</p>
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/brampton" className="group">
+              <div className="relative rounded-lg overflow-hidden shadow-md h-48">
+                <img
+                  src="/city-images/brampton.jpg"
+                  alt="Brampton"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 p-4 text-white">
+                  <h3 className="text-xl font-bold mb-1">Brampton</h3>
+                  <p className="text-sm">80+ Projects</p>
+                </div>
+              </div>
+            </Link>
+
+            {/* New city cards - Row 2 */}
+            <Link href="/pickering" className="group">
+              <div className="relative rounded-lg overflow-hidden shadow-md h-48">
+                <img
+                  src="/city-images/pickering.jpg"
+                  alt="Pickering"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 p-4 text-white">
+                  <h3 className="text-xl font-bold mb-1">Pickering</h3>
+                  <p className="text-sm">30+ Projects</p>
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/hamilton" className="group">
+              <div className="relative rounded-lg overflow-hidden shadow-md h-48">
+                <img
+                  src="/city-images/hamilton.jpg"
+                  alt="Hamilton"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 p-4 text-white">
+                  <h3 className="text-xl font-bold mb-1">Hamilton</h3>
+                  <p className="text-sm">70+ Projects</p>
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/milton" className="group">
+              <div className="relative rounded-lg overflow-hidden shadow-md h-48">
+                <img
+                  src="/city-images/milton.jpeg"
+                  alt="Milton"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 p-4 text-white">
+                  <h3 className="text-xl font-bold mb-1">Milton</h3>
+                  <p className="text-sm">40+ Projects</p>
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/oakville" className="group">
+              <div className="relative rounded-lg overflow-hidden shadow-md h-48">
+                <img
+                  src="/city-images/oakville.jpg"
+                  alt="Oakville"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 p-4 text-white">
+                  <h3 className="text-xl font-bold mb-1">Oakville</h3>
+                  <p className="text-sm">60+ Projects</p>
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/waterloo" className="group">
+              <div className="relative rounded-lg overflow-hidden shadow-md h-48">
+                <img
+                  src="/city-images/waterloo.jpeg"
+                  alt="Waterloo"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 p-4 text-white">
+                  <h3 className="text-xl font-bold mb-1">Waterloo</h3>
+                  <p className="text-sm">50+ Projects</p>
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/cambridge" className="group">
+              <div className="relative rounded-lg overflow-hidden shadow-md h-48">
+                <img
+                  src="/city-images/cambridge.jpeg"
+                  alt="Cambridge"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 p-4 text-white">
+                  <h3 className="text-xl font-bold mb-1">Cambridge</h3>
+                  <p className="text-sm">30+ Projects</p>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          <div className="mt-12 text-center">
+            <Link
+              href="/pre-construction-homes"
+              className="inline-flex items-center justify-center px-6 py-3 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-colors"
+            >
+              View All Projects
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 ml-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="py-5 " id="top10gta">
         <div className="container pt-5 ">
           <div className="d-flex flex-column align-items-center justify-content-center">
-            <h2 className="fw-mine fs-big ">
+            <h2 className="fw-mine fs-1">
               <span className="link-black font-family2 mb-2">
                 Featured Project
               </span>
             </h2>
-            <p className="fs-5  text-center mb-2">
+            <p className="fs-6  text-center mb-2">
               Explore Top 10 Pre Construction Project for sale in GTA
             </p>
             <div className="text-center mb-2 ">
@@ -358,9 +577,9 @@ export default async function Home(props) {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
 
-      <div className="py-5 my-2"></div>
+      <div className=" py-5 my-2"></div>
       <Link href={"/resale/ontario"}>
         <h2 className="fw-mine text-center mb-5 accent-line fs-1 font-family2 text-black">
           Explore Resale Homes For Sale in Ontario
@@ -730,7 +949,7 @@ export default async function Home(props) {
         <div className="text-center mt-8">
           <Link
             href="/resale/ontario/homes-for-sale"
-            className="inline-flex items-center justify-center px-6 py-3 border bg-orange-500 text-white rounded-full font-medium "
+            className="inline-flex items-center justify-center px-6 py-3 border bg-black text-white rounded-full font-medium "
           >
             View All Ontario Properties
             <svg
