@@ -28,12 +28,10 @@ const AssignmentCard = ({ assignment, index }) => {
       >
         <div className="relative h-48 w-full overflow-hidden group">
           {assignment.image1 ? (
-            <Image
+            <img
               src={assignment.image1}
               alt={`${assignment.project_name} - ${assignment.unit_type}`}
-              fill
-              className="object-cover transition-all duration-300 ease-in-out group-hover:scale-110"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover transition-all duration-300 ease-in-out group-hover:scale-110 w-full h-48"
             />
           ) : (
             <div className="h-full w-full bg-gray-100 flex items-center justify-center">

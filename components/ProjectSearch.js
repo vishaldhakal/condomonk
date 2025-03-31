@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 const SearchWithAutocomplete = ({
   isHomepage = false,
   searchType = "sale",
+  setSearchType = () => {},
   showOnlyPreconstruction = false,
   generateCityUrl,
   onNavigationStart,
@@ -30,10 +31,14 @@ const SearchWithAutocomplete = ({
   const [isFocused, setIsFocused] = useState(false);
   const [isTabbing, setIsTabbing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const inputRef = useRef(null);
   const dropdownRef = useRef(null);
   const router = useRouter();
+
+  // Add localSearchType state at component level
+  const [localSearchType, setLocalSearchType] = useState(searchType);
 
   // Add this helper function to capitalize first letter of each word
   const capitalizeWords = (str) => {
@@ -83,8 +88,11 @@ const SearchWithAutocomplete = ({
         let preconResponse = { data: { cities: [], projects: [] } };
 
         if (searchTerm.length >= 2) {
-          // Only fetch property data if not showing only preconstruction
-          if (!showOnlyPreconstruction) {
+          // Only fetch property data if not in preconstruction mode
+          if (
+            localSearchType !== "preconstruction" &&
+            !showOnlyPreconstruction
+          ) {
             const capitalizedTerm = capitalizeWords(searchTerm);
             const response = await fetch(
               `/api/search?term=${encodeURIComponent(capitalizedTerm)}`
@@ -95,47 +103,60 @@ const SearchWithAutocomplete = ({
             propertyResponse = await response.json();
           }
 
-          // Always fetch preconstruction data if in preconstruction tab or showOnlyPreconstruction is true
-          if (searchType === "preconstruction" || showOnlyPreconstruction) {
+          // Fetch preconstruction data if in preconstruction mode
+          if (
+            localSearchType === "preconstruction" ||
+            showOnlyPreconstruction
+          ) {
             preconResponse = await axios.get(
-              "https://api.condomonk.ca/api/all-precons-search/?search=" +
+              `https://api.condomonk.ca/api/all-precons-search/?search=${encodeURIComponent(
                 searchTerm.toLowerCase()
+              )}`
             );
           }
         }
 
-        // Update the data state based on showOnlyPreconstruction
+        // Update data based on current searchType
         setData({
-          cities: showOnlyPreconstruction
-            ? preconResponse.data.cities || []
-            : [],
-          projects: showOnlyPreconstruction
-            ? preconResponse.data.projects || []
-            : [],
-          resaleCities: showOnlyPreconstruction ? [] : allCities,
-          properties: showOnlyPreconstruction
-            ? []
-            : propertyResponse.value || [],
+          cities:
+            localSearchType === "preconstruction"
+              ? preconResponse.data.cities || []
+              : [],
+          projects:
+            localSearchType === "preconstruction"
+              ? preconResponse.data.projects || []
+              : [],
+          resaleCities: localSearchType !== "preconstruction" ? allCities : [],
+          properties:
+            localSearchType !== "preconstruction"
+              ? propertyResponse.value || []
+              : [],
         });
 
         // Update search results similarly
         setSearchResults({
-          cities: showOnlyPreconstruction
-            ? preconResponse.data.cities || []
-            : [],
-          projects: showOnlyPreconstruction
-            ? preconResponse.data.projects || []
-            : [],
-          resaleCities: showOnlyPreconstruction
-            ? []
-            : allCities
-                .filter((cityObj) =>
-                  cityObj.city.toLowerCase().includes(searchTerm.toLowerCase())
-                )
-                .slice(0, 5),
-          properties: showOnlyPreconstruction
-            ? []
-            : propertyResponse.value || [],
+          cities:
+            localSearchType === "preconstruction"
+              ? preconResponse.data.cities || []
+              : [],
+          projects:
+            localSearchType === "preconstruction"
+              ? preconResponse.data.projects || []
+              : [],
+          resaleCities:
+            localSearchType !== "preconstruction"
+              ? allCities
+                  .filter((cityObj) =>
+                    cityObj.city
+                      .toLowerCase()
+                      .includes(searchTerm.toLowerCase())
+                  )
+                  .slice(0, 5)
+              : [],
+          properties:
+            localSearchType !== "preconstruction"
+              ? propertyResponse.value || []
+              : [],
         });
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -150,13 +171,22 @@ const SearchWithAutocomplete = ({
       }
     };
 
-    // Debounce the search
-    const timeoutId = setTimeout(() => {
-      fetchData();
-    }, 300);
-
-    return () => clearTimeout(timeoutId);
-  }, [searchTerm, searchType, showOnlyPreconstruction]);
+    // Clear results when searchType changes
+    if (!searchTerm) {
+      setSearchResults({
+        cities: [],
+        projects: [],
+        resaleCities: [],
+        properties: [],
+      });
+    } else {
+      // Debounce the search
+      const timeoutId = setTimeout(() => {
+        fetchData();
+      }, 300);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [searchTerm, localSearchType, showOnlyPreconstruction]);
 
   // Modify the handleRouteChange function in useEffect
   useEffect(() => {
@@ -178,6 +208,14 @@ const SearchWithAutocomplete = ({
 
     return () => {
       window.removeEventListener("popstate", handleRouteChange);
+    };
+  }, []);
+
+  // Add cleanup effect for navigation state
+  useEffect(() => {
+    // Cleanup function to reset navigation state
+    return () => {
+      setIsNavigating(false);
     };
   }, []);
 
@@ -236,19 +274,6 @@ const SearchWithAutocomplete = ({
     }
   };
 
-  // Modify the handleTabClick function
-  const handleTabClick = (type) => {
-    setSearchType(type);
-    // Clear the search results when switching tabs
-    setSearchTerm("");
-    setSearchResults({
-      cities: [],
-      projects: [],
-      resaleCities: [],
-      properties: [],
-    });
-  };
-
   const handleFocus = () => {
     setIsFocused(true);
   };
@@ -282,18 +307,19 @@ const SearchWithAutocomplete = ({
     }, 100);
   };
 
-  // Update the handleLinkClick function
+  // Update handleLinkClick function
   const handleLinkClick = async (e, href) => {
     e.preventDefault();
     e.stopPropagation();
 
     // Show loading state
+    setIsNavigating(true);
     onNavigationStart?.();
 
     try {
       await router.push(href);
 
-      // Clear the search after successful navigation
+      // Clear states
       setIsFocused(false);
       setSearchTerm("");
       setSearchResults({
@@ -302,21 +328,29 @@ const SearchWithAutocomplete = ({
         resaleCities: [],
         properties: [],
       });
+
+      // Reset navigation state immediately after push
+      setIsNavigating(false);
     } catch (error) {
       console.error("Navigation failed:", error);
+      // Reset navigation state on error
+      setIsNavigating(false);
     }
   };
 
-  // Update the handleTouchStart function
+  // Update handleTouchStart function
   const handleTouchStart = (e, href) => {
     e.preventDefault();
     e.stopPropagation();
 
     // Show loading state
+    setIsNavigating(true);
     onNavigationStart?.();
 
-    // Navigate
-    router.push(href);
+    // Navigate and reset state
+    router.push(href).finally(() => {
+      setIsNavigating(false);
+    });
   };
 
   // Apply different classes based on whether this is the homepage or not
@@ -335,6 +369,24 @@ const SearchWithAutocomplete = ({
   const placeholderText = isHomepage
     ? "Enter location, neighborhood, or property"
     : "Search for a city or project...";
+
+  // Update handleTabClick to use the state properly
+  const handleTabClick = (type) => {
+    // Keep the dropdown open
+    setIsFocused(true);
+
+    // Update local search type
+    setLocalSearchType(type);
+
+    // Clear the search results when switching tabs
+    setSearchTerm("");
+    setSearchResults({
+      cities: [],
+      projects: [],
+      resaleCities: [],
+      properties: [],
+    });
+  };
 
   return (
     <div
@@ -432,10 +484,10 @@ const SearchWithAutocomplete = ({
           {!isHomepage && (
             <div className="flex border-b border-gray-200">
               <button
-                onClick={() => handleTabClick("resale")}
+                onClick={() => handleTabClick("sale")}
                 onMouseDown={(e) => e.preventDefault()}
                 className={`flex-1 px-4 py-2.5 text-xs font-medium border-b-2 transition-colors ${
-                  searchType !== "preconstruction"
+                  localSearchType === "sale"
                     ? "border-[#FFA725] text-[#FFA725]"
                     : "border-transparent text-gray-500 hover:text-gray-700"
                 }`}
@@ -446,7 +498,7 @@ const SearchWithAutocomplete = ({
                 onClick={() => handleTabClick("preconstruction")}
                 onMouseDown={(e) => e.preventDefault()}
                 className={`flex-1 px-4 py-2.5 text-xs font-medium border-b-2 transition-colors ${
-                  searchType === "preconstruction"
+                  localSearchType === "preconstruction"
                     ? "border-[#FFC007] text-[#FFC007]"
                     : "border-transparent text-gray-500 hover:text-gray-700"
                 }`}
@@ -462,7 +514,7 @@ const SearchWithAutocomplete = ({
               isHomepage ? "max-h-[450px]" : "max-h-[400px]"
             } overflow-y-auto`}
           >
-            {searchType !== "preconstruction" && (
+            {localSearchType !== "preconstruction" && (
               <>
                 {/* Resale Cities Section - Moved to top */}
                 {searchResults.resaleCities.length > 0 && (
@@ -567,7 +619,7 @@ const SearchWithAutocomplete = ({
               </>
             )}
 
-            {searchType === "preconstruction" && (
+            {localSearchType === "preconstruction" && (
               <>
                 {/* Pre-Construction Cities */}
                 {searchResults.cities.map((city, index) => {
@@ -688,6 +740,14 @@ const SearchWithAutocomplete = ({
                 </div>
               )}
           </div>
+        </div>
+      )}
+
+      {/* Navigation Loading Overlay */}
+      {isNavigating && (
+        <div className="fixed inset-0 bg-white/70 backdrop-blur-sm z-50 flex flex-col items-center justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#32a953] border-t-transparent mb-4"></div>
+          <p className="text-gray-600 font-medium">Loading...</p>
         </div>
       )}
     </div>

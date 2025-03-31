@@ -62,6 +62,7 @@ const HomeSearch = () => {
         <ProjectSearch
           isHomepage={true}
           searchType={activeSearchType}
+          setSearchType={setActiveSearchType}
           onSearchStart={handleSearchStart}
           onNavigationStart={handleNavigationStart}
           generateCityUrl={(cityPath) => {

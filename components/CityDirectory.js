@@ -91,7 +91,7 @@ export default function CityDirectory({
             <Link
               key={type.value}
               href={`/${citySlug}${type.path}`}
-              className="text-sm text-gray-700 py-1 px-3 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+              className="text-sm text-blue-700 hover:text-blue-800 decoration-blue-700 underline-1 decoration-1 py-1 px-3"
             >
               {type.label}
             </Link>
@@ -109,7 +109,7 @@ export default function CityDirectory({
             <Link
               key={range.value}
               href={`/${citySlug}/price/${range.value}`}
-              className="text-sm text-gray-700 py-1 px-3 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+              className="text-sm text-blue-700 hover:text-blue-800 decoration-blue-700 underline decoration-1 py-1 px-3"
             >
               {range.label}
             </Link>
@@ -140,7 +140,7 @@ export default function CityDirectory({
                   )}
                 </div>
                 <div>
-                  <h3 className="text-sm font-medium text-gray-900 group-hover:text-gray-700">
+                  <h3 className="text-sm font-medium text-blue-700 underline group-hover:text-blue-800">
                     {developer.name}
                   </h3>
                   <div className="mt-1 flex items-center">
@@ -184,7 +184,7 @@ export default function CityDirectory({
                     <td className="px-3 py-2 whitespace-nowrap">
                       <Link
                         href={`/pre-construction-homes/${project.slug}`}
-                        className="text-sm text-gray-900 hover:text-blue-500"
+                        className="px-2 py-0.5 text-sm font-medium bg-gray-50 text-gray-900 rounded-lg"
                       >
                         {project.project_name}
                       </Link>
