@@ -91,7 +91,7 @@ export default function CityDirectory({
             <Link
               key={type.value}
               href={`/${citySlug}${type.path}`}
-              className="text-sm text-blue-700 hover:text-blue-800 decoration-blue-700 underline-1 decoration-1 py-1 px-3"
+              className="text-sm text-blue-700 hover:text-blue-800   py-1 px-3"
             >
               {type.label}
             </Link>
@@ -109,7 +109,7 @@ export default function CityDirectory({
             <Link
               key={range.value}
               href={`/${citySlug}/price/${range.value}`}
-              className="text-sm text-blue-700 hover:text-blue-800 decoration-blue-700 underline decoration-1 py-1 px-3"
+              className="text-sm text-blue-700 hover:text-blue-800 decoration-blue-700  py-1 px-3"
             >
               {range.label}
             </Link>

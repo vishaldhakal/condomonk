@@ -5,7 +5,7 @@ import FixedContactButton from "@/components/FixedContactButton";
 import Link from "next/link";
 import SearchBar from "@/components/SearchBar";
 
-async function getData(city) {
+async function getData() {
   const res = await fetch("https://api.condomonk.ca/api/all-precons", {
     next: { revalidate: 10 },
   });
@@ -16,6 +16,7 @@ async function getData(city) {
 
   return res.json();
 }
+
 async function getCities() {
   const res = await fetch("https://api.condomonk.ca/api/all-city", {
     next: { revalidate: 10 },
@@ -45,9 +46,18 @@ export async function generateMetadata({ params }, parent) {
   };
 }
 
-export default async function Home({ params }) {
+export default async function Home() {
   let all_data = await getData();
   let cities = await getCities();
+
+  // Helper function to filter projects by type
+  const filterByType = (citySlug, type) => {
+    const cityData = all_data.find((data) => data.slug === citySlug);
+    if (!cityData || !cityData.preconstructions) return [];
+    return cityData.preconstructions.filter(
+      (project) => project.project_type === type
+    );
+  };
 
   return (
     <>
@@ -74,66 +84,137 @@ export default async function Home({ params }) {
         </div>
         <div className="container">
           {cities &&
-            cities.map((city) => (
-              <div key={city.slug} className="mb-5">
-                {/* City Name */}
-                <h2 className="fs-2 fw-bold font-family2 mb-3">{city.name}</h2>
+            cities.map((city) => {
+              // Get projects for each type
+              const condoProjects = filterByType(city.slug, "Condo");
+              const townhomeProjects = filterByType(city.slug, "Townhome");
+              const detachedProjects = filterByType(city.slug, "Detached");
 
-                {/* Property Types */}
-                <div className="mb-4">
-                  <Link
-                    href={`/${city.slug}`}
-                    className="d-block mb-2 text-gray-600 hover:text-black"
-                  >
-                    Pre Construction Homes in {city.name}
-                  </Link>
-                  <Link
-                    href={`/${city.slug}/townhomes`}
-                    className="d-block mb-2 text-gray-600 hover:text-black"
-                  >
-                    Pre Construction Townhomes in {city.name}
-                  </Link>
-                  <Link
-                    href={`/${city.slug}/condos`}
-                    className="d-block mb-2 text-gray-600 hover:text-black"
-                  >
-                    Pre Construction Condos in {city.name}
-                  </Link>
-                  <Link
-                    href={`/${city.slug}/detached`}
-                    className="d-block mb-2 text-gray-600 hover:text-black"
-                  >
-                    Pre Construction Detached Homes in {city.name}
-                  </Link>
-                </div>
+              // Only show city if it has any projects
+              if (
+                condoProjects.length === 0 &&
+                townhomeProjects.length === 0 &&
+                detachedProjects.length === 0
+              ) {
+                return null;
+              }
 
-                {/* Projects in this city */}
-                <div className="mb-5">
-                  <h3 className="fs-4 fw-bold font-family2 mb-3">
-                    List of Pre Construction Projects in {city.name}
-                  </h3>
-                  {all_data
-                    .filter((item) => item.slug === city.slug)
-                    .map((item) => (
-                      <div key={item.slug} className="mb-4">
-                        <div className="row row-cols-2 row-cols-md-4 gx-3 gy-2">
-                          {item.preconstructions &&
-                            item.preconstructions.map((precon) => (
-                              <div className="col" key={precon.slug}>
-                                <Link
-                                  href={`/${item.slug}/${precon.slug}`}
-                                  className="text-gray-600 hover:text-black text-decoration-none"
-                                >
-                                  {precon.project_name}
-                                </Link>
+              return (
+                <div key={city.slug} className="mb-5">
+                  {/* City Main Heading - Now Linked */}
+                  <Link href={`/${city.slug}`} className="text-decoration-none">
+                    <h3 className="fs-2 font-bold font-family2 mb-4 text-gray-800 hover:text-blue-700">
+                      Pre Construction Homes in {city.name}
+                    </h3>
+                  </Link>
+
+                  {/* Condos Section */}
+                  {condoProjects.length > 0 && (
+                    <div className="mb-4">
+                      <Link
+                        href={`/${city.slug}/condos`}
+                        className="text-decoration-none"
+                      >
+                        <h4 className="fs-5 mb-3 font-semibold text-gray-800 hover:text-blue-700">
+                          Pre Construction Condos in {city.name}
+                        </h4>
+                      </Link>
+                      <div className="row">
+                        {condoProjects.map((project) => (
+                          <div
+                            key={project.id}
+                            className="col-12 col-md-4 mb-3"
+                          >
+                            <Link
+                              href={`/${city.slug}/${project.slug}`}
+                              className="text-decoration-none"
+                            >
+                              <div className="d-flex align-items-center">
+                                <div>
+                                  <p className="mb-0 pb-0 leading-none text-gray-600 hover:text-blue-700 hover:underline">
+                                    {project.project_name}
+                                  </p>
+                                </div>
                               </div>
-                            ))}
-                        </div>
+                            </Link>
+                          </div>
+                        ))}
                       </div>
-                    ))}
+                    </div>
+                  )}
+
+                  {/* Townhomes Section */}
+                  {townhomeProjects.length > 0 && (
+                    <div className="mb-4">
+                      <Link
+                        href={`/${city.slug}/townhomes`}
+                        className="text-decoration-none"
+                      >
+                        <h4 className="fs-5 mb-3 font-semibold text-gray-800 hover:text-blue-700">
+                          Pre Construction Townhomes in {city.name}
+                        </h4>
+                      </Link>
+                      <div className="row">
+                        {townhomeProjects.map((project) => (
+                          <div
+                            key={project.id}
+                            className="col-12 col-md-4 mb-3"
+                          >
+                            <Link
+                              href={`/${city.slug}/${project.slug}`}
+                              className="text-decoration-none"
+                            >
+                              <div className="d-flex align-items-center">
+                                <div>
+                                  <p className="mb-0 pb-0 leading-none text-gray-600 hover:text-blue-700 hover:underline">
+                                    {project.project_name}
+                                  </p>
+                                </div>
+                              </div>
+                            </Link>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Detached Homes Section */}
+                  {detachedProjects.length > 0 && (
+                    <div className="mb-4">
+                      <Link
+                        href={`/${city.slug}/detached`}
+                        className="text-decoration-none"
+                      >
+                        <h4 className="fs-5 mb-3 font-semibold text-gray-800 hover:text-blue-700">
+                          Pre Construction Detached Homes in {city.name}
+                        </h4>
+                      </Link>
+                      <div className="row">
+                        {detachedProjects.map((project) => (
+                          <div
+                            key={project.id}
+                            className="col-12 col-md-4 mb-3"
+                          >
+                            <Link
+                              href={`/${city.slug}/${project.slug}`}
+                              className="text-decoration-none"
+                            >
+                              <div className="d-flex align-items-center">
+                                <div>
+                                  <p className="mb-0 pb-0 leading-none text-gray-600 hover:text-blue-700 hover:underline">
+                                    {project.project_name}
+                                  </p>
+                                </div>
+                              </div>
+                            </Link>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
 
           {/* Contact Form Section */}
           <div className="py-5 my-5" id="mycontact">
