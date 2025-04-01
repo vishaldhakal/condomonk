@@ -83,9 +83,9 @@ export default function CityDirectory({
     <div className="max-w-9xl mx-auto px-2 md:px-0 py-16">
       {/* Browse by Property Type */}
       <div className="pb-12">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-8">
+        <h4 className="text-2xl font-semibold text-gray-900 mb-8">
           Browse by Property Type
-        </h2>
+        </h4>
         <div className="flex flex-wrap gap-3">
           {projectTypes.map((type) => (
             <Link
@@ -101,9 +101,9 @@ export default function CityDirectory({
 
       {/* Browse by Price Range */}
       <div className="mb-12">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+        <h4 className="text-2xl font-semibold text-gray-900 mb-4">
           Browse by Price Range
-        </h2>
+        </h4>
         <div className="flex flex-wrap gap-3">
           {priceRanges.map((range) => (
             <Link
@@ -159,9 +159,9 @@ export default function CityDirectory({
 
       {/* Projects Table */}
       <div className="mt-16">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+        <h4 className="text-2xl font-semibold text-gray-900 mb-6">
           All Pre Construction Projects in {cityName}
-        </h2>
+        </h4>
         {cityData.all_projects && cityData.all_projects.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">

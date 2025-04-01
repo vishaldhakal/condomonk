@@ -525,9 +525,9 @@ export default async function Home({ params }) {
               <div className="pt-5"></div>
               <div className="d-flex">
                 <div>
-                  <h2 className="main-title font-family2 pb-md-2 pb-2">
+                  <h3 className="main-title font-family2 pb-md-2 pb-2">
                     Assignment for sale in {CapitalizeFirst(cleanCity)}
-                  </h2>
+                  </h3>
                   <p>
                     Discover the best deals on price-reduced assignments in{" "}
                     {CapitalizeFirst(cleanCity)}.
@@ -552,9 +552,9 @@ export default async function Home({ params }) {
               <div className="pt-5"></div>
               <div className="d-flex">
                 <div>
-                  <h2 className="main-title font-family2 pb-md-2">
+                  <h3 className="main-title font-family2 pb-md-2">
                     Latest News and Insights in {CapitalizeFirst(cleanCity)}
-                  </h2>
+                  </h3>
                 </div>
               </div>
               <p className="mb-4">
