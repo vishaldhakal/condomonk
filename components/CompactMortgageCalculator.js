@@ -215,12 +215,6 @@ export default function CompactMortgageCalculator({
                   Principal and Interest
                 </span>
               </div>
-              <div className="flex items-center">
-                <div className="w-3 h-3 rounded-full bg-red-400 mr-2"></div>
-                <span className="text-gray-600">
-                  ${formatCurrency(intrest).replace("$", "")} Property Taxes
-                </span>
-              </div>
             </div>
           </div>
         </div>
