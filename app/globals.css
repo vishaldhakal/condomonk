@@ -2920,3 +2920,42 @@ textarea {
     background-position: center;
     background-repeat: no-repeat;
 }
+
+/* Read More/Less Styles */
+.read-more-checkbox {
+    display: none;
+}
+
+.subtitle-container {
+    position: relative;
+}
+
+.read-more-content {
+    display: none;
+}
+
+.read-more-toggle {
+    color: #007bff;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.show-less-label {
+    display: none;
+}
+
+.read-more-checkbox:checked~.subtitle-container .read-more-content {
+    display: inline;
+}
+
+.read-more-checkbox:checked~.subtitle-container .show-more-label {
+    display: none;
+}
+
+.read-more-checkbox:checked~.subtitle-container .show-less-label {
+    display: inline;
+}
+
+.subtitle-text {
+    font-weight: normal;
+}
