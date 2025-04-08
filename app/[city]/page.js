@@ -8,6 +8,7 @@ import Image from "next/legacy/image";
 import CityDirectory from "@/components/CityDirectory";
 import AssignmentCard from "@/components/assignment/AssignmentCard";
 import BlogCard from "@/components/blogCard";
+import GoogleMap from "@/components/GoogleMap";
 
 async function getData(city, priceFilter = null) {
   let url = `https://api.condomonk.ca/api/preconstructions-city/${city}`;
@@ -192,7 +193,7 @@ export async function generateMetadata({ params }, parent) {
   const data = await getData(cleanCity);
 
   let title, description;
-  title = `Pre construction Homes in  ${CapitalizeFirst(cleanCity)}`;
+  title = `120+ Pre construction Homes in  ${CapitalizeFirst(cleanCity)}`;
   description = `${
     data.preconstructions.length
   }+ Pre-Construction Homes & New Developments in ${CapitalizeFirst(
@@ -315,7 +316,9 @@ export default async function Home({ params }) {
                     cleanCity
                   )} ${formatPriceFilter(priceFilter)} `
                 ) : (
-                  <>Pre Construction Homes in {CapitalizeFirst(cleanCity)} </>
+                  <>
+                    120+ Pre Construction Homes in {CapitalizeFirst(cleanCity)}{" "}
+                  </>
                 )}
               </h1>
             </div>
@@ -347,9 +350,9 @@ export default async function Home({ params }) {
             />
             <div className="subtitle-container">
               <span className="subtitle-text">
-                {data.preconstructions.length}+ Pre construction Homes in{" "}
-                {CapitalizeFirst(cleanCity)}, Ontario | Explore Floor Plans,
-                Pricing & Availability on Condomonk.
+                120+ Pre construction Homes in {CapitalizeFirst(cleanCity)},
+                Ontario | Explore Floor Plans, Pricing & Availability on
+                Condomonk.
               </span>
               <label
                 htmlFor="read-more"
@@ -361,19 +364,18 @@ export default async function Home({ params }) {
               </label>
               <span className="read-more-content subtitle-text">
                 {" "}
-                Find your dream home among {data.preconstructions.length}+ pre
-                construction properties in {CapitalizeFirst(cleanCity)},
-                Ontario, exclusively on Condomonk.ca—our go-to source for new
-                developments in the GTA. Browse a wide selection of condos,
-                townhouses, and detached houses from leading builders, with
-                pricing options perfect for first-time buyers and investors. Our
-                daily-updated listings feature the latest pre-construction and
-                under-construction projects, allowing you to filter by bedrooms
-                (1 to 4+), property type, and construction status. Whether
-                you're looking for affordable condos or luxury new builds,
-                Condomonk provides insider access to{" "}
-                {CapitalizeFirst(cleanCity)}'s hottest real estate
-                opportunities. <br />
+                Find your dream home among 120+ pre construction properties in{" "}
+                {CapitalizeFirst(cleanCity)}, Ontario, exclusively on
+                Condomonk.ca—our go-to source for new developments in the GTA.
+                Browse a wide selection of condos, townhouses, and detached
+                houses from leading builders, with pricing options perfect for
+                first-time buyers and investors. Our daily-updated listings
+                feature the latest pre-construction and under-construction
+                projects, allowing you to filter by bedrooms (1 to 4+), property
+                type, and construction status. Whether you're looking for
+                affordable condos or luxury new builds, Condomonk provides
+                insider access to {CapitalizeFirst(cleanCity)}'s hottest real
+                estate opportunities. <br />
                 <label
                   htmlFor="read-more"
                   className="read-more-toggle show-less-label ms-0"
@@ -619,6 +621,32 @@ export default async function Home({ params }) {
               </div>
             </>
           )}
+
+          {/* Google Map Section */}
+          <div className="py-16 pt-32">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                  Explore Pre Construction Homes in {CapitalizeFirst(cleanCity)}
+                </h2>
+                <p className="mt-2 text-lg text-gray-600 max-w-3xl mx-auto">
+                  Discover the prime locations and neighborhoods in{" "}
+                  {CapitalizeFirst(cleanCity)}. Our interactive map helps you
+                  visualize the city's layout and find the perfect location for
+                  your new home.
+                </p>
+              </div>
+              <div className="rounded-xl overflow-hidden shadow-lg">
+                <GoogleMap
+                  location={CapitalizeFirst(cleanCity) + ", Ontario, Canada"}
+                  width="100%"
+                  height={500}
+                  zoom={12}
+                />
+              </div>
+            </div>
+          </div>
+
           <div className="pt-5 mt-5"></div>
           <div className="flex justify-center items-center max-w-7xl mx-auto px-4 md:px-6 mt-10 mb-16">
             <div className="max-w-none mt-14">
