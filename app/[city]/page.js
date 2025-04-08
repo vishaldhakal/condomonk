@@ -138,6 +138,25 @@ function getCleanCity(city) {
   return city.split("-homes-")[0];
 }
 
+// Add formatPriceFilter function
+function formatPriceFilter(filter) {
+  if (!filter) return "";
+
+  if (filter.startsWith("under-")) {
+    return filter
+      .replace("under-500k", "under $500k")
+      .replace("under-1-million", "under $1 million")
+      .replace("under-1.5-million", "under $1.5 million");
+  }
+  if (filter === "over-700k") {
+    return "Over $700,000";
+  }
+  return filter
+    .replace("-", " to $")
+    .replace("k", ",000")
+    .replace("M", " million");
+}
+
 // Add getSEOParagraph function here
 function getSEOParagraph(cleanCity, priceFilter) {
   if (!priceFilter) {
@@ -239,25 +258,6 @@ export default async function Home({ params }) {
       project_type: p.project_type || "", // Provide default empty string
       status: p.status || "", // Provide default empty string
     })),
-  };
-
-  // Function to format the price filter for display
-  const formatPriceFilter = (filter) => {
-    if (filter.startsWith("under-")) {
-      return filter
-        .replace("under-500k", "under $500k")
-        .replace("under-1-million", "under $1 million")
-        .replace("under-1.5-million", "under $1.5 million")
-        .replace("K", ",000")
-        .replace("M", "million");
-    }
-    if (filter === "over-700K") {
-      return "Over $700,000";
-    }
-    return filter
-      .replace("-", " to $")
-      .replace("K", ",000")
-      .replace("M", " million");
   };
 
   const filteredprojects = (value) => {
