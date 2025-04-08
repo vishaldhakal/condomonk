@@ -48,7 +48,7 @@ export default function CondoCard(props) {
                 <span>Featured</span>
               </span>
             )}
-            <div className="relative w-full h-[200px] md:h-[300px]">
+            <div className="relative w-full h-[200px] md:h-[300px] overflow-hidden">
               <img
                 src={
                   props.image.image != null
@@ -58,7 +58,7 @@ export default function CondoCard(props) {
                 alt={`${props.project_name} - ${props.project_type} in ${props.city.name}`}
                 layout="fill"
                 objectFit="cover"
-                className="rounded-t-[25px]"
+                className="rounded-t-[25px] w-full h-full object-cover"
                 priority={props.priority}
                 quality={props.priority ? 85 : 75}
                 loading={props.priority ? "eager" : "lazy"}
