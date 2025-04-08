@@ -49,7 +49,7 @@ export default function CondoCard(props) {
               </span>
             )}
             <div className="relative w-full h-[200px] md:h-[300px]">
-              <Image
+              <img
                 src={
                   props.image.image != null
                     ? `https://api.condomonk.ca${props.image.image}`
