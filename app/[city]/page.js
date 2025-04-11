@@ -646,7 +646,6 @@ export default async function Home({ params }) {
               </div>
             </div>
           </div>
-
           <div className="pt-5 mt-5"></div>
           <div className="flex justify-center items-center max-w-7xl mx-auto px-4 md:px-6 mt-10 mb-16">
             <div className="max-w-none mt-14">
