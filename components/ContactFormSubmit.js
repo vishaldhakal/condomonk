@@ -30,12 +30,15 @@ function ContactFormSubmit(msgdata, setSubmitbtn, setCredentials) {
     }
   }
 
-  // Get the source from hostname (keeping this for backward compatibility)
-  // But now we'll use the full hostname for all environments including localhost
-  let source = "unknown";
-  if (typeof window !== 'undefined' && window.location && window.location.hostname) {
-    source = window.location.hostname;
-  }
+  // Use the full URL as the source as well to ensure it's being sent correctly
+  let source = fullUrl;
+
+  // Log all the data we're about to send
+  console.log("Form submission data:");
+  console.log("- Full URL:", fullUrl);
+  console.log("- Source:", source);
+  console.log("- City:", city);
+  console.log("- Project Name:", proj_name);
 
   // Form data for homebaba API
   let form_data = new FormData();
@@ -46,8 +49,14 @@ function ContactFormSubmit(msgdata, setSubmitbtn, setCredentials) {
   form_data.append("realtor", msgdata.realtor);
   form_data.append("proj_name", proj_name || ""); // Send empty string if null
   form_data.append("cityy", city || ""); // Send empty string if null
-  form_data.append("source", source); // Now using full hostname for all environments
+  form_data.append("source", source); // Now using full URL as source
   form_data.append("full_url", fullUrl); // Add the full URL to the form data
+  
+  // Log the FormData entries to verify what's being sent
+  console.log("FormData entries:");
+  for (let pair of form_data.entries()) {
+    console.log(`- ${pair[0]}: ${pair[1]}`);
+  }
 
   // Send request to Homebaba API
   axios
