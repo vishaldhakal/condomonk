@@ -1,32 +1,7 @@
 import Link from "next/link";
 
-export default function CityDirectory({
-  cityData,
-  cityName,
-  citySlug,
-  devData,
-}) {
-  if (!cityData || !devData?.results) return null;
-
-  // Filter developers that have projects in this city
-  const cityDevelopers = devData.results
-    .filter((dev) => {
-      return cityData.all_projects.some(
-        (project) => project.developer_name === dev.name
-      );
-    })
-    .map((dev) => ({
-      id: dev.id,
-      name: dev.name || "",
-      slug: dev.slug || "",
-      project_count: cityData.all_projects.filter(
-        (p) => p.developer_name === dev.name
-      ).length,
-      image: dev.image || "",
-      details: dev.details || "",
-    }));
-
-  console.log("City Developers:", cityDevelopers); // Debug log
+export default function CityDirectory({ cityData, cityName, citySlug }) {
+  if (!cityData) return null;
 
   const { project_types, status_summary } = cityData.city_data;
   const { all_projects } = cityData;
@@ -116,46 +91,6 @@ export default function CityDirectory({
           ))}
         </div>
       </div>
-
-      {/* Developers Section */}
-      {cityDevelopers.length > 0 && (
-        <div className="mb-16">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">
-            Pre Construction Homes by Developers in {cityName}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {cityDevelopers.map((developer) => (
-              <Link
-                key={developer.id}
-                href={`/builders/${developer.slug}`}
-                className="group flex items-center space-x-4 p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow"
-              >
-                <div className="w-16 h-16 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                  {developer.image && (
-                    <img
-                      src={developer.image}
-                      alt={developer.name}
-                      className="w-full h-full object-contain"
-                    />
-                  )}
-                </div>
-                <div>
-                  <h3 className="text-sm font-medium text-blue-700 underline group-hover:text-blue-800">
-                    {developer.name}
-                  </h3>
-                  <div className="mt-1 flex items-center">
-                    <span className="text-xs text-gray-500">
-                      {developer.project_count}{" "}
-                      {developer.project_count === 1 ? "Project" : "Projects"}{" "}
-                      in {cityName}
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* Projects Table */}
       <div className="mt-16">

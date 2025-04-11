@@ -218,34 +218,16 @@ export default async function Home({ params }) {
   const priceFilter = getPriceFilter(city);
 
   // Fetch all data in parallel using Promise.all
-  const [data, featuredData, devData, assignments, cityBlogs] =
-    await Promise.all([
-      getData(cleanCity, priceFilter),
-      getFeaturedData(cleanCity),
-      getDevData(),
-      getAssignments(cleanCity),
-      getCityBlogs(cleanCity),
-    ]);
-
-  // Filter developers for this city
-  const cityDevelopers = devData.results.filter((dev) => {
-    // Check if developer has projects in this city
-    return data.preconstructions.some(
-      (project) => project.developer_name === dev.name
-    );
-  });
+  const [data, featuredData, assignments, cityBlogs] = await Promise.all([
+    getData(cleanCity, priceFilter),
+    getFeaturedData(cleanCity),
+    getAssignments(cleanCity),
+    getCityBlogs(cleanCity),
+  ]);
 
   // Prepare data for CityDirectory
   const cityDirectoryData = {
     city_data: {
-      developers: cityDevelopers.map((dev) => ({
-        id: dev.id,
-        name: dev.name || "", // Provide default empty string
-        slug: dev.slug || "", // Provide default empty string
-        project_count: data.preconstructions.filter(
-          (p) => p.developer_name === dev.name
-        ).length,
-      })),
       project_types: [
         ...new Set(data.preconstructions.map((p) => p.project_type)),
       ],
@@ -704,7 +686,6 @@ export default async function Home({ params }) {
             cityData={cityDirectoryData}
             cityName={CapitalizeFirst(cleanCity)}
             citySlug={cleanCity}
-            devData={devData}
           />
           <div className="py-5 my-md-5 my-0" id="contact">
             <div className="container">
