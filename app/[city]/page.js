@@ -630,10 +630,10 @@ export default async function Home({ params }) {
                   Explore Pre Construction Homes in {CapitalizeFirst(cleanCity)}
                 </h2>
                 <p className="mt-2 text-lg text-gray-600 max-w-3xl mx-auto">
-                  Discover the prime locations and neighborhoods in{" "}
-                  {CapitalizeFirst(cleanCity)}. Our interactive map helps you
-                  visualize the city's layout and find the perfect location for
-                  your new home.
+                  Explore a wide range of pre construction homes in{" "}
+                  {CapitalizeFirst(cleanCity)}. Discover top{" "}
+                  {CapitalizeFirst(cleanCity)}'s neighborhoods, new
+                  developments, and ideal locations for your future home.
                 </p>
               </div>
               <div className="rounded-xl overflow-hidden shadow-lg">
