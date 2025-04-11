@@ -17,12 +17,24 @@ function ContactFormSubmit(msgdata, setSubmitbtn, setCredentials) {
     proj_name = path[1];
   }
 
-  // Get the root domain name
-  const hostname = window.location.hostname;
-  let source = "localhost";
-  if (hostname !== "localhost") {
-    const parts = hostname.split(".");
-    source = parts.length >= 2 ? parts[parts.length - 2] : parts[0];
+  // Get the full URL of the page
+  let fullUrl = "no-url-captured";
+  
+  if (typeof window !== 'undefined') {
+    try {
+      // Get the complete URL
+      fullUrl = window.location.href;
+      console.log("Full URL captured:", fullUrl);
+    } catch (error) {
+      console.error("Error capturing full URL:", error);
+    }
+  }
+
+  // Get the source from hostname (keeping this for backward compatibility)
+  // But now we'll use the full hostname for all environments including localhost
+  let source = "unknown";
+  if (typeof window !== 'undefined' && window.location && window.location.hostname) {
+    source = window.location.hostname;
   }
 
   // Form data for homebaba API
@@ -34,7 +46,8 @@ function ContactFormSubmit(msgdata, setSubmitbtn, setCredentials) {
   form_data.append("realtor", msgdata.realtor);
   form_data.append("proj_name", proj_name || ""); // Send empty string if null
   form_data.append("cityy", city || ""); // Send empty string if null
-  form_data.append("source", source);
+  form_data.append("source", source); // Now using full hostname for all environments
+  form_data.append("full_url", fullUrl); // Add the full URL to the form data
 
   // Send request to Homebaba API
   axios
