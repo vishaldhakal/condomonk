@@ -12,17 +12,20 @@ export default function Newsletter() {
     setStatus("sending");
 
     try {
-      const response = await fetch("https://api.homebaba.ca/api/newsletter/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          page_url: pathname,
-          city: pathname.split("/")[1] || "toronto",
-        }),
-      });
+      const response = await fetch(
+        "https://admin.homebaba.ca/api/newsletter/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            page_url: pathname,
+            city: pathname.split("/")[1] || "toronto",
+          }),
+        }
+      );
 
       if (response.ok) {
         setStatus("success");

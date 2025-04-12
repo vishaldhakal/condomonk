@@ -2,7 +2,7 @@ import axios from "axios";
 import swal from "sweetalert";
 
 function ContactFormSubmit(msgdata, setSubmitbtn, setCredentials) {
-  let baseUrl = "https://api.homebaba.ca";
+  let baseUrl = "https://admin.homebaba.ca";
   setSubmitbtn("Submitting...");
 
   // Parse URL to get city and project name
@@ -19,8 +19,8 @@ function ContactFormSubmit(msgdata, setSubmitbtn, setCredentials) {
 
   // Get the full URL of the page
   let fullUrl = "no-url-captured";
-  
-  if (typeof window !== 'undefined') {
+
+  if (typeof window !== "undefined") {
     try {
       // Get the complete URL
       fullUrl = window.location.href;
@@ -51,7 +51,7 @@ function ContactFormSubmit(msgdata, setSubmitbtn, setCredentials) {
   form_data.append("cityy", city || ""); // Send empty string if null
   form_data.append("source", source); // Now using full URL as source
   form_data.append("full_url", fullUrl); // Add the full URL to the form data
-  
+
   // Log the FormData entries to verify what's being sent
   console.log("FormData entries:");
   for (let pair of form_data.entries()) {

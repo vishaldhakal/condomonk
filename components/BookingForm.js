@@ -72,7 +72,7 @@ export default function BookingForm({
         form_data.append("preferred_date", formData.date);
       }
 
-      const url = "https://api.homebaba.ca/api/contact-form-resale-submit/";
+      const url = "https://admin.homebaba.ca/api/contact-form-resale-submit/";
       const response = await axios.post(url, form_data, {
         headers: {
           "content-type": "multipart/form-data",

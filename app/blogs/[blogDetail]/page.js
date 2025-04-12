@@ -86,7 +86,7 @@ const BlogDetails = async ({ params }) => {
                   width="60px"
                   height="60px"
                   className="rounded-circle"
-                  src="https://api.homebaba.ca/media/agent_UGllzo7.jpg"
+                  src="https://admin.homebaba.ca/media/agent_UGllzo7.jpg"
                   alt="blog-author"
                 />
               </div>
