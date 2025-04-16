@@ -1,49 +1,13 @@
 import Link from "next/link";
 import Image from "next/legacy/image";
-import CondoCard from "@/components/CondoCard";
 import PreconSchema from "@/components/PreconSchema";
 import BottomContactForm from "@/components/BottomContactForm";
-import MainSearch from "@/components/MainSearch";
 import "./icons.css";
 import FeaturedCard from "@/components/FeaturedCard";
-import Newsletter from "@/components/Newsletter";
-import PropertyCard from "@/components/PropertyCard";
-import { getProperties } from "@/lib/properties";
-import ProjectSearch from "@/components/ProjectSearch";
 import BlogCard from "@/components/blogCard";
 import { fetchAllBlogPosts } from "@/api/blogs";
 import HomeSearch from "@/components/HomeSearch";
 
-const fetchPropertyData = async (city) => {
-  try {
-    const response = await fetch(
-      `https://query.ampre.ca/odata/Property?$filter=ContractStatus eq 'Available' and StandardStatus eq 'Active' and TransactionType eq 'For Sale' and contains(City, '${city}')...`,
-      {
-        // Add any necessary headers or options
-      }
-    );
-    return await response.json();
-  } catch (error) {
-    // Handle error appropriately
-    console.error("Error fetching property data:", error);
-  }
-};
-
-async function getData(city) {
-  const res = await fetch(
-    "https://api.condomonk.ca/api/preconstructions-city/" +
-      city +
-      "?page_size=10",
-    {
-      next: { revalidate: 10 },
-    }
-  );
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
 async function getCities() {
   const res = await fetch("https://api.condomonk.ca/api/all-city", {
     next: { revalidate: 10 },
@@ -67,42 +31,15 @@ async function getFeaturedData() {
   return res.json();
 }
 
-async function getResaleProperties(city) {
-  const { properties } = await getProperties({
-    city: city,
-    transactionType: "For Sale",
-    pageSize: 4,
-    page: 1,
-  });
-
-  return {
-    properties: properties || [],
-  };
-}
-
 async function getBlogs() {
   return await fetchAllBlogPosts();
 }
 
 export default async function Home(props) {
-  const data = await getData("calgary");
-  const mississauga_data = await getData("mississauga");
-  const edmonton_data = await getData("edmonton");
-  const cambridge_data = await getData("cambridge");
   let cities = await getCities();
-  // let dropdown_cities = await getCitiesandProjects();
+
   const featured = await getFeaturedData();
   const blogs = await getBlogs();
-
-  const toronto_resale = await getResaleProperties("Toronto");
-  const barrie_resale = await getResaleProperties("Barrie");
-  const milton_resale = await getResaleProperties("Milton");
-
-  const filteredprojects = (value) => {
-    return dropdown_cities.filter((city) => {
-      return value.includes(city.name);
-    });
-  };
 
   return (
     <>
@@ -110,9 +47,10 @@ export default async function Home(props) {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/pexels-bg.jpeg"
+            src="/pexels-bg.webp"
             alt="Background"
             className="w-full h-full object-cover"
+            loading="lazy"
           />
           {/* Overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/20"></div>
@@ -138,7 +76,7 @@ export default async function Home(props) {
         {/* Content */}
         <div className="relative z-0 container mx-auto px-4 min-h-screen flex md:pt-32 pt-44">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-white ">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-white">
               Home for everyone
             </h1>
             <p className="text-xl md:text-3xl text-white/90 mb-8 md:px-1 px-5">
@@ -191,6 +129,7 @@ export default async function Home(props) {
                     src="/image1.jpeg"
                     className="img-fluid img-small"
                     alt="Image 1"
+                    loading="lazy"
                   />
                 </div>
                 <div className="col-4 ">
@@ -198,6 +137,7 @@ export default async function Home(props) {
                     src="/image2.jpeg"
                     className="img-fluid img-small"
                     alt="Image 2"
+                    loading="lazy"
                   />
                 </div>
                 <div className="col-4 ">
@@ -205,6 +145,7 @@ export default async function Home(props) {
                     src="/image3.jpeg"
                     className="img-fluid img-small"
                     alt="Image 3"
+                    loading="lazy"
                   />
                 </div>
                 <div className="col-4 ">
@@ -212,6 +153,7 @@ export default async function Home(props) {
                     src="/image4.jpeg"
                     className="img-fluid img-small"
                     alt="Image 4"
+                    loading="lazy"
                   />
                 </div>
                 <div className="col-4 ">
@@ -219,6 +161,7 @@ export default async function Home(props) {
                     src="/image5.jpeg"
                     className="img-fluid img-small"
                     alt="Image 5"
+                    loading="lazy"
                   />
                 </div>
                 <div className="col-4 ">
@@ -226,6 +169,7 @@ export default async function Home(props) {
                     src="/image6.jpeg"
                     className="img-fluid img-small"
                     alt="Image 6"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -276,6 +220,7 @@ export default async function Home(props) {
                     src="/image1.jpeg"
                     className="d-block w-100 carousel-img-responsive"
                     alt="Image 1"
+                    loading="lazy"
                   />
                 </div>
                 <div className="carousel-item">
@@ -283,6 +228,7 @@ export default async function Home(props) {
                     src="/image2.jpeg"
                     className="d-block w-100 carousel-img-responsive"
                     alt="Image 2"
+                    loading="lazy"
                   />
                 </div>
                 <div className="carousel-item">
@@ -290,6 +236,7 @@ export default async function Home(props) {
                     src="/image3.jpeg"
                     className="d-block w-100 carousel-img-responsive"
                     alt="Image 3"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -373,6 +320,7 @@ export default async function Home(props) {
                   src="/city-images/mississauga.jpg"
                   alt="Mississauga"
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-4 text-white">
@@ -388,6 +336,7 @@ export default async function Home(props) {
                   src="/city-images/calgary.jpg"
                   alt="Calgary"
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-4 text-white">
@@ -403,6 +352,7 @@ export default async function Home(props) {
                   src="/city-images/barrie.jpg"
                   alt="Barrie"
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-4 text-white">
@@ -418,6 +368,7 @@ export default async function Home(props) {
                   src="/city-images/brampton.jpg"
                   alt="Brampton"
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-4 text-white">
@@ -434,6 +385,7 @@ export default async function Home(props) {
                   src="/city-images/pickering.jpg"
                   alt="Pickering"
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-4 text-white">
@@ -449,6 +401,7 @@ export default async function Home(props) {
                   src="/city-images/hamilton.jpg"
                   alt="Hamilton"
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-4 text-white">
@@ -464,6 +417,7 @@ export default async function Home(props) {
                   src="/city-images/milton.jpeg"
                   alt="Milton"
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-4 text-white">
@@ -479,6 +433,7 @@ export default async function Home(props) {
                   src="/city-images/oakville.jpg"
                   alt="Oakville"
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-4 text-white">
@@ -494,6 +449,7 @@ export default async function Home(props) {
                   src="/city-images/waterloo.jpeg"
                   alt="Waterloo"
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-4 text-white">
@@ -509,6 +465,7 @@ export default async function Home(props) {
                   src="/city-images/cambridge.jpeg"
                   alt="Cambridge"
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-4 text-white">
