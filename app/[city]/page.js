@@ -1,14 +1,68 @@
 import CondoCard from "@/components/CondoCard";
-import BottomContactForm from "@/components/BottomContactForm";
 import { notFound } from "next/navigation";
 import PreconSchema from "@/components/PreconSchema";
 import Link from "next/link";
-import Newsletter from "@/components/Newsletter";
 import Image from "next/legacy/image";
-import CityDirectory from "@/components/CityDirectory";
-import AssignmentCard from "@/components/assignment/AssignmentCard";
-import BlogCard from "@/components/blogCard";
-import GoogleMap from "@/components/GoogleMap";
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
+
+// Dynamic imports for components that can be loaded later
+const BottomContactForm = dynamic(
+  () => import("@/components/BottomContactForm"),
+  {
+    loading: () => (
+      <div className="h-96 flex items-center justify-center">
+        <div className="animate-pulse bg-gray-200 h-64 w-full rounded-lg"></div>
+      </div>
+    ),
+    ssr: false,
+  }
+);
+
+const Newsletter = dynamic(() => import("@/components/Newsletter"), {
+  loading: () => (
+    <div className="h-40 flex items-center justify-center">
+      <div className="animate-pulse bg-gray-200 h-32 w-full rounded-lg"></div>
+    </div>
+  ),
+  ssr: false,
+});
+
+const CityDirectory = dynamic(() => import("@/components/CityDirectory"), {
+  loading: () => (
+    <div className="h-64 flex items-center justify-center">
+      <div className="animate-pulse bg-gray-200 h-48 w-full rounded-lg"></div>
+    </div>
+  ),
+});
+
+const AssignmentCard = dynamic(
+  () => import("@/components/assignment/AssignmentCard"),
+  {
+    loading: () => (
+      <div className="h-80 flex items-center justify-center">
+        <div className="animate-pulse bg-gray-200 h-64 w-full rounded-lg"></div>
+      </div>
+    ),
+  }
+);
+
+const BlogCard = dynamic(() => import("@/components/blogCard"), {
+  loading: () => (
+    <div className="h-64 flex items-center justify-center">
+      <div className="animate-pulse bg-gray-200 h-48 w-full rounded-lg"></div>
+    </div>
+  ),
+});
+
+const GoogleMap = dynamic(() => import("@/components/GoogleMap"), {
+  loading: () => (
+    <div className="h-[500px] flex items-center justify-center">
+      <div className="animate-pulse bg-gray-200 h-full w-full rounded-lg"></div>
+    </div>
+  ),
+  ssr: false,
+});
 
 async function getData(city, priceFilter = null) {
   let url = `https://api.condomonk.ca/api/preconstructions-city/${city}`;
@@ -571,7 +625,15 @@ export default async function Home({ params }) {
               <div className="row row-cols-1 row-cols-md-4 gy-4 gx-3">
                 {assignments.data.map((assignment, index) => (
                   <div className="col" key={assignment.id}>
-                    <AssignmentCard assignment={assignment} index={index} />
+                    <Suspense
+                      fallback={
+                        <div className="h-80 flex items-center justify-center">
+                          <div className="animate-pulse bg-gray-200 h-64 w-full rounded-lg"></div>
+                        </div>
+                      }
+                    >
+                      <AssignmentCard assignment={assignment} index={index} />
+                    </Suspense>
                   </div>
                 ))}
               </div>
@@ -597,7 +659,15 @@ export default async function Home({ params }) {
               <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 gy-4 gx-3">
                 {cityBlogs.map((blog) => (
                   <div className="col" key={blog.id}>
-                    <BlogCard blog={blog} />
+                    <Suspense
+                      fallback={
+                        <div className="h-64 flex items-center justify-center">
+                          <div className="animate-pulse bg-gray-200 h-48 w-full rounded-lg"></div>
+                        </div>
+                      }
+                    >
+                      <BlogCard blog={blog} />
+                    </Suspense>
                   </div>
                 ))}
               </div>
@@ -619,12 +689,20 @@ export default async function Home({ params }) {
                 </p>
               </div>
               <div className="rounded-xl overflow-hidden shadow-lg">
-                <GoogleMap
-                  location={CapitalizeFirst(cleanCity) + ", Ontario, Canada"}
-                  width="100%"
-                  height={500}
-                  zoom={12}
-                />
+                <Suspense
+                  fallback={
+                    <div className="h-[500px] flex items-center justify-center">
+                      <div className="animate-pulse bg-gray-200 h-full w-full rounded-lg"></div>
+                    </div>
+                  }
+                >
+                  <GoogleMap
+                    location={CapitalizeFirst(cleanCity) + ", Ontario, Canada"}
+                    width="100%"
+                    height={500}
+                    zoom={12}
+                  />
+                </Suspense>
               </div>
             </div>
           </div>
@@ -705,10 +783,18 @@ export default async function Home({ params }) {
               <div className="row row-cols-1 row-cols-md-3 mt-5">
                 <div className="col-md-2"></div>
                 <div className="col-md-8">
-                  <BottomContactForm
-                    proj_name="All"
-                    city="Home Page"
-                  ></BottomContactForm>
+                  <Suspense
+                    fallback={
+                      <div className="h-96 flex items-center justify-center">
+                        <div className="animate-pulse bg-gray-200 h-64 w-full rounded-lg"></div>
+                      </div>
+                    }
+                  >
+                    <BottomContactForm
+                      proj_name="All"
+                      city="Home Page"
+                    ></BottomContactForm>
+                  </Suspense>
                   <div className="d-flex">
                     <p className="small-text2 mb-3 text-center">
                       I agree to receive marketing and customer service calls
@@ -726,7 +812,15 @@ export default async function Home({ params }) {
           <div className="pt-5 mt-5"></div>
           <div className="pt-5 mt-5"></div>
 
-          <Newsletter />
+          <Suspense
+            fallback={
+              <div className="h-40 flex items-center justify-center">
+                <div className="animate-pulse bg-gray-200 h-32 w-full rounded-lg"></div>
+              </div>
+            }
+          >
+            <Newsletter />
+          </Suspense>
           {getSEOParagraph(cleanCity, priceFilter) && (
             <div className="row justify-content-start mb-5">
               <div className="col-md-12">

@@ -3,9 +3,17 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   // Add any other necessary configurations
-  images: {
-    domains: ["api.condomonk.ca", "trreb-image.ampre.ca", "api.toassign.com"],
-  },
+  remotePatterns: [
+    {
+      hostname: "api.condomonk.ca",
+    },
+    {
+      hostname: "trreb-image.ampre.ca",
+    },
+    {
+      hostname: "api.toassign.com",
+    },
+  ],
 };
 
 module.exports = nextConfig;
