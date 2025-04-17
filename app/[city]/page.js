@@ -399,13 +399,13 @@ export default async function Home({ params }) {
                 {CapitalizeFirst(cleanCity)}, ON. Condomonk is your trusted
                 platform for new pre construction across Canada. Select from
                 updated database of condos, townhomes, and detached pre
-                construction from high-rated builders, with pricing custoumized
+                construction from high-rated builders, with pricing customized
                 for both first-time buyers and seasoned investors. Our listings
                 are updated daily, giving you the latest pre construction and
                 upcoming projects. Easily filter by no of bedrooms (1 to 4+),
-                project type, and construction status. from budget-friendly
-                condo to a luxury pre costruction hom, Condomonk connects you to
-                the most exciting real estate opportunities in{" "}
+                project type, and construction status from budget-friendly condo
+                to a pre costruction homes, Condomonk connects you to the most
+                exciting real estate opportunities in{" "}
                 {CapitalizeFirst(cleanCity)}. <br />
                 <label
                   htmlFor="read-more"
