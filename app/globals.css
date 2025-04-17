@@ -832,12 +832,12 @@ a:hover {
     }
 
     .main-title {
-        text-align: center;
+
         line-height: 2rem !important;
         font-weight: 900;
         margin-bottom: 10px;
-        font-size: 1.6rem !important;
-        text-align: center;
+        font-size: 1.8rem !important;
+        text-align: left;
     }
 
     .main-title2 {
