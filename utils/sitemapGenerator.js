@@ -55,7 +55,7 @@ class SitemapGenerator {
       // Add URLs for each city and its projects
       data.forEach((city) => {
         // Add city URL
-        this.addUrl(`/pre-construction-homes/${city.slug}`, 0.8);
+        this.addUrl(`/${city.slug}`, 0.8);
 
         // Add URLs for each project in the city
         city.preconstructions.forEach((project) => {
