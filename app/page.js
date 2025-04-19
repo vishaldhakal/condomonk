@@ -538,7 +538,7 @@ export default async function Home(props) {
 
       <div className=" py-5 my-2"></div>
       <Link href={"/resale/ontario"}>
-        <h2 className="fw-mine text-center mb-5 accent-line fs-1 font-family2 text-black">
+        <h2 className="fw-mine text-center mb-5 fs-1 font-family2 text-black">
           Explore Resale Homes For Sale in Ontario
         </h2>
       </Link>

@@ -123,15 +123,12 @@ const Navbar = ({ cities, dropdown_cities, transparent }) => {
               </a>
             </li>
           </ul>
-          <button
-            className="btn btn-dark my-2 my-sm-0 rounded ms-md-4 py-2 px-3"
-            type="submit"
+          <Link
+            href="#contact"
+            className="btn btn-dark my-2 my-sm-0 rounded ms-md-4 py-2 px-3 nav-link text-white"
           >
-            {" "}
-            <a className="nav-link" href="#contact">
-              Call Now
-            </a>
-          </button>
+            Call Now
+          </Link>
         </div>
       </div>
     </nav>

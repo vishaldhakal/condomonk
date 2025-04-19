@@ -9,7 +9,7 @@ class SitemapGenerator {
   }
 
   formatDate(date) {
-    return date.toISOString().replace(/\.\d+Z$/, "+00:00");
+    return date.toISOString();
   }
 
   addUrl(url, priority) {
@@ -41,27 +41,57 @@ class SitemapGenerator {
     });
   }
 
+  async fetchWithTimeout(url, options = {}) {
+    const timeout = options.timeout || 10000; // 10 second timeout
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+
+    try {
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal,
+        // Remove revalidation for large responses
+        cache: "no-store", // Disable caching completely
+      });
+      clearTimeout(id);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error(`Error fetching ${url}:`, error);
+      return null;
+    } finally {
+      clearTimeout(id);
+    }
+  }
+
   async addDynamicRoutes() {
     try {
       // Fetch all preconstruction projects
-      const response = await fetch(
-        "https://api.condomonk.ca/api/all-precons/",
-        {
-          next: { revalidate: 10 },
-        }
+      const data = await this.fetchWithTimeout(
+        "https://api.condomonk.ca/api/all-precons/"
       );
-      const data = await response.json();
 
-      // Add URLs for each city and its projects
-      data.forEach((city) => {
-        // Add city URL
-        this.addUrl(`/${city.slug}`, 0.8);
+      if (data) {
+        // Add URLs for each city and its projects
+        data.forEach((city) => {
+          // Add city URL
+          this.addUrl(`/${city.slug}`, 0.8);
 
-        // Add URLs for each project in the city
-        city.preconstructions.forEach((project) => {
-          this.addUrl(`/${city.slug}/${project.slug}`, 0.64);
+          // Add URLs for each project in the city
+          if (city.preconstructions && Array.isArray(city.preconstructions)) {
+            city.preconstructions.forEach((project) => {
+              if (project && project.slug) {
+                this.addUrl(`/${city.slug}/${project.slug}`, 0.64);
+              }
+            });
+          }
         });
-      });
+      }
 
       // Keep all existing routes
       await this.addBuilderRoutes();
@@ -70,45 +100,43 @@ class SitemapGenerator {
       await this.addNewHomesRoutes();
       await this.addTopProjectsRoutes();
     } catch (error) {
-      console.error("Error fetching preconstruction data:", error);
+      console.error("Error in addDynamicRoutes:", error);
     }
   }
 
   async addBuilderRoutes() {
     try {
-      // Fetch builders from API
-      const response = await fetch("https://api.condomonk.ca/api/developers", {
-        next: { revalidate: 10 },
-      });
-      const data = await response.json();
+      const data = await this.fetchWithTimeout(
+        "https://api.condomonk.ca/api/developers"
+      );
 
-      // Add URL for each builder
-      if (data.developers) {
+      if (data && data.developers) {
         data.developers.forEach((builder) => {
-          this.addUrl(`/builders/${builder.slug}`, 0.6);
+          if (builder && builder.slug) {
+            this.addUrl(`/builders/${builder.slug}`, 0.6);
+          }
         });
       }
     } catch (error) {
-      console.error("Error fetching builders:", error);
+      console.error("Error in addBuilderRoutes:", error);
     }
   }
 
   async addBlogRoutes() {
     try {
-      // Fetch blogs from API
-      const response = await fetch("https://api.condomonk.ca/api/blogs", {
-        next: { revalidate: 10 },
-      });
-      const data = await response.json();
+      const data = await this.fetchWithTimeout(
+        "https://api.condomonk.ca/api/blogs"
+      );
 
-      // Add URL for each blog post
-      if (data.blogs) {
+      if (data && data.blogs) {
         data.blogs.forEach((blog) => {
-          this.addUrl(`/blogs/${blog.slug}`, 0.6);
+          if (blog && blog.slug) {
+            this.addUrl(`/blogs/${blog.slug}`, 0.6);
+          }
         });
       }
     } catch (error) {
-      console.error("Error fetching blogs:", error);
+      console.error("Error in addBlogRoutes:", error);
     }
   }
 
@@ -118,16 +146,13 @@ class SitemapGenerator {
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-`;
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">`;
     const xmlFooter = "</urlset>";
 
     // Join URLs with newlines and proper spacing
     const urlsContent = Array.from(this.urls).join("\n");
 
-    return xmlHeader + urlsContent + "\n" + xmlFooter;
+    return xmlHeader + "\n" + urlsContent + "\n" + xmlFooter;
   }
 
   async generateSitemap() {
@@ -162,4 +187,5 @@ class SitemapGenerator {
   }
 }
 
-export default new SitemapGenerator();
+const sitemapGenerator = new SitemapGenerator();
+export default sitemapGenerator;
