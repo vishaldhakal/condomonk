@@ -58,9 +58,9 @@ export default function CityDirectory({ cityData, cityName, citySlug }) {
     <div className="max-w-9xl mx-auto px-2 md:px-0 py-16">
       {/* Browse by Property Type */}
       <div className="pb-12">
-        <h4 className="text-2xl font-semibold text-gray-900 mb-8">
+        <h5 className="text-2xl font-semibold text-gray-900 mb-8">
           Browse by Property Type
-        </h4>
+        </h5>
         <div className="flex flex-wrap gap-3">
           {projectTypes.map((type) => (
             <Link
@@ -76,9 +76,9 @@ export default function CityDirectory({ cityData, cityName, citySlug }) {
 
       {/* Browse by Price Range */}
       <div className="mb-12">
-        <h4 className="text-2xl font-semibold text-gray-900 mb-4">
+        <h5 className="text-2xl font-semibold text-gray-900 mb-4">
           Browse by Price Range
-        </h4>
+        </h5>
         <div className="flex flex-wrap gap-3">
           {priceRanges.map((range) => (
             <Link

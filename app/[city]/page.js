@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/legacy/image";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
+import PreconstructionFilter from "@/components/PreconstructionFilter";
 
 // Dynamic imports for components that can be loaded later
 const BottomContactForm = dynamic(
@@ -398,14 +399,53 @@ export default async function Home({ params }) {
                 Condomonk has over 120 pre construction homes in{" "}
                 {CapitalizeFirst(cleanCity)}, ON. Condomonk is your trusted
                 platform for new pre construction across Canada. Select from
-                updated database of condos, townhomes, and detached pre
-                construction from high-rated builders, with pricing customized
-                for both first-time buyers and seasoned investors. Our listings
-                are updated daily, giving you the latest pre construction and
-                upcoming projects. Easily filter by no of bedrooms (1 to 4+),
-                project type, and construction status from budget-friendly condo
-                to a pre costruction homes, Condomonk connects you to the most
-                exciting real estate opportunities in{" "}
+                updated database of{" "}
+                <Link
+                  href={`/${cleanCity}/condos`}
+                  className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800"
+                >
+                  condos
+                </Link>
+                ,{" "}
+                <Link
+                  href={`/${cleanCity}/townhomes`}
+                  className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800"
+                >
+                  townhomes
+                </Link>
+                , and{" "}
+                <Link
+                  href={`/${cleanCity}/detached`}
+                  className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800"
+                >
+                  detached pre construction homes
+                </Link>{" "}
+                from{" "}
+                <Link
+                  href="/builders"
+                  className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 "
+                >
+                  high-rated builders
+                </Link>
+                , with pricing customized for both first-time buyers and
+                seasoned investors. Our listings are updated daily, giving you
+                the latest{" "}
+                <Link
+                  href={`/${cleanCity}/upcoming`}
+                  className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800"
+                >
+                  upcoming pre construction projects.
+                </Link>{" "}
+                Easily filter by no of bedrooms (1 to 4+), project type, and
+                construction status from budget-friendly condo to a pre
+                costruction homes,{" "}
+                <Link
+                  href="#contact"
+                  className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 "
+                >
+                  contact us
+                </Link>{" "}
+                to connect you to the most exciting real estate opportunities in{" "}
                 {CapitalizeFirst(cleanCity)}. <br />
                 <label
                   htmlFor="read-more"
@@ -418,88 +458,21 @@ export default async function Home({ params }) {
               </span>
             </div>
           </h2>
-          <div className="d-flex sm-center mb-lg-0 sticky-buttons pb-0 mb-0 z-2 sticky-top">
-            <div className="position-relative w-100">
-              <div className="d-flex flex-nowrap overflow-auto pb-2 hide-scrollbar">
-                <div className="d-flex gap-2 flex-nowrap ">
-                  <h3 className="">
-                    <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m whitespace-nowrap border-2 border-transparent hover:border-b-[#FFC007]"
-                      href={`/${params.city.split("-homes-")[0]}/upcoming/`}
-                      prefetch={false}
-                    >
-                      Upcoming Projects {CapitalizeFirst(params.city)}
-                    </Link>
-                  </h3>
-                  <h3>
-                    <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 me-2 whitespace-nowrap border-2 border-transparent hover:border-b-[#FFC007]"
-                      href={`/${params.city.split("-homes-")[0]}/townhomes/`}
-                      prefetch={false}
-                    >
-                      Pre Construction Townhomes {CapitalizeFirst(params.city)}
-                    </Link>
-                  </h3>
-                  <h3>
-                    <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m whitespace-nowrap border-2 border-transparent hover:border-b-[#FFC007]"
-                      href={`/${params.city.split("-homes-")[0]}/detached/`}
-                      prefetch={false}
-                    >
-                      Pre Construction Detached Homes{" "}
-                      {CapitalizeFirst(params.city)}
-                    </Link>
-                  </h3>
-                  <h3>
-                    <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 whitespace-nowrap border-2 border-transparent hover:border-b-[#FFC007]"
-                      href={`/${params.city.split("-homes-")[0]}/condos/`}
-                      prefetch={false}
-                    >
-                      Pre Construction Condos {CapitalizeFirst(params.city)}
-                    </Link>
-                  </h3>
-                  <h4>
-                    <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-2 border-transparent hover:border-b-[#FFC007]"
-                      href={`/${
-                        params.city.split("-homes-")[0]
-                      }-homes-under-500k`}
-                      prefetch={false}
-                    >
-                      Under $500k
-                    </Link>
-                  </h4>
-                  <h4>
-                    <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-2 border-transparent hover:border-b-[#FFC007]"
-                      href={`/${
-                        params.city.split("-homes-")[0]
-                      }-homes-under-1-million`}
-                      prefetch={false}
-                    >
-                      Under $1M
-                    </Link>
-                  </h4>
-                  <h4>
-                    <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-2 border-transparent hover:border-b-[#FFC007]"
-                      href={`/${
-                        params.city.split("-homes-")[0]
-                      }-homes-under-1.5-million`}
-                      prefetch={false}
-                    >
-                      Under $1.5M
-                    </Link>
-                  </h4>
-                </div>
-              </div>
+          <div className="d-flex sm-center mb-lg-0 sticky-buttons pb-0 mb-0 z-2 sticky-top bg-white">
+            <div className="position-relative w-100 container">
+              <PreconstructionFilter
+                cityName={CapitalizeFirst(params.city)}
+                citySlug={params.city.split("-homes-")[0]}
+              />
             </div>
           </div>
 
           {eventbanner()}
           <div className="mt-md-3 mt-0"></div>
-          <div className="row row-cols-2 row-cols-md-4 gy-2 gy-lg-4  gx-3 gx-lg-3 ">
+          <div
+            className="row row-cols-2 row-cols-md-4 gy-2 gy-lg-4  gx-3 gx-lg-3"
+            id="selling"
+          >
             {featuredData.preconstructions &&
               featuredData.preconstructions.map((item, no) => (
                 <div className="col" key={item.id}>
@@ -535,7 +508,7 @@ export default async function Home({ params }) {
           </div>
           <div className="pt-5 mt-5"></div>
           <div className="pt-5"></div>
-          <h3 className="fw-bold fs-2 mb-4 font-family2">
+          <h3 className="fw-bold fs-2 mb-4 font-family2" id="upcoming">
             {filteredprojects("Upcoming").length > 0 ? (
               `Launching Soon - New Pre Construction Homes in ${CapitalizeFirst(
                 data.city.name
@@ -577,7 +550,7 @@ export default async function Home({ params }) {
           </div>
           <div className="pt-5 mt-5"></div>
           <div className="pt-5"></div>
-          <h2 className="fw-bold fs-2 mb-4 text-red">
+          <h2 className="fw-bold fs-2 mb-4 text-red" id="soldout">
             {filteredprojects("Sold out").length > 0 ? (
               <i>{`Past Communities in ${CapitalizeFirst(
                 data.city.name
