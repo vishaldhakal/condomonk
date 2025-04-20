@@ -44,7 +44,6 @@ export default async function Home(props) {
   return (
     <>
       <div className="relative bg-gradient-to-b from-[#f4f8fb] to-white overflow-hidden max-h-[90vh]">
-        {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img
             src="/pexels-bg.webp"
