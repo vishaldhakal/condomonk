@@ -35,9 +35,6 @@ class SitemapGenerator {
       { url: "/resale", priority: 0.8 },
       { url: "/top-10-gta-projects", priority: 0.8 },
       { url: "/contact", priority: 0.7 },
-      { url: "/about", priority: 0.7 },
-      { url: "/privacy-policy", priority: 0.5 },
-      { url: "/terms-of-service", priority: 0.5 },
     ];
 
     staticRoutes.forEach((route) => {
