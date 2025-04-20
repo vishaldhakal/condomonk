@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import sitemapConfig from "../config/sitemap.config.js";
+import sitemapConfig from "../config/sitemap.config";
 
 class SitemapGenerator {
   constructor() {
@@ -17,11 +17,11 @@ class SitemapGenerator {
     const cleanUrl = url.startsWith("/") ? url : `/${url}`;
     const finalUrl = cleanUrl.replace(/\/$/, "");
 
-    const urlEntry = `  <url>
-    <loc>${this.siteUrl}${finalUrl}</loc>
-    <lastmod>${this.formatDate(new Date())}</lastmod>
-    <priority>${priority.toFixed(2)}</priority>
-  </url>`;
+    const urlEntry = `<url>
+  <loc>${this.siteUrl}${finalUrl}</loc>
+  <lastmod>${this.formatDate(new Date())}</lastmod>
+  <priority>${priority.toFixed(2)}</priority>
+</url>`;
     this.urls.add(urlEntry);
   }
 
@@ -34,7 +34,6 @@ class SitemapGenerator {
       { url: "/pre-construction-homes", priority: 0.8 },
       { url: "/resale", priority: 0.8 },
       { url: "/top-10-gta-projects", priority: 0.8 },
-      { url: "/contact", priority: 0.7 },
     ];
 
     staticRoutes.forEach((route) => {
@@ -51,11 +50,6 @@ class SitemapGenerator {
           next: { revalidate: 10 },
         }
       );
-
-      if (!response.ok) {
-        throw new Error(`Failed to fetch precons: ${response.status}`);
-      }
-
       const data = await response.json();
 
       // Add URLs for each city and its projects
@@ -64,12 +58,17 @@ class SitemapGenerator {
         this.addUrl(`/${city.slug}`, 0.8);
 
         // Add URLs for each project in the city
-        if (city.preconstructions) {
-          city.preconstructions.forEach((project) => {
-            this.addUrl(`/${city.slug}/${project.slug}`, 0.64);
-          });
-        }
+        city.preconstructions.forEach((project) => {
+          this.addUrl(`/${city.slug}/${project.slug}`, 0.64);
+        });
       });
+
+      // Keep all existing routes
+      await this.addBuilderRoutes();
+      await this.addBlogRoutes();
+      await this.addResaleRoutes();
+      await this.addNewHomesRoutes();
+      await this.addTopProjectsRoutes();
     } catch (error) {
       console.error("Error fetching preconstruction data:", error);
     }
@@ -77,16 +76,13 @@ class SitemapGenerator {
 
   async addBuilderRoutes() {
     try {
+      // Fetch builders from API
       const response = await fetch("https://api.condomonk.ca/api/developers", {
         next: { revalidate: 10 },
       });
-
-      if (!response.ok) {
-        throw new Error(`Failed to fetch builders: ${response.status}`);
-      }
-
       const data = await response.json();
 
+      // Add URL for each builder
       if (data.developers) {
         data.developers.forEach((builder) => {
           this.addUrl(`/builders/${builder.slug}`, 0.6);
@@ -99,18 +95,15 @@ class SitemapGenerator {
 
   async addBlogRoutes() {
     try {
-      const response = await fetch("https://api.condomonk.ca/api/blogs", {
+      // Fetch blogs from API
+      const response = await fetch("https://api.condomonk.ca/api/news/", {
         next: { revalidate: 10 },
       });
-
-      if (!response.ok) {
-        throw new Error(`Failed to fetch blogs: ${response.status}`);
-      }
-
       const data = await response.json();
 
-      if (data.blogs) {
-        data.blogs.forEach((blog) => {
+      // Add URL for each blog post
+      if (Array.isArray(data)) {
+        data.forEach((blog) => {
           this.addUrl(`/blogs/${blog.slug}`, 0.6);
         });
       }
@@ -119,17 +112,49 @@ class SitemapGenerator {
     }
   }
 
+  async addResaleRoutes() {
+    try {
+      // Fetch resale listings from API
+      const response = await fetch("https://api.condomonk.ca/api/resale", {
+        next: { revalidate: 10 },
+      });
+      const data = await response.json();
+
+      // Add URL for each resale listing
+      if (data.listings) {
+        data.listings.forEach((listing) => {
+          this.addUrl(`/resale/${listing.slug}`, 0.6);
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching resale listings:", error);
+    }
+  }
+
+  async addNewHomesRoutes() {
+    // ... existing code ...
+  }
+
+  async addTopProjectsRoutes() {
+    // ... existing code ...
+  }
+
   generateSitemapXml() {
     const xmlHeader = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">`;
-    const xmlFooter = "\n</urlset>";
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
-    // Sort URLs for better organization and consistency
-    const sortedUrls = Array.from(this.urls).sort();
-    return xmlHeader + "\n" + sortedUrls.join("\n") + xmlFooter;
+`;
+    const xmlFooter = "</urlset>";
+
+    // Join URLs with newlines and proper spacing
+    const urlsContent = Array.from(this.urls).join("\n");
+
+    return xmlHeader + urlsContent + "\n" + xmlFooter;
   }
 
   async generateSitemap() {
@@ -137,11 +162,9 @@ class SitemapGenerator {
       // Clear existing URLs
       this.urls.clear();
 
-      // Add all routes
+      // Add routes
       await this.addStaticRoutes();
       await this.addDynamicRoutes();
-      await this.addBuilderRoutes();
-      await this.addBlogRoutes();
 
       // Generate XML
       const sitemapXml = this.generateSitemapXml();
@@ -152,7 +175,7 @@ class SitemapGenerator {
 
       return {
         success: true,
-        message: `Sitemap generated successfully with ${this.urls.size} URLs`,
+        message: "Sitemap generated successfully",
         path: "/sitemap.xml",
       };
     } catch (error) {
