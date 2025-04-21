@@ -32,7 +32,7 @@ class SitemapGenerator {
       { url: "/blogs", priority: 0.8 },
       { url: "/builders", priority: 0.8 },
       { url: "/pre-construction-homes", priority: 0.8 },
-      { url: "/resale", priority: 0.8 },
+      { url: "/resale/ontario", priority: 0.8 },
       { url: "/top-10-gta-projects", priority: 0.8 },
     ];
 
