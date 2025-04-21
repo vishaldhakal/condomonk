@@ -376,25 +376,13 @@ export default async function Home({ params }) {
             </div>
           </div>
           <h2 className="text-sm md:text-base">
-            <input
-              type="checkbox"
-              id="read-more"
-              className="read-more-checkbox"
-            />
             <div className="subtitle-container">
               <span className="subtitle-text">
                 120+ Pre construction Homes in {CapitalizeFirst(cleanCity)}, ON
                 | Explore Floor Plans, Pricing & Availability.
               </span>
-              <label
-                htmlFor="read-more"
-                className="read-more-toggle show-more-label"
-              >
-                <span className="show-more text-black font-bold">
-                  Read More
-                </span>
-              </label>
-              <span className="read-more-content subtitle-text">
+
+              <span className=" subtitle-text">
                 {" "}
                 Condomonk has over 120 pre construction homes in{" "}
                 {CapitalizeFirst(cleanCity)}, ON. Condomonk is your trusted
@@ -447,14 +435,6 @@ export default async function Home({ params }) {
                 </Link>{" "}
                 to connect you to the most exciting real estate opportunities in{" "}
                 {CapitalizeFirst(cleanCity)}. <br />
-                <label
-                  htmlFor="read-more"
-                  className="read-more-toggle show-less-label ms-0"
-                >
-                  <span className="show-less text-black font-bold">
-                    Show Less
-                  </span>
-                </label>
               </span>
             </div>
           </h2>
