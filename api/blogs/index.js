@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 
 export const fetchAllBlogPosts = async () => {
   const res = await fetch("https://api.condomonk.ca/api/news/", {
-    cache: "no-store",
+    next: { revalidate: 10 },
   });
 
   if (!res.ok) {
@@ -11,17 +11,22 @@ export const fetchAllBlogPosts = async () => {
 
   const blogs = await res.json();
 
+  // REQUIRED LATERON AFTER TIME COMES FROM API
+  // const sortedBlogs = blogs.sort(
+  //   (a, b) => new Date(b.date_of_upload) - new Date(a.date_of_upload)
+  // );
+
   if (Array.isArray(blogs)) {
-    return blogs.reverse().slice(0, 10);
+    return blogs.reverse();
   } else {
     console.error("Expected an array but got:", blogs);
-    return [];
+    return []; // Return an empty array or handle the error as needed
   }
 };
 
 export const fetchBlogPostBySlug = async (slug) => {
   const res = await fetch(`https://api.condomonk.ca/api/news/${slug}`, {
-    cache: "no-store",
+    next: { revalidate: 10 },
   });
 
   if (!res.ok) {
@@ -36,7 +41,7 @@ export const fetchBlogPostByCity = async (citySlug) => {
   const res = await fetch(
     `https://api.condomonk.ca/api/news/?city=${citySlug}`,
     {
-      cache: "no-store",
+      next: { revalidate: 10 },
     }
   );
 
@@ -50,13 +55,13 @@ export const fetchBlogPostByCity = async (citySlug) => {
     return blogs.reverse();
   } else {
     console.error("Expected an array but got:", blogs);
-    return [];
+    return []; // Return an empty array or handle the error as needed
   }
 };
 
 export const fetchCities = async () => {
   const res = await fetch("https://api.condomonk.ca/api/all-city/", {
-    next: { revalidate: 3600 },
+    next: { revalidate: 10 },
   });
 
   if (!res.ok) {
@@ -65,6 +70,7 @@ export const fetchCities = async () => {
 
   const cities = await res.json();
 
+  //append All to top of list
   const allCities = [
     {
       slug: "all",

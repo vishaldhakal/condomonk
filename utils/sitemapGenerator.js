@@ -32,7 +32,7 @@ class SitemapGenerator {
       { url: "/blogs", priority: 0.8 },
       { url: "/builders", priority: 0.8 },
       { url: "/pre-construction-homes", priority: 0.8 },
-      { url: "/resale/ontario", priority: 0.8 },
+      { url: "/resale", priority: 0.8 },
       { url: "/top-10-gta-projects", priority: 0.8 },
     ];
 
@@ -55,7 +55,7 @@ class SitemapGenerator {
       // Add URLs for each city and its projects
       data.forEach((city) => {
         // Add city URL
-        this.addUrl(`/${city.slug}`, 0.8);
+        this.addUrl(`/pre-construction-homes/${city.slug}`, 0.8);
 
         // Add URLs for each project in the city
         city.preconstructions.forEach((project) => {
@@ -96,47 +96,20 @@ class SitemapGenerator {
   async addBlogRoutes() {
     try {
       // Fetch blogs from API
-      const response = await fetch("https://api.condomonk.ca/api/news/", {
+      const response = await fetch("https://api.condomonk.ca/api/blogs", {
         next: { revalidate: 10 },
       });
       const data = await response.json();
 
       // Add URL for each blog post
-      if (Array.isArray(data)) {
-        data.forEach((blog) => {
+      if (data.blogs) {
+        data.blogs.forEach((blog) => {
           this.addUrl(`/blogs/${blog.slug}`, 0.6);
         });
       }
     } catch (error) {
       console.error("Error fetching blogs:", error);
     }
-  }
-
-  async addResaleRoutes() {
-    try {
-      // Fetch resale listings from API
-      const response = await fetch("https://api.condomonk.ca/api/resale", {
-        next: { revalidate: 10 },
-      });
-      const data = await response.json();
-
-      // Add URL for each resale listing
-      if (data.listings) {
-        data.listings.forEach((listing) => {
-          this.addUrl(`/resale/${listing.slug}`, 0.6);
-        });
-      }
-    } catch (error) {
-      console.error("Error fetching resale listings:", error);
-    }
-  }
-
-  async addNewHomesRoutes() {
-    // ... existing code ...
-  }
-
-  async addTopProjectsRoutes() {
-    // ... existing code ...
   }
 
   generateSitemapXml() {

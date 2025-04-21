@@ -4,26 +4,7 @@ const nextConfig = {
   swcMinify: true,
   // Add any other necessary configurations
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "api.condomonk.ca",
-        port: "",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "trreb-image.ampre.ca",
-        port: "",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "api.toassign.com",
-        port: "",
-        pathname: "/**",
-      },
-    ],
+    domains: ["api.condomonk.ca", "trreb-image.ampre.ca", "api.toassign.com"],
   },
 };
 

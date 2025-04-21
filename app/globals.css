@@ -832,12 +832,12 @@ a:hover {
     }
 
     .main-title {
-
+        text-align: center;
         line-height: 2rem !important;
         font-weight: 900;
         margin-bottom: 10px;
-        font-size: 1.8rem !important;
-        text-align: left;
+        font-size: 1.6rem !important;
+        text-align: center;
     }
 
     .main-title2 {
@@ -2958,8 +2958,4 @@ textarea {
 
 .subtitle-text {
     font-weight: normal;
-}
-
-.hover-underline:hover {
-    text-decoration: underline !important;
 }

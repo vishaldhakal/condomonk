@@ -1,42 +1,33 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
 import sitemapGenerator from "../../../utils/sitemapGenerator";
-
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+import { revalidatePath } from "next/cache";
 
 export async function GET() {
   try {
     const result = await sitemapGenerator.generateSitemap();
 
     if (result.success) {
-      // Revalidate the sitemap path
+      // Revalidate the sitemap.xml path
       revalidatePath("/sitemap.xml");
 
-      return NextResponse.json({
-        success: true,
-        message: result.message,
-        path: result.path,
-      });
-    } else {
       return NextResponse.json(
         {
-          success: false,
           message: result.message,
-          error: result.error,
+          timestamp: new Date().toISOString(),
         },
-        { status: 500 }
+        { status: 200 }
       );
+    } else {
+      return NextResponse.json({ error: result.message }, { status: 500 });
     }
   } catch (error) {
-    console.error("Error in sitemap-update route:", error);
+    console.error("Sitemap generation error:", error);
     return NextResponse.json(
-      {
-        success: false,
-        message: "Internal server error",
-        error: error.message,
-      },
+      { error: "Internal Server Error" },
       { status: 500 }
     );
   }
 }
+
+// Set revalidation period to 24 hours
+export const revalidate = 86400;

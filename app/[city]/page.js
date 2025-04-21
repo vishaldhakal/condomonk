@@ -1,69 +1,14 @@
 import CondoCard from "@/components/CondoCard";
+import BottomContactForm from "@/components/BottomContactForm";
 import { notFound } from "next/navigation";
 import PreconSchema from "@/components/PreconSchema";
 import Link from "next/link";
+import Newsletter from "@/components/Newsletter";
 import Image from "next/legacy/image";
-import { Suspense } from "react";
-import dynamic from "next/dynamic";
-import PreconstructionFilter from "@/components/PreconstructionFilter";
-
-// Dynamic imports for components that can be loaded later
-const BottomContactForm = dynamic(
-  () => import("@/components/BottomContactForm"),
-  {
-    loading: () => (
-      <div className="h-96 flex items-center justify-center">
-        <div className="animate-pulse bg-gray-200 h-64 w-full rounded-lg"></div>
-      </div>
-    ),
-    ssr: false,
-  }
-);
-
-const Newsletter = dynamic(() => import("@/components/Newsletter"), {
-  loading: () => (
-    <div className="h-40 flex items-center justify-center">
-      <div className="animate-pulse bg-gray-200 h-32 w-full rounded-lg"></div>
-    </div>
-  ),
-  ssr: false,
-});
-
-const CityDirectory = dynamic(() => import("@/components/CityDirectory"), {
-  loading: () => (
-    <div className="h-64 flex items-center justify-center">
-      <div className="animate-pulse bg-gray-200 h-48 w-full rounded-lg"></div>
-    </div>
-  ),
-});
-
-const AssignmentCard = dynamic(
-  () => import("@/components/assignment/AssignmentCard"),
-  {
-    loading: () => (
-      <div className="h-80 flex items-center justify-center">
-        <div className="animate-pulse bg-gray-200 h-64 w-full rounded-lg"></div>
-      </div>
-    ),
-  }
-);
-
-const BlogCard = dynamic(() => import("@/components/blogCard"), {
-  loading: () => (
-    <div className="h-64 flex items-center justify-center">
-      <div className="animate-pulse bg-gray-200 h-48 w-full rounded-lg"></div>
-    </div>
-  ),
-});
-
-const GoogleMap = dynamic(() => import("@/components/GoogleMap"), {
-  loading: () => (
-    <div className="h-[500px] flex items-center justify-center">
-      <div className="animate-pulse bg-gray-200 h-full w-full rounded-lg"></div>
-    </div>
-  ),
-  ssr: false,
-});
+import CityDirectory from "@/components/CityDirectory";
+import AssignmentCard from "@/components/assignment/AssignmentCard";
+import BlogCard from "@/components/blogCard";
+import GoogleMap from "@/components/GoogleMap";
 
 async function getData(city, priceFilter = null) {
   let url = `https://api.condomonk.ca/api/preconstructions-city/${city}`;
@@ -249,11 +194,14 @@ export async function generateMetadata({ params }, parent) {
 
   let title, description;
   title = `120+ Pre construction Homes in  ${CapitalizeFirst(cleanCity)}`;
-  description = `120+ Pre Construction homes in ${CapitalizeFirst(
+  description = `${
+    data.preconstructions.length
+  }+ Pre Construction Homes & New Developments in ${CapitalizeFirst(
     cleanCity
-  )}. View floor plans, pricing, map & availability. Check the latest ${CapitalizeFirst(
+  )}| Check out plans, pricing, and availability for pre construction homes in ${CapitalizeFirst(
     cleanCity
-  )} pre construction home projects.`;
+  )} `;
+
   return {
     ...parent,
     alternates: {
@@ -289,6 +237,7 @@ export default async function Home({ params }) {
       id: p.id,
       project_name: p.project_name || "", // Provide default empty string
       slug: p.slug || "", // Provide default empty string
+      developer_name: p.developer_name || "Unknown Developer", // Provide default value
       project_type: p.project_type || "", // Provide default empty string
       status: p.status || "", // Provide default empty string
     })),
@@ -344,13 +293,15 @@ export default async function Home({ params }) {
           <div className="d-flex ">
             <div>
               <h1 className="main-title font-family2 pb-md-2">
-                {priceFilter
-                  ? `Pre construction Homes in ${CapitalizeFirst(
-                      cleanCity
-                    )} ${formatPriceFilter(priceFilter)}`
-                  : `120+ Pre Construction Homes in ${CapitalizeFirst(
-                      cleanCity
-                    )}`}
+                {priceFilter ? (
+                  ` Pre construction Homes in ${CapitalizeFirst(
+                    cleanCity
+                  )} ${formatPriceFilter(priceFilter)} `
+                ) : (
+                  <>
+                    120+ Pre Construction Homes in {CapitalizeFirst(cleanCity)}{" "}
+                  </>
+                )}
               </h1>
             </div>
             <div className="">
@@ -373,73 +324,132 @@ export default async function Home({ params }) {
               </span>
             </div>
           </div>
-          <h2 class="text-sm md:text-base">
-            120+ Pre construction Homes in {CapitalizeFirst(cleanCity)}, ON |
-            Explore Floor Plans, Pricing & Availability. Condomonk has over 120
-            pre construction homes in {CapitalizeFirst(cleanCity)}, ON.
-            Condomonk is your trusted platform for new pre construction across
-            Canada. Select from updated database of
-            <a
-              href="/{cleanCity}/condos"
-              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
-            >
-              condos,
-            </a>
-            <a
-              href="/{cleanCity}/townhomes"
-              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800"
-            >
-              townhomes
-            </a>
-            , and
-            <a
-              href="/{cleanCity}/detached"
-              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
-            >
-              detached pre construction homes
-            </a>
-            from
-            <a
-              href="/builders"
-              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
-            >
-              high-rated builders
-            </a>
-            , with pricing customized for both first-time buyers and seasoned
-            investors. Our listings are updated daily, giving you the latest
-            <a
-              href="/{cleanCity}/upcoming"
-              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
-            >
-              upcoming pre construction projects.
-            </a>
-            Easily filter by no of bedrooms (1 to 4+), project type, and
-            construction status from budget-friendly condo to a pre construction
-            homes,
-            <a
-              href="#contact"
-              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
-            >
-              contact us
-            </a>
-            to connect you to the most exciting real estate opportunities in
-            {CapitalizeFirst(cleanCity)}.
+          <h2 className="text-sm md:text-base">
+            <input
+              type="checkbox"
+              id="read-more"
+              className="read-more-checkbox"
+            />
+            <div className="subtitle-container">
+              <span className="subtitle-text">
+                120+ Pre construction Homes in {CapitalizeFirst(cleanCity)},
+                Ontario | Explore Floor Plans, Pricing & Availability on
+                Condomonk.
+              </span>
+              <label
+                htmlFor="read-more"
+                className="read-more-toggle show-more-label"
+              >
+                <span className="show-more text-black font-bold">
+                  Read More
+                </span>
+              </label>
+              <span className="read-more-content subtitle-text">
+                {" "}
+                Find your dream home among 120+ pre construction properties in{" "}
+                {CapitalizeFirst(cleanCity)}, Ontario, exclusively on
+                Condomonk.ca—our go-to source for new developments in the GTA.
+                Browse a wide selection of condos, townhouses, and detached
+                houses from leading builders, with pricing options perfect for
+                first-time buyers and investors. Our daily-updated listings
+                feature the latest pre-construction and under-construction
+                projects, allowing you to filter by bedrooms (1 to 4+), property
+                type, and construction status. Whether you're looking for
+                affordable condos or luxury new builds, Condomonk provides
+                insider access to {CapitalizeFirst(cleanCity)}'s hottest real
+                estate opportunities. <br />
+                <label
+                  htmlFor="read-more"
+                  className="read-more-toggle show-less-label ms-0"
+                >
+                  <span className="show-less text-black font-bold">
+                    Show Less
+                  </span>
+                </label>
+              </span>
+            </div>
           </h2>
-          <div className="d-flex sm-center mb-lg-0 sticky-buttons pb-0 mb-0 z-2 sticky-top bg-white">
-            <div className="position-relative w-100 container">
-              <PreconstructionFilter
-                cityName={CapitalizeFirst(params.city)}
-                citySlug={params.city.split("-homes-")[0]}
-              />
+          <div className="d-flex sm-center mb-lg-0 sticky-buttons pb-0 mb-0 z-2 sticky-top">
+            <div className="position-relative w-100">
+              <div className="d-flex flex-nowrap overflow-auto pb-2 hide-scrollbar">
+                <div className="d-flex gap-2 flex-nowrap ">
+                  <h3 className="">
+                    <Link
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m whitespace-nowrap border-2 border-transparent hover:border-b-[#FFC007]"
+                      href={`/${params.city.split("-homes-")[0]}/upcoming/`}
+                      prefetch={false}
+                    >
+                      Upcoming Projects {CapitalizeFirst(params.city)}
+                    </Link>
+                  </h3>
+                  <h3>
+                    <Link
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 me-2 whitespace-nowrap border-2 border-transparent hover:border-b-[#FFC007]"
+                      href={`/${params.city.split("-homes-")[0]}/townhomes/`}
+                      prefetch={false}
+                    >
+                      New Townhomes {CapitalizeFirst(params.city)}
+                    </Link>
+                  </h3>
+                  <h3>
+                    <Link
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m whitespace-nowrap border-2 border-transparent hover:border-b-[#FFC007]"
+                      href={`/${params.city.split("-homes-")[0]}/detached/`}
+                      prefetch={false}
+                    >
+                      New Detached Homes {CapitalizeFirst(params.city)}
+                    </Link>
+                  </h3>
+                  <h3>
+                    <Link
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 whitespace-nowrap border-2 border-transparent hover:border-b-[#FFC007]"
+                      href={`/${params.city.split("-homes-")[0]}/condos/`}
+                      prefetch={false}
+                    >
+                      New Condos {CapitalizeFirst(params.city)}
+                    </Link>
+                  </h3>
+                  <h4>
+                    <Link
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-2 border-transparent hover:border-b-[#FFC007]"
+                      href={`/${
+                        params.city.split("-homes-")[0]
+                      }-homes-under-500k`}
+                      prefetch={false}
+                    >
+                      Under $500k
+                    </Link>
+                  </h4>
+                  <h4>
+                    <Link
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-2 border-transparent hover:border-b-[#FFC007]"
+                      href={`/${
+                        params.city.split("-homes-")[0]
+                      }-homes-under-1-million`}
+                      prefetch={false}
+                    >
+                      Under $1M
+                    </Link>
+                  </h4>
+                  <h4>
+                    <Link
+                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-2 border-transparent hover:border-b-[#FFC007]"
+                      href={`/${
+                        params.city.split("-homes-")[0]
+                      }-homes-under-1.5-million`}
+                      prefetch={false}
+                    >
+                      Under $1.5M
+                    </Link>
+                  </h4>
+                </div>
+              </div>
             </div>
           </div>
 
           {eventbanner()}
           <div className="mt-md-3 mt-0"></div>
-          <div
-            className="row row-cols-2 row-cols-md-4 gy-2 gy-lg-4  gx-3 gx-lg-3"
-            id="selling"
-          >
+          <div className="row row-cols-2 row-cols-md-4 gy-2 gy-lg-4  gx-3 gx-lg-3 ">
             {featuredData.preconstructions &&
               featuredData.preconstructions.map((item, no) => (
                 <div className="col" key={item.id}>
@@ -475,9 +485,9 @@ export default async function Home({ params }) {
           </div>
           <div className="pt-5 mt-5"></div>
           <div className="pt-5"></div>
-          <h3 className="fw-bold fs-2 mb-4 font-family2" id="upcoming">
+          <h3 className="fw-bold fs-2 mb-4 font-family2">
             {filteredprojects("Upcoming").length > 0 ? (
-              `Launching Soon - New Pre Construction Homes in ${CapitalizeFirst(
+              `Launching Soon - New Construction Projects in ${CapitalizeFirst(
                 data.city.name
               )}`
             ) : (
@@ -517,7 +527,7 @@ export default async function Home({ params }) {
           </div>
           <div className="pt-5 mt-5"></div>
           <div className="pt-5"></div>
-          <h2 className="fw-bold fs-2 mb-4 text-red" id="soldout">
+          <h2 className="fw-bold fs-2 mb-4 text-red">
             {filteredprojects("Sold out").length > 0 ? (
               <i>{`Past Communities in ${CapitalizeFirst(
                 data.city.name
@@ -552,7 +562,7 @@ export default async function Home({ params }) {
                     Assignment for sale in {CapitalizeFirst(cleanCity)}
                   </h3>
                   <p>
-                    Discover the best deals on price reduced assignments in{" "}
+                    Discover the best deals on price-reduced assignments in{" "}
                     {CapitalizeFirst(cleanCity)}.
                   </p>
                 </div>
@@ -561,15 +571,7 @@ export default async function Home({ params }) {
               <div className="row row-cols-1 row-cols-md-4 gy-4 gx-3">
                 {assignments.data.map((assignment, index) => (
                   <div className="col" key={assignment.id}>
-                    <Suspense
-                      fallback={
-                        <div className="h-80 flex items-center justify-center">
-                          <div className="animate-pulse bg-gray-200 h-64 w-full rounded-lg"></div>
-                        </div>
-                      }
-                    >
-                      <AssignmentCard assignment={assignment} index={index} />
-                    </Suspense>
+                    <AssignmentCard assignment={assignment} index={index} />
                   </div>
                 ))}
               </div>
@@ -584,28 +586,18 @@ export default async function Home({ params }) {
               <div className="d-flex">
                 <div>
                   <h3 className="main-title font-family2 pb-md-2">
-                    Latest Pre Construction News & Insights in{" "}
-                    {CapitalizeFirst(cleanCity)}
+                    Latest News and Insights in {CapitalizeFirst(cleanCity)}
                   </h3>
                 </div>
               </div>
               <p className="mb-4">
-                Stay updated with the latest pre construction news, market
-                trends, real estate update, and insights from{" "}
-                {CapitalizeFirst(cleanCity)}.
+                Stay updated with the latest real estate news, market trends,
+                and insights from {CapitalizeFirst(cleanCity)}.
               </p>
               <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 gy-4 gx-3">
                 {cityBlogs.map((blog) => (
                   <div className="col" key={blog.id}>
-                    <Suspense
-                      fallback={
-                        <div className="h-64 flex items-center justify-center">
-                          <div className="animate-pulse bg-gray-200 h-48 w-full rounded-lg"></div>
-                        </div>
-                      }
-                    >
-                      <BlogCard blog={blog} />
-                    </Suspense>
+                    <BlogCard blog={blog} />
                   </div>
                 ))}
               </div>
@@ -617,8 +609,7 @@ export default async function Home({ params }) {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                  Explore Pre Construction Homes Nearby in{" "}
-                  {CapitalizeFirst(cleanCity)}
+                  Explore Pre Construction Homes in {CapitalizeFirst(cleanCity)}
                 </h2>
                 <p className="mt-2 text-lg text-gray-600 max-w-3xl mx-auto">
                   Explore a wide range of pre construction homes in{" "}
@@ -628,20 +619,12 @@ export default async function Home({ params }) {
                 </p>
               </div>
               <div className="rounded-xl overflow-hidden shadow-lg">
-                <Suspense
-                  fallback={
-                    <div className="h-[500px] flex items-center justify-center">
-                      <div className="animate-pulse bg-gray-200 h-full w-full rounded-lg"></div>
-                    </div>
-                  }
-                >
-                  <GoogleMap
-                    location={CapitalizeFirst(cleanCity) + ", Ontario, Canada"}
-                    width="100%"
-                    height={500}
-                    zoom={12}
-                  />
-                </Suspense>
+                <GoogleMap
+                  location={CapitalizeFirst(cleanCity) + ", Ontario, Canada"}
+                  width="100%"
+                  height={500}
+                  zoom={12}
+                />
               </div>
             </div>
           </div>
@@ -653,47 +636,46 @@ export default async function Home({ params }) {
                 Explore New Upcoming Projects, Prices Ranges & Floor Plans
               </h2>
 
-              <p className="mb-2">
-                Looking for the ideal pre construction home in{" "}
-                {CapitalizeFirst(params.city)}? You have found the right place.
-                The pre construction home market in{" "}
-                {CapitalizeFirst(params.city)} is booming, with new projects
-                going up in top neighbourhoods such as Seton, Belmont, and
-                Downtown. Searching for a stylish condo or a big detached house,
-                you can find more than {data.preconstructions.length}+ pre
-                construction homes in {CapitalizeFirst(params.city)} available
-                on Condomonk.
+              <p className="mb-4">
+                Searching for the perfect pre construction home in{" "}
+                {CapitalizeFirst(params.city)}? You're in the right place. The
+                market for pre construction homes in{" "}
+                {CapitalizeFirst(params.city)} is thriving, with new
+                developments launching in popular neighborhoods like Seton,
+                Belmont, and Downtown. Whether you're looking for a sleek condo
+                or a spacious detached house, you'll find over{" "}
+                {data.preconstructions.length}+ pre construction home options in{" "}
+                {CapitalizeFirst(params.city)} listed on Condomonk.
               </p>
 
-              <p className="mb-2">
-                A pre construction home in {CapitalizeFirst(params.city)}{" "}
-                provides the option to personalize your ideal space at
-                competitive pricing with contemporary features. 1-bedroom to 3+
-                bedroom houses, the choices are unparalleled. Top builders are
-                providing pre construction houses in{" "}
-                {CapitalizeFirst(params.city)} with versatile floor plans,
-                efficient designs, and family-orientated layouts to fit any
-                lifestyle.
+              <p className="mb-4">
+                A pre construction home in {CapitalizeFirst(params.city)} offers
+                the chance to customize your dream space while enjoying
+                competitive pricing and modern features. From 1-bedroom units to
+                3+ bedroom homes, the variety is unmatched. Leading builders are
+                offering pre construction homes in{" "}
+                {CapitalizeFirst(params.city)} with flexible floor plans,
+                energy-efficient designs, and family-friendly layouts to suit
+                every lifestyle.
               </p>
 
-              <p className="mb-2">
-                Investing in a {CapitalizeFirst(params.city)} pre construction
-                home provides you with early availability of pricing,
-                incentives, and the top units in emerging communities. Discover
-                floor plans in precise detail, handover dates estimated, and
-                builder portfolios — everything under one roof. Whether you're
-                purchasing your first home or growing your portfolio, a{" "}
-                {CapitalizeFirst(params.city)} pre construction home is a sound
-                decision.
+              <p className="mb-4">
+                Investing in a pre construction home in{" "}
+                {CapitalizeFirst(params.city)} means you get early access to
+                pricing, incentives, and the best units in new communities.
+                Explore detailed floor plans, estimated handover dates, and
+                builder profiles — all in one place. Whether you're buying your
+                first home or adding to your portfolio, a pre construction home
+                in {CapitalizeFirst(params.city)} is a smart move.
               </p>
 
-              <p className="mb-2">
-                Begin your search now — view the newest listings for a pre
+              <p className="mb-4">
+                Start your journey today — browse the latest listings for a pre
                 construction home in {CapitalizeFirst(params.city)}, compare
-                projects, and speak with reliable local real estate
-                professionals. Get first access to exclusive listings and find
-                your dream pre construction home in{" "}
-                {CapitalizeFirst(params.city)} at Condomonk.
+                projects, and connect with trusted local real estate experts. Be
+                the first to access exclusive opportunities and secure your
+                ideal pre construction home in {CapitalizeFirst(params.city)} on
+                Condomonk.
               </p>
             </div>
           </div>
@@ -723,18 +705,10 @@ export default async function Home({ params }) {
               <div className="row row-cols-1 row-cols-md-3 mt-5">
                 <div className="col-md-2"></div>
                 <div className="col-md-8">
-                  <Suspense
-                    fallback={
-                      <div className="h-96 flex items-center justify-center">
-                        <div className="animate-pulse bg-gray-200 h-64 w-full rounded-lg"></div>
-                      </div>
-                    }
-                  >
-                    <BottomContactForm
-                      proj_name="All"
-                      city="Home Page"
-                    ></BottomContactForm>
-                  </Suspense>
+                  <BottomContactForm
+                    proj_name="All"
+                    city="Home Page"
+                  ></BottomContactForm>
                   <div className="d-flex">
                     <p className="small-text2 mb-3 text-center">
                       I agree to receive marketing and customer service calls
@@ -752,15 +726,7 @@ export default async function Home({ params }) {
           <div className="pt-5 mt-5"></div>
           <div className="pt-5 mt-5"></div>
 
-          <Suspense
-            fallback={
-              <div className="h-40 flex items-center justify-center">
-                <div className="animate-pulse bg-gray-200 h-32 w-full rounded-lg"></div>
-              </div>
-            }
-          >
-            <Newsletter />
-          </Suspense>
+          <Newsletter />
           {getSEOParagraph(cleanCity, priceFilter) && (
             <div className="row justify-content-start mb-5">
               <div className="col-md-12">
