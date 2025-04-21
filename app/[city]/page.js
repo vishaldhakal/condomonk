@@ -9,6 +9,7 @@ import CityDirectory from "@/components/CityDirectory";
 import AssignmentCard from "@/components/assignment/AssignmentCard";
 import BlogCard from "@/components/blogCard";
 import GoogleMap from "@/components/GoogleMap";
+import PreconstructionFilter from "@/components/PreconstructionFilter";
 
 async function getData(city, priceFilter = null) {
   let url = `https://api.condomonk.ca/api/preconstructions-city/${city}`;
@@ -325,130 +326,68 @@ export default async function Home({ params }) {
             </div>
           </div>
           <h2 className="text-sm md:text-base">
-            <input
-              type="checkbox"
-              id="read-more"
-              className="read-more-checkbox"
-            />
-            <div className="subtitle-container">
-              <span className="subtitle-text">
-                120+ Pre construction Homes in {CapitalizeFirst(cleanCity)},
-                Ontario | Explore Floor Plans, Pricing & Availability on
-                Condomonk.
-              </span>
-              <label
-                htmlFor="read-more"
-                className="read-more-toggle show-more-label"
-              >
-                <span className="show-more text-black font-bold">
-                  Read More
-                </span>
-              </label>
-              <span className="read-more-content subtitle-text">
-                {" "}
-                Find your dream home among 120+ pre construction properties in{" "}
-                {CapitalizeFirst(cleanCity)}, Ontario, exclusively on
-                Condomonk.ca—our go-to source for new developments in the GTA.
-                Browse a wide selection of condos, townhouses, and detached
-                houses from leading builders, with pricing options perfect for
-                first-time buyers and investors. Our daily-updated listings
-                feature the latest pre-construction and under-construction
-                projects, allowing you to filter by bedrooms (1 to 4+), property
-                type, and construction status. Whether you're looking for
-                affordable condos or luxury new builds, Condomonk provides
-                insider access to {CapitalizeFirst(cleanCity)}'s hottest real
-                estate opportunities. <br />
-                <label
-                  htmlFor="read-more"
-                  className="read-more-toggle show-less-label ms-0"
-                >
-                  <span className="show-less text-black font-bold">
-                    Show Less
-                  </span>
-                </label>
-              </span>
-            </div>
+            120+ Pre construction Homes in {CapitalizeFirst(cleanCity)}, ON |
+            Explore Floor Plans, Pricing & Availability. Condomonk has over 120
+            pre construction homes in {CapitalizeFirst(cleanCity)}, ON.
+            Condomonk is your trusted platform for new pre construction across
+            Canada. Select from updated database of
+            <Link
+              href={`/${cleanCity}/condos`}
+              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+            >
+              condos,
+            </Link>
+            <Link
+              href={`/${cleanCity}/townhomes`}
+              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800"
+            >
+              townhomes
+            </Link>
+            , and
+            <Link
+              href={`/${cleanCity}/detached`}
+              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+            >
+              detached pre construction homes
+            </Link>
+            from
+            <Link
+              href="/builders"
+              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+            >
+              high-rated builders
+            </Link>
+            , with pricing customized for both first-time buyers and seasoned
+            investors. Our listings are updated daily, giving you the latest
+            <Link
+              href="/{cleanCity}/upcoming"
+              class="text-  blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+            >
+              upcoming pre construction projects.
+            </Link>
+            Easily filter by no of bedrooms (1 to 4+), project type, and
+            construction status from budget-friendly condo to a pre construction
+            homes,
+            <Link
+              href="#contact"
+              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+            >
+              contact us
+            </Link>
+            to connect you to the most exciting real estate opportunities in
+            {CapitalizeFirst(cleanCity)}.
           </h2>
-          <div className="d-flex sm-center mb-lg-0 sticky-buttons pb-0 mb-0 z-2 sticky-top">
-            <div className="position-relative w-100">
-              <div className="d-flex flex-nowrap overflow-auto pb-2 hide-scrollbar">
-                <div className="d-flex gap-2 flex-nowrap ">
-                  <h3 className="">
-                    <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m whitespace-nowrap border-2 border-transparent hover:border-b-[#FFC007]"
-                      href={`/${params.city.split("-homes-")[0]}/upcoming/`}
-                      prefetch={false}
-                    >
-                      Upcoming Projects {CapitalizeFirst(params.city)}
-                    </Link>
-                  </h3>
-                  <h3>
-                    <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 me-2 whitespace-nowrap border-2 border-transparent hover:border-b-[#FFC007]"
-                      href={`/${params.city.split("-homes-")[0]}/townhomes/`}
-                      prefetch={false}
-                    >
-                      New Townhomes {CapitalizeFirst(params.city)}
-                    </Link>
-                  </h3>
-                  <h3>
-                    <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m whitespace-nowrap border-2 border-transparent hover:border-b-[#FFC007]"
-                      href={`/${params.city.split("-homes-")[0]}/detached/`}
-                      prefetch={false}
-                    >
-                      New Detached Homes {CapitalizeFirst(params.city)}
-                    </Link>
-                  </h3>
-                  <h3>
-                    <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 whitespace-nowrap border-2 border-transparent hover:border-b-[#FFC007]"
-                      href={`/${params.city.split("-homes-")[0]}/condos/`}
-                      prefetch={false}
-                    >
-                      New Condos {CapitalizeFirst(params.city)}
-                    </Link>
-                  </h3>
-                  <h4>
-                    <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-2 border-transparent hover:border-b-[#FFC007]"
-                      href={`/${
-                        params.city.split("-homes-")[0]
-                      }-homes-under-500k`}
-                      prefetch={false}
-                    >
-                      Under $500k
-                    </Link>
-                  </h4>
-                  <h4>
-                    <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-2 border-transparent hover:border-b-[#FFC007]"
-                      href={`/${
-                        params.city.split("-homes-")[0]
-                      }-homes-under-1-million`}
-                      prefetch={false}
-                    >
-                      Under $1M
-                    </Link>
-                  </h4>
-                  <h4>
-                    <Link
-                      className="link-black badge py-2 my-1 bg-white shadow-sm text-dark fs-small fw-m mx-0 rounded-pill border-2 border-transparent hover:border-b-[#FFC007]"
-                      href={`/${
-                        params.city.split("-homes-")[0]
-                      }-homes-under-1.5-million`}
-                      prefetch={false}
-                    >
-                      Under $1.5M
-                    </Link>
-                  </h4>
-                </div>
-              </div>
+          <div className="d-flex sm-center mb-lg-0 sticky-buttons py-2 mb-0 z-2 sticky-top bg-white">
+            <div className="position-relative w-100 container">
+              <PreconstructionFilter
+                cityName={CapitalizeFirst(params.city)}
+                citySlug={params.city.split("-homes-")[0]}
+              />
             </div>
           </div>
 
           {eventbanner()}
-          <div className="mt-md-3 mt-0"></div>
+          <div className="mt-md-0 mt-0"></div>
           <div className="row row-cols-2 row-cols-md-4 gy-2 gy-lg-4  gx-3 gx-lg-3 ">
             {featuredData.preconstructions &&
               featuredData.preconstructions.map((item, no) => (
@@ -636,46 +575,47 @@ export default async function Home({ params }) {
                 Explore New Upcoming Projects, Prices Ranges & Floor Plans
               </h2>
 
-              <p className="mb-4">
-                Searching for the perfect pre construction home in{" "}
-                {CapitalizeFirst(params.city)}? You're in the right place. The
-                market for pre construction homes in{" "}
-                {CapitalizeFirst(params.city)} is thriving, with new
-                developments launching in popular neighborhoods like Seton,
-                Belmont, and Downtown. Whether you're looking for a sleek condo
-                or a spacious detached house, you'll find over{" "}
-                {data.preconstructions.length}+ pre construction home options in{" "}
-                {CapitalizeFirst(params.city)} listed on Condomonk.
+              <p className="mb-2">
+                Looking for the ideal pre construction home in{" "}
+                {CapitalizeFirst(params.city)}? You have found the right place.
+                The pre construction home market in{" "}
+                {CapitalizeFirst(params.city)} is booming, with new projects
+                going up in top neighbourhoods such as Seton, Belmont, and
+                Downtown. Searching for a stylish condo or a big detached house,
+                you can find more than {data.preconstructions.length}+ pre
+                construction homes in {CapitalizeFirst(params.city)} available
+                on Condomonk.
               </p>
 
-              <p className="mb-4">
-                A pre construction home in {CapitalizeFirst(params.city)} offers
-                the chance to customize your dream space while enjoying
-                competitive pricing and modern features. From 1-bedroom units to
-                3+ bedroom homes, the variety is unmatched. Leading builders are
-                offering pre construction homes in{" "}
-                {CapitalizeFirst(params.city)} with flexible floor plans,
-                energy-efficient designs, and family-friendly layouts to suit
-                every lifestyle.
+              <p className="mb-2">
+                A pre construction home in {CapitalizeFirst(params.city)}{" "}
+                provides the option to personalize your ideal space at
+                competitive pricing with contemporary features. 1-bedroom to 3+
+                bedroom houses, the choices are unparalleled. Top builders are
+                providing pre construction houses in{" "}
+                {CapitalizeFirst(params.city)} with versatile floor plans,
+                efficient designs, and family-orientated layouts to fit any
+                lifestyle.
               </p>
 
-              <p className="mb-4">
-                Investing in a pre construction home in{" "}
-                {CapitalizeFirst(params.city)} means you get early access to
-                pricing, incentives, and the best units in new communities.
-                Explore detailed floor plans, estimated handover dates, and
-                builder profiles — all in one place. Whether you're buying your
-                first home or adding to your portfolio, a pre construction home
-                in {CapitalizeFirst(params.city)} is a smart move.
+              <p className="mb-2">
+                Investing in a {CapitalizeFirst(params.city)} pre construction
+                home provides you with early availability of pricing,
+                incentives, and the top units in emerging communities. Discover
+                floor plans in precise detail, handover dates estimated, and
+                builder portfolios — everything under one roof. Whether you're
+                purchasing your first home or growing your portfolio, a{" "}
+                {CapitalizeFirst(params.city)} pre construction home is a sound
+                decision.
               </p>
 
-              <p className="mb-4">
-                Start your journey today — browse the latest listings for a pre
+              <p className="mb-2">
+                Begin your search now — view the newest listings for a pre
                 construction home in {CapitalizeFirst(params.city)}, compare
-                projects, and connect with trusted local real estate experts. Be
-                the first to access exclusive opportunities and secure your
-                ideal pre construction home in {CapitalizeFirst(params.city)} on
-                Condomonk.
+                projects, and speak with reliable local real estate
+                professionals. Get first access to exclusive listings and find
+                your dream pre construction home in{" "}
+                {CapitalizeFirst(params.city)} at Condomonk.
               </p>
             </div>
           </div>
