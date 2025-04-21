@@ -344,15 +344,13 @@ export default async function Home({ params }) {
           <div className="d-flex ">
             <div>
               <h1 className="main-title font-family2 pb-md-2">
-                {priceFilter ? (
-                  ` Pre construction Homes in ${CapitalizeFirst(
-                    cleanCity
-                  )} ${formatPriceFilter(priceFilter)} `
-                ) : (
-                  <>
-                    120+ Pre Construction Homes in {CapitalizeFirst(cleanCity)}{" "}
-                  </>
-                )}
+                {priceFilter
+                  ? `Pre construction Homes in ${CapitalizeFirst(
+                      cleanCity
+                    )} ${formatPriceFilter(priceFilter)}`
+                  : `120+ Pre Construction Homes in ${CapitalizeFirst(
+                      cleanCity
+                    )}`}
               </h1>
             </div>
             <div className="">
@@ -375,68 +373,57 @@ export default async function Home({ params }) {
               </span>
             </div>
           </div>
-          <h2 className="text-sm md:text-base">
-            <div className="subtitle-container">
-              <span className="subtitle-text">
-                120+ Pre construction Homes in {CapitalizeFirst(cleanCity)}, ON
-                | Explore Floor Plans, Pricing & Availability.
-              </span>
-
-              <span className=" subtitle-text">
-                {" "}
-                Condomonk has over 120 pre construction homes in{" "}
-                {CapitalizeFirst(cleanCity)}, ON. Condomonk is your trusted
-                platform for new pre construction across Canada. Select from
-                updated database of{" "}
-                <Link
-                  href={`/${cleanCity}/condos`}
-                  className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800"
-                >
-                  condos
-                </Link>
-                ,{" "}
-                <Link
-                  href={`/${cleanCity}/townhomes`}
-                  className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800"
-                >
-                  townhomes
-                </Link>
-                , and{" "}
-                <Link
-                  href={`/${cleanCity}/detached`}
-                  className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800"
-                >
-                  detached pre construction homes
-                </Link>{" "}
-                from{" "}
-                <Link
-                  href="/builders"
-                  className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 "
-                >
-                  high-rated builders
-                </Link>
-                , with pricing customized for both first-time buyers and
-                seasoned investors. Our listings are updated daily, giving you
-                the latest{" "}
-                <Link
-                  href={`/${cleanCity}/upcoming`}
-                  className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800"
-                >
-                  upcoming pre construction projects.
-                </Link>{" "}
-                Easily filter by no of bedrooms (1 to 4+), project type, and
-                construction status from budget-friendly condo to a pre
-                costruction homes,{" "}
-                <Link
-                  href="#contact"
-                  className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 "
-                >
-                  contact us
-                </Link>{" "}
-                to connect you to the most exciting real estate opportunities in{" "}
-                {CapitalizeFirst(cleanCity)}. <br />
-              </span>
-            </div>
+          <h2 class="text-sm md:text-base">
+            120+ Pre construction Homes in {CapitalizeFirst(cleanCity)}, ON |
+            Explore Floor Plans, Pricing & Availability. Condomonk has over 120
+            pre construction homes in {CapitalizeFirst(cleanCity)}, ON.
+            Condomonk is your trusted platform for new pre construction across
+            Canada. Select from updated database of
+            <a
+              href="/{cleanCity}/condos"
+              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+            >
+              condos,
+            </a>
+            <a
+              href="/{cleanCity}/townhomes"
+              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800"
+            >
+              townhomes
+            </a>
+            , and
+            <a
+              href="/{cleanCity}/detached"
+              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+            >
+              detached pre construction homes
+            </a>
+            from
+            <a
+              href="/builders"
+              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+            >
+              high-rated builders
+            </a>
+            , with pricing customized for both first-time buyers and seasoned
+            investors. Our listings are updated daily, giving you the latest
+            <a
+              href="/{cleanCity}/upcoming"
+              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+            >
+              upcoming pre construction projects.
+            </a>
+            Easily filter by no of bedrooms (1 to 4+), project type, and
+            construction status from budget-friendly condo to a pre construction
+            homes,
+            <a
+              href="#contact"
+              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+            >
+              contact us
+            </a>
+            to connect you to the most exciting real estate opportunities in
+            {CapitalizeFirst(cleanCity)}.
           </h2>
           <div className="d-flex sm-center mb-lg-0 sticky-buttons pb-0 mb-0 z-2 sticky-top bg-white">
             <div className="position-relative w-100 container">
