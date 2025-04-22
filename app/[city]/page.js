@@ -114,7 +114,7 @@ async function getCityBlogs(city) {
     const res = await fetch(
       `https://api.condomonk.ca/api/news/?city=${city}&page_size=4`,
       {
-        next: { revalidate: 3600 }, // Cache for 1 hour
+        cache: "no-store",
       }
     );
 
@@ -195,9 +195,7 @@ export async function generateMetadata({ params }, parent) {
 
   let title, description;
   title = `120+ Pre construction Homes in  ${CapitalizeFirst(cleanCity)}`;
-  description = `${
-    data.preconstructions.length
-  }+ Pre Construction Homes & New Developments in ${CapitalizeFirst(
+  description = `120+ Pre Construction Homes & New Developments in ${CapitalizeFirst(
     cleanCity
   )}| Check out plans, pricing, and availability for pre construction homes in ${CapitalizeFirst(
     cleanCity
@@ -374,7 +372,7 @@ export default async function Home({ params }) {
             >
               contact us
             </Link>
-            to connect you to the most exciting real estate opportunities in
+            to connect you to the most exciting real estate opportunities in{" "}
             {CapitalizeFirst(cleanCity)}.
           </h2>
           <div className="d-flex sm-center mb-lg-0 sticky-buttons py-2 mb-0 z-2 sticky-top bg-white">
