@@ -500,6 +500,31 @@ export default async function Home({ params }) {
                 </div>
               ))}
           </div>
+          {/* Google Map Section */}
+          <div className="pb-32 mb-10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                  Check Out Pre Construction Homes in{" "}
+                  {CapitalizeFirst(cleanCity)} Area.
+                </h2>
+                <p className="mt-2 text-lg text-gray-600 max-w-3xl mx-auto">
+                  Explore a wide range of pre construction homes in{" "}
+                  {CapitalizeFirst(cleanCity)}. Discover top{" "}
+                  {CapitalizeFirst(cleanCity)}'s neighborhoods, new
+                  developments, and ideal locations for your future home.
+                </p>
+              </div>
+              <div className="rounded-xl overflow-hidden shadow-lg">
+                <GoogleMap
+                  location={CapitalizeFirst(cleanCity) + ", Ontario, Canada"}
+                  width="100%"
+                  height={500}
+                  zoom={12}
+                />
+              </div>
+            </div>
+          </div>
 
           {/* Assignment Sale Section */}
           {assignments.data && assignments.data.length > 0 && (
@@ -553,30 +578,6 @@ export default async function Home({ params }) {
             </>
           )}
 
-          {/* Google Map Section */}
-          <div className="py-16 pt-32">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                  Explore Pre Construction Homes in {CapitalizeFirst(cleanCity)}
-                </h2>
-                <p className="mt-2 text-lg text-gray-600 max-w-3xl mx-auto">
-                  Explore a wide range of pre construction homes in{" "}
-                  {CapitalizeFirst(cleanCity)}. Discover top{" "}
-                  {CapitalizeFirst(cleanCity)}'s neighborhoods, new
-                  developments, and ideal locations for your future home.
-                </p>
-              </div>
-              <div className="rounded-xl overflow-hidden shadow-lg">
-                <GoogleMap
-                  location={CapitalizeFirst(cleanCity) + ", Ontario, Canada"}
-                  width="100%"
-                  height={500}
-                  zoom={12}
-                />
-              </div>
-            </div>
-          </div>
           <div className="pt-5 mt-5"></div>
           <div className="flex justify-center items-center max-w-7xl mx-auto px-4 md:px-6 mt-10 mb-16">
             <div className="max-w-none mt-14">
