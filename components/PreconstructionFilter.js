@@ -1,237 +1,333 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { ChevronDown } from "lucide-react";
 
-export default function PreconstructionFilter({ cityName, citySlug }) {
-  const [activeDropdown, setActiveDropdown] = useState(null);
+const PreconstructionFilter = ({ cityName, citySlug }) => {
+  const [openPopover, setOpenPopover] = useState(null);
 
-  // Check for hash in URL on component mount and scroll if needed
-  useEffect(() => {
-    const hash = window.location.hash;
-    if (hash) {
-      const element = document.querySelector(hash);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  }, []);
-
-  // Property type links
   const projectTypes = [
     {
       value: "Detached",
-      label: `Pre Construction Detached Homes`,
-      path: `/detached`,
+      label: "Pre Construction Detached Homes",
+      path: "/detached",
     },
     {
       value: "Townhome",
-      label: `Pre Construction Townhomes`,
-      path: `/townhomes`,
+      label: "Pre Construction Townhomes",
+      path: "/townhomes",
     },
-    {
-      value: "Condo",
-      label: `Pre Construction Condos`,
-      path: `/condos`,
-    },
+    { value: "Condo", label: "Pre Construction Condos", path: "/condos" },
   ];
 
-  // Price range links
   const priceRanges = [
-    {
-      value: "under-500k",
-      label: `Under $500K`,
-    },
-    {
-      value: "500k-600k",
-      label: `$500K to $600K`,
-    },
-    {
-      value: "600k-700k",
-      label: `$600K to $700K`,
-    },
-    {
-      value: "under-1-million",
-      label: `Under $1M`,
-    },
-    {
-      value: "under-1.5-million",
-      label: `Under $1.5M`,
-    },
+    { value: "under-500k", label: "Under $500K" },
+    { value: "500k-600k", label: "$500K to $600K" },
+    { value: "600k-700k", label: "$600K to $700K" },
+    { value: "under-1-million", label: "Under $1M" },
+    { value: "under-1.5-million", label: "Under $1.5M" },
   ];
 
-  // Property status options
   const statusOptions = [
+    { value: "selling", label: "Selling Now", sectionId: "selling" },
+    { value: "upcoming", label: "Upcoming", sectionId: "upcoming" },
+    { value: "past", label: "Past Communities", sectionId: "soldout" },
+  ];
+
+  const propertyOptions = [
     {
-      value: "selling",
-      label: "Selling Now",
-      sectionId: "selling",
-    },
-    {
-      value: "upcoming",
-      label: "Upcoming",
-      sectionId: "upcoming",
-    },
-    {
-      value: "past",
-      label: "Past Communities",
-      sectionId: "soldout",
+      value: "homes-for-sale",
+      label: "Homes for Sale",
+      path: `/resale/ontario/${citySlug}/homes-for-sale`,
     },
   ];
 
-  const handleStatusClick = (sectionId) => {
-    // Update URL with hash
-    const currentPath = window.location.pathname;
-    const newUrl = `${currentPath}#${sectionId}`;
-
-    // Update the URL without a full page reload
-    window.history.pushState({}, "", newUrl);
-
-    // Scroll to section
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-    setActiveDropdown(null);
+  const handleTogglePopover = (name) => {
+    setOpenPopover(openPopover === name ? null : name);
   };
 
+  const getLinkPath = (option, type) => {
+    if (type === "project") {
+      return `/${citySlug}${option.path}`;
+    } else if (type === "price") {
+      return `/${citySlug}-homes-${option.value}`;
+    } else if (type === "status") {
+      // For status, we're scrolling to sections on the same page
+      return `#${option.sectionId}`;
+    } else if (type === "property") {
+      return option.path;
+    }
+    return `/`;
+  };
+
+  // For mobile dropdown
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
-    <div className="flex flex-wrap gap-2 items-center justify-start">
-      <div
-        className="relative"
-        onMouseEnter={() => setActiveDropdown("listingType")}
-        onMouseLeave={() => setActiveDropdown(null)}
-      >
-        <button className="px-2 py-1 text-sm bg-gray-100 border border-gray-200 rounded-full border-black focus:outline-none focus:ring-1 focus:ring-gray-300 flex items-center gap-2 min-w-[140px]">
-          <span className="text-gray-700 font-medium">Pre construction</span>
-          <svg
-            className="w-4 h-4 text-gray-400"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
-        {activeDropdown === "listingType" && (
-          <div className="absolute left-0 mt-1 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-            <Link
-              href={`/resale/ontario/${citySlug}/homes-for-sale`}
-              className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+    <>
+      {/* Desktop Filter */}
+      <div className="hidden md:flex space-x-2 justify-start items-center">
+        {/* Property Type Dropdown */}
+        <Popover
+          open={openPopover === "property"}
+          onOpenChange={() => handleTogglePopover("property")}
+        >
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              className="border-gray-300 bg-gray-100 text-gray-800 font-medium rounded-full px-3"
             >
-              Homes for Sale
-            </Link>
-          </div>
-        )}
+              Pre Construction
+              <ChevronDown className="ml-2 h-4 w-4" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <div className="py-2">
+              {propertyOptions.map((option) => (
+                <Link
+                  key={option.value}
+                  href={getLinkPath(option, "property")}
+                  className="block px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                >
+                  {option.label}
+                </Link>
+              ))}
+            </div>
+          </PopoverContent>
+        </Popover>
+
+        {/* Project Type Filter */}
+        <Popover
+          open={openPopover === "project"}
+          onOpenChange={() => handleTogglePopover("project")}
+        >
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              className="border-gray-300 hover:bg-gray-100 text-gray-800 font-medium rounded-full px-3"
+            >
+              Project Type
+              <ChevronDown className="ml-2 h-4 w-4" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <div className="py-2">
+              {projectTypes.map((option) => (
+                <Link
+                  key={option.value}
+                  href={getLinkPath(option, "project")}
+                  className="block px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                >
+                  {option.label}
+                </Link>
+              ))}
+            </div>
+          </PopoverContent>
+        </Popover>
+
+        {/* Price Range Filter */}
+        <Popover
+          open={openPopover === "price"}
+          onOpenChange={() => handleTogglePopover("price")}
+        >
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              className="border-gray-300 hover:bg-gray-100 text-gray-800 font-medium rounded-full px-3"
+            >
+              Price Range
+              <ChevronDown className="ml-2 h-4 w-4" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <div className="py-2">
+              {priceRanges.map((option) => (
+                <Link
+                  key={option.value}
+                  href={getLinkPath(option, "price")}
+                  className="block px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                >
+                  {option.label}
+                </Link>
+              ))}
+            </div>
+          </PopoverContent>
+        </Popover>
+
+        {/* Status Filter */}
+        <Popover
+          open={openPopover === "status"}
+          onOpenChange={() => handleTogglePopover("status")}
+        >
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              className="border-gray-300 hover:bg-gray-100 text-gray-800 font-medium rounded-full px-3"
+            >
+              Status
+              <ChevronDown className="ml-2 h-4 w-4" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <div className="py-2">
+              {statusOptions.map((option) => (
+                <a
+                  key={option.value}
+                  href={getLinkPath(option, "status")}
+                  className="block px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                >
+                  {option.label}
+                </a>
+              ))}
+            </div>
+          </PopoverContent>
+        </Popover>
       </div>
 
-      {/* Property Type Dropdown */}
-      <div
-        className="relative"
-        onMouseEnter={() => setActiveDropdown("type")}
-        onMouseLeave={() => setActiveDropdown(null)}
-      >
-        <button className="px-2 py-1 text-sm bg-white border border-gray-200 rounded-full hover:border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-300 flex items-center gap-2 min-w-[140px]">
-          <span className="text-gray-700"> Home Types</span>
-          <svg
-            className="w-4 h-4 text-gray-400"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
-        {activeDropdown === "type" && (
-          <div className="absolute left-0 mt-1 w-64 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-            {projectTypes.map((type) => (
-              <Link
-                key={type.value}
-                href={`/${citySlug}${type.path}`}
-                className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900"
-              >
-                {type.label}
-              </Link>
-            ))}
+      {/* Mobile Filter - Horizontally Scrollable */}
+      <div className="md:hidden w-full">
+        <div
+          className="flex items-center overflow-x-auto pb-2 scrollbar-hide"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {/* Property Type Dropdown for Mobile */}
+          <div className="mr-2 flex-shrink-0">
+            <Popover
+              open={openPopover === "property-mobile"}
+              onOpenChange={() => handleTogglePopover("property-mobile")}
+            >
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="border-gray-300 bg-gray-100 text-gray-800 font-medium text-sm px-3 whitespace-nowrap rounded-full"
+                  size="sm"
+                >
+                  Pre Construction
+                  <ChevronDown className="ml-1 h-3 w-3" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <div className="py-2">
+                  {propertyOptions.map((option) => (
+                    <Link
+                      key={option.value}
+                      href={getLinkPath(option, "property")}
+                      className="block px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                    >
+                      {option.label}
+                    </Link>
+                  ))}
+                </div>
+              </PopoverContent>
+            </Popover>
           </div>
-        )}
-      </div>
 
-      {/* Price Range Dropdown */}
-      <div
-        className="relative"
-        onMouseEnter={() => setActiveDropdown("price")}
-        onMouseLeave={() => setActiveDropdown(null)}
-      >
-        <button className="px-2 py-1 text-sm bg-white border border-gray-200 rounded-full hover:border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-300 flex items-center gap-2 min-w-[140px]">
-          <span className="text-gray-700"> Price Ranges</span>
-          <svg
-            className="w-4 h-4 text-gray-400"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
-        {activeDropdown === "price" && (
-          <div className="absolute left-0 mt-1 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-            {priceRanges.map((range) => (
-              <Link
-                key={range.value}
-                href={`/${citySlug}-homes-${range.value}`}
-                className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900"
-              >
-                {range.label}
-              </Link>
-            ))}
+          {/* Project Type Filter for Mobile */}
+          <div className="mr-2 flex-shrink-0">
+            <Popover
+              open={openPopover === "project-mobile"}
+              onOpenChange={() => handleTogglePopover("project-mobile")}
+            >
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="border-gray-300 hover:bg-gray-100 text-gray-800 font-medium text-sm px-3 whitespace-nowrap rounded-full"
+                  size="sm"
+                >
+                  Project Type
+                  <ChevronDown className="ml-1 h-3 w-3" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <div className="py-2">
+                  {projectTypes.map((option) => (
+                    <Link
+                      key={option.value}
+                      href={getLinkPath(option, "project")}
+                      className="block px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                    >
+                      {option.label}
+                    </Link>
+                  ))}
+                </div>
+              </PopoverContent>
+            </Popover>
           </div>
-        )}
-      </div>
 
-      {/* Property Status Dropdown */}
-      <div
-        className="relative"
-        onMouseEnter={() => setActiveDropdown("status")}
-        onMouseLeave={() => setActiveDropdown(null)}
-      >
-        <button className="px-2 py-1 text-sm bg-white border border-gray-200 rounded-full hover:border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-300 flex items-center gap-2 min-w-[140px]">
-          <span className="text-gray-700">Project Status</span>
-          <svg
-            className="w-4 h-4 text-gray-400"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
-        {activeDropdown === "status" && (
-          <div className="absolute left-0 mt-1 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-            {statusOptions.map((status) => (
-              <button
-                key={status.value}
-                onClick={() => handleStatusClick(status.sectionId)}
-                className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900"
-              >
-                {status.label}
-              </button>
-            ))}
+          {/* Price Range Filter for Mobile */}
+          <div className="mr-2 flex-shrink-0">
+            <Popover
+              open={openPopover === "price-mobile"}
+              onOpenChange={() => handleTogglePopover("price-mobile")}
+            >
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="border-gray-300 hover:bg-gray-100 text-gray-800 font-medium text-sm px-3 whitespace-nowrap rounded-full"
+                  size="sm"
+                >
+                  Price Range
+                  <ChevronDown className="ml-1 h-3 w-3" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <div className="py-2">
+                  {priceRanges.map((option) => (
+                    <Link
+                      key={option.value}
+                      href={getLinkPath(option, "price")}
+                      className="block px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                    >
+                      {option.label}
+                    </Link>
+                  ))}
+                </div>
+              </PopoverContent>
+            </Popover>
           </div>
-        )}
+
+          {/* Status Filter for Mobile */}
+          <div className="flex-shrink-0">
+            <Popover
+              open={openPopover === "status-mobile"}
+              onOpenChange={() => handleTogglePopover("status-mobile")}
+            >
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="border-gray-300 hover:bg-gray-100 text-gray-800 font-medium text-sm px-3 whitespace-nowrap rounded-full"
+                  size="sm"
+                >
+                  Status
+                  <ChevronDown className="ml-1 h-3 w-3" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <div className="py-2">
+                  {statusOptions.map((option) => (
+                    <a
+                      key={option.value}
+                      href={getLinkPath(option, "status")}
+                      className="block px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                    >
+                      {option.label}
+                    </a>
+                  ))}
+                </div>
+              </PopoverContent>
+            </Popover>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
-}
+};
+
+export default PreconstructionFilter;

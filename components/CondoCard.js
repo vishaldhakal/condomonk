@@ -25,7 +25,7 @@ export default function CondoCard(props) {
 
   return (
     <>
-      <div className="bg-white rounded-[25px] shadow-lg my-3 md:my-0 transition-all duration-300 hover:shadow-xl">
+      <div className=" rounded-[10px] shadow-md my-3 md:my-0 transition-all duration-300 hover:shadow-xl transition-transform duration-300 hover:-translate-y-2">
         <div className="relative">
           <Link
             href={`/${props.city.slug}/${props.slug}`}
@@ -48,7 +48,7 @@ export default function CondoCard(props) {
                 <span>Featured</span>
               </span>
             )}
-            <div className="relative w-full h-[200px] md:h-[300px] overflow-hidden">
+            <div className="relative w-full h-[200px] md:h-[250px] overflow-hidden">
               <img
                 src={
                   props.image.image != null
@@ -58,10 +58,10 @@ export default function CondoCard(props) {
                 alt={`${props.project_name} - ${props.project_type} in ${props.city.name}`}
                 layout="fill"
                 objectFit="cover"
-                className="rounded-t-[25px] w-full h-full object-cover"
+                className="rounded-t-[10px] w-full h-full object-cover"
                 priority={props.priority}
                 quality={props.priority ? 85 : 75}
-                loading={props.priority ? "eager" : "lazy"}
+                loading="lazy"
               />
             </div>
           </Link>
@@ -82,26 +82,30 @@ export default function CondoCard(props) {
 
         <Link
           href={`/${props.city.slug}/${props.slug}`}
-          className="block p-3 md:p-4 text-black bg-white rounded-b-[25px] shadow-lg"
+          className="block px-3 md:px-4 pt-3 text-black rounded-b-[10px] "
           target="_blank"
         >
           <div className="pt-0">
-            <p className="mb-1 text-dark text-lg md:text-xl font-extrabold leading-[20px]">
+            <p className="mb-0 text-dark text-sm md:text-xl font-extrabold leading-[20px]">
               {props.project_name}
             </p>
-            <p className="mb-1 text-yellow-500 text-xs md:text-base font-semibold">
+            <p className="mb-0 text-yellow-500 text-xs md:text-base font-semibold">
               {checkPricing(props.price_starting_from)}
             </p>
-            <p className="md:mb-1 mb-0 text-[11px] md:text-sm text-black">
-              By {props.developer.name}
-            </p>
-            <p className="mb-1 text-[11px] md:text-sm text-black">
+            <p className="mb-1 text-[11px] md:text-sm text-black truncate">
               {props.project_address}
             </p>
-            <p className="mb-1 text-[11px] md:text-sm text-gray-500">
-              Approx completion: {props.occupancy}
+            <p className="mb-1 text-[11px] md:text-sm text-gray-500 truncate">
+              Occupancy: {props.occupancy}
             </p>
           </div>
+        </Link>
+        <Link
+          href={`/${props.city.slug}/${props.slug}`}
+          className="inline-block text-black mx-3 mt-2 mb-3 px-3 py-2 rounded-xl border-1 border-gray-300 hover:border-black shadow-md bg-white text-sm font-medium "
+          target="_blank"
+        >
+          View Details
         </Link>
       </div>
     </>

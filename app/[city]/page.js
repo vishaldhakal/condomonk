@@ -291,7 +291,7 @@ export default async function Home({ params }) {
         <div className="container">
           <div className="d-flex ">
             <div>
-              <h1 className="main-title font-family2 pb-md-2">
+              <h1 className="md:text-4xl text-xl font-bold  font-family2 pb-md-2">
                 {priceFilter ? (
                   ` Pre construction Homes in ${CapitalizeFirst(
                     cleanCity
@@ -323,7 +323,7 @@ export default async function Home({ params }) {
               </span>
             </div>
           </div>
-          <h2 className="text-sm md:text-base">
+          <h2 className="text-xs md:text-base text-gray-700">
             120+ Pre construction Homes in {CapitalizeFirst(cleanCity)}, ON |
             Explore Floor Plans, Pricing & Availability. Condomonk has over 120
             pre construction homes in {CapitalizeFirst(cleanCity)}, ON.
@@ -331,27 +331,27 @@ export default async function Home({ params }) {
             Canada. Select from updated database of
             <Link
               href={`/${cleanCity}/condos`}
-              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+              className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
             >
               condos,
             </Link>
             <Link
               href={`/${cleanCity}/townhomes`}
-              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800"
+              className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800"
             >
               townhomes
             </Link>
             , and
             <Link
               href={`/${cleanCity}/detached`}
-              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+              className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
             >
               detached pre construction homes
             </Link>
             from
             <Link
               href="/builders"
-              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+              className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
             >
               high-rated builders
             </Link>
@@ -359,7 +359,7 @@ export default async function Home({ params }) {
             investors. Our listings are updated daily, giving you the latest
             <Link
               href="/{cleanCity}/upcoming"
-              class="text-  blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+              className="text-  blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
             >
               upcoming pre construction projects.
             </Link>
@@ -368,15 +368,24 @@ export default async function Home({ params }) {
             homes,
             <Link
               href="#contact"
-              class="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+              className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
             >
               contact us
             </Link>
             to connect you to the most exciting real estate opportunities in{" "}
             {CapitalizeFirst(cleanCity)}.
+            <div className="text-gray-600 mt-2 mb-3">
+              <span className="font-medium">Last Updated:</span>{" "}
+              {new Date().toLocaleDateString("en-CA", {
+                timeZone: "America/Toronto",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </div>
           </h2>
-          <div className="d-flex sm-center mb-lg-0 sticky-buttons py-2 mb-0 z-2 sticky-top bg-white">
-            <div className="position-relative w-100 container">
+          <div className="d-flex sm-center mb-lg-0 sticky-buttons py-2 mb-0 sticky-top bg-white">
+            <div className="relative w-full container ps-0 overflow-visible z-30">
               <PreconstructionFilter
                 cityName={CapitalizeFirst(params.city)}
                 citySlug={params.city.split("-homes-")[0]}
@@ -386,7 +395,10 @@ export default async function Home({ params }) {
 
           {eventbanner()}
           <div className="mt-md-0 mt-0"></div>
-          <div className="row row-cols-2 row-cols-md-4 gy-2 gy-lg-4  gx-3 gx-lg-3 ">
+          <div
+            id="selling"
+            className="row row-cols-2 row-cols-md-4  gx-2 gx-lg-3 "
+          >
             {featuredData.preconstructions &&
               featuredData.preconstructions.map((item, no) => (
                 <div className="col" key={item.id}>
@@ -422,16 +434,16 @@ export default async function Home({ params }) {
           </div>
           <div className="pt-5 mt-5"></div>
           <div className="pt-5"></div>
-          <h3 className="fw-bold fs-2 mb-4 font-family2">
+          <h3 id="upcoming" className="fw-bold fs-2 mb-4 font-family2">
             {filteredprojects("Upcoming").length > 0 ? (
-              `Launching Soon - New Construction Projects in ${CapitalizeFirst(
+              `Launching Soon - New Pre Construction Homes in ${CapitalizeFirst(
                 data.city.name
               )}`
             ) : (
               <></>
             )}
           </h3>
-          <div className="row row-cols-1 row-cols-md-4 gy-2 gy-lg-4 gx-3">
+          <div className="row row-cols-2 row-cols-md-4 gy-2 gy-lg-0  gx-3 gx-lg-3">
             {data.preconstructions &&
               filteredprojects("Planning Phase").map((item, no) => (
                 <div className="col" key={item.id}>
@@ -464,7 +476,7 @@ export default async function Home({ params }) {
           </div>
           <div className="pt-5 mt-5"></div>
           <div className="pt-5"></div>
-          <h2 className="fw-bold fs-2 mb-4 text-red">
+          <h2 id="soldout" className="fw-bold fs-2 mb-4 text-red">
             {filteredprojects("Sold out").length > 0 ? (
               <i>{`Past Communities in ${CapitalizeFirst(
                 data.city.name
@@ -473,7 +485,7 @@ export default async function Home({ params }) {
               <></>
             )}
           </h2>
-          <div className="row row-cols-1 row-cols-md-4 row-cols-lg-6 gy-2 gy-lg-4 gx-3 ">
+          <div className="row  row-cols-2 row-cols-md-4 gy-2 gy-lg-0  gx-3 gx-lg-3">
             {data.preconstructions &&
               filteredprojects("Sold out").map((item, no) => (
                 <div className="col" key={item.id}>
