@@ -88,7 +88,7 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
           setOpenPopover(null);
           hoverElementRef.current = null;
         }
-      }, 500);
+      }, 300);
     }
   };
 
@@ -121,7 +121,11 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
           <PopoverTrigger asChild>
             <Button
               variant="outline"
-              className="border-gray-300 hover:bg-gray-100 text-gray-800 font-medium rounded-full px-3"
+              className={`border-gray-500 ${
+                buttonText === "Pre Construction"
+                  ? "bg-gray-100 border-black"
+                  : "hover:bg-gray-100"
+              } text-gray-800 font-medium rounded-full px-3`}
             >
               {buttonText}
               <ChevronDown className="ml-2 h-4 w-4" />
@@ -146,12 +150,12 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
             buttonText="Pre Construction"
             className={openPopover === "property" ? "z-10" : ""}
           >
-            <div className="py-2">
+            <div className="py-2 ">
               {propertyOptions.map((option) => (
                 <Link
                   key={option.value}
                   href={getLinkPath(option, "property")}
-                  className="block px-4 py-2 text-sm bg-gray-100 text-gray-700"
+                  className="block px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
                 >
                   {option.label}
                 </Link>
