@@ -136,8 +136,10 @@ class SitemapGenerator {
 
   async addOntarioResaleRoutes() {
     try {
+      console.log("Starting to add Ontario resale routes");
       // Import the Ontario cities
       const { allCities } = await import("../data/ontarioCities.js");
+      console.log(`Loaded ${allCities.length} Ontario cities`);
 
       // Add main Ontario resale routes
       const ontarioRoutes = [
@@ -152,6 +154,7 @@ class SitemapGenerator {
         "resale/ontario/open-houses",
         "resale/ontario/price-reduced-homes-for-sale",
       ];
+      console.log(`Adding ${ontarioRoutes.length} main Ontario routes`);
 
       // Add each Ontario route
       ontarioRoutes.forEach((route) => {
@@ -164,6 +167,7 @@ class SitemapGenerator {
       };
 
       // Add city-specific routes for each Ontario city
+      console.log("Adding city-specific routes");
       allCities.forEach((city) => {
         const citySlug = cleanSlug(city.city);
 
@@ -188,6 +192,7 @@ class SitemapGenerator {
           this.addUrl(`/${route}`, 0.6);
         });
       });
+      console.log("Finished adding Ontario resale routes");
     } catch (error) {
       console.error("Error adding Ontario resale routes:", error);
     }
@@ -227,6 +232,12 @@ class SitemapGenerator {
       // Add routes
       await this.addStaticRoutes();
       await this.addDynamicRoutes();
+
+      // Directly add Ontario routes to ensure they're included
+      console.log(
+        "Directly calling addOntarioResaleRoutes from generateSitemap"
+      );
+      await this.addOntarioResaleRoutes();
 
       // Generate XML
       const sitemapXml = this.generateSitemapXml();
