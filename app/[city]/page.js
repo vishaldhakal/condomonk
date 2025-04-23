@@ -329,7 +329,7 @@ export default async function Home({ params }) {
               </span>
             </div>
           </div>
-          <h2 className="text-xs md:text-base text-gray-700">
+          <h2 className="text-xs md:text-sm text-gray-500">
             120+ Pre construction Homes in {CapitalizeFirst(cleanCity)}, ON |
             Explore Floor Plans, Pricing & Availability. Condomonk has over 120
             pre construction homes in {CapitalizeFirst(cleanCity)}, ON.
@@ -337,27 +337,27 @@ export default async function Home({ params }) {
             Canada. Select from updated database of
             <Link
               href={`/${cleanCity}/condos`}
-              className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800 px-1"
             >
               condos,
             </Link>
             <Link
               href={`/${cleanCity}/townhomes`}
-              className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800"
+              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
             >
               townhomes
             </Link>
             , and
             <Link
               href={`/${cleanCity}/detached`}
-              className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800 px-1"
             >
               detached pre construction homes
             </Link>
             from
             <Link
               href="/builders"
-              className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800 px-1"
             >
               high-rated builders
             </Link>
@@ -365,7 +365,7 @@ export default async function Home({ params }) {
             investors. Our listings are updated daily, giving you the latest
             <Link
               href="/{cleanCity}/upcoming"
-              className="text-  blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800 px-1"
             >
               upcoming pre construction projects.
             </Link>
@@ -374,7 +374,7 @@ export default async function Home({ params }) {
             homes,
             <Link
               href="#contact"
-              className="text-blue-700 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800 px-1"
             >
               contact us
             </Link>
@@ -656,7 +656,8 @@ export default async function Home({ params }) {
                 />
               </div>
               <h3 className="fw-bolder fw-boldie text-center px-md-4 fs-3 ">
-                Looking to buy a preconstruction home ?
+                Looking to buy a preconstruction home in{" "}
+                {CapitalizeFirst(cleanCity)} ?
               </h3>
 
               <div className="row row-cols-1 row-cols-md-3 mt-5">
