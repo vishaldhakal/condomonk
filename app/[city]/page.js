@@ -10,6 +10,12 @@ import AssignmentCard from "@/components/assignment/AssignmentCard";
 import BlogCard from "@/components/blogCard";
 import GoogleMap from "@/components/GoogleMap";
 import PreconstructionFilter from "@/components/PreconstructionFilter";
+import dynamic from "next/dynamic";
+
+// Dynamically import LazyContent component with no SSR
+const LazyContent = dynamic(() => import("@/components/LazyContent"), {
+  ssr: false,
+});
 
 async function getData(city, priceFilter = null) {
   let url = `https://api.condomonk.ca/api/preconstructions-city/${city}`;
@@ -692,12 +698,7 @@ export default async function Home({ params }) {
             {data.city && (
               <div className="container" id="make-img-responsive">
                 <div className="row row-cols-1 g-0">
-                  <div
-                    className="col-12 mt-mine px-3 max-w-100 iframe-container "
-                    dangerouslySetInnerHTML={{
-                      __html: data.city.details,
-                    }}
-                  ></div>
+                  <LazyContent html={data.city.details} />
                   <div className="pt-5">
                     <p className="text-small text-secondary text-center">
                       Note:{" "}
