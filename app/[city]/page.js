@@ -197,7 +197,7 @@ export async function generateMetadata({ params }, parent) {
   title = `120+ Pre construction Homes in  ${CapitalizeFirst(cleanCity)}`;
   description = `120+ Pre Construction Homes & New Developments in ${CapitalizeFirst(
     cleanCity
-  )}| Check out plans, pricing, and availability for pre construction homes in ${CapitalizeFirst(
+  )} | Check out plans, pricing, and availability for pre construction homes in ${CapitalizeFirst(
     cleanCity
   )} `;
 
