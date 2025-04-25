@@ -67,7 +67,7 @@ export default function CondoCard(props) {
           </Link>
 
           <div className="absolute bottom-5 left-4 flex gap-2">
-            <span className="px-2 py-1 bg-[#FFC007] rounded text-black md:text-xs text-[11px] font-medium">
+            <span className="px-2 py-1 bg-orange-600 rounded text-white md:text-xs text-[11px] font-medium">
               {props.status}
             </span>
             <span className="px-2 py-1 bg-white rounded text-black md:text-xs text-[11px] font-medium">
@@ -89,7 +89,7 @@ export default function CondoCard(props) {
             <p className="mb-0 text-dark text-sm md:text-xl font-extrabold leading-[20px]">
               {props.project_name}
             </p>
-            <p className="mb-0 text-yellow-500 text-xs md:text-base font-semibold">
+            <p className="mb-0 text-orange-500 text-xs md:text-base font-semibold">
               {checkPricing(props.price_starting_from)}
             </p>
             <p className="mb-1 text-[11px] md:text-sm text-black truncate">
@@ -102,7 +102,7 @@ export default function CondoCard(props) {
         </Link>
         <Link
           href={`/${props.city.slug}/${props.slug}`}
-          className="inline-block text-black mx-3 mt-2 mb-3 px-3 py-2 rounded-xl border-1 border-gray-300 hover:border-black shadow-md bg-white text-sm font-medium "
+          className="inline-block text-black mx-3 mt-2 mb-3 px-3 py-2 rounded-xl border-1 border-blue-500 hover:border-black shadow-md bg-white text-sm font-medium "
           target="_blank"
         >
           View Details

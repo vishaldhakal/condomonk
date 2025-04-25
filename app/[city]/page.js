@@ -321,7 +321,7 @@ export default async function Home({ params }) {
                 >
                   <path
                     d="M2 4.5L144 2L2 12L144 9"
-                    stroke="#FFC007"
+                    stroke="#F97316"
                     strokeWidth="3"
                     strokeLinecap="round"
                   ></path>

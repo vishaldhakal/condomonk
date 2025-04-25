@@ -153,8 +153,8 @@ export default async function Home({ params }) {
                   <div className="row row-cols-1 row-cols-sm-2">
                     <div className="col-sm-12">
                       <div className="d-flex align-items-center gap-3 my-2">
-                        <div className=" btn btn-sm bg-warning ">
-                          <span className="col fs-esmall text-dark">
+                        <div className=" bg-orange-500 shadow-xl px-2 rounded-md py-1">
+                          <span className="col fs-esmall text-white">
                             {data.preconstruction.status}
                           </span>
                         </div>
@@ -192,7 +192,7 @@ export default async function Home({ params }) {
                         </Link>
                       </h2>
 
-                      <p className="text-mine fs-3 fw-mine mt-1 mb-0 brand-color font-family2 mb-4">
+                      <p className=" fs-3 fw-mine mt-1 mb-0 text-orange-500  mb-4">
                         {checkPricing(
                           data.preconstruction.price_starting_from,
                           data.preconstruction.price_to
@@ -313,7 +313,7 @@ export default async function Home({ params }) {
                   <div className="">
                     <CustomModal
                       linkText={
-                        <span className="custom-button mb-5">
+                        <span className="bg-orange-500 text-white shadow-xl py-2 px-3 rounded mb-5">
                           Click here to get the latest information today!
                         </span>
                       }
