@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 export default function CommunityPopup() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [submitBtn, setSubmitBtn] = useState("Join Priority List");
   const pathname = usePathname();
   const [formData, setFormData] = useState({
