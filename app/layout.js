@@ -5,7 +5,7 @@ import "react-quill/dist/quill.snow.css";
 import Navbar from "@/components/Navbar";
 import Script from "next/script";
 import GoogleAnalytics from "./GoogleAnalytics";
-
+import CommunityPopup from "@/components/CommunityPopup";
 import Footer from "@/components/Footer";
 import NextTopLoader from "nextjs-toploader";
 import { Montserrat } from "next/font/google";
@@ -176,6 +176,7 @@ export default function RootLayout({ children }) {
           {children}
         </Providers>
         <Footer cities={cities}></Footer>
+        <CommunityPopup />
         <Script
           src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
           integrity="sha384-BZlP8y3y1aP5dJt6z/74ukidT+PiZCzV5u5F5+1OW2F0k0yGBGvxXuVEvaO3dPbi"
