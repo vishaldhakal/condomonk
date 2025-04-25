@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 export default function CommunityPopup() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [submitBtn, setSubmitBtn] = useState("Join Priority List");
   const pathname = usePathname();
   const [formData, setFormData] = useState({
@@ -123,12 +123,16 @@ export default function CommunityPopup() {
     >
       {/* Backdrop with blur effect */}
       <div
-        className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm"
+        className="fixed inset-0 bg-white/10 backdrop-filter backdrop-blur-[8px] transition-all duration-300"
         onClick={handleClose}
+        style={{
+          backdropFilter: "blur(8px)",
+          WebkitBackdropFilter: "blur(8px)",
+        }}
       />
 
-      {/* Modal Container with SVG Background */}
-      <div className="relative bg-gradient-to-br from-indigo-50 via-white to-purple-50 shadow-2xl rounded-3xl w-full max-w-md overflow-hidden">
+      {/* Modal Container */}
+      <div className="relative bg-gradient-to-br from-indigo-50 via-white to-purple-50 shadow-2xl rounded-3xl w-full max-w-md overflow-hidden z-[10000]">
         {/* SVG Background Pattern */}
         <div className="absolute inset-0 z-0 opacity-20">
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
