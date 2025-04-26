@@ -76,18 +76,18 @@ export default function CommunityPopup() {
 
       const data = await response.json();
 
-      // if (!response.ok) {
-      //   if (data?.email?.[0]?.includes("already exists")) {
-      //     setSubmitBtn("Email already subscribed!");
-      //     setTimeout(() => {
-      //       setIsOpen(false);
-      //       setFormData({ name: "", email: "", phone: "" });
-      //       setSubmitBtn("Join Priority List");
-      //     }, 2000);
-      //     return;
-      //   }
-      //   throw new Error("Failed to subscribe");
-      // }
+      if (!response.ok) {
+        if (data?.email?.[0]?.includes("already exists")) {
+          setSubmitBtn("Email already subscribed!");
+          setTimeout(() => {
+            setIsOpen(false);
+            setFormData({ name: "", email: "", phone: "" });
+            setSubmitBtn("Join Priority List");
+          }, 2000);
+          return;
+        }
+        throw new Error("Failed to subscribe");
+      }
 
       setSubmitBtn("Thank you for being part of the Condomonk community!");
       localStorage.setItem("communityFormSubmitted", "true");
