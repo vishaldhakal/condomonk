@@ -575,70 +575,59 @@ export async function generateMetadata({ params, searchParams }, parent) {
       ? `${actualTotal}+ price-dropped homes in ${location}. Find price reduced homes - detached, semi-detached, townhomes & condos on Condomonk. Don't miss out.`
       : generateSubtitle(filters, total);
 
-  // Define exact property type paths mapping
+  // Define all possible property type paths mapping
   const propertyTypePaths = {
     "homes-for-sale": "homes-for-sale",
+    "homes-for-lease": "homes-for-lease",
     "detached-homes-for-sale": "detached-homes-for-sale",
+    "detached-homes-for-lease": "detached-homes-for-lease",
     "semi-detached-homes-for-sale": "semi-detached-homes-for-sale",
+    "semi-detached-homes-for-lease": "semi-detached-homes-for-lease",
     "condo-townhomes-for-sale": "condo-townhomes-for-sale",
+    "condo-townhomes-for-lease": "condo-townhomes-for-lease",
     "townhomes-for-sale": "townhomes-for-sale",
+    "townhomes-for-lease": "townhomes-for-lease",
     "condos-for-sale": "condos-for-sale",
+    "condos-for-lease": "condos-for-lease",
+    "price-reduced-homes-for-sale": "price-reduced-homes-for-sale",
+    "price-reduced-homes-for-lease": "price-reduced-homes-for-lease",
   };
 
-  // Check if the current path matches any of our property type paths
-  const currentPath = params.slug1[0];
-  if (propertyTypePaths[currentPath]) {
-    return {
-      title: `${title} | Real Estate Listings | MLS Homes`,
-      description: description,
-      alternates: {
-        canonical: `https://condomonk.ca/resale/ontario/${propertyTypePaths[currentPath]}`,
-      },
-      openGraph: {
-        title: `${title} | Real Estate Listings | MLS Homes`,
-        description: description,
-        url: `https://condomonk.ca/resale/ontario/${propertyTypePaths[currentPath]}`,
-        siteName: "Condomonk",
-        type: "website",
-        images: [
-          {
-            url: "https://condomonk.ca/cities/brampton.jpg",
-            width: 1200,
-            height: 630,
-            alt: `Real Estate Listings in ${location}`,
-          },
-        ],
-      },
-      twitter: {
-        card: "summary_large_image",
-        title: `${title} | Real Estate Listings | MLS Homes`,
-        description: description,
-        images: ["https://condomonk.ca/cities/brampton.jpg"],
-      },
-      robots: {
-        index: true,
-        follow: true,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-      },
-      other: {
-        "og:locale": "en_CA",
-        "og:type": "website",
-      },
-    };
+  // Build the canonical path based on the URL structure
+  let canonicalPath;
+  if (filters.city) {
+    // For city-specific pages
+    const citySlug = filters.city.toLowerCase().replace(/\s+/g, "-");
+    if (filters.mlsStatus === "Price Change") {
+      canonicalPath = `/resale/ontario/${citySlug}/price-reduced-homes-for-sale`;
+    } else {
+      const propertyType =
+        filters.propertyType?.toLowerCase().replace(/\s+/g, "-") || "homes";
+      const transactionType =
+        filters.transactionType === "For Lease" ? "for-lease" : "for-sale";
+      canonicalPath = `/resale/ontario/${citySlug}/${propertyType}-${transactionType}`;
+    }
+  } else {
+    // For province-wide pages
+    if (filters.mlsStatus === "Price Change") {
+      canonicalPath = `/resale/ontario/price-reduced-homes-for-sale`;
+    } else {
+      const propertyType =
+        filters.propertyType?.toLowerCase().replace(/\s+/g, "-") || "homes";
+      const transactionType =
+        filters.transactionType === "For Lease" ? "for-lease" : "for-sale";
+      canonicalPath = `/resale/ontario/${propertyType}-${transactionType}`;
+    }
   }
 
-  // For all other URLs, use the exact path from params
-  const canonicalPath = `/resale/ontario/${params.slug1.join("/")}`;
   return {
-    title: title,
+    title: `${title} | Real Estate Listings | MLS Homes`,
     description: description,
     alternates: {
       canonical: `https://condomonk.ca${canonicalPath}`,
     },
     openGraph: {
-      title: title,
+      title: `${title} | Real Estate Listings | MLS Homes`,
       description: description,
       url: `https://condomonk.ca${canonicalPath}`,
       siteName: "Condomonk",
@@ -654,7 +643,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
     },
     twitter: {
       card: "summary_large_image",
-      title: title,
+      title: `${title} | Real Estate Listings | MLS Homes`,
       description: description,
       images: ["https://condomonk.ca/cities/brampton.jpg"],
     },
