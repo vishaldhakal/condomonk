@@ -88,7 +88,7 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
           setOpenPopover(null);
           hoverElementRef.current = null;
         }
-      }, 300);
+      }, 200);
     }
   };
 
