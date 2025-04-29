@@ -52,10 +52,25 @@ class SitemapGenerator {
       );
       const data = await response.json();
 
+      // Price range filters
+      const priceRanges = [
+        "under-500k",
+        "under-600k",
+        "under-700k",
+        "under-800k",
+        "under-1-million",
+        "under-1.5-million",
+      ];
+
       // Add URLs for each city and its projects
       data.forEach((city) => {
         // Add city URL
         this.addUrl(`/${city.slug}`, 0.8);
+
+        // Add price range URLs for each city
+        priceRanges.forEach((priceRange) => {
+          this.addUrl(`/${city.slug}-homes-${priceRange}`, 0.7);
+        });
 
         // Add URLs for each project in the city
         city.preconstructions.forEach((project) => {
@@ -199,11 +214,11 @@ class SitemapGenerator {
   }
 
   async addNewHomesRoutes() {
-    // ... existing code ...
+    // Implementation for adding new homes routes
   }
 
   async addTopProjectsRoutes() {
-    // ... existing code ...
+    // Implementation for adding top projects routes
   }
 
   generateSitemapXml() {

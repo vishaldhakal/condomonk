@@ -22,13 +22,17 @@ async function getData(city, priceFilter = null) {
 
   if (priceFilter) {
     if (priceFilter === "under-500k") {
-      url += "?price_to=500000";
+      url += "?price_starting_from=0&price_to=500000";
+    } else if (priceFilter === "under-600k") {
+      url += "?price_starting_from=0&price_to=600000";
+    } else if (priceFilter === "under-700k") {
+      url += "?price_starting_from=0&price_to=700000";
+    } else if (priceFilter === "under-800k") {
+      url += "?price_starting_from=0&price_to=800000";
     } else if (priceFilter === "under-1-million") {
-      url += "?price_to=1000000";
+      url += "?price_starting_from=0&price_to=1000000";
     } else if (priceFilter === "under-1.5-million") {
-      url += "?price_to=1500000";
-    } else if (priceFilter === "over-700k") {
-      url += "?price_starting_from=700000";
+      url += "?price_starting_from=0&price_to=1500000";
     } else {
       const [min, max] = priceFilter.split("-").map((p) => parseInt(p) * 1000);
       url += `?price_starting_from=${min}&price_to=${max}`;
@@ -150,19 +154,25 @@ function getCleanCity(city) {
 function formatPriceFilter(filter) {
   if (!filter) return "";
 
-  if (filter.startsWith("under-")) {
-    return filter
-      .replace("under-500k", "under $500k")
-      .replace("under-1-million", "under $1 million")
-      .replace("under-1.5-million", "under $1.5 million");
+  switch (filter) {
+    case "under-500k":
+      return "Under $500K";
+    case "under-600k":
+      return "Under $600K";
+    case "under-700k":
+      return "Under $700K";
+    case "under-800k":
+      return "Under $800K";
+    case "under-1-million":
+      return "Under $1M";
+    case "under-1.5-million":
+      return "Under $1.5M";
+    default:
+      return filter
+        .replace("-", " to $")
+        .replace("k", ",000")
+        .replace("M", " million");
   }
-  if (filter === "over-700k") {
-    return "Over $700,000";
-  }
-  return filter
-    .replace("-", " to $")
-    .replace("k", ",000")
-    .replace("M", " million");
 }
 
 // Add getSEOParagraph function here
@@ -174,17 +184,17 @@ function getSEOParagraph(cleanCity, priceFilter) {
   const cityName = CapitalizeFirst(cleanCity);
   const priceDesc = formatPriceFilter(priceFilter);
 
-  return `Discover an extensive selection of pre construction homes in ${cityName}  ${priceDesc}. Our curated list showcases the latest developments, offering a range of options from affordable condos to luxurious townhomes. Whether you're a first-time buyer or looking to invest, these new construction properties in ${cityName} provide excellent opportunities in various neighborhoods. Explore modern designs, innovative amenities, and the chance to customize your future home. Start your journey to homeownership or expand your real estate portfolio with these exciting pre construction projects in ${cityName}.`;
+  return `Discover an extensive selection of pre construction homes in ${cityName} ${priceDesc}. Our curated list showcases the latest developments, offering a range of options from affordable condos to luxurious townhomes. Whether you're a first-time buyer or looking to invest, these new construction properties in ${cityName} provide excellent opportunities in various neighborhoods. Explore modern designs, innovative amenities, and the chance to customize your future home. Start your journey to homeownership or expand your real estate portfolio with these exciting pre construction projects in ${cityName}.`;
 }
 
 function getPriceFilter(city) {
   const priceFilters = [
     "under-500k",
+    "under-600k",
+    "under-700k",
+    "under-800k",
     "under-1-million",
     "under-1.5-million",
-    "over-700k",
-    "500k-600k",
-    "600k-700k",
   ];
   for (const filter of priceFilters) {
     if (city.endsWith(`-homes-${filter}`)) {

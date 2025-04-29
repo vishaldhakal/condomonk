@@ -31,8 +31,9 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
 
   const priceRanges = [
     { value: "under-500k", label: "Under $500K" },
-    { value: "500k-600k", label: "$500K to $600K" },
-    { value: "600k-700k", label: "$600K to $700K" },
+    { value: "under-600k", label: "Under $600K" },
+    { value: "under-700k", label: "Under $700K" },
+    { value: "under-800k", label: "Under $800K" },
     { value: "under-1-million", label: "Under $1M" },
     { value: "under-1.5-million", label: "Under $1.5M" },
   ];
