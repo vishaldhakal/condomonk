@@ -7,7 +7,6 @@ import Newsletter from "@/components/Newsletter";
 import Image from "next/legacy/image";
 import CityDirectory from "@/components/CityDirectory";
 import AssignmentCard from "@/components/assignment/AssignmentCard";
-import BlogCard from "@/components/blogCard";
 import GoogleMap from "@/components/GoogleMap";
 import PreconstructionFilter from "@/components/PreconstructionFilter";
 import dynamic from "next/dynamic";
@@ -119,24 +118,26 @@ async function getAssignments(city) {
   }
 }
 
-// async function getCityBlogs(city) {
-//   try {
-//     const res = await fetch(`https://api.condomonk.ca/api/news/?city=${city}`, {
-//       next: { revalidate: 3600 },
-//     });
+/* Commenting out blog API function
+async function getCityBlogs(city) {
+  try {
+    const res = await fetch(`https://api.condomonk.ca/api/news/?city=${city}`, {
+      next: { revalidate: 3600 },
+    });
 
-//     if (!res.ok) {
-//       return [];
-//     }
+    if (!res.ok) {
+      return [];
+    }
 
-//     const blogs = await res.json();
-//     const blogData = blogs?.results?.slice(0, 4) || [];
-//     return blogData;
-//   } catch (error) {
-//     console.error(`Error loading blogs for ${city}:`, error);
-//     return [];
-//   }
-// }
+    const blogs = await res.json();
+    const blogData = blogs?.results?.slice(0, 4) || [];
+    return blogData;
+  } catch (error) {
+    console.error(`Error loading blogs for ${city}:`, error);
+    return [];
+  }
+}
+*/
 
 const CapitalizeFirst = (city) => {
   return (
@@ -231,12 +232,14 @@ export default async function Home({ params }) {
   const priceFilter = getPriceFilter(city);
 
   // Fetch all data in parallel using Promise.all
-  const [data, featuredData, assignments, cityBlogs] = await Promise.all([
-    getData(cleanCity, priceFilter),
-    getFeaturedData(cleanCity),
-    getAssignments(cleanCity),
-    getCityBlogs(cleanCity),
-  ]);
+  const [data, featuredData, assignments /* , cityBlogs */] = await Promise.all(
+    [
+      getData(cleanCity, priceFilter),
+      getFeaturedData(cleanCity),
+      getAssignments(cleanCity),
+      // getCityBlogs(cleanCity),
+    ]
+  );
 
   // Prepare data for CityDirectory
   const cityDirectoryData = {
