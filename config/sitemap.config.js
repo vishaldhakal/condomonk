@@ -54,4 +54,4 @@ const sitemapConfig = {
   outputPath: "./public/sitemap.xml",
 };
 
-module.exports = sitemapConfig;
+export default sitemapConfig;
