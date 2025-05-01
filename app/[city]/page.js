@@ -119,24 +119,24 @@ async function getAssignments(city) {
   }
 }
 
-async function getCityBlogs(city) {
-  try {
-    const res = await fetch(`https://api.condomonk.ca/api/news/?city=${city}`, {
-      next: { revalidate: 3600 },
-    });
+// async function getCityBlogs(city) {
+//   try {
+//     const res = await fetch(`https://api.condomonk.ca/api/news/?city=${city}`, {
+//       next: { revalidate: 3600 },
+//     });
 
-    if (!res.ok) {
-      return [];
-    }
+//     if (!res.ok) {
+//       return [];
+//     }
 
-    const blogs = await res.json();
-    const blogData = blogs?.results?.slice(0, 4) || [];
-    return blogData;
-  } catch (error) {
-    console.error(`Error loading blogs for ${city}:`, error);
-    return [];
-  }
-}
+//     const blogs = await res.json();
+//     const blogData = blogs?.results?.slice(0, 4) || [];
+//     return blogData;
+//   } catch (error) {
+//     console.error(`Error loading blogs for ${city}:`, error);
+//     return [];
+//   }
+// }
 
 const CapitalizeFirst = (city) => {
   return (
@@ -567,7 +567,7 @@ export default async function Home({ params }) {
           )}
 
           {/* Blog Section */}
-          {cityBlogs.length > 0 && (
+          {/* {cityBlogs.length > 0 && (
             <>
               <div className="pt-5 mt-5"></div>
               <div className="pt-5"></div>
@@ -590,7 +590,7 @@ export default async function Home({ params }) {
                 ))}
               </div>
             </>
-          )}
+          )} */}
 
           <div className="pt-5 mt-5"></div>
           <div className="flex justify-center items-center max-w-7xl mx-auto px-4 md:px-6 mt-10 mb-16">
