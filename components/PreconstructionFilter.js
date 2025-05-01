@@ -149,7 +149,7 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
           <FilterDropdown
             name="property"
             buttonText="Pre Construction"
-            className={openPopover === "property" ? "z-10" : ""}
+            className={openPopover === "property" ? "z-40" : ""}
           >
             <div className="py-2 ">
               {propertyOptions.map((option) => (
@@ -168,7 +168,7 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
           <FilterDropdown
             name="project"
             buttonText="Project Type"
-            className={openPopover === "project" ? "z-10" : ""}
+            className={openPopover === "project" ? "z-40" : ""}
           >
             <div className="py-2">
               {projectTypes.map((option) => (
@@ -187,7 +187,7 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
           <FilterDropdown
             name="price"
             buttonText="Price Range"
-            className={openPopover === "price" ? "z-10" : ""}
+            className={openPopover === "price" ? "z-40" : ""}
           >
             <div className="py-2">
               {priceRanges.map((option) => (
@@ -206,7 +206,7 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
           <FilterDropdown
             name="status"
             buttonText="Status"
-            className={openPopover === "status" ? "z-10" : ""}
+            className={openPopover === "status" ? "z-40" : ""}
           >
             <div className="py-2">
               {statusOptions.map((option) => (
@@ -226,7 +226,7 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
         <FilterDropdown
           name="nearby-cities"
           buttonText="Nearby Cities"
-          className={openPopover === "nearby-cities" ? "z-10" : ""}
+          className={openPopover === "nearby-cities" ? "z-40" : ""}
         >
           <div className="py-2 ">
             {nearbyCities.map((city) => (

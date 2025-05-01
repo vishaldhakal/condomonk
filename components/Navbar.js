@@ -139,7 +139,7 @@ const Navbar = ({ cities, transparent }) => {
   return (
     <div
       className={navbar ? "navbar-transparent active" : "navbar-transparent"}
-      style={{ zIndex: 50 }}
+      style={{ zIndex: 100 }}
     >
       <nav className="navbar navbar-expand-lg py-lg-3 ">
         <div className="container justify-content-start">
@@ -187,8 +187,8 @@ const Navbar = ({ cities, transparent }) => {
                   }`}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <div className="container">
-                    <div className="row row-cols-md-4 row-cols-2">
+                  <div className="container z-50">
+                    <div className="row row-cols-md-4 row-cols-2 z-30">
                       {cities &&
                         cities.map((city) => (
                           <div className="col" key={city.id}>

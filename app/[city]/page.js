@@ -375,7 +375,7 @@ export default async function Home({ params }) {
             , with pricing customized for both first-time buyers and seasoned
             investors. Our listings are updated daily, giving you the latest
             <Link
-              href="/{cleanCity}/upcoming"
+              href={`/${cleanCity}/upcoming`}
               className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800 px-1"
             >
               upcoming pre construction projects.
@@ -401,8 +401,8 @@ export default async function Home({ params }) {
               })}
             </div>
           </h2>
-          <div className="d-flex sm-center mb-lg-0 sticky-buttons py-2 mb-0 sticky-top bg-white">
-            <div className="relative w-full container ps-0 overflow-visible z-30">
+          <div className="d-flex sm-center mb-lg-0 sticky-buttons py-2 mb-0 sticky-top bg-white z-0">
+            <div className="relative w-full container ps-0 overflow-visible ">
               <PreconstructionFilter
                 cityName={CapitalizeFirst(params.city)}
                 citySlug={params.city.split("-homes-")[0]}
