@@ -57,6 +57,7 @@ export async function generateMetadata({ params }, parent) {
     alternates: {
       canonical: `https://condomonk.ca/${params.city}/${params.slug}`,
     },
+    metadataBase: new URL("https://condomonk.ca"),
     title: `${projectName} ${projectCity} | Book Today`,
     description:
       `${projectName} in ${projectCity}. Check out pricing, floor plans, and availability for ` +

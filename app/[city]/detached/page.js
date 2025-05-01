@@ -58,6 +58,7 @@ export async function generateMetadata({ params }, parent) {
     alternates: {
       canonical: `https://condomonk.ca/pre-construction-homes/${params.city}/detached/`,
     },
+    metadataBase: new URL("https://condomonk.ca"),
     title:
       data.preconstructions.length +
       " Preconstruction Detached Homes in " +

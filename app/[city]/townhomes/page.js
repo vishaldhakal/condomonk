@@ -58,6 +58,7 @@ export async function generateMetadata({ params }, parent) {
     alternates: {
       canonical: `https://condomonk.ca/${params.city}/townhomes/`,
     },
+    metadataBase: new URL("https://condomonk.ca"),
     title:
       data.preconstructions.length + " Preconstruction Townhomes in " + city,
     openGraph: {

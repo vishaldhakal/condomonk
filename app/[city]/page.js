@@ -221,6 +221,7 @@ export async function generateMetadata({ params }, parent) {
     alternates: {
       canonical: `https://condomonk.ca/${city}`,
     },
+    metadataBase: new URL("https://condomonk.ca"),
     title,
     description,
   };

@@ -161,6 +161,7 @@ export default async function AssignmentSalePage({ searchParams }) {
 
 export async function generateMetadata() {
   return {
+    metadataBase: new URL("https://condomonk.ca"),
     title: "Assignment Sale in Ontario - Homebaba",
     description:
       "Find 100+ assignment sales in Ontario, including townhomes, semi-detached, and condos. Explore the best deals on Condomonk.",

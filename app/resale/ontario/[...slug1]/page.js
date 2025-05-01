@@ -621,6 +621,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
   }
 
   return {
+    metadataBase: new URL("https://condomonk.ca"),
     title: `${title} | Real Estate Listings | MLS Homes`,
     description: description,
     alternates: {

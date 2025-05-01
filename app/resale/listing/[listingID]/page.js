@@ -60,6 +60,7 @@ export async function generateMetadata({ params }) {
     const canonical = `https://condomonk.ca/resale/listing/${params.listingID}`;
 
     return {
+      metadataBase: new URL("https://condomonk.ca"),
       title,
       description,
       alternates: {

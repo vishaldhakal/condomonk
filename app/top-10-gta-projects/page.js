@@ -42,6 +42,7 @@ export async function generateMetadata({ params }, parent) {
     openGraph: {
       images: "/social/precon.webp",
     },
+    metadataBase: new URL("https://condomonk.ca"),
     title: `Top 10 GTA Projects - Condomonk`,
     description: `Discover the top 10 GTA pre-construction projects with Condomonk. Explore premier developments across the Greater Toronto Area, featuring luxury condos, modern amenities, and prime locations.`,
   };

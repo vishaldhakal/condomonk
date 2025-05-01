@@ -36,6 +36,7 @@ export async function generateMetadata({ params }) {
   }
 
   return {
+    metadataBase: new URL("https://condomonk.ca"),
     title: `${assignment.project_name} - ${assignment.unit_type} Assignment | Condomonk`,
     description: `${assignment.unit_type} assignment for sale at ${assignment.project_name} by ${assignment.developer} in ${assignment.region}. Occupancy: ${assignment.occupancy_date}. Price: ${assignment.price}.`,
     openGraph: {

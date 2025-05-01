@@ -16,6 +16,7 @@ import LoadingOverlay from "@/components/LoadingOverlay";
 const montserrat = Montserrat({ subsets: ["cyrillic"] });
 
 export const metadata = {
+  metadataBase: new URL("https://condomonk.ca"),
   alternates: {
     canonical: `https://condomonk.ca/`,
   },

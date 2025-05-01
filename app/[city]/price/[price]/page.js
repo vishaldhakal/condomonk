@@ -42,6 +42,7 @@ export async function generateMetadata({ params }, parent) {
     alternates: {
       canonical: `https://condomonk.ca/${city}/filter/${price}`,
     },
+    metadataBase: new URL("https://condomonk.ca"),
     title: `New Pre-construction Homes in ${formattedCity} - ${formattedPrice}`,
     description: `Discover new construction homes, condos & townhouses in ${formattedCity} priced ${formattedPrice}. Find your dream property in our latest developments.`,
   };

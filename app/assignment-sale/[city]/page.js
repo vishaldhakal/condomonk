@@ -172,6 +172,7 @@ export async function generateMetadata({ params }) {
     .replace(/\b\w/g, (char) => char.toUpperCase());
 
   return {
+    metadataBase: new URL("https://condomonk.ca"),
     title: `Assignment Sale in ${cityFormat} - Homebaba`,
     description: `100+ assignment sales in ${cityFormat}, Ontario, including townhomes, semi-detached, and condos. Explore the best assignment deals on Homebaba.`,
     openGraph: {
