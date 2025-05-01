@@ -74,7 +74,7 @@ async function getDevData() {
     const res = await fetch(
       "https://api.condomonk.ca/api/developers?page_size=800",
       {
-        next: { revalidate: 10 }, // Cache for 10 seconds like in builders page
+        next: { revalidate: 10 },
       }
     );
 
@@ -121,19 +121,17 @@ async function getAssignments(city) {
 
 async function getCityBlogs(city) {
   try {
-    const res = await fetch(
-      `https://api.condomonk.ca/api/news/?city=${city}&page_size=4`,
-      {
-        cache: "no-store",
-      }
-    );
+    const res = await fetch(`https://api.condomonk.ca/api/news/?city=${city}`, {
+      next: { revalidate: 3600 },
+    });
 
     if (!res.ok) {
       return [];
     }
 
     const blogs = await res.json();
-    return Array.isArray(blogs) ? blogs.slice(0, 4) : [];
+    const blogData = blogs?.results?.slice(0, 4) || [];
+    return blogData;
   } catch (error) {
     console.error(`Error loading blogs for ${city}:`, error);
     return [];

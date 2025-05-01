@@ -10,7 +10,7 @@ import HomeSearch from "@/components/HomeSearch";
 
 async function getCities() {
   const res = await fetch("https://api.condomonk.ca/api/all-city", {
-    next: { revalidate: 10 },
+    next: { revalidate: 36000 },
   });
 
   if (!res.ok) {
@@ -22,7 +22,7 @@ async function getFeaturedData() {
   const res = await fetch(
     "https://api.condomonk.ca/api/preconstructions/?is_featured=True",
     {
-      next: { revalidate: 10 },
+      next: { revalidate: 3600 },
     }
   );
   if (!res.ok) {
