@@ -124,20 +124,25 @@ export default function BookingForm({
       className="bg-white rounded-lg shadow-lg p-3 sticky top-24"
       id="contactForm"
     >
-      <div className="d-flex items-center justify-center">
-        {" "}
-        <img
-          src="/shally.jpg"
-          className="h-40 w-full  object-contain "
-          alt="shally image"
-        />
+      <div className="flex flex-row items-center justify-center gap-x-3 mb-3 sm:mb-3">
+        <div className="w-[70px] h-[70px] sm:w-[90px] sm:h-[90px] relative flex-shrink-0">
+          <div className="w-full h-full overflow-hidden">
+            <img
+              src="/angelablob.png"
+              alt="Default Agent"
+              className="w-full h-full object-cover rounded-full border border-gray-200 shadow-sm"
+            />
+          </div>
+        </div>
+        <div className="min-w-fit flex-1 text-left">
+          <h2 className="text-xs sm:text-sm md:text-lg lg:text-xl font-bold text-black leading-none text-left whitespace-nowrap mb-0">
+            Book a Showing
+          </h2>
+          <p className="text-[8px] sm:text-xs md:text-sm text-[#2C2C2C] flex items-center text-left whitespace-nowrap">
+            Tour this home with Angela
+          </p>
+        </div>
       </div>
-      <h2 className="text-2xl font-extrabold mb-1 text-center ">
-        Book a Showing
-      </h2>
-      <p className="text-gray-500 text-sm mb-3 text-center">
-        Tour this home with Shally ✨
-      </p>
 
       {/* Date Selection - Horizontal Scroll */}
       {/* <div className="mb-3">

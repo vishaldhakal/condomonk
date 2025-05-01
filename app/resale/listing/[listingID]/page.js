@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import BookingForm from "@/components/BookingForm";
 import PropertyGallery from "@/components/PropertyGallery";
 import Link from "next/link";
+import Image from "next/image";
 import HomeOverview from "@/components/HomeOverview";
 import CompactMortgageCalculator from "@/components/CompactMortgageCalculator";
 import FloatingResaleButton from "@/components/FloatingResaleButton";
@@ -758,20 +759,22 @@ export default async function PropertyDetailPage({ params }) {
                 <div className="bg-white rounded-xl border p-6">
                   <div className="flex flex-col sm:flex-row gap-6 items-start">
                     <div className="flex-shrink-0">
-                      <img
-                        src="/shally.webp"
+                      <Image
+                        src="/angelablob.png"
                         alt="Sales Representative"
-                        className="rounded-full object-cover w-24 h-24"
+                        width={120}
+                        height={120}
+                        className="rounded-full object-cover"
                       />
                     </div>
                     <div className="flex-1">
-                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
                         <div>
                           <h3 className="text-xl font-semibold leading-0">
-                            Shally Shi
+                            Angela Yang
                           </h3>
                           <p className="text-gray-600 leading-0">
-                            Sales Representative, Dolphin Realty Inc
+                            Sales Representative, ANCHOR NEW HOMES INC.
                           </p>
                         </div>
                       </div>
