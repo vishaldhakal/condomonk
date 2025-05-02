@@ -57,7 +57,7 @@ const Blogs = async () => {
               <div className="row g-4">
                 <div className="col-sm-12 col-lg-12 ">
                   <h1 className="main-title text-center text-md-start mb-4">
-                    The Condomonk Blog : Learn whats happening in your city
+                    The Condomonk Blog : See whats happening in your city
                   </h1>
                   <div className="insights-on-cities">
                     <CityInsights {...{ cities }} />

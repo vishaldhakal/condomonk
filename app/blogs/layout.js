@@ -1,3 +1,5 @@
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import "./blog.css";
 
 async function getCities() {
@@ -13,5 +15,11 @@ async function getCities() {
 
 export default async function RootLayout({ children }) {
   let cities = await getCities();
-  return <>{children}</>;
+  return (
+    <>
+      {/* <Navbar cities={cities}></Navbar> */}
+      {children}
+      <Footer cities={cities}></Footer>
+    </>
+  );
 }
