@@ -7,6 +7,7 @@ import FeaturedCard from "@/components/FeaturedCard";
 import BlogCard from "@/components/blogCard";
 import { fetchAllBlogPosts } from "@/api/blogs";
 import HomeSearch from "@/components/HomeSearch";
+import HomeCarousel from "@/components/HomeCarousel";
 
 async function getCities() {
   const res = await fetch("https://api.condomonk.ca/api/all-city", {
@@ -186,85 +187,8 @@ export default async function Home(props) {
               </Link>
             </div>
           </div>
-          <div className="col-md-6 d-none d-md-block">
-            <div
-              id="carouselExampleIndicators"
-              className="carousel slide"
-              data-bs-ride="carousel"
-            >
-              <div className="carousel-indicators">
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleIndicators"
-                  data-bs-slide-to="0"
-                  className="active"
-                  aria-current="true"
-                  aria-label="Slide 1"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleIndicators"
-                  data-bs-slide-to="1"
-                  aria-label="Slide 2"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleIndicators"
-                  data-bs-slide-to="2"
-                  aria-label="Slide 3"
-                ></button>
-              </div>
-              <div className="carousel-inner">
-                <div className="carousel-item active">
-                  <img
-                    src="/image1.jpeg"
-                    className="d-block w-100 carousel-img-responsive"
-                    alt="Image 1"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="carousel-item">
-                  <img
-                    src="/image2.jpeg"
-                    className="d-block w-100 carousel-img-responsive"
-                    alt="Image 2"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="carousel-item">
-                  <img
-                    src="/image3.jpeg"
-                    className="d-block w-100 carousel-img-responsive"
-                    alt="Image 3"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-              <button
-                className="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev"
-              >
-                <span
-                  className="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
-                <span className="visually-hidden">Previous</span>
-              </button>
-              <button
-                className="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next"
-              >
-                <span
-                  className="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
-                <span className="visually-hidden">Next</span>
-              </button>
-            </div>
+          <div className="col-md-6 d-none d-md-block h-[400px]">
+            <HomeCarousel />
           </div>
         </div>
       </div>

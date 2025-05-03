@@ -4,7 +4,7 @@ import "./blog.css";
 
 async function getCities() {
   const res = await fetch("https://api.condomonk.ca/api/all-city", {
-    next: { revalidate: 10 },
+    next: { revalidate: 3600 },
   });
 
   if (!res.ok) {

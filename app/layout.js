@@ -54,12 +54,15 @@ export default function RootLayout({ children }) {
         <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
           rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+          crossOrigin="anonymous"
         />
-        <script
+        <Script
           src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
           integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
           crossOrigin="anonymous"
-        ></script>
+          strategy="afterInteractive"
+        />
         <Script id="analytics" strategy="afterInteractive">
           {`
             (function() {
@@ -170,7 +173,6 @@ export default function RootLayout({ children }) {
           speed={200}
           shadow="0 0 10px #32a953,0 0 5px #32a953"
         />
-        {/* <Tracker siteId="ABC-123" /> */}
         <Navbar cities={cities}></Navbar>
         <Providers>
           <GoogleAnalytics />
@@ -178,11 +180,6 @@ export default function RootLayout({ children }) {
         </Providers>
         <Footer cities={cities}></Footer>
         <CommunityPopup />
-        <Script
-          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-BZlP8y3y1aP5dJt6z/74ukidT+PiZCzV5u5F5+1OW2F0k0yGBGvxXuVEvaO3dPbi"
-          crossOrigin="anonymous"
-        ></Script>
       </body>
     </html>
   );

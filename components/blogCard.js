@@ -13,9 +13,8 @@ import "../app/blogs/blog.css";
 const BlogCard = ({ blog }) => {
   return (
     <div className="card border-0  my-3 my-md-0 blog-container shadow-lg position-relative">
-      {/* Wrap the card in the Link component */}
-      <Link href={`/blogs/${blog.slug}`} passHref className="h-100">
-        <div className="image-container w-100 position-relative">
+      <div className="image-container w-100 position-relative">
+        <Link href={`/blogs/${blog.slug}`} passHref className="h-100">
           <img
             loading="lazy"
             className="card-img-top"
@@ -23,17 +22,23 @@ const BlogCard = ({ blog }) => {
             alt={blog.news_title.slice(0, 10)}
             style={{ filter: "brightness(0.8)" }}
           />
-          <div
-            className="tags-container position-absolute bottom-0 mb-3"
-            style={{ left: "20px" }}
-          >
-            <Link href={`/blogs/category/${blog.city.slug}`}>
-              <div className="tag">
-                <p>{blog.city.name}</p>
-              </div>
-            </Link>
-          </div>
+        </Link>
+        <div
+          className="tags-container position-absolute bottom-0 mb-3"
+          style={{ left: "20px" }}
+        >
+          <Link href={`/blogs/category/${blog.city.slug}`}>
+            <div className="tag">
+              <p>{blog.city.name}</p>
+            </div>
+          </Link>
         </div>
+      </div>
+      <Link
+        href={`/blogs/${blog.slug}`}
+        passHref
+        className="text-decoration-none"
+      >
         <div className="card-body d-flex flex-column text-dark">
           <h5 className="card-title font-weight-bold text-dark title-container mb-4">
             {blog.news_title}
