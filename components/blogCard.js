@@ -1,56 +1,67 @@
 import React from "react";
-
-//LIB
 import Link from "next/link";
 import dayjs from "dayjs";
-
-//API
+import PropTypes from "prop-types";
 import { endPoints } from "@/api/endpoints";
 
-//STYLES
-import "../app/blogs/blog.css";
-
 const BlogCard = ({ blog }) => {
+  const { slug, news_thumbnail, news_title, city, date_of_upload } = blog;
+
+  // Calculate read time based on content length (approximately 200 words per minute)
+  const readTime = Math.max(1, Math.ceil(news_title.split(" ").length / 200));
+
   return (
-    <div className="card border-0  my-3 my-md-0 blog-container shadow-lg position-relative">
-      <div className="image-container w-100 position-relative">
-        <Link href={`/blogs/${blog.slug}`} passHref className="h-100">
+    <article className="group flex flex-col overflow-hidden">
+      <div className="relative mb-3">
+        <Link href={`/blogs/${slug}`} className="block">
           <img
             loading="lazy"
-            className="card-img-top"
-            src={endPoints.baseURL + blog.news_thumbnail}
-            alt={blog.news_title.slice(0, 10)}
-            style={{ filter: "brightness(0.8)" }}
+            className="h-48 w-full rounded-lg object-cover"
+            src={`${endPoints.baseURL}${news_thumbnail}`}
+            alt={news_title}
           />
         </Link>
-        <div
-          className="tags-container position-absolute bottom-0 mb-3"
-          style={{ left: "20px" }}
-        >
-          <Link href={`/blogs/category/${blog.city.slug}`}>
-            <div className="tag">
-              <p>{blog.city.name}</p>
-            </div>
+      </div>
+
+      <div className="flex flex-col space-y-2">
+        <div className="mb-1">
+          <span className="text-xs font-medium uppercase tracking-wider text-gray-500 border border-gray-500 rounded-full px-2 py-1">
+            News
+          </span>
+        </div>
+
+        <Link href={`/blogs/${slug}`}>
+          <h3 className="text-lg font-bold leading-snug text-gray-900 group-hover:text-blue-600">
+            {news_title}
+          </h3>
+        </Link>
+
+        <div className="flex items-center space-x-2 text-sm text-gray-500">
+          <span>{readTime} min read</span>
+          <span>•</span>
+          <Link
+            href={`/blogs/category/${city.slug}`}
+            className="hover:text-blue-600"
+          >
+            {city.name}
           </Link>
         </div>
       </div>
-      <Link
-        href={`/blogs/${blog.slug}`}
-        passHref
-        className="text-decoration-none"
-      >
-        <div className="card-body d-flex flex-column text-dark">
-          <h5 className="card-title font-weight-bold text-dark title-container mb-4">
-            {blog.news_title}
-          </h5>
-
-          <div className="text-secondary position-absolute bottom-0 mb-3">
-            Posted {dayjs(blog?.date_of_upload).format("MMMM DD, YYYY")}
-          </div>
-        </div>
-      </Link>
-    </div>
+    </article>
   );
+};
+
+BlogCard.propTypes = {
+  blog: PropTypes.shape({
+    slug: PropTypes.string.isRequired,
+    news_thumbnail: PropTypes.string.isRequired,
+    news_title: PropTypes.string.isRequired,
+    city: PropTypes.shape({
+      slug: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+    date_of_upload: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default BlogCard;
