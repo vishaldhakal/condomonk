@@ -315,10 +315,6 @@ const SearchWithAutocomplete = ({
     e.preventDefault();
     e.stopPropagation();
 
-    // Show loading state
-    setIsNavigating(true);
-    onNavigationStart?.();
-
     try {
       await router.push(href);
 
@@ -331,13 +327,8 @@ const SearchWithAutocomplete = ({
         resaleCities: [],
         properties: [],
       });
-
-      // Reset navigation state immediately after push
-      setIsNavigating(false);
     } catch (error) {
       console.error("Navigation failed:", error);
-      // Reset navigation state on error
-      setIsNavigating(false);
     }
   };
 
@@ -346,14 +337,8 @@ const SearchWithAutocomplete = ({
     e.preventDefault();
     e.stopPropagation();
 
-    // Show loading state
-    setIsNavigating(true);
-    onNavigationStart?.();
-
     // Navigate and reset state
-    router.push(href).finally(() => {
-      setIsNavigating(false);
-    });
+    router.push(href);
   };
 
   // Apply different classes based on whether this is the homepage or not
@@ -701,14 +686,6 @@ const SearchWithAutocomplete = ({
                 </div>
               </div>
             )}
-        </div>
-      )}
-
-      {/* Navigation Loading Overlay */}
-      {isNavigating && (
-        <div className="fixed inset-0 bg-white/70 backdrop-blur-sm z-50 flex flex-col items-center justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#32a953] border-t-transparent mb-4"></div>
-          <p className="text-gray-600 font-medium">Loading...</p>
         </div>
       )}
     </div>
