@@ -318,12 +318,14 @@ async function getSimilarProperties(filters) {
   return { properties: properties.filter(Boolean), type: "regular" };
 }
 
-export default async function DynamicPage({ params, searchParams }) {
+export default async function DynamicPage({ params }) {
   try {
-    console.log("Received params:", params);
-
     const filters = parseSlug(params.slug1);
-    console.log("Parsed filters:", filters);
+
+    const searchParams = {
+      ...filters,
+      page: filters.page || 1,
+    };
 
     if (!filters) {
       notFound();
@@ -335,7 +337,6 @@ export default async function DynamicPage({ params, searchParams }) {
       currentPage,
       totalPages,
     } = await getProperties({
-      ...filters,
       ...searchParams,
     });
 

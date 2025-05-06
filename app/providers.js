@@ -1,9 +1,10 @@
 "use client";
 import * as React from "react";
-
-// 1. import `NextUIProvider` component
 import { NextUIProvider } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 
 export function Providers({ children }) {
-  return <NextUIProvider>{children}</NextUIProvider>;
+  const router = useRouter();
+
+  return <NextUIProvider navigate={router.push}>{children}</NextUIProvider>;
 }

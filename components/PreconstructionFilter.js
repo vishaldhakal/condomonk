@@ -100,7 +100,7 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
       return `/${citySlug}-homes-${option.value}`;
     } else if (type === "status") {
       // For status, we're scrolling to sections on the same page
-      return `#${option.sectionId}`;
+      return `/${citySlug}#${option.sectionId}`;
     } else if (type === "property") {
       return option.path;
     }

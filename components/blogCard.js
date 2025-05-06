@@ -1,67 +1,59 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import dayjs from "dayjs";
-import PropTypes from "prop-types";
 import { endPoints } from "@/api/endpoints";
 
-const BlogCard = ({ blog }) => {
-  const { slug, news_thumbnail, news_title, city, date_of_upload } = blog;
+export default function BlogCard({ blog }) {
+  // Ensure the image URL is properly formed
+  const getImageUrl = (thumbnail) => {
+    if (!thumbnail) return null;
+    // If the thumbnail already starts with the full URL, use it
+    if (thumbnail.startsWith("https://")) return thumbnail;
+    // Otherwise, combine with baseURL
+    return `${endPoints.baseURL}${
+      thumbnail.startsWith("/") ? "" : "/"
+    }${thumbnail}`;
+  };
 
-  // Calculate read time based on content length (approximately 200 words per minute)
-  const readTime = Math.max(1, Math.ceil(news_title.split(" ").length / 200));
+  const imageUrl = getImageUrl(blog.news_thumbnail);
 
   return (
-    <article className="group flex flex-col overflow-hidden">
-      <div className="relative mb-3">
-        <Link href={`/blogs/${slug}`} className="block">
-          <img
-            loading="lazy"
-            className="h-48 w-full rounded-lg object-cover"
-            src={`${endPoints.baseURL}${news_thumbnail}`}
-            alt={news_title}
-          />
+    <div className="relative my-3 md:my-0 rounded-lg shadow-lg overflow-hidden bg-white">
+      <div className="relative w-full aspect-[4/3]">
+        <Link href={`/blogs/${blog.slug}`} className="block h-full">
+          {imageUrl ? (
+            <Image
+              src={imageUrl}
+              alt={blog.news_title.slice(0, 10)}
+              fill
+              className="object-cover brightness-80"
+              loading="lazy"
+            />
+          ) : (
+            <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+              <span className="text-gray-400">No image available</span>
+            </div>
+          )}
         </Link>
-      </div>
-
-      <div className="flex flex-col space-y-2">
-        <div className="mb-1">
-          <span className="text-xs font-medium uppercase tracking-wider text-gray-500 border border-gray-500 rounded-full px-2 py-1">
-            News
-          </span>
-        </div>
-
-        <Link href={`/blogs/${slug}`}>
-          <h3 className="text-lg font-bold leading-snug text-gray-900 group-hover:text-blue-600">
-            {news_title}
-          </h3>
-        </Link>
-
-        <div className="flex items-center space-x-2 text-sm text-gray-500">
-          <span>{readTime} min read</span>
-          <span>•</span>
-          <Link
-            href={`/blogs/category/${city.slug}`}
-            className="hover:text-blue-600"
-          >
-            {city.name}
+        <div className="absolute bottom-0 left-5 mb-3">
+          <Link href={`/blogs/category/${blog.city.slug}`}>
+            <div className="inline-block px-3 py-1 text-sm font-medium bg-white rounded-full">
+              {blog.city.name}
+            </div>
           </Link>
         </div>
       </div>
-    </article>
+      <Link href={`/blogs/${blog.slug}`} className="block text-decoration-none">
+        <div className="relative p-4">
+          <h5 className="font-bold text-lg text-gray-900 mb-4 line-clamp-2">
+            {blog.news_title}
+          </h5>
+          <div className="absolute bottom-0 mb-3 text-sm text-gray-500">
+            Posted {dayjs(blog?.date_of_upload).format("MMMM DD, YYYY")}
+          </div>
+        </div>
+      </Link>
+    </div>
   );
-};
-
-BlogCard.propTypes = {
-  blog: PropTypes.shape({
-    slug: PropTypes.string.isRequired,
-    news_thumbnail: PropTypes.string.isRequired,
-    news_title: PropTypes.string.isRequired,
-    city: PropTypes.shape({
-      slug: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    date_of_upload: PropTypes.string.isRequired,
-  }).isRequired,
-};
-
-export default BlogCard;
+}

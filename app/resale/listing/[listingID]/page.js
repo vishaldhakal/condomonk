@@ -45,10 +45,9 @@ export const revalidate = 60; // 1 minute
 export async function generateMetadata({ params }) {
   try {
     const property = await getListingDetail(params.listingID);
-
     if (!property) {
       return {
-        title: "Property Not Found | Condomonk",
+        title: "Property Not Found",
         description: "The requested property listing could not be found.",
       };
     }
@@ -81,9 +80,8 @@ export async function generateMetadata({ params }) {
     };
   } catch (error) {
     return {
-      title: "Resale Homes for Sale | Condomonk",
-      description:
-        "View detailed information about this property listing on Condomonk.",
+      title: "Property Not Found",
+      description: "The requested property listing could not be found.",
     };
   }
 }
@@ -91,7 +89,6 @@ export async function generateMetadata({ params }) {
 export default async function PropertyDetailPage({ params }) {
   try {
     const property = await getListingDetail(params.listingID);
-
     if (!property) {
       notFound();
     }
@@ -294,7 +291,7 @@ export default async function PropertyDetailPage({ params }) {
               {/* Price */}
               <div className="mb-0">
                 <div>
-                  <h2 className="text-4xl md:text-6xl font-bold mb-1">
+                  <h2 className="text-3xl md:text-5xl font-bold mb-1">
                     ${property.ListPrice.toLocaleString()}
                   </h2>
                   {property.PreviousListPrice &&
@@ -402,7 +399,7 @@ export default async function PropertyDetailPage({ params }) {
                 </div>
 
                 {/* Address */}
-                <h1 className="text-lg md:text-2xl mb-4">
+                <h1 className="text-base md:text-xl mb-4">
                   {property.StreetNumber} {property.StreetName}{" "}
                   {property.StreetSuffix}, {property.City},{" "}
                   {property.StateOrProvince} {property.PostalCode}
@@ -879,7 +876,6 @@ export default async function PropertyDetailPage({ params }) {
       </>
     );
   } catch (error) {
-    console.error("Error in PropertyDetailPage:", error);
     notFound();
   }
 }

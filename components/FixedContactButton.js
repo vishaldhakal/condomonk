@@ -2,21 +2,20 @@ import Link from "next/link";
 
 export default function FixedContactButton() {
   return (
-    <>
-      <Link href="#contact" className="floating  fixcontact">
-        <div className=" shadow-lg rounded-mine d-flex flex-column">
-          <div className="btn my-sm-0 ms-md-3 d-flex align-items-center gap-2">
-            <img
-              src="/COA-agent-pic.jpg"
-              alt="agent pic"
-              className="img-fluid img-call-height"
-            />
-            <span className="d-flex flex-column justify-content-start text-dark text-sm">
-              <b>Send me latest info</b>
-            </span>
-          </div>
-        </div>
-      </Link>
-    </>
+    <Link
+      href="#contact"
+      className="fixed bottom-4 right-4 z-50 bg-white rounded-lg shadow-xl transition-transform hover:scale-105 duration-200 ease-in-out"
+    >
+      <div className="flex items-center gap-3 p-3 md:hidden block">
+        <img
+          src="/COA-agent-pic.jpg"
+          alt="Contact Agent"
+          className="w-12 h-12 rounded-full object-cover"
+        />
+        <span className="text-gray-900 font-medium text-sm whitespace-nowrap">
+          Send me latest info
+        </span>
+      </div>
+    </Link>
   );
 }

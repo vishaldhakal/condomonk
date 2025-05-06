@@ -1,122 +1,135 @@
 import React from "react";
-
-//API
+import { Suspense } from "react";
 import { fetchAllBlogPosts, fetchCities } from "@/api/blogs";
-
-//COMPONENTS
-import BlogCard from "@/components/blogCard";
+import BlogCard from "@/components/BlogCard";
 import Breadcrumb from "@/components/Breadcrumb";
 import BottomContactForm from "@/components/BottomContactForm";
 import CityInsights from "@/components/CityInsights";
 
-export async function generateMetadata({ params }, parent) {
-  return {
-    ...parent,
-    alternates: {
-      canonical: `https://condomonk.ca/blogs/`,
-    },
-    title: "Condomonk Blogs | Insights on real Estate",
-  };
+// Metadata for SEO
+export const metadata = {
+  title: "Condomonk Blogs | Insights on Real Estate",
+  description:
+    "Stay updated with the latest real estate insights, market trends, and property news through Condomonk's expert blog articles.",
+  alternates: {
+    canonical: "https://condomonk.ca/blogs/",
+  },
+};
+
+// Loading component for blog cards
+function BlogCardSkeleton() {
+  return (
+    <div className="animate-pulse">
+      <div className="bg-gray-200 rounded-lg h-48 mb-4"></div>
+      <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+      <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+    </div>
+  );
 }
 
-const Blogs = async () => {
+// Blog list component with loading state
+function BlogList({ blogs }) {
+  if (!blogs?.length) {
+    return (
+      <div className="text-center py-10">
+        <p className="text-gray-500 text-lg">
+          No blog posts available at the moment. Check back soon for updates!
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {blogs.map((blog, index) => (
+        <BlogCard key={blog.id || index} blog={blog} />
+      ))}
+    </div>
+  );
+}
+
+export default async function Blogs() {
   const [blogPosts, cities] = await Promise.all([
     fetchAllBlogPosts(),
     fetchCities(),
   ]);
 
   return (
-    <div className="pages">
-      <div className="container justify-content-start">
+    <div className="min-h-screen bg-gray-50">
+      <div className="container mx-auto px-4 py-8">
+        {/* Breadcrumb */}
         <Breadcrumb
           homeElement={"Home"}
           separator={
-            <span>
-              {" "}
+            <span className="mx-2">
               <svg
-                className="svg minearr"
+                className="w-5 h-5 text-gray-400"
                 viewBox="0 0 32 32"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
                   d="M17.65 16.513l-7.147-7.055 1.868-1.893 9.068 8.951-9.069 8.927-1.866-1.896z"
-                  fill={"#869099"}
+                  fill="currentColor"
                 ></path>
-              </svg>{" "}
+              </svg>
             </span>
           }
-          activeClasses="text-dark"
-          containerClasses="d-flex align-items-center p-0 m-0 pt-4 breadcrumb"
+          activeClasses="text-gray-900"
+          containerClasses="flex items-center py-4"
           listClasses="mx-1"
           capitalizeLinks
         />
-      </div>
 
-      <div className="container mt-4">
-        <div className="row mt-3">
-          <div className="mx-auto">
-            <div className="blogs">
-              <div className="row g-4">
-                <div className="col-sm-12 col-lg-12">
-                  <h1 className="main-title text-center text-md-start mb-4">
-                    The Condomonk Blog: See what's happening in your city
-                  </h1>
-                  <div className="insights-on-cities">
-                    <CityInsights {...{ cities }} />
-                  </div>
-                  <div className="row">
-                    {blogPosts && blogPosts.length > 0 ? (
-                      blogPosts.map((blog, index) => (
-                        <div
-                          className="col-sm-12 col-md-4 col-lg-3 mb-4"
-                          key={index}
-                        >
-                          <BlogCard blog={blog} />
-                        </div>
-                      ))
-                    ) : (
-                      <div className="col-12 text-center py-5">
-                        <p className="fs-5 text-secondary">
-                          No blog posts available at the moment. Check back soon
-                          for updates!
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
+        {/* Main Content */}
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center md:text-left">
+            The Condomonk Blog: See what's happening in your city
+          </h1>
+
+          {/* City Insights Section */}
+          <div className="mb-12">
+            <Suspense
+              fallback={
+                <div className="h-32 bg-gray-100 animate-pulse rounded-lg"></div>
+              }
+            >
+              <CityInsights cities={cities} />
+            </Suspense>
           </div>
+
+          {/* Blog Posts Section */}
+          <Suspense
+            fallback={
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {[...Array(8)].map((_, i) => (
+                  <BlogCardSkeleton key={i} />
+                ))}
+              </div>
+            }
+          >
+            <BlogList blogs={blogPosts} />
+          </Suspense>
         </div>
 
-        <div className="pt-5 mt-5"></div>
-        <div className="py-5 my-5 d-none d-md-block">
-          <div className="container">
-            <div className="row justify-content-center">
-              <img
-                src="/contact-bottom-2.png"
-                alt="dce"
-                className="img-fluid w-25 w-smm-50 mb-3"
-              />
-            </div>
-            <h2 className="fw-mine text-center px-md-4 fs-4">
+        {/* Contact Form Section */}
+        <div className="mt-24 hidden md:block">
+          <div className="max-w-4xl mx-auto text-center">
+            <img
+              src="/contact-bottom-2.png"
+              alt="Contact Condomonk"
+              className="w-40 mx-auto mb-6"
+              width={160}
+              height={160}
+            />
+            <h2 className="text-2xl font-bold text-gray-900 mb-8">
               Contact Condomonk Team Today
             </h2>
-            <div className="row row-cols-1 row-cols-md-3 mt-3">
-              <div className="col-md-3"></div>
-              <div className="col-md-6">
-                <BottomContactForm
-                  proj_name="Blog"
-                  city="Blog Page"
-                ></BottomContactForm>
-              </div>
-              <div className="col-md-3"></div>
+            <div className="max-w-xl mx-auto">
+              <BottomContactForm proj_name="Blog" city="Blog Page" />
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-};
-
-export default Blogs;
+}

@@ -2,7 +2,6 @@
 
 import React from "react";
 import { usePathname } from "next/navigation";
-
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -19,48 +18,63 @@ import {
 } from "next-share";
 import { endPoints } from "@/api/endpoints";
 
-const SocialMediaShare = () => {
-  const pathname = usePathname();
+const ShareButton = ({ title, children }) => (
+  <div
+    className="transition-transform hover:scale-110"
+    title={`Share With ${title}`}
+  >
+    {children}
+  </div>
+);
 
-  const url = endPoints.shareURL + pathname;
-  const title = "Check out this awesome blog!";
+const SocialMediaShare = ({ customTitle, customUrl }) => {
+  const pathname = usePathname();
+  const url = customUrl || endPoints.shareURL + pathname;
+  const title = customTitle || "Check out this awesome blog!";
+
+  const SHARE_BUTTONS = [
+    {
+      title: "Facebook",
+      Button: FacebookShareButton,
+      Icon: FacebookIcon,
+      props: { quote: title },
+    },
+    {
+      title: "Twitter",
+      Button: TwitterShareButton,
+      Icon: TwitterIcon,
+      props: { title },
+    },
+    {
+      title: "Email",
+      Button: EmailShareButton,
+      Icon: EmailIcon,
+      props: { subject: title, body: "Check out this awesome content!" },
+    },
+    {
+      title: "Telegram",
+      Button: TelegramShareButton,
+      Icon: TelegramIcon,
+      props: { subject: title },
+    },
+    {
+      title: "WhatsApp",
+      Button: WhatsappShareButton,
+      Icon: WhatsappIcon,
+      props: { subject: title },
+    },
+  ];
 
   return (
-    <div className="tags-container d-flex align-items-baseline">
-      <div className="d-flex gap-2 gap-md-3 flex-wrap">
-        <div title="Share With Facebook">
-          <FacebookShareButton url={url} quote={title}>
-            <FacebookIcon size={38} round />
-          </FacebookShareButton>
-        </div>
-
-        <div title="Share With Twitter">
-          <TwitterShareButton url={url} title={title}>
-            <TwitterIcon size={38} round />
-          </TwitterShareButton>
-        </div>
-
-        <div title="Share With Email">
-          <EmailShareButton
-            url={url}
-            subject={title}
-            body="Check out this awesome content!"
-          >
-            <EmailIcon size={38} round />
-          </EmailShareButton>
-        </div>
-
-        <div title="Share With Telegram">
-          <TelegramShareButton url={url} subject={title}>
-            <TelegramIcon size={38} round />
-          </TelegramShareButton>
-        </div>
-
-        <div title="Share With Whatsapp">
-          <WhatsappShareButton url={url} subject={title}>
-            <WhatsappIcon size={38} round />
-          </WhatsappShareButton>
-        </div>
+    <div className="flex items-baseline">
+      <div className="flex flex-wrap gap-2 md:gap-3">
+        {SHARE_BUTTONS.map(({ title, Button, Icon, props }) => (
+          <ShareButton key={title} title={title}>
+            <Button url={url} {...props}>
+              <Icon size={38} round />
+            </Button>
+          </ShareButton>
+        ))}
       </div>
     </div>
   );

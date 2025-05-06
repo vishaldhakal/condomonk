@@ -1,25 +1,32 @@
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import "./blog.css";
 
 async function getCities() {
-  const res = await fetch("https://api.condomonk.ca/api/all-city", {
-    next: { revalidate: 3600 },
-  });
+  try {
+    const res = await fetch("https://api.condomonk.ca/api/all-city", {
+      next: {
+        revalidate: 3600, // Cache for 1 hour
+        tags: ["cities"],
+      },
+    });
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    if (!res.ok) {
+      throw new Error("Failed to fetch cities");
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error("Error fetching cities:", error);
+    return [];
   }
-  return res.json();
 }
 
-export default async function RootLayout({ children }) {
-  let cities = await getCities();
+export default async function BlogLayout({ children }) {
+  const cities = await getCities();
+
   return (
-    <>
-      {/* <Navbar cities={cities}></Navbar> */}
-      {children}
-      <Footer cities={cities}></Footer>
-    </>
+    <div className="min-h-screen flex flex-col">
+      <main className="flex-grow">{children}</main>
+      <Footer cities={cities} />
+    </div>
   );
 }

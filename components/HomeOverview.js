@@ -2,7 +2,7 @@
 import TimeAgo from "@/helper/timeAgo";
 import Link from "next/link";
 import { useState } from "react";
-import "@/styles/homeOverview.css";
+// import "@/styles/homeOverview.css";
 
 const HomeOverview = ({ property }) => {
   const [collapse, setCollapse] = useState(true);

@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 
-export default function ExpandableContent({ content, maxHeight = 500 }) {
+export default function ExpandableContent({ content, maxHeight = 400 }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [shouldShowButton, setShouldShowButton] = useState(false);
   const contentRef = useRef(null);
@@ -40,33 +40,88 @@ export default function ExpandableContent({ content, maxHeight = 500 }) {
   };
 
   return (
-    <div>
+    <div className="relative">
       <div
         ref={contentRef}
-        className={`iframe-container custom-description-container leading-8 relative overflow-hidden transition-[max-height] duration-300 ease-in-out`}
+        className={`prose max-w-none leading-relaxed relative overflow-hidden transition-[max-height] duration-300 ease-in-out ${
+          !isExpanded ? "mask-bottom" : ""
+        }`}
         style={{
           maxHeight: isExpanded
             ? `${expandedHeightRef.current}px`
             : `${maxHeight}px`,
         }}
       >
-        <div dangerouslySetInnerHTML={{ __html: content }} />
+        <div
+          className="text-gray-700"
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
         {!isExpanded && shouldShowButton && (
-          <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent"></div>
+          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white to-transparent pointer-events-none" />
         )}
       </div>
+
       {shouldShowButton && (
-        <div className="flex items-center gap-4 mt-4">
-          <div className="flex-1 h-px bg-gray-200"></div>
+        <div className="flex items-center gap-4 mt-6">
+          <div className="flex-1 h-px bg-gray-200" />
           <button
             onClick={toggleExpand}
-            className="text-blue-600 hover:text-blue-800 focus:outline-none transition-colors duration-300 ease-in-out font-bold whitespace-nowrap text-sm"
+            className="px-4 py-2 text-sm font-semibold text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-full transition-all duration-200 ease-in-out"
           >
-            {isExpanded ? "Read Less ↑" : "Read More ↓"}
+            {isExpanded ? (
+              <span className="flex items-center gap-1">
+                Read Less
+                <svg
+                  className="w-4 h-4 transform rotate-180"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </span>
+            ) : (
+              <span className="flex items-center gap-1">
+                Read More
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </span>
+            )}
           </button>
-          <div className="flex-1 h-px bg-gray-200"></div>
+          <div className="flex-1 h-px bg-gray-200" />
         </div>
       )}
+
+      <style jsx>{`
+        .mask-bottom {
+          mask-image: linear-gradient(
+            to bottom,
+            black calc(100% - 80px),
+            transparent 100%
+          );
+          -webkit-mask-image: linear-gradient(
+            to bottom,
+            black calc(100% - 80px),
+            transparent 100%
+          );
+        }
+      `}</style>
     </div>
   );
 }

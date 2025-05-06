@@ -2,6 +2,15 @@
 import { useState } from "react";
 import ProjectSearch from "./ProjectSearch";
 
+const defaultCities = [
+  { name: "Toronto", slug: "toronto" },
+  { name: "Mississauga", slug: "mississauga" },
+  { name: "Vaughan", slug: "vaughan" },
+  { name: "Brampton", slug: "brampton" },
+  { name: "Hamilton", slug: "hamilton" },
+  { name: "Ottawa", slug: "ottawa" },
+];
+
 const HomeSearch = () => {
   const [activeSearchType, setActiveSearchType] = useState("sale");
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +31,7 @@ const HomeSearch = () => {
   return (
     <div className="w-full max-w-2xl mx-auto relative">
       {/* Search Type Buttons - Styled like the navigation */}
-      <div className="w-full md:max-w-sm max-w-xs mx-auto">
+      {/* <div className="w-full md:max-w-sm max-w-xs mx-auto">
         <div className="flex  mb-6 bg-white  rounded-xl">
           <button
             onClick={() => handleSearchTypeChange("sale")}
@@ -55,9 +64,9 @@ const HomeSearch = () => {
             Pre-construction
           </button>
         </div>
-      </div>
+      </div> */}
 
-      {/* Search Bar */}
+      {/* Search Bar with increased height */}
       <div className="relative w-full">
         <ProjectSearch
           isHomepage={true}
@@ -65,19 +74,9 @@ const HomeSearch = () => {
           setSearchType={setActiveSearchType}
           onSearchStart={handleSearchStart}
           onNavigationStart={handleNavigationStart}
-          generateCityUrl={(cityPath) => {
-            switch (activeSearchType) {
-              case "sale":
-                return `/resale/ontario/${cityPath}/homes-for-sale`;
-              case "lease":
-                return `/resale/ontario/${cityPath}/homes-for-lease`;
-              case "preconstruction":
-                return `/${cityPath}`;
-              default:
-                return `/resale/ontario/${cityPath}/homes-for-sale`;
-            }
-          }}
+          defaultCities={defaultCities}
           showOnlyPreconstruction={activeSearchType === "preconstruction"}
+          customInputClasses="h-[60px] text-base"
         />
       </div>
 

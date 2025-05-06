@@ -74,95 +74,138 @@ export default async function BuilderSingle({ params }) {
   const developer = all_data.developer;
 
   return (
-    <>
-      <FixedContactButton></FixedContactButton>
-      <div className="pt-4 position-relative font-family2">
-        <div className="container-fluid">
-          <div className="pb-4"></div>
-        </div>
-        <div className="container">
-          <div className="row row-cols-1 row-cols-md-1 position-relative">
-            <div className="col mt-4">
-              <div className="d-flex justify-content-center">
-                <DeveloperCardDetail {...developer} />
-              </div>
-              <div className="py-5 my-4"></div>
-              <div className="row row-cols-1 row-cols-md-3 ">
-                <div className="col-md-12 ">
-                  <h1 className="main-title text-center pb-5">
-                    {`New Construction Homes by ${CapitalizeFirst(
-                      params.builder
-                    )}`}
-                  </h1>
-                  <div className="row row-cols-1 row-cols-md-4 row-cols-lg-4 gy-4 gx-3">
-                    {data &&
-                      data.map((item) => (
-                        <div className="col" key={item.id}>
-                          <script
-                            key={item.slug}
-                            type="application/ld+json"
-                            dangerouslySetInnerHTML={{
-                              __html: JSON.stringify(PreconSchema(item)),
-                            }}
-                          />
-                          <CondoCard {...item} />
-                        </div>
-                      ))}
-                  </div>
-                </div>
-                <div className="col-md-2"></div>
-              </div>
+    <main className="min-h-screen bg-gray-50">
+      <FixedContactButton />
+
+      {/* Developer Details Section */}
+      <section className="py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Breadcrumb Navigation */}
+          <nav className="" aria-label="Breadcrumb">
+            <div className="max-w-4xl mx-auto px-4 py-3">
+              <ol className="flex items-center space-x-2 text-sm">
+                <li>
+                  <Link href="/" className="text-gray-500 hover:text-gray-700">
+                    Home
+                  </Link>
+                </li>
+                <li className="text-gray-400">
+                  <svg
+                    className="h-5 w-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </li>
+                <li>
+                  <Link
+                    href="/builders"
+                    className="text-gray-500 hover:text-gray-700"
+                  >
+                    Builders
+                  </Link>
+                </li>
+                <li className="text-gray-400">
+                  <svg
+                    className="h-5 w-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </li>
+                <li>
+                  <span
+                    className="text-gray-900 font-medium"
+                    aria-current="page"
+                  >
+                    {CapitalizeFirst(params.builder)}
+                  </span>
+                </li>
+              </ol>
             </div>
+          </nav>
+          <DeveloperCardDetail {...developer} />
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <h1 className="text-2xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+            {`Pre Construction Homes by ${CapitalizeFirst(params.builder)}`}
+          </h1>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {data &&
+              data.map((item) => (
+                <div key={item.id}>
+                  <script
+                    key={item.slug}
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                      __html: JSON.stringify(PreconSchema(item)),
+                    }}
+                  />
+                  <CondoCard {...item} />
+                </div>
+              ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Disclaimer Section */}
+      <section className="py-12 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-sm text-gray-600 leading-relaxed">
+            *Disclaimer: The information on this page about the builder or
+            developer, including project status, pricing, floor plans, and other
+            related details, is for general informational purposes only. It may
+            have been sourced from the builder's website or publicly available
+            data. While we strive to keep the information up to date and
+            accurate, changes or discrepancies may occur. For the most accurate
+            details, we recommend verifying directly with the builder. Condomonk
+            is not responsible for any outdated or incorrect information.
+            <br />
+            <br />
+            If you are a builder and wish to request updates or modifications to
+            the information on this page, please contact us at
+            info@condomonk.ca.
+          </p>
+        </div>
+      </section>
+
+      {/* Contact Form Section */}
+      <section className="py-16 bg-white" id="mycontact">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <img
+              src="/contact-bottom-2.png"
+              alt="Contact Condomonk"
+              className="w-32 md:w-40 mx-auto mb-6"
+            />
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+              Contact Condomonk Team Today
+            </h2>
           </div>
 
-          <div className="pt-5 mt-5"></div>
-          <div>
-            <p className="text-sm">
-              *Disclaimer: The information on this page about the builder or
-              developer, including project status, pricing, floor plans, and
-              other related details, is for general informational purposes only.
-              It may have been sourced from the builder’s website or publicly
-              available data. While we strive to keep the information up to date
-              and accurate, changes or discrepancies may occur. For the most
-              accurate details, we recommend verifying directly with the
-              builder. Condomonk is not responsible for any outdated or
-              incorrect information.
-              <br />
-              If you are a builder and wish to request updates or modifications
-              to the information on this page, please contact us at
-              info@condomonk.ca.
-            </p>
+          <div className="max-w-xl mx-auto">
+            <BottomContactForm
+              proj_name={params.builder}
+              city="Builders Detail Page"
+            />
           </div>
-          <div className="pt-5 mt-5"></div>
-          <div className="py-5 my-5" id="mycontact">
-            <div className="container-fluid">
-              <div className="row justify-content-center">
-                <img
-                  src="/contact-bottom-2.png"
-                  alt="dce"
-                  className="img-fluid w-25 w-smm-50 mb-3"
-                />
-              </div>
-              <h2 className="fw-mine text-center px-md-4 fs-4">
-                Contact condomonk Team Today
-              </h2>
-              <div className="row row-cols-1 row-cols-md-3 mt-3">
-                <div className="col-md-3"></div>
-                <div className="col-md-6">
-                  <BottomContactForm
-                    proj_name={params.builder}
-                    city="Builders Detail Page"
-                  ></BottomContactForm>
-                </div>
-                <div className="col-md-3"></div>
-              </div>
-            </div>
-          </div>
-          <div className="pt-5 mt-5"></div>
-          <div className="pt-5 mt-5"></div>
-          <div className="pt-5 mt-5"></div>
         </div>
-      </div>
-    </>
+      </section>
+    </main>
   );
 }

@@ -1,45 +1,15 @@
+import Image from "next/image";
 import Link from "next/link";
-import Image from "next/legacy/image";
-import PreconSchema from "@/components/PreconSchema";
-import BottomContactForm from "@/components/BottomContactForm";
-import "./icons.css";
-import FeaturedCard from "@/components/FeaturedCard";
-import BlogCard from "@/components/blogCard";
-import { fetchAllBlogPosts } from "@/api/blogs";
-import HomeSearch from "@/components/HomeSearch";
 import HomeCarousel from "@/components/HomeCarousel";
-
-async function getCities() {
-  const res = await fetch("https://api.condomonk.ca/api/all-city", {
-    next: { revalidate: 36000 },
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
-async function getFeaturedData() {
-  const res = await fetch(
-    "https://api.condomonk.ca/api/preconstructions/?is_featured=True",
-    {
-      next: { revalidate: 3600 },
-    }
-  );
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
+import BottomContactForm from "@/components/BottomContactForm";
+import HomeSearch from "@/components/HomeSearch";
+import BlogCard from "@/components/BlogCard";
+import { fetchAllBlogPosts } from "@/api/blogs";
 
 async function getBlogs() {
   return await fetchAllBlogPosts();
 }
-
-export default async function Home(props) {
-  let cities = await getCities();
-
-  const featured = await getFeaturedData();
+export default async function Home() {
   const blogs = await getBlogs();
 
   return (
@@ -75,12 +45,12 @@ export default async function Home(props) {
         </div>
 
         {/* Content */}
-        <div className="relative z-0 container mx-auto px-4 min-h-screen flex md:pt-32 pt-44">
+        <div className="relative z-0 container mx-auto px-4 min-h-screen flex md:pt-38 pt-44">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-white">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white">
               Home for everyone
             </h1>
-            <p className="text-xl md:text-3xl text-white/90 mb-8 md:px-1 px-5">
+            <p className="text-xl md:text-2xl text-white/90 mb-8 md:px-1 px-5">
               Leading Real Estate Homes Platform in Canada.
             </p>
 
@@ -91,120 +61,92 @@ export default async function Home(props) {
       </div>
 
       {/* carrousel */}
-      <div className="container my-4 ">
-        <div className="row md:pt-20 pt-10 align-items-center justify-content-between ">
-          <div className="col-md-6">
-            <h2 className="font-family2 fw-bold sm-center mt-4 mt-md-0 text-2xl text-black no-underline hover:underline ">
-              <Link
-                href="/pre-construction-homes"
-                className="text-black hover:underline "
-              >
-                2500+ Pre construction homes across Canada
-              </Link>
-            </h2>
-            <div className="buttons my-3 sm-center">
-              <Link href="#contact">
-                <button className="button btn btn-dark  mr-2">
-                  Request Information
-                </button>
-                <button className="button btn">
-                  <span className="text-white bg-orange-500 px-3 py-2.5 rounded-lg">
-                    Contact Now
-                  </span>
-                </button>
-              </Link>
-            </div>
-            <p className="pt-2">
-              Welcome to Condomonk, Canada's premier platform for
-              pre-construction homes. Stay ahead with the latest updates on new
-              construction home projects across Canada. Discover exclusive
-              insights and secure your dream home before it's built.
-            </p>
-            <div className="recently-bought pt-md-4 pt-2">
-              <h2 className="fw-normal font-family2 text-3xl sm-center text-decoration-underline">
-                New Projects
-              </h2>
-              <div className="row g-3">
-                <div className="col-4 ">
-                  <img
-                    src="/image1.jpeg"
-                    className="img-fluid img-small"
-                    alt="Image 1"
-                    loading="lazy"
-                  />
+      {/* <div className="max-w-6xl mx-auto px-4 my-8">
+        <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-lg overflow-hidden">
+          <div className="flex flex-col md:flex-row items-stretch">
+            <div className="w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-between">
+              <div className="space-y-6">
+                <div className="transform transition-all duration-500 hover:scale-[1.02]">
+                  <h2 className="font-bold text-3xl md:text-4xl text-gray-900 leading-tight">
+                    <Link
+                      href="/pre-construction-homes"
+                      className="text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-900 hover:from-black hover:to-gray-800 transition-all duration-300"
+                    >
+                      2500+ Pre construction homes across Canada
+                    </Link>
+                  </h2>
                 </div>
-                <div className="col-4 ">
-                  <img
-                    src="/image2.jpeg"
-                    className="img-fluid img-small"
-                    alt="Image 2"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="col-4 ">
-                  <img
-                    src="/image3.jpeg"
-                    className="img-fluid img-small"
-                    alt="Image 3"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="col-4 ">
-                  <img
-                    src="/image4.jpeg"
-                    className="img-fluid img-small"
-                    alt="Image 4"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="col-4 ">
-                  <img
-                    src="/image5.jpeg"
-                    className="img-fluid img-small"
-                    alt="Image 5"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="col-4 ">
-                  <img
-                    src="/image6.jpeg"
-                    className="img-fluid img-small"
-                    alt="Image 6"
-                    loading="lazy"
-                  />
+
+                <p className="text-gray-600 leading-relaxed animate-fade-in">
+                  Welcome to Condomonk, Canada's premier platform for
+                  pre-construction homes. Stay ahead with the latest updates on
+                  new construction home projects across Canada. Discover
+                  exclusive insights and secure your dream home before it's
+                  built.
+                </p>
+                <div className="flex flex-row gap-3 md:text-sm text-[10px]">
+                  <Link href="#contact">
+                    <button className="group relative px-6 py-3 bg-black text-white rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
+                      <div className="relative z-10 flex items-center">
+                        <span>Request Information</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5 ml-2 transform transition-transform duration-300 group-hover:translate-x-1"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-black transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></div>
+                    </button>
+                  </Link>
+                  <Link href="#contact">
+                    <button className="group relative px-6 py-3 text-black rounded-lg overflow-hidden  duration-300 hover:shadow-xl border border-black">
+                      <div className="relative z-10 flex items-center">
+                        <span>Contact Now</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5 ml-2 transform transition-transform duration-300 group-hover:translate-x-1 text-orange-500"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                          <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                        </svg>
+                      </div>
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
-            <div className="sm-center mt-2 mt-md-0">
-              <Link href="#projects">
-                <div className=" mt-3 btn btn-outline-dark sm-center  ">
-                  {" "}
-                  <span className="sm-center btn-outline-dark ">
-                    Explore More Projects{" "}
-                    <i className="bi bi-arrow-up-right-circle sm-center "></i>
-                  </span>
-                </div>
-              </Link>
+
+            <div className="relative w-full md:w-1/2 bg-gray-100">
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-900/5 to-gray-900/0"></div>
+              <div className="h-[500px] transform transition-transform duration-500 hover:scale-[1.02]">
+                <HomeCarousel />
+              </div>
             </div>
           </div>
-          <div className="col-md-6 d-none d-md-block h-[400px]">
-            <HomeCarousel />
-          </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Pre Construction Homes across Canada Section */}
-      <div className="pt-5 mt-5"></div>
+
       <div className="pt-5"></div>
 
       <div className="bg-white py-16">
-        <div className="container mx-auto px-4">
+        <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-4xl font-bold text-center ">
             Pre Construction Homes across Canada
           </h2>
           <p className="text-center text-base mb-12">
             Over 1,000 Pre Construction Homes Available Nationwide on the
-            Homebaba Platform
+            Condomonk Platform
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -422,51 +364,215 @@ export default async function Home(props) {
           </div>
         </div>
       </div>
-      <div className="py-5 " id="top10gta">
-        <div className="container pt-5 ">
-          <div className="d-flex flex-column align-items-center justify-content-center">
-            <h2 className="fw-mine fs-1">
-              <span className="link-black font-family2 mb-2">
-                Featured Project
-              </span>
-            </h2>
-            <p className="fs-6  text-center mb-2">
-              Explore Top 10 Pre Construction Project for sale in GTA
-            </p>
-            <div className="text-center mb-2 ">
-              <Link href="/top-10-gta-projects" className="text-primary ">
-                View all top 10 GTA Projects{" "}
-              </Link>
-            </div>
-          </div>
 
-          <div className="">
-            <div className="row row-cols-2 row-cols-md-2 my-md-2 my-3 gy-3 g-2">
-              {featured.results &&
-                featured.results.slice(0, 4).map((item) => (
-                  <div className="col" key={item.id}>
-                    <script
-                      key={item.slug}
-                      type="application/ld+json"
-                      dangerouslySetInnerHTML={{
-                        __html: JSON.stringify(PreconSchema(item)),
-                      }}
-                    />
-                    <FeaturedCard {...item} />
-                  </div>
+      {/* Price Dropped Homes Section */}
+      <section className="bg-white py-32">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-8">
+            {/* Left Section */}
+            <div className="flex flex-col justify-center space-y-6 max-w-lg">
+              {/* Logo */}
+              <div className="flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-trending-down w-6 h-6"
+                >
+                  <polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline>
+                  <polyline points="16 17 22 17 22 11"></polyline>
+                </svg>
+
+                <span className="ml-2 font-medium text-gray-800 transform transition-all duration-300 group-hover:">
+                  Price Dropped Homes
+                </span>
+              </div>
+
+              {/* Headline with animated gradient */}
+              <h2 className="text-4xl md:text-5xl font-bold text-black leading-tight">
+                Premium homes, now at better prices
+              </h2>
+
+              <p className="text-gray-800 text-lg">
+                Discover properties that have recently dropped in price.
+              </p>
+
+              {/* Location Pills */}
+              <div className="flex flex-wrap gap-4">
+                {[
+                  { city: "Toronto", count: "156" },
+                  { city: "Milton", count: "67" },
+                  { city: "Oakville", count: "93" },
+                  { city: "Brampton", count: "124" },
+                  { city: "Mississauga", count: "89" },
+                ].map((location, index) => (
+                  <Link
+                    key={location.city}
+                    href={`/resale/ontario/${location.city.toLowerCase()}/price-reduced-homes-for-sale`}
+                    className="flex items-center bg-white rounded-full px-4 py-2 border border-gray-200 shadow-sm hover:shadow-md hover:border-green-400 transform transition-all duration-300 hover:-translate-y-1"
+                  >
+                    <svg
+                      className="w-4 h-4 "
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
+                    <span className="ml-2 font-medium">{location.city}</span>
+                    <span className="ml-2  text-xs font-medium px-2 py-0.5 rounded-full">
+                      {location.count}
+                    </span>
+                  </Link>
                 ))}
+              </div>
+
+              {/* CTA Button */}
+              <div>
+                <Link
+                  href="/resale/ontario/price-reduced-homes-for-sale"
+                  className="inline-flex items-center bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl pulse-glow"
+                >
+                  <span>View all price drops</span>
+                  <svg
+                    className="w-5 h-5 ml-2 transition-transform duration-300 transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Section - House Image with Price Tags */}
+            <div className="relative">
+              <div className="rounded-2xl overflow-hidden shadow-xl">
+                <img
+                  src="/pexels-bg.jpeg"
+                  alt="Modern house with price drops"
+                  className="w-full h-[450px] object-cover transition-all duration-700 hover:scale-105"
+                />
+
+                {/* Price Drop Tags */}
+                <div className="absolute top-16 right-16 animate-bounce-slow">
+                  <div className="bg-green-500 text-white px-4 py-2 rounded-full flex items-center shadow-lg transform transition-all duration-300 hover:scale-110 hover:bg-green-600">
+                    <svg
+                      className="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                    <span>-$50,000</span>
+                  </div>
+                </div>
+
+                <div className="absolute top-36 left-20 animate-bounce-slow animation-delay-300">
+                  <div className="bg-green-500 text-white px-4 py-2 rounded-full flex items-center shadow-lg transform transition-all duration-300 hover:scale-110 hover:bg-green-600">
+                    <svg
+                      className="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                    <span>-$35,000</span>
+                  </div>
+                </div>
+
+                <div className="absolute bottom-32 left-1/2 -translate-x-1/2 animate-bounce-slow animation-delay-600">
+                  <div className="bg-green-500 text-white px-4 py-2 rounded-full flex items-center shadow-lg transform transition-all duration-300 hover:scale-110 hover:bg-green-600">
+                    <svg
+                      className="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                    <span>-$42,000</span>
+                  </div>
+                </div>
+
+                {/* Stats Bar */}
+                <div className="absolute bottom-0 left-0 right-0 bg-black/70 backdrop-blur-sm text-white p-4">
+                  <div className="flex justify-between items-center">
+                    <div className="text-center group cursor-pointer">
+                      <div className="text-2xl font-bold text-green-400 group-hover:text-white transition-colors duration-300">
+                        529
+                      </div>
+                      <div className="text-sm text-gray-300">Price Drops</div>
+                    </div>
+                    <div className="text-center group cursor-pointer">
+                      <div className="text-2xl font-bold text-green-400 group-hover:text-white transition-colors duration-300">
+                        15%
+                      </div>
+                      <div className="text-sm text-gray-300">
+                        Avg. Reduction
+                      </div>
+                    </div>
+                    <div className="text-center group cursor-pointer">
+                      <div className="text-2xl font-bold text-green-400 group-hover:text-white transition-colors duration-300">
+                        24h
+                      </div>
+                      <div className="text-sm text-gray-300">Last Updated</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       <div className=" py-5 my-2"></div>
       <Link href={"/resale/ontario"}>
-        <h2 className="fw-mine text-center mb-5  fs-1 font-family2 text-black">
+        <h2 className="font-bold text-center mb-5 text-3xl text-black hover:underline">
           Explore Resale Homes For Sale in Ontario
         </h2>
       </Link>
-      <div className="container mx-auto px-4 mb-20">
+      <div className="max-w-6xl mx-auto px-4 mb-20">
         <div className="grid grid-cols-2 md:grid-cols-4 md:gap-x-4 md:gap-y-8 gap-y-4 gap-x-3">
           <div className="flex flex-col">
             <Link
@@ -849,73 +955,216 @@ export default async function Home(props) {
         </div>
       </div>
 
-      <div className="pt-5">
-        <div className="container " id="projects">
-          <div className="py-5 my-4"></div>
-          <div className="d-flex align-items-center justify-content-center">
-            <h2 className="fw-mine text-center mb-0 fs-1 font-family2 fw-mine fs-bi">
-              <Link href="/blogs" className="text-black">
-                Latest Real Estate News & Insights
-              </Link>
-            </h2>
-          </div>
-          <div className="d-flex flex-column justify-content-center flex-column align-items-center mb-4">
-            <p className="fs-5 mb-0 text-center">
-              Stay updated with the latest news and trends in Canadian real
-              estate
-            </p>
-            <Link href="/blogs" className="mt-1 text-mine text-primary">
-              View all articles <i className="bi bi-arrow-right-short"></i>
-            </Link>
-          </div>
-          <div className="row row-cols-1 row-cols-md-4 g-4 mb-5">
-            {blogs &&
-              blogs.slice(0, 4).map((blog) => (
-                <div className="col" key={blog.id}>
-                  <BlogCard blog={blog} />
-                </div>
-              ))}
-          </div>
+      {/* Top Builders Section */}
+      <section className="max-w-6xl mx-auto px-4 py-16">
+        <div className="text-center mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 ">
+            Top pre construction builders
+          </h2>
+        </div>
 
-          <div className="py-5 my-md-5 my-0" id="contact">
-            <div className="container">
-              <div className="row justify-content-center">
-                <Image
-                  src="/contact-bottom-2.png"
-                  alt="Contact bottom"
-                  width={300}
-                  height={250}
-                  className="img-fluid w-25 w-smm-50 mb-3"
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-3">
+          <Link href="/builders/mattamy-homes" className="group">
+            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300">
+              <div className="h-24 flex items-center justify-center mb-4">
+                <img
+                  src="/builders/mattamyhomes.jpg"
+                  alt="Mattamy Homes"
+                  className="max-h-full max-w-full object-contain"
                 />
               </div>
-              <h2 className="fw-bolder fw-boldie text-center px-md-4 fs-3 ">
-                Looking to buy a preconstruction home ?
-              </h2>
-
-              <div className="row row-cols-1 row-cols-md-3 mt-5">
-                <div className="col-md-2"></div>
-                <div className="col-md-7 mx-auto">
-                  <BottomContactForm
-                    proj_name="All"
-                    city="Home Page"
-                  ></BottomContactForm>
-                  <div className="d-flex">
-                    <p className="small-text2 mb-3 text-center">
-                      I agree to receive marketing and customer service calls
-                      and text messages from Homebaba Technologies. Consent is
-                      not a condition of purchase. Msg/data rates may apply. Msg
-                      frequency varies. Reply STOP to unsubscribe. Privacy
-                      Policy & Terms of Service.
-                    </p>
+              <div className="text-center">
+                <h3 className="text-sm font-semibold text-gray-900 mb-2">
+                  Mattamy Homes
+                </h3>
+                <div className="flex items-center justify-center gap-1">
+                  <div className="flex text-yellow-400">
+                    {"★".repeat(4)}
+                    {"☆".repeat(1)}
                   </div>
+                  <span className="text-gray-600 ml-2 text-xs">27</span>
                 </div>
-                <div className="col-md-2"></div>
               </div>
             </div>
+          </Link>
+
+          <Link href="/builders/empire-communities" className="group">
+            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300">
+              <div className="h-24 flex items-center justify-center mb-4">
+                <img
+                  src="/builders/empire.png"
+                  alt="Empire Communities"
+                  className="max-h-full max-w-full object-contain"
+                />
+              </div>
+              <div className="text-center">
+                <h3 className="text-sm font-semibold text-gray-900 mb-2">
+                  Empire Communities
+                </h3>
+                <div className="flex items-center justify-center gap-1">
+                  <div className="flex text-yellow-400">
+                    {"★".repeat(4)}
+                    {"☆".repeat(1)}
+                  </div>
+                  <span className="text-gray-600 ml-2 text-xs">21</span>
+                </div>
+              </div>
+            </div>
+          </Link>
+
+          <Link href="/builders/minto-communities" className="group">
+            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300">
+              <div className="h-24 flex items-center justify-center mb-4">
+                <img
+                  src="/builders/minto-communities.webp"
+                  alt="Minto Communities"
+                  className="max-h-full max-w-full object-contain"
+                />
+              </div>
+              <div className="text-center">
+                <h3 className="text-sm font-semibold text-gray-900 mb-2">
+                  Minto Communities
+                </h3>
+                <div className="flex items-center justify-center gap-1">
+                  <div className="flex text-yellow-400">
+                    {"★".repeat(4)}
+                    {"☆".repeat(1)}
+                  </div>
+                  <span className="text-gray-600 ml-2 text-xs">19</span>
+                </div>
+              </div>
+            </div>
+          </Link>
+
+          <Link href="/builders/brookfield-residential" className="group">
+            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300">
+              <div className="h-24 flex items-center justify-center mb-4">
+                <img
+                  src="/builders/brookfield-residential-logo.png"
+                  alt="Brookfield Residential"
+                  className="max-h-full max-w-full object-contain"
+                />
+              </div>
+              <div className="text-center">
+                <h3 className="text-sm font-semibold text-gray-900 mb-2">
+                  Brookfield Residential
+                </h3>
+                <div className="flex items-center justify-center gap-1">
+                  <div className="flex text-yellow-400">
+                    {"★".repeat(4)}
+                    {"☆".repeat(1)}
+                  </div>
+                  <span className="text-gray-600 ml-2 text-xs">15</span>
+                </div>
+              </div>
+            </div>
+          </Link>
+
+          <Link href="/builders/truman" className="group">
+            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300">
+              <div className="h-24 flex items-center justify-center mb-4">
+                <img
+                  src="/builders/truman.png"
+                  alt="Truman"
+                  className="max-h-full max-w-full object-contain"
+                />
+              </div>
+              <div className="text-center">
+                <h3 className="text-sm font-semibold text-gray-900 mb-2">
+                  Truman
+                </h3>
+                <div className="flex items-center justify-center gap-1">
+                  <div className="flex text-yellow-400">
+                    {"★".repeat(4)}
+                    {"☆".repeat(1)}
+                  </div>
+                  <span className="text-gray-600 ml-2 text-xs">23</span>
+                </div>
+              </div>
+            </div>
+          </Link>
+        </div>
+        <div className="mt-5 text-center">
+          <Link
+            href="/builders"
+            className="inline-block bg-black  text-white px-4 py-2 rounded-full font-medium transition-colors duration-200"
+          >
+            View All Builders
+          </Link>
+        </div>
+      </section>
+
+      {/* Blog Section */}
+      <section className="max-w-6xl mx-auto px-4 py-16">
+        <div className="text-center mb-8">
+          <Link href="/blogs" className="inline-block group">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 hover:text-gray-700 transition-colors duration-300">
+              Latest Real Estate News & Insights
+            </h2>
+          </Link>
+          <p className="mt-4 text-lg text-gray-600">
+            Stay updated with the latest news and trends in canadian real estate
+          </p>
+          <Link
+            href="/blogs"
+            className="inline-flex items-center mt-2  hover:text-blue-700 font-medium transition-colors duration-300"
+          >
+            View all articles
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 ml-1 transform transition-transform duration-300 group-hover:translate-x-1"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </Link>
+        </div>
+
+        {/* Blog Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {blogs &&
+            blogs.slice(0, 4).map((blog) => (
+              <div className="col" key={blog.id}>
+                <BlogCard blog={blog} />
+              </div>
+            ))}
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <div className="py-5 md:my-20 my-0" id="contact">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-center">
+            <Image
+              src="/contact-bottom-2.png"
+              alt="Contact bottom"
+              width={250}
+              height={20}
+              className=" mb-3 object-contain"
+            />
           </div>
-          <div className="pt-5 mt-5"></div>
+          <h2 className="font-bold text-center md:px-4 text-2xl">
+            Looking to buy a preconstruction home?
+          </h2>
+
+          <div className="mt-5 grid grid-cols-1 gap-4">
+            <div className="md:col-span-2"></div>
+            <div className="max-w-3xl mx-auto w-full">
+              <BottomContactForm
+                proj_name="All"
+                city="Home Page"
+              ></BottomContactForm>
+            </div>
+            <div className="md:col-span-2"></div>
+          </div>
         </div>
       </div>
+      <div className="pt-5 mt-5"></div>
     </>
   );
 }

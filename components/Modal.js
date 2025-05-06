@@ -23,7 +23,10 @@ export default function CustomModal({
 
   return (
     <>
-      <Link className="custom-link" onPress={onOpen}>
+      <Link
+        className="cursor-pointer hover:text-blue-600 transition-colors duration-200"
+        onPress={onOpen}
+      >
         {linkText}
       </Link>
       <Modal
@@ -31,61 +34,40 @@ export default function CustomModal({
         placement={modalPlacement}
         isOpen={isOpen}
         onOpenChange={onOpenChange}
-        className="modal-custom-styles"
         classNames={{
-          backdrop: "modal-custom-backdrop",
+          backdrop: "bg-white/50 backdrop-blur-md",
+          base: "bg-white/90",
+          body: "p-0",
+          closeButton: "hover:bg-white/5 active:bg-white/10",
         }}
+        className="max-w-md mx-auto"
       >
-        <ModalContent className="modal-content-custom">
+        <ModalContent className="bg-white rounded-2xl shadow-xl backdrop-blur-sm border border-white/20 overflow-hidden transform transition-all duration-200 ease-out animate-modalFadeIn hover:scale-[1.002]">
           {(onClose) => (
-            <>
-              <div className="row align-items-start modal-inner-content">
-                <div className="text-center modal-header-custom">
-                  <h5 className="fw-bold text-center linem fs-4 mb-0 pt-3">
-                    GET PLATINUM ACCESS!!
-                  </h5>
-
-                  <p className="mb-0 text-small text-center px-3">
-                    Register to Receive Guaranteed Platinum Access & Prices,
-                    Incentives & Discounts, Floor Plans & More!
-                  </p>
-                </div>
-
-                <ModalBody>
-                  <SideContactForm
-                    proj_name={proj_name}
-                    defaultmessage={defaultmessage}
-                    city={city}
-                  ></SideContactForm>
-                </ModalBody>
+            <div className="flex flex-col">
+              <div className="text-center bg-gradient-to-br from-gray-50 to-white p-6 border-b border-gray-100">
+                <h5 className="font-bold text-2xl text-gray-900 mb-2">
+                  GET PLATINUM ACCESS!!
+                </h5>
+                <p className="text-sm text-gray-600 px-4">
+                  Register to Receive Guaranteed Platinum Access & Prices,
+                  Incentives & Discounts, Floor Plans & More!
+                </p>
               </div>
-            </>
+
+              <ModalBody className="p-6">
+                <SideContactForm
+                  proj_name={proj_name}
+                  defaultmessage={defaultmessage}
+                  city={city}
+                />
+              </ModalBody>
+            </div>
           )}
         </ModalContent>
       </Modal>
 
-      <style jsx global>{`
-        .modal-custom-backdrop {
-          background: rgba(255, 255, 255, 0.5) !important;
-          backdrop-filter: blur(8px) !important;
-        }
-
-        .modal-custom-styles {
-          --modal-background: rgba(255, 255, 255, 0.9);
-        }
-
-        .modal-content-custom {
-          background: white;
-          border-radius: 16px;
-          box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-          backdrop-filter: blur(4px);
-          border: 1px solid rgba(255, 255, 255, 0.18);
-          overflow: hidden;
-          transform: scale(1);
-          transition: transform 0.2s ease;
-          animation: modalFadeIn 0.3s ease-out;
-        }
-
+      <style jsx>{`
         @keyframes modalFadeIn {
           from {
             opacity: 0;
@@ -94,40 +76,6 @@ export default function CustomModal({
           to {
             opacity: 1;
             transform: scale(1);
-          }
-        }
-
-        .modal-content-custom:hover {
-          transform: scale(1.002);
-        }
-
-        .modal-inner-content {
-          padding: 20px;
-        }
-
-        .modal-header-custom {
-          background: linear-gradient(145deg, #f3f4f6, #ffffff);
-          padding: 20px;
-          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .modal-header-custom h5 {
-          color: #1a1a1a;
-          margin-bottom: 10px;
-          font-size: 24px;
-          font-weight: 700;
-        }
-
-        .modal-header-custom p {
-          color: #666;
-          font-size: 14px;
-          line-height: 1.5;
-        }
-
-        @media (max-width: 768px) {
-          .modal-content-custom {
-            margin: 10px;
-            width: calc(100% - 20px);
           }
         }
       `}</style>

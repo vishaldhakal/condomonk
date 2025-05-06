@@ -48,7 +48,7 @@ export default async function AssignmentSalePage({ params, searchParams }) {
     .replace(/\b\w/g, (char) => char.toUpperCase())}`;
   let subtitle = `Browse top price reduced assignments in ${city
     .replace(/-/g, " ")
-    .replace(/\b\w/g, (char) => char.toUpperCase())} for sale on Homebaba`;
+    .replace(/\b\w/g, (char) => char.toUpperCase())} for sale on Condomonk`;
 
   return (
     <main className="pt-10 md:pt-20">
@@ -83,19 +83,19 @@ export default async function AssignmentSalePage({ params, searchParams }) {
               <h5 className="text-lg font-semibold">
                 Why do buyers choose assignment sales in Ontario?
               </h5>
-              <p className="text-gray-600">
+              <div className="text-gray-600">
                 Buyers opt for assignment sales to secure a pre-construction
                 property at an earlier price before completion. This allows them
                 to benefit from market appreciation and sometimes better deals
                 compared to resale properties. Additionally, assignment sales
                 provide access to new developments that may already be sold out.
-              </p>
+              </div>
             </li>
             <li>
               <h5 className="text-lg font-semibold">
                 What are the benefits of purchasing an assignment sale property?
               </h5>
-              <p className="text-gray-600">
+              <div className="text-gray-600">
                 <ul className="list-disc pl-6 space-y-1">
                   <li>
                     <strong>Lower Prices:</strong> Buyers may get a better price
@@ -116,7 +116,7 @@ export default async function AssignmentSalePage({ params, searchParams }) {
                     time for financial planning.
                   </li>
                 </ul>
-              </p>
+              </div>
             </li>
           </ol>
           <p className="text-gray-500 italic">
@@ -173,20 +173,20 @@ export async function generateMetadata({ params }) {
 
   return {
     metadataBase: new URL("https://condomonk.ca"),
-    title: `Assignment Sale in ${cityFormat} - Homebaba`,
-    description: `100+ assignment sales in ${cityFormat}, Ontario, including townhomes, semi-detached, and condos. Explore the best assignment deals on Homebaba.`,
+    title: `Assignment Sale in ${cityFormat} - Condomonk`,
+    description: `100+ assignment sales in ${cityFormat}, Ontario, including townhomes, semi-detached, and condos. Explore the best assignment deals on Condomonk.`,
     openGraph: {
-      title: `Assignment Sale in ${cityFormat} - Homebaba`,
-      description: `100+ assignment sales in ${cityFormat}, Ontario, including townhomes, semi-detached, and condos. Explore the best assignment deals on Homebaba.`,
-      images: [{ url: "https://homebaba.ca/logo.png" }],
+      title: `Assignment Sale in ${cityFormat} - Condomonk`,
+      description: `100+ assignment sales in ${cityFormat}, Ontario, including townhomes, semi-detached, and condos. Explore the best assignment deals on Condomonk.`,
+      images: [{ url: "https://Condomonk.ca/logo.png" }],
     },
     twitter: {
-      title: `Assignment Sale in ${cityFormat} - Homebaba`,
-      description: `100+ assignment sales in ${cityFormat}, Ontario, including townhomes, semi-detached, and condos. Explore the best assignment deals on Homebaba.`,
-      images: [{ url: "https://homebaba.ca/logo.png" }],
+      title: `Assignment Sale in ${cityFormat} - Condomonk`,
+      description: `100+ assignment sales in ${cityFormat}, Ontario, including townhomes, semi-detached, and condos. Explore the best assignment deals on Condomonk.`,
+      images: [{ url: "https://condomonk.ca/logo.png" }],
     },
     alternates: {
-      canonical: `https://homebaba.ca/assignment-sale/${city}`,
+      canonical: `https://condomonk.ca/assignment-sale/${city}`,
     },
   };
 }

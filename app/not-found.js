@@ -35,7 +35,7 @@ export default async function NotFound() {
           </div>
         </div>
       </div>
-      <div className="py-20 container">
+      <div className="py-20 max-w-7xl mx-auto">
         <RealEstateLinks />
       </div>
     </>

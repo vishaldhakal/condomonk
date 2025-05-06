@@ -78,19 +78,19 @@ export default async function AssignmentSalePage({ searchParams }) {
               <h5 className="text-lg font-semibold">
                 Why do buyers choose assignment sales in Ontario?
               </h5>
-              <p className="text-gray-600">
+              <span className="text-gray-600">
                 Buyers opt for assignment sales to secure a pre-construction
                 property at an earlier price before completion. This allows them
                 to benefit from market appreciation and sometimes better deals
                 compared to resale properties. Additionally, assignment sales
                 provide access to new developments that may already be sold out.
-              </p>
+              </span>
             </li>
             <li>
               <h5 className="text-lg font-semibold">
                 What are the benefits of purchasing an assignment sale property?
               </h5>
-              <p className="text-gray-600">
+              <div className="text-gray-600">
                 <ul className="list-disc pl-6 space-y-1">
                   <li>
                     <strong>Lower Prices:</strong> Buyers may get a better price
@@ -111,7 +111,7 @@ export default async function AssignmentSalePage({ searchParams }) {
                     time for financial planning.
                   </li>
                 </ul>
-              </p>
+              </div>
             </li>
           </ol>
           <p className="text-gray-500 italic">

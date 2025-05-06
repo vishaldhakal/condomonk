@@ -1,19 +1,17 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
-import "./icons.css";
-import "react-quill/dist/quill.snow.css";
+import "./styles/animations.css";
 import Navbar from "@/components/Navbar";
 import Script from "next/script";
 import GoogleAnalytics from "./GoogleAnalytics";
 import CommunityPopup from "@/components/CommunityPopup";
 import Footer from "@/components/Footer";
 import NextTopLoader from "nextjs-toploader";
-import { Montserrat } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 import { allcities } from "@/datas/cities";
 import LoadingOverlay from "@/components/LoadingOverlay";
 
-const montserrat = Montserrat({ subsets: ["cyrillic"] });
+const inter = Inter({ subsets: ["cyrillic"] });
 
 export const metadata = {
   metadataBase: new URL("https://condomonk.ca"),
@@ -51,18 +49,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-          crossOrigin="anonymous"
-        />
-        <Script
-          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
         <Script id="analytics" strategy="afterInteractive">
           {`
             (function() {
@@ -160,7 +146,7 @@ export default function RootLayout({ children }) {
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         />
       </head>
-      <body className={montserrat.className}>
+      <body className={`${inter.className} min-h-screen bg-gray-50`}>
         <LoadingOverlay />
         <NextTopLoader
           color="#32a953"
@@ -173,13 +159,15 @@ export default function RootLayout({ children }) {
           speed={200}
           shadow="0 0 10px #32a953,0 0 5px #32a953"
         />
-        <Navbar cities={cities}></Navbar>
-        <Providers>
-          <GoogleAnalytics />
-          {children}
-        </Providers>
-        <Footer cities={cities}></Footer>
-        <CommunityPopup />
+        <div className="min-h-screen flex flex-col">
+          <Navbar cities={cities}></Navbar>
+          <Providers>
+            <GoogleAnalytics />
+            <main className="flex-grow">{children}</main>
+          </Providers>
+          <Footer cities={cities}></Footer>
+          <CommunityPopup />
+        </div>
       </body>
     </html>
   );

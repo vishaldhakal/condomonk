@@ -4,36 +4,27 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { FaCheck } from "react-icons/fa";
 import SideContactForm from "../SideContactForm";
+import Map from "../Map";
+import WalkScore from "../WalkScore";
 import dynamic from "next/dynamic";
-
-// Dynamically import components that use window
-const Map = dynamic(() => import("../Map"), {
-  ssr: false,
-});
-
-const WalkScore = dynamic(() => import("../WalkScore"), {
-  ssr: false,
-});
 
 const AssignmentDetail = ({ assignment }) => {
   const [showAllFeatures, setShowAllFeatures] = useState(true);
   const [isMobileView, setIsMobileView] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
     const handleResize = () => {
-      if (typeof window !== "undefined") {
-        setIsMobileView(window.innerWidth < 768);
-      }
+      setIsMobileView(window.innerWidth < 768);
     };
 
+    // Initial check
     handleResize();
 
-    if (typeof window !== "undefined") {
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
-    }
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const features = assignment.short_description
@@ -67,6 +58,7 @@ const AssignmentDetail = ({ assignment }) => {
     },
   ];
 
+  // Rest of your component code remains the same...
   return (
     <div className="max-w-6xl mx-auto px-3 py-4">
       {/* Back Button and Breadcrumbs */}
@@ -163,6 +155,7 @@ const AssignmentDetail = ({ assignment }) => {
               </span>
             </div>
           </div>
+
           {/* Listing Description */}
           <div className="mb-12">
             <h2 className="text-lg md:text-2xl font-semibold md:font-bold mb-3 border-b border-gray-200 pb-2">
@@ -322,29 +315,26 @@ const AssignmentDetail = ({ assignment }) => {
             </div>
           </div>
 
-          {/* Map section */}
           <div className="mb-12">
             <h2 className="text-lg md:text-2xl font-semibold md:font-bold mb-3 border-b border-gray-200 pb-2">
               Map View of {assignment.project_name} at {assignment.address}
             </h2>
             <div className="h-[400px] w-full rounded-lg overflow-hidden border border-gray-200">
-              {isMounted && <Map location={assignment.address} />}
+              <Map location={assignment.address} />
             </div>
           </div>
 
-          {/* Walk Score section */}
+          {/* Walk Score Section */}
           <div className="mb-12">
             <h2 className="text-lg md:text-2xl font-semibold md:font-bold mb-3 border-b border-gray-200 pb-2">
               Walk Score of {assignment.project_name} at {assignment.address}
             </h2>
             <div className="w-full">
-              {isMounted && (
-                <WalkScore
-                  address={assignment.address}
-                  width={isMobileView ? 350 : 600}
-                  height={400}
-                />
-              )}
+              <WalkScore
+                address={assignment.address}
+                width={isMobileView ? 350 : 600}
+                height={400}
+              />
             </div>
           </div>
 

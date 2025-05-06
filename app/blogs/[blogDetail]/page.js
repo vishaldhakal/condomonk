@@ -1,188 +1,187 @@
 import React from "react";
-
-//API
 import { fetchBlogPostByCity, fetchBlogPostBySlug } from "@/api/blogs";
 import { endPoints } from "@/api/endpoints";
-
-//LIB
 import Link from "next/link";
+import Image from "next/image";
 import dayjs from "dayjs";
-
-//COMPONENT
 import BottomContactForm from "@/components/BottomContactForm";
 import SocialMediaShare from "@/components/SocialMediaShare";
-import BlogCard from "@/components/blogCard";
-
-//STYLES
-import "../blog.css";
+import BlogCard from "@/components/BlogCard";
 import Breadcrumb from "@/components/Breadcrumb";
 
-export async function generateMetadata({ params }, parent) {
+export async function generateMetadata({ params }) {
   const blogSlug = params?.blogDetail;
-
   const blog = await fetchBlogPostBySlug(blogSlug);
 
   return {
-    ...parent,
+    title: blog.news_title,
+    description: blog.news_description?.slice(0, 160).replace(/<[^>]*>/g, ""),
     alternates: {
       canonical: `https://condomonk.ca/blogs/${blogSlug}`,
     },
-    title: `${blog.news_title}`,
+    openGraph: {
+      title: blog.news_title,
+      description: blog.news_description?.slice(0, 160).replace(/<[^>]*>/g, ""),
+      url: `https://condomonk.ca/blogs/${blogSlug}`,
+      images: [
+        {
+          url: endPoints.baseURL + blog.news_thumbnail,
+          width: 1200,
+          height: 630,
+          alt: blog.news_title,
+        },
+      ],
+    },
   };
 }
 
-const BlogDetails = async ({ params }) => {
-  const blogSlug = params?.blogDetail;
+function RelatedBlogs({ blogs }) {
+  if (!blogs?.length) return null;
 
+  return (
+    <section className="mt-16">
+      <h3 className="text-2xl font-bold text-gray-900 mb-8">
+        You might be interested in
+      </h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {blogs.map((blog, index) => (
+          <BlogCard key={blog.id || index} blog={blog} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export default async function BlogDetails({ params }) {
+  const blogSlug = params?.blogDetail;
   const blog = await fetchBlogPostBySlug(blogSlug);
   const relatedBlogPosts = await fetchBlogPostByCity(blog.city.slug);
 
-  //filter out related blogs for the same city
-  const filteredBlogPostsBasedOnCity = relatedBlogPosts.filter(
+  const filteredBlogPosts = relatedBlogPosts.filter(
     (relatedBlog) => blog.slug !== relatedBlog.slug
   );
 
   return (
-    <div className="blog__details">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-8 col-10 mx-auto ">
-            <Breadcrumb
-              homeElement={"Home"}
-              separator={
-                <span>
-                  {" "}
-                  <svg
-                    className="svg minearr"
-                    viewBox="0 0 32 32"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M17.65 16.513l-7.147-7.055 1.868-1.893 9.068 8.951-9.069 8.927-1.866-1.896z"
-                      fill={"#869099"}
-                    ></path>
-                  </svg>{" "}
-                </span>
-              }
-              activeClasses="text-dark "
-              containerClasses="d-flex align-items-center p-0 m-0 pt-4 breadcrumb"
-              listClasses="mx-1"
-              capitalizeLinks
-            />
-            <div className="city my-3 mt-4">
-              <Link href={`/blogs/category/${blog.city.slug}`}>
-                <div className="tag fw-bold">
-                  <p>{blog.city.name}</p>
-                </div>
-              </Link>
-            </div>
+    <div className="min-h-screen bg-white">
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto">
+          {/* Breadcrumb */}
+          <Breadcrumb
+            homeElement={"Home"}
+            separator={
+              <span className="mx-2">
+                <svg
+                  className="w-5 h-5 text-gray-400"
+                  viewBox="0 0 32 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M17.65 16.513l-7.147-7.055 1.868-1.893 9.068 8.951-9.069 8.927-1.866-1.896z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </span>
+            }
+            activeClasses="text-gray-900"
+            containerClasses="flex items-center py-4"
+            listClasses="mx-1"
+            capitalizeLinks
+          />
 
-            <div className="blog-title">
-              <h1 className="main-title py-3 mb-3 fs-1">{blog.news_title}</h1>
+          {/* City Tag */}
+          <div className="mt-6">
+            <Link href={`/blogs/category/${blog.city.slug}`}>
+              <span className="inline-block px-4 py-2 bg-gray-100 text-gray-800 rounded-full font-semibold hover:bg-gray-200 transition-colors">
+                {blog.city.name}
+              </span>
+            </Link>
+          </div>
+
+          {/* Blog Title */}
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mt-6 mb-8">
+            {blog.news_title}
+          </h1>
+
+          {/* Author Section */}
+          <section className="flex items-center space-x-4">
+            <div className="flex-shrink-0">
+              {/* <Image
+                width={60}
+                height={60}
+                className="rounded-full"
+                src="https://admin.homebaba.ca/media/agent_UGllzo7.jpg"
+                alt="blog-author"
+              /> */}
             </div>
-            <section className="blog__author d-flex align-items-center mt-3">
-              <div className="blog__author-image">
-                <img
-                  width="60px"
-                  height="60px"
-                  className="rounded-circle"
-                  src="https://admin.homebaba.ca/media/agent_UGllzo7.jpg"
-                  alt="blog-author"
-                />
-              </div>
-              <div className="row flex-grow-1 ps-3">
-                <div className="blog__author-detail col-sm-12 col-md-9 ">
-                  <div className="fw-bold">The Condomonk Content Team</div>
-                  <div className="text-secondary">
+            <div className="flex-grow">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                <div className="col-span-2">
+                  <div className="font-bold text-gray-900">
+                    The Condomonk Content Team
+                  </div>
+                  <div className="text-gray-500">
                     Posted {dayjs(blog?.date_of_upload).format("MMMM DD, YYYY")}
                   </div>
                 </div>
-
-                <div className="blog-read__time text-secondary text-start col-sm-12 col-md-3">
-                  <div className="blog-read__time-name">Blog</div>
+                <div className="text-gray-500">
+                  <div>Blog</div>
                   <div>5 min read</div>
                 </div>
               </div>
-            </section>
-
-            <div className="blog__share my-4 d-flex align-items-baseline gap-4">
-              <p className="fw-bold text-secondary ps-2">Share</p>
-              <SocialMediaShare />
             </div>
+          </section>
 
-            <div className="horizontal-row mt-4 mb-5" />
-            <section className="blog__desc mt-4">
-              <div className="banner-image">
-                <img
-                  src={endPoints.baseURL + blog.news_thumbnail}
-                  alt={blog.news_title.slice(0, 10)}
-                  loading="lazy"
-                  width="100%"
-                  height="100%"
-                  className="img-fluid"
-                />
-              </div>
+          {/* Share Section */}
+          <div className="flex items-center space-x-4 my-8">
+            <span className="font-semibold text-gray-600">Share</span>
+            <SocialMediaShare />
+          </div>
 
-              <div
-                className="mt-4"
-                id="make-img-responsive"
-                dangerouslySetInnerHTML={{
-                  __html: blog.news_description,
-                }}
+          <hr className="my-8 border-gray-200" />
+
+          {/* Blog Content */}
+          <section className="mt-8">
+            <div className="relative w-full aspect-[16/9] mb-8">
+              <Image
+                src={endPoints.baseURL + blog.news_thumbnail}
+                alt={blog.news_title}
+                fill
+                className="object-cover rounded-lg"
+                priority
               />
-            </section>
-
-            {filteredBlogPostsBasedOnCity.length > 0 ? (
-              <>
-                <section className="blogs__related mt-5">
-                  <h3 className="main-title">You might be interested in</h3>
-                  <article>
-                    <div className="row mt-4">
-                      {filteredBlogPostsBasedOnCity.map((blog, index) => {
-                        return (
-                          <div
-                            className="col-sm-12 col-md-6 col-lg-4 mb-4"
-                            key={index}
-                          >
-                            <BlogCard blog={blog} />
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </article>
-                </section>
-              </>
-            ) : null}
-          </div>
-        </div>
-      </div>
-
-      <div className="py-5 my-3 d-none d-md-block">
-        <div className="container-fluid">
-          <div className="row justify-content-center">
-            <img
-              src="/contact-bottom-2.png"
-              alt="dce"
-              className="img-fluid w-25 w-smm-50 mb-3"
-            />
-          </div>
-          <h2 className="fw-mine text-center px-md-4 fs-4">
-            Contact Dolphy Team Today
-          </h2>
-          <div className="row row-cols-1 row-cols-md-3 mt-3">
-            <div className="col-md-3"></div>
-            <div className="col-md-6">
-              <BottomContactForm
-                proj_name={blog.news_title}
-                city="Blog Page"
-              ></BottomContactForm>
             </div>
-            <div className="col-md-3"></div>
+
+            <div
+              className="prose prose-lg max-w-none rich-text"
+              dangerouslySetInnerHTML={{
+                __html: blog.news_description,
+              }}
+            />
+          </section>
+
+          {/* Related Blogs */}
+          <RelatedBlogs blogs={filteredBlogPosts} />
+        </div>
+
+        {/* Contact Form */}
+        <div className="mt-24 hidden md:block">
+          <div className="max-w-4xl mx-auto text-center">
+            <Image
+              src="/contact-bottom-2.png"
+              alt="Contact Condomonk"
+              width={160}
+              height={160}
+              className="mx-auto mb-6"
+            />
+            <h2 className="text-2xl font-bold text-gray-900 mb-8">
+              Contact Condomonk Team Today
+            </h2>
+            <div className="max-w-xl mx-auto">
+              <BottomContactForm proj_name={blog.news_title} city="Blog Page" />
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
-};
-
-export default BlogDetails;
+}

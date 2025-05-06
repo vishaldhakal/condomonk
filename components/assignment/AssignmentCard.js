@@ -63,7 +63,7 @@ const AssignmentCard = ({ assignment, index }) => {
         </div> */}
         <div className="mb-6">
           <div className="flex items-center">
-            <span className="text-2xl font-black text-black md:text-2xl">
+            <span className="text-2xl font-bold text-black md:text-2xl">
               ${formatPrice(assignment.price.replace(/\$|,/g, ""))}
             </span>
             <span className="ml-2 px-2 py-1 bg-gray-100 text-[9px] font-semibold rounded-md">

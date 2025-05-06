@@ -41,7 +41,7 @@ const HomeCarousel = () => {
   return (
     <div className="relative w-full h-full">
       {/* Carousel container */}
-      <div className="relative h-[400px] overflow-hidden rounded-lg">
+      <div className="relative h-[500px] overflow-hidden rounded-lg">
         {/* Slides */}
         {slides.map((slide, index) => (
           <div

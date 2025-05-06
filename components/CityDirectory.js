@@ -55,7 +55,7 @@ export default function CityDirectory({ cityData, cityName, citySlug }) {
   ];
 
   return (
-    <div className="max-w-9xl mx-auto px-2 md:px-0 py-16">
+    <div className="max-w-6xl mx-auto px-2 md:px-0 py-16">
       {/* Browse by Property Type */}
       <div className="pb-12">
         <h4 className="text-2xl font-semibold text-gray-900 mb-8">
