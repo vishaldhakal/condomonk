@@ -6,6 +6,7 @@ import HomeSearch from "@/components/HomeSearch";
 import BlogCard from "@/components/BlogCard";
 import { fetchAllBlogPosts } from "@/api/blogs";
 import BestExperience from "@/components/BestExperience";
+import Newsletter from "@/components/Newsletter";
 
 async function getBlogs() {
   return await fetchAllBlogPosts();
@@ -1168,6 +1169,7 @@ export default async function Home() {
         </div>
       </div>
       <div className="pt-5 mt-5"></div>
+      <Newsletter />
     </>
   );
 }

@@ -15,6 +15,7 @@ import Neighbourhood from "@/components/Neighbourhood";
 import BannerPrecon from "@/components/BannerPrecon";
 import { FileText } from "lucide-react";
 import EssentialInfo from "@/components/EssentialInfo";
+import Newsletter from "@/components/Newsletter";
 
 // Dynamically import the Map component with no SSR
 const Map = dynamic(() => import("@/components/Map"), { ssr: false });
@@ -408,6 +409,8 @@ export default async function PropertyPage({ params }) {
             ))}
           </div>
         </section>
+
+        <Newsletter />
       </main>
     </div>
   );

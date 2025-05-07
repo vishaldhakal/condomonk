@@ -15,7 +15,6 @@ const Footer = ({ cities }) => {
 
   return (
     <div className="pt-5">
-      <Newsletter />
       <footer className="w-full py-5">
         <div className=" mx-auto px-4">
           <div className="max-w-6xl mx-auto pt-5 mt-0 md:mt-10">
