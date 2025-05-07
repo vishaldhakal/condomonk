@@ -39,73 +39,88 @@ export default function Newsletter() {
   };
 
   return (
-    <section className="bg-gradient-to-b from-gray-100 to-white ">
-      <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl md:pt-20 pt-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-between">
-          {/* Left side - Image */}
-          <div className="relative h-[500px] rounded-2xl overflow-hidden">
-            <img
-              src="/hero-img.png"
-              alt="Modern architectural building"
-              className="w-full h-full object-contain"
-            />
-          </div>
-
-          {/* Right side - Content */}
-          <div className=" flex flex-col justify-center ">
-            <div className=" sm-center">
-              <div className="text-4xl font-bold text-orange-500 pb-4">
-                Newsletter Subscription
-              </div>
-
-              <h2 className="text-2xl font-bold text-gray-900">
-                Stay Ahead with Exclusive Pre Construction Deals
-              </h2>
-
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Join our newsletter and never miss out on the latest pre
-                construction projects, exclusive investment opportunities, and
-                special offers. Be the first to access floor plans, pricing, and
-                VIP incentives before they hit the market.
-              </p>
-
-              {/* Email input and submit */}
-              <form onSubmit={handleSubmit} className="flex gap-2">
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your Email Address"
-                  className="flex-1 px-4 py-3 text-gray-900 border border-gray-200 rounded-lg bg-white focus:border-blue-600 focus:ring-1 focus:ring-blue-600 focus:outline-none"
-                  required
-                />
-                <button
-                  type="submit"
-                  disabled={status === "sending"}
-                  className="px-6 py-3 text-white bg-orange-500 rounded-lg hover:bg-orange-600 transition-colors duration-200 whitespace-nowrap"
-                >
-                  {status === "sending" ? "Subscribing..." : "Subscribe"}
-                </button>
-              </form>
-
-              {status === "success" && (
-                <p className="text-sm text-green-600">
-                  Thank you for subscribing!
-                </p>
-              )}
-              {status === "error" && (
-                <p className="text-sm text-red-600">
-                  Something went wrong. Please try again.
-                </p>
-              )}
-
-              <p className="text-xs text-gray-500 pt-2">
-                Your email is 100% confidential and won't send you any spam.
-              </p>
-            </div>
-          </div>
+    <section className="w-full min-h-[60vh] flex items-center justify-center bg-gradient-to-b from-pink-50 to-yellow-0 mt-20">
+      <div className="w-full max-w-2xl mx-auto px-4 text-center py-40">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
+          Notify Me of New Projects
+        </h2>
+        <p className="text-lg text-gray-700 mb-1">
+          Send me information about new projects that are launching or selling
+        </p>
+        <p className="text-base text-gray-500 mb-8">
+          Join Condomonk community of{" "}
+          <span className="font-semibold text-gray-900">
+            500,000+ Buyers & Investors
+          </span>{" "}
+          today!
+        </p>
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto mb-4"
+        >
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            className="flex-1 px-6 py-4 text-gray-900 border border-gray-200 rounded-lg bg-white focus:border-black focus:ring-1 focus:ring-black focus:outline-none text-lg transition-all duration-200"
+            required
+          />
+          <button
+            type="submit"
+            disabled={status === "sending"}
+            className="px-8 py-4 text-white bg-black rounded-lg hover:bg-gray-900 transition-colors duration-200 text-lg font-semibold whitespace-nowrap"
+          >
+            {status === "sending" ? "Notifying..." : "Notify me"}
+          </button>
+        </form>
+        {status === "success" && (
+          <p className="text-sm text-green-600 mt-2 font-medium">
+            Thank you for subscribing!
+          </p>
+        )}
+        {status === "error" && (
+          <p className="text-sm text-red-600 mt-2 font-medium">
+            Something went wrong. Please try again.
+          </p>
+        )}
+        <div className="flex flex-col sm:flex-row gap-2 justify-center items-center text-gray-500 text-sm mt-2">
+          <span className="flex items-center gap-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+              />
+            </svg>
+            No spam, ever
+          </span>
+          <span className="flex items-center gap-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+            Unsubscribe anytime
+          </span>
         </div>
       </div>
     </section>

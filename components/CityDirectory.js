@@ -57,7 +57,7 @@ export default function CityDirectory({ cityData, cityName, citySlug }) {
   return (
     <div className="max-w-6xl mx-auto px-2 md:px-0 py-16">
       {/* Browse by Property Type */}
-      <div className="pb-12">
+      {/* <div className="pb-12">
         <h4 className="text-2xl font-semibold text-gray-900 mb-8">
           Browse by Property Type
         </h4>
@@ -72,10 +72,10 @@ export default function CityDirectory({ cityData, cityName, citySlug }) {
             </Link>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* Browse by Price Range */}
-      <div className="mb-12">
+      {/* <div className="mb-12">
         <h4 className="text-2xl font-semibold text-gray-900 mb-4">
           Browse by Price Range
         </h4>
@@ -90,15 +90,20 @@ export default function CityDirectory({ cityData, cityName, citySlug }) {
             </Link>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* Projects Table */}
-      <div className="mt-16">
-        <h4 className="text-2xl font-semibold text-gray-900 mb-6">
-          All Pre Construction Projects in {cityName}
+      <div className="mt-12">
+        <h4 className="text-md font-semibold text-gray-900 mb-6">
+          All Pre Construction Projects in {cityName} | Last Updated{" "}
+          {new Date().toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          })}
         </h4>
         {cityData.all_projects && cityData.all_projects.length > 0 ? (
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto border p-4 border-gray-300 rounded-md">
             <table className="min-w-full divide-y divide-gray-200">
               <thead>
                 <tr>

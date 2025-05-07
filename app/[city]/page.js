@@ -490,11 +490,6 @@ export default async function CityPage({ params }) {
               {CapitalizeFirst(cleanCity)}?
             </h3>
             <BottomContactForm proj_name="All" city="Home Page" />
-            <p className="text-sm text-gray-500 mt-4">
-              I agree to receive marketing communications. Consent is not a
-              condition of purchase. Message/data rates may apply. Message
-              frequency varies. Reply STOP to unsubscribe.
-            </p>
           </div>
         </div>
 

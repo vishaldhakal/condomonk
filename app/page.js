@@ -15,7 +15,7 @@ export default async function Home() {
 
   return (
     <>
-      <div className="relative bg-gradient-to-b from-[#f4f8fb] to-white overflow-hidden max-h-[90vh]">
+      <div className="relative bg-white overflow-hidden max-h-[90vh]">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img
@@ -29,7 +29,7 @@ export default async function Home() {
         </div>
 
         {/* Wave SVG at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 z-0">
+        <div className="absolute bottom-0 left-0 right-0 z-0 ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1440 320"
@@ -46,7 +46,7 @@ export default async function Home() {
         </div>
 
         {/* Content */}
-        <div className="relative z-0 container mx-auto px-4 min-h-screen flex md:pt-38 pt-44">
+        <div className="relative z-0  mx-auto px-4 min-h-screen flex md:pt-38 pt-44">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white">
               Home for everyone
@@ -137,11 +137,12 @@ export default async function Home() {
       </div> */}
 
       {/* Pre Construction Homes across Canada Section */}
-      <BestExperience />
+      <div className="bg-white pt-10">
+        {" "}
+        <BestExperience />
+      </div>
 
-      <div className="pt-5"></div>
-
-      <div className="bg-white py-16">
+      <div className="bg-white py-24">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-4xl font-bold text-center ">
             Pre Construction Homes across Canada
@@ -368,7 +369,7 @@ export default async function Home() {
       </div>
 
       {/* Price Dropped Homes Section */}
-      <section className="bg-white py-32">
+      <section className="bg-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-8">
             {/* Left Section */}
@@ -568,7 +569,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <div className=" py-5 my-2"></div>
+      <div className=" py-10 bg-white"></div>
       <Link href={"/resale/ontario"}>
         <h2 className="font-bold text-center mb-5 text-3xl text-black hover:underline">
           Explore Resale Homes For Sale in Ontario

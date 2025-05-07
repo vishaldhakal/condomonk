@@ -29,7 +29,7 @@ export default function BottomContactForm(props) {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4">
+    <div className="w-full max-w-3xl mx-auto px-4">
       <form
         method="POST"
         className="space-y-2"
@@ -77,18 +77,32 @@ export default function BottomContactForm(props) {
 
         <div className="relative">
           <select
-            className="w-full px-4 py-5 rounded-lg bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm appearance-none"
             id="realtor"
+            className="w-full px-3 sm:px-4 py-4 border border-[#E5E7EB] rounded-xl text-[#2C2C2C] bg-white appearance-none focus:outline-none focus:ring-1 focus:ring-[#2C2C2C] text-xs sm:text-xs placeholder:text-xs"
             value={credentials.realtor}
-            onChange={(e) => handleChange(e)}
-            required
+            onChange={handleChange}
           >
             <option value="No">No</option>
             <option value="Yes">Yes</option>
           </select>
-          <label className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">
-            Are you a realtor or working with a realtor?
-          </label>
+          <div className="absolute top-0 left-4 -translate-y-2 px-1 bg-white">
+            <span className="text-[11px] sm:text-xs text-[#6B7280]">
+              Are you a realtor or working with a realtor?
+            </span>
+          </div>
+          <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
+            <svg
+              className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#6B7280]"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </div>
         </div>
 
         <div>
