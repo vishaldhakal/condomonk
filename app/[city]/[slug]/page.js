@@ -11,6 +11,10 @@ import ExpandableContent from "@/components/ExpandableContent";
 import dynamic from "next/dynamic";
 import GoogleMap from "@/components/GoogleMap";
 import SocialMediaShare from "@/components/SocialMediaShare";
+import Neighbourhood from "@/components/Neighbourhood";
+import BannerPrecon from "@/components/BannerPrecon";
+import { FileText } from "lucide-react";
+import EssentialInfo from "@/components/EssentialInfo";
 
 // Dynamically import the Map component with no SSR
 const Map = dynamic(() => import("@/components/Map"), { ssr: false });
@@ -185,7 +189,7 @@ export default async function PropertyPage({ params }) {
                   </h2>
                   <CustomModal
                     linkText={
-                      <button className="text-green-600 border border-green-600 px-3 py-1.5 rounded-full text-xs font-medium hover:bg-green-700 hover:text-white transition-colors inline-flex items-center gap-1">
+                      <button className="text-black border border-black px-3 py-1.5 rounded-full text-xs font-medium hover:text-white hover:bg-black transition-colors inline-flex items-center gap-1">
                         Send me latest info
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -279,7 +283,7 @@ export default async function PropertyPage({ params }) {
                 </h2>
                 <CustomModal
                   linkText={
-                    <button className="text-green-600 border border-green-600 px-3 py-1.5 rounded-full text-xs font-medium hover:bg-green-700 hover:text-white transition-colors inline-flex items-center gap-1">
+                    <button className="text-black border border-black px-3 py-1.5 rounded-full text-xs font-medium hover:text-white hover:bg-black transition-colors inline-flex items-center gap-1">
                       Request more details
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -312,129 +316,10 @@ export default async function PropertyPage({ params }) {
             </div>
 
             {/* Essential Info Section */}
-            <div className="pb-20">
-              <h2 className="text-xl md:text-3xl font-bold mb-4">
-                Essential Info
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-1 gap-6 border border-gray-200 rounded-lg p-6">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100">
-                    <span className="text-gray-900">Floor Plans</span>
-                    <CustomModal
-                      linkText={
-                        <button className="text-green-600 border border-green-600 px-3 py-1.5 rounded-full text-xs font-medium hover:bg-green-700 hover:text-white transition-colors inline-flex items-center gap-1">
-                          Request Details
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"
-                          >
-                            <path d="M7 7h10v10"></path>
-                            <path d="M7 17 17 7"></path>
-                          </svg>
-                        </button>
-                      }
-                      proj_name={data.preconstruction.project_name}
-                      defaultmessage={`Please send me floor plan details of ${data.preconstruction.project_name}. Thank you`}
-                      city={data.preconstruction.city.name}
-                    />
-                  </div>
-                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100">
-                    <span className="text-gray-900">Parking Price</span>
-                    <CustomModal
-                      linkText={
-                        <button className="text-green-600 border border-green-600 px-3 py-1.5 rounded-full text-xs font-medium hover:bg-green-700 hover:text-white transition-colors inline-flex items-center gap-1">
-                          Request Details
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"
-                          >
-                            <path d="M7 7h10v10"></path>
-                            <path d="M7 17 17 7"></path>
-                          </svg>
-                        </button>
-                      }
-                      proj_name={data.preconstruction.project_name}
-                      defaultmessage={`Please send me parking price details of ${data.preconstruction.project_name}. Thank you`}
-                      city={data.preconstruction.city.name}
-                    />
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100">
-                    <span className="text-gray-900">Locker Price</span>
-                    <CustomModal
-                      linkText={
-                        <button className="text-green-600 border border-green-600 px-3 py-1.5 rounded-full text-xs font-medium hover:bg-green-700 hover:text-white transition-colors inline-flex items-center gap-1">
-                          Request Details
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"
-                          >
-                            <path d="M7 7h10v10"></path>
-                            <path d="M7 17 17 7"></path>
-                          </svg>
-                        </button>
-                      }
-                      proj_name={data.preconstruction.project_name}
-                      defaultmessage={`Please send me locker price details of ${data.preconstruction.project_name}. Thank you`}
-                      city={data.preconstruction.city.name}
-                    />
-                  </div>
-                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-100">
-                    <span className="text-gray-900">Maintenance Fee</span>
-                    <CustomModal
-                      linkText={
-                        <button className="text-green-600 border border-green-600 px-3 py-1.5 rounded-full text-xs font-medium hover:bg-green-700 hover:text-white transition-colors inline-flex items-center gap-1">
-                          Request Details
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"
-                          >
-                            <path d="M7 7h10v10"></path>
-                            <path d="M7 17 17 7"></path>
-                          </svg>
-                        </button>
-                      }
-                      proj_name={data.preconstruction.project_name}
-                      defaultmessage={`Please send me maintenance fee details of ${data.preconstruction.project_name}. Thank you`}
-                      city={data.preconstruction.city.name}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <EssentialInfo
+              projectName={data.preconstruction.project_name}
+              city={data.preconstruction.city.name}
+            />
 
             {/* Map Section */}
             <div className="pb-20 bg-white rounded-xl p-6 shadow-sm ">
@@ -456,7 +341,7 @@ export default async function PropertyPage({ params }) {
             </div>
 
             {/* Walk Score Section */}
-            <div className=" bg-white rounded-xl p-6 shadow-sm ">
+            <div className=" bg-white rounded-xl p-6 shadow-sm pb-20">
               <h2 className="text-xl md:text-3xl font-bold mb-4">Walk Score</h2>
               <div className="rounded-lg overflow-hidden">
                 <iframe
@@ -502,6 +387,14 @@ export default async function PropertyPage({ params }) {
               </div>
             </div>
           </div>
+        </div>
+        <div className="py-4">
+          <BannerPrecon
+            projectName={data.preconstruction.project_name}
+            developer={data.preconstruction.developer}
+            project_type={data.preconstruction.project_type}
+            city={data.preconstruction.city.name}
+          />
         </div>
 
         {/* Similar Properties */}

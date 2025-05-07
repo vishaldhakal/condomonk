@@ -5,6 +5,7 @@ import BottomContactForm from "@/components/BottomContactForm";
 import HomeSearch from "@/components/HomeSearch";
 import BlogCard from "@/components/BlogCard";
 import { fetchAllBlogPosts } from "@/api/blogs";
+import BestExperience from "@/components/BestExperience";
 
 async function getBlogs() {
   return await fetchAllBlogPosts();
@@ -136,6 +137,7 @@ export default async function Home() {
       </div> */}
 
       {/* Pre Construction Homes across Canada Section */}
+      <BestExperience />
 
       <div className="pt-5"></div>
 
@@ -448,7 +450,7 @@ export default async function Home() {
               <div>
                 <Link
                   href="/resale/ontario/price-reduced-homes-for-sale"
-                  className="inline-flex items-center bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl pulse-glow"
+                  className="inline-flex items-center bg-black hover:bg-black text-white px-6 py-3 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
                 >
                   <span>View all price drops</span>
                   <svg

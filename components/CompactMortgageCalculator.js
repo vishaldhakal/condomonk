@@ -206,16 +206,6 @@ export default function CompactMortgageCalculator({
                 )}
               </svg>
             </div>
-
-            <div className="space-y-3 mt-4">
-              <div className="flex items-center">
-                <div className="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
-                <span className="text-gray-600">
-                  ${formatCurrency(calculatordata.loanamt).replace("$", "")}{" "}
-                  Principal and Interest
-                </span>
-              </div>
-            </div>
           </div>
         </div>
       </div>

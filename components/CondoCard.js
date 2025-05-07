@@ -95,7 +95,7 @@ export default function CondoCard(props) {
       <div className="px-4 pb-4">
         <Link
           href={`/${props.city.slug}/${props.slug}`}
-          className="inline-flex items-center px-3 py-1 text-sm font-medium text-gray-900 bg-white border  rounded-full hover:bg-green-600 hover:text-white border-green-600 transition-colors duration-200"
+          className="inline-flex items-center px-3 py-1 text-sm font-medium text-black bg-white border rounded-full hover:bg-black hover:text-white border-black transition-colors duration-200"
           target="_blank"
         >
           View Details{" "}

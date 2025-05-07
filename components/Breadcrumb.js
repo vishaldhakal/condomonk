@@ -39,7 +39,7 @@ const Breadcrumb = ({
           // Modify city name display in breadcrumb
           if (index === 0) {
             // First path segment is typically the city
-            itemLink = `Pre construction homes ${itemLink}`;
+            itemLink = `Pre Construction ${itemLink}`;
           }
 
           return (

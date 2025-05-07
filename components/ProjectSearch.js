@@ -344,7 +344,7 @@ const SearchWithAutocomplete = ({
   // Apply different classes based on whether this is the homepage or not
   const inputClasses = isHomepage
     ? `w-full pl-6 pr-32 text-sm rounded-r-full border-0 shadow-lg focus:outline-none ${customInputClasses}`
-    : "w-full md:py-3 py-4 px-10 text-[#666] text-xs rounded-r-full bg-white border border-l-0 border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-50 focus:border-green-500 transition-all duration-200 ease-in-out placeholder:text-gray-400";
+    : "w-full md:py-3 py-4 px-10 text-black text-xs rounded-r-full bg-white border border-l-0 border-gray-300 focus:outline-none   transition-all duration-200 ease-in-out placeholder:text-gray-400";
 
   const iconClasses = isHomepage
     ? "absolute top-1/2 -translate-y-1/2 text-2xl"
@@ -364,7 +364,7 @@ const SearchWithAutocomplete = ({
         <div className="relativ ">
           <button
             onClick={handleDropdownClick}
-            className="h-full px-3 py-3 bg-green-50 text-green-600 font-medium rounded-l-full border-y border-l border-gray-200 flex items-center gap-2 hover:bg-green-100 transition-colors "
+            className="h-full px-3 py-3 bg-black text-white font-medium rounded-l-full border-y border-l border-gray-200 flex items-center gap-2 hover:bg-black transition-colors "
           >
             {localSearchType === "preconstruction"
               ? "Pre Construction"
@@ -379,30 +379,28 @@ const SearchWithAutocomplete = ({
             <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-40">
               <button
                 onClick={() => handleOptionSelect("preconstruction")}
-                className={`w-full px-4 py-2 text-left hover:bg-green-50 transition-colors ${
+                className={`w-full px-4 py-2 text-left hover:bg-gray-100  transition-colors ${
                   localSearchType === "preconstruction"
-                    ? "text-green-600 bg-green-50/50"
+                    ? "text-black"
                     : "text-gray-600"
                 }`}
               >
                 <span className="flex items-center gap-2">
                   {localSearchType === "preconstruction" && (
-                    <i className="fas fa-check text-green-600"></i>
+                    <i className="fas fa-check text-black"></i>
                   )}
                   Pre Construction
                 </span>
               </button>
               <button
                 onClick={() => handleOptionSelect("sale")}
-                className={`w-full px-4 py-2 text-left hover:bg-green-50 transition-colors ${
-                  localSearchType === "sale"
-                    ? "text-green-600 bg-green-50/50"
-                    : "text-gray-600"
+                className={`w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors ${
+                  localSearchType === "sale" ? "text-black" : "text-gray-600"
                 }`}
               >
                 <span className="flex items-center gap-2">
                   {localSearchType === "sale" && (
-                    <i className="fas fa-check text-green-600"></i>
+                    <i className="fas fa-check text-black"></i>
                   )}
                   Resale Homes
                 </span>
