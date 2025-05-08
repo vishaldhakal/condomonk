@@ -28,16 +28,21 @@ const Navbar = ({ cities, transparent }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [resaleDropdownOpen, setResaleDropdownOpen] = useState(false);
   const [citiesDropdownOpen, setCitiesDropdownOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [closeTimeout, setCloseTimeout] = useState(null);
+  const [showCities, setShowCities] = useState(false);
+  const [showHomesForSale, setShowHomesForSale] = useState(false);
 
   const changeBackground = () => {
     if (window.scrollY >= 80) {
       setNavbar(true);
+      setIsScrolled(true);
     } else {
       setNavbar(false);
+      setIsScrolled(false);
     }
   };
 
@@ -427,36 +432,247 @@ const Navbar = ({ cities, transparent }) => {
             </svg>
           </button>
         </div>
-        <div className="md:hidden block md:w-[400px] mb-2">
-          <ProjectSearch />
-        </div>
-        {/* Mobile menu */}
-        {isOpen && (
-          <div className="md:hidden py-4">
-            <div className="flex flex-col gap-4">
-              {cities &&
-                cities.map((city) => (
-                  <Link
-                    key={city.id}
-                    href={`/${city.slug}`}
-                    className="block px-4 py-2 text-gray-600 hover:text-blue-600"
-                  >
-                    {city.name}
-                  </Link>
-                ))}
-              <Link href="/assignment-sale" className="block px-4 py-2">
-                Assignment
-              </Link>
-              <Link href="/blogs" className="block px-4 py-2">
-                Blogs
-              </Link>
-              <Link href="#contact" className="block px-4 py-2">
-                Contact
-              </Link>
-            </div>
-          </div>
-        )}
       </div>
+      {/* Mobile sticky search bar */}
+      <div className="md:hidden">
+        <div
+          className={`${
+            isScrolled && !pathname.includes("/listings")
+              ? "fixed top-0 left-0 right-0 z-50"
+              : "sticky top-0 z-50"
+          } bg-white `}
+        >
+          <div className="mx-auto px-4 py-2">
+            <ProjectSearch />
+          </div>
+        </div>
+      </div>
+      {/* Mobile menu */}
+      {isOpen && (
+        <div className="md:hidden py-4">
+          <div className="flex flex-col gap-4">
+            {cities && (
+              <div className="relative">
+                <button
+                  onClick={() => setShowCities(!showCities)}
+                  className="flex items-center justify-between w-full px-4 py-2 text-gray-600 hover:text-blue-600"
+                >
+                  Cities
+                  <svg
+                    className={`w-4 h-4 transition-transform ${
+                      showCities ? "rotate-180" : ""
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+
+                {showCities && (
+                  <div className="grid grid-cols-3 gap-4 px-4 py-2 bg-white">
+                    {cities.map((city) => (
+                      <Link
+                        key={city.id}
+                        href={`/${city.slug}`}
+                        className="block py-2 text-gray-600 hover:text-blue-600"
+                      >
+                        {city.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Homes for Sale Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setShowHomesForSale(!showHomesForSale)}
+                className="flex items-center justify-between w-full px-4 py-2 text-gray-600 hover:text-blue-600"
+              >
+                {isResalePage ? "Pre Construction" : "Homes for Sale & Lease"}
+                <svg
+                  className={`w-4 h-4 transition-transform ${
+                    showHomesForSale ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+
+              {showHomesForSale && (
+                <div className="px-4 py-2 bg-white">
+                  {isResalePage ? (
+                    // Pre Construction Links
+                    <div className="space-y-2">
+                      <div className="text-sm font-bold text-black pb-2">
+                        PRE CONSTRUCTION HOMES
+                      </div>
+                      {isMainResalePage || pathname === "/resale/ontario/" ? (
+                        <>
+                          <Link
+                            href="/pre-construction-homes"
+                            className="block py-2 text-gray-600 hover:text-blue-600"
+                          >
+                            All Pre Construction Homes
+                          </Link>
+                          <Link
+                            href="/top-10-gta-projects"
+                            className="block py-2 text-gray-600 hover:text-blue-600"
+                          >
+                            Top 10 GTA Projects
+                          </Link>
+                        </>
+                      ) : (
+                        <>
+                          <Link
+                            href={`/${currentCity}`}
+                            className="block py-2 text-gray-600 hover:text-blue-600"
+                          >
+                            All Pre Construction Homes{" "}
+                            {cityName && `in ${cityName}`}
+                          </Link>
+                          <Link
+                            href={`/${currentCity}/condos`}
+                            className="block py-2 text-gray-600 hover:text-blue-600"
+                          >
+                            Pre Construction Condos{" "}
+                            {cityName && `in ${cityName}`}
+                          </Link>
+                          <Link
+                            href={`/${currentCity}/townhomes`}
+                            className="block py-2 text-gray-600 hover:text-blue-600"
+                          >
+                            Pre Construction Townhomes{" "}
+                            {cityName && `in ${cityName}`}
+                          </Link>
+                          <Link
+                            href={`/${currentCity}/detached`}
+                            className="block py-2 text-gray-600 hover:text-blue-600"
+                          >
+                            Pre Construction Detached Homes{" "}
+                            {cityName && `in ${cityName}`}
+                          </Link>
+                          <Link
+                            href={`/${currentCity}/upcoming`}
+                            className="block py-2 text-gray-600 hover:text-blue-600"
+                          >
+                            Upcoming Pre Construction{" "}
+                            {cityName && `in ${cityName}`}
+                          </Link>
+                        </>
+                      )}
+                    </div>
+                  ) : (
+                    // Homes for Sale & Lease Links
+                    <div className="space-y-4">
+                      <div>
+                        <div className="text-sm font-bold text-black pb-2">
+                          HOMES FOR SALE
+                        </div>
+                        <div className="space-y-2">
+                          <Link
+                            href={getResaleLink("homes-for-sale")}
+                            className="block py-2 text-gray-600 hover:text-blue-600"
+                          >
+                            All Homes For Sale {cityName && `in ${cityName}`}
+                          </Link>
+                          <Link
+                            href={getResaleLink("semi-detached-homes-for-sale")}
+                            className="block py-2 text-gray-600 hover:text-blue-600"
+                          >
+                            Semi Detached Homes For Sale{" "}
+                            {cityName && `in ${cityName}`}
+                          </Link>
+                          <Link
+                            href={getResaleLink("detached-homes-for-sale")}
+                            className="block py-2 text-gray-600 hover:text-blue-600"
+                          >
+                            Detached Homes For Sale{" "}
+                            {cityName && `in ${cityName}`}
+                          </Link>
+                          <Link
+                            href={getResaleLink("townhomes-for-sale")}
+                            className="block py-2 text-gray-600 hover:text-blue-600"
+                          >
+                            Townhomes For Sale {cityName && `in ${cityName}`}
+                          </Link>
+                          <Link
+                            href={getResaleLink("condos-for-sale")}
+                            className="block py-2 text-gray-600 hover:text-blue-600"
+                          >
+                            Condos For Sale {cityName && `in ${cityName}`}
+                          </Link>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-sm font-bold text-black pb-2">
+                          HOMES FOR LEASE
+                        </div>
+                        <div className="space-y-2">
+                          <Link
+                            href={getResaleLink(
+                              "semi-detached-homes-for-lease"
+                            )}
+                            className="block py-2 text-gray-600 hover:text-blue-600"
+                          >
+                            Semi Detached Homes For Lease{" "}
+                            {cityName && `in ${cityName}`}
+                          </Link>
+                          <Link
+                            href={getResaleLink("detached-homes-for-lease")}
+                            className="block py-2 text-gray-600 hover:text-blue-600"
+                          >
+                            Detached Homes For Lease{" "}
+                            {cityName && `in ${cityName}`}
+                          </Link>
+                          <Link
+                            href={getResaleLink("townhomes-for-lease")}
+                            className="block py-2 text-gray-600 hover:text-blue-600"
+                          >
+                            Townhomes For Lease {cityName && `in ${cityName}`}
+                          </Link>
+                          <Link
+                            href={getResaleLink("condos-for-lease")}
+                            className="block py-2 text-gray-600 hover:text-blue-600"
+                          >
+                            Condos For Lease {cityName && `in ${cityName}`}
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            <Link href="/assignment-sale" className="block px-4 py-2">
+              Assignment
+            </Link>
+            <Link href="/blogs" className="block px-4 py-2">
+              Blogs
+            </Link>
+            <Link href="#contact" className="block px-4 py-2">
+              Contact
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

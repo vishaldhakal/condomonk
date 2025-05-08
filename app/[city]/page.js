@@ -218,7 +218,7 @@ export default async function CityPage({ params }) {
             </h1>
           </div>
 
-          <h2 className="text-xs md:text-sm text-gray-500">
+          <h2 className="text-[8px] md:text-sm text-gray-500">
             120+ Pre construction Homes in {CapitalizeFirst(cleanCity)}, ON |
             Explore Floor Plans, Pricing & Availability. Condomonk has over 120
             pre construction homes in {CapitalizeFirst(cleanCity)}, ON.
@@ -282,7 +282,7 @@ export default async function CityPage({ params }) {
         </div>
 
         {/* Filter Section */}
-        <div className="sticky top-0 bg-white z-10 py-4 mt-4">
+        <div className="sticky top-0 bg-white z-10 md:py-4 py-2 mt-4">
           <PreconstructionFilter
             cityName={CapitalizeFirst(params.city)}
             citySlug={params.city.split("-homes-")[0]}
@@ -292,7 +292,7 @@ export default async function CityPage({ params }) {
         {/* Combined Projects Grid */}
         <div
           id="selling"
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8"
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:mt-8 mt-0"
         >
           {/* Featured Projects First */}
           {featuredData.preconstructions?.map((item, index) => (

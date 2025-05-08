@@ -37,13 +37,13 @@ export default function EssentialInfo({ projectName, city }) {
         <table className="min-w-full bg-white">
           <thead>
             <tr>
-              <th className="px-6 py-3 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <th className="md:px-6 px-2 py-3 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 Title
               </th>
-              <th className="px-6 py-3 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <th className="md:px-6 px-2 py-3 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 Description
               </th>
-              <th className="px-6 py-3 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"></th>
+              <th className="md:px-6 px-2 py-3 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"></th>
             </tr>
           </thead>
           <tbody>
@@ -54,14 +54,16 @@ export default function EssentialInfo({ projectName, city }) {
                   index !== essentialInfoItems.length - 1 ? "border-b" : ""
                 }
               >
-                <td className="px-6 py-4 font-medium text-gray-900">
+                <td className="md:px-6 px-2 py-4 font-medium text-gray-900">
                   {item.title}
                 </td>
-                <td className="px-6 py-4 text-gray-700">{item.description}</td>
-                <td className="px-6 py-4">
+                <td className="md:px-6 px-2 py-4 text-gray-700">
+                  {item.description}
+                </td>
+                <td className="md:px-6 px-2 py-4">
                   <CustomModal
                     linkText={
-                      <button className="text-black border border-black px-3 py-3 rounded-md text-xs font-medium  hover:text-white hover:bg-black transition-colors flex items-center gap-1">
+                      <button className="text-black border border-black px-3 py-3 rounded-md text-xs font-medium hover:text-white hover:bg-black transition-colors flex items-center gap-1 whitespace-nowrap w-auto">
                         {item.icon}
                         <span>{item.buttonText}</span>
                         <svg

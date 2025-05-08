@@ -141,7 +141,7 @@ export default async function PropertyPage({ params }) {
           {/* Main Content Column */}
           <div className="lg:col-span-2">
             <div className="pb-20">
-              <div className="mb-2">
+              <div className="mb-2 overflow-hidden">
                 <Breadcrumb
                   homeElement={"Home"}
                   separator={
@@ -156,7 +156,8 @@ export default async function PropertyPage({ params }) {
                     </span>
                   }
                   activeClasses="text-gray-900"
-                  containerClasses="flex items-center text-sm"
+                  containerClasses="text-[11px] md:text-sm"
+                  listClasses="text-gray-500 hover:text-gray-700"
                   capitalizeLinks
                 />
               </div>
@@ -277,14 +278,14 @@ export default async function PropertyPage({ params }) {
 
             {/* Project Description */}
             <div className="pb-20">
-              <div className="flex  flex-row item-center justify-start gap-4 mb-4">
+              <div className="flex  flex-row item-center justify-start md:gap-4 gap-2 mb-4">
                 {" "}
                 <h2 className="text-xl md:text-3xl leading-none text-black font-bold ">
                   About {data.preconstruction.project_name}
                 </h2>
                 <CustomModal
                   linkText={
-                    <button className="text-black border border-black px-3 py-1.5 rounded-full text-xs font-medium hover:text-white hover:bg-black transition-colors inline-flex items-center gap-1">
+                    <button className="text-black border border-black md:px-3 px-1 py-1.5 rounded-full text-xs font-medium hover:text-white hover:bg-black transition-colors inline-flex items-center gap-1">
                       Request more details
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -304,7 +305,7 @@ export default async function PropertyPage({ params }) {
                     </button>
                   }
                   proj_name={data.preconstruction.project_name}
-                  defaultmessage={`Please send me the latest information of ${data.preconstruction.project_name}. Thank you`}
+                  defaultmessage={`Please send me more details of ${data.preconstruction.project_name}. Thank you`}
                   city={data.preconstruction.city.name}
                 />
               </div>
@@ -358,9 +359,9 @@ export default async function PropertyPage({ params }) {
           </div>
 
           {/* Sticky Contact Form */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-4 w-[350px] min-w-[350px] mx-auto">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <div className="lg:col-span-1" id="contact">
+            <div className="sticky top-4 w-[360px] min-w-[36x0px] mx-auto">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
                 <div className="text-center mb-6">
                   <img
                     src="/contact-bottom-2.png"

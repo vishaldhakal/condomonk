@@ -360,11 +360,11 @@ const SearchWithAutocomplete = ({
 
   return (
     <div className={`relative ${isHomepage ? "w-full" : "w-[380px]"}`}>
-      <div className="relative flex text-xs">
-        <div className="relativ ">
+      <div className="relative flex text-xs ">
+        <div className="relative ">
           <button
             onClick={handleDropdownClick}
-            className="h-full px-3 py-3 bg-black text-white font-medium rounded-l-full border-y border-l border-gray-200 flex items-center gap-2 hover:bg-black transition-colors "
+            className="h-full px-3 py-3 bg-gray-200 text-black font-medium rounded-l-full border-y border-l border-gray-200 flex items-center gap-2 hover: transition-colors "
           >
             {localSearchType === "preconstruction"
               ? "Pre Construction"

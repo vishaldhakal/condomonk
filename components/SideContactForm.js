@@ -45,7 +45,7 @@ export default function SideContactForm(props) {
             id="name"
             value={credentials.name}
             onChange={(e) => handleChange(e)}
-            className="w-full px-4 py-3 rounded-lg bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+            className="w-full px-4 py-4 rounded-lg bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
           />
         </div>
         <div>
@@ -57,7 +57,7 @@ export default function SideContactForm(props) {
             value={credentials.phone}
             onChange={(e) => handleChange(e)}
             required={true}
-            className="w-full px-4 py-3 rounded-lg bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+            className="w-full px-4 py-4 rounded-lg bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
           />
         </div>
       </div>
@@ -71,7 +71,7 @@ export default function SideContactForm(props) {
           id="email"
           value={credentials.email}
           onChange={(e) => handleChange(e)}
-          className="w-full px-4 py-3 rounded-lg bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+          className="w-full px-4 py-4 rounded-lg bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
         />
       </div>
 
@@ -112,13 +112,13 @@ export default function SideContactForm(props) {
           rows="3"
           value={credentials.message}
           onChange={(e) => handleChange(e)}
-          className="w-full px-4 py-3 rounded-lg bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+          className="w-full px-4 py-4 rounded-lg bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
         ></textarea>
       </div>
 
       <button
         type="submit"
-        className="w-full px-4 py-3 bg-black text-white rounded-lg text-base font-medium hover:bg-gray-800 transition-colors"
+        className="w-full px-4 py-4 bg-black text-white rounded-lg text-base font-medium hover:bg-gray-800 transition-colors"
       >
         {submitbtn}
       </button>

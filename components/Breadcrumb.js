@@ -18,11 +18,15 @@ const Breadcrumb = ({
 
   return (
     <div className="z-2">
-      <ul className={containerClasses}>
-        <li className={listClasses}>
+      <ul
+        className={`flex items-center whitespace-nowrap text-xs overflow-hidden ${containerClasses}`}
+      >
+        <li className={`${listClasses} flex-shrink-0`}>
           <Link href={"/"}>{homeElement}</Link>
         </li>
-        {pathNames.length > 0 && separator}
+        {pathNames.length > 0 && (
+          <span className="flex-shrink-0">{separator}</span>
+        )}
         {pathNames.map((link, index) => {
           if (removePathName?.toUpperCase() === link.toUpperCase()) {
             return;
@@ -39,15 +43,25 @@ const Breadcrumb = ({
           // Modify city name display in breadcrumb
           if (index === 0) {
             // First path segment is typically the city
-            itemLink = `Pre Construction ${itemLink}`;
+            itemLink = `Pre construction home ${itemLink}`;
           }
+
+          const isLastItem = index === pathNames.length - 1;
 
           return (
             <React.Fragment key={index}>
-              <li className={itemClasses} key={index}>
+              <li
+                className={`${itemClasses} ${
+                  isLastItem
+                    ? "max-w-[120px] md:max-w-none truncate"
+                    : "flex-shrink-0"
+                }`}
+              >
                 <Link href={href}>{itemLink}</Link>
               </li>
-              {pathNames.length !== index + 1 && separator}
+              {pathNames.length !== index + 1 && (
+                <span className="flex-shrink-0">{separator}</span>
+              )}
             </React.Fragment>
           );
         })}

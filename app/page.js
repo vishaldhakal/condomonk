@@ -16,21 +16,26 @@ export default async function Home() {
 
   return (
     <>
-      <div className="relative bg-white overflow-hidden max-h-[90vh]">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/pexels-bg.webp"
-            alt="Background"
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-          {/* Overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/20"></div>
+      <div className="relative bg-gradient-to-b from-[#f0f7ff] to-white overflow-hidden max-h-[90vh]">
+        {/* Subtle Pattern Overlay */}
+        <div className="absolute inset-0 opacity-[0.03]">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.8'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z'/%3E%3C/g%3E%3C/svg%3E")`,
+            }}
+          ></div>
         </div>
 
-        {/* Wave SVG at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 z-0 ">
+        {/* Subtle Animated Shapes */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -left-10 top-10 w-40 h-40 bg-blue-50/40 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+          <div className="absolute right-10 top-10 w-40 h-40 bg-emerald-50/40 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+          <div className="absolute left-40 bottom-10 w-40 h-40 bg-indigo-50/40 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+        </div>
+
+        {/* Wave Pattern Bottom */}
+        <div className="absolute bottom-0 left-0 right-0 z-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1440 320"
@@ -47,17 +52,135 @@ export default async function Home() {
         </div>
 
         {/* Content */}
-        <div className="relative z-0  mx-auto px-4 min-h-screen flex md:pt-38 pt-44">
+        <div className="relative z-10 mx-auto px-4 min-h-screen flex md:pt-38 pt-44">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 mb-4">
               Home for everyone
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8 md:px-1 px-5">
+            <p className="text-xl md:text-2xl text-gray-600 mb-8 md:px-1 px-5">
               Leading Real Estate Homes Platform in Canada.
             </p>
 
             {/* Search Component */}
             <HomeSearch />
+
+            {/*  Stats Section */}
+            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl mx-auto">
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 border border-gray-100">
+                <div className="flex items-center justify-center mb-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-blue-500"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-bold text-gray-900">2500+</h3>
+                <p className="text-xs text-gray-600">Pre Construction</p>
+              </div>
+
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 border border-gray-100">
+                <div className="flex items-center justify-center mb-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-green-500"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-bold text-gray-900">50K+</h3>
+                <p className="text-xs text-gray-600">Happy Clients</p>
+              </div>
+
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 border border-gray-100">
+                <div className="flex items-center justify-center mb-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-purple-500"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-bold text-gray-900">60+</h3>
+                <p className="text-xs text-gray-600">Cities</p>
+              </div>
+
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 border border-gray-100">
+                <div className="flex items-center justify-center mb-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-red-500"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-bold text-gray-900">10+ Yrs</h3>
+                <p className="text-xs text-gray-600">Experience</p>
+              </div>
+            </div>
+
+            {/* Trust Badges */}
+            <div className="mt-4 flex items-center justify-center gap-4 text-gray-400 text-xs">
+              <div className="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span>Verified Properties</span>
+              </div>
+              <span>•</span>
+              <div className="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span>Trusted Partners</span>
+              </div>
+              <span>•</span>
+              <div className="flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                </svg>
+                <span>Expert Support</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -452,9 +575,9 @@ export default async function Home() {
               <div>
                 <Link
                   href="/resale/ontario/price-reduced-homes-for-sale"
-                  className="inline-flex items-center bg-black hover:bg-black text-white px-6 py-3 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  className="inline-flex items-center bg-black hover:bg-black text-white px-6 py-3 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
                 >
-                  <span>View all price drops</span>
+                  <span>View price dropped homes across ontario</span>
                   <svg
                     className="w-5 h-5 ml-2 transition-transform duration-300 transform group-hover:translate-x-1"
                     fill="none"
