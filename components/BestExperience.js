@@ -3,14 +3,14 @@ import Image from "next/image";
 const BestExperience = () => {
   return (
     <section className=" pb-16 md:py-24  ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 md:gap-20 items-center">
           {/* Left side - Device Images */}
           <div className="relative">
             <img
               src="/condomonk-mockup.png"
               alt="Condomonk App Interface"
-              className="w-full h-auto scale-150 transform"
+              className="w-full h-auto scale-100 transform"
               priority
             />
           </div>

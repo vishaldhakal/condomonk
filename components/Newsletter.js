@@ -41,13 +41,13 @@ export default function Newsletter() {
   return (
     <section className="w-full min-h-[60vh] flex items-center justify-center bg-gradient-to-b from-pink-50 to-yellow-0 mt-20">
       <div className="w-full max-w-2xl mx-auto px-4 text-center py-40">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 ">
           Notify Me of New Projects
         </h2>
-        <p className="text-lg text-gray-700 mb-1">
+        <p className="text-lg text-gray-700 mb-1 px-2">
           Send me information about new projects that are launching or selling
         </p>
-        <p className="text-base text-gray-500 mb-8">
+        <p className="text-base text-gray-500 mb-8 px-2">
           Join Condomonk community of{" "}
           <span className="font-semibold text-gray-900">
             500,000+ Buyers & Investors

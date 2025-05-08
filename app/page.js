@@ -145,7 +145,7 @@ export default async function Home() {
 
       <div className="bg-white py-24">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center ">
+          <h2 className="md:text-4xl text-3xl font-bold text-center ">
             Pre Construction Homes across Canada
           </h2>
           <p className="text-center text-base mb-12">
@@ -393,13 +393,13 @@ export default async function Home() {
                   <polyline points="16 17 22 17 22 11"></polyline>
                 </svg>
 
-                <span className="ml-2 font-medium text-gray-800 transform transition-all duration-300 group-hover:">
+                <span className=" ml-2 font-medium text-gray-800 transform transition-all duration-300 group-hover:">
                   Price Dropped Homes
                 </span>
               </div>
 
               {/* Headline with animated gradient */}
-              <h2 className="text-4xl md:text-5xl font-bold text-black leading-tight">
+              <h2 className="text-3xl md:text-4xl font-bold text-black leading-tight">
                 Premium homes, now at better prices
               </h2>
 
@@ -1142,7 +1142,7 @@ export default async function Home() {
 
       {/* Contact Section */}
       <div className="py-5 md:my-20 my-0" id="contact">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-5">
           <div className="flex justify-center">
             <Image
               src="/contact-bottom-2.png"
@@ -1152,7 +1152,7 @@ export default async function Home() {
               className=" mb-3 object-contain"
             />
           </div>
-          <h2 className="font-bold text-center md:px-4 text-2xl">
+          <h2 className="font-bold text-center md:px-4 text-2xl px-4">
             Looking to buy a preconstruction home?
           </h2>
 
