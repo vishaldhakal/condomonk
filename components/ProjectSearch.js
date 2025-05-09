@@ -364,7 +364,7 @@ const SearchWithAutocomplete = ({
         <div className="relative ">
           <button
             onClick={handleDropdownClick}
-            className="h-full px-3 py-3 bg-gray-200 text-black font-medium rounded-l-full border-y border-l border-gray-200 flex items-center gap-2 hover: transition-colors "
+            className="h-full px-3 py-3 bg-blue-200 text-black font-medium rounded-l-full border-y border-l border-gray-200 flex items-center gap-2 hover: transition-colors "
           >
             {localSearchType === "preconstruction"
               ? "Pre Construction"

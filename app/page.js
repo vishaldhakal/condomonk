@@ -111,7 +111,7 @@ export default async function Home() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-lg font-bold text-gray-900">60+</h3>
+                <h3 className="text-lg font-bold text-gray-900">80+</h3>
                 <p className="text-xs text-gray-600">Cities</p>
               </div>
 
