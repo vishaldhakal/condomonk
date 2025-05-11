@@ -65,7 +65,7 @@ export default async function Home() {
             <HomeSearch />
 
             {/*  Stats Section */}
-            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl mx-auto">
+            {/* <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl mx-auto">
               <div className="bg-white/80 backdrop-blur-sm rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 border border-gray-100">
                 <div className="flex items-center justify-center mb-1">
                   <svg
@@ -133,7 +133,7 @@ export default async function Home() {
                 <h3 className="text-lg font-bold text-gray-900">10+ Yrs</h3>
                 <p className="text-xs text-gray-600">Experience</p>
               </div>
-            </div>
+            </div> */}
 
             {/* Trust Badges */}
             <div className="mt-4 flex items-center justify-center gap-4 text-gray-400 text-xs">
@@ -179,6 +179,29 @@ export default async function Home() {
                   <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
                 </svg>
                 <span>Expert Support</span>
+              </div>
+            </div>
+
+            {/* Enhanced Scroll Indicator */}
+            <div className="flex flex-col items-center justify-center mt-12 mb-4">
+              <div className="relative">
+                {/* Outer glow effect */}
+                <div className="absolute -inset-2 bg-yellow-200 rounded-full blur-lg opacity-50 animate-pulse"></div>
+                {/* Main arrow with bounce */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-12 w-12 text-yellow-400 animate-bounce duration-2000 hover:text-yellow-500 transition-colors cursor-pointer"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
+                  />
+                </svg>
               </div>
             </div>
           </div>

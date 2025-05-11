@@ -36,6 +36,10 @@ const Navbar = ({ cities, transparent }) => {
   const [showCities, setShowCities] = useState(false);
   const [showHomesForSale, setShowHomesForSale] = useState(false);
 
+  // Determine if we're on a preconstruction page
+  const isPreconstructionPage =
+    pathname.split("/").length >= 2 && !pathname.includes("resale");
+
   const changeBackground = () => {
     if (window.scrollY >= 80) {
       setNavbar(true);
@@ -152,7 +156,9 @@ const Navbar = ({ cities, transparent }) => {
               Condomonk
             </Link>
             <div className="hidden md:block md:w-[400px] ">
-              <ProjectSearch />
+              <ProjectSearch
+                searchType={isPreconstructionPage ? "preconstruction" : "sale"}
+              />
             </div>
           </div>
 
@@ -443,7 +449,9 @@ const Navbar = ({ cities, transparent }) => {
           } bg-white `}
         >
           <div className="mx-auto px-4 py-2">
-            <ProjectSearch />
+            <ProjectSearch
+              searchType={isPreconstructionPage ? "preconstruction" : "sale"}
+            />
           </div>
         </div>
       </div>
