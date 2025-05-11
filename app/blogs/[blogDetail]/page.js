@@ -142,12 +142,12 @@ export default async function BlogDetails({ params }) {
           {/* Blog Content */}
           <section className="mt-8">
             <div className="relative w-full aspect-[16/9] mb-8">
-              <Image
+              <img
                 src={endPoints.baseURL + blog.news_thumbnail}
                 alt={blog.news_title}
                 fill
-                className="object-cover rounded-lg"
-                priority
+                className="object-cover rounded-lg w-full h-full"
+                priority="true"
               />
             </div>
 

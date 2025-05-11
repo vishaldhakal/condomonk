@@ -141,7 +141,7 @@ export default async function AssignmentSalePage({ searchParams }) {
             width={300}
             height={300}
             className="rounded-full mb-6 md:mb-8 w-[200px] h-[200px] md:w-[300px] md:h-[300px] object-cover"
-            priority
+            priority={true}
           />
           <h2 className="text-xl md:text-3xl font-bold text-gray-800 mb-2 text-center">
             Need help with Assignment Sale?

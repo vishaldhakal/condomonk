@@ -218,7 +218,7 @@ export default function CommunityPopup() {
                     width={200}
                     height={200}
                     className="rounded-full w-[120px] h-[120px] object-cover object-top border-4 border-white shadow-lg"
-                    priority
+                    priority="true"
                   />
                 </div>
               </div>

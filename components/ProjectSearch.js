@@ -343,11 +343,11 @@ const SearchWithAutocomplete = ({
 
   // Apply different classes based on whether this is the homepage or not
   const inputClasses = isHomepage
-    ? `w-full pl-6 pr-32 text-sm rounded-r-full border-0 shadow-lg focus:outline-none ${customInputClasses}`
+    ? `w-full px-8  text-sm rounded-r-full border-0 shadow-lg focus:outline-none ${customInputClasses}`
     : "w-full md:py-3 py-4 px-10 text-black text-xs rounded-r-full bg-white border border-l-0 border-gray-300 focus:outline-none   transition-all duration-200 ease-in-out placeholder:text-gray-400";
 
   const iconClasses = isHomepage
-    ? "absolute top-1/2 -translate-y-1/2 text-2xl"
+    ? "absolute top-1/2 -translate-y-1/2 right-4 text-2xl"
     : "absolute top-1/2 -translate-y-1/2 right-4 text-[#FFA725] text-xl";
 
   const iconStyle = isHomepage

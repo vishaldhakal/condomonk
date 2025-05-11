@@ -97,7 +97,7 @@ const AssignmentDetail = ({ assignment }) => {
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  priority
+                  priority="true"
                 />
               ) : (
                 <div className="h-full w-full bg-gray-100 flex items-center justify-center">

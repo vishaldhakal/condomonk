@@ -11,7 +11,8 @@ const BestExperience = () => {
               src="/condomonk-mockup.png"
               alt="Condomonk App Interface"
               className="w-full h-auto scale-100 transform"
-              priority
+              priority="true"
+              loading="lazy"
             />
           </div>
 

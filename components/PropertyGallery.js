@@ -44,7 +44,7 @@ export default function PropertyGallery({ images, propertyAddress }) {
               alt={`${propertyAddress} Image ${currentImageIndex + 1}`}
               fill
               className="object-cover"
-              priority
+              priority="true"
             />
 
             {/* Bottom Left Buttons */}
@@ -159,7 +159,7 @@ export default function PropertyGallery({ images, propertyAddress }) {
                   alt={`${propertyAddress} Image ${index + 1}`}
                   fill
                   className="object-cover"
-                  priority={index < 2}
+                  priority={(index < 2).toString()}
                 />
                 <div className="absolute inset-0 bg-black/10" />
 

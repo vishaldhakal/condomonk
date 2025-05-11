@@ -304,7 +304,11 @@ export default async function CityPage({ params }) {
                 }}
               />
               <div className="priority-content">
-                <CondoCard {...item} no={index} priority={index < 4} />
+                <CondoCard
+                  {...item}
+                  no={index}
+                  priority={(index < 4).toString()}
+                />
               </div>
             </div>
           ))}
@@ -328,7 +332,7 @@ export default async function CityPage({ params }) {
                 <CondoCard
                   {...item}
                   no={index + (featuredData.preconstructions?.length || 0)}
-                  priority={false}
+                  priority="false"
                 />
               </div>
             ))}

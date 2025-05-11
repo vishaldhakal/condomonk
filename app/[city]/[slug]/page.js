@@ -15,6 +15,7 @@ import Neighbourhood from "@/components/Neighbourhood";
 import BannerPrecon from "@/components/BannerPrecon";
 import { FileText } from "lucide-react";
 import EssentialInfo from "@/components/EssentialInfo";
+import FloorPlans from "@/components/FloorPlans";
 import Newsletter from "@/components/Newsletter";
 
 // Dynamically import the Map component with no SSR
@@ -318,7 +319,13 @@ export default async function PropertyPage({ params }) {
             </div>
 
             {/* Essential Info Section */}
-            <EssentialInfo
+            {/* <EssentialInfo
+              projectName={data.preconstruction.project_name}
+              city={data.preconstruction.city.name}
+            /> */}
+
+            {/* Floor Plans Section */}
+            <FloorPlans
               projectName={data.preconstruction.project_name}
               city={data.preconstruction.city.name}
             />

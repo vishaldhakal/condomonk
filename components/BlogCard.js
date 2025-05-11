@@ -23,11 +23,11 @@ export default function BlogCard({ blog }) {
       <div className="relative w-full aspect-[4/3]">
         <Link href={`/blogs/${blog.slug}`} className="block h-full">
           {imageUrl ? (
-            <Image
+            <img
               src={imageUrl}
               alt={blog.news_title.slice(0, 10)}
               fill
-              className="object-cover brightness-80"
+              className="object-cover brightness-80 h-full w-full"
               loading="lazy"
             />
           ) : (
