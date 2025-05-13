@@ -17,6 +17,7 @@ export default function CustomModal({
   city,
   proj_name,
   defaultmessage,
+  title,
 }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [modalPlacement, setModalPlacement] = React.useState("center");
@@ -47,7 +48,7 @@ export default function CustomModal({
             <div className="flex flex-col">
               <div className="text-center bg-gradient-to-br from-gray-50 to-white p-6 border-b border-gray-100">
                 <h5 className="font-bold text-2xl text-gray-900 mb-2">
-                  GET PLATINUM ACCESS!!
+                  {title || "GET PLATINUM ACCESS!!"}
                 </h5>
                 <p className="text-sm text-gray-600 px-4">
                   Register to Receive Guaranteed Platinum Access & Prices,

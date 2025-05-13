@@ -142,7 +142,7 @@ export default async function PropertyPage({ params }) {
           {/* Main Content Column */}
           <div className="lg:col-span-2">
             <div className="pb-20">
-              <div className="mb-2 overflow-hidden">
+              <div className="md:mb-2 mb-0 overflow-hidden">
                 <Breadcrumb
                   homeElement={"Home"}
                   separator={
@@ -157,15 +157,15 @@ export default async function PropertyPage({ params }) {
                     </span>
                   }
                   activeClasses="text-gray-900"
-                  containerClasses="text-[11px] md:text-sm"
+                  containerClasses="text-[12px] md:text-sm"
                   listClasses="text-gray-500 hover:text-gray-700"
                   capitalizeLinks
                 />
               </div>
               {/* Project Title Section */}
-              <div className="mt-4 mb-2">
-                <div className="flex items-center gap-3 mb-4">
-                  <h1 className="text-2xl md:text-4xl leading-none text-black font-black whitespace-nowrap overflow-hidden text-ellipsis">
+              <div className="md:mt-4 mt-0 mb-2">
+                <div className="flex items-center gap-3 md:mb-4 mb-2">
+                  <h1 className="text-4xl leading-none text-black font-black whitespace-nowrap overflow-hidden text-ellipsis">
                     {data.preconstruction.project_name}
                   </h1>
                   {data.preconstruction.is_featured == true && (
@@ -211,6 +211,7 @@ export default async function PropertyPage({ params }) {
                         </svg>
                       </button>
                     }
+                    title="Send me latest info"
                     proj_name={data.preconstruction.project_name}
                     defaultmessage={`Please send me the latest information of ${data.preconstruction.project_name}. Thank you`}
                     city={data.preconstruction.city.name}
@@ -281,7 +282,7 @@ export default async function PropertyPage({ params }) {
             <div className="pb-20">
               <div className="flex  flex-row item-center justify-start md:gap-4 gap-2 mb-4">
                 {" "}
-                <h2 className="text-xl md:text-3xl leading-none text-black font-bold ">
+                <h2 className="text-2xl md:text-3xl leading-none text-black font-bold ">
                   About {data.preconstruction.project_name}
                 </h2>
                 <CustomModal
@@ -305,6 +306,7 @@ export default async function PropertyPage({ params }) {
                       </svg>
                     </button>
                   }
+                  title="Request more details"
                   proj_name={data.preconstruction.project_name}
                   defaultmessage={`Please send me more details of ${data.preconstruction.project_name}. Thank you`}
                   city={data.preconstruction.city.name}
@@ -331,8 +333,8 @@ export default async function PropertyPage({ params }) {
             />
 
             {/* Map Section */}
-            <div className="pb-20 bg-white rounded-xl p-6 shadow-sm ">
-              <h2 className="text-xl md:text-3xl font-bold mb-4">
+            <div className="pb-20 bg-white rounded-xl md:p-6 p-2 shadow-sm ">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">
                 Project Location
               </h2>
               <div className="w-full h-[400px] relative rounded-lg overflow-hidden">
@@ -340,7 +342,7 @@ export default async function PropertyPage({ params }) {
                   width="100%"
                   height={400}
                   location={data.preconstruction.project_address}
-                  zoom={20}
+                  zoom={16}
                 />
               </div>
               <p className="text-xs text-gray-500 mt-4">
@@ -350,8 +352,10 @@ export default async function PropertyPage({ params }) {
             </div>
 
             {/* Walk Score Section */}
-            <div className=" bg-white rounded-xl p-6 shadow-sm pb-20">
-              <h2 className="text-xl md:text-3xl font-bold mb-4">Walk Score</h2>
+            <div className=" bg-white rounded-xl md:p-6 p-2 shadow-sm pb-20">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">
+                Walk Score
+              </h2>
               <div className="rounded-lg overflow-hidden">
                 <iframe
                   height="500"
@@ -375,7 +379,7 @@ export default async function PropertyPage({ params }) {
                     alt="Agent"
                     className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
                   />
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-1">
                     Priority List
                   </h3>
                   <p className="text-sm text-gray-500">

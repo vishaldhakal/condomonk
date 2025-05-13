@@ -11,7 +11,7 @@ const GoogleMap = ({
   const mapRef = useRef(null);
   const mapSrc = `https://maps.google.com/maps?hl=en&q=${encodeURIComponent(
     location
-  )}&t=m&z=${zoom}&ie=UTF8&iwloc=B&output=embed`;
+  )}&t=p&z=${zoom}&ie=UTF8&iwloc=B&output=embed`;
 
   useEffect(() => {
     const observer = new IntersectionObserver(

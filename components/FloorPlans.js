@@ -37,7 +37,7 @@ const floorPlanItems = [
 export default function FloorPlans({ projectName, city }) {
   return (
     <div className="pb-20">
-      <h2 className="text-xl md:text-3xl font-bold mb-4">Floor Plans</h2>
+      <h2 className="text-2xl md:text-3xl font-bold mb-4">Floor Plans</h2>
       <div className="overflow-x-auto rounded-lg shadow border border-gray-200">
         <table className="min-w-full bg-white">
           <thead>
@@ -90,6 +90,7 @@ export default function FloorPlans({ projectName, city }) {
                         </svg>
                       </button>
                     }
+                    title="Request floor plans"
                     proj_name={projectName}
                     defaultmessage={`${item.defaultMessage} ${projectName}. Thank you`}
                     city={city}

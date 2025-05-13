@@ -39,9 +39,14 @@ function BlogList({ blogs }) {
     );
   }
 
+  // Sort blogs by date_of_upload in descending order (newest first)
+  const sortedBlogs = [...blogs].sort(
+    (a, b) => new Date(b.date_of_upload) - new Date(a.date_of_upload)
+  );
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {blogs.map((blog, index) => (
+      {sortedBlogs.map((blog, index) => (
         <BlogCard key={blog.id || index} blog={blog} />
       ))}
     </div>
