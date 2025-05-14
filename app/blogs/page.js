@@ -45,7 +45,7 @@ function BlogList({ blogs }) {
   );
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 md:gap-6 gap-2">
       {sortedBlogs.map((blog, index) => (
         <BlogCard key={blog.id || index} blog={blog} />
       ))}
@@ -62,37 +62,14 @@ export default async function Blogs() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8">
-        {/* Breadcrumb */}
-        <Breadcrumb
-          homeElement={"Home"}
-          separator={
-            <span className="mx-2">
-              <svg
-                className="w-5 h-5 text-gray-400"
-                viewBox="0 0 32 32"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M17.65 16.513l-7.147-7.055 1.868-1.893 9.068 8.951-9.069 8.927-1.866-1.896z"
-                  fill="currentColor"
-                ></path>
-              </svg>
-            </span>
-          }
-          activeClasses="text-gray-900"
-          containerClasses="flex items-center py-4"
-          listClasses="mx-1"
-          capitalizeLinks
-        />
-
         {/* Main Content */}
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center md:text-left">
+          <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-8 text-center md:text-left">
             The Condomonk Blog: See what's happening in your city
           </h1>
 
           {/* City Insights Section */}
-          <div className="mb-12">
+          <div className="mb-2">
             <Suspense
               fallback={
                 <div className="h-32 bg-gray-100 animate-pulse rounded-lg"></div>

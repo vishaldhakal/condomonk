@@ -17,6 +17,8 @@ import { FileText } from "lucide-react";
 import EssentialInfo from "@/components/EssentialInfo";
 import FloorPlans from "@/components/FloorPlans";
 import Newsletter from "@/components/Newsletter";
+import DepositStructure from "@/components/DepositStructure";
+import Amenities from "@/components/Amenities";
 
 // Dynamically import the Map component with no SSR
 const Map = dynamic(() => import("@/components/Map"), { ssr: false });
@@ -326,10 +328,26 @@ export default async function PropertyPage({ params }) {
               city={data.preconstruction.city.name}
             /> */}
 
+            {/* Deposit Structure Section */}
+            <DepositStructure
+              content={data.preconstruction.description}
+              project_name={data.preconstruction.project_name}
+              city={data.preconstruction.city.name}
+              maxHeight={400}
+            />
+
             {/* Floor Plans Section */}
             <FloorPlans
               projectName={data.preconstruction.project_name}
               city={data.preconstruction.city.name}
+            />
+
+            {/* Amenities Section */}
+            <Amenities
+              content={data.preconstruction.description}
+              project_name={data.preconstruction.project_name}
+              city={data.preconstruction.city.name}
+              maxHeight={300}
             />
 
             {/* Map Section */}

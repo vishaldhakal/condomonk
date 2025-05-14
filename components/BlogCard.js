@@ -38,7 +38,7 @@ export default function BlogCard({ blog }) {
         </Link>
         <div className="absolute bottom-0 left-5 mb-3">
           <Link href={`/blogs/category/${blog.city.slug}`}>
-            <div className="inline-block px-3 py-1 text-sm font-medium bg-white rounded-full">
+            <div className="inline-block px-3 py-1 md:text-sm text-xs font-medium bg-white rounded-full">
               {blog.city.name}
             </div>
           </Link>
@@ -46,7 +46,7 @@ export default function BlogCard({ blog }) {
       </div>
       <Link href={`/blogs/${blog.slug}`} className="block text-decoration-none">
         <div className="relative p-4">
-          <h5 className="font-bold text-lg text-gray-900 mb-4 line-clamp-2">
+          <h5 className="font-bold md:text-lg text-md text-gray-900 mb-4 line-clamp-2 leading-tight">
             {blog.news_title}
           </h5>
           <div className="absolute bottom-0 mb-3 text-sm text-gray-500">

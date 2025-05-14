@@ -62,7 +62,7 @@ export default function ExpandableContent({ content, maxHeight = 400 }) {
       </div>
 
       {shouldShowButton && (
-        <div className="flex items-center gap-4 mt-6">
+        <div className="flex items-center gap-4 mt-2">
           <div className="flex-1 h-px bg-gray-200" />
           <button
             onClick={toggleExpand}
