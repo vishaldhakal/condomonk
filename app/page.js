@@ -166,7 +166,7 @@ export default async function Home() {
       </div> */}
 
       {/* Pre Construction Homes across Canada Section */}
-      <div className="bg-white pt-10">
+      <div className="bg-white">
         {" "}
         <BestExperience />
       </div>

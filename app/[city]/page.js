@@ -268,7 +268,13 @@ export default async function CityPage({ params }) {
               contact us
             </Link>
             to connect you to the most exciting real estate opportunities in{" "}
-            {CapitalizeFirst(cleanCity)}.
+            {CapitalizeFirst(cleanCity)}.{" "}
+            <Link
+              href={`/resale/ontario/${cleanCity}/homes-for-sale`}
+              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+            >
+              Explore resale homes for sale in {CapitalizeFirst(cleanCity)}.
+            </Link>
             <div className="text-gray-600 mt-2 mb-3">
               <span className="font-medium">Last Updated:</span>{" "}
               {new Date().toLocaleDateString("en-CA", {
