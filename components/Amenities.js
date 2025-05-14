@@ -19,8 +19,14 @@ export default function Amenities({
       try {
         let amenities = [];
 
+        // Clean up the content first
+        let cleanContent = content
+          .replace(/<span class="ql-cursor">.*?<\/span>/g, "") // Remove ql-cursor spans
+          .replace(/&nbsp;/g, " ") // Replace &nbsp; with spaces
+          .replace(/\u200B/g, ""); // Remove zero-width spaces
+
         // Look for content between "Amenities" and the next section
-        const sections = content
+        const sections = cleanContent
           .split(/<\/?(?:p|div|section)[^>]*>/g)
           .map((section) => section.trim())
           .filter((section) => section.length > 0);
@@ -55,17 +61,17 @@ export default function Amenities({
           if (listItems) {
             amenities = listItems
               .map((item) => item.replace(/<\/?li>/g, "").trim())
+              .map((item) => item.replace(/<[^>]+>/g, "").trim()) // Remove any remaining HTML tags
               .filter((item) => item && item.length > 0);
           } else {
             // Split by bullet points, line breaks, or commas
             amenities = amenitiesSection
               .split(/[•\n,]/)
-              .map((line) => line.trim())
+              .map((line) => line.replace(/<[^>]+>/g, "").trim()) // Remove any HTML tags
               .filter(
                 (line) =>
                   line &&
                   line.length > 0 &&
-                  !/^<\/?[^>]+>/.test(line) &&
                   !line.includes("Deposit Structure") &&
                   !line.includes("Features") &&
                   !line.includes("EXTERIOR") &&
@@ -73,6 +79,9 @@ export default function Amenities({
               );
           }
         }
+
+        // Remove duplicates and empty strings
+        amenities = [...new Set(amenities)].filter((item) => item.trim());
 
         setAmenityLines(
           amenities.length > 0 ? amenities : ["To be determined"]
