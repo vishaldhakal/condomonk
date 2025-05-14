@@ -21,7 +21,7 @@ export default function DepositStructure({
         const findDepositSection = (text) => {
           // First pattern: Look for content between "Deposit Structure" (including misspelled versions) and any ending marker
           const depositSection = text.match(
-            /depos[ie]te?\s+structures?(?:\s+(?:for|of)\s+[^:\n]+)?:?(.*?)(?=(?:\s*(?:register(?:\s+now|today)?|be\s+among|don't\s+miss|amenities|features|floor plan|about|location|specifications|contact|call|email)\b)|$)/is
+            /(?:depos[ie]te?\s+structures?|payment\s+schedule)(?:\s+(?:for|of)\s+[^:\n]+)?:?(.*?)(?=(?:\s*(?:register(?:\s+now|today)?|be\s+among|don't\s+miss|amenities|features|floor plan|about|location|specifications|contact|call|email|check out)\b)|$)/is
           );
 
           if (depositSection) {
@@ -53,7 +53,11 @@ export default function DepositStructure({
                 // Match lines with "Total" or "Extended Deposit"
                 /(?:total|extended\s+deposit)/i.test(trimmedLine) ||
                 // Match lines with payment schedules or specific terms
-                /(?:(?:at\s+)?time\s+of\s+signing|with\s+offer|offer|days?|deposit|in\s+\d+|upon\s+(?:signing|firm)|agreement|purchase|sale|occupancy|top\s+up|balance|on\s+[a-z]+\s+\d+,\s+\d{4})/i.test(
+                /(?:(?:at\s+)?time\s+of\s+signing|with\s+offer|offer|days?|deposit|in\s+\d+|upon\s+(?:signing|firm)|agreement|purchase|sale|occupancy|top\s+up|balance|on\s+[a-z]+\s+\d+,\s+\d{4}|(?:in|at)\s+\d+(?:\s*,\s*\d+)*\s*days?)/i.test(
+                  trimmedLine
+                ) ||
+                // Match lines with specific deposit amounts
+                /(?:\d+,\d+|\d+k|\d+K|\$\d+(?:,\d+)?(?:\s*(?:at|in|on)\s+\w+)?)/i.test(
                   trimmedLine
                 )
               );
@@ -64,7 +68,9 @@ export default function DepositStructure({
             for (let i = lines.length - 1; i >= 0; i--) {
               const line = lines[i].toLowerCase();
               if (
-                /(?:\$[\d,.]+|\d+%|deposit|occupancy|days)/i.test(line) ||
+                /(?:\$[\d,.]+|\d+%|deposit|occupancy|days|k\b|K\b)/i.test(
+                  line
+                ) ||
                 line.includes("total") ||
                 line.endsWith(":")
               ) {
