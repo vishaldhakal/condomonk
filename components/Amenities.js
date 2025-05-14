@@ -17,59 +17,72 @@ export default function Amenities({
   useEffect(() => {
     if (content) {
       try {
-        // Only match if it starts with capital 'A' in Amenities
-        const amenitiesMatch = content.match(
-          /Amenities(?:\s+(?:for|of|at)\s+[^:\n]+)?:(.*?)(?=(?:\s*(?:Features|Floor Plan|Deposit|About|Location|Specifications|Register Now|Contact|Call|Email|Check Out|Developer'?s?\s+Link)\b)|$)/s
-        );
+        let amenities = [];
 
-        if (amenitiesMatch && amenitiesMatch[1]) {
-          // Clean and process the text
-          const cleanText = amenitiesMatch[1]
-            .replace(/<\/?[^>]+(>|$)/g, "") // Remove HTML tags
-            .replace(/&nbsp;/g, " ") // Replace HTML entities
-            .replace(/\s+/g, " ") // Normalize whitespace
-            .trim();
+        // Look for content between "Amenities" and the next section
+        const sections = content
+          .split(/<\/?(?:p|div|section)[^>]*>/g)
+          .map((section) => section.trim())
+          .filter((section) => section.length > 0);
 
-          // First check if the text contains "to be determined" or similar phrases
-          const tbdPattern = /to be determined|tbd|tba|to be announced/i;
-          if (tbdPattern.test(cleanText)) {
-            setAmenityLines(["To be determined"]);
-            return;
+        let amenitiesSection = "";
+        for (let i = 0; i < sections.length; i++) {
+          // Check for both "Amenities" and "Amenities:" in bold
+          if (
+            sections[i].includes("<strong>Amenities</strong>") ||
+            sections[i].includes("<strong>Amenities:</strong>")
+          ) {
+            amenitiesSection = sections[i];
+            // Also include the next section if it's part of the amenities list
+            if (
+              i + 1 < sections.length &&
+              !sections[i + 1].includes("<strong>")
+            ) {
+              amenitiesSection += sections[i + 1];
+            }
+            break;
           }
-
-          // Split text into amenities
-          const amenities = cleanText
-            .split(/(?:[•\n]|(?=[A-Z][a-z]))/) // Split on bullets, newlines, or capital letters
-            .map((item) => item.trim())
-            .filter((item) => {
-              const trimmedItem = item.toLowerCase();
-              return (
-                item &&
-                item.length > 1 && // At least 2 characters
-                /[a-zA-Z]/.test(item) && // Contains at least one letter
-                !trimmedItem.includes("check out") &&
-                !trimmedItem.includes("click here") &&
-                !trimmedItem.includes("learn more") &&
-                !trimmedItem.includes("register") &&
-                !trimmedItem.startsWith("for more") &&
-                !/^https?:\/\//.test(trimmedItem) &&
-                !new RegExp(`for\\s+${project_name}`, "i").test(trimmedItem)
-              );
-            });
-
-          setAmenityLines(
-            amenities.length > 0 ? amenities : ["To be determined"]
-          );
-        } else {
-          // If no valid amenities section found, set as TBD
-          setAmenityLines(["To be determined"]);
         }
+
+        if (amenitiesSection) {
+          // Remove the "Amenities" header with or without colon
+          amenitiesSection = amenitiesSection
+            .replace(/<strong>Amenities:<\/strong>/, "")
+            .replace(/<strong>Amenities<\/strong>/, "");
+
+          // Extract list items if they exist
+          const listItems = amenitiesSection.match(/<li>(.*?)<\/li>/g);
+          if (listItems) {
+            amenities = listItems
+              .map((item) => item.replace(/<\/?li>/g, "").trim())
+              .filter((item) => item && item.length > 0);
+          } else {
+            // Split by bullet points, line breaks, or commas
+            amenities = amenitiesSection
+              .split(/[•\n,]/)
+              .map((line) => line.trim())
+              .filter(
+                (line) =>
+                  line &&
+                  line.length > 0 &&
+                  !/^<\/?[^>]+>/.test(line) &&
+                  !line.includes("Deposit Structure") &&
+                  !line.includes("Features") &&
+                  !line.includes("EXTERIOR") &&
+                  !line.includes("and many more")
+              );
+          }
+        }
+
+        setAmenityLines(
+          amenities.length > 0 ? amenities : ["To be determined"]
+        );
       } catch (error) {
         console.error("Error parsing amenities:", error);
         setAmenityLines(["To be determined"]);
       }
     }
-  }, [content, project_name]);
+  }, [content]);
 
   useEffect(() => {
     if (contentRef.current) {
@@ -99,12 +112,27 @@ export default function Amenities({
   return (
     <div className="pb-16">
       <div className="bg-white rounded-xl md:p-6 p-2 shadow-sm">
-        <div className="flex items-center gap-4 mb-2">
+        <div className="flex items-center gap-4 mb-4">
           <h2 className="text-2xl md:text-3xl font-bold">Amenities</h2>
           <CustomModal
             linkText={
-              <button className="text-black border border-black md:px-3 px-1 py-1.5 rounded-full text-xs font-medium hover:text-white hover:bg-black transition-colors">
+              <button className="text-black border border-black md:px-3 px-1 py-1.5 rounded-full text-xs font-medium hover:text-white hover:bg-black transition-colors inline-flex items-center gap-1">
                 Request full package
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"
+                >
+                  <path d="M7 7h10v10"></path>
+                  <path d="M7 17 17 7"></path>
+                </svg>
               </button>
             }
             title="Request full package"
@@ -123,11 +151,28 @@ export default function Amenities({
                 : `${maxHeight}px`,
             }}
           >
-            <div className="space-y-2">
+            <div className="grid grid-cols-1 gap-3">
               {amenityLines.map((line, index) => (
-                <div key={index} className="flex items-start gap-2">
-                  <span className="text-gray-600">•</span>
-                  <span className="text-gray-600">{line}</span>
+                <div
+                  key={index}
+                  className="flex items-start gap-2 transition-colors group"
+                >
+                  <svg
+                    className="w-5 h-5 mt-0.5 text-green-500 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  <span className="text-gray-700 font-medium group-hover:text-gray-900">
+                    {line}
+                  </span>
                 </div>
               ))}
             </div>
@@ -135,7 +180,7 @@ export default function Amenities({
         </div>
 
         {shouldShowButton && (
-          <div className="flex items-center gap-4 mt-2">
+          <div className="flex items-center gap-4 mt-4">
             <div className="flex-1 h-px bg-gray-200" />
             <button
               onClick={toggleExpand}
