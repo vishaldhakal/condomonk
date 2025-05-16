@@ -510,18 +510,18 @@ const SearchWithAutocomplete = ({
                       </div>
                       {searchResults.projects.map((project, index) => (
                         <Link
-                          href={`/${project.city_slug}/${project.slug}`}
+                          href={`/${project.city.slug}/${project.slug}`}
                           key={index}
                           onClick={(e) =>
                             handleLinkClick(
                               e,
-                              `/${project.city_slug}/${project.slug}`
+                              `/${project.city.slug}/${project.slug}`
                             )
                           }
                           onTouchStart={(e) =>
                             handleTouchStart(
                               e,
-                              `/${project.city_slug}/${project.slug}`
+                              `/${project.city.slug}/${project.slug}`
                             )
                           }
                           className="flex items-start px-4 py-2 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0"
