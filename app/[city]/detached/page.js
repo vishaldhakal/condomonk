@@ -66,12 +66,53 @@ export default async function DetachedPage({ params }) {
             Pre Construction Detached Homes in {cityName}
           </h1>
 
-          <h2 className="text-gray-600 text-sm md:text-base">
+          <h2 className="text-[8px] md:text-sm text-gray-500">
             {data.preconstructions.length}+ Pre construction detached homes in{" "}
-            {cityName}. Affordable new construction detached homes in highly
-            desirable communities. Discover {cityName} new developments by
-            reputable home builders, check pricing, floor plans, and get early
-            updates on new construction detached home projects.
+            {cityName}, ON | Explore Floor Plans, Pricing & Availability.
+            Condomonk has over {data.preconstructions.length} pre construction
+            detached homes from trusted{" "}
+            <Link
+              href={`/builders`}
+              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+            >
+              builders in {cityName}, ON.
+            </Link>{" "}
+            If you are looking to buy resale detached homes, Condomonk is your
+            trusted platform to find{" "}
+            <Link
+              href={`/resale/ontario/${params.city}/detached-homes-for-sale`}
+              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+            >
+              100+ detached homes for sale in {cityName}.{" "}
+            </Link>
+            Whether you are looking to downsize to affordable{" "}
+            <Link
+              href={`/resale/ontario/${params.city}/detached-homes-for-sale`}
+              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+            >
+              {cityName} detached for sale,
+            </Link>{" "}
+            condomonk has updated MLS Listings updated daily. For new
+            development homes, easily filter by number of bedrooms (1 to 4+),
+            project type, and construction status from budget-friendly detached
+            homes,{" "}
+            <Link
+              href="#contact"
+              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+            >
+              contact us
+            </Link>{" "}
+            to connect you to the most exciting real estate opportunities in{" "}
+            {cityName}.
+            <div className="text-gray-600 mt-2 mb-3">
+              <span className="font-medium">Last Updated:</span>{" "}
+              {new Date().toLocaleDateString("en-CA", {
+                timeZone: "America/Toronto",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </div>
           </h2>
 
           {/* PreconstructionFilter Component */}
