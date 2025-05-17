@@ -221,60 +221,54 @@ export default async function CityPage({ params }) {
           <h2 className="text-[8px] md:text-sm text-gray-500">
             120+ Pre construction Homes in {CapitalizeFirst(cleanCity)}, ON |
             Explore Floor Plans, Pricing & Availability. Condomonk has over 120
-            pre construction homes in {CapitalizeFirst(cleanCity)}, ON.
-            Condomonk is your trusted platform for new pre construction across
-            Canada. Select from updated database of
+            pre construction homes from trusted{" "}
             <Link
-              href={`/${cleanCity}/condos`}
-              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800 px-1"
-            >
-              condos,
-            </Link>
-            <Link
-              href={`/${cleanCity}/townhomes`}
+              href={`/builders`}
               className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
             >
-              townhomes
-            </Link>
-            , and
-            <Link
-              href={`/${cleanCity}/detached`}
-              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800 px-1"
-            >
-              detached pre construction homes
-            </Link>
-            from
-            <Link
-              href="/builders"
-              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800 px-1"
-            >
-              high-rated builders
-            </Link>
-            , with pricing customized for both first-time buyers and seasoned
-            investors. Our listings are updated daily, giving you the latest
-            <Link
-              href={`/${cleanCity}/upcoming`}
-              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800 px-1"
-            >
-              upcoming pre construction projects.
-            </Link>
-            Easily filter by no of bedrooms (1 to 4+), project type, and
-            construction status from budget-friendly condo to a pre construction
-            homes,
-            <Link
-              href="#contact"
-              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800 px-1"
-            >
-              contact us
-            </Link>
-            to connect you to the most exciting real estate opportunities in{" "}
-            {CapitalizeFirst(cleanCity)}.{" "}
+              builders in {CapitalizeFirst(cleanCity)}, ON.
+            </Link>{" "}
+            If you are looking to buy resale homes, Condomonk is your trusted
+            platform to find{" "}
             <Link
               href={`/resale/ontario/${cleanCity}/homes-for-sale`}
-              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800 px-1"
+              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
             >
-              Explore resale homes for sale in {CapitalizeFirst(cleanCity)}.
+              1000+ homes for sale in {CapitalizeFirst(cleanCity)}.{" "}
             </Link>
+            Whether you are looking to downsize to buy{" "}
+            <Link
+              href={`/resale/ontario/${cleanCity}/townhomes-for-sale`}
+              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+            >
+              townhomes for sale in {CapitalizeFirst(cleanCity)}
+            </Link>{" "}
+            or looking to buy{" "}
+            <Link
+              href={`/resale/ontario/${cleanCity}/condos-for-sale`}
+              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+            >
+              condos in {CapitalizeFirst(cleanCity)}
+            </Link>{" "}
+            for your family or browsing{" "}
+            <Link
+              href={`/resale/ontario/${cleanCity}/detached-homes-for-sale`}
+              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+            >
+              {CapitalizeFirst(cleanCity)} detached homes for sale
+            </Link>
+            , our platform is updated daily with latest resale listings every
+            hour. For new development homes, easily filter by number of bedrooms
+            (1 to 4+), project type, and construction status from
+            budget-friendly condo to a pre construction homes,{" "}
+            <Link
+              href="#contact"
+              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+            >
+              contact us
+            </Link>{" "}
+            to connect you to the most exciting real estate opportunities in{" "}
+            {CapitalizeFirst(cleanCity)}.
             <div className="text-gray-600 mt-2 mb-3">
               <span className="font-medium">Last Updated:</span>{" "}
               {new Date().toLocaleDateString("en-CA", {
