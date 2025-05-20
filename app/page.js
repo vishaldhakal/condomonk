@@ -7,6 +7,7 @@ import BlogCard from "@/components/BlogCard";
 import { fetchAllBlogPosts } from "@/api/blogs";
 import BestExperience from "@/components/BestExperience";
 import Newsletter from "@/components/Newsletter";
+import HomebabaAdvantage from "@/components/HomebabaAdvantage";
 
 async function getBlogs() {
   return await fetchAllBlogPosts();
@@ -63,6 +64,59 @@ export default async function Home() {
 
             {/* Search Component */}
             <HomeSearch />
+            <div>
+              {/* Add cities list */}
+              <span className="text-xs text-gray-500 mt-3 flex  gap-4 item-center justify-center">
+                <Link
+                  href="/resale/ontario/toronto/homes-for-sale"
+                  className="hover:text-black hover:underline"
+                >
+                  Toronto
+                </Link>{" "}
+                <Link
+                  href="/resale/ontario/milton/homes-for-sale"
+                  className="hover:text-black hover:underline"
+                >
+                  Milton
+                </Link>{" "}
+                <Link
+                  href="/resale/ontario/mississauga/homes-for-sale"
+                  className="hover:text-black hover:underline"
+                >
+                  Mississauga
+                </Link>{" "}
+                <Link
+                  href="/resale/ontario/etobicoke/homes-for-sale"
+                  className="hover:text-black hover:underline"
+                >
+                  Etobicoke
+                </Link>{" "}
+                <Link
+                  href="/resale/ontario/brampton/homes-for-sale"
+                  className="hover:text-black hover:underline"
+                >
+                  Brampton
+                </Link>{" "}
+                <Link
+                  href="/resale/ontario/markham/homes-for-sale"
+                  className="hover:text-black hover:underline"
+                >
+                  Markham
+                </Link>{" "}
+                <Link
+                  href="/resale/ontario/vaughan/homes-for-sale"
+                  className="hover:text-black hover:underline"
+                >
+                  Vaughan
+                </Link>{" "}
+                <Link
+                  href="/resale/ontario/edmonton/homes-for-sale"
+                  className="hover:text-black hover:underline"
+                >
+                  Edmonton
+                </Link>
+              </span>
+            </div>
 
             {/* Enhanced Scroll Indicator */}
             <div className="flex flex-col items-center justify-center mt-32 mb-4">
@@ -395,6 +449,10 @@ export default async function Home() {
             </Link>
           </div>
         </div>
+      </div>
+
+      <div className="bg-white">
+        <HomebabaAdvantage />
       </div>
 
       {/* Price Dropped Homes Section */}
