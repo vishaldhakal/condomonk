@@ -982,7 +982,7 @@ export default async function Home() {
           </h2>
         </Link>
         <p className="text-md text-gray-600 max-w-md mb-7  leading-normal text-center mx-auto">
-          Explore 195+ condos for sale in Barrie, Ontario.
+          Explore 195+ condos for sale in barrie, Ontario.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {barrieCondos.map((property) => (
@@ -1020,7 +1020,7 @@ export default async function Home() {
             </h2>
           </Link>
           <p className="text-md text-gray-600 max-w-md mb-7  leading-normal text-center mx-auto">
-            Explore 845+ condos for sale in Barrie, Ontario.
+            Explore 845+ condos for lease in mississauga, Ontario.
           </p>
         </div>
 
