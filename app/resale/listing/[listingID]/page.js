@@ -804,13 +804,17 @@ export default async function PropertyDetailPage({ params }) {
                   </div>
                 </div>
               </div>
-              <div className="pt-6 col-12 md:pt-20 md:col-12">
-                <CompactMortgageCalculator
-                  price={property?.ListPrice}
-                  showDetails={false}
-                  align="left"
-                />
-              </div>
+
+              {/* Mortgage Calculator Section */}
+              {property.TransactionType !== "For Lease" && (
+                <div className="pt-6 col-12 md:pt-20 md:col-12">
+                  <CompactMortgageCalculator
+                    price={property?.ListPrice}
+                    showDetails={false}
+                    align="left"
+                  />
+                </div>
+              )}
 
               <div className="mt-6 ">
                 <ResaleFAQ property={property} />

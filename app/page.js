@@ -8,12 +8,17 @@ import { fetchAllBlogPosts } from "@/api/blogs";
 import BestExperience from "@/components/BestExperience";
 import Newsletter from "@/components/Newsletter";
 import HomebabaAdvantage from "@/components/HomebabaAdvantage";
+import { getBarrieCondos } from "@/lib/properties";
+import { getMississaugaRentals } from "@/lib/properties";
+import PropertyCard from "@/components/PropertyCard";
 
 async function getBlogs() {
   return await fetchAllBlogPosts();
 }
 export default async function Home() {
   const blogs = await getBlogs();
+  const barrieCondos = await getBarrieCondos(8);
+  const mississaugaRentals = await getMississaugaRentals(8);
 
   return (
     <>
@@ -143,81 +148,6 @@ export default async function Home() {
           </div>
         </div>
       </div>
-
-      {/* carrousel */}
-      {/* <div className="max-w-6xl mx-auto px-4 my-8">
-        <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-lg overflow-hidden">
-          <div className="flex flex-col md:flex-row items-stretch">
-            <div className="w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-between">
-              <div className="space-y-6">
-                <div className="transform transition-all duration-500 hover:scale-[1.02]">
-                  <h2 className="font-bold text-3xl md:text-4xl text-gray-900 leading-tight">
-                    <Link
-                      href="/pre-construction-homes"
-                      className="text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-900 hover:from-black hover:to-gray-800 transition-all duration-300"
-                    >
-                      2500+ Pre construction homes across Canada
-                    </Link>
-                  </h2>
-                </div>
-
-                <p className="text-gray-600 leading-relaxed animate-fade-in">
-                  Welcome to Condomonk, Canada's premier platform for
-                  pre-construction homes. Stay ahead with the latest updates on
-                  new construction home projects across Canada. Discover
-                  exclusive insights and secure your dream home before it's
-                  built.
-                </p>
-                <div className="flex flex-row gap-3 md:text-sm text-[10px]">
-                  <Link href="#contact">
-                    <button className="group relative px-6 py-3 bg-black text-white rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
-                      <div className="relative z-10 flex items-center">
-                        <span>Request Information</span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5 ml-2 transform transition-transform duration-300 group-hover:translate-x-1"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </div>
-                      <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-black transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></div>
-                    </button>
-                  </Link>
-                  <Link href="#contact">
-                    <button className="group relative px-6 py-3 text-black rounded-lg overflow-hidden  duration-300 hover:shadow-xl border border-black">
-                      <div className="relative z-10 flex items-center">
-                        <span>Contact Now</span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5 ml-2 transform transition-transform duration-300 group-hover:translate-x-1 text-orange-500"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                          <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                        </svg>
-                      </div>
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative w-full md:w-1/2 bg-gray-100">
-              <div className="absolute inset-0 bg-gradient-to-br from-gray-900/5 to-gray-900/0"></div>
-              <div className="h-[500px] transform transition-transform duration-500 hover:scale-[1.02]">
-                <HomeCarousel />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
 
       {/* Pre Construction Homes across Canada Section */}
       <div className="bg-white">
@@ -662,7 +592,7 @@ export default async function Home() {
           Explore Resale Homes For Sale in Ontario
         </h2>
       </Link>
-      <div className="max-w-6xl mx-auto px-4 mb-20">
+      <div className="max-w-6xl mx-auto px-4 pb-20">
         <div className="grid grid-cols-2 md:grid-cols-4 md:gap-x-4 md:gap-y-8 gap-y-4 gap-x-3">
           <div className="flex flex-col">
             <Link
@@ -1044,6 +974,70 @@ export default async function Home() {
           </Link>
         </div>
       </div>
+
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <Link href={"resale/ontario/barrie/condos-for-sale"}>
+          <h2 className="font-bold text-center  text-3xl text-black hover:underline">
+            Latest Condos For Sale in Barrie
+          </h2>
+        </Link>
+        <p className="text-md text-gray-600 max-w-md mb-7  leading-normal text-center mx-auto">
+          Explore 195+ condos for sale in Barrie, Ontario.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {barrieCondos.map((property) => (
+            <PropertyCard key={property.ListingKey} property={property} />
+          ))}
+        </div>
+
+        <div className="text-center mt-8">
+          <Link
+            href="resale/ontario/barrie/condos-for-sale"
+            className="inline-flex items-center justify-center px-3 py-2 border bg-black text-white rounded-full font-medium "
+          >
+            View All Condos in Barrie
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 ml-2"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </Link>
+        </div>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className=" justify-between items-center mb-6">
+          <Link href={"/resale/ontario/mississauga/condos-for-lease"}>
+            <h2 className="font-bold text-center  text-3xl text-black hover:underline">
+              Latest Rental Condos in Mississauga
+            </h2>
+          </Link>
+          <p className="text-md text-gray-600 max-w-md mb-7  leading-normal text-center mx-auto">
+            Explore 845+ condos for sale in Barrie, Ontario.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4">
+          {mississaugaRentals.map((property) => (
+            <PropertyCard key={property.ListingKey} property={property} />
+          ))}
+        </div>
+        <div className="text-center mt-8">
+          <Link
+            href="/resale/ontario/mississauga/condos-for-lease"
+            className="inline-flex items-center justify-center px-3 py-2 border bg-black text-white rounded-full font-medium "
+          >
+            View All Rental Condos in Mississauga →
+          </Link>
+        </div>
+      </section>
 
       {/* Top Builders Section */}
       <section className="max-w-6xl mx-auto px-4 py-16">
