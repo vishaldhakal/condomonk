@@ -12,6 +12,21 @@ import { getBarrieCondos } from "@/lib/properties";
 import { getMississaugaRentals } from "@/lib/properties";
 import PropertyCard from "@/components/PropertyCard";
 
+const getCityLinks = () => [
+  { name: "Brampton" },
+  { name: "Mississauga" },
+  { name: "Innisfil" },
+  { name: "Orillia" },
+  { name: "Newmarket" },
+  { name: "Toronto" },
+  { name: "Hamilton" },
+  { name: "Oakville" },
+  { name: "Burlington" },
+  { name: "Milton" },
+  { name: "Ajax" },
+  { name: "Oshawa" },
+];
+
 async function getBlogs() {
   return await fetchAllBlogPosts();
 }
@@ -69,9 +84,9 @@ export default async function Home() {
 
             {/* Search Component */}
             <HomeSearch />
-            <div className="flex flex-wrap gap-3 justify-center mt-4 max-w-xl mx-auto">
+            <div className="flex flex-wrap gap-2 justify-center mt-4 chan mx-auto">
               {/* Add cities list */}
-              <div className="flex flex-wrap md:gap-3 gap-2 justify-center text-xs text-gray-500 md:px-2 px-2">
+              <div className="flex flex-wrap gap-2 justify-center text-xs text-gray-500 md:px-0 px-2">
                 <Link
                   href="/resale/ontario/toronto/homes-for-sale"
                   className="hover:text-black hover:underline px-2"
@@ -113,6 +128,12 @@ export default async function Home() {
                   className="hover:text-black hover:underline px-2"
                 >
                   Vaughan
+                </Link>
+                <Link
+                  href="/resale/ontario/barrie/homes-for-sale"
+                  className="hover:text-black hover:underline px-2"
+                >
+                  Barrie
                 </Link>
               </div>
             </div>
@@ -1006,6 +1027,55 @@ export default async function Home() {
         </div>
       </section>
 
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <h3 className="text-3xl font-bold text-center mb-8">
+          Explore Condos For Sale in Other Cities
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mx-auto max-w-4xl">
+          {getCityLinks().map((city) => (
+            <Link
+              key={`sale-${city.name}`}
+              href={`/resale/ontario/${city.name.toLowerCase()}/condos-for-sale`}
+              className="flex items-center p-3 rounded-lg hover:bg-gray-50 border border-gray-100 transition-all duration-300 group hover:border-gray-200 hover:shadow-md"
+            >
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-blue-50">
+                  <svg
+                    className="w-4 h-4 text-gray-500 group-hover:text-yellow-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                    />
+                  </svg>
+                </div>
+                <span className="text-gray-600 group-hover:text-black">
+                  Condos in {city.name}
+                </span>
+              </div>
+              <svg
+                className="w-4 h-4 ml-auto text-gray-400 group-hover:text-yellow-500 transform group-hover:translate-x-1 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className=" justify-between items-center mb-6">
           <Link href={"/resale/ontario/mississauga/condos-for-lease"}>
@@ -1033,8 +1103,57 @@ export default async function Home() {
         </div>
       </section>
 
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <h3 className="text-3xl font-bold text-center mb-8">
+          Explore Rental Condos in Other Cities
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mx-auto max-w-4xl">
+          {getCityLinks().map((city) => (
+            <Link
+              key={`rental-${city.name}`}
+              href={`/resale/ontario/${city.name.toLowerCase()}/condos-for-lease`}
+              className="flex items-center p-3 rounded-lg hover:bg-gray-50 border border-gray-100 transition-all duration-300 group hover:border-gray-200 hover:shadow-md"
+            >
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-green-50">
+                  <svg
+                    className="w-4 h-4 text-gray-500 group-hover:text-yellow-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                    />
+                  </svg>
+                </div>
+                <span className="text-gray-600 group-hover:text-black">
+                  Rentals in {city.name}
+                </span>
+              </div>
+              <svg
+                className="w-4 h-4 ml-auto text-gray-400 group-hover:text-yellow-500 transform group-hover:translate-x-1 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* Top Builders Section */}
-      <section className="max-w-6xl mx-auto px-4 py-16">
+      <section className="max-w-6xl mx-auto px-4 py-20">
         <div className="text-center mb-4">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 ">
             Top pre construction builders
