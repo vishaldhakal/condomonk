@@ -69,58 +69,52 @@ export default async function Home() {
 
             {/* Search Component */}
             <HomeSearch />
-            <div>
+            <div className="flex flex-wrap gap-3 justify-center mt-4 max-w-xl mx-auto">
               {/* Add cities list */}
-              <span className="text-xs text-gray-500 mt-3 flex  gap-4 item-center justify-center">
+              <div className="flex flex-wrap md:gap-3 gap-2 justify-center text-xs text-gray-500 md:px-2 px-2">
                 <Link
                   href="/resale/ontario/toronto/homes-for-sale"
-                  className="hover:text-black hover:underline"
+                  className="hover:text-black hover:underline px-2"
                 >
                   Toronto
-                </Link>{" "}
+                </Link>
                 <Link
                   href="/resale/ontario/milton/homes-for-sale"
-                  className="hover:text-black hover:underline"
+                  className="hover:text-black hover:underline px-2"
                 >
                   Milton
-                </Link>{" "}
+                </Link>
                 <Link
                   href="/resale/ontario/mississauga/homes-for-sale"
-                  className="hover:text-black hover:underline"
+                  className="hover:text-black hover:underline px-2"
                 >
                   Mississauga
-                </Link>{" "}
+                </Link>
                 <Link
                   href="/resale/ontario/etobicoke/homes-for-sale"
-                  className="hover:text-black hover:underline"
+                  className="hover:text-black hover:underline px-2"
                 >
                   Etobicoke
-                </Link>{" "}
+                </Link>
                 <Link
                   href="/resale/ontario/brampton/homes-for-sale"
-                  className="hover:text-black hover:underline"
+                  className="hover:text-black hover:underline px-2"
                 >
                   Brampton
-                </Link>{" "}
+                </Link>
                 <Link
                   href="/resale/ontario/markham/homes-for-sale"
-                  className="hover:text-black hover:underline"
+                  className="hover:text-black hover:underline px-2"
                 >
                   Markham
-                </Link>{" "}
+                </Link>
                 <Link
                   href="/resale/ontario/vaughan/homes-for-sale"
-                  className="hover:text-black hover:underline"
+                  className="hover:text-black hover:underline px-2"
                 >
                   Vaughan
-                </Link>{" "}
-                <Link
-                  href="/resale/ontario/edmonton/homes-for-sale"
-                  className="hover:text-black hover:underline"
-                >
-                  Edmonton
                 </Link>
-              </span>
+              </div>
             </div>
 
             {/* Enhanced Scroll Indicator */}
