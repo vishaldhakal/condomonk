@@ -189,8 +189,17 @@ export default async function PropertyPage({ params }) {
 
                 <div className="flex items-center gap-4">
                   <h2 className="text-sm md:text-xl font-[400]">
-                    Starting From Low $
-                    {Nformatter(data.preconstruction.price_starting_from, 2)}
+                    {data.preconstruction.price_starting_from ? (
+                      <>
+                        Starting From Low $
+                        {Nformatter(
+                          data.preconstruction.price_starting_from,
+                          2
+                        )}
+                      </>
+                    ) : (
+                      "Pricing Not Available"
+                    )}
                   </h2>
                   <CustomModal
                     linkText={

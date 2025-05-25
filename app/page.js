@@ -1325,7 +1325,7 @@ export default async function Home() {
         {/* Blog Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {blogs &&
-            blogs.slice(0, 4).map((blog) => (
+            blogs.slice(0, 8).map((blog) => (
               <div className="col" key={blog.id}>
                 <BlogCard blog={blog} />
               </div>
