@@ -323,7 +323,7 @@ export default async function PropertyPage({ params }) {
                   city={data.preconstruction.city.name}
                 />
               </div>
-              <div className="prose max-w-none text-gray-600">
+              <div className="prose max-w-none text-gray-600 rich-text">
                 <ExpandableContent
                   content={data.preconstruction.description}
                   maxWords={100}

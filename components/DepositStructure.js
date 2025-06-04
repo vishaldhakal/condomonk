@@ -108,16 +108,16 @@ export default function DepositStructure({
           // Format the content to preserve line breaks and highlight amounts
           formattedContent = formattedContent
             .replace(/\n/g, "<br/>")
-            // Bold section headers
-            .replace(/^([^:]+):/gm, "<strong>$1:</strong>")
-            // Bold dollar amounts and percentages
-            .replace(/(?:\$[\d,.]+|\d+%)/g, "<strong>$&</strong>")
+            // Remove the bold formatting for section headers
+            .replace(/^([^:]+):/gm, "$1:")
+            // Remove the bold formatting for dollar amounts and percentages
+            .replace(/(?:\$[\d,.]+|\d+%)/g, "$&")
             // Remove extra spaces in numbers
             .replace(/(?<=\d[,.])\s*(?=\d{3})/g, "")
             // Clean up multiple line breaks
             .replace(/(<br\/>){2,}/g, "<br/>")
-            // Add spacing after section headers
-            .replace(/<\/strong>:/g, "</strong>:<br/>");
+            // Add spacing after colons without bold
+            .replace(/:/g, ":<br/>");
 
           setDepositStructure(formattedContent);
         }

@@ -66,11 +66,11 @@ export default function ExpandableContent({ content, maxHeight = 400 }) {
           <div className="flex-1 h-px bg-gray-200" />
           <button
             onClick={toggleExpand}
-            className="px-4 py-2 text-sm font-semibold text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-full transition-all duration-200 ease-in-out"
+            className="px-5 py-1 text-sm font-semibold text-blue-600 hover:text-blue-800 focus:outline-none   transition-all duration-200 ease-in-out"
           >
             {isExpanded ? (
-              <span className="flex items-center gap-1">
-                Read Less
+              <span className="flex items-center justify-center space-x-2">
+                <span>Read Less</span>
                 <svg
                   className="w-4 h-4 transform rotate-180"
                   fill="none"
@@ -86,8 +86,8 @@ export default function ExpandableContent({ content, maxHeight = 400 }) {
                 </svg>
               </span>
             ) : (
-              <span className="flex items-center gap-1">
-                Read More
+              <span className="flex items-center justify-center space-x-2">
+                <span>Read More</span>
                 <svg
                   className="w-4 h-4"
                   fill="none"
