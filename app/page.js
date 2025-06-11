@@ -54,7 +54,7 @@ export default async function Home() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="pt-20 pb-16 text-center lg:pt-32">
               {/* Main Heading with Gradient */}
-              <h1 className="mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl">
+              <h1 className="mx-auto max-w-4xl font-display md:text-5xl text-4xl font-medium tracking-tight text-slate-900 sm:text-7xl">
                 <span className="relative whitespace-nowrap">
                   <span className="relative  text-black font-bold">
                     Home for everyone
@@ -64,7 +64,7 @@ export default async function Home() {
 
               {/* Subtitle with Gradient Border */}
               <div className="mt-3 max-w-2xl mx-auto">
-                <p className="text-lg text-slate-600 leading-relaxed">
+                <p className="md:text-lg text-basecfhjk text-slate-600 leading-relaxed">
                   Leading Real Estate Homes Platform in Canada
                 </p>
               </div>
