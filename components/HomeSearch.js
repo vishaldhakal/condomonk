@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import ProjectSearch from "./ProjectSearch";
+import { useTypewriter } from "../hooks/useTypewriter";
 
 const defaultCities = [
   { name: "Toronto", slug: "toronto" },
@@ -15,6 +16,12 @@ const HomeSearch = () => {
   const [activeSearchType, setActiveSearchType] = useState("sale");
   const [isLoading, setIsLoading] = useState(false);
   const [isNavigating, setIsNavigating] = useState(false);
+
+  const typewriterText = useTypewriter(
+    "Enter location, neighborhood or property",
+    80,
+    true
+  );
 
   const handleSearchTypeChange = (type) => {
     setActiveSearchType(type);
@@ -77,6 +84,7 @@ const HomeSearch = () => {
           defaultCities={defaultCities}
           showOnlyPreconstruction={activeSearchType === "preconstruction"}
           customInputClasses="h-[60px] text-base"
+          animatedPlaceholder={typewriterText}
         />
       </div>
 

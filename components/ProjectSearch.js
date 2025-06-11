@@ -14,6 +14,7 @@ const SearchWithAutocomplete = ({
   generateCityUrl,
   onNavigationStart,
   defaultCities = [],
+  animatedPlaceholder,
   customInputClasses = "",
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -413,7 +414,7 @@ const SearchWithAutocomplete = ({
             type="text"
             className={inputClasses}
             id="searchInput"
-            placeholder={placeholderText}
+            placeholder={animatedPlaceholder || placeholderText}
             autoComplete="off"
             value={searchTerm}
             onChange={handleSearch}

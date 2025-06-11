@@ -37,124 +37,81 @@ export default async function Home() {
 
   return (
     <>
-      <div className="relative bg-gradient-to-b from-[#f0f7ff] to-white overflow-hidden max-h-[90vh]">
-        {/* Subtle Pattern Overlay */}
-        <div className="absolute inset-0 opacity-[0.03]">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.8'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z'/%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          ></div>
+      <div className="relative bg-gradient-to-br from-gray-50 via-white to-gray-50">
+        {/* Background Grid Pattern */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
         </div>
 
-        {/* Subtle Animated Shapes */}
+        {/* Animated Gradient Orbs */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -left-10 top-10 w-40 h-40 bg-blue-50/40 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
-          <div className="absolute right-10 top-10 w-40 h-40 bg-emerald-50/40 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
-          <div className="absolute left-40 bottom-10 w-40 h-40 bg-indigo-50/40 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+          <div className="absolute top-0 -left-4 w-32 h-32 bg-purple-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+          <div className="absolute -bottom-8 left-20 w-32 h-32 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
         </div>
 
-        {/* Wave Pattern Bottom */}
-        <div className="absolute bottom-0 left-0 right-0 z-0">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1440 320"
-            className="w-full"
-            preserveAspectRatio="none"
-            style={{ height: "120px" }}
-          >
-            <path
-              fill="#ffffff"
-              fillOpacity="1"
-              d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,106.7C960,117,1056,139,1152,138.7C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-            ></path>
-          </svg>
-        </div>
+        <div className="relative">
+          {/* Hero Content */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="pt-20 pb-16 text-center lg:pt-32">
+              {/* Main Heading with Gradient */}
+              <h1 className="mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl">
+                <span className="relative whitespace-nowrap">
+                  <span className="relative  text-black font-bold">
+                    Home for everyone
+                  </span>
+                </span>{" "}
+              </h1>
 
-        {/* Content */}
-        <div className="relative z-10 mx-auto px-4 min-h-screen flex md:pt-38 pt-44">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 mb-4">
-              Home for everyone
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-8 md:px-1 px-5">
-              Leading Real Estate Homes Platform in Canada.
-            </p>
-
-            {/* Search Component */}
-            <HomeSearch />
-            <div className="flex flex-wrap gap-2 justify-center mt-4 chan mx-auto">
-              {/* Add cities list */}
-              <div className="flex flex-wrap gap-2 justify-center text-xs text-gray-500 md:px-0 px-2">
-                <Link
-                  href="/resale/ontario/toronto/homes-for-sale"
-                  className="hover:text-black hover:underline px-2"
-                >
-                  Toronto
-                </Link>
-                <Link
-                  href="/resale/ontario/milton/homes-for-sale"
-                  className="hover:text-black hover:underline px-2"
-                >
-                  Milton
-                </Link>
-                <Link
-                  href="/resale/ontario/mississauga/homes-for-sale"
-                  className="hover:text-black hover:underline px-2"
-                >
-                  Mississauga
-                </Link>
-                <Link
-                  href="/resale/ontario/etobicoke/homes-for-sale"
-                  className="hover:text-black hover:underline px-2"
-                >
-                  Etobicoke
-                </Link>
-                <Link
-                  href="/resale/ontario/brampton/homes-for-sale"
-                  className="hover:text-black hover:underline px-2"
-                >
-                  Brampton
-                </Link>
-                <Link
-                  href="/resale/ontario/markham/homes-for-sale"
-                  className="hover:text-black hover:underline px-2"
-                >
-                  Markham
-                </Link>
-                <Link
-                  href="/resale/ontario/vaughan/homes-for-sale"
-                  className="hover:text-black hover:underline px-2"
-                >
-                  Vaughan
-                </Link>
-                <Link
-                  href="/resale/ontario/barrie/homes-for-sale"
-                  className="hover:text-black hover:underline px-2"
-                >
-                  Barrie
-                </Link>
+              {/* Subtitle with Gradient Border */}
+              <div className="mt-3 max-w-2xl mx-auto">
+                <p className="text-lg text-slate-600 leading-relaxed">
+                  Leading Real Estate Homes Platform in Canada
+                </p>
               </div>
-            </div>
 
-            {/* Enhanced Scroll Indicator */}
-            <div className="flex flex-col items-center justify-center mt-32 mb-4">
-              <div className="relative">
-                {/* Outer glow effect */}
-                <div className="absolute -inset-2 bg-yellow-200 rounded-full blur-lg opacity-50 animate-pulse"></div>
-                {/* Main arrow with bounce */}
+              {/* Search Component Container */}
+              <div className="mt-10 max-w-2xl mx-auto">
+                <HomeSearch />
+              </div>
+
+              {/* Popular Cities Tags */}
+              <div className="mt-6 flex flex-wrap justify-center gap-3">
+                {[
+                  "Toronto",
+                  "Milton",
+                  "Mississauga",
+                  "Etobicoke",
+                  "Brampton",
+                  "Markham",
+                  "Vaughan",
+                  "Barrie",
+                ].map((city) => (
+                  <Link
+                    key={city}
+                    href={`/resale/ontario/${city.toLowerCase()}/homes-for-sale`}
+                    className="inline-flex items-center px-2 py-1.5 rounded-full text-sm 
+                bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 
+                hover:text-gray-900 hover:border-gray-300 transition-colors duration-200 
+                shadow-sm hover:shadow"
+                  >
+                    {city}
+                  </Link>
+                ))}
+              </div>
+
+              {/* Scroll Indicator */}
+              <div className="mt-16 mb-4 animate-bounce">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-12 w-12 text-yellow-400 animate-bounce duration-2000 hover:text-yellow-500 transition-colors cursor-pointer"
+                  className="h-6 w-6 mx-auto text-gray-400"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={2.5}
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
+                    strokeWidth={2}
                     d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
                   />
                 </svg>
