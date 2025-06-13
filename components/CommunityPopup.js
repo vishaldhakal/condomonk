@@ -1,12 +1,33 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
+
+const projects = [
+  {
+    name: "Arbor West",
+    city: "Brampton",
+    image: "/arbor-min.jpg",
+    link: "/brampton/arbor-west-brampton",
+    price: "Starting from $500,000",
+    description: "Arbor West Townhomes",
+  },
+  {
+    name: "Mira Townhomes",
+    city: "Barrie",
+    image: "/miratown.jpg",
+    link: "/barrie/mira-townhomes-barrie",
+    price: "Starting from $500,000",
+    description: "Mira Townhomes",
+  },
+];
 
 export default function CommunityPopup() {
   const [isOpen, setIsOpen] = useState(false);
-  const [submitBtn, setSubmitBtn] = useState("Join Priority List");
+  const [showContactForm, setShowContactForm] = useState(false);
+  const [submitBtn, setSubmitBtn] = useState("Request Prices & Floor Plans");
+  const [selectedProject, setSelectedProject] = useState(null);
   const pathname = usePathname();
   const [formData, setFormData] = useState({
     name: "",
@@ -15,41 +36,29 @@ export default function CommunityPopup() {
   });
 
   useEffect(() => {
-    const hasSubmitted = localStorage.getItem("communityFormSubmitted");
-    const lastClosed = localStorage.getItem("communityPopupLastClosed");
+    const hasSubmitted = localStorage.getItem("communityFormSubmitted2");
+    const lastClosed = localStorage.getItem("communityPopupLastClosed2");
     const today = new Date().toDateString();
     const resalePage = pathname.includes("/resale");
 
-    // Only set up exit intent if conditions are met
+    // Only set up timeout if conditions are met
     if (!hasSubmitted && (!lastClosed || lastClosed !== today) && !resalePage) {
-      // Track mouse position for exit intent
-      let mouseY = 0;
+      const timer = setTimeout(() => {
+        setIsOpen(true);
+      }, 10000); // 10 seconds
 
-      const handleMouseMove = (e) => {
-        // Only track if mouse is moving upward (toward top of page)
-        if (e.clientY < mouseY) {
-          // If mouse is in the top 20% of the page, show popup
-          if (e.clientY < window.innerHeight * 0.2) {
-            setIsOpen(true);
-            // Remove event listener after showing popup
-            document.removeEventListener("mousemove", handleMouseMove);
-          }
-        }
-        mouseY = e.clientY;
-      };
-
-      // Add event listener for mouse movement
-      document.addEventListener("mousemove", handleMouseMove);
-
-      // Clean up event listener on component unmount
+      // Clean up timeout on component unmount
       return () => {
-        document.removeEventListener("mousemove", handleMouseMove);
+        clearTimeout(timer);
       };
     }
   }, [pathname]);
 
   const handleClose = () => {
-    localStorage.setItem("communityPopupLastClosed", new Date().toDateString());
+    localStorage.setItem(
+      "communityPopupLastClosed2",
+      new Date().toDateString()
+    );
     setIsOpen(false);
   };
 
@@ -57,50 +66,84 @@ export default function CommunityPopup() {
     e.preventDefault();
     setSubmitBtn("Submitting...");
 
+    let form_data = new FormData();
+
+    // Log window object availability
+    console.log("Window object available:", typeof window !== "undefined");
+
+    // Get the complete URL with multiple methods for debugging
+    let fullUrl = "no-url-captured";
+
+    if (typeof window !== "undefined") {
+      try {
+        fullUrl = window.location.href;
+        console.log("Current URL:", fullUrl);
+      } catch (error) {
+        console.error("Error capturing URL:", error);
+        fullUrl = "error-capturing-url";
+      }
+    }
+
+    // Log form data being prepared
+    console.log("Form data preparation started");
+    form_data.append("name", formData.name);
+    form_data.append("email", formData.email);
+    form_data.append("phone", formData.phone);
+    form_data.append(
+      "message",
+      `I would like to get the price list and floor plans for ${
+        selectedProject?.name || "the selected project"
+      }`
+    );
+    form_data.append("realtor", "No");
+    form_data.append("source", fullUrl);
+
+    // Log form data entries if possible
+    try {
+      console.log("Form data entries:");
+      for (let pair of form_data.entries()) {
+        console.log(pair[0] + ": " + pair[1]);
+      }
+    } catch (e) {
+      console.log("Could not log form data entries:", e);
+    }
+
     try {
       const response = await fetch(
-        "https://admin.homebaba.ca/api/newsletter/",
+        "https://admin.homebaba.ca/api/contact-form-submit/",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ...formData,
-            page_url: pathname,
-            city: pathname.split("/")[1] || "toronto",
-            subscribed_at: new Date().toISOString(),
-          }),
+          body: form_data,
         }
       );
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        if (data?.email?.[0]?.includes("already exists")) {
-          setSubmitBtn("Email already subscribed!");
-          setTimeout(() => {
-            setIsOpen(false);
-            setFormData({ name: "", email: "", phone: "" });
-            setSubmitBtn("Join Priority List");
-          }, 2000);
-          return;
+      if (response.ok) {
+        setSubmitBtn("Successfully Submitted");
+        // Show success message
+        if (typeof window !== "undefined" && window.swal) {
+          window.swal(
+            `Thank You, ${formData.name}`,
+            "Please expect an email or call from us shortly",
+            "success"
+          );
         }
-        throw new Error("Failed to subscribe");
-      }
-
-      setSubmitBtn("Thank you for being part of the Condomonk community!");
-      localStorage.setItem("communityFormSubmitted", "true");
-      setTimeout(() => {
-        setIsOpen(false);
+        localStorage.setItem("communityFormSubmitted2", "true");
         setFormData({ name: "", email: "", phone: "" });
-        setSubmitBtn("Join Priority List");
-      }, 3000);
+        setTimeout(() => {
+          setIsOpen(false);
+          setSubmitBtn("Request Prices & Floor Plans");
+        }, 2000);
+      } else {
+        throw new Error("Form submission failed");
+      }
     } catch (error) {
-      console.error("Newsletter subscription error:", error);
-      setSubmitBtn("Failed to subscribe. Try again");
+      console.error("Form submission error:", error);
+      setSubmitBtn("Failed to submit. Try again");
+      if (typeof window !== "undefined" && window.swal) {
+        window.swal("Message Failed", "Cannot send your message", "error");
+      }
       setTimeout(() => {
-        setSubmitBtn("Join Priority List");
+        setSubmitBtn("Request Prices & Floor Plans");
       }, 3000);
     }
   };
@@ -110,6 +153,11 @@ export default function CommunityPopup() {
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const toggleContactForm = (project) => {
+    setSelectedProject(project);
+    setShowContactForm(true);
   };
 
   if (!isOpen) return null;
@@ -123,35 +171,31 @@ export default function CommunityPopup() {
     >
       {/* Backdrop with blur effect */}
       <div
-        className="fixed inset-0 bg-white/10 backdrop-filter backdrop-blur-[8px] transition-all duration-300"
+        className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm"
         onClick={handleClose}
-        style={{
-          backdropFilter: "blur(8px)",
-          WebkitBackdropFilter: "blur(8px)",
-        }}
       />
 
-      {/* Modal Container */}
-      <div className="relative bg-gradient-to-br from-indigo-50 via-white to-purple-50 shadow-2xl rounded-3xl w-full max-w-md overflow-hidden z-[10000]">
+      {/* Modal Container with SVG Background */}
+      <div className="relative bg-white shadow-2xl rounded-2xl w-full max-w-md overflow-hidden">
         {/* SVG Background Pattern */}
-        <div className="absolute inset-0 z-0 opacity-20">
+        <div className="absolute inset-0 z-0 opacity-10">
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
             <pattern
               id="grid"
-              width="40"
-              height="40"
+              width="30"
+              height="30"
               patternUnits="userSpaceOnUse"
             >
               <path
-                d="M 40 0 L 0 0 0 40"
+                d="M 30 0 L 0 0 0 30"
                 fill="none"
-                stroke="#6366f1"
-                strokeWidth="0.5"
+                stroke="currentColor"
+                strokeWidth="1"
               />
             </pattern>
             <rect width="100%" height="100%" fill="url(#grid)" />
-            <circle cx="70%" cy="20%" r="100" fill="url(#gradient1)" />
-            <circle cx="30%" cy="80%" r="120" fill="url(#gradient2)" />
+            <circle cx="50%" cy="0" r="160" fill="url(#gradient1)" />
+            <circle cx="10%" cy="90%" r="120" fill="url(#gradient2)" />
             <defs>
               <radialGradient
                 id="gradient1"
@@ -161,8 +205,8 @@ export default function CommunityPopup() {
                 fx="50%"
                 fy="50%"
               >
-                <stop offset="0%" stopColor="#818cf8" stopOpacity="0.4" />
-                <stop offset="100%" stopColor="#818cf8" stopOpacity="0" />
+                <stop offset="0%" stopColor="#FF3A3A" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#FF3A3A" stopOpacity="0" />
               </radialGradient>
               <radialGradient
                 id="gradient2"
@@ -172,14 +216,14 @@ export default function CommunityPopup() {
                 fx="50%"
                 fy="50%"
               >
-                <stop offset="0%" stopColor="#c084fc" stopOpacity="0.4" />
-                <stop offset="100%" stopColor="#c084fc" stopOpacity="0" />
+                <stop offset="0%" stopColor="#3A3AFF" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#3A3AFF" stopOpacity="0" />
               </radialGradient>
             </defs>
           </svg>
         </div>
 
-        {/* Close Button */}
+        {/* Close Button with Animation */}
         <button
           type="button"
           onClick={(e) => {
@@ -187,10 +231,10 @@ export default function CommunityPopup() {
             handleClose();
           }}
           aria-label="Close popup"
-          className="absolute top-4 right-4 text-gray-500 hover:text-indigo-600 transition-colors duration-300 z-20 bg-white/80 rounded-full p-2 cursor-pointer shadow-md hover:shadow-lg"
+          className="absolute top-4 right-4 text-gray-500 hover:text-red-500 transition-colors duration-300 z-20 bg-white bg-opacity-80 rounded-full p-1 cursor-pointer"
         >
           <svg
-            className="w-5 h-5"
+            className="w-6 h-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -205,168 +249,217 @@ export default function CommunityPopup() {
         </button>
 
         {/* Content Container */}
-        <div className="relative z-10 p-6">
-          {/* Header Section */}
-          <div className="relative mb-8">
-            <div className="flex justify-center mb-6">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full animate-pulse"></div>
-                <div className="relative bg-white p-1 rounded-full">
-                  <Image
-                    src="/angela.webp"
-                    alt="Real Estate Agent"
-                    width={200}
-                    height={200}
-                    className="rounded-full w-[120px] h-[120px] object-cover object-top border-4 border-white shadow-lg"
-                    priority="true"
-                  />
+        <div className="relative z-10 p-4">
+          {/* Back Button (only shown in contact form) */}
+          {showContactForm && (
+            <button
+              onClick={() => setShowContactForm(false)}
+              className="absolute top-4 left-4 text-gray-500 hover:text-red-500 transition-colors duration-300 z-20"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            </button>
+          )}
+
+          {/* Community Info Section */}
+          <div
+            className={`transition-all duration-300 ${
+              showContactForm ? "hidden" : "block"
+            }`}
+          >
+            <div className="relative mb-8">
+              {/* Profile Image with Border Animation */}
+              <div className="flex justify-center mt-2">
+                <div className="relative rounded-full p-1">
+                  <div className="bg-white p-1 rounded-full">
+                    {/* <Image
+                      src="/angela.jpeg"
+                      alt="Real Estate Agent"
+                      width={200}
+                      height={200}
+                      className="rounded-full w-[140px] h-[140px] object-cover object-top"
+                      priority
+                    /> */}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="space-y-2 text-center">
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                Join Our Community
-              </h2>
-              <p className="text-gray-600 text-sm font-medium">
-                Get Exclusive Access to Premium Properties
+              {/* Title with Gradient */}
+              <p className="border border-red-500 rounded-full px-2 py-1 text-red-600 text-sm text-center italic mb-1 w-fit mx-auto">
+                Don't miss out
               </p>
+              <h2 className="text-xl font-bold text-center mt-1">
+                affordable Townhomes
+              </h2>
+              <h2 className="text-2xl font-extrabold text-center mt-0 mb-1">
+                STARTING FROM <span className="text-green-600"> $500,000</span>
+              </h2>
+              <div className="grid grid-cols-2 gap-6 w-full justify-center mt-3">
+                {projects.map((project, idx) => (
+                  <div
+                    key={project.name}
+                    className="flex-1 flex flex-col items-center rounded-2xl min-w-[120px] max-w-xs shadow-sm"
+                  >
+                    <Link href={project.link} className="w-full">
+                      <div className="w-full aspect-[2/2] bg-gray-300 rounded-xl mb-2 flex items-center justify-center overflow-hidden">
+                        <img
+                          src={project.image}
+                          alt={project.name}
+                          className="object-cover object-top h-full w-full"
+                        />
+                      </div>
+                      <div className="text-center">
+                        <div className="font-semibold text-lg text-gray-900">
+                          {project.name}
+                        </div>
+                        <div className="text-gray-600 text-base font-medium">
+                          {project.city}
+                        </div>
+                      </div>
+                    </Link>
+                    <button
+                      onClick={() => toggleContactForm(project)}
+                      className="bg-red-600 text-white text-sm w-full px-3 py-2 rounded-md hover:bg-red-700 transition-colors duration-300 mt-2"
+                    >
+                      Get Prices & Floor Plans
+                    </button>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Form Section */}
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-4">
-              <div className="group">
-                <div className="relative">
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Full Name"
-                    required
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="w-full px-5 py-4 bg-white/50 backdrop-blur-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 pl-12"
-                  />
-                  <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                    <svg
-                      className="h-5 w-5 text-gray-400 group-focus-within:text-indigo-500"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
+          {/* Contact Form Section */}
+          <div
+            className={`transition-all duration-300 ${
+              showContactForm ? "block" : "hidden"
+            }`}
+          >
+            <div className="p-4">
+              <h2 className="text-2xl font-extrabold text-center mb-1">
+                {selectedProject?.name || "Selected Project"}
+              </h2>
+              <p className="text-gray-600 text-center text-sm italic mb-6">
+                Request Prices & Plans
+              </p>
 
-              <div className="group">
-                <div className="relative">
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email Address"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full px-5 py-4 bg-white/50 backdrop-blur-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 pl-12"
-                  />
-                  <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                    <svg
-                      className="h-5 w-5 text-gray-400 group-focus-within:text-indigo-500"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                      />
-                    </svg>
+              <form onSubmit={handleSubmit} className="space-y-3">
+                <div className="group focus-within:shadow-lg transition-shadow duration-300">
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <svg
+                        className="h-5 w-5 text-gray-400 group-focus-within:text-red-500 transition-colors duration-300"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Full Name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="w-full pl-10 pr-4 py-3 h-14 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-50 transition-all duration-300"
+                    />
                   </div>
                 </div>
-              </div>
 
-              <div className="group">
-                <div className="relative">
-                  <input
-                    type="tel"
-                    name="phone"
-                    placeholder="Phone Number"
-                    required
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full px-5 py-4 bg-white/50 backdrop-blur-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 pl-12"
-                  />
-                  <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                    <svg
-                      className="h-5 w-5 text-gray-400 group-focus-within:text-indigo-500"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                      />
-                    </svg>
+                <div className="group focus-within:shadow-lg transition-shadow duration-300">
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <svg
+                        className="h-5 w-5 text-gray-400 group-focus-within:text-red-500 transition-colors duration-300"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                      </svg>
+                    </div>
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Email Address"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="w-full pl-10 pr-4 py-3 h-14 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-50 transition-all duration-300"
+                    />
                   </div>
                 </div>
-              </div>
+
+                <div className="group focus-within:shadow-lg transition-shadow duration-300">
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <svg
+                        className="h-5 w-5 text-gray-400 group-focus-within:text-red-500 transition-colors duration-300"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                      </svg>
+                    </div>
+                    <input
+                      type="tel"
+                      name="phone"
+                      placeholder="Phone Number"
+                      required
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="w-full pl-10 pr-4 py-3 h-14 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-50 transition-all duration-300"
+                    />
+                  </div>
+                </div>
+
+                {/* Animated Submit Button */}
+                <button
+                  type="submit"
+                  disabled={submitBtn === "Submitting..."}
+                  onClick={handleSubmit}
+                  className="w-full py-4 h-14 bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800 text-white rounded-xl transition-all duration-300 font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 active:translate-y-0 overflow-hidden relative"
+                >
+                  <span className="relative z-10">{submitBtn}</span>
+                  <span className="absolute inset-0 bg-white opacity-20 transform -translate-x-full hover:translate-x-0 transition-transform duration-700 ease-in-out"></span>
+                </button>
+
+                {/* Privacy Note */}
+                <p className="text-[0.5rem] text-center text-gray-500 mt-2 leading-[0.9rem]">
+                  By submitting this form, I consent to receive marketing
+                  emails, calls, and texts from Homebaba Technologies. Message
+                  and data rates may apply. Frequency may vary. See our{" "}
+                  <a href="/privacy" className="text-red-500">
+                    Privacy Policy
+                  </a>{" "}
+                  &{" "}
+                  <a href="/privacy" className="text-red-500">
+                    Terms of Service
+                  </a>
+                  . You can email us to unsubscribe.
+                </p>
+              </form>
             </div>
-
-            <button
-              type="submit"
-              disabled={submitBtn === "Submitting..."}
-              className="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-xl transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0"
-            >
-              <span className="relative z-10 flex items-center justify-center gap-2">
-                {submitBtn}
-                {submitBtn === "Submitting..." && (
-                  <svg
-                    className="animate-spin h-5 w-5 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    ></circle>
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    ></path>
-                  </svg>
-                )}
-              </span>
-            </button>
-
-            <p className="text-[0.6rem] text-center text-gray-500 mt-4 leading-relaxed">
-              By submitting this form, I consent to receive marketing emails,
-              calls, and texts from Homebaba Technologies. Message and data
-              rates may apply. Frequency may vary. You can email us to
-              unsubscribe.
-            </p>
-          </form>
+          </div>
         </div>
       </div>
     </div>
