@@ -8,8 +8,8 @@ const projects = [
   {
     name: "Seaton Whitevale",
     city: "Pickering",
-    image: "/seaton-whitevale.webp",
-    link: "/pickering/seaton-whitevale",
+    image: "/Seaton-whitevale.jpg",
+    link: "pickering/seaton-whitevale-phase-6",
     price: "Starting from $800,000",
     description: "Seaton Whitevale Towns and Singles",
   },
