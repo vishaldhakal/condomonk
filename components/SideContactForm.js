@@ -118,7 +118,7 @@ export default function SideContactForm(props) {
 
       <button
         type="submit"
-        className="w-full px-4 py-4 bg-black text-white rounded-lg text-base font-medium hover:bg-gray-800 transition-colors"
+        className="w-full px-4 py-4 bg-red-600 text-white rounded-lg text-lg font-bold font-medium  transition-colors"
       >
         {submitbtn}
       </button>

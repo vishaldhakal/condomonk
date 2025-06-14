@@ -6,12 +6,12 @@ import Link from "next/link";
 
 const projects = [
   {
-    name: "Arbor West",
-    city: "Brampton",
-    image: "/arbor-min.jpg",
-    link: "/brampton/arbor-west-brampton",
-    price: "Starting from $500,000",
-    description: "Arbor West Townhomes",
+    name: "Seaton Whitevale",
+    city: "Pickering",
+    image: "/seaton-whitevale.webp",
+    link: "/pickering/seaton-whitevale",
+    price: "Starting from $800,000",
+    description: "Seaton Whitevale Towns and Singles",
   },
   {
     name: "Mira Townhomes",
