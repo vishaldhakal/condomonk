@@ -32,7 +32,7 @@ class SitemapGenerator {
       { url: "/blogs", priority: 0.8 },
       { url: "/builders", priority: 0.8 },
       { url: "/pre-construction-homes", priority: 0.8 },
-      { url: "/resale/ontario", priority: 0.8 },
+      { url: "/resale/ontario", priority: 1.0 },
       { url: "/top-10-gta-projects", priority: 0.8 },
     ];
 
@@ -64,8 +64,8 @@ class SitemapGenerator {
 
       // Add URLs for each city and its projects
       data.forEach((city) => {
-        // Add city URL
-        this.addUrl(`/${city.slug}`, 0.8);
+        // Add city URL with priority 1.0 (changed from 0.8)
+        this.addUrl(`/${city.slug}`, 1.0);
 
         // Add price range URLs for each city
         priceRanges.forEach((priceRange) => {
@@ -186,10 +186,12 @@ class SitemapGenerator {
       allCities.forEach((city) => {
         const citySlug = cleanSlug(city.city);
 
+        // Add main city route with priority 1.0 (add this line before other city routes)
+        this.addUrl(`/resale/ontario/${citySlug}/homes-for-sale`, 1.0);
+        this.addUrl(`/resale/ontario/${citySlug}/homes-for-lease`, 1.0);
+
         // Add all the city-specific routes
         const cityRoutes = [
-          `resale/ontario/${citySlug}/homes-for-sale`,
-          `resale/ontario/${citySlug}/homes-for-lease`,
           `resale/ontario/${citySlug}/detached-homes-for-sale`,
           `resale/ontario/${citySlug}/semi-detached-homes-for-sale`,
           `resale/ontario/${citySlug}/townhomes-for-sale`,
