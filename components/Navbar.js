@@ -36,6 +36,16 @@ const Navbar = ({ cities, transparent }) => {
   const [showCities, setShowCities] = useState(false);
   const [showHomesForSale, setShowHomesForSale] = useState(false);
 
+  // Top 5 cities for quick access
+  const topCities = [
+    { name: "Toronto", slug: "toronto" },
+    { name: "Mississauga", slug: "mississauga" },
+    { name: "Brampton", slug: "brampton" },
+    { name: "Markham", slug: "markham" },
+    { name: "Vaughan", slug: "vaughan" },
+    { name: "Oakville", slug: "oakville" },
+  ];
+
   // Determine if we're on a preconstruction page
   const isPreconstructionPage =
     pathname.split("/").length >= 2 && !pathname.includes("resale");
@@ -246,7 +256,7 @@ const Navbar = ({ cities, transparent }) => {
                     : "invisible opacity-0"
                 }`}
                 style={{
-                  minWidth: isResalePage ? "300px" : "520px",
+                  minWidth: isResalePage ? "300px" : "600px",
                   maxWidth: "90vw",
                 }}
               >
@@ -397,6 +407,23 @@ const Navbar = ({ cities, transparent }) => {
                       </div>
                     </>
                   )}
+                </div>
+                {/* Top Cities Row */}
+                <div className="pt-3 border-t border-gray-100 p-4">
+                  <div className="text-xs font-medium text-gray-500 mb-2">
+                    TOP CITIES
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {topCities.map((city) => (
+                      <Link
+                        key={city.slug}
+                        href={`/resale/ontario/${city.slug}/homes-for-sale`}
+                        className="px-3 py-1 text-xs bg-gray-100 hover:bg-blue-100 hover:text-blue-600 rounded-full border border-gray-200 transition-colors duration-200"
+                      >
+                        {city.name}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -626,6 +653,24 @@ const Navbar = ({ cities, transparent }) => {
                           >
                             Condos For Sale {cityName && `in ${cityName}`}
                           </Link>
+                        </div>
+
+                        {/* Top Cities Row for Mobile */}
+                        <div className="pt-3 border-t border-gray-100 mt-3">
+                          <div className="text-xs font-medium text-gray-500 mb-2">
+                            TOP CITIES
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            {topCities.map((city) => (
+                              <Link
+                                key={city.slug}
+                                href={`/resale/ontario/${city.slug}/homes-for-sale`}
+                                className="px-3 py-1 text-xs bg-gray-100 hover:bg-blue-100 hover:text-blue-600 rounded-full border border-gray-200 transition-colors duration-200"
+                              >
+                                {city.name}
+                              </Link>
+                            ))}
+                          </div>
                         </div>
                       </div>
                       <div>
