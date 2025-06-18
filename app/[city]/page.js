@@ -519,13 +519,19 @@ export default async function CityPage({ params }) {
               />
             </div>
             <p className="text-sm text-gray-500 text-center mt-8">
-              Note:{" "}
-              <Link href="https://condomonk.ca/" className="text-blue-600">
-                Condomonk
+              Disclaimer: The content on this page is curated from various
+              reputable online sources, including blogs, news outlets, and real
+              estate boards. While our content writer team at{" "}
+              <Link className="text-blue-500" href="https://condomonk.ca/">
+                {" "}
+                Condomonk.ca
               </Link>{" "}
-              is Canada's leading database of new pre construction homes.
-              Information may be outdated or inaccurate. Please contact a
-              licensed real estate agent for updated information.
+              strives to present valuable information, we do not guarantee its
+              accuracy or completeness. Some information could be prone to error
+              and some details may be outdated, and the content should not be
+              considered professional advice. For the most accurate and
+              personalized guidance, please consult a licensed real estate agent
+              or broker.
             </p>
           </div>
         )}
