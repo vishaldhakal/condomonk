@@ -83,7 +83,7 @@ export default async function Blogs() {
           {/* Two-column layout */}
           <div className="flex flex-col md:flex-row gap-8 pt-8">
             {/* Left column: Cities */}
-            <aside className="md:w-1/5 w-full mb-8 md:mb-0 md:h-[70vh] md:overflow-y-auto hide-scrollbar">
+            <aside className="md:w-1/5 w-full mb-8 md:mb-0 md:h-[70vh] md:overflow-y-auto hide-scrollbar sticky top-10">
               <Suspense
                 fallback={
                   <div className="h-32 bg-gray-100 animate-pulse rounded-lg"></div>

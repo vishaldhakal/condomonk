@@ -18,6 +18,12 @@ export async function generateMetadata({ params }) {
     },
   };
 }
+const torontoDate = new Date().toLocaleDateString("en-CA", {
+  timeZone: "America/Toronto",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
 
 // Loading component for blog cards
 function BlogCardSkeleton() {
@@ -89,33 +95,43 @@ export default async function CityBlogs({ params }) {
 
         {/* Main Content */}
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center md:text-left">
-            The Condomonk Blog: {params?.city} Real Estate Insights
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 max-w-3xl mx-auto text-center my-2 pt-6">
+            Explore 2025 real estate trends in Canada, with daily updates and
+            city-specific comparisons
           </h1>
+          <p className="max-w-3xl mx-auto text-center mb-8">
+            Check out Month to Month Real Estate Trends in your city | Last
+            updated: {torontoDate}{" "}
+          </p>
 
-          {/* City Insights Section */}
-          <div className="mb-12">
-            <Suspense
-              fallback={
-                <div className="h-32 bg-gray-100 animate-pulse rounded-lg"></div>
-              }
-            >
-              <CityInsights particularCity={params?.city} cities={cities} />
-            </Suspense>
+          {/* Two-column layout */}
+          <div className="flex flex-col md:flex-row gap-8">
+            {/* Left: City Insights */}
+            <aside className="md:w-1/5 w-full mb-8 md:mb-0 md:h-[70vh] md:overflow-y-auto hide-scrollbar sticky top-10">
+              <Suspense
+                fallback={
+                  <div className="h-32 bg-gray-100 animate-pulse rounded-lg"></div>
+                }
+              >
+                <CityInsights particularCity={params?.city} cities={cities} />
+              </Suspense>
+            </aside>
+
+            {/* Right: Blog Posts */}
+            <main className="w-full">
+              <Suspense
+                fallback={
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {[...Array(8)].map((_, i) => (
+                      <BlogCardSkeleton key={i} />
+                    ))}
+                  </div>
+                }
+              >
+                <BlogList blogs={blogPosts} />
+              </Suspense>
+            </main>
           </div>
-
-          {/* Blog Posts Section */}
-          <Suspense
-            fallback={
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {[...Array(8)].map((_, i) => (
-                  <BlogCardSkeleton key={i} />
-                ))}
-              </div>
-            }
-          >
-            <BlogList blogs={blogPosts} />
-          </Suspense>
         </div>
 
         {/* Contact Form Section */}
