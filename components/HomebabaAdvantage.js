@@ -11,7 +11,7 @@ const HomebabaAdvantage = () => {
     name: "",
     email: "",
     phone: "",
-    message: "Interested in working with Condomonk",
+    message: "Interested in bing with Condomonk",
     realtor: "No",
     project_namee: "",
     cityy: "",
@@ -146,7 +146,7 @@ const HomebabaAdvantage = () => {
           onClick={() => setIsModalOpen(true)}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="bg-black rounded-full text-white px-6 text-lg py-3 transition-colors duration-300 flex items-center gap-2"
+          className="bg-green-500 rounded-full text-white px-6 text-lg py-3 transition-colors duration-300 flex items-center gap-2"
         >
           Work With Us{" "}
           <svg

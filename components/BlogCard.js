@@ -38,7 +38,7 @@ export default function BlogCard({ blog }) {
         </Link>
         <div className="absolute bottom-0 left-5 mb-3">
           <Link href={`/blogs/category/${blog.city.slug}`}>
-            <div className="inline-block px-3 py-1 md:text-sm text-xs font-medium bg-white rounded-full">
+            <div className="inline-block px-2 py-1 text-[10px]  font-medium bg-white rounded-full">
               {blog.city.name}
             </div>
           </Link>
