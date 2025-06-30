@@ -11,6 +11,7 @@ import HomebabaAdvantage from "@/components/HomebabaAdvantage";
 import { getBarrieCondos } from "@/lib/properties";
 import { getMississaugaRentals } from "@/lib/properties";
 import PropertyCard from "@/components/PropertyCard";
+import BuyDubai from "@/components/BuyDubai";
 
 const getCityLinks = () => [
   { name: "Brampton" },
@@ -956,7 +957,7 @@ export default async function Home() {
         <p className="text-md text-gray-600 max-w-md mb-7  leading-normal text-center mx-auto">
           Explore 195+ condos for sale in barrie, Ontario.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {barrieCondos.map((property) => (
             <PropertyCard key={property.ListingKey} property={property} />
           ))}
@@ -988,7 +989,7 @@ export default async function Home() {
         <h3 className="text-3xl font-bold text-center mb-8">
           Explore Condos For Sale in Other Cities
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mx-auto max-w-4xl">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 mx-auto max-w-4xl">
           {getCityLinks().map((city) => (
             <Link
               key={`sale-${city.name}`}
@@ -1045,7 +1046,7 @@ export default async function Home() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4">
           {mississaugaRentals.map((property) => (
             <PropertyCard key={property.ListingKey} property={property} />
           ))}
@@ -1064,7 +1065,7 @@ export default async function Home() {
         <h3 className="text-3xl font-bold text-center mb-8">
           Explore Rental Condos in Other Cities
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mx-auto max-w-4xl">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 mx-auto max-w-4xl">
           {getCityLinks().map((city) => (
             <Link
               key={`rental-${city.name}`}
@@ -1108,6 +1109,8 @@ export default async function Home() {
           ))}
         </div>
       </section>
+
+      <BuyDubai />
 
       {/* Top Builders Section */}
       <section className="max-w-6xl mx-auto px-4 py-20">
