@@ -1109,7 +1109,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Top Builders Section */}
       <section className="max-w-6xl mx-auto px-4 py-20">
         <div className="text-center mb-4">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 ">
