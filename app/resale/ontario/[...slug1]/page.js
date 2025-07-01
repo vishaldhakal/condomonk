@@ -205,7 +205,6 @@ function generateSubtitle(filters, total) {
 
   const location = filters.city || "Ontario";
 
-  // Handle bedroom-specific condo listings
   if (filters.propertyType === "Condo Apartment" && filters.minBeds) {
     return `${total.toLocaleString()} ${
       filters.minBeds
