@@ -1290,7 +1290,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
       <div className="py-5 md:my-20 my-0" id="contact">
         <div className="container mx-auto px-5">
           <div className="flex justify-center">
