@@ -5,8 +5,14 @@ export default function BuyDubai() {
   return (
     <section className="bg-gradient-to-br from-white via-blue-50 to-cyan-100 pt-16 md:pb-40 pb-20 px-4">
       <div className="max-w-6xl mx-auto text-center mb-12 px-4">
-        <h2 className="text-4xl sm:text-5xl font-bold text-gray-800">
-          Buy in Dubai
+        <h2 className="text-2xl md:text-5xl font-extrabold mb-2">
+          <a
+            href="https://homebaba.ae"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Buy in Dubai
+          </a>
         </h2>
         <p className="text-base sm:text-lg text-gray-600 mt-4">
           Find 100+ premium off-plan properties across UAE at Homebaba.ae.
