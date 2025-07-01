@@ -1112,7 +1112,6 @@ export default async function Home() {
 
       <BuyDubai />
 
-      {/* Top Builders Section */}
       <section className="max-w-6xl mx-auto px-4 py-20">
         <div className="text-center mb-4">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 ">
@@ -1251,7 +1250,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Blog Section */}
       <section className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-8">
           <Link href="/blogs" className="inline-block group">
@@ -1293,7 +1291,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
       <div className="py-5 md:my-20 my-0" id="contact">
         <div className="container mx-auto px-5">
           <div className="flex justify-center">
