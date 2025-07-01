@@ -1248,7 +1248,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Blog Section */}
       <section className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-8">
           <Link href="/blogs" className="inline-block group">
