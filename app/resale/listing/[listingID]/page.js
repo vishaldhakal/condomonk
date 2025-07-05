@@ -609,96 +609,99 @@ export default async function PropertyDetailPage({ params }) {
                 </div>
               </div>
               {/* Market Analytics */}
-              <div className="bg-white rounded-lg py-6 space-y-6">
-                {/* Summary Stats */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="p-6 bg-gray-100 rounded-xl">
-                    <div className="text-2xl font-bold black mt-1">
-                      {analyticsData?.totalSimilar || 0}
+              {property?.TransactionType !== "For Lease" && (
+                <div className="bg-white rounded-lg py-6 space-y-6">
+                  {/* Summary Stats */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="p-6 bg-gray-100 rounded-xl">
+                      <div className="text-2xl font-bold black mt-1">
+                        {analyticsData?.totalSimilar || 0}
+                      </div>
+                      <div className="text-sm text-black font-medium">
+                        Similar Homes Found
+                      </div>
                     </div>
-                    <div className="text-sm text-black font-medium">
-                      Similar Homes Found
+
+                    <div className="p-6 bg-gray-100 rounded-xl">
+                      <div className="text-2xl font-bold text-black mt-1">
+                        ${formatPrice(analyticsData?.avgPrice || 0)}
+                      </div>
+                      <div className="text-sm text-black font-medium">
+                        Average Price
+                      </div>
+                    </div>
+
+                    <div className="p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
+                      <div
+                        className={`text-2xl font-bold mt-1 ${
+                          property.ListPrice > (analyticsData?.avgPrice || 0)
+                            ? "text-red-600"
+                            : "text-emerald-600"
+                        }`}
+                      >
+                        {(
+                          ((property.ListPrice -
+                            (analyticsData?.avgPrice || 0)) /
+                            (analyticsData?.avgPrice || 1)) *
+                          100
+                        ).toFixed(1)}
+                        %
+                      </div>
+                      <div className="text-sm text-gray-800 font-medium">
+                        {property.ListPrice > (analyticsData?.avgPrice || 0)
+                          ? "Higher than average"
+                          : "Lower than average"}
+                      </div>
                     </div>
                   </div>
 
-                  <div className="p-6 bg-gray-100 rounded-xl">
-                    <div className="text-2xl font-bold text-black mt-1">
-                      ${formatPrice(analyticsData?.avgPrice || 0)}
-                    </div>
-                    <div className="text-sm text-black font-medium">
-                      Average Price
-                    </div>
-                  </div>
-
-                  <div className="p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl">
-                    <div
-                      className={`text-2xl font-bold mt-1 ${
-                        property.ListPrice > (analyticsData?.avgPrice || 0)
-                          ? "text-red-600"
-                          : "text-emerald-600"
-                      }`}
-                    >
-                      {(
-                        ((property.ListPrice - (analyticsData?.avgPrice || 0)) /
-                          (analyticsData?.avgPrice || 1)) *
-                        100
-                      ).toFixed(1)}
-                      %
-                    </div>
-                    <div className="text-sm text-gray-800 font-medium">
-                      {property.ListPrice > (analyticsData?.avgPrice || 0)
-                        ? "Higher than average"
-                        : "Lower than average"}
+                  {/* Market Comparison Chart */}
+                  <div className="mt-8">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                      Price Comparison
+                    </h3>
+                    <div className="bg-white rounded-lg ">
+                      <MarketComparisonChart
+                        currentPrice={property.ListPrice}
+                        comparisons={[
+                          {
+                            name: `Similar Homes in ${property.City}`,
+                            description: `${
+                              analyticsData?.totalSimilar
+                            } homes with ${property.BedroomsTotal} beds, ${
+                              (property.WashroomsType1Pcs || 0) +
+                              (property.WashroomsType2Pcs || 0)
+                            } baths`,
+                            price: analyticsData?.avgPrice || 0,
+                          },
+                          {
+                            name: `${property.BedroomsTotal} Bed Homes`,
+                            description: `Average of ${
+                              analyticsData?.bedroomCount || 0
+                            } homes`,
+                            price: analyticsData?.avgPriceBedrooms || 0,
+                          },
+                          {
+                            name: property.PropertySubType,
+                            description: `Average of ${
+                              analyticsData?.propertyTypeCount || 0
+                            } ${property.PropertySubType} homes in ${
+                              property.City
+                            }`,
+                            price: analyticsData?.avgPriceType || 0,
+                          },
+                        ]}
+                      />
+                      <div className="text-sm text-gray-600">
+                        Note <span className="text-red-500">*</span> Price
+                        comparison is based on the similar properties listed in
+                        the area and may not be accurate. Consult licensed real
+                        estate agent for accurate comparison.
+                      </div>
                     </div>
                   </div>
                 </div>
-
-                {/* Market Comparison Chart */}
-                <div className="mt-8">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                    Price Comparison
-                  </h3>
-                  <div className="bg-white rounded-lg ">
-                    <MarketComparisonChart
-                      currentPrice={property.ListPrice}
-                      comparisons={[
-                        {
-                          name: `Similar Homes in ${property.City}`,
-                          description: `${
-                            analyticsData?.totalSimilar
-                          } homes with ${property.BedroomsTotal} beds, ${
-                            (property.WashroomsType1Pcs || 0) +
-                            (property.WashroomsType2Pcs || 0)
-                          } baths`,
-                          price: analyticsData?.avgPrice || 0,
-                        },
-                        {
-                          name: `${property.BedroomsTotal} Bed Homes`,
-                          description: `Average of ${
-                            analyticsData?.bedroomCount || 0
-                          } homes`,
-                          price: analyticsData?.avgPriceBedrooms || 0,
-                        },
-                        {
-                          name: property.PropertySubType,
-                          description: `Average of ${
-                            analyticsData?.propertyTypeCount || 0
-                          } ${property.PropertySubType} homes in ${
-                            property.City
-                          }`,
-                          price: analyticsData?.avgPriceType || 0,
-                        },
-                      ]}
-                    />
-                    <div className="text-sm text-gray-600">
-                      Note <span className="text-red-500">*</span> Price
-                      comparison is based on the similar properties listed in
-                      the area and may not be accurate. Consult licensed real
-                      estate agent for accurate comparison.
-                    </div>
-                  </div>
-                </div>
-              </div>
+              )}
 
               {/* Map Section */}
               <div className="pt-12 z-0">
