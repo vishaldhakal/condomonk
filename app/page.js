@@ -11,6 +11,7 @@ import HomebabaAdvantage from "@/components/HomebabaAdvantage";
 import { getBarrieCondos } from "@/lib/properties";
 import { getMississaugaRentals } from "@/lib/properties";
 import PropertyCard from "@/components/PropertyCard";
+import BuyDubai from "@/components/BuyDubai";
 
 const getCityLinks = () => [
   { name: "Brampton" },
@@ -333,7 +334,7 @@ export default async function Home() {
           <div className="mt-12 text-center">
             <Link
               href="/pre-construction-homes"
-              className="inline-flex items-center justify-center px-6 py-3 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-colors"
+              className="inline-flex items-center justify-center px-6 py-3 bg-green-500 text-white rounded-full font-medium hover:bg-gray-800 transition-colors"
             >
               View All Projects
               <svg
@@ -440,7 +441,7 @@ export default async function Home() {
               <div>
                 <Link
                   href="/resale/ontario/price-reduced-homes-for-sale"
-                  className="inline-flex items-center bg-black hover:bg-black text-white px-6 py-3 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  className="inline-flex items-center bg-green-500  text-white px-6 py-3 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
                 >
                   <span>View price dropped homes across ontario</span>
                   <svg
@@ -928,7 +929,7 @@ export default async function Home() {
         <div className="text-center mt-8">
           <Link
             href="/resale/ontario/homes-for-sale"
-            className="inline-flex items-center justify-center px-6 py-3 border bg-black text-white rounded-full font-medium "
+            className="inline-flex items-center justify-center px-6 py-3 border bg-green-500 text-white rounded-full font-medium "
           >
             View All Ontario Properties
             <svg
@@ -956,7 +957,7 @@ export default async function Home() {
         <p className="text-md text-gray-600 max-w-md mb-7  leading-normal text-center mx-auto">
           Explore 195+ condos for sale in barrie, Ontario.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {barrieCondos.map((property) => (
             <PropertyCard key={property.ListingKey} property={property} />
           ))}
@@ -965,7 +966,7 @@ export default async function Home() {
         <div className="text-center mt-8">
           <Link
             href="resale/ontario/barrie/condos-for-sale"
-            className="inline-flex items-center justify-center px-3 py-2 border bg-black text-white rounded-full font-medium "
+            className="inline-flex items-center justify-center px-3 py-2 border bg-green-500 text-white rounded-full font-medium "
           >
             View All Condos in Barrie
             <svg
@@ -988,7 +989,7 @@ export default async function Home() {
         <h3 className="text-3xl font-bold text-center mb-8">
           Explore Condos For Sale in Other Cities
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mx-auto max-w-4xl">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 mx-auto max-w-4xl">
           {getCityLinks().map((city) => (
             <Link
               key={`sale-${city.name}`}
@@ -1045,7 +1046,7 @@ export default async function Home() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4">
           {mississaugaRentals.map((property) => (
             <PropertyCard key={property.ListingKey} property={property} />
           ))}
@@ -1053,7 +1054,7 @@ export default async function Home() {
         <div className="text-center mt-8">
           <Link
             href="/resale/ontario/mississauga/condos-for-lease"
-            className="inline-flex items-center justify-center px-3 py-2 border bg-black text-white rounded-full font-medium "
+            className="inline-flex items-center justify-center px-3 py-2 border bg-green-500 text-white rounded-full font-medium "
           >
             View All Rental Condos in Mississauga →
           </Link>
@@ -1064,7 +1065,7 @@ export default async function Home() {
         <h3 className="text-3xl font-bold text-center mb-8">
           Explore Rental Condos in Other Cities
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mx-auto max-w-4xl">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 mx-auto max-w-4xl">
           {getCityLinks().map((city) => (
             <Link
               key={`rental-${city.name}`}
@@ -1109,7 +1110,8 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Top Builders Section */}
+      <BuyDubai />
+
       <section className="max-w-6xl mx-auto px-4 py-20">
         <div className="text-center mb-4">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 ">
@@ -1241,14 +1243,13 @@ export default async function Home() {
         <div className="mt-5 text-center">
           <Link
             href="/builders"
-            className="inline-block bg-black  text-white px-4 py-2 rounded-full font-medium transition-colors duration-200"
+            className="inline-block bg-green-500  text-white px-4 py-2 rounded-full font-medium transition-colors duration-200"
           >
             View All Builders
           </Link>
         </div>
       </section>
 
-      {/* Blog Section */}
       <section className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-8">
           <Link href="/blogs" className="inline-block group">
@@ -1290,7 +1291,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
       <div className="py-5 md:my-20 my-0" id="contact">
         <div className="container mx-auto px-5">
           <div className="flex justify-center">

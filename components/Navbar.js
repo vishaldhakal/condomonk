@@ -36,6 +36,49 @@ const Navbar = ({ cities, transparent }) => {
   const [showCities, setShowCities] = useState(false);
   const [showHomesForSale, setShowHomesForSale] = useState(false);
 
+  // Top 5 cities for quick access
+  const topCities = [
+    { name: "Toronto", slug: "toronto" },
+    { name: "Mississauga", slug: "mississauga" },
+    { name: "Brampton", slug: "brampton" },
+    { name: "Markham", slug: "markham" },
+    { name: "Vaughan", slug: "vaughan" },
+    { name: "Oakville", slug: "oakville" },
+  ];
+
+  // Resale cities array
+  const resaleCities = [
+    { name: "Toronto", slug: "toronto" },
+    { name: "Mississauga", slug: "mississauga" },
+    { name: "Brampton", slug: "brampton" },
+    { name: "Vaughan", slug: "vaughan" },
+    { name: "Markham", slug: "markham" },
+    { name: "Richmond Hill", slug: "richmond-hill" },
+    { name: "Oakville", slug: "oakville" },
+    { name: "Burlington", slug: "burlington" },
+    { name: "Milton", slug: "milton" },
+    { name: "Barrie", slug: "barrie" },
+    { name: "Ajax", slug: "ajax" },
+    { name: "Pickering", slug: "pickering" },
+    { name: "Whitby", slug: "whitby" },
+    { name: "Oshawa", slug: "oshawa" },
+    { name: "Hamilton", slug: "hamilton" },
+    { name: "Kitchener", slug: "kitchener" },
+    { name: "Waterloo", slug: "waterloo" },
+    { name: "Cambridge", slug: "cambridge" },
+    { name: "Guelph", slug: "guelph" },
+    { name: "London", slug: "london" },
+    { name: "Niagara", slug: "niagara" },
+    { name: "St Catharines", slug: "st-catharines" },
+    { name: "Kingston", slug: "kingston" },
+    { name: "Ottawa", slug: "ottawa" },
+    { name: "Aurora", slug: "aurora" },
+    { name: "Newmarket", slug: "newmarket" },
+    { name: "Scarborough", slug: "scarborough" },
+    { name: "North York", slug: "north-york" },
+    { name: "Etobicoke", slug: "etobicoke" },
+  ];
+
   // Determine if we're on a preconstruction page
   const isPreconstructionPage =
     pathname.split("/").length >= 2 && !pathname.includes("resale");
@@ -182,7 +225,7 @@ const Navbar = ({ cities, transparent }) => {
               }}
             >
               <button className="flex items-center gap-1 px-1 py-2 text-sm">
-                Cities
+                Pre Construction Cities
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-4 w-4"
@@ -246,7 +289,7 @@ const Navbar = ({ cities, transparent }) => {
                     : "invisible opacity-0"
                 }`}
                 style={{
-                  minWidth: isResalePage ? "300px" : "520px",
+                  minWidth: isResalePage ? "300px" : "600px",
                   maxWidth: "90vw",
                 }}
               >
@@ -322,82 +365,57 @@ const Navbar = ({ cities, transparent }) => {
                     // Homes for Sale & Lease Links
                     <>
                       <div className="space-y-4">
-                        <div className="text-sm font-bold text-black pb-2 border-b border-gray-200">
+                        <div className="text-sm font-bold text-black pb-2 border-b border-gray-200 text-center">
                           HOMES FOR SALE
                         </div>
-                        <div className="flex flex-col space-y-2">
-                          <Link
-                            href={getResaleLink("homes-for-sale")}
-                            className="text-gray-600 hover:text-gray-900 text-sm"
-                          >
-                            All Homes For Sale {cityName && `in ${cityName}`}
-                          </Link>
-                          <Link
-                            href={getResaleLink("semi-detached-homes-for-sale")}
-                            className="text-gray-600 hover:text-gray-900 text-sm"
-                          >
-                            Semi Detached Homes For Sale{" "}
-                            {cityName && `in ${cityName}`}
-                          </Link>
-                          <Link
-                            href={getResaleLink("detached-homes-for-sale")}
-                            className="text-gray-600 hover:text-gray-900 text-sm"
-                          >
-                            Detached Homes For Sale{" "}
-                            {cityName && `in ${cityName}`}
-                          </Link>
-                          <Link
-                            href={getResaleLink("townhomes-for-sale")}
-                            className="text-gray-600 hover:text-gray-900 text-sm"
-                          >
-                            Townhomes For Sale {cityName && `in ${cityName}`}
-                          </Link>
-                          <Link
-                            href={getResaleLink("condos-for-sale")}
-                            className="text-gray-600 hover:text-gray-900 text-sm"
-                          >
-                            Condos For Sale {cityName && `in ${cityName}`}
-                          </Link>
+                        <div className="grid grid-cols-3 gap-2">
+                          {resaleCities.map((city) => (
+                            <Link
+                              key={city.slug}
+                              href={`/resale/ontario/${city.slug}/homes-for-sale`}
+                              className="text-gray-600 hover:text-gray-900 text-xs hover:underline"
+                            >
+                              {city.name}
+                            </Link>
+                          ))}
                         </div>
                       </div>
                       <div className="space-y-4 border-l border-gray-200 pl-4">
-                        <div className="text-sm font-bold text-black pb-2 border-b border-gray-200">
+                        <div className="text-sm font-bold text-black pb-2 border-b border-gray-200 text-center">
                           HOMES FOR LEASE
                         </div>
-                        <div className="flex flex-col space-y-2">
-                          <Link
-                            href={getResaleLink(
-                              "semi-detached-homes-for-lease"
-                            )}
-                            className="text-gray-600 hover:text-gray-900 text-sm"
-                          >
-                            Semi Detached Homes For Lease{" "}
-                            {cityName && `in ${cityName}`}
-                          </Link>
-                          <Link
-                            href={getResaleLink("detached-homes-for-lease")}
-                            className="text-gray-600 hover:text-gray-900 text-sm"
-                          >
-                            Detached Homes For Lease{" "}
-                            {cityName && `in ${cityName}`}
-                          </Link>
-                          <Link
-                            href={getResaleLink("townhomes-for-lease")}
-                            className="text-gray-600 hover:text-gray-900 text-sm"
-                          >
-                            Townhomes For Lease {cityName && `in ${cityName}`}
-                          </Link>
-                          <Link
-                            href={getResaleLink("condos-for-lease")}
-                            className="text-gray-600 hover:text-gray-900 text-sm"
-                          >
-                            Condos For Lease {cityName && `in ${cityName}`}
-                          </Link>
+                        <div className="grid grid-cols-3 gap-2">
+                          {resaleCities.map((city) => (
+                            <Link
+                              key={city.slug}
+                              href={`/resale/ontario/${city.slug}/homes-for-lease`}
+                              className="text-gray-600 hover:text-gray-900 text-xs hover:underline"
+                            >
+                              {city.name}
+                            </Link>
+                          ))}
                         </div>
                       </div>
                     </>
                   )}
                 </div>
+                {/* Top Cities Row */}
+                {/* <div className="pt-3 border-t border-gray-100 p-4">
+                  <div className="text-xs font-medium text-gray-500 mb-2">
+                    TOP CITIES
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {topCities.map((city) => (
+                      <Link
+                        key={city.slug}
+                        href={`/resale/ontario/${city.slug}/homes-for-sale`}
+                        className="px-3 py-1 text-xs bg-gray-100 hover:bg-blue-100 hover:text-blue-600 rounded-full border border-gray-200 transition-colors duration-200"
+                      >
+                        {city.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div> */}
               </div>
             </div>
 
@@ -593,74 +611,50 @@ const Navbar = ({ cities, transparent }) => {
                         <div className="text-sm font-bold text-black pb-2">
                           HOMES FOR SALE
                         </div>
-                        <div className="space-y-2">
-                          <Link
-                            href={getResaleLink("homes-for-sale")}
-                            className="block py-2 text-gray-600 hover:text-blue-600"
-                          >
-                            All Homes For Sale {cityName && `in ${cityName}`}
-                          </Link>
-                          <Link
-                            href={getResaleLink("semi-detached-homes-for-sale")}
-                            className="block py-2 text-gray-600 hover:text-blue-600"
-                          >
-                            Semi Detached Homes For Sale{" "}
-                            {cityName && `in ${cityName}`}
-                          </Link>
-                          <Link
-                            href={getResaleLink("detached-homes-for-sale")}
-                            className="block py-2 text-gray-600 hover:text-blue-600"
-                          >
-                            Detached Homes For Sale{" "}
-                            {cityName && `in ${cityName}`}
-                          </Link>
-                          <Link
-                            href={getResaleLink("townhomes-for-sale")}
-                            className="block py-2 text-gray-600 hover:text-blue-600"
-                          >
-                            Townhomes For Sale {cityName && `in ${cityName}`}
-                          </Link>
-                          <Link
-                            href={getResaleLink("condos-for-sale")}
-                            className="block py-2 text-gray-600 hover:text-blue-600"
-                          >
-                            Condos For Sale {cityName && `in ${cityName}`}
-                          </Link>
+                        <div className="grid grid-cols-3 gap-2">
+                          {resaleCities.map((city) => (
+                            <Link
+                              key={city.slug}
+                              href={`/resale/ontario/${city.slug}/homes-for-sale`}
+                              className="text-gray-600 hover:text-gray-900 text-sm"
+                            >
+                              {city.name}
+                            </Link>
+                          ))}
                         </div>
+
+                        {/* Top Cities Row for Mobile */}
+                        {/* <div className="pt-3 border-t border-gray-100 mt-3">
+                          <div className="text-xs font-medium text-gray-500 mb-2">
+                            TOP CITIES
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            {topCities.map((city) => (
+                              <Link
+                                key={city.slug}
+                                href={`/resale/ontario/${city.slug}/homes-for-sale`}
+                                className="px-3 py-1 text-xs bg-gray-100 hover:bg-blue-100 hover:text-blue-600 rounded-full border border-gray-200 transition-colors duration-200"
+                              >
+                                {city.name}
+                              </Link>
+                            ))}
+                          </div>
+                        </div> */}
                       </div>
                       <div>
                         <div className="text-sm font-bold text-black pb-2">
                           HOMES FOR LEASE
                         </div>
-                        <div className="space-y-2">
-                          <Link
-                            href={getResaleLink(
-                              "semi-detached-homes-for-lease"
-                            )}
-                            className="block py-2 text-gray-600 hover:text-blue-600"
-                          >
-                            Semi Detached Homes For Lease{" "}
-                            {cityName && `in ${cityName}`}
-                          </Link>
-                          <Link
-                            href={getResaleLink("detached-homes-for-lease")}
-                            className="block py-2 text-gray-600 hover:text-blue-600"
-                          >
-                            Detached Homes For Lease{" "}
-                            {cityName && `in ${cityName}`}
-                          </Link>
-                          <Link
-                            href={getResaleLink("townhomes-for-lease")}
-                            className="block py-2 text-gray-600 hover:text-blue-600"
-                          >
-                            Townhomes For Lease {cityName && `in ${cityName}`}
-                          </Link>
-                          <Link
-                            href={getResaleLink("condos-for-lease")}
-                            className="block py-2 text-gray-600 hover:text-blue-600"
-                          >
-                            Condos For Lease {cityName && `in ${cityName}`}
-                          </Link>
+                        <div className="grid grid-cols-3 gap-2">
+                          {resaleCities.map((city) => (
+                            <Link
+                              key={city.slug}
+                              href={`/resale/ontario/${city.slug}/homes-for-lease`}
+                              className="text-gray-600 hover:text-gray-900 text-sm"
+                            >
+                              {city.name}
+                            </Link>
+                          ))}
                         </div>
                       </div>
                     </div>

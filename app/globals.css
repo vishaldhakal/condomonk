@@ -262,3 +262,13 @@
 .cursor-blink {
   animation: blink 1s infinite;
 }
+
+/* Add this to your global CSS */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

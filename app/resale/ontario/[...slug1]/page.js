@@ -187,6 +187,11 @@ function generateTitle(filters) {
 }
 
 function generateSubtitle(filters, total) {
+  const transactionText =
+    filters.transactionType === "For Lease" ? "for lease" : "for sale";
+  const transactionTextCapitalized =
+    filters.transactionType === "For Lease" ? "for Lease" : "for Sale";
+
   if (filters.mlsStatus === "Price Change") {
     const propertyTypeText = filters.propertyType
       ? `${filters.propertyType} `
@@ -200,11 +205,10 @@ function generateSubtitle(filters, total) {
 
   const location = filters.city || "Ontario";
 
-  // Handle bedroom-specific condo listings
   if (filters.propertyType === "Condo Apartment" && filters.minBeds) {
     return `${total.toLocaleString()} ${
       filters.minBeds
-    }-Bedroom Condos for Sale in ${location} | Affordable ${
+    }-Bedroom Condos ${transactionText} in ${location} | Affordable ${
       filters.minBeds
     }-Bedroom Condos ${
       filters.maxPrice
@@ -222,7 +226,7 @@ function generateSubtitle(filters, total) {
       ? filters.propertyType
       : `${filters.propertyType}s`;
 
-    return `${total.toLocaleString()} ${location} ${pluralType} for Sale | Affordable ${
+    return `${total.toLocaleString()} ${location} ${pluralType} ${transactionText} | Affordable ${
       filters.minBeds
         ? `${filters.minBeds}-${filters.minBeds + 3} Bedroom `
         : ""
@@ -239,7 +243,7 @@ function generateSubtitle(filters, total) {
 
   // Handle price range specific pages
   if (filters.maxPrice || filters.minPrice) {
-    return `${total.toLocaleString()} ${location} homes for sale | Affordable homes in ${location} ${
+    return `${total.toLocaleString()} ${location} homes ${transactionText} | Affordable homes in ${location} ${
       filters.maxPrice
         ? `under $${formatPrice(filters.maxPrice)}`
         : filters.minPrice
@@ -253,7 +257,7 @@ function generateSubtitle(filters, total) {
   }
 
   // Default subtitle for general listings
-  return `${total.toLocaleString()} ${location} homes for sale | Affordable 1 - 4 bedroom homes in ${location} from $1 to $5M | Open Houses & New Listings Available`;
+  return `${total.toLocaleString()}+ homes ${transactionText} in ${location} | Affordable 1 - 4 bedroom homes in ${location} from $1 to $5M | Open Houses & New Listings Available`;
 }
 
 // Update the getSimilarProperties function
