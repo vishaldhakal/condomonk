@@ -1,27 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Mail,
-  Phone,
-  User,
-  MessageSquare,
-  ArrowRight,
-  Headset,
-} from "lucide-react";
-import { sendEmail } from "@/app/_resale-api/resend";
 
 const CMHCMobileFixedButton = ({ title, buttonClassName = "" }) => {
   const [formData, setFormData] = useState({
@@ -48,21 +29,21 @@ const CMHCMobileFixedButton = ({ title, buttonClassName = "" }) => {
     const submitButton = e.target.querySelector('button[type="submit"]');
     submitButton.disabled = true;
 
-    try {
-      // Your form submission logic here
-      await sendEmail({
-        content: formData,
-        page: "CMHC Inquiry from CMHC MLI Select Page",
-        title: "Inquiry from CMHC MLI Select page",
-      });
-      submitButton.innerHTML = "Submitted";
-      setIsSubmitting(false);
-    } catch (error) {
-      // Handle error
-      submitButton.disabled = false;
-      submitButton.innerHTML = "Submit";
-      console.error("Submission error:", error);
-    }
+    // try {
+    //   // Your form submission logic here
+    //   await sendEmail({
+    //     content: formData,
+    //     page: "CMHC Inquiry from CMHC MLI Select Page",
+    //     title: "Inquiry from CMHC MLI Select page",
+    //   });
+    //   submitButton.innerHTML = "Submitted";
+    //   setIsSubmitting(false);
+    // } catch (error) {
+    //   // Handle error
+    //   submitButton.disabled = false;
+    //   submitButton.innerHTML = "Submit";
+    //   console.error("Submission error:", error);
+    // }
   };
 
   return (

@@ -1,21 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent } from "@/components/ui/card";
-import { Mail, Phone, User, MessageSquare, ArrowRight } from "lucide-react";
-import { sendEmail } from "@/app/_resale-api/resend";
-import CMHCContactForm from "./CMHCContactForm";
 
 const CMHCContactButton = ({ title, buttonClassName = "" }) => {
   return (

@@ -21,7 +21,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import CMHCContactButton from "@/components/cmhc/CMHCContactButton";
-import WhyChooseCMHC from "@/components/WhyChooseCMHC";
+import WhyChooseCMHC from "@/components/cmhc/WhyChooseCMHC";
 import CMHCAdvantages from "@/components/cmhc/CMHCAdvantages";
 import CMHCMobileFixedButton from "@/components/cmhc/CMHCMobileFixedButton";
 import CMHCContactForm from "@/components/cmhc/CMHCContactForm";

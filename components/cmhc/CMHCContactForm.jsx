@@ -3,12 +3,9 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail, Phone, User, MessageSquare, ArrowRight } from "lucide-react";
-import { sendEmail } from "@/app/_resale-api/resend";
-import { Resend } from "resend";
-import { sendCMHCMail } from "@/app/_resale-api/sendCMHCMail";
+import { sendCMHCMail } from "@/api/sendCMHCMail";
 import { usePathname } from "next/navigation";
 
 const CMHCContactForm = () => {
