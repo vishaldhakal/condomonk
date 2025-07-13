@@ -19,6 +19,7 @@ import FloorPlans from "@/components/FloorPlans";
 import Newsletter from "@/components/Newsletter";
 import DepositStructure from "@/components/DepositStructure";
 import Amenities from "@/components/Amenities";
+import AutoOpenModal from "@/components/AutoOpenModal";
 
 // Dynamically import the Map component with no SSR
 const Map = dynamic(() => import("@/components/Map"), { ssr: false });
@@ -130,6 +131,11 @@ export default async function PropertyPage({ params }) {
   return (
     <div className="min-h-screen bg-white">
       <FixedContactButton />
+      <AutoOpenModal
+        city={data.preconstruction.city.name}
+        proj_name={data.preconstruction.project_name}
+        defaultmessage={`Please send me the latest information of ${data.preconstruction.project_name}. Thank you`}
+      />
 
       <main className="container mx-auto px-4 py-4">
         {/* Breadcrumb */}

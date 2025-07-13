@@ -5,8 +5,8 @@ import Image from "next/legacy/image";
 export default function CondoCard(props) {
   const checkPricing = (price) => {
     return parseInt(price) > 0
-      ? `Starting from low $${Nformatter(price, 2)}`
-      : `Pricing not available`;
+      ? `From Low: CAD ${parseInt(price).toLocaleString()}`
+      : `Not Available`;
   };
 
   const daysCount = (x) => {
@@ -80,7 +80,7 @@ export default function CondoCard(props) {
         <h3 className="text-sm md:text-xl font-extrabold leading-tight mb-1">
           {props.project_name}
         </h3>
-        <p className="text-xs md:text-base text-blue-500 ">
+        <p className="text-sm md:text-base text-blue-500 font-semibold">
           {checkPricing(props.price_starting_from)}
         </p>
         <p className="text-[11px] md:text-sm text-gray-900 truncate">
@@ -98,7 +98,7 @@ export default function CondoCard(props) {
           className="inline-flex items-center px-3 py-1 text-sm font-medium text-black bg-white border rounded-full hover:bg-black hover:text-white border-black transition-colors duration-200"
           target="_blank"
         >
-          View Details{" "}
+          Send Info{" "}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
