@@ -292,7 +292,7 @@ export default async function CityPage({ params }) {
         {/* Combined Projects Grid */}
         <div
           id="selling"
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:mt-8 mt-0"
+          className="grid grid-cols-2 md:grid-cols-4 md:gap-4 gap-x-3 md:mt-8 mt-0"
         >
           {/* Featured Projects First */}
           {featuredData.preconstructions?.map((item, index) => (

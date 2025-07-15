@@ -16,6 +16,7 @@ export default function CustomModal({
   defaultmessage,
   title,
   openOnMount = false,
+  image,
 }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
@@ -52,11 +53,20 @@ export default function CustomModal({
                 </p>
               </div>
               <ModalBody className="p-6">
-                <SideContactForm
-                  proj_name={proj_name}
-                  defaultmessage={defaultmessage}
-                  city={city}
-                />
+                <div className="modal-content">
+                  {image && (
+                    <img
+                      src={image}
+                      alt={`${proj_name} image`}
+                      className="w-full h-48 object-cover rounded mb-4"
+                    />
+                  )}
+                  <SideContactForm
+                    proj_name={proj_name}
+                    defaultmessage={defaultmessage}
+                    city={city}
+                  />
+                </div>
               </ModalBody>
             </>
           )}

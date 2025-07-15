@@ -19,7 +19,7 @@ import FloorPlans from "@/components/FloorPlans";
 import Newsletter from "@/components/Newsletter";
 import DepositStructure from "@/components/DepositStructure";
 import Amenities from "@/components/Amenities";
-import AutoOpenModal from "@/components/AutoOpenModal";
+import AutoModalWrapper from "@/components/AutoModalWrapper";
 
 // Dynamically import the Map component with no SSR
 const Map = dynamic(() => import("@/components/Map"), { ssr: false });
@@ -131,10 +131,15 @@ export default async function PropertyPage({ params }) {
   return (
     <div className="min-h-screen bg-white">
       <FixedContactButton />
-      <AutoOpenModal
+      <AutoModalWrapper
         city={data.preconstruction.city.name}
         proj_name={data.preconstruction.project_name}
         defaultmessage={`Please send me the latest information of ${data.preconstruction.project_name}. Thank you`}
+        image={
+          data.preconstruction.image[0]?.image
+            ? `https://api.condomonk.ca${data.preconstruction.image[0].image}`
+            : "/noimage.webp"
+        }
       />
 
       <main className="container mx-auto px-4 py-4">
@@ -394,7 +399,7 @@ export default async function PropertyPage({ params }) {
                   height="500"
                   title="Walk Score"
                   className="w-full"
-                  src={`https://www.walkscore.com/serve-walkscore-tile.php?wsid=&amp&s=${convDash(
+                  src={`https://www.walkscore.com/serve-walkscore-tile.php?wsid=&amp;s=${convDash(
                     data.preconstruction.project_address
                   )}&amp;o=h&amp;c=f&amp;h=500&amp;fh=0&amp;w=737`}
                 />

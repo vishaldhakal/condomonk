@@ -1,11 +1,15 @@
+"use client";
 import Link from "next/link";
 import Nformatter from "./Nformatter";
-import Image from "next/legacy/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function CondoCard(props) {
+  const router = useRouter();
+
   const checkPricing = (price) => {
     return parseInt(price) > 0
-      ? `From Low: CAD ${parseInt(price).toLocaleString()}`
+      ? `Starting From CAD $${parseInt(price).toLocaleString()}`
       : `Not Available`;
   };
 
@@ -15,6 +19,11 @@ export default function CondoCard(props) {
     const difference = date_1.getTime() - date_2.getTime();
     const TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
     return TotalDays === 0 ? "Today" : `${Math.abs(TotalDays)} day ago`;
+  };
+
+  const handleSendInfoClick = (e) => {
+    e.preventDefault();
+    router.push(`/${props.city.slug}/${props.slug}?showModal=1`);
   };
 
   return (
@@ -55,7 +64,6 @@ export default function CondoCard(props) {
           </div>
         </Link>
 
-        {/* Status badges */}
         <div className="absolute bottom-4 left-4 flex gap-2">
           <span className="px-2.5 py-1 border border-black bg-black rounded-full text-white text-[11px] md:text-xs font-medium">
             {props.status}
@@ -65,7 +73,6 @@ export default function CondoCard(props) {
           </span>
         </div>
 
-        {/* Project number */}
         <span className="absolute top-2 left-4 text-white font-black text-3xl md:text-4xl drop-shadow-[2px_2px_4px_rgba(0,0,0,0.5)]">
           {props.no + 1 ? props.no + 1 + " " : " "}
         </span>
@@ -74,13 +81,13 @@ export default function CondoCard(props) {
       {/* Project details */}
       <Link
         href={`/${props.city.slug}/${props.slug}`}
-        className="flex flex-col flex-grow p-4 text-gray-900"
+        className="flex flex-col flex-grow md:p-4 p-2 text-gray-900"
         target="_blank"
       >
         <h3 className="text-sm md:text-xl font-extrabold leading-tight mb-1">
           {props.project_name}
         </h3>
-        <p className="text-sm md:text-base text-blue-500 font-semibold">
+        <p className="text-[11px] md:text-base text-blue-500 font-semibold">
           {checkPricing(props.price_starting_from)}
         </p>
         <p className="text-[11px] md:text-sm text-gray-900 truncate">
@@ -91,12 +98,12 @@ export default function CondoCard(props) {
         </p>
       </Link>
 
-      {/* View details button */}
-      <div className="px-4 pb-4">
-        <Link
-          href={`/${props.city.slug}/${props.slug}`}
-          className="inline-flex items-center px-3 py-1 text-sm font-medium text-black bg-white border rounded-full hover:bg-black hover:text-white border-black transition-colors duration-200"
-          target="_blank"
+      {/* Send Info button triggers modal */}
+      <div className="px-2 pb-4">
+        <button
+          type="button"
+          className="inline-flex items-center justify-center w-full md:px-4 px-2 md:py-3 py-2 md:text-base text-xs font-semibold text-white bg-green-700 rounded-md shadow hover:bg-green-800 transition-colors duration-200"
+          onClick={handleSendInfoClick}
         >
           Send Info{" "}
           <svg
@@ -114,7 +121,7 @@ export default function CondoCard(props) {
             <path d="M7 7h10v10"></path>
             <path d="M7 17 17 7"></path>
           </svg>
-        </Link>
+        </button>
       </div>
     </div>
   );
