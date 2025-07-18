@@ -3,9 +3,11 @@ import Link from "next/link";
 import Nformatter from "./Nformatter";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import CustomModal from "./Modal";
 
 export default function CondoCard(props) {
   const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const checkPricing = (price) => {
     return parseInt(price) > 0
@@ -23,7 +25,7 @@ export default function CondoCard(props) {
 
   const handleSendInfoClick = (e) => {
     e.preventDefault();
-    router.push(`/${props.city.slug}/${props.slug}?showModal=1`);
+    setIsModalOpen(true);
   };
 
   return (
@@ -99,30 +101,40 @@ export default function CondoCard(props) {
       </Link>
 
       {/* Send Info button triggers modal */}
-      <div className="px-2 pb-4">
-        <button
-          type="button"
-          className="inline-flex items-center justify-center w-full md:px-4 px-2 md:py-3 py-2 md:text-base text-xs font-semibold text-white bg-green-700 rounded-md shadow hover:bg-green-800 transition-colors duration-200"
-          onClick={handleSendInfoClick}
-        >
-          Send Info{" "}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"
+      <CustomModal
+        linkText={
+          <button
+            type="button"
+            className="inline-flex items-center justify-center w-full md:px-4 px-2 md:py-3 py-2 md:text-base text-xs font-semibold text-white bg-green-700 rounded-md shadow hover:bg-green-800 transition-colors duration-200"
           >
-            <path d="M7 7h10v10"></path>
-            <path d="M7 17 17 7"></path>
-          </svg>
-        </button>
-      </div>
+            Request Price List{" "}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-arrow-up-right-icon lucide-arrow-up-right"
+            >
+              <path d="M7 7h10v10"></path>
+              <path d="M7 17 17 7"></path>
+            </svg>
+          </button>
+        }
+        title="Request Price List"
+        city={props.city}
+        proj_name={props.project_name}
+        defaultmessage={`Please send me additional information about ${props.project_name}. Thank you !`}
+        image={
+          props.image?.image
+            ? `https://api.condomonk.ca${props.image.image}`
+            : "/noimage.webp"
+        }
+      />
     </div>
   );
 }

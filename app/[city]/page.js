@@ -204,11 +204,11 @@ export default async function CityPage({ params }) {
 
   return (
     <div className="pt-4 lg:pt-8 bg-white">
-      <div className=" max-w-[1370px] mx-auto px-4">
+      <div className=" max-w-6xl mx-auto px-4">
         {/* Header Section */}
         <div className="flex flex-col space-y-4">
-          <div className="flex items-start">
-            <h1 className="text-xl md:text-4xl font-bold ">
+          <div className="flex text-center justify-center">
+            <h1 className="text-xl md:text-4xl font-bold text-center">
               {priceFilter
                 ? `Pre construction Homes in ${CapitalizeFirst(
                     cleanCity
@@ -285,7 +285,7 @@ export default async function CityPage({ params }) {
         </div>
 
         {/* Filter Section */}
-        <div className="sticky md:top-0 top-16 bg-white z-10  py-2">
+        <div className="sticky md:top-0 top-16 bg-white z-10   flex justify-center">
           <PreconstructionFilter
             cityName={CapitalizeFirst(params.city)}
             citySlug={params.city.split("-homes-")[0]}

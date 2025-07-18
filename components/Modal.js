@@ -15,28 +15,17 @@ export default function CustomModal({
   proj_name,
   defaultmessage,
   title,
-  openOnMount = false,
   image,
 }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  React.useEffect(() => {
-    if (openOnMount) {
-      onOpen();
-    }
-  }, [openOnMount, onOpen]);
-
   return (
     <>
       {linkText && (
-        <Link
-          className="cursor-pointer hover:text-blue-600 transition-colors duration-200"
-          onPress={onOpen}
-        >
+        <span onClick={onOpen} style={{ display: "inline" }}>
           {linkText}
-        </Link>
+        </span>
       )}
-
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}

@@ -55,7 +55,7 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
   const [showPricePopover, setShowPricePopover] = useState(false);
 
   return (
-    <div className="sticky bg-white z-30 md:mt-3 ">
+    <div className="sticky bg-white z-30  ">
       <div className="flex md:space-x-3 space-x-1 items-center w-full">
         {filterButtons.map((btn) => (
           <Link
