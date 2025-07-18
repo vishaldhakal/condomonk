@@ -9,6 +9,7 @@ import CityDirectory from "@/components/CityDirectory";
 import AssignmentCard from "@/components/assignment/AssignmentCard";
 import GoogleMap from "@/components/GoogleMap";
 import PreconstructionFilter from "@/components/PreconstructionFilter";
+import ExpandableDescription from "@/components/ExpandableDescription";
 
 // Data fetching functions
 async function getData(city, priceFilter = null) {
@@ -219,70 +220,72 @@ export default async function CityPage({ params }) {
           </div>
 
           <h2 className="text-[8px] md:text-sm text-gray-500">
-            120+ Pre construction Homes in {CapitalizeFirst(cleanCity)}, ON |
-            Explore Floor Plans, Pricing & Availability. Condomonk has over 120
-            pre construction homes from trusted{" "}
-            <Link
-              href={`/builders`}
-              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
-            >
-              builders in {CapitalizeFirst(cleanCity)}, ON.
-            </Link>{" "}
-            If you are looking to buy resale homes, Condomonk is your trusted
-            platform to find{" "}
-            <Link
-              href={`/resale/ontario/${cleanCity}/homes-for-sale`}
-              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
-            >
-              1000+ homes for sale in {CapitalizeFirst(cleanCity)}.{" "}
-            </Link>
-            Whether you are looking to downsize to buy{" "}
-            <Link
-              href={`/resale/ontario/${cleanCity}/townhomes-for-sale`}
-              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
-            >
-              townhomes for sale in {CapitalizeFirst(cleanCity)}
-            </Link>{" "}
-            or looking to buy{" "}
-            <Link
-              href={`/resale/ontario/${cleanCity}/condos-for-sale`}
-              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
-            >
-              condos in {CapitalizeFirst(cleanCity)}
-            </Link>{" "}
-            for your family or browsing{" "}
-            <Link
-              href={`/resale/ontario/${cleanCity}/detached-homes-for-sale`}
-              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
-            >
-              {CapitalizeFirst(cleanCity)} detached homes for sale
-            </Link>
-            , our platform is updated daily with latest resale listings every
-            hour. For new development homes, easily filter by number of bedrooms
-            (1 to 4+), project type, and construction status from
-            budget-friendly condo to a pre construction homes,{" "}
-            <Link
-              href="#contact"
-              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
-            >
-              contact us
-            </Link>{" "}
-            to connect you to the most exciting real estate opportunities in{" "}
-            {CapitalizeFirst(cleanCity)}.
-            <div className="text-gray-600 mt-2 mb-3">
-              <span className="font-medium">Last Updated:</span>{" "}
-              {new Date().toLocaleDateString("en-CA", {
-                timeZone: "America/Toronto",
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </div>
+            <ExpandableDescription>
+              120+ Pre construction Homes in {CapitalizeFirst(cleanCity)}, ON |
+              Explore Floor Plans, Pricing & Availability. Condomonk has over
+              120 pre construction homes from trusted{" "}
+              <Link
+                href={`/builders`}
+                className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+              >
+                builders in {CapitalizeFirst(cleanCity)}, ON.
+              </Link>{" "}
+              If you are looking to buy resale homes, Condomonk is your trusted
+              platform to find{" "}
+              <Link
+                href={`/resale/ontario/${cleanCity}/homes-for-sale`}
+                className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+              >
+                1000+ homes for sale in {CapitalizeFirst(cleanCity)}.{" "}
+              </Link>
+              Whether you are looking to downsize to buy{" "}
+              <Link
+                href={`/resale/ontario/${cleanCity}/townhomes-for-sale`}
+                className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+              >
+                townhomes for sale in {CapitalizeFirst(cleanCity)}
+              </Link>{" "}
+              or looking to buy{" "}
+              <Link
+                href={`/resale/ontario/${cleanCity}/condos-for-sale`}
+                className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+              >
+                condos in {CapitalizeFirst(cleanCity)}
+              </Link>{" "}
+              for your family or browsing{" "}
+              <Link
+                href={`/resale/ontario/${cleanCity}/detached-homes-for-sale`}
+                className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+              >
+                {CapitalizeFirst(cleanCity)} detached homes for sale
+              </Link>
+              , our platform is updated daily with latest resale listings every
+              hour. For new development homes, easily filter by number of
+              bedrooms (1 to 4+), project type, and construction status from
+              budget-friendly condo to a pre construction homes,{" "}
+              <Link
+                href="#contact"
+                className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+              >
+                contact us
+              </Link>{" "}
+              to connect you to the most exciting real estate opportunities in{" "}
+              {CapitalizeFirst(cleanCity)}.
+              <div className="text-gray-600 mt-2 mb-3">
+                <span className="font-medium">Last Updated:</span>{" "}
+                {new Date().toLocaleDateString("en-CA", {
+                  timeZone: "America/Toronto",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </div>
+            </ExpandableDescription>
           </h2>
         </div>
 
         {/* Filter Section */}
-        <div className="sticky top-0 bg-white z-10 md:py-4 py-2 mt-4">
+        <div className="sticky md:top-0 top-16 bg-white z-10  py-2">
           <PreconstructionFilter
             cityName={CapitalizeFirst(params.city)}
             citySlug={params.city.split("-homes-")[0]}
@@ -512,7 +515,7 @@ export default async function CityPage({ params }) {
         {/* City Details */}
         {data.city && (
           <div className="py-16">
-            <div className="prose max-w-none px-3 mt-8">
+            <div className="w-full overflow-x-auto">
               <div
                 dangerouslySetInnerHTML={{ __html: data.city.details }}
                 className="prose prose-sm md:prose-base lg:prose-lg max-w-none prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-gray-600 prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-img:rounded-lg [&_table]:!border [&_table]:!border-collapse [&_table]:!border-solid [&_table]:!border-black [&_th]:!border [&_th]:!border-solid [&_th]:!border-black [&_th]:!p-2 [&_td]:!border [&_td]:!border-solid [&_td]:!border-black [&_td]:!p-2 [&_tr]:!border [&_tr]:!border-solid [&_tr]:!border-black rich-text"
