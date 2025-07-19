@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import PreconstructionFilter from "@/components/PreconstructionFilter";
+import ExpandableDescription from "@/components/ExpandableDescription";
 
 // Data fetching function
 async function getData(city) {
@@ -62,57 +63,59 @@ export default async function DetachedPage({ params }) {
       <div className="max-w-[1370px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header Section */}
         <div className="space-y-6">
-          <h1 className="text-3xl md:text-4xl font-bold">
+          <h1 className="text-xl md:text-4xl font-bold">
             Pre Construction Detached Homes in {cityName}
           </h1>
 
           <h2 className="text-[8px] md:text-sm text-gray-500">
-            {data.preconstructions.length}+ Pre construction detached homes in{" "}
-            {cityName}, ON | Explore Floor Plans, Pricing & Availability.
-            Condomonk has over {data.preconstructions.length} pre construction
-            detached homes from trusted{" "}
-            <Link
-              href={`/builders`}
-              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
-            >
-              builders in {cityName}, ON.
-            </Link>{" "}
-            If you are looking to buy resale detached homes, Condomonk is your
-            trusted platform to find{" "}
-            <Link
-              href={`/resale/ontario/${params.city}/detached-homes-for-sale`}
-              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
-            >
-              100+ detached homes for sale in {cityName}.{" "}
-            </Link>
-            Whether you are looking to downsize to affordable{" "}
-            <Link
-              href={`/resale/ontario/${params.city}/detached-homes-for-sale`}
-              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
-            >
-              {cityName} detached for sale,
-            </Link>{" "}
-            condomonk has updated MLS Listings updated daily. For new
-            development homes, easily filter by number of bedrooms (1 to 4+),
-            project type, and construction status from budget-friendly detached
-            homes,{" "}
-            <Link
-              href="#contact"
-              className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
-            >
-              contact us
-            </Link>{" "}
-            to connect you to the most exciting real estate opportunities in{" "}
-            {cityName}.
-            <div className="text-gray-600 mt-2 mb-3">
-              <span className="font-medium">Last Updated:</span>{" "}
-              {new Date().toLocaleDateString("en-CA", {
-                timeZone: "America/Toronto",
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </div>
+            <ExpandableDescription>
+              {data.preconstructions.length}+ Pre construction detached homes in{" "}
+              {cityName}, ON | Explore Floor Plans, Pricing & Availability.
+              Condomonk has over {data.preconstructions.length} pre construction
+              detached homes from trusted{" "}
+              <Link
+                href={`/builders`}
+                className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+              >
+                builders in {cityName}, ON.
+              </Link>{" "}
+              If you are looking to buy resale detached homes, Condomonk is your
+              trusted platform to find{" "}
+              <Link
+                href={`/resale/ontario/${params.city}/detached-homes-for-sale`}
+                className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+              >
+                100+ detached homes for sale in {cityName}.{" "}
+              </Link>
+              Whether you are looking to downsize to affordable{" "}
+              <Link
+                href={`/resale/ontario/${params.city}/detached-homes-for-sale`}
+                className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+              >
+                {cityName} detached for sale,
+              </Link>{" "}
+              condomonk has updated MLS Listings updated daily. For new
+              development homes, easily filter by number of bedrooms (1 to 4+),
+              project type, and construction status from budget-friendly
+              detached homes,{" "}
+              <Link
+                href="#contact"
+                className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+              >
+                contact us
+              </Link>{" "}
+              to connect you to the most exciting real estate opportunities in{" "}
+              {cityName}.
+              <div className="text-gray-600 mt-2 mb-3">
+                <span className="font-medium">Last Updated:</span>{" "}
+                {new Date().toLocaleDateString("en-CA", {
+                  timeZone: "America/Toronto",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </div>
+            </ExpandableDescription>
           </h2>
 
           {/* PreconstructionFilter Component */}
@@ -122,8 +125,8 @@ export default async function DetachedPage({ params }) {
         </div>
 
         {/* Selling Projects Grid */}
-        <div className="mt-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="mt-3">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {sellingProjects.map((item, index) => (
               <CondoCard key={item.id} {...item} no={index} />
             ))}
@@ -132,11 +135,11 @@ export default async function DetachedPage({ params }) {
 
         {/* Upcoming Projects Section */}
         {upcomingProjects.length > 0 && (
-          <div className="mt-16">
+          <div className="mt-12">
             <h2 className="text-2xl font-bold mb-8">
               Upcoming Pre Construction Detached Homes in {cityName}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {upcomingProjects.map((item, index) => (
                 <CondoCard key={item.id} {...item} no={index} />
               ))}

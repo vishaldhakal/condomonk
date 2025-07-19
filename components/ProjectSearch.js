@@ -16,6 +16,7 @@ const SearchWithAutocomplete = ({
   defaultCities = [],
   animatedPlaceholder,
   customInputClasses = "",
+  cityName = "",
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState({
@@ -355,7 +356,9 @@ const SearchWithAutocomplete = ({
     ? { color: "#f8a100", right: "30px" }
     : { color: "#FFC007", right: "15px" };
 
-  const placeholderText = isHomepage
+  const placeholderText = cityName
+    ? cityName
+    : isHomepage
     ? "Enter location, neighborhood, or property"
     : "Search for a city or project...";
 

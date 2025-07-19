@@ -125,7 +125,8 @@ export default function CondoCard(props) {
             </svg>
           </button>
         }
-        title="Request Price List"
+        title={props.project_name}
+        subtitle="Request Price List"
         city={props.city}
         proj_name={props.project_name}
         defaultmessage={`Please send me additional information about ${props.project_name}. Thank you !`}

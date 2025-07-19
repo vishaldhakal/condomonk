@@ -2,11 +2,13 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import { usePathname } from "next/navigation";
+import useDeviceView from "../helper/useDeviceView";
 
 const PreconstructionFilter = ({ cityName, citySlug }) => {
   const pathname = usePathname();
+  const { isMobileView } = useDeviceView();
 
   // Define filter buttons
   const filterButtons = [
@@ -61,7 +63,7 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
           <Link
             key={btn.value}
             href={btn.href}
-            className={`rounded-full md:px-4 px-3 md:py-3 py-2 md:text-sm text-xs font-bold transition border-2
+            className={`rounded-full md:px-4 px-2 md:py-3 py-2 md:text-sm text-xs font-bold transition border-2
             ${
               activeButton === btn.label
                 ? "bg-[#14463B] text-white border-[#14463B] shadow-lg"
@@ -75,7 +77,7 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
         {/* Price Range Button with Popover */}
         <div className="relative">
           <button
-            className={`rounded-full md:px-4 px-3 md:py-3 py-2 md:text-sm text-xs font-bold transition border-2 flex items-center
+            className={`rounded-full md:px-4 px-2 md:py-3 py-2 md:text-sm text-xs font-bold transition border-2 flex items-center
             ${
               activeButton === "Price Range"
                 ? "border-blue-700 text-[#14463B] bg-white shadow-lg"
@@ -86,7 +88,7 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
             type="button"
           >
             Price Range
-            <ChevronDown className="ml-2 h-5 w-5" />
+            <ChevronDown className="ml-0 h-5 w-5" />
           </button>
           {showPricePopover && (
             <div className="absolute z-50 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg w-56">
@@ -104,14 +106,23 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
           )}
         </div>
         {/* Clear Filters Button */}
-        {isFiltered && (
-          <Link
-            href={`/${citySlug}`}
-            className="rounded-full px-8 py-4 text-lg font-bold border-2 border-red-400 text-red-500 bg-white hover:bg-red-50 transition ml-2"
-          >
-            Clear Filters
-          </Link>
-        )}
+        {isFiltered &&
+          (isMobileView ? (
+            <Link
+              href={`/${citySlug}`}
+              className="rounded-full p-1 text-red-500 border-2 border-red-400 bg-white hover:bg-red-50 transition ml-2 flex items-center justify-center md:hidden"
+              aria-label="Clear Filters"
+            >
+              <X className="w-4 h-4" />
+            </Link>
+          ) : (
+            <Link
+              href={`/${citySlug}`}
+              className="rounded-full px-8 py-4 text-lg font-bold border-2 border-red-400 text-red-500 bg-white hover:bg-red-50 transition ml-2 hidden md:inline-block"
+            >
+              Clear Filters
+            </Link>
+          ))}
       </div>
     </div>
   );

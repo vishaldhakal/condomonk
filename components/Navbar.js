@@ -201,6 +201,7 @@ const Navbar = ({ cities, transparent }) => {
             <div className="hidden md:block md:w-[400px] ">
               <ProjectSearch
                 searchType={isPreconstructionPage ? "preconstruction" : "sale"}
+                cityName={cityName}
               />
             </div>
           </div>
@@ -469,6 +470,7 @@ const Navbar = ({ cities, transparent }) => {
           <div className="mx-auto px-4 py-2">
             <ProjectSearch
               searchType={isPreconstructionPage ? "preconstruction" : "sale"}
+              cityName={cityName}
             />
           </div>
         </div>

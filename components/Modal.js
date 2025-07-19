@@ -15,6 +15,7 @@ export default function CustomModal({
   proj_name,
   defaultmessage,
   title,
+  subtitle,
   image,
 }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -37,9 +38,9 @@ export default function CustomModal({
             <>
               <div className="p-6 text-center border-b border-gray-200">
                 <h2 className="text-xl font-bold">{title}</h2>
-                <p className="text-sm text-gray-600">
-                  Register to Receive Platinum Access & More!
-                </p>
+                {subtitle && (
+                  <p className="text-sm text-gray-600">{subtitle}</p>
+                )}
               </div>
               <ModalBody className="p-6">
                 <div className="modal-content">
@@ -47,7 +48,7 @@ export default function CustomModal({
                     <img
                       src={image}
                       alt={`${proj_name} image`}
-                      className="w-full h-48 object-cover rounded mb-4"
+                      className="w-full h-40 object-cover rounded mb-4 mx-auto"
                     />
                   )}
                   <SideContactForm
