@@ -60,7 +60,7 @@ export default async function DetachedPage({ params }) {
 
   return (
     <div className="bg-white">
-      <div className="max-w-[1370px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header Section */}
         <div className="space-y-6">
           <h1 className="text-xl md:text-4xl font-bold">
