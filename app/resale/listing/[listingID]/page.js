@@ -69,13 +69,13 @@ export async function generateMetadata({ params }) {
         title,
         description,
         url: canonical,
-        images: property.images?.[0] ? [property.images[0]] : [],
+        // images: property.images?.[0] ? [property.images[0]] : [],
       },
       twitter: {
         card: "summary_large_image",
         title,
         description,
-        images: property.images?.[0] ? [property.images[0]] : [],
+        // images: property.images?.[0] ? [property.images[0]] : [],
       },
     };
   } catch (error) {
@@ -280,12 +280,12 @@ export default async function PropertyDetailPage({ params }) {
           </div>
 
           {/* Property Gallery */}
-          <PropertyGallery
+          {/* <PropertyGallery
             images={property.images}
             propertyAddress={`${property.StreetNumber} ${property.StreetName} ${property.StreetSuffix}, ${property.City}, ${property.StateOrProvince}`}
-          />
+          /> */}
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 max-w-5xl mx-auto mt-2">
             {/* Main Content */}
             <div className="md:col-span-2 space-y-8  md:pe-4">
               {/* Price */}

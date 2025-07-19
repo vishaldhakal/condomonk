@@ -192,7 +192,7 @@ const Navbar = ({ cities, transparent }) => {
   return (
     <nav className="w-full bg-white">
       <div className="max-w-[1370px] mx-auto px-4">
-        <div className="flex md:justify-between justify-center md:items-center items-between h-16">
+        <div className="flex md:justify-between justify-center md:items-center items-between h-12 md:h-16">
           {/* Left section - Logo and Search */}
           <div className="flex items-center gap-8">
             <Link href="/" className="text-xl font-bold">
@@ -467,7 +467,7 @@ const Navbar = ({ cities, transparent }) => {
               : "sticky top-0 z-50"
           } bg-white `}
         >
-          <div className="mx-auto px-4 py-2">
+          <div className="mx-auto px-4 md:py-2">
             <ProjectSearch
               searchType={isPreconstructionPage ? "preconstruction" : "sale"}
               cityName={cityName}

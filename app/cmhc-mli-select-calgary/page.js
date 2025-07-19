@@ -141,8 +141,7 @@ const CMHCRentalPage = () => {
               CMHC MLI Select Calgary
             </h1>
             <p className="text-lg md:text-xl text-gray-700 mb-8">
-              Get up to 85% financing, below-prime rates, and more for your
-              multi-unit investment.
+              CMHC MLI Select Program: What You Need to Know in 2025
               <CMHCDisclaimerAsterisk />
             </p>
           </div>

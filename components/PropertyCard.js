@@ -67,7 +67,8 @@ export default function PropertyCard({ property }) {
             <div className="h-36 sm:h-52 overflow-hidden relative">
               <div className="h-36 sm:h-52 relative z-10 rounded-t-2xl rounded-b-2xl overflow-hidden">
                 <img
-                  src={hasImage ? property.imageUrl.medium : NO_IMAGE_URL}
+                  // src={hasImage ? property.imageUrl.medium : NO_IMAGE_URL}
+                  src={NO_IMAGE_URL}
                   alt={`${property.StreetNumber} ${property.StreetName}`}
                   className="object-cover object-center w-full transition-all duration-200 transform group-hover:scale-110 h-52 sm:h-52"
                 />

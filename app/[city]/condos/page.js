@@ -41,8 +41,12 @@ export async function generateMetadata({ params }, parent) {
       canonical: `https://condomonk.ca/${params.city}/condos/`,
     },
     metadataBase: new URL("https://condomonk.ca"),
-    title: `${data.preconstructions.length}+ Pre Construction Condos in ${cityName}`,
-    description: `Explore ${data.preconstructions.length}+ pre construction condos in ${cityName}. Find affordable 1-4 bedroom new construction condos with updated floor plans & pricing.`,
+    title: !["calgary", "edmonton"].includes(params.city)
+      ? `${data.preconstructions.length}+ Pre Construction Condos in ${cityName}`
+      : `${CapitalizeFirst(cityName)} Pre Construction & New Condos For Sale | Condomonk`,
+    description: !["calgary", "edmonton"].includes(params.city)
+      ? `Explore ${data.preconstructions.length}+ pre construction condos in ${cityName}. Find affordable 1-4 bedroom new construction condos with updated floor plans & pricing.`
+      : `Find new condos for sale in ${CapitalizeFirst(cityName)} | Check out plans, pricing, and availability`,
   };
 }
 
@@ -58,63 +62,76 @@ export default async function CondosPage({ params }) {
     (item) => item.status === "Upcoming"
   );
 
+  const generateTitle = () => {
+    if (params.city == "calgary" || params.city == "edmonton") {
+      return `Pre Construction & New Condos for sale in ${CapitalizeFirst(params.city)}, AB`;
+    }
+    return `Pre Construction Condos in ${CapitalizeFirst(params.city)}`;
+  };
+
+  const generateSubtitle = () => {
+    if (params.city == "calgary" || params.city == "edmonton") {
+      return `100+ new condos in ${CapitalizeFirst(params.city)}, AB | Explore Floor Plans, Pricing & Availability. Condomonk has over 120 new construction condos from trusted builders in ${CapitalizeFirst(params.city)}, AB. If you are looking to buy new  homes, Condomonk is your trusted platform to find 1000+  homes for sale in ${CapitalizeFirst(params.city)}. Whether you are looking to downsize to buy townhomes for sale in ${CapitalizeFirst(params.city)} or looking to buy condos in ${CapitalizeFirst(params.city)} for your family or browsing ${CapitalizeFirst(params.city)} detached homes for sale, our platform is updated daily with latest resale listings every hour. For new development homes, easily filter by number of bedrooms (1 to 4+), project type, and construction status from budget-friendly condo to a pre construction homes, contact us to connect you to the most exciting real estate opportunities in ${CapitalizeFirst(params.city)}.`;
+    }
+    return (
+      <>
+        {data.preconstructions.length}+ Pre construction condos in {cityName},
+        ON | Explore Floor Plans, Pricing & Availability. Condomonk has over{" "}
+        {data.preconstructions.length} pre construction condos from trusted{" "}
+        <Link
+          href={`/builders`}
+          className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+        >
+          builders in {cityName}, ON.
+        </Link>{" "}
+        If you are looking to buy resale condos, Condomonk is your trusted
+        platform to find{" "}
+        <Link
+          href={`/resale/ontario/${params.city}/condos-for-sale`}
+          className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+        >
+          100+ condos for sale in {cityName}.{" "}
+        </Link>
+        Whether you are looking to downsize to affordable{" "}
+        <Link
+          href={`/resale/ontario/${params.city}/condos-for-sale`}
+          className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+        >
+          {cityName} condos for sale,
+        </Link>{" "}
+        condomonk has updated MLS Listings updated daily. For new development
+        homes, easily filter by number of bedrooms (1 to 4+), project type, and
+        construction status from budget-friendly condos,{" "}
+        <Link
+          href="#contact"
+          className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+        >
+          contact us
+        </Link>{" "}
+        to connect you to the most exciting real estate opportunities in{" "}
+        {cityName}.
+        <div className="text-gray-600 mt-2 mb-3">
+          <span className="font-medium">Last Updated:</span>{" "}
+          {new Date().toLocaleDateString("en-CA", {
+            timeZone: "America/Toronto",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </div>
+      </>
+    );
+  };
+
   return (
     <div className="bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header Section */}
         <div className="space-y-6">
-          <h1 className="text-xl md:text-4xl font-bold">
-            Pre Construction Condos in {cityName}{" "}
-          </h1>
+          <h1 className="text-xl md:text-4xl font-bold">{generateTitle()}</h1>
 
           <h2 className="text-[8px] md:text-sm text-gray-500">
-            <ExpandableDescription>
-              {data.preconstructions.length}+ Pre construction condos in{" "}
-              {cityName}, ON | Explore Floor Plans, Pricing & Availability.
-              Condomonk has over {data.preconstructions.length} pre construction
-              condos from trusted{" "}
-              <Link
-                href={`/builders`}
-                className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
-              >
-                builders in {cityName}, ON.
-              </Link>{" "}
-              If you are looking to buy resale condos, Condomonk is your trusted
-              platform to find{" "}
-              <Link
-                href={`/resale/ontario/${params.city}/condos-for-sale`}
-                className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
-              >
-                100+ condos for sale in {cityName}.{" "}
-              </Link>
-              Whether you are looking to downsize to affordable{" "}
-              <Link
-                href={`/resale/ontario/${params.city}/condos-for-sale`}
-                className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
-              >
-                {cityName} condos for sale,
-              </Link>{" "}
-              condomonk has updated MLS Listings updated daily. For new
-              development homes, easily filter by number of bedrooms (1 to 4+),
-              project type, and construction status from budget-friendly condos,{" "}
-              <Link
-                href="#contact"
-                className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
-              >
-                contact us
-              </Link>{" "}
-              to connect you to the most exciting real estate opportunities in{" "}
-              {cityName}.
-              <div className="text-gray-600 mt-2 mb-3">
-                <span className="font-medium">Last Updated:</span>{" "}
-                {new Date().toLocaleDateString("en-CA", {
-                  timeZone: "America/Toronto",
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </div>
-            </ExpandableDescription>
+            <ExpandableDescription>{generateSubtitle()}</ExpandableDescription>
           </h2>
 
           {/* PreconstructionFilter Component */}
