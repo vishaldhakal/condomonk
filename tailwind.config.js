@@ -45,6 +45,7 @@ module.exports = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
+        "cmhc-green": "#12453B",
         chart: {
           1: "hsl(var(--chart-1))",
           2: "hsl(var(--chart-2))",

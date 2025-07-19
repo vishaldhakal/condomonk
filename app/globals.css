@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Cantata+One&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -24,6 +25,10 @@
     /* IE and Edge */
     scrollbar-width: none;
     /* Firefox */
+  }
+
+  .font-cantata {
+    font-family: "Cantata One", serif;
   }
 }
 
@@ -110,7 +115,7 @@
   }
 }
 
-.grid-cont>div:first-child {
+.grid-cont > div:first-child {
   display: grid;
   gap: 10px;
   /* Space between items */
@@ -170,7 +175,7 @@
     max-height: 150px !important;
   }
 
-  .grid-cont>div:first-child {
+  .grid-cont > div:first-child {
     display: grid;
     gap: 10px 10px;
     z-index: 98 !important;
@@ -218,7 +223,7 @@
   outline: none;
 }
 
-.ProseMirror>*+* {
+.ProseMirror > * + * {
   margin-top: 0.75em;
 }
 
@@ -248,7 +253,6 @@
 }
 
 @keyframes blink {
-
   0%,
   100% {
     opacity: 1;

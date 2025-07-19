@@ -4,207 +4,241 @@ import Nformatter from "./Nformatter";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import CustomModal from "./Modal";
-
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import SideContactForm from "./SideContactForm";
 export default function CondoCard(props) {
-  const router = useRouter();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+  console.log(props);
+  function checkPricing(prii) {
+    if (parseInt(prii) == 0) {
+      return `Pricing not available`;
+    } else {
+      return (
+        <div>
+          <span className="text-xs md:text-inherit">From low</span>{" "}
+          <span className="font-bold text-cmhc-green text-xl ml-1">
+            ${Nformatter(prii, 2)}
+          </span>
+        </div>
+      );
+    }
+  }
+  const city = props.city.name.toLowerCase();
+  // // Minimal version for map infowindow
+  // if (minimal) {
+  //   return (
+  //     <div
+  //       className={`rounded-xl my-3 md:my-0 transition-all duration-300 ${
+  //         props.is_featured
+  //           ? "shadow-featured border-blue-500 border"
+  //           : "shadow-lg"
+  //       } hover:shadow-xl hover:translate-y-[-5px]`}
+  //       style={{ maxWidth: "280px" }}
+  //     >
+  //       <div className={`relative`}>
+  //         {props.images && props.images.length > 0 ? (
+  //           <img
+  //             loading="lazy"
+  //             src={props.images[0].split(",")[0]}
+  //             className="w-full h-[150px] rounded-t-xl object-cover transition-transform duration-300 ease-in-out"
+  //             style={{
+  //               background:
+  //                 "linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%)",
+  //             }}
+  //             alt={`${props.project_name} located at ${props.project_address} cover image`}
+  //           />
+  //         ) : (
+  //           <img
+  //             loading="lazy"
+  //             src="/noimage.webp"
+  //             className="w-full h-[150px] rounded-t-xl object-cover transition-transform duration-300 ease-in-out"
+  //             style={{
+  //               background:
+  //                 "linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%)",
+  //             }}
+  //             alt={"no image available for " + props.project_name}
+  //           />
+  //         )}
+  //         {props.is_featured && (
+  //           <span className="absolute top-2 right-2 bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded flex items-center gap-1">
+  //             <svg
+  //               xmlns="http://www.w3.org/2000/svg"
+  //               width="14"
+  //               height="14"
+  //               fill="currentColor"
+  //               className="bi bi-star"
+  //               viewBox="0 0 22 22"
+  //             >
+  //               <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z" />
+  //             </svg>
+  //             Featured
+  //           </span>
+  //         )}
+  //         <span className="absolute bottom-2 left-2 bg-white px-2 py-1 rounded text-xs">
+  //           {props.status}
+  //         </span>
+  //       </div>
+  //       <div className={`block p-4 bg-white rounded-b-xl no-underline`}>
+  //         <div className="space-y-1">
+  //           <Link
+  //             href={`/${city}/${props.slug}`}
+  //             className="no-underline"
+  //             target="_blank"
+  //           >
+  //             <h3 className="md:text-[1.1rem] font-bold my-0 leading-tight line-clamp-1 hover:text-[#00b5d6] transition-colors duration-300">
+  //               {props.project_name}
+  //             </h3>
+  //           </Link>
 
-  const checkPricing = (price) => {
-    return parseInt(price) > 0
-      ? `Starting From $${parseInt(price).toLocaleString()}`
-      : `Not Available`;
-  };
+  //           <h5 className="truncate text-[0.9rem] my-0">
+  //             {props.project_address}
+  //           </h5>
+  //           <p className="text-[0.9rem] truncate my-0">
+  //             Occupancy {props.occupancy}
+  //           </p>
 
-  const daysCount = (x) => {
-    const date_1 = new Date(x);
-    const date_2 = new Date();
-    const difference = date_1.getTime() - date_2.getTime();
-    const TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
-    return TotalDays === 0 ? "Today" : `${Math.abs(TotalDays)} day ago`;
-  };
+  //           <InquiryButton minimal={true} city={city} props={props} />
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
-  const handleSendInfoClick = (e) => {
-    e.preventDefault();
-    setIsModalOpen(true);
-  };
-
+  // Original version for regular props pages
   return (
-    <div
-      className="group relative flex flex-col bg-white rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-500 ease-out transform hover:-translate-y-2 border border-gray-100 hover:border-emerald-200 overflow-hidden my-4 md:my-0 cursor-pointer"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Image Section */}
-      <div className="relative overflow-hidden rounded-t-3xl">
-        <Link
-          href={`/${props.city.slug}/${props.slug}`}
-          className="block relative"
-          target="_blank"
-        >
-          {/* Featured Badge */}
-          {props.is_featured && (
-            <div className="absolute top-3 right-3 z-20">
-              <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 rounded-lg md:rounded-2xl text-xs font-bold shadow-lg flex items-center gap-1 sm:gap-2 backdrop-blur-sm bg-opacity-95">
-                <svg
-                  className="w-3 h-3 sm:w-4 sm:h-4 animate-pulse"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-                <span>Featured</span>
-              </div>
-            </div>
-          )}
-
-          {/* Card Number */}
-          <div className="absolute top-3 left-3 z-20">
-            <div className="bg-black/80 backdrop-blur-sm text-white w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl flex items-center justify-center font-black text-sm sm:text-base md:text-lg shadow-lg">
-              {props.no + 1 || "1"}
-            </div>
-          </div>
-
-          {/* Main Image */}
-          <div className="relative w-full h-64 md:h-96 overflow-hidden">
+    <>
+      <div
+        className={`rounded-xl my-3 md:my-0 transition-all duration-300 ${
+          props.is_featured
+            ? "md:col-span-1 shadow-featured border-cmhc-green border"
+            : "shadow-lg"
+        } hover:shadow-xl hover:translate-y-[-5px]`}
+      >
+        <div className={`relative overflow-hidden rounded-t-xl`}>
+          <Link
+            href={`/${city}/${props.slug}`}
+            className="block h-[300px] md:h-[250px]"
+            target="_blank"
+          >
             <img
+              loading="lazy"
               src={
                 props.image.image
                   ? `https://api.condomonk.ca${props.image.image}`
                   : "/noimage.webp"
               }
-              alt={`${props.project_name} - ${props.project_type} in ${props.city.name}`}
-              className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
-              loading={props.priority ? "eager" : "lazy"}
+              className="w-full h-[350px] md:h-[250px] rounded-t-xl object-cover transition-transform duration-300 ease-in-out"
+              style={{
+                background:
+                  "linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%)",
+              }}
+              alt={`${props.project_name} located at ${props.project_address} cover image`}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent transition-opacity duration-500 group-hover:from-black/60" />
-          </div>
-
-          {/* Status Badges */}
-          <div className="absolute bottom-3 left-1 md:left-3 flex gap-1.5 sm:gap-2 z-10">
-            <span className="px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 bg-emerald-500/90 backdrop-blur-sm rounded-full text-white text-xs sm:text-sm font-semibold shadow-lg border border-white/20">
+          </Link>
+          {props.is_featured && (
+            <span className="absolute top-2 right-2 bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded flex items-center gap-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                fill="currentColor"
+                className="bi bi-star"
+                viewBox="0 0 22 22"
+              >
+                <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z" />
+              </svg>
+              Featured
+            </span>
+          )}
+          <span className="absolute bottom-2 left-2">
+            <span className="bg-white px-2 py-1 rounded text-xs">
               {props.status}
             </span>
-            <span className="px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 bg-white/90 backdrop-blur-sm rounded-full text-gray-800 text-xs sm:text-sm font-semibold shadow-lg">
-              {props.project_type}
-            </span>
+          </span>
+        </div>
+        <div className="flex flex-col gap-1 md:gap-2 p-3">
+          <div className="flex items-end justify-start gap-1">
+            <Link
+              href={`/${city}/${props.slug}`}
+              className="text-sm md:text-[1.4rem] leading-tight text-black font-extrabold whitespace-nowrap overflow-hidden text-ellipsis hover:text-[#00b5d6] transition-colors duration-300"
+            >
+              {props.no + 1 || "1"}
+              {props.project_name}
+            </Link>
           </div>
-        </Link>
-      </div>
-
-      {/* Content Section */}
-      <div className="flex flex-col flex-grow p-3 sm:p-4 md:p-4">
-        <Link
-          href={`/${props.city.slug}/${props.slug}`}
-          className="flex flex-col flex-grow mb-2 sm:mb-3"
-          target="_blank"
-        >
-          {/* Project Name */}
-          <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-gray-900 mb-1.5 sm:mb-2 line-clamp-2 group-hover:text-emerald-700 transition-colors duration-300">
-            {props.project_name}
-          </h3>
-
-          {/* Address & Occupancy */}
-          <div className="space-y-1 sm:space-y-2 flex-grow">
-            <div className="flex items-start gap-1.5 sm:gap-2">
-              <svg
-                className="w-3 h-3 sm:w-4 sm:h-4 text-gray-400 mt-0.5 flex-shrink-0"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                  clipRule="evenodd"
+          {/* <div className="flex flex-col md:flex-row items-start md:items-center justify-start gap-2">
+            <p className="text-xs md:text-sm font-medium text-gray-600">
+              {props.price_starting_from === 0 && `Price Coming Soon`}
+              {props.price_starting_from > 0 &&
+                `Starting From Low $${nFormatter(props.price_starting_from)}`}
+            </p>
+          </div> */}
+          <dl className="mt-0">
+            <dd>
+              <ul className="space-y-0.5 p-0 m-0">
+                <li className="flex items-start text-gray-600">
+                  <span className="flex-1 text-xs md:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
+                    {props.project_address}
+                  </span>
+                </li>
+                <li className="flex items-center text-gray-600">
+                  <Link
+                    href={`/developers/${props.developer.slug}`}
+                    className="text-xs md:text-sm text-black hover:underline whitespace-nowrap overflow-hidden text-ellipsis"
+                  >
+                    Developed by {props.developer.name}
+                  </Link>
+                </li>
+                <li className="flex items-center text-gray-600">
+                  <span className="flex-1 text-xs md:text-sm">
+                    Type: {props.project_type}
+                  </span>
+                </li>
+                <li className="flex items-center text-gray-600">
+                  <span className="flex-1 text-xs md:text-sm">
+                    Occupancy: {props.occupancy}
+                  </span>
+                </li>
+              </ul>
+            </dd>
+          </dl>
+          <h4 className="text-[0.9rem] font-normal text-black my-0">
+            {checkPricing(props.price_starting_from)}
+          </h4>
+          <Dialog>
+            <DialogTrigger asChild>
+              <button className="py-2 text-xs md:text-base text-center flex flex-row items-center justify-center shadow-green-100 shadow-md gap-0.5 text-white bg-cmhc-green font-bold hover:text-white hover:bg-green-900 border px-2 rounded-md w-full transition-all duration-200">
+                Request Price List
+              </button>
+            </DialogTrigger>
+            <DialogContent className="p-3 w-[80%] md:w-[30rem] max-h-fit z-[99999]">
+              <div className="block">
+                <div className="flex flex-col items-center mb-4 md:mb-5">
+                  {/* <Image
+                    src="/contact-bottom-2.png"
+                    alt="Real Estate Agent"
+                    width={100}
+                    height={100}
+                    className="rounded-full mb-6 md:mb-8 w-[200px] h-[200px] md:w-[100px] md:h-[100px] object-cover hidden md:block"
+                    priority
+                  /> */}
+                  <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-1 text-center">
+                    {props.project_name}
+                  </h2>
+                  <p className="text-gray-600 text-center text-sm md:text-base">
+                    Send Me Pricing Details
+                  </p>
+                </div>
+                <SideContactForm
+                  proj_name={props.project_name}
+                  defaultmessage={`Please send me additional information about ${props.project_name}. Thank you !`}
+                  city={city}
                 />
-              </svg>
-              <p className="text-xs sm:text-sm text-gray-700 line-clamp-2">
-                {props.project_address}
-              </p>
-            </div>
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              <svg
-                className="w-3 h-3 sm:w-4 sm:h-4 text-gray-400 flex-shrink-0"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <p className="text-xs sm:text-sm text-gray-600">
-                Occupancy: {props.occupancy}
-              </p>
-            </div>
-          </div>
-        </Link>
-        {/* Pricing */}
-        <div className="mb-2 sm:mb-3">
-          <p className="text-sm md:text-lg lg:text-xl font-black text-emerald-600 mb-0.5 sm:mb-1">
-            {checkPricing(props.price_starting_from).replace("Starting", "")}
-          </p>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
         {/* CTA Section */}
-        <div className="space-y-2 sm:space-y-3">
-          <CustomModal
-            linkText={
-              <button
-                type="button"
-                className={`relative w-full px-3 py-2 sm:px-4 sm:py-3 md:px-4 md:py-3 text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-emerald-200 transition-all duration-300 group/button transform hover:scale-[1.02] active:scale-[0.98]`}
-              >
-                <div className="flex items-center justify-center gap-1.5 sm:gap-2">
-                  <svg
-                    className="w-3 h-3 sm:w-4 sm:h-4 transition-transform group-hover/button:rotate-12"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                  </svg>
-                  <span className="hidden sm:inline">Get Price List</span>
-                  <span className="sm:hidden">Price List</span>
-                  <svg
-                    className="w-3 h-3 sm:w-4 sm:h-4 transition-transform group-hover/button:translate-x-1"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-
-                {/* Exclusive Badge for Featured Properties */}
-                {props.is_featured && (
-                  <div className="absolute -top-1 -right-1 bg-yellow-400 text-black text-xs font-bold px-1 py-0.5 sm:px-1.5 sm:py-0.5 rounded-full shadow-md animate-bounce">
-                    Featured
-                  </div>
-                )}
-
-                {/* Shimmer Effect */}
-                <div className="absolute inset-0 rounded-lg sm:rounded-xl bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/button:translate-x-full transition-transform duration-1000 ease-out" />
-              </button>
-            }
-            title={props.project_name}
-            subtitle="Request Price List"
-            city={props.city}
-            proj_name={props.project_name}
-            defaultmessage={`Hi! I'm interested in ${props.project_name}. Could you please send me the price list, floor plans, and any current promotions? Thank you!`}
-            image={
-              props.image?.image
-                ? `https://api.condomonk.ca${props.image.image}`
-                : "/noimage.webp"
-            }
-          />
-        </div>
       </div>
-
-      {/* Hover Glow Effect */}
-      {/* <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/0 via-white/0 to-white/0 group-hover:from-white/5 group-hover:via-white/0 group-hover:to-white/0 transition-all duration-500 pointer-events-none" /> */}
-    </div>
+    </>
   );
 }
