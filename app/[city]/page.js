@@ -302,11 +302,14 @@ export default async function CityPage({ params }) {
         </div>
 
         {/* Filter Section */}
-        <div className="sticky md:top-0 top-16 bg-white z-10   ">
-          <PreconstructionFilter
-            cityName={CapitalizeFirst(params.city)}
-            citySlug={params.city.split("-homes-")[0]}
-          />
+
+        <div className="sticky top-0 bg-white py-3 z-[9999] -mx-4">
+          <div className="flex justify-center md:justify-start md:px-4">
+            <PreconstructionFilter
+              cityName={CapitalizeFirst(params.city)}
+              citySlug={params.city.split("-homes-")[0]}
+            />
+          </div>
         </div>
 
         {/* Combined Projects Grid */}

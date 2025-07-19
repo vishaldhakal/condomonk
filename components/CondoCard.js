@@ -12,7 +12,7 @@ export default function CondoCard(props) {
 
   const checkPricing = (price) => {
     return parseInt(price) > 0
-      ? `Starting From CAD $${parseInt(price).toLocaleString()}`
+      ? `Starting From $${parseInt(price).toLocaleString()}`
       : `Not Available`;
   };
 
@@ -66,7 +66,7 @@ export default function CondoCard(props) {
           </div>
 
           {/* Main Image */}
-          <div className="relative w-full h-48 sm:h-56 md:h-72 overflow-hidden">
+          <div className="relative w-full h-64 md:h-96 overflow-hidden">
             <img
               src={
                 props.image.image
@@ -104,13 +104,6 @@ export default function CondoCard(props) {
             {props.project_name}
           </h3>
 
-          {/* Pricing */}
-          <div className="mb-2 sm:mb-3">
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl font-black text-emerald-600 mb-0.5 sm:mb-1">
-              {checkPricing(props.price_starting_from).replace("Starting", "")}
-            </p>
-          </div>
-
           {/* Address & Occupancy */}
           <div className="space-y-1 sm:space-y-2 flex-grow">
             <div className="flex items-start gap-1.5 sm:gap-2">
@@ -147,7 +140,12 @@ export default function CondoCard(props) {
             </div>
           </div>
         </Link>
-
+        {/* Pricing */}
+        <div className="mb-2 sm:mb-3">
+          <p className="text-sm md:text-lg lg:text-xl font-black text-emerald-600 mb-0.5 sm:mb-1">
+            {checkPricing(props.price_starting_from).replace("Starting", "")}
+          </p>
+        </div>
         {/* CTA Section */}
         <div className="space-y-2 sm:space-y-3">
           <CustomModal
@@ -183,7 +181,7 @@ export default function CondoCard(props) {
                 {/* Exclusive Badge for Featured Properties */}
                 {props.is_featured && (
                   <div className="absolute -top-1 -right-1 bg-yellow-400 text-black text-xs font-bold px-1 py-0.5 sm:px-1.5 sm:py-0.5 rounded-full shadow-md animate-bounce">
-                    VIP
+                    Featured
                   </div>
                 )}
 
@@ -202,27 +200,6 @@ export default function CondoCard(props) {
                 : "/noimage.webp"
             }
           />
-
-          {/* Incentive Text */}
-          <div className="text-center">
-            <p className="text-xs font-medium text-emerald-600 flex items-center justify-center gap-1">
-              <svg
-                className="w-3 h-3 animate-spin"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <span className="hidden sm:inline">
-                Exclusive pricing & incentives
-              </span>
-              <span className="sm:hidden">Exclusive deals</span>
-            </p>
-          </div>
         </div>
       </div>
 
