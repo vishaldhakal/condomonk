@@ -189,9 +189,21 @@ const Navbar = ({ cities, transparent }) => {
     return `/resale/ontario/${type}`;
   };
 
+  const isPreconCityPage = () => {
+    if (typeof window !== "undefined") {
+      const path = window.location.pathname;
+      // Remove leading/trailing slashes and split
+      const parts = path.replace(/^\/+|\/+$/g, "").split("/");
+      return parts.length === 1 && parts[0] !== "";
+    }
+    return false;
+  };
+
   return (
     <nav className="w-full bg-white">
-      <div className="max-w-[1370px] mx-auto px-4">
+      <div
+        className={` ${!isPreconCityPage ? "max-w-[1370px]" : "max-w-6xl"} mx-auto px-4`}
+      >
         <div className="flex md:justify-between justify-center md:items-center items-between h-12 md:h-16">
           {/* Left section - Logo and Search */}
           <div className="flex items-center gap-8">
