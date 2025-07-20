@@ -194,6 +194,7 @@ const Navbar = ({ cities, transparent }) => {
       const path = window.location.pathname;
       // Remove leading/trailing slashes and split
       const parts = path.replace(/^\/+|\/+$/g, "").split("/");
+      console.log(parts);
       return parts.length === 1 && parts[0] !== "";
     }
     return false;
@@ -202,7 +203,7 @@ const Navbar = ({ cities, transparent }) => {
   return (
     <nav className="w-full bg-white">
       <div
-        className={` ${!isPreconCityPage ? "max-w-[1370px]" : "max-w-6xl"} mx-auto px-4`}
+        className={`${!isPreconCityPage() ? "max-w-[1370px]" : "md:max-w-6xl"} mx-auto px-4`}
       >
         <div className="flex md:justify-between justify-center md:items-center items-between h-12 md:h-16">
           {/* Left section - Logo and Search */}
