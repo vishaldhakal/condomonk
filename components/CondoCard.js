@@ -161,7 +161,7 @@ export default function CondoCard(props) {
               href={`/${city}/${props.slug}`}
               className="text-sm md:text-[1.4rem] leading-tight text-black font-extrabold whitespace-nowrap overflow-hidden text-ellipsis hover:text-[#00b5d6] transition-colors duration-300"
             >
-              {props.no + 1 || "1"}
+              {/* {props.no + 1 || "1"} */}
               {props.project_name}
             </Link>
           </div>
