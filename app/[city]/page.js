@@ -304,7 +304,7 @@ export default async function CityPage({ params }) {
         {/* Filter Section */}
 
         <div className="sticky top-0 bg-white py-3 z-[9999] -mx-4">
-          <div className="flex justify-center md:justify-start md:px-4">
+          <div className="flex justify-start px-4">
             <PreconstructionFilter
               cityName={CapitalizeFirst(params.city)}
               citySlug={params.city.split("-homes-")[0]}

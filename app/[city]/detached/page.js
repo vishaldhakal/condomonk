@@ -125,19 +125,24 @@ export default async function DetachedPage({ params }) {
   );
 
   return (
-    <div className="bg-white">
+    <div className="bg-white relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header Section */}
         <div className="space-y-6">
           <h1 className="text-xl md:text-4xl font-bold">{generateTitle()}</h1>
 
           <h2 className="text-[8px] md:text-sm text-gray-500">
-            <ExpandableDescription></ExpandableDescription>
+            <ExpandableDescription>{generateSubtitle()}</ExpandableDescription>
           </h2>
 
           {/* PreconstructionFilter Component */}
-          <div className="mt-6">
-            <PreconstructionFilter cityName={cityName} citySlug={params.city} />
+          <div className="sticky top-0 bg-white py-3 z-[9999] -mx-4">
+            <div className="flex justify-start px-4">
+              <PreconstructionFilter
+                cityName={cityName}
+                citySlug={params.city}
+              />
+            </div>
           </div>
         </div>
 
