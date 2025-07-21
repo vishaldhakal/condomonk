@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ChevronDown, X } from "lucide-react";
+import { ChevronDown, CircleX, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import useDeviceView from "../helper/useDeviceView";
 
@@ -119,8 +119,9 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
           ) : (
             <Link
               href={`/${citySlug}`}
-              className="rounded-full px-3 py-2 text-base font-semibold border-[1px] border-red-400 text-red-500 bg-white hover:bg-red-50 transition ml-2 hidden md:inline-block"
+              className="rounded-full px-3 py-2 text-base font-semibold border-[1px] border-red-400 text-red-500 bg-white hover:bg-red-50 transition ml-2 hidden md:flex md:items-center "
             >
+              <CircleX className="w-4 h-4 inline mr-1" />
               Clear Filters
             </Link>
           ))}

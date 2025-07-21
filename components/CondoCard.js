@@ -183,7 +183,7 @@ export default function CondoCard(props) {
                 <li className="flex items-center text-gray-600">
                   <Link
                     href={`/developers/${props.developer.slug}`}
-                    className="text-xs md:text-sm text-black hover:underline whitespace-nowrap overflow-hidden text-ellipsis"
+                    className="text-xs md:text-sm hover:underline whitespace-nowrap overflow-hidden text-ellipsis"
                   >
                     Developed by {props.developer.name}
                   </Link>
