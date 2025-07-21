@@ -214,8 +214,8 @@ function generateSubtitle(filters, total) {
       filters.maxPrice
         ? `under $${formatPrice(filters.maxPrice)}`
         : filters.minPrice
-        ? `from $${formatPrice(filters.minPrice)}`
-        : "from $300K to $1M"
+          ? `from $${formatPrice(filters.minPrice)}`
+          : "from $300K to $1M"
     } | Open Houses Available`;
   }
 
@@ -234,10 +234,10 @@ function generateSubtitle(filters, total) {
       filters.maxPrice
         ? `under $${formatPrice(filters.maxPrice)}`
         : filters.minPrice && filters.maxPrice
-        ? `from $${formatPrice(filters.minPrice)} to $${formatPrice(
-            filters.maxPrice
-          )}`
-        : "from $1 to $5M"
+          ? `from $${formatPrice(filters.minPrice)} to $${formatPrice(
+              filters.maxPrice
+            )}`
+          : "from $1 to $5M"
     } | Open Houses Available`;
   }
 
@@ -247,12 +247,12 @@ function generateSubtitle(filters, total) {
       filters.maxPrice
         ? `under $${formatPrice(filters.maxPrice)}`
         : filters.minPrice
-        ? `over $${formatPrice(filters.minPrice)}`
-        : filters.minPrice && filters.maxPrice
-        ? `between $${formatPrice(filters.minPrice)} - $${formatPrice(
-            filters.maxPrice
-          )}`
-        : ""
+          ? `over $${formatPrice(filters.minPrice)}`
+          : filters.minPrice && filters.maxPrice
+            ? `between $${formatPrice(filters.minPrice)} - $${formatPrice(
+                filters.maxPrice
+              )}`
+            : ""
     } | Open Houses & New Listings Available`;
   }
 
@@ -405,7 +405,7 @@ export default async function DynamicPage({ params }) {
     return (
       <>
         {schemaScript}
-        <div className="max-w-[1370px] mx-auto px-2 md:px-4 py-2">
+        <div className="max-w-[85.625rem] mx-auto px-2 md:px-4 py-2">
           <div className="flex justify-between items-center">
             <div>
               <h1 className="text-xl md:text-3xl font-extrabold leading-tight">

@@ -107,7 +107,7 @@ export default function CondoCard(props) {
   return (
     <>
       <div
-        className={`rounded-xl my-3 md:my-0 transition-all duration-300 ${
+        className={`rounded-xl my-3 md:my-0 transition-all duration-300 dm-sans-font ${
           props.is_featured
             ? "md:col-span-1 shadow-featured border-cmhc-green border"
             : "shadow-lg"
@@ -155,11 +155,11 @@ export default function CondoCard(props) {
             </span>
           </span>
         </div>
-        <div className="flex flex-col gap-1 md:gap-2 p-3">
+        <div className="flex flex-col gap-1 md:gap-2 p-4">
           <div className="flex items-end justify-start gap-1">
             <Link
               href={`/${city}/${props.slug}`}
-              className="text-sm md:text-[1.4rem] leading-tight text-black font-extrabold whitespace-nowrap overflow-hidden text-ellipsis hover:text-[#00b5d6] transition-colors duration-300"
+              className="text-sm md:text-[1.4rem] leading-tight text-black font-semibold whitespace-nowrap overflow-hidden text-ellipsis hover:text-[#00b5d6] transition-colors duration-300"
             >
               {/* {props.no + 1 || "1"} */}
               {props.project_name}
@@ -206,7 +206,7 @@ export default function CondoCard(props) {
           </h4>
           <Dialog>
             <DialogTrigger asChild>
-              <button className="py-2 text-xs md:text-base text-center flex flex-row items-center justify-center shadow-green-100 shadow-md gap-0.5 text-white bg-cmhc-green font-bold hover:text-white hover:bg-green-900 border px-2 rounded-md w-full transition-all duration-200">
+              <button className="py-2 text-xs md:text-lg text-center flex flex-row items-center justify-center gap-0.5 font-bold text-white bg-[#fa5757] shadow-lg shadow-emerald-100 border-0 px-2 rounded-md w-full transition-all duration-200">
                 Request Price List
               </button>
             </DialogTrigger>

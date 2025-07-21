@@ -191,7 +191,7 @@ export default async function PropertyDetailPage({ params }) {
     return (
       <>
         {schemaScript}
-        <div className="max-w-[1370px] mx-auto px-4 md:pt-6">
+        <div className="max-w-[85.625rem] mx-auto px-4 md:pt-6">
           {/* Header with Breadcrumb and Share/Save */}
           <div className="flex justify-between items-center mb-0 sticky top-0 bg-white z-1">
             {/* Breadcrumb Navigation */}

@@ -287,7 +287,7 @@ export default async function CityPage({ params }) {
 
   return (
     <div className="pt-4 lg:pt-8 bg-white">
-      <div className=" max-w-6xl mx-auto px-4">
+      <div className="max-w-[85.625rem] mx-auto px-4">
         {/* Header Section */}
         <div className="flex flex-col space-y-4">
           <div className="flex">

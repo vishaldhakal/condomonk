@@ -63,11 +63,11 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
           <Link
             key={btn.value}
             href={btn.href}
-            className={`rounded-full md:px-4 px-2 md:py-3 py-2 md:text-sm text-[0.65rem] font-bold transition border-2
+            className={`rounded-full md:px-4 px-2 md:py-3 py-2 md:text-sm text-[0.65rem] font-semibold transition border-[1px]
             ${
               activeButton === btn.label
                 ? "bg-[#14463B] text-white border-[#14463B] shadow-lg"
-                : "bg-white text-[#14463B] border-gray-200 hover:bg-gray-100"
+                : "bg-white text-[#14463B] border-gray-400 hover:bg-gray-100"
             }
           `}
           >
@@ -77,11 +77,11 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
         {/* Price Range Button with Popover */}
         <div className="relative">
           <button
-            className={`rounded-full md:px-4 px-2 md:py-3 py-2 md:text-sm text-[0.65rem] font-bold transition border-2 flex items-center
+            className={`rounded-full md:px-4 px-2 md:py-3 py-2 md:text-sm text-[0.65rem] font-semibold transition border-[1px] flex items-center
             ${
               activeButton === "Price Range"
                 ? "border-blue-700 text-[#14463B] bg-white shadow-lg"
-                : "bg-white text-[#14463B] border-gray-200 hover:bg-gray-100"
+                : "bg-white text-[#14463B] border-gray-400 hover:bg-gray-100"
             }
           `}
             onClick={() => setShowPricePopover((v) => !v)}
@@ -119,7 +119,7 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
           ) : (
             <Link
               href={`/${citySlug}`}
-              className="rounded-full px-3 py-2 text-base font-bold border-2 border-red-400 text-red-500 bg-white hover:bg-red-50 transition ml-2 hidden md:inline-block"
+              className="rounded-full px-3 py-2 text-base font-semibold border-[1px] border-red-400 text-red-500 bg-white hover:bg-red-50 transition ml-2 hidden md:inline-block"
             >
               Clear Filters
             </Link>
