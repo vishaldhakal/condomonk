@@ -303,7 +303,7 @@ export default async function CityPage({ params }) {
 
         {/* Filter Section */}
 
-        <div className="sticky top-0 bg-white py-3 z-[9999] -mx-4">
+        <div className="sticky md:top-0 bg-white pt-2 pb-2 md:pt-3 md:pb-3 z-[9999] md:z-[999] -top-14 -mx-4 h-30 md:h-20 mt-4 md:mt-0">
           <div className="flex justify-start px-4">
             <PreconstructionFilter
               cityName={CapitalizeFirst(params.city)}

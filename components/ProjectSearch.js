@@ -5,6 +5,7 @@ import Link from "next/link";
 import { allCities } from "@/data/ontarioCities";
 import { cityRegions } from "@/data/postalCodeCities";
 import { useRouter } from "next/navigation";
+import { X } from "lucide-react";
 
 const SearchWithAutocomplete = ({
   isHomepage = false,
@@ -17,6 +18,7 @@ const SearchWithAutocomplete = ({
   animatedPlaceholder,
   customInputClasses = "",
   cityName = "",
+  searchTypeOption = true,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState({
@@ -343,10 +345,14 @@ const SearchWithAutocomplete = ({
     router.push(href);
   };
 
+  const handlePlaceholderClick = () => {
+    window.location.href = "/";
+  };
+
   // Apply different classes based on whether this is the homepage or not
   const inputClasses = isHomepage
     ? `w-full px-8  text-sm rounded-r-full border-0 shadow-lg focus:outline-none ${customInputClasses}`
-    : "w-full md:py-3 py-4 px-10 text-black text-xs rounded-r-full bg-white border border-l-0 border-gray-300 focus:outline-none   transition-all duration-200 ease-in-out placeholder:text-gray-400";
+    : `w-full md:py-3 py-4 px-10 text-black text-xs bg-white border ${!searchTypeOption ? "rounded-full" : "border-l-0 rounded-r-full "} border-gray-300 focus:outline-none   transition-all duration-200 ease-in-out placeholder:text-gray-400`;
 
   const iconClasses = isHomepage
     ? "absolute top-1/2 -translate-y-1/2 right-4 text-2xl"
@@ -359,30 +365,32 @@ const SearchWithAutocomplete = ({
   const placeholderText = cityName
     ? cityName
     : isHomepage
-    ? "Enter location, neighborhood, or property"
-    : "Search for a city or project...";
+      ? "Enter location, neighborhood, or property"
+      : "Search for a city or project...";
 
   return (
     <div className={`relative ${isHomepage ? "w-full" : "w-[380px]"}`}>
       <div className="relative flex text-xs ">
         <div className="relative ">
-          <button
-            onClick={handleDropdownClick}
-            className={`h-full px-3 py-3 ${
-              isHomepage
-                ? "bg-green-100 text-gray-800"
-                : "bg-green-700 text-white"
-            } font-medium rounded-l-full border-y border-l border-gray-200 flex items-center gap-2 hover:transition-colors`}
-          >
-            {localSearchType === "preconstruction"
-              ? "Pre Construction"
-              : "Resale Homes"}
-            <i
-              className={`fas fa-chevron-down transition-transform duration-200 ${
-                isDropdownOpen ? "rotate-180" : ""
-              }`}
-            ></i>
-          </button>
+          {searchTypeOption && (
+            <button
+              onClick={handleDropdownClick}
+              className={`h-full px-3 py-3 ${
+                isHomepage
+                  ? "bg-green-100 text-gray-800"
+                  : "bg-black text-white"
+              } font-medium rounded-l-full border-y border-l border-gray-200 flex items-center gap-2 hover:transition-colors`}
+            >
+              {localSearchType === "preconstruction"
+                ? "Pre Construction"
+                : "Resale Homes"}
+              <i
+                className={`fas fa-chevron-down transition-transform duration-200 ${
+                  isDropdownOpen ? "rotate-180" : ""
+                }`}
+              ></i>
+            </button>
+          )}
           {isDropdownOpen && (
             <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-40">
               <button
@@ -421,19 +429,39 @@ const SearchWithAutocomplete = ({
             type="text"
             className={inputClasses}
             id="searchInput"
-            placeholder={animatedPlaceholder || placeholderText}
+            placeholder={placeholderText}
             autoComplete="off"
             value={searchTerm}
             onChange={handleSearch}
             onFocus={handleFocus}
-            onBlur={(e) => {
-              handleBlur(e);
-              // Add small delay to allow click events to register
-              setTimeout(() => setIsDropdownOpen(false), 200);
-            }}
+            onBlur={handleBlur}
             ref={inputRef}
           />
-          <i className="fa-solid fa-magnifying-glass absolute left-2 top-1/2 -translate-y-1/2 text-gray-400 text-lg"></i>
+          {/* <X className="fa-solid fa-magnifying-glass absolute left-2 top-1/2 -translate-y-1/2 text-gray-400 text-lg" /> */}
+          {/* {searchTerm && (
+            <div className="">
+              <button
+                className="flex-1 text-center text-lg font-bold text-black w-fit"
+                onClick={handlePlaceholderClick}
+              >
+                {placeholderText}
+              </button>
+            </div>
+          )} */}
+          {!searchTerm && cityName && (
+            <button
+              className="absolute inset-y-0 left-2 h-[80%] top-1 flex items-center px-2 bg-gray-100 rounded-full text-gray-600 hover:bg-gray-200 transition-colors w-fit"
+              onClick={handlePlaceholderClick}
+            >
+              {placeholderText}
+              <button
+                className="text-gray-400 hover:text-gray-600 ml-2"
+                onClick={clearSearch}
+              >
+                <X className="w-3" />
+              </button>
+            </button>
+          )}
         </div>
       </div>
 
