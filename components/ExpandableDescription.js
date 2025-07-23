@@ -16,9 +16,9 @@ export default function ExpandableDescription({ children }) {
         {children}
       </div>
       {/* Toggle button only on mobile */}
-      <div className="block md:hidden">
+      <div className="block md:hidden text-center">
         <button
-          className="text-blue-600 font-medium mt-1 focus:outline-none"
+          className="text-blue-600 font-medium mt-1 focus:outline-none "
           onClick={() => setExpanded((v) => !v)}
         >
           {expanded ? "See less" : "See more"}

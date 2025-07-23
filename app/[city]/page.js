@@ -152,12 +152,16 @@ export async function generateMetadata({ params }, parent) {
 
   const title = !["calgary", "edmonton"].includes(city)
     ? `120+ Pre construction Homes in ${CapitalizeFirst(cleanCity)}`
-    : `${CapitalizeFirst(cleanCity)} Pre Construction & New Homes For Sale | Condomonk`;
+    : `${CapitalizeFirst(
+        cleanCity
+      )} Pre Construction & New Homes For Sale | Condomonk`;
   const description = !["calgary", "edmonton"].includes(city)
     ? `120+ Pre Construction Homes & New Developments in ${CapitalizeFirst(
         cleanCity
       )} | Check out plans, pricing, and availability`
-    : `Find new homes for sale in ${CapitalizeFirst(cleanCity)} | Check out plans, pricing, and availability`;
+    : `Find new homes for sale in ${CapitalizeFirst(
+        cleanCity
+      )} | Check out plans, pricing, and availability`;
 
   return {
     ...parent,
@@ -208,17 +212,43 @@ export default async function CityPage({ params }) {
 
   const generateTitle = () => {
     if (city == "calgary" || city == "edmonton") {
-      return `Pre Construction & New Homes for sale in ${CapitalizeFirst(city)}, AB`;
+      return (
+        <>
+          Pre Construction & New Homes for sale in{" "}
+          <span className="text-red-500">{CapitalizeFirst(city)}</span>, AB
+        </>
+      );
     }
-    return priceFilter
-      ? `Pre construction Homes in ${CapitalizeFirst(
-          cleanCity
-        )} ${formatPriceFilter(priceFilter)}`
-      : `120+ Pre Construction Homes in ${CapitalizeFirst(cleanCity)}`;
+    return priceFilter ? (
+      <>
+        Pre construction Homes in{" "}
+        <span className="text-red-500">{CapitalizeFirst(cleanCity)}</span>{" "}
+        {formatPriceFilter(priceFilter)}
+      </>
+    ) : (
+      <>
+        120+ Pre Construction Homes in{" "}
+        <span className="text-red-500">{CapitalizeFirst(cleanCity)}</span>
+      </>
+    );
   };
   const generateSubtitle = () => {
     if (city == "calgary" || city == "edmonton") {
-      return `100+ new homes in ${CapitalizeFirst(city)}, AB | Explore Floor Plans, Pricing & Availability. Condomonk has over 120 new  construction homes from trusted builders in ${CapitalizeFirst(city)}, AB. If you are looking to buy new  homes, Condomonk is your trusted platform to find 1000+  homes for sale in ${CapitalizeFirst(city)}. Whether you are looking to downsize to buy townhomes for sale in ${CapitalizeFirst(city)} or looking to buy condos in ${CapitalizeFirst(city)} for your family or browsing ${CapitalizeFirst(city)} detached homes for sale, our platform is updated daily with latest resale listings every hour. For new development homes, easily filter by number of bedrooms (1 to 4+), project type, and construction status from budget-friendly condo to a pre construction homes, contact us to connect you to the most exciting real estate opportunities in ${CapitalizeFirst(city)}.`;
+      return `100+ new homes in ${CapitalizeFirst(
+        city
+      )}, AB | Explore Floor Plans, Pricing & Availability. Condomonk has over 120 new  construction homes from trusted builders in ${CapitalizeFirst(
+        city
+      )}, AB. If you are looking to buy new  homes, Condomonk is your trusted platform to find 1000+  homes for sale in ${CapitalizeFirst(
+        city
+      )}. Whether you are looking to downsize to buy townhomes for sale in ${CapitalizeFirst(
+        city
+      )} or looking to buy condos in ${CapitalizeFirst(
+        city
+      )} for your family or browsing ${CapitalizeFirst(
+        city
+      )} detached homes for sale, our platform is updated daily with latest resale listings every hour. For new development homes, easily filter by number of bedrooms (1 to 4+), project type, and construction status from budget-friendly condo to a pre construction homes, contact us to connect you to the most exciting real estate opportunities in ${CapitalizeFirst(
+        city
+      )}.`;
     }
     return (
       <>
@@ -289,21 +319,21 @@ export default async function CityPage({ params }) {
     <div className="pt-4 lg:pt-8 bg-white">
       <div className="max-w-[85.625rem] mx-auto px-4">
         {/* Header Section */}
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col ">
           <div className="flex">
-            <h1 className="text-xl md:text-4xl font-bold ">
+            <h1 className="text-xl md:text-4xl font-bold mb-0">
               {generateTitle()}
             </h1>
           </div>
 
-          <h2 className="text-[8px] md:text-sm text-gray-500 pb-2">
+          <h2 className="text-[8px] md:text-sm text-gray-500  mt-0 md:pt-4 pt-0">
             <ExpandableDescription>{generateSubtitle()}</ExpandableDescription>
           </h2>
         </div>
 
         {/* Filter Section */}
 
-        <div className="sticky md:top-0 bg-white pt-2 pb-2 md:pt-3 md:pb-3 z-[9999] md:z-[999] -top-14 -mx-4 h-30 md:h-20 mt-4 md:mt-0">
+        <div className="sticky md:top-0 bg-white pt-2 pb-2 md:pt-3 md:pb-3 z-[9999] md:z-[999] -top-14 -mx-4 h-30 md:h-20 md:mt-0">
           <div className="flex justify-start px-4">
             <PreconstructionFilter
               cityName={CapitalizeFirst(params.city)}
@@ -311,11 +341,16 @@ export default async function CityPage({ params }) {
             />
           </div>
         </div>
-
+        <div>
+          <p className="pt-2">
+            Showing result{" "}
+            <span className="font-semibold">25 of 100 new homes</span>
+          </p>
+        </div>
         {/* Combined Projects Grid */}
         <div
           id="selling"
-          className="grid grid-cols-2 md:grid-cols-4 md:gap-4 gap-x-3 md:mt-8 mt-0"
+          className="grid grid-cols-2 md:grid-cols-4 md:gap-4 gap-x-3 md:mt-3 mt-0 mt-0 mx-2"
         >
           {/* Featured Projects First */}
           {featuredData.preconstructions?.map((item, index) => (

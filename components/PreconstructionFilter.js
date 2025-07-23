@@ -61,24 +61,24 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
     <div className=" bg-white z-[9999] md:z-30  ">
       <div className="flex flex-col md:flex-row md:space-x-3 space-x-1 items-center w-full">
         <div className="flex items-center h-30 md:h-12">
-          <SearchWithAutocomplete
+          {/* <SearchWithAutocomplete
             searchType={"preconstruction"}
             cityName={cityName}
             searchTypeOption={false}
-          />
+          /> */}
         </div>
         <div className="flex flex-row mt-2 md:mt-0 space-x-2 w-full justify-start py-2">
           {filterButtons.map((btn) => (
             <Link
               key={btn.value}
               href={btn.href}
-              className={`rounded-full md:px-4 px-2 md:py-2 py-1 flex items-center md:text-sm text-[0.6rem] font-semibold transition border-[1px]
-            ${
-              activeButton === btn.label
-                ? "bg-[#14463B] text-white border-[#14463B] shadow-lg"
-                : "bg-white text-[#14463B] border-gray-400 hover:bg-gray-100"
-            }
-          `}
+              className={`rounded-full md:px-4 px-2 md:py-2 py-1 flex items-center text-sm font-normal transition border-[1px]
+        ${
+          activeButton === btn.label
+            ? "bg-[#14463B] text-white border-[#14463B] shadow-lg"
+            : "bg-white text-[#14463B] border-gray-400 hover:bg-gray-100"
+        }
+      `}
             >
               {btn.label}
             </Link>
@@ -86,21 +86,21 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
           {/* Price Range Button with Popover */}
           <div className="relative">
             <button
-              className={`rounded-full md:px-4 px-2 md:py-2 py-1 flex litems-center md:text-sm text-[0.6rem] font-semibold transition border-[1px] 
-            ${
-              activeButton === "Price Range"
-                ? "border-blue-700 text-[#14463B] bg-white shadow-lg"
-                : "bg-white text-[#14463B] border-gray-400 hover:bg-gray-100"
-            }
-          `}
+              className={`rounded-full md:px-4 px-2 md:py-2 py-1 flex litems-center text-sm font-normal transition border-[1px] 
+        ${
+          activeButton === "Price Range"
+            ? "border-blue-700 text-[#14463B] bg-white shadow-lg"
+            : "bg-white text-[#14463B] border-gray-400 hover:bg-gray-100"
+        }
+      `}
               onClick={() => setShowPricePopover((v) => !v)}
               type="button"
             >
               Price Range
-              <ChevronDown className="ml-0 md:h-4 md:w-4 h-3 w-3 inline" />
+              <ChevronDown className="ml-1 md:h-4 md:w-4 h-3 w-3 inline" />
             </button>
             {showPricePopover && (
-              <div className="absolute z-50 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg w-56">
+              <div className="absolute z-50 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg w-40">
                 {priceRanges.map((option) => (
                   <Link
                     key={option.value}
@@ -114,27 +114,29 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
               </div>
             )}
           </div>
-          {/* Clear Filters Button */}
-          {isFiltered &&
-            (isMobileView ? (
+        </div>
+        {/* Clear Filters Button */}
+        {isFiltered &&
+          (isMobileView ? (
+            <div className="w-full mt-2 md:hidden">
               <Link
                 href={`/${citySlug}`}
-                className="rounded-full py-1 px-2 text-red-500 border-2 border-red-400 bg-white hover:bg-red-50 transition ml-2 flex items-center justify-center md:hidden text-[0.6rem]"
+                className="rounded-full py-1 px-2 text-red-500 border-2 border-red-400 bg-white hover:bg-red-50 transition w-auto text-sm"
                 aria-label="Clear Filters"
               >
                 {/* <X className="w-4 h-4" /> */}
                 Clear
               </Link>
-            ) : (
-              <Link
-                href={`/${citySlug}`}
-                className="rounded-full px-3 py-2 text-base font-semibold border-[1px] border-red-400 text-red-500 bg-white hover:bg-red-50 transition ml-2 hidden md:flex md:items-center "
-              >
-                <CircleX className="w-4 h-4 inline mr-1" />
-                Clear Filters
-              </Link>
-            ))}
-        </div>
+            </div>
+          ) : (
+            <Link
+              href={`/${citySlug}`}
+              className="rounded-full px-3 py-2 text-base font-semibold border-[1px] border-red-400 text-red-500 bg-white hover:bg-red-50 transition ml-2 hidden md:flex md:items-center w-auto "
+            >
+              <CircleX className="w-4 h-4 inline mr-1" />
+              Clear Filters
+            </Link>
+          ))}
       </div>
     </div>
   );
