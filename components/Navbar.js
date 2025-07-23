@@ -474,7 +474,7 @@ const Navbar = ({ cities, transparent }) => {
         <div
           className={`${
             isScrolled && !pathname.includes("/listings")
-              ? "fixed top-0 left-0 right-0 z-50"
+              ? " top-0 left-0 right-0 z-50"
               : "sticky top-0 z-50"
           } bg-white `}
         >

@@ -46,6 +46,7 @@ const SearchWithAutocomplete = ({
 
   // Add localSearchType state at component level
   const [localSearchType, setLocalSearchType] = useState(searchType);
+  const [localCityName, setLocalCityName] = useState(cityName);
 
   // Add this helper function to capitalize first letter of each word
   const capitalizeWords = (str) => {
@@ -300,7 +301,6 @@ const SearchWithAutocomplete = ({
 
   // Modify the clearSearch function
   const clearSearch = () => {
-    // Add a small delay to ensure navigation happens first
     setTimeout(() => {
       setIsFocused(false);
       setSearchTerm("");
@@ -310,6 +310,7 @@ const SearchWithAutocomplete = ({
         resaleCities: [],
         properties: [],
       });
+      setLocalCityName(""); // Hide city name after clearing
       inputRef.current?.blur();
     }, 100);
   };
@@ -364,8 +365,8 @@ const SearchWithAutocomplete = ({
     ? { color: "#f8a100", right: "30px" }
     : { color: "#FFC007", right: "15px" };
 
-  const placeholderText = cityName
-    ? cityName
+  const placeholderText = localCityName
+    ? localCityName
     : isHomepage
     ? "Enter location, neighborhood, or property"
     : "Search for a city or project...";
@@ -455,16 +456,18 @@ const SearchWithAutocomplete = ({
               </button>
             </div>
           )} */}
-          {!searchTerm && cityName && (
-            <button
-              className="absolute inset-y-0 left-2 h-[80%] top-1 flex items-center px-2 text-red-500 font-semibold  transition-colors w-fit text-base"
-              onClick={handlePlaceholderClick}
-            >
+          {!searchTerm && localCityName && (
+            <div className="absolute inset-y-0 left-2 h-[80%] top-1 flex items-center px-2 text-red-500 font-semibold transition-colors w-fit text-base">
               {placeholderText}
-              <button className="text-black ml-1" onClick={clearSearch}>
+              <button
+                type="button"
+                className="text-black ml-1"
+                onClick={clearSearch}
+                tabIndex={0}
+              >
                 <X className="w-6" />
               </button>
-            </button>
+            </div>
           )}
         </div>
       </div>

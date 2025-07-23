@@ -119,20 +119,6 @@ export default function CondoCard(props) {
         } hover:shadow-xl hover:translate-y-[-5px]`}
       >
         <div className={`relative overflow-hidden rounded-t-xl`}>
-          {/* Eye icon and views count */}
-          <span className="absolute top-2 left-2 flex items-center bg-[rgba(0,0,0,0.45)] text-white text-xs font-semibold px-2 py-1 rounded z-10 gap-1">
-            {/* Eye SVG */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zm-8 4.5c-3.314 0-6.057-2.614-7.342-4.5C1.943 6.614 4.686 4 8 4s6.057 2.614 7.342 4.5C14.057 9.386 11.314 12 8 12zm0-7a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zm0 4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-            </svg>
-            {randomViews.toLocaleString()}
-          </span>
           <Link
             href={`/${city}/${props.slug}`}
             className="block h-[300px] md:h-[250px]"
@@ -168,9 +154,23 @@ export default function CondoCard(props) {
               Featured
             </span>
           )}
-          <span className="absolute bottom-2 left-2">
+          <span className="absolute bottom-2 left-2 flex items-center gap-2">
             <span className="bg-white px-2 py-1 rounded text-xs">
               {props.status}
+            </span>
+            {/* Eye icon and views count */}
+            <span className="flex items-center bg-white text-black text-[10px] font-semibold px-2 py-1 rounded z-10 gap-1">
+              {/* Eye SVG */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zm-8 4.5c-3.314 0-6.057-2.614-7.342-4.5C1.943 6.614 4.686 4 8 4s6.057 2.614 7.342 4.5C14.057 9.386 11.314 12 8 12zm0-7a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zm0 4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+              </svg>
+              {randomViews.toLocaleString()}
             </span>
           </span>
         </div>
