@@ -86,7 +86,7 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
           {/* Price Range Button with Popover */}
           <div className="relative">
             <button
-              className={`rounded-full md:px-4 px-2 md:py-2 py-1 flex litems-center md:text-sm text-[0.6rem] font-semibold transition border-[1px]
+              className={`rounded-full md:px-4 px-2 md:py-2 py-1 flex litems-center md:text-sm text-[0.6rem] font-semibold transition border-[1px] 
             ${
               activeButton === "Price Range"
                 ? "border-blue-700 text-[#14463B] bg-white shadow-lg"

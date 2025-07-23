@@ -384,11 +384,11 @@ const SearchWithAutocomplete = ({
               {localSearchType === "preconstruction"
                 ? "Pre Construction"
                 : "Resale Homes"}
-              <i
+              {/* <i
                 className={`fas fa-chevron-down transition-transform duration-200 ${
                   isDropdownOpen ? "rotate-180" : ""
                 }`}
-              ></i>
+              ></i> */}
             </button>
           )}
           {isDropdownOpen && (

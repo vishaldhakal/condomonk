@@ -201,7 +201,7 @@ const Navbar = ({ cities, transparent }) => {
   };
 
   return (
-    <nav className="w-full bg-white">
+    <nav className="w-full bg-white z-[9999]">
       <div className={`max-w-[85.625rem] mx-auto px-4`}>
         <div className="flex md:justify-between justify-center md:items-center items-between h-12 md:h-16">
           {/* Left section - Logo and Search */}
