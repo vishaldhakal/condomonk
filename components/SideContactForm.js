@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ContactFormSubmit from "./ContactFormSubmit";
 
 export default function SideContactForm(props) {
@@ -29,12 +29,22 @@ export default function SideContactForm(props) {
     ContactFormSubmit(credentials, setSubmitbtn, setCredentials);
   };
 
+  useEffect(() => {
+    // Blur any focused element when component mounts
+    setTimeout(() => {
+      if (document.activeElement && document.activeElement.blur) {
+        document.activeElement.blur();
+      }
+    }, 0);
+  }, []);
+
   return (
     <form
       method="POST"
       className="space-y-4"
       onSubmit={(e) => handleFormSubmit(e)}
       id="contactForm"
+      autoFocus={false}
     >
       <div className="grid grid-cols-2 gap-4">
         <div>
@@ -46,6 +56,8 @@ export default function SideContactForm(props) {
             value={credentials.name}
             onChange={(e) => handleChange(e)}
             className="w-full px-4 py-4 rounded-lg bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+            tabIndex="-1"
+            autoFocus={false}
           />
         </div>
         <div>
@@ -58,6 +70,7 @@ export default function SideContactForm(props) {
             onChange={(e) => handleChange(e)}
             required={true}
             className="w-full px-4 py-4 rounded-lg bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+            autoFocus={false}
           />
         </div>
       </div>
@@ -72,6 +85,7 @@ export default function SideContactForm(props) {
           value={credentials.email}
           onChange={(e) => handleChange(e)}
           className="w-full px-4 py-4 rounded-lg bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+          autoFocus={false}
         />
       </div>
 
@@ -81,6 +95,7 @@ export default function SideContactForm(props) {
           className="w-full px-3 sm:px-4 py-4 border border-[#E5E7EB] rounded-xl text-[#2C2C2C] bg-white appearance-none focus:outline-none focus:ring-1 focus:ring-[#2C2C2C] text-xs sm:text-xs placeholder:text-xs"
           value={credentials.realtor}
           onChange={handleChange}
+          autoFocus={false}
         >
           <option value="No">No</option>
           <option value="Yes">Yes</option>
@@ -113,12 +128,14 @@ export default function SideContactForm(props) {
           value={credentials.message}
           onChange={(e) => handleChange(e)}
           className="w-full px-4 py-4 rounded-lg bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+          autoFocus={false}
         ></textarea>
       </div>
 
       <button
         type="submit"
         className="w-full px-4 py-4 bg-red-600 text-white rounded-lg text-lg font-bold font-medium  transition-colors"
+        autoFocus={false}
       >
         {submitbtn}
       </button>
