@@ -67,7 +67,7 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
             searchTypeOption={false}
           /> */}
         </div>
-        <div className="flex flex-row mt-2 md:mt-0 space-x-2 w-full justify-start py-2">
+        <div className="flex flex-row mt-2 md:mt-0 space-x-2 w-full justify-start py-2 items-center">
           {filterButtons.map((btn) => (
             <Link
               key={btn.value}
@@ -86,7 +86,7 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
           {/* Price Range Button with Popover */}
           <div className="relative">
             <button
-              className={`rounded-full md:px-4 px-2 md:py-2 py-1 flex litems-center text-sm font-normal transition border-[1px] 
+              className={`rounded-full md:px-4 px-2 md:py-2 py-1 flex items-center text-sm font-normal transition border-[1px] 
         ${
           activeButton === "Price Range"
             ? "border-blue-700 text-[#14463B] bg-white shadow-lg"
@@ -114,29 +114,19 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
               </div>
             )}
           </div>
-        </div>
-        {/* Clear Filters Button */}
-        {isFiltered &&
-          (isMobileView ? (
-            <div className="w-full mt-2 md:hidden">
-              <Link
-                href={`/${citySlug}`}
-                className="rounded-full py-1 px-2 text-red-500 border-2 border-red-400 bg-white hover:bg-red-50 transition w-auto text-sm"
-                aria-label="Clear Filters"
-              >
-                {/* <X className="w-4 h-4" /> */}
-                Clear
-              </Link>
-            </div>
-          ) : (
+          {/* Clear Filters Button (always inline) */}
+          {isFiltered && (
             <Link
               href={`/${citySlug}`}
-              className="rounded-full px-3 py-2 text-base font-semibold border-[1px] border-red-400 text-red-500 bg-white hover:bg-red-50 transition ml-2 hidden md:flex md:items-center w-auto "
+              className={`rounded-full px-3 py-2 text-base font-semibold border-[1px] border-red-400 text-red-500 bg-white hover:bg-red-50 transition ml-2 flex items-center w-auto`}
+              aria-label="Clear Filters"
             >
               <CircleX className="w-4 h-4 inline mr-1" />
-              Clear Filters
+              <span className="hidden md:inline">Clear Filters</span>
+              <span className="md:hidden">Clear</span>
             </Link>
-          ))}
+          )}
+        </div>
       </div>
     </div>
   );

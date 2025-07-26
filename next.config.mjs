@@ -8,6 +8,10 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "admin.homebaba.ca",
+      },
+      {
+        protocol: "https",
         hostname: "api.toassign.com",
       },
       {

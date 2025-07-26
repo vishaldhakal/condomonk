@@ -10,6 +10,7 @@ import AssignmentCard from "@/components/assignment/AssignmentCard";
 import GoogleMap from "@/components/GoogleMap";
 import PreconstructionFilter from "@/components/PreconstructionFilter";
 import ExpandableDescription from "@/components/ExpandableDescription";
+import CityPopup from "@/components/CityPopup";
 
 // Data fetching functions
 async function getData(city, priceFilter = null) {
@@ -232,6 +233,7 @@ export default async function CityPage({ params }) {
       </>
     );
   };
+
   const generateSubtitle = () => {
     if (city == "calgary" || city == "edmonton") {
       return `100+ new homes in ${CapitalizeFirst(
@@ -317,6 +319,9 @@ export default async function CityPage({ params }) {
 
   return (
     <div className="pt-4 lg:pt-8 bg-white">
+      {/* Add the CityPopup component */}
+      <CityPopup cityName={cleanCity} />
+
       <div className="max-w-[85.625rem] mx-auto px-4">
         {/* Header Section */}
         <div className="flex flex-col ">
