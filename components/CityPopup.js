@@ -114,7 +114,7 @@ const CityPopup = ({ cityName }) => {
               {/* Logo/Builder Name */}
               <div className="mb-6 text-center">
                 <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                  {popupData.popupBuilder}
+                  {popupData.PopupName}
                 </h2>
               </div>
 
