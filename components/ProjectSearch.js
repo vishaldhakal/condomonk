@@ -284,6 +284,10 @@ const SearchWithAutocomplete = ({
 
   const handleFocus = () => {
     setIsFocused(true);
+    // Clear the city name placeholder when user focuses to type
+    if (localCityName) {
+      setLocalCityName("");
+    }
   };
 
   // Modify the handleBlur function

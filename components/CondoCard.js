@@ -122,7 +122,6 @@ export default function CondoCard(props) {
           <Link
             href={`/${city}/${props.slug}`}
             className="block h-[300px] md:h-[250px]"
-            target="_blank"
           >
             <img
               loading="lazy"

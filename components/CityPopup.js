@@ -1,7 +1,6 @@
 // components/CityPopup.js
 "use client";
 import { useState, useEffect } from "react";
-import Image from "next/legacy/image";
 
 const CityPopup = ({ cityName }) => {
   const [popupData, setPopupData] = useState(null);
@@ -306,12 +305,10 @@ const CityPopup = ({ cityName }) => {
             <div className="md:w-1/2 relative min-h-[300px] md:min-h-[500px]">
               {popupData.PopupImage && (
                 <div className="relative w-full h-full">
-                  <Image
+                  <img
                     src={popupData.PopupImage}
                     alt={popupData.PopupName}
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-r-2xl"
+                    className="w-full h-full object-cover rounded-r-2xl"
                   />
                   {/* City name overlay */}
                   <div className="absolute bottom-4 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded">

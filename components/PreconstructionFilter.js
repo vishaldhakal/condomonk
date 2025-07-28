@@ -114,19 +114,31 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
               </div>
             )}
           </div>
-          {/* Clear Filters Button (always inline) */}
+          {/* Clear Filters Button - Desktop (inline) */}
           {isFiltered && (
             <Link
               href={`/${citySlug}`}
-              className={`rounded-full px-3 py-2 text-base font-semibold border-[1px] border-red-400 text-red-500 bg-white hover:bg-red-50 transition ml-2 flex items-center w-auto`}
+              className={`hidden md:flex rounded-full px-3 py-2 text-base font-semibold border-[1px] border-red-400 text-red-500 bg-white hover:bg-red-50 transition ml-2 items-center w-auto`}
               aria-label="Clear Filters"
             >
               <CircleX className="w-4 h-4 inline mr-1" />
-              <span className="hidden md:inline">Clear Filters</span>
-              <span className="md:hidden">Clear</span>
+              <span>Clear Filters</span>
             </Link>
           )}
         </div>
+        {/* Clear Filters Button - Mobile (next line) */}
+        {isFiltered && (
+          <div className="flex md:hidden w-full justify-start mt-2">
+            <Link
+              href={`/${citySlug}`}
+              className={`rounded-full px-3 py-2 text-base font-semibold border-[1px] border-red-400 text-red-500 bg-white hover:bg-red-50 transition flex items-center w-auto`}
+              aria-label="Clear Filters"
+            >
+              <CircleX className="w-4 h-4 inline mr-1" />
+              <span>Clear</span>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
