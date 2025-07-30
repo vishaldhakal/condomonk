@@ -11,7 +11,8 @@ const CityPopup = ({ cityName }) => {
     phone: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitBtn, setSubmitBtn] = useState("SIGN ME UP!");
+  const [submitBtn, setSubmitBtn] = useState("Request Info From Builder");
+  const [showFullDisclaimer, setShowFullDisclaimer] = useState(false);
 
   // Format city name to match API response (capitalize first letter)
   const formatCityName = (city) => {
@@ -121,7 +122,7 @@ const CityPopup = ({ cityName }) => {
         // Close popup after successful submission
         setTimeout(() => {
           setShowPopup(false);
-          setSubmitBtn("SIGN ME UP!");
+          setSubmitBtn("Request Info From Builder");
         }, 2000);
       } else {
         throw new Error("Form submission failed");
@@ -181,17 +182,22 @@ const CityPopup = ({ cityName }) => {
             {/* Left Side - Form */}
             <div className="md:w-1/2 p-8 md:p-12 order-2 md:order-1">
               {/* Logo/Builder Name */}
-              <div className="mb-6 text-center">
-                <h2 className="text-4xl font-bold text-gray-800 mb-2">
+              <div className="mb-3 text-center">
+                <h2 className="text-4xl font-bold text-gray-800 mb-0">
                   {popupData.PopupName}
                 </h2>
+                {popupData.popupBuilder && (
+                  <p className="text-lg text-gray-600 font-medium">
+                    by {popupData.popupBuilder}
+                  </p>
+                )}
               </div>
 
               {/* Price */}
               <div className="mb-6 flex text-center items-center justify-center">
                 <h3 className="text-xl text-gray-700 mb-1">Starting From</h3>
-                <p className="text-xl font-bold text-red-500 ml-2">
-                  ${popupData.starting_price?.toLocaleString()}s
+                <p className="text-xl font-extrabold text-green-600 ml-2">
+                  ${popupData.starting_price?.toLocaleString()}
                 </p>
               </div>
 
@@ -288,19 +294,79 @@ const CityPopup = ({ cityName }) => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-3 px-6 rounded-2xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1 active:translate-y-0 shadow-lg hover:shadow-xl"
+                  className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-2xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1 active:translate-y-0 shadow-lg hover:shadow-xl"
                 >
                   {submitBtn}
                 </button>
               </form>
 
-              {/* No Thanks Button */}
-              <button
-                onClick={closePopup}
-                className="w-full mt-4 text-gray-500 hover:text-gray-700 py-2 transition-colors"
-              >
-                No, Thanks
-              </button>
+              <p className="font-bold text-center mt-2">
+                Directly connect with Builder Sales Team{" "}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  className="inline-block ml-1 text-blue-500"
+                  viewBox="0 0 16 16"
+                >
+                  <circle cx="8" cy="8" r="7" fill="currentColor" />
+                  <path
+                    d="M6.5 8.5l1.5 1.5 3-3"
+                    stroke="white"
+                    strokeWidth="2"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </p>
+
+              {/* Disclaimer */}
+              <div className="mt-4 text-center">
+                <p className="text-[9px] text-gray-500 leading-tight">
+                  By providing your name and contact information and clicking
+                  the Request info button, you consent and agree to receive
+                  marketing communications from homebaba and each of the
+                  builders or agents you selected above, including emails, calls
+                  or text messages using an automatic telephone dialing system
+                  or an artificial or prerecorded voice.{" "}
+                  {!showFullDisclaimer && (
+                    <button
+                      type="button"
+                      onClick={() => setShowFullDisclaimer(true)}
+                      className="text-blue-500 underline hover:text-blue-700"
+                    >
+                      See more
+                    </button>
+                  )}
+                  {showFullDisclaimer && (
+                    <span className="block mt-0 ">
+                      {" "}
+                      You also agree to Homebaba's Privacy Policy, and Terms of
+                      Service. Your agreement is not a condition to purchasing
+                      any property, goods or services, and you may call us
+                      instead of submitting the information online. You also
+                      acknowledge and agree that you can revoke your
+                      authorization at any time. Your consent herein also
+                      applies to any future registration on national or state
+                      Do-Not-Call lists. For mobile phones, standard message and
+                      data charges apply. Consult our Privacy Policy for
+                      additional information, including unsubscribe options.
+                      <br />
+                      <br />
+                      This site is protected by reCAPTCHA and the Google Privacy
+                      Policy and Terms of Service apply.{" "}
+                      <button
+                        type="button"
+                        onClick={() => setShowFullDisclaimer(false)}
+                        className="text-blue-500 underline hover:text-blue-700"
+                      >
+                        See less
+                      </button>
+                    </span>
+                  )}
+                </p>
+              </div>
             </div>
 
             {/* Right Side - Image */}
