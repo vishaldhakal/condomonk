@@ -167,7 +167,7 @@ const CityPopup = ({ cityName }) => {
       >
         {/* Popup Container */}
         <div
-          className="relative bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
+          className="relative bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[80vh] overflow-hidden"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close Button */}
@@ -178,40 +178,55 @@ const CityPopup = ({ cityName }) => {
             ✕
           </button>
 
-          <div className="flex flex-col md:flex-row">
+          <div className="flex flex-col lg:flex-row">
             {/* Left Side - Form */}
-            <div className="md:w-1/2 p-8 md:p-12 order-2 md:order-1">
+            <div className="lg:w-3/5 p-4 md:p-6 order-2 lg:order-1">
               {/* Logo/Builder Name */}
-              <div className="mb-3 text-center">
-                <h2 className="text-4xl font-bold text-gray-800 mb-0">
+              <div className="mb-4 text-center">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-1 leading-tight tracking-tight">
                   {popupData.PopupName}
                 </h2>
                 {popupData.popupBuilder && (
-                  <p className="text-lg text-gray-600 font-medium">
-                    by {popupData.popupBuilder}
+                  <p className="text-sm md:text-base text-gray-600 font-medium tracking-wide">
+                    by{" "}
+                    <span className="text-gray-800 font-semibold">
+                      {popupData.popupBuilder}
+                    </span>
                   </p>
                 )}
               </div>
 
               {/* Price */}
-              <div className="mb-6 flex text-center items-center justify-center">
-                <h3 className="text-xl text-gray-700 mb-1">Starting From</h3>
-                <p className="text-xl font-extrabold text-green-600 ml-2">
+              <div className="mb-5 text-center bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-3 border border-green-100">
+                <h3 className="text-xs md:text-sm text-gray-600 font-medium mb-1 uppercase tracking-wider">
+                  Starting From
+                </h3>
+                <p className="text-xl md:text-2xl font-black text-green-700 tracking-tight">
                   ${popupData.starting_price?.toLocaleString()}
                 </p>
               </div>
 
               {/* Description */}
-              <div className="mb-8">
-                <p className="text-gray-600 text-center">
-                  Get the pricing, floor plans,
-                  <br />
-                  payment plan directly from the builder.
+              <div className="mb-5 text-center">
+                <p className="text-base md:text-lg text-gray-700 leading-relaxed font-medium">
+                  Get the{" "}
+                  <span className="text-gray-900 font-semibold">pricing</span>,
+                  <span className="text-gray-900 font-semibold">
+                    {" "}
+                    floor plans
+                  </span>
+                  , and
+                  <br className="hidden md:block" />
+                  <span className="text-gray-900 font-semibold">
+                    {" "}
+                    payment plan
+                  </span>{" "}
+                  directly from the builder.
                 </p>
               </div>
 
               {/* Form */}
-              <form onSubmit={handleSubmit} className="space-y-3">
+              <form onSubmit={handleSubmit} className="space-y-2">
                 <div className="group focus-within:shadow-lg transition-shadow duration-300">
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -235,7 +250,7 @@ const CityPopup = ({ cityName }) => {
                       value={formData.firstName}
                       onChange={handleInputChange}
                       required
-                      className="w-full pl-10 px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-sm"
+                      className="w-full pl-10 px-3 py-2.5 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-sm"
                     />
                   </div>
                 </div>
@@ -261,7 +276,7 @@ const CityPopup = ({ cityName }) => {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        className="w-full pl-10 px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-sm"
+                        className="w-full pl-10 px-3 py-2.5 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-sm"
                       />
                     </div>
                   </div>
@@ -285,7 +300,7 @@ const CityPopup = ({ cityName }) => {
                         value={formData.phone}
                         onChange={handleInputChange}
                         required
-                        className="w-full pl-10 px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-sm"
+                        className="w-full pl-10 px-3 py-2.5 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-sm"
                       />
                     </div>
                   </div>
@@ -294,36 +309,38 @@ const CityPopup = ({ cityName }) => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-2xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1 active:translate-y-0 shadow-lg hover:shadow-xl"
+                  className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2.5 px-5 rounded-2xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1 active:translate-y-0 shadow-lg hover:shadow-xl"
                 >
                   {submitBtn}
                 </button>
               </form>
 
-              <p className="font-bold text-center mt-2">
-                Directly connect with Builder Sales Team{" "}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  className="inline-block ml-1 text-blue-500"
-                  viewBox="0 0 16 16"
-                >
-                  <circle cx="8" cy="8" r="7" fill="currentColor" />
-                  <path
-                    d="M6.5 8.5l1.5 1.5 3-3"
-                    stroke="white"
-                    strokeWidth="2"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </p>
+              <div className="text-center mt-3 mb-2">
+                <p className="text-xs md:text-sm font-semibold text-gray-800 flex items-center justify-center gap-2">
+                  <span>Directly connect with Builder Sales Team</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    className="text-blue-600"
+                    viewBox="0 0 16 16"
+                  >
+                    <circle cx="8" cy="8" r="7" fill="currentColor" />
+                    <path
+                      d="M6.5 8.5l1.5 1.5 3-3"
+                      stroke="white"
+                      strokeWidth="2"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </p>
+              </div>
 
               {/* Disclaimer */}
-              <div className="mt-4 text-center">
-                <p className="text-[9px] text-gray-500 leading-tight">
+              <div className="mt-3 text-center px-2">
+                <p className="text-[7px] text-gray-500 leading-relaxed">
                   By providing your name and contact information and clicking
                   the Request info button, you consent and agree to receive
                   marketing communications from homebaba and each of the
@@ -370,7 +387,7 @@ const CityPopup = ({ cityName }) => {
             </div>
 
             {/* Right Side - Image */}
-            <div className="md:w-1/2 relative  md:min-h-[500px] order-1 md:order-2">
+            <div className="lg:w-3/5 relative lg:min-h-[400px] order-1 lg:order-2">
               {popupData.PopupImage && (
                 <div className="relative w-full h-full">
                   <img
