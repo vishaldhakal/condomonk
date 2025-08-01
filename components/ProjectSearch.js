@@ -348,6 +348,16 @@ const SearchWithAutocomplete = ({
 
     // Navigate and reset state
     router.push(href);
+
+    // Clear states to close dropdown
+    setIsFocused(false);
+    setSearchTerm("");
+    setSearchResults({
+      cities: [],
+      projects: [],
+      resaleCities: [],
+      properties: [],
+    });
   };
 
   const handlePlaceholderClick = () => {
@@ -488,7 +498,7 @@ const SearchWithAutocomplete = ({
           {/* Show default cities when no search term and on homepage */}
           {isHomepage && !searchTerm && defaultCities.length > 0 && (
             <div className="py-2">
-              <div className="px-4 py-2 text-xs font-medium text-black text-left">
+              <div className="px-4 py-2 text-sm font-medium text-black text-left">
                 Popular Cities
               </div>
               <div className="grid grid-cols-2 gap-1">
@@ -507,8 +517,10 @@ const SearchWithAutocomplete = ({
                       onTouchStart={(e) => handleTouchStart(e, cityUrl)}
                       className="flex items-center px-4 py-3 hover:bg-gray-50 transition-colors"
                     >
-                      <i className="fa-solid fa-location-dot text-gray-400 text-sm w-6"></i>
-                      <span className="text-sm text-gray-700">{city.name}</span>
+                      <i className="fa-solid fa-location-dot text-gray-400 text-base w-6"></i>
+                      <span className="text-base text-gray-700">
+                        {city.name}
+                      </span>
                     </Link>
                   );
                 })}
@@ -528,7 +540,7 @@ const SearchWithAutocomplete = ({
                   {/* Pre-Construction Cities */}
                   {searchResults.cities?.length > 0 && (
                     <div className="py-2 border-t border-gray-100">
-                      <div className="px-4 py-1 text-xs font-medium text-black text-left">
+                      <div className="px-4 py-1 text-sm font-medium text-black text-left">
                         Cities
                       </div>
                       {searchResults.cities.map((city, index) => (
@@ -541,8 +553,8 @@ const SearchWithAutocomplete = ({
                           }
                           className="flex items-start px-4 py-2 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0"
                         >
-                          <i className="fa-solid fa-location-dot text-gray-400 text-xs w-6"></i>
-                          <span className="text-xs text-gray-700">
+                          <i className="fa-solid fa-location-dot text-gray-400 text-sm w-6"></i>
+                          <span className="text-sm text-gray-700">
                             {city.name}
                           </span>
                         </Link>
@@ -552,7 +564,7 @@ const SearchWithAutocomplete = ({
                   {/* Pre-Construction Projects */}
                   {searchResults.projects?.length > 0 && (
                     <div className="py-2">
-                      <div className="px-4 py-1 text-xs font-medium text-black text-left">
+                      <div className="px-4 py-1 text-sm font-medium text-black text-left">
                         Projects
                       </div>
                       {searchResults.projects.map((project, index) => (
@@ -573,12 +585,12 @@ const SearchWithAutocomplete = ({
                           }
                           className="flex items-start px-4 py-2 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0"
                         >
-                          <i className="fa-solid fa-building text-gray-400 text-xs w-6"></i>
+                          <i className="fa-solid fa-building text-gray-400 text-sm w-6"></i>
                           <div className="min-w-0 flex-1">
-                            <div className="text-xs text-gray-700 truncate">
+                            <div className="text-sm text-gray-700 truncate">
                               {project.project_name}
                             </div>
-                            <div className="text-[10px] text-gray-500">
+                            <div className="text-xs text-gray-500">
                               • {capitalizeWords(project.city.slug)}
                               <span className="pl-2">
                                 - {project.project_type}
@@ -597,7 +609,7 @@ const SearchWithAutocomplete = ({
                     <div className="py-2">
                       <div
                         className={`px-4 py-1 ${
-                          isHomepage ? "text-sm" : "text-xs"
+                          isHomepage ? "text-base" : "text-sm"
                         } font-medium text-gray-500 text-left`}
                       >
                         Cities
@@ -622,12 +634,12 @@ const SearchWithAutocomplete = ({
                           >
                             <i
                               className={`fa-solid fa-location-dot text-gray-400 ${
-                                isHomepage ? "text-sm" : "text-xs"
+                                isHomepage ? "text-base" : "text-sm"
                               } w-6`}
                             ></i>
                             <span
                               className={`${
-                                isHomepage ? "text-sm" : "text-xs"
+                                isHomepage ? "text-base" : "text-sm"
                               } text-gray-700`}
                             >
                               {city.city}
@@ -643,7 +655,7 @@ const SearchWithAutocomplete = ({
                     <div className="py-2 border-t border-gray-100">
                       <div
                         className={`px-4 py-1 ${
-                          isHomepage ? "text-sm" : "text-xs"
+                          isHomepage ? "text-base" : "text-sm"
                         } font-medium text-gray-500 text-left`}
                       >
                         Properties
@@ -662,20 +674,20 @@ const SearchWithAutocomplete = ({
                           >
                             <i
                               className={`fa-solid fa-home text-gray-400 ${
-                                isHomepage ? "text-sm" : "text-xs"
+                                isHomepage ? "text-base" : "text-sm"
                               } w-6`}
                             ></i>
                             <div className="min-w-0 flex-1">
                               <div
                                 className={`${
-                                  isHomepage ? "text-sm" : "text-xs"
+                                  isHomepage ? "text-base" : "text-sm"
                                 } text-gray-700 truncate`}
                               >
                                 {property.address}
                               </div>
                               <div
                                 className={`${
-                                  isHomepage ? "text-xs" : "text-[10px]"
+                                  isHomepage ? "text-sm" : "text-xs"
                                 } text-gray-500`}
                               >
                                 {property.city} - $
@@ -708,21 +720,21 @@ const SearchWithAutocomplete = ({
                   <div className="flex justify-center">
                     <i
                       className={`fas fa-search ${
-                        isHomepage ? "text-3xl" : "text-2xl"
+                        isHomepage ? "text-4xl" : "text-3xl"
                       } text-gray-300`}
                     ></i>
                   </div>
                   <div>
                     <div
                       className={`${
-                        isHomepage ? "text-base" : "text-sm"
+                        isHomepage ? "text-lg" : "text-base"
                       } font-medium text-gray-600`}
                     >
                       No matches found
                     </div>
                     <div
                       className={`${
-                        isHomepage ? "text-sm" : "text-xs"
+                        isHomepage ? "text-base" : "text-sm"
                       } text-gray-400 mt-1`}
                     >
                       Try adjusting your search terms

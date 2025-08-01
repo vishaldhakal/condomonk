@@ -27,12 +27,20 @@ const CityPopup = ({ cityName }) => {
           const data = await response.json();
 
           // Find popup that matches the current city and should be shown
-          const matchingPopup = data.find(
-            (popup) =>
-              popup.show_popup &&
-              popup.popupCity.name.toLowerCase() ===
+          const matchingPopup = data.find((popup) => {
+            if (!popup.show_popup) return false;
+
+            // Handle both single city object and array of cities
+            const cities = Array.isArray(popup.popupCity)
+              ? popup.popupCity
+              : [popup.popupCity];
+
+            return cities.some(
+              (city) =>
+                city.name.toLowerCase() ===
                 formatCityName(cityName).toLowerCase()
-          );
+            );
+          });
 
           if (matchingPopup) {
             setPopupData(matchingPopup);
@@ -85,6 +93,7 @@ const CityPopup = ({ cityName }) => {
         "message",
         `[POPUP INQUIRY] I would like to get the pricing, floor plans, and payment plan for ${popupData.PopupName} in ${cityName}. Please contact me with more information. This inquiry was submitted through the city popup on your website.`
       );
+      form_data.append("popup_id", popupData.id || "");
       form_data.append("realtor", "No");
       form_data.append("source", `${fullUrl} - City Popup (${cityName})`);
       form_data.append("popup_city", cityName);
@@ -92,7 +101,7 @@ const CityPopup = ({ cityName }) => {
       form_data.append("inquiry_type", "City Popup Form");
 
       const response = await fetch(
-        "https://admin.homebaba.ca/api/contact-form-submit/",
+        "https://admin.homebaba.ca/api/builder-popup-submit//",
         {
           method: "POST",
           body: form_data,
@@ -162,48 +171,120 @@ const CityPopup = ({ cityName }) => {
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black bg-opacity-50 z-[9999] flex items-center justify-center p-4"
+        className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-[9999] flex items-center justify-center p-2 sm:p-4"
         onClick={closePopup}
       >
         {/* Popup Container */}
         <div
-          className="relative bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
+          className="relative bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
         >
+          {/* Background Pattern */}
+          <div className="absolute inset-0 z-0 opacity-5">
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+              <pattern
+                id="grid"
+                width="30"
+                height="30"
+                patternUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M 30 0 L 0 0 0 30"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                />
+              </pattern>
+              <rect width="100%" height="100%" fill="url(#grid)" />
+              <circle cx="20%" cy="20%" r="120" fill="url(#gradient1)" />
+              <circle cx="80%" cy="80%" r="100" fill="url(#gradient2)" />
+              <defs>
+                <radialGradient
+                  id="gradient1"
+                  cx="50%"
+                  cy="50%"
+                  r="50%"
+                  fx="50%"
+                  fy="50%"
+                >
+                  <stop offset="0%" stopColor="#FF3A3A" stopOpacity="0.2" />
+                  <stop offset="100%" stopColor="#FF3A3A" stopOpacity="0" />
+                </radialGradient>
+                <radialGradient
+                  id="gradient2"
+                  cx="50%"
+                  cy="50%"
+                  r="50%"
+                  fx="50%"
+                  fy="50%"
+                >
+                  <stop offset="0%" stopColor="#3A3AFF" stopOpacity="0.2" />
+                  <stop offset="100%" stopColor="#3A3AFF" stopOpacity="0" />
+                </radialGradient>
+              </defs>
+            </svg>
+          </div>
+
           {/* Close Button */}
           <button
             onClick={closePopup}
-            className="absolute top-4 right-4 z-10 w-8 h-8 bg-white bg-opacity-80 rounded-full flex items-center justify-center text-gray-600 hover:text-gray-800 hover:bg-opacity-100 transition-all"
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 w-8 h-8 bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full flex items-center justify-center text-gray-700 hover:text-gray-900 transition-all duration-300 shadow-lg hover:shadow-xl border border-gray-200"
           >
-            ✕
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4 sm:h-5 sm:w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
           </button>
 
-          <div className="flex flex-col md:flex-row">
+          <div className="flex flex-col md:flex-row relative z-10 md:items-stretch">
             {/* Left Side - Form */}
-            <div className="md:w-1/2 p-8 md:p-12 order-2 md:order-1">
-              {/* Logo/Builder Name */}
-              <div className="mb-3 text-center">
-                <h2 className="text-4xl font-bold text-gray-800 mb-0">
-                  {popupData.PopupName}
-                </h2>
-                {popupData.popupBuilder && (
-                  <p className="text-lg text-gray-600 font-medium">
-                    by {popupData.popupBuilder}
-                  </p>
-                )}
+            <div className="md:w-1/2 p-4 sm:p-6 md:p-12 order-2 md:order-1 flex flex-col justify-center">
+              {/* Don't miss out badge */}
+              <div className="flex justify-center">
+                <div className="inline-block border-2 border-red-300 text-red-600 px-2 py-1 rounded-full text-[12px] font-medium">
+                  Don't miss out
+                </div>
               </div>
 
+              {/* Project Name */}
+              <div className="text-center">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 leading-tight">
+                  {popupData.PopupName}
+                </h2>
+              </div>
+
+              {/* Builder Name */}
+              {/* {popupData.popupBuilder && (
+                <div className=" text-center">
+                  <p className="text-xs text-gray-600 font-medium">
+                    by {popupData.popupBuilder}
+                  </p>
+                </div>
+              )} */}
+
               {/* Price */}
-              <div className="mb-6 flex text-center items-center justify-center">
-                <h3 className="text-xl text-gray-700 mb-1">Starting From</h3>
-                <p className="text-xl font-extrabold text-green-600 ml-2">
-                  ${popupData.starting_price?.toLocaleString()}
-                </p>
+              <div className="mb-4 text-center">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-black text-gray-900 mb-1">
+                  STARTING FROM{" "}
+                  <span className="text-green-600">
+                    ${popupData.starting_price?.toLocaleString()}
+                  </span>
+                </h3>
               </div>
 
               {/* Description */}
-              <div className="mb-8">
-                <p className="text-gray-600 text-center">
+              <div className="mb-4 text-center">
+                <p className="text-gray-600 text-sm leading-light">
                   Get the pricing, floor plans,
                   <br />
                   payment plan directly from the builder.
@@ -211,7 +292,8 @@ const CityPopup = ({ cityName }) => {
               </div>
 
               {/* Form */}
-              <form onSubmit={handleSubmit} className="space-y-3">
+              <form onSubmit={handleSubmit} className="space-y-2">
+                {/* First Name */}
                 <div className="group focus-within:shadow-lg transition-shadow duration-300">
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -235,11 +317,12 @@ const CityPopup = ({ cityName }) => {
                       value={formData.firstName}
                       onChange={handleInputChange}
                       required
-                      className="w-full pl-10 px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-sm"
+                      className="w-full pl-10 px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-gray-500"
                     />
                   </div>
                 </div>
 
+                {/* Email and Phone Row */}
                 <div className="flex flex-row gap-2">
                   <div className="group focus-within:shadow-lg transition-shadow duration-300 flex-1">
                     <div className="relative">
@@ -261,7 +344,7 @@ const CityPopup = ({ cityName }) => {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        className="w-full pl-10 px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-sm"
+                        className="w-full pl-10 px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-gray-500"
                       />
                     </div>
                   </div>
@@ -285,45 +368,49 @@ const CityPopup = ({ cityName }) => {
                         value={formData.phone}
                         onChange={handleInputChange}
                         required
-                        className="w-full pl-10 px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-sm"
+                        className="w-full pl-10 px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-gray-500"
                       />
                     </div>
                   </div>
                 </div>
 
+                {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-2xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1 active:translate-y-0 shadow-lg hover:shadow-xl"
+                  className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1 active:translate-y-0 shadow-lg hover:shadow-xl text-base"
                 >
                   {submitBtn}
                 </button>
               </form>
 
-              <p className="font-bold text-center mt-2">
-                Directly connect with Builder Sales Team{" "}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  className="inline-block ml-1 text-blue-500"
-                  viewBox="0 0 16 16"
-                >
-                  <circle cx="8" cy="8" r="7" fill="currentColor" />
-                  <path
-                    d="M6.5 8.5l1.5 1.5 3-3"
-                    stroke="white"
-                    strokeWidth="2"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </p>
+              {/* Direct Connect Message */}
+              <div className="flex items-center justify-center mt-2">
+                <p className="font-bold text-center text-sm text-gray-700">
+                  Directly connect with Builder Sales Team{" "}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    className="inline-block ml-1 text-blue-500"
+                    viewBox="0 0 16 16"
+                  >
+                    <circle cx="8" cy="8" r="7" fill="currentColor" />
+                    <path
+                      d="M6.5 8.5l1.5 1.5 3-3"
+                      stroke="white"
+                      strokeWidth="2"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </p>
+              </div>
 
               {/* Disclaimer */}
               <div className="mt-4 text-center">
-                <p className="text-[9px] text-gray-500 leading-tight">
+                <p className="text-[10px] text-gray-500 leading-tight">
                   By providing your name and contact information and clicking
                   the Request info button, you consent and agree to receive
                   marketing communications from homebaba and each of the
@@ -340,8 +427,7 @@ const CityPopup = ({ cityName }) => {
                     </button>
                   )}
                   {showFullDisclaimer && (
-                    <span className="block mt-0 ">
-                      {" "}
+                    <span className="block mt-1">
                       You also agree to Homebaba's Privacy Policy, and Terms of
                       Service. Your agreement is not a condition to purchasing
                       any property, goods or services, and you may call us
@@ -370,17 +456,17 @@ const CityPopup = ({ cityName }) => {
             </div>
 
             {/* Right Side - Image */}
-            <div className="md:w-1/2 relative  md:min-h-[500px] order-1 md:order-2">
+            <div className="md:w-1/2 relative h-48 sm:h-64 md:h-[500px] lg:h-[550px] order-1 md:order-2">
               {popupData.PopupImage && (
                 <div className="relative w-full h-full">
                   <img
                     src={popupData.PopupImage}
                     alt={popupData.PopupName}
-                    className="w-full h-full object-cover rounded-r-2xl"
+                    className="w-full h-full object-cover rounded-t-2xl md:rounded-t-none md:rounded-r-2xl"
                   />
                   {/* City name overlay */}
-                  <div className="absolute bottom-4 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded">
-                    {popupData.popupCity.name}, Ontario
+                  <div className="absolute bottom-4 right-4 bg-black bg-opacity-60 text-white px-2 py-1 rounded-lg text-xs sm:text-sm font-medium">
+                    {formatCityName(cityName)}, Ontario
                   </div>
                 </div>
               )}

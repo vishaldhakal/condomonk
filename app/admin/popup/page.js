@@ -13,9 +13,9 @@ export default function PopupManager() {
     PopupImage: null,
     popupBuilder: "",
     popupBuilderEmail: "",
-    popupCity: "",
+    popupCity: [], // Changed to array for multiple cities
     show_popup: false,
-    starting_price: "", // <-- Add this line
+    starting_price: "",
   });
   const [editingPopupId, setEditingPopupId] = useState(null);
 
@@ -58,11 +58,23 @@ export default function PopupManager() {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked, files } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]:
-        type === "checkbox" ? checked : type === "file" ? files[0] : value,
-    }));
+
+    if (name === "popupCity") {
+      // Handle multiple city selection
+      const cityId = parseInt(value);
+      setFormData((prev) => ({
+        ...prev,
+        popupCity: checked
+          ? [...prev.popupCity, cityId]
+          : prev.popupCity.filter((id) => id !== cityId),
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]:
+          type === "checkbox" ? checked : type === "file" ? files[0] : value,
+      }));
+    }
   };
 
   const handleImageDelete = () => {
@@ -79,9 +91,9 @@ export default function PopupManager() {
       PopupImage: null,
       popupBuilder: popup.popupBuilder || "",
       popupBuilderEmail: popup.popupBuilderEmail || "",
-      popupCity: popup.popupCity || "",
+      popupCity: popup.popupCity || popup.popupCity_ids || [], // Handle both possible field names
       show_popup: popup.show_popup || false,
-      starting_price: popup.starting_price || "", // <-- Add this line
+      starting_price: popup.starting_price || "",
     });
     setEditingPopupId(popup.id);
     setShowForm(true);
@@ -94,9 +106,12 @@ export default function PopupManager() {
     formPayload.append("PopupName", formData.PopupName);
     formPayload.append("popupBuilder", formData.popupBuilder);
     formPayload.append("popupBuilderEmail", formData.popupBuilderEmail);
-    formPayload.append("popupCity_id", formData.popupCity);
+
+    // Send city IDs as JSON array
+    formPayload.append("popupCity_ids", JSON.stringify(formData.popupCity));
+
     formPayload.append("show_popup", formData.show_popup);
-    formPayload.append("starting_price", formData.starting_price); // <-- Add this line
+    formPayload.append("starting_price", formData.starting_price);
     if (formData.PopupImage) {
       formPayload.append("PopupImage", formData.PopupImage);
     }
@@ -139,8 +154,9 @@ export default function PopupManager() {
       PopupImage: null,
       popupBuilder: "",
       popupBuilderEmail: "",
-      popupCity: "",
+      popupCity: [],
       show_popup: false,
+      starting_price: "",
     });
     setEditingPopupId(null);
     setShowForm(false);
@@ -291,7 +307,11 @@ export default function PopupManager() {
                       />
                     </svg>
                     <span>
-                      {getCityName(popup.popupCity_id || popup.popupCity)}
+                      {Array.isArray(popup.popupCity || popup.popupCity_ids)
+                        ? (popup.popupCity || popup.popupCity_ids)
+                            .map((cityId) => getCityName(cityId))
+                            .join(", ")
+                        : getCityName(popup.popupCity_id || popup.popupCity)}
                     </span>
                   </div>
 
@@ -468,22 +488,31 @@ export default function PopupManager() {
                   {/* City Selection */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      City
+                      Cities
                     </label>
-                    <select
-                      name="popupCity"
-                      value={formData.popupCity}
-                      onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      required
-                    >
-                      <option value="">Select a city</option>
+                    <div className="space-y-2 max-h-48 overflow-y-auto border border-gray-300 rounded-lg p-3">
                       {cities.map((city) => (
-                        <option key={city.id} value={city.id}>
-                          {city.name}
-                        </option>
+                        <label
+                          key={city.id}
+                          className="flex items-center space-x-2"
+                        >
+                          <input
+                            type="checkbox"
+                            name="popupCity"
+                            value={city.id}
+                            checked={formData.popupCity.includes(city.id)}
+                            onChange={handleInputChange}
+                            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                          />
+                          <span className="text-sm text-gray-700">
+                            {city.name}
+                          </span>
+                        </label>
                       ))}
-                    </select>
+                    </div>
+                    <p className="mt-1 text-sm text-gray-500">
+                      Select one or more cities for this popup
+                    </p>
                   </div>
 
                   {/* Show Popup Toggle */}

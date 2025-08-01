@@ -157,10 +157,17 @@ export default function ContactForm({
         </div>
 
         <div className="text-[0.8rem] md:text-[0.8rem] text-gray-500 leading-relaxed text-center">
-          I agree to receive marketing and customer service calls and text
-          messages from Homebaba Technologies. Consent is not a condition of
-          purchase. Msg/data rates may apply. Msg frequency varies. Reply STOP
-          to unsubscribe. Privacy Policy & Terms of Service.
+          By submitting this form, you give express written consent to eXp
+          Realty and its authorized representatives & homebaba agent partners to
+          contact you via email, telephone, text message, and other forms of
+          electronic communication, including through automated systems, AI
+          assistants, or prerecorded messages. Communications may include
+          information about real estate services, property listings, market
+          updates, or promotions related to your inquiry or expressed interests.
+          You may withdraw your consent at any time by replying “STOP” to text
+          messages or clicking “unsubscribe” in emails. Message and data rates
+          may apply. For more details, please review our Privacy Policy & Terms
+          of Service.
         </div>
 
         <div className="flex justify-center mt-6">
