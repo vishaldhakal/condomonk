@@ -275,7 +275,7 @@ const CityPopup = ({ cityName }) => {
               {/* Price */}
               <div className="mb-4 text-center">
                 <h3 className="text-lg sm:text-xl md:text-2xl font-black text-gray-900 mb-1">
-                  STARTING FROM{" "}
+                  Starting From{" "}
                   <span className="text-green-600">
                     ${popupData.starting_price?.toLocaleString()}
                   </span>
