@@ -313,7 +313,7 @@ const CityPopup = ({ cityName }) => {
                     <input
                       type="text"
                       name="firstName"
-                      placeholder="First Name"
+                      placeholder="Name"
                       value={formData.firstName}
                       onChange={handleInputChange}
                       required
