@@ -307,7 +307,7 @@ async function getSimilarProperties(filters) {
     : popularCities;
 
   const properties = await Promise.all(
-    citiesToShow.slice(0, 8).map(async (city) => {
+    citiesToShow.slice(0, 4).map(async (city) => {
       const { properties } = await getProperties({
         city,
         propertyType: filters.propertyType,

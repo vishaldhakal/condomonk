@@ -92,7 +92,7 @@ export default function PropertyCard({ property }) {
               <div className="h-36 sm:h-52 relative z-10 rounded-t-2xl rounded-b-2xl overflow-hidden">
                 <img
                   className="object-cover w-full h-full transition-all duration-200 transform group-hover:scale-110 rounded-b-2xl hover:rounded-b-2xl rounded-t-2xl"
-                  src={`https://pillar9.homebaba.ca/property-images/images/${property.ListingKey}-0.jpg`}
+                  src={`https://pillar9.homebaba.ca/property-images/images/${property.ListingKey}-0.jpg?cardImage=true`}
                   onLoad={handleImageLoad}
                   alt="property image"
                   onError={handleImageError}
