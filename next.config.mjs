@@ -18,6 +18,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "trreb-image.ampre.ca",
       },
+      {
+        protocol: "https",
+        hostname: "pillar9.homebaba.ca",
+      },
     ],
   },
 };

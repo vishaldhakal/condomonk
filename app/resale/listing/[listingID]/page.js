@@ -2,6 +2,7 @@ import {
   getListingDetail,
   getSimilarListings,
   getRoomInformation,
+  getImageUrls,
 } from "@/lib/properties";
 import { notFound } from "next/navigation";
 import BookingForm from "@/components/BookingForm";
@@ -87,6 +88,11 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function PropertyDetailPage({ params }) {
+  const parts = params.listingID.split("-");
+  const lastPart = parts[parts.length - 1];
+  const listingIDValue = lastPart;
+
+  const imageURLS = await getImageUrls({ listingKey: listingIDValue });
   try {
     const property = await getListingDetail(params.listingID);
     if (!property) {
@@ -280,10 +286,10 @@ export default async function PropertyDetailPage({ params }) {
           </div>
 
           {/* Property Gallery */}
-          {/* <PropertyGallery
-            images={property.images}
+          <PropertyGallery
+            images={imageURLS}
             propertyAddress={`${property.StreetNumber} ${property.StreetName} ${property.StreetSuffix}, ${property.City}, ${property.StateOrProvince}`}
-          /> */}
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2 max-w-5xl mx-auto mt-2">
             {/* Main Content */}

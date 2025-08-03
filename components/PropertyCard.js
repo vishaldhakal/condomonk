@@ -1,7 +1,8 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import TimeAgo from "@/helper/timeAgo";
-import React from "react";
+import React, { useState } from "react";
 
 const NO_IMAGE_URL = "/noimage.webp";
 
@@ -24,6 +25,7 @@ function isNewListing(timestamp) {
 }
 
 export default function PropertyCard({ property }) {
+  const [imageLoaded, setImageLoaded] = useState(false);
   const hasImage = property.imageUrl?.medium;
   const totalBathrooms =
     (property.WashroomsType1Pcs || 0) + (property.WashroomsType2Pcs || 0);
@@ -59,6 +61,28 @@ export default function PropertyCard({ property }) {
     };
   }, [property.ListPrice, property.PreviousListPrice]);
 
+  // useEffect(() => {
+  //   setLoadingImage(true);
+  //   getImageUrls({ MLS: curElem.ListingKey, thumbnailOnly: true }).then(
+  //     (urls) => {
+  //       setImgUrl(urls[0]);
+  //       setLoadingImage(false);
+  //     }
+  //   );
+  // }, []);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+    setImgError(false);
+  };
+  const handleImageError = (e) => {
+    if (!imageLoaded) {
+      setImgError(true);
+      e.target.onerror = null;
+      e.target.src = NO_IMAGE_URL;
+    }
+  };
+
   return (
     <section className="relative transition-all duration-200 transform bg-white group rounded-2xl p-0 hover:shadow-lg hover:rounded-t-2xl hover:-translate-y-1 overflow-hidden">
       <Link href={`/resale/listing/${streetAndMLS}`} className="text-black">
@@ -67,10 +91,11 @@ export default function PropertyCard({ property }) {
             <div className="h-36 sm:h-52 overflow-hidden relative">
               <div className="h-36 sm:h-52 relative z-10 rounded-t-2xl rounded-b-2xl overflow-hidden">
                 <img
-                  // src={hasImage ? property.imageUrl.medium : NO_IMAGE_URL}
-                  src={NO_IMAGE_URL}
-                  alt={`${property.StreetNumber} ${property.StreetName}`}
-                  className="object-cover object-center w-full transition-all duration-200 transform group-hover:scale-110 h-52 sm:h-52"
+                  className="object-cover w-full h-full transition-all duration-200 transform group-hover:scale-110 rounded-b-2xl hover:rounded-b-2xl rounded-t-2xl"
+                  src={`https://pillar9.homebaba.ca/property-images/images/${property.ListingKey}-0.jpg`}
+                  onLoad={handleImageLoad}
+                  alt="property image"
+                  onError={handleImageError}
                 />
               </div>
 

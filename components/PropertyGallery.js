@@ -40,7 +40,7 @@ export default function PropertyGallery({ images, propertyAddress }) {
           {/* Main Image */}
           <div className="relative w-full h-[300px]">
             <Image
-              src={images[currentImageIndex].url}
+              src={images[currentImageIndex]}
               alt={`${propertyAddress} Image ${currentImageIndex + 1}`}
               fill
               className="object-cover"
@@ -114,7 +114,7 @@ export default function PropertyGallery({ images, propertyAddress }) {
                 }`}
               >
                 <Image
-                  src={image.url}
+                  src={image}
                   alt={`${propertyAddress} Image ${index + 1}`}
                   fill
                   className="object-cover"
@@ -147,7 +147,7 @@ export default function PropertyGallery({ images, propertyAddress }) {
           {images.slice(0, 5).map((image, index) => (
             <a
               key={index}
-              href={image.url}
+              href={image}
               className={`relative cursor-pointer group ${
                 index === 0 ? "col-span-2 row-span-2" : ""
               } ${index >= 5 ? "hidden" : ""}`}
@@ -155,7 +155,7 @@ export default function PropertyGallery({ images, propertyAddress }) {
             >
               <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                 <Image
-                  src={image.url}
+                  src={image}
                   alt={`${propertyAddress} Image ${index + 1}`}
                   fill
                   className="object-cover"
@@ -199,12 +199,12 @@ export default function PropertyGallery({ images, propertyAddress }) {
           {images.slice(5).map((image, index) => (
             <a
               key={`hidden-${index}`}
-              href={image.url}
+              href={image}
               className="hidden"
               data-lg-size="1600-2400"
             >
               <Image
-                src={image.url}
+                src={image}
                 alt={`${propertyAddress} Image ${index + 6}`}
                 width={1600}
                 height={2400}
