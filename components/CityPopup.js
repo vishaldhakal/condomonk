@@ -102,7 +102,7 @@ const CityPopup = ({ cityName }) => {
       form_data.append("inquiry_type", "City Popup Form");
 
       const response = await fetch(
-        "https://admin.homebaba.ca/api/builder-popup-submit//",
+        "https://admin.homebaba.ca/api/builder-popup-submit/",
         {
           method: "POST",
           body: form_data,
