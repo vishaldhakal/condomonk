@@ -261,11 +261,25 @@ export default function BookingForm({
         </button>
       </form>
 
-      <p className="mt-2 text-[9px] text-gray-500 leading-relaxed text-center">
-        I agree to receive marketing and customer service calls and text
-        messages from Condomonk. Consent is not a condition of purchase.
-        Msg/data rates may apply. Msg frequency varies. Reply STOP to
-        unsubscribe. Privacy Policy & Terms of Service.
+      <p className="text-[0.5rem] text-center text-gray-500 mt-2 leading-[0.9rem]">
+        By submitting this form, you give express written consent to Dolphin
+        Realty and its authorized representatives to contact you via email,
+        telephone, text message, and other forms of electronic communication,
+        including through automated systems, AI assistants, or prerecorded
+        messages. Communications may include information about real estate
+        services, property listings, market updates, or promotions related to
+        your inquiry or expressed interests. You may withdraw your consent at
+        any time by replying “STOP” to text messages or clicking “unsubscribe”
+        in emails. Message and data rates may apply. For more details, please
+        review our{" "}
+        <a href="/privacy" className="text-red-500">
+          Privacy Policy
+        </a>{" "}
+        &{" "}
+        <a href="/privacy" className="text-red-500">
+          Terms of Service
+        </a>
+        .
       </p>
     </div>
   );
