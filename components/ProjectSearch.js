@@ -267,7 +267,7 @@ const SearchWithAutocomplete = ({
   };
 
   useEffect(() => {
-    const currentCity = citiesWithProvinces
+  const currentCity = citiesWithProvinces
       .map((item) => item?.city)
       .find((city) => pathname.includes(city.toLowerCase()));
     currentCity && setLocalCityName(currentCity);
