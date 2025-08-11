@@ -284,7 +284,7 @@ const CityPopup = ({ cityName }) => {
             <div className="relative z-10 ">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch">
                 {/* Left content */}
-                <div className="flex flex-col justify-between px-8 md:px-10 py-6">
+                <div className="order-2 md:order-1 flex flex-col justify-between px-8 md:px-10 py-6">
                   <div>
                     <div className="flex items-center gap-2 text-gray-600 text-xs md:text-sm font-medium mb-3">
                       <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
@@ -335,7 +335,7 @@ const CityPopup = ({ cityName }) => {
                 </div>
 
                 {/* Right image */}
-                <div className="overflow-hidden bg-gray-200 md:min-h-[420px] md:rounded-r-2xl">
+                <div className="order-1 md:order-2 overflow-hidden bg-gray-200 md:min-h-[420px] md:rounded-r-2xl">
                   {popupData.PopupImage && (
                     <img
                       src={popupData.PopupImage}
@@ -350,7 +350,7 @@ const CityPopup = ({ cityName }) => {
             <div className="relative z-10">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch">
                 {/* Left: Stage 2 Form */}
-                <div className="flex flex-col justify-start px-8 md:px-10 py-6">
+                <div className="order-2 md:order-1 flex flex-col justify-start px-8 md:px-10 py-6">
                   <div className="mb-4">
                     <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
                       {popupData.PopupName}
@@ -390,54 +390,57 @@ const CityPopup = ({ cityName }) => {
                       </div>
                     </div>
 
-                    {/* Email Address */}
-                    <div className="group focus-within:shadow-lg transition-shadow duration-300">
-                      <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                          <svg
-                            className="h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors duration-300"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                          </svg>
+                    {/* Email and Phone in one row */}
+                    <div className="grid grid-cols-2 gap-3">
+                      {/* Email Address */}
+                      <div className="group focus-within:shadow-lg transition-shadow duration-300">
+                        <div className="relative">
+                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <svg
+                              className="h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors duration-300"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                            </svg>
+                          </div>
+                          <input
+                            type="email"
+                            name="email"
+                            placeholder="Email Address"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-gray-400 text-lg"
+                          />
                         </div>
-                        <input
-                          type="email"
-                          name="email"
-                          placeholder="Email Address"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-gray-400 text-lg"
-                        />
                       </div>
-                    </div>
 
-                    {/* Phone Number */}
-                    <div className="group focus-within:shadow-lg transition-shadow duration-300">
-                      <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                          <svg
-                            className="h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors duration-300"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                          </svg>
+                      {/* Phone Number */}
+                      <div className="group focus-within:shadow-lg transition-shadow duration-300">
+                        <div className="relative">
+                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <svg
+                              className="h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors duration-300"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                            </svg>
+                          </div>
+                          <input
+                            type="tel"
+                            name="phone"
+                            placeholder="Phone Number"
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-gray-400 text-lg"
+                          />
                         </div>
-                        <input
-                          type="tel"
-                          name="phone"
-                          placeholder="Phone Number"
-                          value={formData.phone}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-gray-400 text-lg"
-                        />
                       </div>
                     </div>
 
@@ -522,7 +525,7 @@ const CityPopup = ({ cityName }) => {
                 </div>
 
                 {/* Right: Image stays visible */}
-                <div className="overflow-hidden bg-gray-200 md:min-h-[420px] md:rounded-r-2xl">
+                <div className="order-1 md:order-2 overflow-hidden bg-gray-200 md:min-h-[420px] md:rounded-r-2xl">
                   {popupData.PopupImage && (
                     <img
                       src={popupData.PopupImage}
