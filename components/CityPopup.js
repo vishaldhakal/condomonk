@@ -182,12 +182,12 @@ const CityPopup = ({ cityName }) => {
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-[9999] flex items-center justify-center p-2 sm:p-4"
+        className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-[9999] flex items-center justify-center  sm:p-4"
         onClick={closePopup}
       >
         {/* Popup Container */}
         <div
-          className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full  overflow-y-auto"
+          className="relative bg-white rounded-2xl shadow-2xl max-w-4xl w-full overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Background Pattern */}
@@ -281,242 +281,255 @@ const CityPopup = ({ cityName }) => {
           )}
 
           {!showForm ? (
-            <div className="relative z-10 p-4 sm:p-6 md:p-8">
-              {/* Don't miss out badge */}
-              <div className="flex justify-center ">
-                <div className="border border-red-500 rounded-full px-2 py-1 text-red-600 text-sm text-center italic mb-1 w-fit mx-auto">
-                  Don't miss out
+            <div className="relative z-10 ">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch">
+                {/* Left content */}
+                <div className="flex flex-col justify-between px-8 md:px-10 py-6">
+                  <div>
+                    <div className="flex items-center gap-2 text-gray-600 text-xs md:text-sm font-medium mb-3">
+                      <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
+                        <svg
+                          className="w-3 h-3 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                      <span>Straight from the Developer</span>
+                    </div>
+
+                    <div className="mt-20">
+                      <div className="md:text-2xl text-xl font-bold text-gray-900 leading-tight">
+                        {popupData.PopupName}
+                      </div>
+                      <div className="text-sm md:text-base text-gray-700 ">
+                        {formatCityName(cityName)} Ontario
+                      </div>
+                      <div className="text-red-600 font-extrabold text-xl md:text-2xl  leading-none">
+                        Starting from $
+                        {popupData.starting_price?.toLocaleString()}
+                      </div>
+                      <div className="text-gray-800 text-sm md:text-base ">
+                        Connect Directly with the Developer
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-6">
+                    <button
+                      onClick={showFormStage}
+                      className="px-6 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 md:py-4 rounded-full transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 shadow-lg hover:shadow-xl text-base md:text-lg text-left"
+                    >
+                      Recieve package from Developer
+                    </button>
+                    <p className="text-gray-500 text-xs md:text-xs mt-2 text-center">
+                      Get the pricing, floor plans info directly from the
+                      builder.
+                    </p>
+                  </div>
                 </div>
-              </div>
 
-              {/* Main Heading */}
-              <div className="text-center mb-2">
-                <h2 className="text-xl md:text-2xl font-bold text-gray-900">
-                  {popupData.PopupName}
-                </h2>
-                <h3 className="text-2xl font-extrabold text-center mt-0 mb-1">
-                  STARTING FROM{" "}
-                  <span className="text-green-600">
-                    ${popupData.starting_price?.toLocaleString()}
-                  </span>
-                </h3>
-              </div>
-
-              {/* Project Card */}
-              <div className="grid grid-cols-1 gap-6 w-full justify-center mt-3">
-                <div className="flex-1 flex flex-col items-center rounded-2xl min-w-[120px] max-w-[350px] mx-auto shadow-sm">
-                  <div className="w-full">
-                    <div className="w-full  bg-gray-300 rounded-xl  flex items-center justify-center overflow-hidden">
-                      {popupData.PopupImage && (
-                        <img
-                          src={popupData.PopupImage}
-                          alt={popupData.PopupName}
-                          className="object-cover object-top h-full w-full"
-                        />
-                      )}
-                    </div>
-                  </div>
-                  <button
-                    onClick={showFormStage}
-                    className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1 active:translate-y-0 shadow-lg hover:shadow-xl text-lg mt-6"
-                  >
-                    Request Info From Builder
-                  </button>
-                  <div className="flex items-center justify-center gap-2 mt-2">
-                    <span className="text-gray-700 font-bold text-xs ">
-                      Directly connect with the Developer
-                    </span>
-                    <div className="w-3 h-3 bg-blue-500 rounded-full flex items-center justify-center">
-                      <svg
-                        className="w-4 h-4 text-white"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </div>
-                  </div>
+                {/* Right image */}
+                <div className="overflow-hidden bg-gray-200 md:min-h-[420px] md:rounded-r-2xl">
+                  {popupData.PopupImage && (
+                    <img
+                      src={popupData.PopupImage}
+                      alt={popupData.PopupName}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
                 </div>
               </div>
             </div>
           ) : (
-            // STAGE 2: Form
-            <div className="relative z-10 p-4 sm:p-6 md:p-8">
-              {/* Project Name */}
-              <div className="text-center mb-6">
-                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
-                  {popupData.PopupName}
-                </h2>
-              </div>
+            <div className="relative z-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch">
+                {/* Left: Stage 2 Form */}
+                <div className="flex flex-col justify-start px-8 md:px-10 py-6">
+                  <div className="mb-4">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+                      {popupData.PopupName}
+                    </h2>
+                  </div>
 
-              {/* Form */}
-              <form
-                onSubmit={handleSubmit}
-                className="space-y-4 max-w-md mx-auto"
-              >
-                {/* Full Name */}
-                <div className="group focus-within:shadow-lg transition-shadow duration-300">
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                      <svg
-                        className="h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors duration-300"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                          clipRule="evenodd"
+                  <form
+                    onSubmit={handleSubmit}
+                    className="space-y-4 max-w-sm md:max-w-md"
+                  >
+                    {/* Full Name */}
+                    <div className="group focus-within:shadow-lg transition-shadow duration-300">
+                      <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                          <svg
+                            className="h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors duration-300"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <input
+                          type="text"
+                          name="firstName"
+                          placeholder="Full Name"
+                          value={formData.firstName}
+                          onChange={handleInputChange}
+                          required
+                          className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-gray-400 text-lg"
                         />
-                      </svg>
+                      </div>
                     </div>
-                    <input
-                      type="text"
-                      name="firstName"
-                      placeholder="Full Name"
-                      value={formData.firstName}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-gray-400 text-lg"
-                    />
-                  </div>
-                </div>
 
-                {/* Email Address */}
-                <div className="group focus-within:shadow-lg transition-shadow duration-300">
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                      <svg
-                        className="h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors duration-300"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                      </svg>
-                    </div>
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Email Address"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-gray-400 text-lg"
-                    />
-                  </div>
-                </div>
-
-                {/* Phone Number */}
-                <div className="group focus-within:shadow-lg transition-shadow duration-300">
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                      <svg
-                        className="h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors duration-300"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                      </svg>
-                    </div>
-                    <input
-                      type="tel"
-                      name="phone"
-                      placeholder="Phone Number"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-gray-400 text-lg"
-                    />
-                  </div>
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1 active:translate-y-0 shadow-lg hover:shadow-xl text-lg mt-6"
-                >
-                  {submitBtn}
-                </button>
-              </form>
-
-              {/* Builder Info Section */}
-              <div className=" max-w-md mx-auto">
-                {/* Builder Connection Info */}
-                <div className=" px-4 ">
-                  <div className="flex items-center justify-center gap-2 my-2">
-                    <span className="text-gray-700 font-bold text-xs ">
-                      Directly connect with the Developer
-                    </span>
-                    <div className="w-3 h-3 bg-blue-500 rounded-full flex items-center justify-center">
-                      <svg
-                        className="w-4 h-4 text-white"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
+                    {/* Email Address */}
+                    <div className="group focus-within:shadow-lg transition-shadow duration-300">
+                      <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                          <svg
+                            className="h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors duration-300"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                          </svg>
+                        </div>
+                        <input
+                          type="email"
+                          name="email"
+                          placeholder="Email Address"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          required
+                          className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-gray-400 text-lg"
                         />
-                      </svg>
+                      </div>
+                    </div>
+
+                    {/* Phone Number */}
+                    <div className="group focus-within:shadow-lg transition-shadow duration-300">
+                      <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                          <svg
+                            className="h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors duration-300"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                          </svg>
+                        </div>
+                        <input
+                          type="tel"
+                          name="phone"
+                          placeholder="Phone Number"
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                          required
+                          className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-gray-400 text-lg"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Submit Button */}
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1 active:translate-y-0 shadow-lg hover:shadow-xl text-lg mt-6"
+                    >
+                      {submitBtn}
+                    </button>
+                  </form>
+
+                  {/* Builder Info Section */}
+                  <div className="max-w-sm md:max-w-md mt-4">
+                    <div className="px-2 md:px-4">
+                      <div className="flex items-center justify-center gap-2 my-2">
+                        <span className="text-gray-700 font-bold text-xs">
+                          Directly connect with the Developer
+                        </span>
+                        <div className="w-3 h-3 bg-blue-500 rounded-full flex items-center justify-center">
+                          <svg
+                            className="w-4 h-4 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+
+                      <div className="text-[8px] text-gray-600 leading-tight space-y-1">
+                        <p>
+                          By providing your name and contact information and
+                          clicking the Request info button, you consent and
+                          agree to receive marketing communications from
+                          homebaba and each of the builders or agents you
+                          selected above, including emails, calls or text
+                          messages using an automatic telephone dialing system
+                          or an artificial or prerecorded voice.
+                        </p>
+                        {showFullDisclaimer && (
+                          <>
+                            <p>
+                              {" "}
+                              You also agree to Homebaba's Privacy Policy, and
+                              Terms of Service. Your agreement is not a
+                              condition to purchase any property, goods or
+                              services, and you may call us instead or submit
+                              the information online. You also acknowledge and
+                              agree that you can revoke your authorization at
+                              any time. Your consent herein also applies to any
+                              future registration on national or state
+                              Do-Not-Call lists. For mobile phones, standard
+                              message and data charges apply. Consult our
+                              Privacy Policy for additional information,
+                              including unsubscribe options.
+                            </p>
+                            <p>
+                              This site is protected by reCAPTCHA and the Google
+                              Privacy Policy and Terms of Service apply.
+                            </p>
+                          </>
+                        )}
+                        <p>
+                          <span
+                            className="text-blue-500 cursor-pointer hover:underline"
+                            onClick={() =>
+                              setShowFullDisclaimer(!showFullDisclaimer)
+                            }
+                          >
+                            {showFullDisclaimer ? "See less" : "See more"}
+                          </span>
+                        </p>
+                      </div>
                     </div>
                   </div>
+                </div>
 
-                  {/* Detailed Consent Text */}
-                  <div className="text-[8px] text-gray-600 leading-tight space-y-1">
-                    <p>
-                      By providing your name and contact information and
-                      clicking the Request info button, you consent and agree to
-                      receive marketing communications from homebaba and each of
-                      the builders or agents you selected above, including
-                      emails, calls or text messages using an automatic
-                      telephone dialing system or an artificial or prerecorded
-                      voice.
-                    </p>
-
-                    {showFullDisclaimer && (
-                      <>
-                        <p>
-                          You also agree to Homebaba's Privacy Policy, and Terms
-                          of Service. Your agreement is not a condition to
-                          purchase any property, goods or services, and you may
-                          call us instead or submit the information online. You
-                          also acknowledge and agree that you can revoke your
-                          authorization at any time. Your consent herein also
-                          applies to any future registration on national or
-                          state Do-Not-Call lists. For mobile phones, standard
-                          message and data charges apply. Consult our Privacy
-                          Policy for additional information, including
-                          unsubscribe options.
-                        </p>
-
-                        <p>
-                          This site is protected by reCAPTCHA and the Google
-                          Privacy Policy and Terms of Service apply.
-                        </p>
-                      </>
-                    )}
-
-                    <p>
-                      <span
-                        className="text-blue-500 cursor-pointer hover:underline"
-                        onClick={() =>
-                          setShowFullDisclaimer(!showFullDisclaimer)
-                        }
-                      >
-                        {showFullDisclaimer ? "See less" : "See more"}
-                      </span>
-                    </p>
-                  </div>
+                {/* Right: Image stays visible */}
+                <div className="overflow-hidden bg-gray-200 md:min-h-[420px] md:rounded-r-2xl">
+                  {popupData.PopupImage && (
+                    <img
+                      src={popupData.PopupImage}
+                      alt={popupData.PopupName}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
                 </div>
               </div>
             </div>
