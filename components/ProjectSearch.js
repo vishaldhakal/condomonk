@@ -2,9 +2,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Link from "next/link";
-import { allCities } from "@/data/ontarioCities";
+import citiesWithProvinces, { allCities } from "@/data/ontarioCities";
 import { cityRegions } from "@/data/postalCodeCities";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { X } from "lucide-react";
 
 const SearchWithAutocomplete = ({
@@ -43,7 +43,7 @@ const SearchWithAutocomplete = ({
   const inputRef = useRef(null);
   const dropdownRef = useRef(null);
   const router = useRouter();
-
+  const pathname = usePathname();
   // Add localSearchType state at component level
   const [localSearchType, setLocalSearchType] = useState(searchType);
   const [localCityName, setLocalCityName] = useState(cityName);
@@ -266,6 +266,13 @@ const SearchWithAutocomplete = ({
     });
   };
 
+  useEffect(() => {
+  const currentCity = citiesWithProvinces
+      .map((item) => item?.city)
+      .find((city) => pathname.includes(city.toLowerCase()));
+    currentCity && setLocalCityName(currentCity);
+  }, [pathname]);
+
   const handleDropdownClick = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -289,7 +296,9 @@ const SearchWithAutocomplete = ({
       setLocalCityName("");
     }
   };
-
+  {
+    console.log(localCityName);
+  }
   // Modify the handleBlur function
   const handleBlur = (e) => {
     // Check if the related target is within our dropdown
@@ -378,12 +387,11 @@ const SearchWithAutocomplete = ({
   const iconStyle = isHomepage
     ? { color: "#f8a100", right: "30px" }
     : { color: "#FFC007", right: "15px" };
-
   const placeholderText = localCityName
     ? localCityName
     : isHomepage
-    ? "Enter location, neighborhood, or property"
-    : "Search for a city or project...";
+      ? "Enter location, neighborhood, or property"
+      : "Search for a city or project...";
 
   return (
     <div
