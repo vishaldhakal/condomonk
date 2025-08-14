@@ -187,7 +187,7 @@ const CityPopup = ({ cityName }) => {
       >
         {/* Popup Container */}
         <div
-          className="relative bg-white rounded-2xl shadow-2xl max-w-4xl w-full overflow-y-auto"
+          className="relative bg-white rounded-2xl shadow-2xl max-w-3xl w-full overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Background Pattern */}
@@ -284,38 +284,37 @@ const CityPopup = ({ cityName }) => {
             <div className="relative z-10 ">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch">
                 {/* Left content */}
-                <div className="order-2 md:order-1 flex flex-col justify-between px-8 md:px-10 py-6">
+                <div className="order-2 md:order-1 flex flex-col justify-between px-8 md:px-10 md:py-6 py-2  text-center">
                   <div>
-                    <div className="flex items-center gap-2 text-gray-600 text-xs md:text-sm font-medium mb-3">
-                      <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
-                        <svg
-                          className="w-3 h-3 text-white"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
+                    <div className="md:mt-20 mt-5">
+                      <p className="text-red-600 text-xs md:text-sm text-center border border-red-600 rounded-full px-2 py-1 w-fit mx-auto  mt-1">
+                        don't miss out
+                      </p>
+                      <div className="md:text-xl text-2xl font-bold text-gray-900 leading-tight">
+                        {popupData.PopupTitle}
                       </div>
-                      <span>Straight from the Developer</span>
-                    </div>
 
-                    <div className="mt-20">
-                      <div className="md:text-2xl text-xl font-bold text-gray-900 leading-tight">
-                        {popupData.PopupName}
+                      <div className="text-black font-extrabold text-3xl md:text-2xl  leading-light ">
+                        Starting From{" "}
+                        <span className="text-green-600">
+                          ${popupData.starting_price?.toLocaleString()}{" "}
+                        </span>
                       </div>
-                      <div className="text-sm md:text-base text-gray-700 ">
-                        {formatCityName(cityName)} Ontario
-                      </div>
-                      <div className="text-red-600 font-extrabold text-xl md:text-2xl  leading-none">
-                        Starting from $
-                        {popupData.starting_price?.toLocaleString()}
-                      </div>
-                      <div className="text-gray-800 text-sm md:text-base ">
+                      <div className="text-gray-800 text-xs md:text-[10px] text-center  mt-1 flex items-center justify-center gap-2">
                         Connect Directly with the Developer
+                        <div className="w-3 h-3 bg-blue-500 rounded-full flex items-center justify-center">
+                          <svg
+                            className="w-3 h-3 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -323,11 +322,11 @@ const CityPopup = ({ cityName }) => {
                   <div className="mt-6">
                     <button
                       onClick={showFormStage}
-                      className="px-6 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 md:py-4 rounded-full transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 shadow-lg hover:shadow-xl text-base md:text-lg text-left"
+                      className="px-6 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 md:py-4 rounded-full transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 shadow-lg hover:shadow-xl text-base md:text-md"
                     >
                       Recieve package from Developer
                     </button>
-                    <p className="text-gray-500 text-xs md:text-xs mt-2 text-center">
+                    <p className="text-gray-500 text-xs md:text-[8px] mt-2 text-center">
                       Get the pricing, floor plans info directly from the
                       builder.
                     </p>
@@ -335,7 +334,7 @@ const CityPopup = ({ cityName }) => {
                 </div>
 
                 {/* Right image */}
-                <div className="order-1 md:order-2 overflow-hidden bg-gray-200 md:min-h-[420px] md:rounded-r-2xl">
+                <div className="order-1 md:order-2 overflow-hidden bg-gray-200 md:min-h-[420px] min-h-[380px] h-auto md:rounded-r-2xl">
                   {popupData.PopupImage && (
                     <img
                       src={popupData.PopupImage}
@@ -350,16 +349,10 @@ const CityPopup = ({ cityName }) => {
             <div className="relative z-10">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch">
                 {/* Left: Stage 2 Form */}
-                <div className="order-2 md:order-1 flex flex-col justify-start px-8 md:px-10 py-6">
-                  <div className="mb-4">
-                    <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
-                      {popupData.PopupName}
-                    </h2>
-                  </div>
-
+                <div className="order-2 md:order-1 flex flex-col justify-start px-8 md:px-10 py-3 md:mt-10 mt-5">
                   <form
                     onSubmit={handleSubmit}
-                    className="space-y-4 max-w-sm md:max-w-md"
+                    className="space-y-3 max-w-sm md:max-w-md"
                   >
                     {/* Full Name */}
                     <div className="group focus-within:shadow-lg transition-shadow duration-300">
@@ -385,13 +378,13 @@ const CityPopup = ({ cityName }) => {
                           value={formData.firstName}
                           onChange={handleInputChange}
                           required
-                          className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-gray-400 text-lg"
+                          className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-gray-400 placeholder:text-xs md:placeholder:text-sm text-sm"
                         />
                       </div>
                     </div>
 
                     {/* Email and Phone in one row */}
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 gap-2">
                       {/* Email Address */}
                       <div className="group focus-within:shadow-lg transition-shadow duration-300">
                         <div className="relative">
@@ -413,7 +406,7 @@ const CityPopup = ({ cityName }) => {
                             value={formData.email}
                             onChange={handleInputChange}
                             required
-                            className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-gray-400 text-lg"
+                            className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-gray-400 placeholder:text-xs md:placeholder:text-sm text-sm"
                           />
                         </div>
                       </div>
@@ -438,7 +431,7 @@ const CityPopup = ({ cityName }) => {
                             value={formData.phone}
                             onChange={handleInputChange}
                             required
-                            className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-gray-400 text-lg"
+                            className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-gray-400 placeholder:text-xs md:placeholder:text-sm text-sm"
                           />
                         </div>
                       </div>
@@ -448,7 +441,7 @@ const CityPopup = ({ cityName }) => {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1 active:translate-y-0 shadow-lg hover:shadow-xl text-lg mt-6"
+                      className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1 active:translate-y-0 shadow-lg hover:shadow-xl text-sm mt-6"
                     >
                       {submitBtn}
                     </button>
@@ -525,7 +518,7 @@ const CityPopup = ({ cityName }) => {
                 </div>
 
                 {/* Right: Image stays visible */}
-                <div className="order-1 md:order-2 overflow-hidden bg-gray-200 md:min-h-[420px] md:rounded-r-2xl">
+                <div className="order-1 md:order-2 overflow-hidden bg-gray-200 md:min-h-[420px] min-h-[380px] h-auto md:rounded-r-2xl">
                   {popupData.PopupImage && (
                     <img
                       src={popupData.PopupImage}

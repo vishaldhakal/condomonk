@@ -10,6 +10,7 @@ export default function PopupManager() {
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     PopupName: "",
+    PopupTitle: "",
     PopupImage: null,
     popupBuilder: "",
     popupBuilderEmail: "",
@@ -88,6 +89,7 @@ export default function PopupManager() {
   const handleEdit = (popup) => {
     setFormData({
       PopupName: popup.PopupName || "",
+      PopupTitle: popup.PopupTitle || "",
       PopupImage: null,
       popupBuilder: popup.popupBuilder || "",
       popupBuilderEmail: popup.popupBuilderEmail || "",
@@ -104,6 +106,7 @@ export default function PopupManager() {
 
     const formPayload = new FormData();
     formPayload.append("PopupName", formData.PopupName);
+    formPayload.append("PopupTitle", formData.PopupTitle);
     formPayload.append("popupBuilder", formData.popupBuilder);
     formPayload.append("popupBuilderEmail", formData.popupBuilderEmail);
 
@@ -151,6 +154,7 @@ export default function PopupManager() {
 
     setFormData({
       PopupName: "",
+      PopupTitle: "",
       PopupImage: null,
       popupBuilder: "",
       popupBuilderEmail: "",
@@ -419,6 +423,21 @@ export default function PopupManager() {
                       type="text"
                       name="PopupName"
                       value={formData.PopupName}
+                      onChange={handleInputChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      required
+                    />
+                  </div>
+
+                  {/* Popup Title */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Popup Title
+                    </label>
+                    <input
+                      type="text"
+                      name="PopupTitle"
+                      value={formData.PopupTitle}
                       onChange={handleInputChange}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       required
