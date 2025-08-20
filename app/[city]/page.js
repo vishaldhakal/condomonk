@@ -11,6 +11,8 @@ import GoogleMap from "@/components/GoogleMap";
 import PreconstructionFilter from "@/components/PreconstructionFilter";
 import ExpandableDescription from "@/components/ExpandableDescription";
 import CityPopup from "@/components/CityPopup";
+import BlogCard from "@/components/BlogCard";
+import { fetchBlogPostByCity } from "@/api/blogs";
 
 // Data fetching functions
 async function getData(city, priceFilter = null) {
@@ -182,11 +184,20 @@ export default async function CityPage({ params }) {
   const priceFilter = getPriceFilter(city);
 
   // Parallel data fetching
-  const [data, featuredData, assignments] = await Promise.all([
+  const [data, featuredData, assignments, cityBlogs] = await Promise.all([
     getData(cleanCity, priceFilter),
     getFeaturedData(cleanCity),
     getAssignments(cleanCity),
+    fetchBlogPostByCity(cleanCity),
   ]);
+
+  const latestCityBlogs = Array.isArray(cityBlogs)
+    ? [...cityBlogs].sort(
+        (a, b) =>
+          new Date(b?.date_of_upload || b?.created_at || 0) -
+          new Date(a?.date_of_upload || a?.created_at || 0)
+      )
+    : [];
 
   // Filter projects by status
   const filteredProjects = (status) => {
@@ -464,8 +475,31 @@ export default async function CityPage({ params }) {
           </div>
         )}
 
+        {/* Latest News and Insight */}
+        {latestCityBlogs?.length > 0 && (
+          <div className="pt-32">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-2xl md:text-3xl font-bold">
+                Latest News and Insight in {CapitalizeFirst(cleanCity)}
+              </h3>
+              <Link
+                href={`/blogs/category/${cleanCity}`}
+                className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800 text-sm md:text-base"
+              >
+                View all blogs in {CapitalizeFirst(cleanCity)} ➟
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+              {latestCityBlogs.slice(0, 5).map((blog) => (
+                <BlogCard key={blog.slug} blog={blog} />
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Google Map Section */}
-        <div className="pt-24">
+        <div className="pt-32">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-extrabold">

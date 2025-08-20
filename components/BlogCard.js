@@ -26,7 +26,6 @@ export default function BlogCard({ blog }) {
             <img
               src={imageUrl}
               alt={blog.news_title.slice(0, 10)}
-              fill
               className="object-cover brightness-80 h-full w-full"
               loading="lazy"
             />

@@ -29,11 +29,59 @@ export default function CommunityPopup() {
   const [submitBtn, setSubmitBtn] = useState("Request Prices & Floor Plans");
   const [selectedProject, setSelectedProject] = useState(null);
   const pathname = usePathname();
+  const [isCityPopupActive, setIsCityPopupActive] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
   });
+
+  const formatCityName = (city) =>
+    city ? city.charAt(0).toUpperCase() + city.slice(1).toLowerCase() : "";
+
+  // Detect if CityPopup is active for the current city and suppress CommunityPopup
+  useEffect(() => {
+    const citySegment = pathname.split("/").filter(Boolean)[0] || "";
+    if (!citySegment) {
+      setIsCityPopupActive(false);
+      return;
+    }
+
+    const controller = new AbortController();
+
+    const checkCityPopup = async () => {
+      try {
+        const res = await fetch("https://admin.homebaba.ca/api/popups/", {
+          signal: controller.signal,
+        });
+        if (!res.ok) {
+          setIsCityPopupActive(false);
+          return;
+        }
+        const data = await res.json();
+        const matchingPopup = data.find((popup) => {
+          if (!popup.show_popup) return false;
+          const cities = Array.isArray(popup.popupCity)
+            ? popup.popupCity
+            : [popup.popupCity];
+          return cities?.some(
+            (city) =>
+              city?.name?.toLowerCase() ===
+              formatCityName(citySegment).toLowerCase()
+          );
+        });
+        setIsCityPopupActive(Boolean(matchingPopup));
+      } catch (e) {
+        if (e.name !== "AbortError") {
+          console.error("Error checking city popup:", e);
+        }
+        setIsCityPopupActive(false);
+      }
+    };
+
+    checkCityPopup();
+    return () => controller.abort();
+  }, [pathname]);
 
   useEffect(() => {
     const hasSubmitted = localStorage.getItem("communityFormSubmitted2");
@@ -42,7 +90,12 @@ export default function CommunityPopup() {
     const resalePage = pathname.includes("/resale");
 
     // Only set up timeout if conditions are met
-    if (!hasSubmitted && (!lastClosed || lastClosed !== today) && !resalePage) {
+    if (
+      !hasSubmitted &&
+      (!lastClosed || lastClosed !== today) &&
+      !resalePage &&
+      !isCityPopupActive
+    ) {
       const timer = setTimeout(() => {
         setIsOpen(true);
       }, 10000); // 10 seconds
@@ -52,7 +105,7 @@ export default function CommunityPopup() {
         clearTimeout(timer);
       };
     }
-  }, [pathname]);
+  }, [pathname, isCityPopupActive]);
 
   const handleClose = () => {
     localStorage.setItem(
@@ -160,7 +213,7 @@ export default function CommunityPopup() {
     setShowContactForm(true);
   };
 
-  if (!isOpen) return null;
+  if (!isOpen || isCityPopupActive) return null;
   const isResalePage = pathname.includes("resale");
 
   return (
