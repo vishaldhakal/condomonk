@@ -2,9 +2,7 @@
 "use client";
 import { useState, useEffect } from "react";
 
-const CityPopup = ({ cityName }) => {
-  const [popupData, setPopupData] = useState(null);
-  const [showPopup, setShowPopup] = useState(false);
+const CityPopup = ({ cityName, popupData, showPopup, onClose }) => {
   const [showForm, setShowForm] = useState(false); // New state for form stage
   const [formData, setFormData] = useState({
     firstName: "",
@@ -14,50 +12,6 @@ const CityPopup = ({ cityName }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitBtn, setSubmitBtn] = useState("Request Info From Builder");
   const [showFullDisclaimer, setShowFullDisclaimer] = useState(false);
-
-  // Format city name to match API response (capitalize first letter)
-  const formatCityName = (city) => {
-    return city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
-  };
-
-  useEffect(() => {
-    const fetchPopupData = async () => {
-      try {
-        const response = await fetch("https://admin.homebaba.ca/api/popups/");
-        if (response.ok) {
-          const data = await response.json();
-
-          // Find popup that matches the current city and should be shown
-          const matchingPopup = data.find((popup) => {
-            if (!popup.show_popup) return false;
-
-            // Handle both single city object and array of cities
-            const cities = Array.isArray(popup.popupCity)
-              ? popup.popupCity
-              : [popup.popupCity];
-
-            return cities.some(
-              (city) =>
-                city.name.toLowerCase() ===
-                formatCityName(cityName).toLowerCase()
-            );
-          });
-
-          if (matchingPopup) {
-            setPopupData(matchingPopup);
-            // Show popup after a small delay
-            setTimeout(() => setShowPopup(true), 2000);
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching popup data:", error);
-      }
-    };
-
-    if (cityName) {
-      fetchPopupData();
-    }
-  }, [cityName]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -131,7 +85,9 @@ const CityPopup = ({ cityName }) => {
 
         // Close popup after successful submission
         setTimeout(() => {
-          setShowPopup(false);
+          if (onClose) {
+            onClose();
+          }
           setShowForm(false); // Reset form stage
           setSubmitBtn("Request Prices & Floor Plans");
         }, 2000);
@@ -161,8 +117,10 @@ const CityPopup = ({ cityName }) => {
   };
 
   const closePopup = () => {
-    setShowPopup(false);
     setShowForm(false); // Reset form stage when closing
+    if (onClose) {
+      onClose();
+    }
   };
 
   const showFormStage = () => {
@@ -182,7 +140,7 @@ const CityPopup = ({ cityName }) => {
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-[9999] flex items-center justify-center  sm:p-4"
+        className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-[99999] flex items-center justify-center  sm:p-4"
         onClick={closePopup}
       >
         {/* Popup Container */}
@@ -470,7 +428,7 @@ const CityPopup = ({ cityName }) => {
                       </div>
 
                       <div className="text-[8px] text-gray-600 leading-tight space-y-1">
-                        <p>
+                        <p className="text-[8px] text-gray-600 leading-tight space-y-1">
                           By providing your name and contact information and
                           clicking the Request info button, you consent and
                           agree to receive marketing communications from
@@ -481,7 +439,7 @@ const CityPopup = ({ cityName }) => {
                         </p>
                         {showFullDisclaimer && (
                           <>
-                            <p>
+                            <p className="text-[8px] text-gray-600 leading-tight space-y-1">
                               {" "}
                               You also agree to Homebaba's Privacy Policy, and
                               Terms of Service. Your agreement is not a
@@ -496,13 +454,13 @@ const CityPopup = ({ cityName }) => {
                               Privacy Policy for additional information,
                               including unsubscribe options.
                             </p>
-                            <p>
+                            <p className="text-[8px] text-gray-600 leading-tight space-y-2">
                               This site is protected by reCAPTCHA and the Google
                               Privacy Policy and Terms of Service apply.
                             </p>
                           </>
                         )}
-                        <p>
+                        <p className="text-[8px] text-gray-600 leading-tight space-y-1">
                           <span
                             className="text-blue-500 cursor-pointer hover:underline"
                             onClick={() =>

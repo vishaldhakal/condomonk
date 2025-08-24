@@ -10,7 +10,7 @@ import AssignmentCard from "@/components/assignment/AssignmentCard";
 import GoogleMap from "@/components/GoogleMap";
 import PreconstructionFilter from "@/components/PreconstructionFilter";
 import ExpandableDescription from "@/components/ExpandableDescription";
-import CityPopup from "@/components/CityPopup";
+import CombinedPopupManager from "@/components/CombinedPopupManager";
 import BlogCard from "@/components/BlogCard";
 import { fetchBlogPostByCity } from "@/api/blogs";
 
@@ -331,7 +331,7 @@ export default async function CityPage({ params }) {
   return (
     <div className="pt-4 lg:pt-8 bg-white">
       {/* Add the CityPopup component */}
-      <CityPopup cityName={cleanCity} />
+      <CombinedPopupManager cityName={params.city} />
 
       <div className="max-w-[85.625rem] mx-auto px-4">
         {/* Header Section */}
@@ -349,7 +349,7 @@ export default async function CityPage({ params }) {
 
         {/* Filter Section */}
 
-        <div className="sticky top-0 z-50 bg-white pt-2 pb-2 md:pt-3 md:pb-3  md:z-[999] -top-14 -mx-4 h-30 md:h-20 md:mt-0">
+        <div className="sticky z-50 bg-white pt-2 pb-2 md:pt-3 md:pb-3  md:z-[999] -top-14 -mx-4 h-30 md:h-20 md:mt-0">
           <div className="flex justify-start px-4">
             <PreconstructionFilter
               cityName={CapitalizeFirst(params.city)}
