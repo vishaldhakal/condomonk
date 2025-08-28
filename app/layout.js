@@ -3,7 +3,7 @@ import "./styles/animations.css";
 import Navbar from "@/components/Navbar";
 import Script from "next/script";
 import GoogleAnalytics from "./GoogleAnalytics";
-import CommunityPopup from "@/components/CommunityPopup";
+// import CommunityPopup from "@/components/CommunityPopup";
 import Footer from "@/components/Footer";
 import NextTopLoader from "nextjs-toploader";
 import { Inter } from "next/font/google";
@@ -166,7 +166,7 @@ export default function RootLayout({ children }) {
             <main className="flex-grow">{children}</main>
           </Providers>
           <Footer cities={cities}></Footer>
-          <CommunityPopup />
+          {/* <CommunityPopup /> */}
         </div>
       </body>
     </html>
