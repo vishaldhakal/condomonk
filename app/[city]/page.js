@@ -247,6 +247,15 @@ export default async function CityPage({ params }) {
 
   const generateSubtitle = () => {
     if (city == "calgary" || city == "edmonton") {
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+      const lastUpdated = yesterday.toLocaleDateString("en-CA", {
+        timeZone: "America/Toronto",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+
       return `100+ new homes in ${CapitalizeFirst(
         city
       )}, AB | Explore Floor Plans, Pricing & Availability. Condomonk has over 120 new  construction homes from trusted builders in ${CapitalizeFirst(
@@ -261,7 +270,7 @@ export default async function CityPage({ params }) {
         city
       )} detached homes for sale, our platform is updated daily with latest resale listings every hour. For new development homes, easily filter by number of bedrooms (1 to 4+), project type, and construction status from budget-friendly condo to a pre construction homes, contact us to connect you to the most exciting real estate opportunities in ${CapitalizeFirst(
         city
-      )}.`;
+      )}. Last Updated: ${lastUpdated}`;
     }
     return (
       <>
