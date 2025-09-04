@@ -317,12 +317,16 @@ export default async function CityPage({ params }) {
         {CapitalizeFirst(cleanCity)}.
         <div className="text-gray-600 mt-2 mb-3">
           <span className="font-medium">Last Updated:</span>{" "}
-          {new Date().toLocaleDateString("en-CA", {
-            timeZone: "America/Toronto",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
+          {(() => {
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            return yesterday.toLocaleDateString("en-CA", {
+              timeZone: "America/Toronto",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            });
+          })()}
         </div>
       </>
     );
