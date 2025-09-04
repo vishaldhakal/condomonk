@@ -256,21 +256,27 @@ export default async function CityPage({ params }) {
         day: "numeric",
       });
 
-      return `100+ new homes in ${CapitalizeFirst(
-        city
-      )}, AB | Explore Floor Plans, Pricing & Availability. Condomonk has over 120 new  construction homes from trusted builders in ${CapitalizeFirst(
-        city
-      )}, AB. If you are looking to buy new  homes, Condomonk is your trusted platform to find 1000+  homes for sale in ${CapitalizeFirst(
-        city
-      )}. Whether you are looking to downsize to buy townhomes for sale in ${CapitalizeFirst(
-        city
-      )} or looking to buy condos in ${CapitalizeFirst(
-        city
-      )} for your family or browsing ${CapitalizeFirst(
-        city
-      )} detached homes for sale, our platform is updated daily with latest resale listings every hour. For new development homes, easily filter by number of bedrooms (1 to 4+), project type, and construction status from budget-friendly condo to a pre construction homes, contact us to connect you to the most exciting real estate opportunities in ${CapitalizeFirst(
-        city
-      )}. Last Updated: ${lastUpdated}`;
+      return (
+        <>
+          100+ new homes in {CapitalizeFirst(city)}, AB | Explore Floor Plans,
+          Pricing & Availability. Condomonk has over 120 new construction homes
+          from trusted builders in {CapitalizeFirst(city)}, AB. If you are
+          looking to buy new homes, Condomonk is your trusted platform to find
+          1000+ homes for sale in {CapitalizeFirst(city)}. Whether you are
+          looking to downsize to buy townhomes for sale in{" "}
+          {CapitalizeFirst(city)} or looking to buy condos in{" "}
+          {CapitalizeFirst(city)} for your family or browsing{" "}
+          {CapitalizeFirst(city)} detached homes for sale, our platform is
+          updated daily with latest resale listings every hour. For new
+          development homes, easily filter by number of bedrooms (1 to 4+),
+          project type, and construction status from budget-friendly condo to a
+          pre construction homes, contact us to connect you to the most exciting
+          real estate opportunities in {CapitalizeFirst(city)}.
+          <div className="text-gray-600 mt-2 mb-3">
+            <span className="font-medium">Last Updated:</span> {lastUpdated}
+          </div>
+        </>
+      );
     }
     return (
       <>
