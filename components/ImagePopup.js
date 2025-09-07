@@ -13,6 +13,17 @@ const ImagePopup = ({ cityName, popupData, showPopup, onClose }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitBtn, setSubmitBtn] = useState("Submit Inquiry");
   const [showFullDisclaimer, setShowFullDisclaimer] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  // Preload image when popup data changes
+  useEffect(() => {
+    if (popupData && popupData.image) {
+      const img = new Image();
+      img.onload = () => setImageLoaded(true);
+      img.onerror = () => setImageLoaded(true); // Still show popup even if image fails
+      img.src = popupData.image;
+    }
+  }, [popupData]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -127,7 +138,7 @@ const ImagePopup = ({ cityName, popupData, showPopup, onClose }) => {
     setShowForm(false);
   };
 
-  if (!popupData || !showPopup) {
+  if (!popupData || !showPopup || !imageLoaded) {
     return null;
   }
 
@@ -194,6 +205,9 @@ const ImagePopup = ({ cityName, popupData, showPopup, onClose }) => {
                     popupData.image_alt_description || `Property in ${cityName}`
                   }
                   className="w-fit h-auto max-h-[80vh] object-contain rounded-xl"
+                  loading="eager"
+                  decoding="sync"
+                  style={{ imageRendering: "auto" }}
                 />
               )}
             </div>
@@ -313,6 +327,9 @@ const ImagePopup = ({ cityName, popupData, showPopup, onClose }) => {
                       `Property in ${cityName}`
                     }
                     className="w-fit h-auto max-h-[80vh] object-contain shadow-lg"
+                    loading="eager"
+                    decoding="sync"
+                    style={{ imageRendering: "auto" }}
                   />
                 )}
               </div>

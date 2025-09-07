@@ -11,10 +11,25 @@ const CombinedPopupManager = ({ cityName }) => {
   const [showImagePopup, setShowImagePopup] = useState(false);
   const [popupSequence, setPopupSequence] = useState([]);
   const [currentPopupIndex, setCurrentPopupIndex] = useState(0);
+  const [imagesPreloaded, setImagesPreloaded] = useState(false);
 
   // Format city name to match API response
   const formatCityName = (city) => {
     return city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
+  };
+
+  // Preload images function
+  const preloadImages = (imageUrls) => {
+    return Promise.all(
+      imageUrls.map((url) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => resolve(url);
+          img.onerror = () => resolve(url); // Still resolve to not block the popup
+          img.src = url;
+        });
+      })
+    );
   };
 
   useEffect(() => {
@@ -55,6 +70,18 @@ const CombinedPopupManager = ({ cityName }) => {
             formatCityName(cityName).toLowerCase()
           );
         });
+
+        // Collect all image URLs for preloading
+        const imageUrls = [];
+        if (matchingImagePopup && matchingImagePopup.image) {
+          imageUrls.push(matchingImagePopup.image);
+        }
+
+        // Preload images before setting up popups
+        if (imageUrls.length > 0) {
+          await preloadImages(imageUrls);
+        }
+        setImagesPreloaded(true);
 
         // Set popup data
         setCityPopupData(matchingCityPopup);
@@ -107,27 +134,24 @@ const CombinedPopupManager = ({ cityName }) => {
     if (sequence.length > 1) {
       sequence.forEach((popup, index) => {
         if (index > 0) {
-          setTimeout(
-            () => {
-              // Close previous popup
-              if (sequence[index - 1].type === "city") {
-                setShowCityPopup(false);
-              } else {
-                setShowImagePopup(false);
-              }
+          setTimeout(() => {
+            // Close previous popup
+            if (sequence[index - 1].type === "city") {
+              setShowCityPopup(false);
+            } else {
+              setShowImagePopup(false);
+            }
 
-              // Show current popup
-              setTimeout(() => {
-                if (popup.type === "city") {
-                  setShowCityPopup(true);
-                } else {
-                  setShowImagePopup(true);
-                }
-                setCurrentPopupIndex(index);
-              }, 500); // Small delay between closing and opening
-            },
-            firstPopup.delay + index * 5000
-          ); // 5 second intervals
+            // Show current popup
+            setTimeout(() => {
+              if (popup.type === "city") {
+                setShowCityPopup(true);
+              } else {
+                setShowImagePopup(true);
+              }
+              setCurrentPopupIndex(index);
+            }, 500); // Small delay between closing and opening
+          }, firstPopup.delay + index * 5000); // 5 second intervals
         }
       });
     }
