@@ -1,10 +1,20 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import TimeAgo from "@/helper/timeAgo";
-import React, { useState } from "react";
+import React from "react";
 
 const NO_IMAGE_URL = "/noimage.webp";
+
+// Gray placeholder that loads instantly (no network request)
+const PLACEHOLDER_STYLE = {
+  backgroundColor: "#f3f4f6",
+  backgroundImage: `linear-gradient(45deg, #e5e7eb 25%, transparent 25%), 
+                   linear-gradient(-45deg, #e5e7eb 25%, transparent 25%), 
+                   linear-gradient(45deg, transparent 75%, #e5e7eb 75%), 
+                   linear-gradient(-45deg, transparent 75%, #e5e7eb 75%)`,
+  backgroundSize: "20px 20px",
+  backgroundPosition: "0 0, 0 10px, 10px -10px, -10px 0px",
+};
 
 function getTimeAgo(timestamp) {
   const now = new Date();
@@ -24,13 +34,16 @@ function isNewListing(timestamp) {
   return minutes < 30;
 }
 
-export default function PropertyCard({ property }) {
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const hasImage = property.imageUrl?.medium;
+export default function PropertyCard({ property, index = 0 }) {
   const totalBathrooms =
     (property.WashroomsType1Pcs || 0) + (property.WashroomsType2Pcs || 0);
   const timeAgo = getTimeAgo(property.ModificationTimestamp);
   const isNew = isNewListing(property.ModificationTimestamp);
+
+  // Direct image URL - no complex loading logic
+  const imageUrl =
+    property.imageUrl?.thumbnail ||
+    `https://pillar9.homebaba.ca/images/${property.ListingKey}-0.jpg?cardImage=true&maxSize=50`;
 
   // Generate URL-friendly street and MLS string
   const streetAndMLS = (() => {
@@ -61,41 +74,21 @@ export default function PropertyCard({ property }) {
     };
   }, [property.ListPrice, property.PreviousListPrice]);
 
-  // useEffect(() => {
-  //   setLoadingImage(true);
-  //   getImageUrls({ MLS: curElem.ListingKey, thumbnailOnly: true }).then(
-  //     (urls) => {
-  //       setImgUrl(urls[0]);
-  //       setLoadingImage(false);
-  //     }
-  //   );
-  // }, []);
-
-  const handleImageLoad = () => {
-    setImageLoaded(true);
-    setImgError(false);
-  };
-  const handleImageError = (e) => {
-    if (!imageLoaded) {
-      setImgError(true);
-      e.target.onerror = null;
-      e.target.src = NO_IMAGE_URL;
-    }
-  };
-
   return (
     <section className="relative transition-all duration-200 transform bg-white group rounded-2xl p-0 hover:shadow-lg hover:rounded-t-2xl hover:-translate-y-1 overflow-hidden">
       <Link href={`/resale/listing/${streetAndMLS}`} className="text-black">
         <div className="lg:px-0 h-full w-full">
           <div className="flex flex-col overflow-hidden relative">
             <div className="h-36 sm:h-52 overflow-hidden relative">
-              <div className="h-36 sm:h-52 relative z-10 rounded-t-2xl rounded-b-2xl overflow-hidden">
+              <div className="h-36 sm:h-52 relative z-10 rounded-t-2xl rounded-b-2xl overflow-hidden bg-gray-200">
                 <img
-                  className="object-cover w-full h-full transition-all duration-200 transform group-hover:scale-110 rounded-b-2xl hover:rounded-b-2xl rounded-t-2xl"
-                  src={`https://pillar9.homebaba.ca/images/${property.ListingKey}-0.jpg?cardImage=true`}
-                  onLoad={handleImageLoad}
-                  alt="property image"
-                  onError={handleImageError}
+                  className="object-cover w-full h-full transform group-hover:scale-110 rounded-t-2xl rounded-b-2xl"
+                  src={imageUrl}
+                  alt={`${property.StreetNumber} ${property.StreetName} ${property.City} - Property Image`}
+                  onError={(e) => {
+                    e.target.src = NO_IMAGE_URL;
+                  }}
+                  loading={index < 12 ? "eager" : "lazy"}
                 />
               </div>
 
