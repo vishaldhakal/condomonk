@@ -203,7 +203,7 @@ const Footer = ({ cities }) => {
             </p>
           </div>
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="space-y-6 ">
+            {/* <div className="space-y-6 ">
               <div className="flex justify-center ">
                 <img
                   src="/trebb.png"
@@ -218,8 +218,8 @@ const Footer = ({ cities }) => {
                 interest in the purchase, sale or lease of real estate and may
                 not be used for any commercial purpose or any other purpose.
               </p>
-            </div>
-            <div className="space-y-6">
+            </div> */}
+            {/* <div className="space-y-6">
               <div className="flex justify-center">
                 <img src="/crea.png" alt="MLS Logo" className="h-6" />
               </div>
@@ -230,7 +230,7 @@ const Footer = ({ cities }) => {
                 Service® and the associated logos identify professional services
                 rendered by REALTOR® members of CREA.
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
 
