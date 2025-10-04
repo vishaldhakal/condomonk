@@ -1,4 +1,6 @@
 import CondoCard from "@/components/CondoCard";
+import HorizontalCondoCard from "@/components/HorizontalCondoCard";
+import RightSidebarLinks from "@/components/RightSidebarLinks";
 import BottomContactForm from "@/components/BottomContactForm";
 import Newsletter from "@/components/Newsletter";
 import { notFound } from "next/navigation";
@@ -146,25 +148,54 @@ export default async function DetachedPage({ params }) {
           </div>
         </div>
 
-        {/* Selling Projects Grid */}
-        <div className="mt-3">
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {sellingProjects.map((item, index) => (
-              <CondoCard key={item.id} {...item} no={index} />
-            ))}
-          </div>
-        </div>
+        {/* Two Column Layout: Projects on Left, Sidebar on Right */}
+        {(sellingProjects.length > 0 || upcomingProjects.length > 0) && (
+          <div className="flex flex-col lg:flex-row gap-6 mt-4">
+            {/* Left Column - Projects List - Scrollable */}
+            <div className="flex-1 lg:w-2/3 overflow-y-auto">
+              {sellingProjects.length > 0
+                ? sellingProjects.map((item, index) => (
+                    <HorizontalCondoCard key={item.id} {...item} no={index} />
+                  ))
+                : upcomingProjects.map((item, index) => (
+                    <HorizontalCondoCard key={item.id} {...item} no={index} />
+                  ))}
+            </div>
 
-        {/* Upcoming Projects Section */}
-        {upcomingProjects.length > 0 && (
-          <div className="mt-12">
+            {/* Right Column - Sidebar Links - Sticky and Scrollable */}
+            <div className="lg:w-1/3">
+              <div className="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                <RightSidebarLinks
+                  cityName={cityName}
+                  citySlug={params.city}
+                  projectTypes={["Condo", "Townhome", "Detached"]}
+                  assignmentsCount={0}
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* No Projects Message */}
+        {sellingProjects.length === 0 && upcomingProjects.length === 0 && (
+          <div className="text-center py-12 text-gray-500">
+            No projects available at this time.
+          </div>
+        )}
+
+        {/* Upcoming Projects Section - Only show if there are selling projects */}
+        {sellingProjects.length > 0 && upcomingProjects.length > 0 && (
+          <div className="mt-16">
             <h2 className="text-2xl font-bold mb-8">
               Upcoming Pre Construction Detached Homes in {cityName}
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {upcomingProjects.map((item, index) => (
-                <CondoCard key={item.id} {...item} no={index} />
-              ))}
+            <div className="flex flex-col lg:flex-row gap-6">
+              <div className="flex-1 lg:w-2/3 overflow-y-auto">
+                {upcomingProjects.map((item, index) => (
+                  <HorizontalCondoCard key={item.id} {...item} no={index} />
+                ))}
+              </div>
+              <div className="lg:w-1/3"></div>
             </div>
           </div>
         )}

@@ -1,4 +1,6 @@
 import CondoCard from "@/components/CondoCard";
+import HorizontalCondoCard from "@/components/HorizontalCondoCard";
+import RightSidebarLinks from "@/components/RightSidebarLinks";
 import BottomContactForm from "@/components/BottomContactForm";
 import { notFound } from "next/navigation";
 import PreconSchema from "@/components/PreconSchema";
@@ -368,53 +370,27 @@ export default async function CityPage({ params }) {
 
         {/* Filter Section */}
 
-        <div className="sticky z-50 bg-white pt-2 pb-2 md:pt-3 md:pb-3  md:z-[999] -top-14 -mx-4 h-30 md:h-20 md:mt-0">
+        {/* <div className="sticky z-50 bg-white pt-2 pb-2 md:pt-3 md:pb-3  md:z-[999] -top-14 -mx-4 h-30 md:h-20 md:mt-0">
           <div className="flex justify-start px-4">
             <PreconstructionFilter
               cityName={CapitalizeFirst(params.city)}
               citySlug={params.city.split("-homes-")[0]}
             />
           </div>
-        </div>
+        </div> */}
         <div>
-          <p className="pt-2">
+          <p className="pt-md-2 pt-4">
             Showing result{" "}
             <span className="font-semibold">25 of 100 new homes</span>
           </p>
         </div>
-        {/* Combined Projects Grid */}
-        <div
-          id="selling"
-          className="grid grid-cols-2 md:grid-cols-4 md:gap-4 gap-x-3 md:mt-3 mt-0 mt-0 mx-2"
-        >
-          {/* Featured Projects First */}
-          {featuredData.preconstructions?.map((item, index) => (
-            <div key={item.id}>
-              <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                  __html: JSON.stringify(PreconSchema(item)),
-                }}
-              />
-              <div className="priority-content">
-                <CondoCard
-                  {...item}
-                  no={index}
-                  priority={(index < 4).toString()}
-                />
-              </div>
-            </div>
-          ))}
 
-          {/* Non-Featured Selling Projects */}
-          {filteredProjects("Selling")
-            .filter(
-              (item) =>
-                !featuredData.preconstructions?.some(
-                  (featured) => featured.id === item.id
-                )
-            )
-            .map((item, index) => (
+        {/* Two Column Layout: Projects on Left, Sidebar on Right */}
+        <div className="flex flex-col lg:flex-row gap-6 mt-2">
+          {/* Left Column - Projects List - Scrollable */}
+          <div className="flex-1 lg:w-2/3 overflow-y-auto" id="selling">
+            {/* Featured Projects First */}
+            {featuredData.preconstructions?.map((item, index) => (
               <div key={item.id}>
                 <script
                   type="application/ld+json"
@@ -422,24 +398,25 @@ export default async function CityPage({ params }) {
                     __html: JSON.stringify(PreconSchema(item)),
                   }}
                 />
-                <CondoCard
-                  {...item}
-                  no={index + (featuredData.preconstructions?.length || 0)}
-                  priority="false"
-                />
+                <div className="priority-content">
+                  <HorizontalCondoCard
+                    {...item}
+                    no={index}
+                    priority={(index < 4).toString()}
+                  />
+                </div>
               </div>
             ))}
-        </div>
 
-        {/* Upcoming Projects */}
-        {filteredProjects("Upcoming").length > 0 && (
-          <div id="upcoming">
-            <h3 className="text-2xl md:text-3xl font-bold pt-32 mb-8">
-              Launching Soon - New Pre Construction Homes in{" "}
-              {CapitalizeFirst(cleanCity)}
-            </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {filteredProjects("Upcoming").map((item, index) => (
+            {/* Non-Featured Selling Projects */}
+            {filteredProjects("Selling")
+              .filter(
+                (item) =>
+                  !featuredData.preconstructions?.some(
+                    (featured) => featured.id === item.id
+                  )
+              )
+              .map((item, index) => (
                 <div key={item.id}>
                   <script
                     type="application/ld+json"
@@ -447,31 +424,75 @@ export default async function CityPage({ params }) {
                       __html: JSON.stringify(PreconSchema(item)),
                     }}
                   />
-                  <CondoCard {...item} no={index} />
+                  <HorizontalCondoCard
+                    {...item}
+                    no={index + (featuredData.preconstructions?.length || 0)}
+                    priority="false"
+                  />
                 </div>
               ))}
+          </div>
+
+          {/* Right Column - Sidebar Links - Sticky and Scrollable */}
+          <div className="lg:w-1/3">
+            <div className="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              <RightSidebarLinks
+                cityName={CapitalizeFirst(cleanCity)}
+                citySlug={cleanCity}
+                projectTypes={cityDirectoryData.city_data.project_types}
+                assignmentsCount={assignments.data?.length || 0}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Upcoming Projects */}
+        {filteredProjects("Upcoming").length > 0 && (
+          <div id="upcoming" className="mt-16">
+            <h3 className="text-2xl md:text-3xl font-bold mb-8">
+              Launching Soon - New Pre Construction Homes in{" "}
+              {CapitalizeFirst(cleanCity)}
+            </h3>
+            <div className="flex flex-col lg:flex-row gap-6">
+              <div className="flex-1 lg:w-2/3 overflow-y-auto">
+                {filteredProjects("Upcoming").map((item, index) => (
+                  <div key={item.id}>
+                    <script
+                      type="application/ld+json"
+                      dangerouslySetInnerHTML={{
+                        __html: JSON.stringify(PreconSchema(item)),
+                      }}
+                    />
+                    <HorizontalCondoCard {...item} no={index} />
+                  </div>
+                ))}
+              </div>
+              <div className="lg:w-1/3"></div>
             </div>
           </div>
         )}
 
         {/* Sold Out Projects */}
         {filteredProjects("Sold out").length > 0 && (
-          <div id="soldout">
-            <h3 className="text-2xl font-bold mt-16 mb-8 italic text-red-600">
+          <div id="soldout" className="mt-16">
+            <h3 className="text-2xl font-bold mb-8 italic text-red-600">
               Past Communities in {CapitalizeFirst(cleanCity)} - Sold out
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {filteredProjects("Sold out").map((item, index) => (
-                <div key={item.id}>
-                  <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{
-                      __html: JSON.stringify(PreconSchema(item)),
-                    }}
-                  />
-                  <CondoCard {...item} no={index} />
-                </div>
-              ))}
+            <div className="flex flex-col lg:flex-row gap-6">
+              <div className="flex-1 lg:w-2/3 overflow-y-auto">
+                {filteredProjects("Sold out").map((item, index) => (
+                  <div key={item.id}>
+                    <script
+                      type="application/ld+json"
+                      dangerouslySetInnerHTML={{
+                        __html: JSON.stringify(PreconSchema(item)),
+                      }}
+                    />
+                    <HorizontalCondoCard {...item} no={index} />
+                  </div>
+                ))}
+              </div>
+              <div className="lg:w-1/3"></div>
             </div>
           </div>
         )}
