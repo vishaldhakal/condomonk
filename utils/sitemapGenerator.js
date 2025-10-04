@@ -32,7 +32,6 @@ class SitemapGenerator {
       { url: "/blogs", priority: 0.8 },
       { url: "/builders", priority: 0.8 },
       { url: "/pre-construction-homes", priority: 0.8 },
-      { url: "/resale/ontario", priority: 1.0 },
       { url: "/top-10-gta-projects", priority: 0.8 },
     ];
 
@@ -81,7 +80,6 @@ class SitemapGenerator {
       // Keep all existing routes
       await this.addBuilderRoutes();
       await this.addBlogRoutes();
-      await this.addResaleRoutes();
       await this.addNewHomesRoutes();
       await this.addTopProjectsRoutes();
     } catch (error) {
@@ -127,94 +125,6 @@ class SitemapGenerator {
     }
   }
 
-  async addResaleRoutes() {
-    try {
-      // Fetch resale listings from API
-      const response = await fetch("https://api.condomonk.ca/api/resale", {
-        next: { revalidate: 10 },
-      });
-      const data = await response.json();
-
-      // Add URL for each resale listing
-      if (data.listings) {
-        data.listings.forEach((listing) => {
-          this.addUrl(`/resale/${listing.slug}`, 0.6);
-        });
-      }
-
-      // Add Ontario resale routes
-      await this.addOntarioResaleRoutes();
-    } catch (error) {
-      console.error("Error fetching resale listings:", error);
-    }
-  }
-
-  async addOntarioResaleRoutes() {
-    try {
-      console.log("Starting to add Ontario resale routes");
-      // Import the Ontario cities
-      const { allCities } = await import("../data/ontarioCities.js");
-      console.log(`Loaded ${allCities.length} Ontario cities`);
-
-      // Add main Ontario resale routes
-      const ontarioRoutes = [
-        "resale/ontario/detached-homes-for-sale",
-        "resale/ontario/semi-detached-homes-for-sale",
-        "resale/ontario/townhomes-for-sale",
-        "resale/ontario/condos-for-sale",
-        "resale/ontario/detached-homes-for-lease",
-        "resale/ontario/semi-detached-homes-for-lease",
-        "resale/ontario/townhomes-for-lease",
-        "resale/ontario/condos-for-lease",
-        "resale/ontario/open-houses",
-        "resale/ontario/price-reduced-homes-for-sale",
-      ];
-      console.log(`Adding ${ontarioRoutes.length} main Ontario routes`);
-
-      // Add each Ontario route
-      ontarioRoutes.forEach((route) => {
-        this.addUrl(`/${route}`, 0.7);
-      });
-
-      // Function to convert city name to slug
-      const cleanSlug = (cityName) => {
-        return cityName.toLowerCase().replace(/\s+/g, "-");
-      };
-
-      // Add city-specific routes for each Ontario city
-      console.log("Adding city-specific routes");
-      allCities.forEach((city) => {
-        const citySlug = cleanSlug(city.city);
-
-        // Add main city route with priority 1.0 (add this line before other city routes)
-        this.addUrl(`/resale/ontario/${citySlug}/homes-for-sale`, 1.0);
-        this.addUrl(`/resale/ontario/${citySlug}/homes-for-lease`, 1.0);
-
-        // Add all the city-specific routes
-        const cityRoutes = [
-          `resale/ontario/${citySlug}/detached-homes-for-sale`,
-          `resale/ontario/${citySlug}/semi-detached-homes-for-sale`,
-          `resale/ontario/${citySlug}/townhomes-for-sale`,
-          `resale/ontario/${citySlug}/condos-for-sale`,
-          `resale/ontario/${citySlug}/detached-homes-for-lease`,
-          `resale/ontario/${citySlug}/semi-detached-homes-for-lease`,
-          `resale/ontario/${citySlug}/townhomes-for-lease`,
-          `resale/ontario/${citySlug}/condos-for-lease`,
-          `resale/ontario/${citySlug}/open-houses`,
-          `resale/ontario/${citySlug}/price-reduced-homes-for-sale`,
-        ];
-
-        // Add each city route
-        cityRoutes.forEach((route) => {
-          this.addUrl(`/${route}`, 0.6);
-        });
-      });
-      console.log("Finished adding Ontario resale routes");
-    } catch (error) {
-      console.error("Error adding Ontario resale routes:", error);
-    }
-  }
-
   async addNewHomesRoutes() {
     // Implementation for adding new homes routes
   }
@@ -249,12 +159,6 @@ class SitemapGenerator {
       // Add routes
       await this.addStaticRoutes();
       await this.addDynamicRoutes();
-
-      // Directly add Ontario routes to ensure they're included
-      console.log(
-        "Directly calling addOntarioResaleRoutes from generateSitemap"
-      );
-      await this.addOntarioResaleRoutes();
 
       // Generate XML
       const sitemapXml = this.generateSitemapXml();
