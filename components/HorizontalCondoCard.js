@@ -8,12 +8,12 @@ import SideContactForm from "./SideContactForm";
 export default function HorizontalCondoCard(props) {
   function checkPricing(prii) {
     if (parseInt(prii) == 0) {
-      return `Pricing not available`;
+      return <div className="text-sm text-gray-500">Pricing not available</div>;
     } else {
       return (
-        <div>
-          <span className="text-xs md:text-inherit">From low</span>{" "}
-          <span className="font-bold text-cmhc-green text-xl ml-1">
+        <div className="flex items-baseline gap-1">
+          <span className="text-xs text-gray-500">From</span>
+          <span className="text-lg font-medium text-teal-600">
             ${Nformatter(prii, 2)}
           </span>
         </div>
@@ -29,10 +29,10 @@ export default function HorizontalCondoCard(props) {
   }, []);
 
   return (
-    <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden mb-4">
+    <div className="bg-white rounded-lg border border-gray-200 hover:border-gray-400 transition-all duration-300 overflow-hidden mb-4">
       <div className="flex flex-col md:flex-row">
         {/* Left: Image Section */}
-        <div className="relative w-full md:w-72 h-64 md:h-auto flex-shrink-0">
+        <div className="relative w-full md:w-80 h-64 md:h-auto md:self-stretch flex-shrink-0">
           <Link href={`/${city}/${props.slug}`}>
             <img
               loading="lazy"
@@ -41,7 +41,7 @@ export default function HorizontalCondoCard(props) {
                   ? `https://api.condomonk.ca${props.image.image}`
                   : "/noimage.webp"
               }
-              className="w-full h-full object-cover"
+              className="w-full h-64 md:h-full object-cover"
               style={{
                 background:
                   "linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%)",
@@ -50,19 +50,37 @@ export default function HorizontalCondoCard(props) {
             />
           </Link>
 
-          {/* Bottom Badges Container */}
-          <div className="absolute bottom-2 left-2 flex items-center gap-2">
+          {/* Top Badges Container */}
+          <div className="absolute top-3 left-3 flex items-center gap-2">
             {/* Status Badge */}
-            <span className="bg-white px-3 py-1 rounded text-xs font-medium">
+            <span className="bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-md text-xs text-gray-700 border border-gray-100">
               {props.status}
             </span>
 
-            {/* Views Badge */}
-            <span className="flex items-center bg-white text-black text-[10px] font-semibold px-2 py-1 rounded gap-1">
+            {/* Featured Badge */}
+            {props.is_featured && (
+              <span className="bg-teal-500/90 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-md flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z" />
+                </svg>
+                Featured
+              </span>
+            )}
+          </div>
+
+          {/* Bottom Views Badge */}
+          <div className="absolute bottom-3 right-3">
+            <span className="flex items-center bg-black/70 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-md gap-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
+                width="12"
+                height="12"
                 fill="currentColor"
                 viewBox="0 0 16 16"
               >
@@ -71,94 +89,131 @@ export default function HorizontalCondoCard(props) {
               {randomViews.toLocaleString()}
             </span>
           </div>
-
-          {/* Featured Badge */}
-          {props.is_featured && (
-            <span className="absolute top-2 right-2 bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded flex items-center gap-1">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
-                fill="currentColor"
-                viewBox="0 0 22 22"
-              >
-                <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z" />
-              </svg>
-              Featured
-            </span>
-          )}
         </div>
 
-        {/* Middle: Content Section */}
-        <div className="flex-1 p-4 md:p-6">
-          <Link
-            href={`/${city}/${props.slug}`}
-            className="no-underline hover:text-[#00b5d6] transition-colors"
-          >
-            <h2 className="text-xl md:text-2xl font-bold text-black mb-3">
-              {props.project_name}
-            </h2>
-          </Link>
+        {/* Right: Content Section */}
+        <div className="flex-1 p-5 pb-5">
+          <div className="flex flex-col h-full justify-between">
+            {/* Top Content */}
+            <div>
+              <Link
+                href={`/${city}/${props.slug}`}
+                className="no-underline hover:text-teal-600 transition-colors"
+              >
+                <h2 className="text-lg md:text-xl text-gray-900 mb-3 leading-tight">
+                  {props.project_name}
+                </h2>
+              </Link>
 
-          <dl className="mt-0 mb-4">
-            <dd>
-              <ul className="space-y-1 p-0 m-0">
-                <li className="flex items-start text-gray-600">
-                  <span className="flex-1 text-xs md:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
+              {/* Project Details */}
+              <div className="space-y-2 mb-4">
+                <div className="flex items-center text-gray-600">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                    className="mr-2 text-gray-400"
+                  >
+                    <path d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                    <path d="M6.94 7.44l4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z" />
+                  </svg>
+                  <span className="text-sm truncate max-w-[80%]">
                     {props.project_address}
                   </span>
-                </li>
-                <li className="flex items-center text-gray-600">
+                </div>
+
+                <div className="flex items-start text-gray-600">
                   <Link
                     href={`/builders/${props.developer.slug}`}
-                    className="text-xs md:text-sm hover:underline whitespace-nowrap overflow-hidden text-ellipsis"
+                    className="text-sm hover:text-teal-600 hover:underline"
                   >
-                    Developed by {props.developer.name}
+                    {props.developer.name}
                   </Link>
-                </li>
-                <li className="flex items-center text-gray-600">
-                  <span className="flex-1 text-xs md:text-sm">
-                    Type: {props.project_type}
-                  </span>
-                </li>
-                <li className="flex items-center text-gray-600">
-                  <span className="flex-1 text-xs md:text-sm">
-                    Occupancy: {props.occupancy}
-                  </span>
-                </li>
-              </ul>
-            </dd>
-          </dl>
-
-          <h4 className="text-[0.9rem] font-normal text-black my-3">
-            {checkPricing(props.price_starting_from)}
-          </h4>
-
-          {/* CTA Button */}
-          <Dialog>
-            <DialogTrigger asChild>
-              <button className="py-2 text-xs md:text-lg text-center flex flex-row items-center justify-center gap-0.5 font-bold text-white bg-[#fa5757] shadow-lg shadow-emerald-100 border-0 px-2 rounded-md w-full md:w-auto transition-all duration-200">
-                Request Price List
-              </button>
-            </DialogTrigger>
-            <DialogContent className="p-3 w-[80%] md:w-[30rem] max-h-fit z-[99999]">
-              <div className="block">
-                <div className="flex flex-col items-center mb-4 md:mb-5">
-                  <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-1 text-center">
-                    {props.project_name}
-                  </h2>
-                  <p className="text-gray-600 text-center text-sm md:text-base">
-                    Send Me Pricing Details
-                  </p>
                 </div>
-                <SideContactForm
-                  proj_name={props.project_name}
-                  defaultmessage={`Please send me additional information about ${props.project_name}. Thank you !`}
-                  city={city}
-                />
+
+                <div className="flex items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                    className="mr-2 text-gray-400"
+                  >
+                    <path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                  </svg>
+                  <span className="text-sm">{props.project_type}</span>
+                </div>
+                <div className="flex items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                    className="mr-2 text-gray-400"
+                  >
+                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
+                  </svg>
+                  <span className="text-sm">{props.occupancy}</span>
+                </div>
               </div>
-            </DialogContent>
-          </Dialog>
+
+              {/* Pricing */}
+              <div className="mb-4">
+                {checkPricing(props.price_starting_from)}
+              </div>
+            </div>
+
+            {/* Bottom CTA Button */}
+            <div className="mt-auto">
+              <Dialog>
+                <DialogTrigger asChild>
+                  <button
+                    className="w-fit bg-[#e5eff0] text-[#006169] border border-[#e5eff0] py-2 px-4 rounded-lg text-sm font-medium hover:bg-[#d1e8eb] transition-colors flex items-center gap-2"
+                    style={{
+                      fill: "#006169",
+                      backgroundColor: "#e5eff0",
+                      borderColor: "#e5eff0",
+                      color: "#006169",
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      fill="#006169"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                      <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                    </svg>
+                    Request Price List
+                  </button>
+                </DialogTrigger>
+                <DialogContent className="p-6 w-[90%] md:w-[32rem] max-h-fit z-[99999]">
+                  <div className="block">
+                    <div className="flex flex-col items-center mb-6">
+                      <h2 className="text-xl md:text-2xl text-gray-800 mb-2 text-center">
+                        {props.project_name}
+                      </h2>
+                      <p className="text-gray-600 text-center text-sm">
+                        Send Me Pricing Details
+                      </p>
+                    </div>
+                    <SideContactForm
+                      proj_name={props.project_name}
+                      defaultmessage={`Please send me additional information about ${props.project_name}. Thank you !`}
+                      city={city}
+                    />
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+          </div>
         </div>
       </div>
     </div>

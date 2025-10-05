@@ -58,8 +58,8 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
   const [showPricePopover, setShowPricePopover] = useState(false);
 
   return (
-    <div className=" bg-white z-[9999] md:z-30  ">
-      <div className="flex flex-col md:flex-row md:space-x-3 space-x-1 items-center w-full">
+    <div className=" bg-white z-[9999] md:z-30">
+      <div className="flex flex-col md:flex-row items-center justify-start w-full">
         <div className="flex items-center h-30 md:h-12">
           {/* <SearchWithAutocomplete
             searchType={"preconstruction"}
@@ -67,7 +67,7 @@ const PreconstructionFilter = ({ cityName, citySlug }) => {
             searchTypeOption={false}
           /> */}
         </div>
-        <div className="flex flex-row mt-2 md:mt-0 space-x-2 w-full justify-start py-2 items-center">
+        <div className="flex flex-row mt-2 md:mt-0 space-x-2 w-full justify-start py-2 items-center ms-0">
           {filterButtons.map((btn) => (
             <Link
               key={btn.value}

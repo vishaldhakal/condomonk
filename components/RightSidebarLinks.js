@@ -9,6 +9,7 @@ export default function RightSidebarLinks({
   assignmentsCount,
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [alertEmail, setAlertEmail] = useState("");
 
   const CapitalizeFirst = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -20,6 +21,13 @@ export default function RightSidebarLinks({
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+  };
+
+  const handleAlertSubmit = (e) => {
+    e.preventDefault();
+    // Handle alert subscription logic here
+    console.log("Alert email:", alertEmail);
+    setAlertEmail("");
   };
 
   // Nearby cities for Ontario
@@ -89,268 +97,187 @@ export default function RightSidebarLinks({
 
   // Sidebar content component
   const SidebarContent = () => (
-    <div className="space-y-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-      {/* Project Types */}
-      <div className="bg-white rounded-xl shadow-md p-5">
-        <h3 className="text-lg font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200">
-          Projects by Type
-        </h3>
-        <ul className="space-y-2">
-          <li>
-            <Link
-              href={`/${citySlug}/condos`}
-              className="text-gray-600 hover:text-blue-600 hover:underline text-sm transition-colors flex items-center gap-2"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-                />
-              </svg>
-              Condos in {cityName}
-            </Link>
-          </li>
-          <li>
-            <Link
-              href={`/${citySlug}/townhomes`}
-              className="text-gray-600 hover:text-blue-600 hover:underline text-sm transition-colors flex items-center gap-2"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-                />
-              </svg>
-              Townhomes in {cityName}
-            </Link>
-          </li>
-          <li>
-            <Link
-              href={`/${citySlug}/detached`}
-              className="text-gray-600 hover:text-blue-600 hover:underline text-sm transition-colors flex items-center gap-2"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-                />
-              </svg>
-              Detached Homes in {cityName}
-            </Link>
-          </li>
-        </ul>
+    <div className="space-y-1">
+      {/* Alert Me Section */}
+      <div className="bg-white rounded-lg p-4 pt-0">
+        <p className="text-sm text-black mb-3">
+          Be the first to hear about new properties
+        </p>
+        <button
+          onClick={handleAlertSubmit}
+          className="w-fit bg-white border border-teal-400 text-teal-500 rounded-lg px-4 py-2.5 text-sm hover:bg-teal-50 transition-colors flex items-center justify-start gap-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+          </svg>
+          Alert Me of New Properties
+        </button>
       </div>
 
-      {/* Project Status */}
-      <div className="bg-white rounded-xl shadow-md p-5">
-        <h3 className="text-lg font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200">
-          Projects by Status
+      {/* Recommended Searches Section */}
+      <div className="bg-white rounded-lg p-4">
+        <h3 className="text-sm font-semibold text-black mb-2 bg-[#f5f5f5] p-2 px-3 rounded-sm">
+          Recommended searches
         </h3>
-        <ul className="space-y-2">
-          <li>
-            <Link
-              href={`/${citySlug}#selling`}
-              className="text-gray-600 hover:text-blue-600 hover:underline text-sm transition-colors flex items-center gap-2"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-                />
-              </svg>
-              Selling Now
-            </Link>
-          </li>
-          <li>
-            <Link
-              href={`/${citySlug}#upcoming`}
-              className="text-gray-600 hover:text-blue-600 hover:underline text-sm transition-colors flex items-center gap-2"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-                />
-              </svg>
-              Launching Soon
-            </Link>
-          </li>
-          <li>
-            <Link
-              href={`/${citySlug}#soldout`}
-              className="text-gray-600 hover:text-blue-600 hover:underline text-sm transition-colors flex items-center gap-2"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-                />
-              </svg>
-              Sold Out Communities
-            </Link>
-          </li>
-        </ul>
+        <div className="space-y-1 ps-3">
+          <Link
+            href={`/${citySlug}/condos`}
+            className="block text-sm text-gray-500 hover:text-gray-700 hover:underline"
+          >
+            Studio Properties for sale in {cityName}
+          </Link>
+          <Link
+            href={`/${citySlug}/condos`}
+            className="block text-sm text-gray-500 hover:text-gray-700 hover:underline"
+          >
+            1 Bedroom Properties for sale in {cityName}
+          </Link>
+          <Link
+            href={`/${citySlug}/condos`}
+            className="block text-sm text-gray-500 hover:text-gray-700 hover:underline"
+          >
+            2 Bedroom Properties for sale in {cityName}
+          </Link>
+          <Link
+            href={`/${citySlug}/townhomes`}
+            className="block text-sm text-gray-500 hover:text-gray-700 hover:underline"
+          >
+            3 Bedroom Properties for sale in {cityName}
+          </Link>
+          <Link
+            href={`/${citySlug}/detached`}
+            className="block text-sm text-gray-500 hover:text-gray-700 hover:underline"
+          >
+            4 Bedroom Properties for sale in {cityName}
+          </Link>
+          <Link
+            href={`/${citySlug}`}
+            className="block text-sm text-gray-500 hover:text-gray-700 hover:underline mt-2"
+          >
+            View More
+          </Link>
+        </div>
       </div>
 
-      {/* Price Ranges */}
-      <div className="bg-white rounded-xl shadow-md p-5">
-        <h3 className="text-lg font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200">
-          Projects by Price
+      {/* Invest in Off Plan Section */}
+      <div className="bg-white rounded-lg p-4 ">
+        <h3 className="text-sm font-semibold text-black mb-2 bg-[#f5f5f5] p-2 px-3 rounded-sm">
+          Invest in Off Plan
         </h3>
-        <ul className="space-y-2">
-          {priceRanges.map((range) => (
-            <li key={range.value}>
-              <Link
-                href={`/${citySlug}-homes-${range.value}`}
-                className="text-gray-600 hover:text-blue-600 hover:underline text-sm transition-colors flex items-center gap-2"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="12"
-                  height="12"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-                  />
-                </svg>
-                Homes {range.label}
-              </Link>
-            </li>
+        <div className="space-y-2 ps-3">
+          <Link
+            href={`/${citySlug}`}
+            className="block text-sm text-gray-700 hover:text-gray-700 hover:underline"
+          >
+            Off Plan Properties in {cityName}
+          </Link>
+          <Link
+            href={`/${citySlug}#upcoming`}
+            className="block text-sm text-gray-700 hover:text-gray-700 hover:underline"
+          >
+            New Projects in {cityName}
+          </Link>
+        </div>
+      </div>
+
+      {/* Project Types - Compact Version */}
+      <div className="bg-white rounded-lg p-4 ">
+        <h3 className="text-sm font-semibold text-black mb-2 bg-[#f5f5f5] p-2 px-3 rounded-sm">
+          Browse by Type
+        </h3>
+        <div className="space-y-2 ps-3">
+          <Link
+            href={`/${citySlug}/condos`}
+            className="block text-sm text-gray-700 hover:text-gray-700 hover:underline"
+          >
+            Condos in {cityName}
+          </Link>
+          <Link
+            href={`/${citySlug}/townhomes`}
+            className="block text-sm text-gray-700 hover:text-gray-700 hover:underline"
+          >
+            Townhomes in {cityName}
+          </Link>
+          <Link
+            href={`/${citySlug}/detached`}
+            className="block text-sm text-gray-700 hover:text-gray-700 hover:underline"
+          >
+            Detached Homes in {cityName}
+          </Link>
+        </div>
+      </div>
+
+      {/* Price Ranges - Compact Version */}
+      <div className="bg-white rounded-lg p-4 ">
+        <h3 className="text-sm font-semibold text-black mb-2 bg-[#f5f5f5] p-2 px-3 rounded-sm">
+          Browse by Price
+        </h3>
+        <div className="space-y-2 ps-3">
+          {priceRanges.slice(0, 4).map((range) => (
+            <Link
+              key={range.value}
+              href={`/${citySlug}-homes-${range.value}`}
+              className="block text-sm text-gray-700 hover:text-gray-700 hover:underline"
+            >
+              Homes {range.label}
+            </Link>
           ))}
-        </ul>
+          <Link
+            href={`/${citySlug}`}
+            className="block text-sm text-gray-700 hover:text-gray-700 hover:underline mt-2"
+          >
+            View All Price Ranges
+          </Link>
+        </div>
       </div>
 
-      {/* Assignment Sales */}
+      {/* Assignment Sales - Only if available */}
       {assignmentsCount > 0 && (
-        <div className="bg-white rounded-xl shadow-md p-5">
-          <h3 className="text-lg font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200">
+        <div className="bg-white rounded-lg p-4 ">
+          <h3 className="text-sm font-semibold text-black mb-2 bg-[#f5f5f5] p-2 px-3 rounded-sm">
             Assignment Sales
           </h3>
           <Link
             href={`/assignment-sale/${citySlug}`}
-            className="text-gray-600 hover:text-blue-600 hover:underline text-sm transition-colors flex items-center gap-2"
+            className="block text-sm text-gray-700 hover:text-gray-700 hover:underline"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="12"
-              height="12"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-              />
-            </svg>
             {assignmentsCount} Assignment Sale{assignmentsCount > 1 ? "s" : ""}{" "}
             in {cityName}
           </Link>
         </div>
       )}
 
-      {/* Nearby Cities */}
+      {/* Nearby Cities - Compact Version */}
       {nearbyCities.length > 0 && (
-        <div className="bg-white rounded-xl shadow-md p-5">
-          <h3 className="text-lg font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200">
-            Preconstruction Homes Near {cityName}
+        <div className="bg-white rounded-lg p-4 ">
+          <h3 className="text-sm font-semibold text-black mb-2 bg-[#f5f5f5] p-2 px-3 rounded-sm">
+            Nearby Areas
           </h3>
-          <ul className="space-y-2">
-            {nearbyCities.map((city) => (
-              <li key={city}>
-                <Link
-                  href={`/${city}`}
-                  className="text-gray-600 hover:text-blue-600 hover:underline text-sm transition-colors flex items-center gap-2"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="12"
-                    height="12"
-                    fill="currentColor"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-                    />
-                  </svg>
-                  Preconstruction Homes in{" "}
-                  {CapitalizeFirst(city.replace(/-/g, " "))}
-                </Link>
-              </li>
+          <div className="space-y-2">
+            {nearbyCities.slice(0, 4).map((city) => (
+              <Link
+                key={city}
+                href={`/${city}`}
+                className="block text-sm text-gray-700 hover:text-gray-700 hover:underline"
+              >
+                {CapitalizeFirst(city.replace(/-/g, " "))}
+              </Link>
             ))}
-          </ul>
+            <Link
+              href={`/cities`}
+              className="block text-sm text-gray-700 hover:text-gray-700 hover:underline mt-2"
+            >
+              View All Cities
+            </Link>
+          </div>
         </div>
       )}
-
-      {/* Top Developers */}
-      <div className="bg-white rounded-xl shadow-md p-5">
-        <h3 className="text-lg font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200">
-          Projects by Developers
-        </h3>
-        <ul className="space-y-2">
-          {developers.map((dev) => (
-            <li key={dev.slug}>
-              <Link
-                href={`/builders/${dev.slug}`}
-                className="text-gray-600 hover:text-blue-600 hover:underline text-sm transition-colors flex items-center gap-2"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="12"
-                  height="12"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-                  />
-                </svg>
-                New Projects by {dev.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
 
@@ -359,7 +286,7 @@ export default function RightSidebarLinks({
       {/* Mobile Filter Button - Fixed at bottom */}
       <button
         onClick={toggleMenu}
-        className="lg:hidden fixed bottom-6 right-6 z-[9999] bg-[#fa5757] text-white p-4 rounded-full shadow-2xl hover:bg-[#e14646] transition-all duration-300 flex items-center gap-2"
+        className="lg:hidden fixed bottom-6 right-6 z-[9999] bg-teal-500 text-white p-4 rounded-full shadow-2xl hover:bg-teal-600 transition-all duration-300 flex items-center gap-2"
         aria-label="Open filters"
       >
         <svg

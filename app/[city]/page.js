@@ -1,4 +1,3 @@
-import CondoCard from "@/components/CondoCard";
 import HorizontalCondoCard from "@/components/HorizontalCondoCard";
 import RightSidebarLinks from "@/components/RightSidebarLinks";
 import BottomContactForm from "@/components/BottomContactForm";
@@ -370,14 +369,6 @@ export default async function CityPage({ params }) {
 
         {/* Filter Section */}
 
-        {/* <div className="sticky z-50 bg-white pt-2 pb-2 md:pt-3 md:pb-3  md:z-[999] -top-14 -mx-4 h-30 md:h-20 md:mt-0">
-          <div className="flex justify-start px-4">
-            <PreconstructionFilter
-              cityName={CapitalizeFirst(params.city)}
-              citySlug={params.city.split("-homes-")[0]}
-            />
-          </div>
-        </div> */}
         <div>
           <p className="pt-md-2 pt-4">
             Showing result{" "}
@@ -385,38 +376,21 @@ export default async function CityPage({ params }) {
           </p>
         </div>
 
-        {/* Two Column Layout: Projects on Left, Sidebar on Right */}
+        {/* Unified Layout: All Content on Left, Comprehensive Sidebar on Right */}
         <div className="flex flex-col lg:flex-row gap-6 mt-2">
-          {/* Left Column - Projects List - Scrollable */}
-          <div className="flex-1 lg:w-2/3 overflow-y-auto" id="selling">
-            {/* Featured Projects First */}
-            {featuredData.preconstructions?.map((item, index) => (
-              <div key={item.id}>
-                <script
-                  type="application/ld+json"
-                  dangerouslySetInnerHTML={{
-                    __html: JSON.stringify(PreconSchema(item)),
-                  }}
+          {/* Left Column - All Content - Scrollable */}
+          <div className="flex-1 lg:w-4/6">
+            <div className="hidden md:block sticky z-50 bg-white md:z-[999] top-0 py-1 md:mt-0">
+              <div className="flex justify-start">
+                <PreconstructionFilter
+                  cityName={CapitalizeFirst(params.city)}
+                  citySlug={params.city.split("-homes-")[0]}
                 />
-                <div className="priority-content">
-                  <HorizontalCondoCard
-                    {...item}
-                    no={index}
-                    priority={(index < 4).toString()}
-                  />
-                </div>
               </div>
-            ))}
-
-            {/* Non-Featured Selling Projects */}
-            {filteredProjects("Selling")
-              .filter(
-                (item) =>
-                  !featuredData.preconstructions?.some(
-                    (featured) => featured.id === item.id
-                  )
-              )
-              .map((item, index) => (
+            </div>
+            {/* Featured Projects First */}
+            <div id="selling">
+              {featuredData.preconstructions?.map((item, index) => (
                 <div key={item.id}>
                   <script
                     type="application/ld+json"
@@ -424,18 +398,109 @@ export default async function CityPage({ params }) {
                       __html: JSON.stringify(PreconSchema(item)),
                     }}
                   />
-                  <HorizontalCondoCard
-                    {...item}
-                    no={index + (featuredData.preconstructions?.length || 0)}
-                    priority="false"
-                  />
+                  <div className="priority-content">
+                    <HorizontalCondoCard
+                      {...item}
+                      no={index}
+                      priority={(index < 4).toString()}
+                    />
+                  </div>
                 </div>
               ))}
+
+              {/* Non-Featured Selling Projects */}
+              {filteredProjects("Selling")
+                .filter(
+                  (item) =>
+                    !featuredData.preconstructions?.some(
+                      (featured) => featured.id === item.id
+                    )
+                )
+                .map((item, index) => (
+                  <div key={item.id}>
+                    <script
+                      type="application/ld+json"
+                      dangerouslySetInnerHTML={{
+                        __html: JSON.stringify(PreconSchema(item)),
+                      }}
+                    />
+                    <HorizontalCondoCard
+                      {...item}
+                      no={index + (featuredData.preconstructions?.length || 0)}
+                      priority="false"
+                    />
+                  </div>
+                ))}
+            </div>
+
+            {/* Upcoming Projects */}
+            {filteredProjects("Upcoming").length > 0 && (
+              <div id="upcoming" className="mb-16 mt-16">
+                <h3 className="text-2xl md:text-3xl font-bold mb-8">
+                  Launching Soon - New Pre Construction Homes in{" "}
+                  {CapitalizeFirst(cleanCity)}
+                </h3>
+                <div className="space-y-4">
+                  {filteredProjects("Upcoming").map((item, index) => (
+                    <div key={item.id}>
+                      <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{
+                          __html: JSON.stringify(PreconSchema(item)),
+                        }}
+                      />
+                      <HorizontalCondoCard {...item} no={index} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Sold Out Projects */}
+            {filteredProjects("Sold out").length > 0 && (
+              <div id="soldout" className="mb-16">
+                <h3 className="text-2xl font-bold mb-8 italic text-red-600">
+                  Past Communities in {CapitalizeFirst(cleanCity)} - Sold out
+                </h3>
+                <div className="space-y-4">
+                  {filteredProjects("Sold out").map((item, index) => (
+                    <div key={item.id}>
+                      <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{
+                          __html: JSON.stringify(PreconSchema(item)),
+                        }}
+                      />
+                      <HorizontalCondoCard {...item} no={index} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Assignments Section */}
+            {assignments.data?.length > 0 && (
+              <div className="mb-16">
+                <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                  Assignment Sales in {CapitalizeFirst(cleanCity)}
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {assignments.data.map((assignment, index) => (
+                    <AssignmentCard
+                      key={assignment.id}
+                      assignment={assignment}
+                      index={index}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* Right Column - Sidebar Links - Sticky and Scrollable */}
-          <div className="lg:w-1/3">
-            <div className="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          {/* Right Column - Sidebar */}
+          <div className="lg:w-2/6">
+            {/* Main Sidebar Links - Normal scroll */}
+            <div className="mb-8">
               <RightSidebarLinks
                 cityName={CapitalizeFirst(cleanCity)}
                 citySlug={cleanCity}
@@ -443,77 +508,19 @@ export default async function CityPage({ params }) {
                 assignmentsCount={assignments.data?.length || 0}
               />
             </div>
+
+            {/* Ad Placement - Sticky */}
+            <div className="sticky top-5 z-20">
+              <div className="bg-white">
+                <img
+                  src="/des.png"
+                  alt="Real Estate Investment"
+                  className="w-full h-auto object-contain hover:scale-105 transition-transform duration-200"
+                />
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* Upcoming Projects */}
-        {filteredProjects("Upcoming").length > 0 && (
-          <div id="upcoming" className="mt-16">
-            <h3 className="text-2xl md:text-3xl font-bold mb-8">
-              Launching Soon - New Pre Construction Homes in{" "}
-              {CapitalizeFirst(cleanCity)}
-            </h3>
-            <div className="flex flex-col lg:flex-row gap-6">
-              <div className="flex-1 lg:w-2/3 overflow-y-auto">
-                {filteredProjects("Upcoming").map((item, index) => (
-                  <div key={item.id}>
-                    <script
-                      type="application/ld+json"
-                      dangerouslySetInnerHTML={{
-                        __html: JSON.stringify(PreconSchema(item)),
-                      }}
-                    />
-                    <HorizontalCondoCard {...item} no={index} />
-                  </div>
-                ))}
-              </div>
-              <div className="lg:w-1/3"></div>
-            </div>
-          </div>
-        )}
-
-        {/* Sold Out Projects */}
-        {filteredProjects("Sold out").length > 0 && (
-          <div id="soldout" className="mt-16">
-            <h3 className="text-2xl font-bold mb-8 italic text-red-600">
-              Past Communities in {CapitalizeFirst(cleanCity)} - Sold out
-            </h3>
-            <div className="flex flex-col lg:flex-row gap-6">
-              <div className="flex-1 lg:w-2/3 overflow-y-auto">
-                {filteredProjects("Sold out").map((item, index) => (
-                  <div key={item.id}>
-                    <script
-                      type="application/ld+json"
-                      dangerouslySetInnerHTML={{
-                        __html: JSON.stringify(PreconSchema(item)),
-                      }}
-                    />
-                    <HorizontalCondoCard {...item} no={index} />
-                  </div>
-                ))}
-              </div>
-              <div className="lg:w-1/3"></div>
-            </div>
-          </div>
-        )}
-
-        {/* Assignments Section */}
-        {assignments.data?.length > 0 && (
-          <div className="pt-32">
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">
-              Assignment Sales in {CapitalizeFirst(cleanCity)}
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              {assignments.data.map((assignment, index) => (
-                <AssignmentCard
-                  key={assignment.id}
-                  assignment={assignment}
-                  index={index}
-                />
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Latest News and Insight */}
         {latestCityBlogs?.length > 0 && (
