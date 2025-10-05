@@ -29,10 +29,10 @@ export default function HorizontalCondoCard(props) {
   }, []);
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 hover:border-gray-400 transition-all duration-300 overflow-hidden mb-4">
+    <div className="bg-white rounded-lg border border-gray-200 hover:border-gray-400 transition-all duration-300 overflow-hidden mb-4 transform-gpu hover:scale-[1.01]">
       <div className="flex flex-col md:flex-row">
         {/* Left: Image Section */}
-        <div className="relative w-full md:w-80 h-64 md:h-auto md:self-stretch flex-shrink-0">
+        <div className="relative w-full md:w-80 h-64 md:h-64 flex-shrink-0">
           <Link href={`/${city}/${props.slug}`}>
             <img
               loading="lazy"
@@ -41,7 +41,7 @@ export default function HorizontalCondoCard(props) {
                   ? `https://api.condomonk.ca${props.image.image}`
                   : "/noimage.webp"
               }
-              className="w-full h-64 md:h-full object-cover"
+              className="w-full h-64 md:h-64 object-cover object-center"
               style={{
                 background:
                   "linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%)",
@@ -92,33 +92,22 @@ export default function HorizontalCondoCard(props) {
         </div>
 
         {/* Right: Content Section */}
-        <div className="flex-1 p-5 pb-5">
-          <div className="flex flex-col h-full justify-between">
+        <div className="flex-1 p-3 ps-5">
+          <div className="flex flex-col justify-between">
             {/* Top Content */}
             <div>
               <Link
                 href={`/${city}/${props.slug}`}
                 className="no-underline hover:text-teal-600 transition-colors"
               >
-                <h2 className="text-lg md:text-xl text-gray-900 mb-3 leading-tight">
+                <h2 className="text-lg md:text-xl text-gray-900 mb-1 leading-tight">
                   {props.project_name}
                 </h2>
               </Link>
 
               {/* Project Details */}
-              <div className="space-y-2 mb-4">
+              <div className="space-y-1 mb-3">
                 <div className="flex items-center text-gray-600">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    fill="currentColor"
-                    viewBox="0 0 16 16"
-                    className="mr-2 text-gray-400"
-                  >
-                    <path d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016zm6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-                    <path d="M6.94 7.44l4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z" />
-                  </svg>
                   <span className="text-sm truncate max-w-[80%]">
                     {props.project_address}
                   </span>
@@ -129,36 +118,17 @@ export default function HorizontalCondoCard(props) {
                     href={`/builders/${props.developer.slug}`}
                     className="text-sm hover:text-teal-600 hover:underline"
                   >
-                    {props.developer.name}
+                    Developed by {props.developer.name}
                   </Link>
                 </div>
 
-                <div className="flex items-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    fill="currentColor"
-                    viewBox="0 0 16 16"
-                    className="mr-2 text-gray-400"
-                  >
-                    <path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                  </svg>
-                  <span className="text-sm">{props.project_type}</span>
+                <div className="flex items-center text-gray-600">
+                  <span className="text-sm">Type: </span>
+                  <span className="text-sm ms-1">{props.project_type}</span>
                 </div>
                 <div className="flex items-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    fill="currentColor"
-                    viewBox="0 0 16 16"
-                    className="mr-2 text-gray-400"
-                  >
-                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-                  </svg>
-                  <span className="text-sm">{props.occupancy}</span>
+                  <span className="text-sm">Occupancy: </span>
+                  <span className="text-sm ms-1">{props.occupancy}</span>
                 </div>
               </div>
 
