@@ -92,7 +92,7 @@ export default function HorizontalCondoCard(props) {
         </div>
 
         {/* Right: Content Section */}
-        <div className="flex-1 p-3 ps-5">
+        <div className="flex-1 p-4 ps-5">
           <div className="flex flex-col justify-between">
             {/* Top Content */}
             <div>
