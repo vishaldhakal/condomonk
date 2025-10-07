@@ -7,7 +7,6 @@ import CustomModal from "./Modal";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import SideContactForm from "./SideContactForm";
 export default function CondoCard(props) {
-  console.log(props);
   function checkPricing(prii) {
     if (parseInt(prii) == 0) {
       return `Pricing not available`;
@@ -177,7 +176,7 @@ export default function CondoCard(props) {
           <div className="flex items-end justify-start gap-1">
             <Link
               href={`/${city}/${props.slug}`}
-              className="text-sm md:text-[1.4rem] leading-tight text-black font-semibold whitespace-nowrap overflow-hidden text-ellipsis hover:text-[#00b5d6] transition-colors duration-300"
+              className="text-sm md:text-[1.2rem] leading-tight text-black font-medium whitespace-nowrap overflow-hidden text-ellipsis hover:text-teal-600 transition-colors duration-300"
             >
               {/* {props.no + 1 || "1"} */}
               {props.project_name}
@@ -224,7 +223,7 @@ export default function CondoCard(props) {
           </h4>
           <Dialog>
             <DialogTrigger asChild>
-              <button className="py-2 text-xs md:text-lg text-center flex flex-row items-center justify-center gap-0.5 font-bold text-white bg-[#fa5757] shadow-lg shadow-emerald-100 border-0 px-2 rounded-md w-full transition-all duration-200">
+              <button className="py-2 text-xs md:text-base text-center flex flex-row items-center justify-center gap-1 font-medium text-white bg-teal-600 hover:bg-teal-700 shadow-md border-0 px-3 rounded-md w-full transition-colors duration-200">
                 Request Price List
               </button>
             </DialogTrigger>

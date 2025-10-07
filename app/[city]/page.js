@@ -228,20 +228,20 @@ export default async function CityPage({ params }) {
       return (
         <>
           Pre Construction & New Homes for sale in{" "}
-          <span className="text-red-500">{CapitalizeFirst(city)}</span>, AB
+          <span className="text-teal-600">{CapitalizeFirst(city)}</span>, AB
         </>
       );
     }
     return priceFilter ? (
       <>
         Pre construction Homes in{" "}
-        <span className="text-red-500">{CapitalizeFirst(cleanCity)}</span>{" "}
+        <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>{" "}
         {formatPriceFilter(priceFilter)}
       </>
     ) : (
       <>
         120+ Pre Construction Homes in{" "}
-        <span className="text-red-500">{CapitalizeFirst(cleanCity)}</span>
+        <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>
       </>
     );
   };
@@ -286,7 +286,7 @@ export default async function CityPage({ params }) {
         construction homes from trusted{" "}
         <Link
           href={`/builders`}
-          className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+          className="text-slate-700 underline hover:text-slate-900"
         >
           builders in {CapitalizeFirst(cleanCity)}, ON.
         </Link>{" "}
@@ -294,28 +294,28 @@ export default async function CityPage({ params }) {
         platform to find{" "}
         <Link
           href={`/resale/ontario/${cleanCity}/homes-for-sale`}
-          className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+          className="text-slate-700 underline hover:text-slate-900"
         >
           1000+ homes for sale in {CapitalizeFirst(cleanCity)}.{" "}
         </Link>
         Whether you are looking to downsize to buy{" "}
         <Link
           href={`/resale/ontario/${cleanCity}/townhomes-for-sale`}
-          className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+          className="text-slate-700 underline hover:text-slate-900"
         >
           townhomes for sale in {CapitalizeFirst(cleanCity)}
         </Link>{" "}
         or looking to buy{" "}
         <Link
           href={`/resale/ontario/${cleanCity}/condos-for-sale`}
-          className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+          className="text-slate-700 underline hover:text-slate-900"
         >
           condos in {CapitalizeFirst(cleanCity)}
         </Link>{" "}
         for your family or browsing{" "}
         <Link
           href={`/resale/ontario/${cleanCity}/detached-homes-for-sale`}
-          className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+          className="text-slate-700 underline hover:text-slate-900"
         >
           {CapitalizeFirst(cleanCity)} detached homes for sale
         </Link>
@@ -325,7 +325,7 @@ export default async function CityPage({ params }) {
         a pre construction homes,{" "}
         <Link
           href="#contact"
-          className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+          className="text-slate-700 underline hover:text-slate-900"
         >
           contact us
         </Link>{" "}
@@ -357,12 +357,12 @@ export default async function CityPage({ params }) {
         {/* Header Section */}
         <div className="flex flex-col ">
           <div className="flex">
-            <h1 className="text-xl md:text-4xl font-bold mb-0">
+            <h1 className="text-xl md:text-4xl font-bold mb-0 text-gray-900">
               {generateTitle()}
             </h1>
           </div>
 
-          <h2 className="text-[8px] md:text-sm text-gray-500  mt-0 md:pt-4 pt-0">
+          <h2 className="text-xs md:text-base text-gray-600 mt-0 md:pt-4 pt-0">
             <ExpandableDescription>{generateSubtitle()}</ExpandableDescription>
           </h2>
         </div>
@@ -436,7 +436,7 @@ export default async function CityPage({ params }) {
             {/* Upcoming Projects */}
             {filteredProjects("Upcoming").length > 0 && (
               <div id="upcoming" className="mb-16 mt-16">
-                <h3 className="text-2xl md:text-3xl font-bold mb-8">
+                <h3 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900">
                   Launching Soon - New Pre Construction Homes in{" "}
                   {CapitalizeFirst(cleanCity)}
                 </h3>
@@ -459,7 +459,7 @@ export default async function CityPage({ params }) {
             {/* Sold Out Projects */}
             {filteredProjects("Sold out").length > 0 && (
               <div id="soldout" className="mb-16">
-                <h3 className="text-2xl font-bold mb-8 italic text-red-600">
+                <h3 className="text-2xl font-bold mb-8 text-gray-900">
                   Past Communities in {CapitalizeFirst(cleanCity)} - Sold out
                 </h3>
                 <div className="space-y-4">
@@ -526,12 +526,12 @@ export default async function CityPage({ params }) {
         {latestCityBlogs?.length > 0 && (
           <div className="pt-32">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-2xl md:text-3xl font-bold">
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
                 Latest News and Insight in {CapitalizeFirst(cleanCity)}
               </h3>
               <Link
                 href={`/blogs/category/${cleanCity}`}
-                className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800 text-sm md:text-base"
+                className="text-slate-700 underline hover:text-slate-900 text-sm md:text-base"
               >
                 View all blogs in {CapitalizeFirst(cleanCity)} ➟
               </Link>
@@ -549,7 +549,7 @@ export default async function CityPage({ params }) {
         <div className="pt-32">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-extrabold">
+              <h2 className="text-3xl font-extrabold text-gray-900">
                 Check Out Pre Construction Homes in {CapitalizeFirst(cleanCity)}{" "}
                 Area
               </h2>
@@ -571,7 +571,7 @@ export default async function CityPage({ params }) {
         <div className="pt-5 mt-5"></div>
         <div className="flex justify-center items-center max-w-7xl mx-auto px-4 md:px-6 mt-10 mb-16">
           <div className="max-w-6xl mt-14">
-            <h2 className="text-sm md:text-3xl text-left font-semibold leading-normal mb-4">
+            <h2 className="text-sm md:text-3xl text-left font-semibold leading-normal mb-4 text-gray-900">
               Pre Construction Home in {CapitalizeFirst(params.city)} – Explore
               New Upcoming Projects, Prices Ranges & Floor Plans
             </h2>
@@ -659,14 +659,14 @@ export default async function CityPage({ params }) {
             <div className="w-full overflow-x-auto">
               <div
                 dangerouslySetInnerHTML={{ __html: data.city.details }}
-                className="prose prose-sm md:prose-base lg:prose-lg max-w-none prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-gray-600 prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-img:rounded-lg [&_table]:!border [&_table]:!border-collapse [&_table]:!border-solid [&_table]:!border-black [&_th]:!border [&_th]:!border-solid [&_th]:!border-black [&_th]:!p-2 [&_td]:!border [&_td]:!border-solid [&_td]:!border-black [&_td]:!p-2 [&_tr]:!border [&_tr]:!border-solid [&_tr]:!border-black rich-text"
+                className="prose prose-sm md:prose-base lg:prose-lg max-w-none prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-gray-600 prose-a:text-teal-700 hover:prose-a:text-teal-600 prose-img:rounded-lg [&_table]:!border [&_table]:!border-collapse [&_table]:!border-solid [&_table]:!border-black [&_th]:!border [&_th]:!border-solid [&_th]:!border-black [&_th]:!p-2 [&_td]:!border [&_td]:!border-solid [&_td]:!border-black [&_td]:!p-2 [&_tr]:!border [&_tr]:!border-solid [&_tr]:!border-black rich-text"
               />
             </div>
             <p className="text-sm text-gray-500 text-center mt-8">
               Disclaimer: The content on this page is curated from various
               reputable online sources, including blogs, news outlets, and real
               estate boards. While our content writer team at{" "}
-              <Link className="text-blue-500" href="https://condomonk.ca/">
+              <Link className="text-teal-600" href="https://condomonk.ca/">
                 {" "}
                 Condomonk.ca
               </Link>{" "}

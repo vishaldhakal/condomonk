@@ -75,7 +75,7 @@ export default async function DetachedPage({ params }) {
         from trusted{" "}
         <Link
           href={`/builders`}
-          className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+          className="text-slate-700 underline hover:text-slate-900"
         >
           builders in {cityName}, ON.
         </Link>{" "}
@@ -83,14 +83,14 @@ export default async function DetachedPage({ params }) {
         trusted platform to find{" "}
         <Link
           href={`/resale/ontario/${params.city}/detached-homes-for-sale`}
-          className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+          className="text-slate-700 underline hover:text-slate-900"
         >
           100+ detached homes for sale in {cityName}.{" "}
         </Link>
         Whether you are looking to downsize to affordable{" "}
         <Link
           href={`/resale/ontario/${params.city}/detached-homes-for-sale`}
-          className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+          className="text-slate-700 underline hover:text-slate-900"
         >
           {cityName} detached for sale,
         </Link>{" "}
@@ -99,7 +99,7 @@ export default async function DetachedPage({ params }) {
         construction status from budget-friendly detached homes,{" "}
         <Link
           href="#contact"
-          className="text-blue-600 hover-underline text-decoration-underline hover:text-blue-800"
+          className="text-slate-700 underline hover:text-slate-900"
         >
           contact us
         </Link>{" "}
@@ -131,9 +131,11 @@ export default async function DetachedPage({ params }) {
       <div className="max-w-[85.625rem] mx-auto px-4">
         {/* Header Section */}
         <div className="space-y-6">
-          <h1 className="text-xl md:text-4xl font-bold">{generateTitle()}</h1>
+          <h1 className="text-xl md:text-4xl font-bold text-gray-900">
+            {generateTitle()}
+          </h1>
 
-          <h2 className="text-[8px] md:text-sm text-gray-500">
+          <h2 className="text-xs md:text-base text-gray-600">
             <ExpandableDescription>{generateSubtitle()}</ExpandableDescription>
           </h2>
 
@@ -186,7 +188,7 @@ export default async function DetachedPage({ params }) {
         {/* Upcoming Projects Section - Only show if there are selling projects */}
         {sellingProjects.length > 0 && upcomingProjects.length > 0 && (
           <div className="mt-16">
-            <h2 className="text-2xl font-bold mb-8">
+            <h2 className="text-2xl font-bold mb-8 text-gray-900">
               Upcoming Pre Construction Detached Homes in {cityName}
             </h2>
             <div className="flex flex-col lg:flex-row gap-6">
@@ -227,7 +229,7 @@ export default async function DetachedPage({ params }) {
 
         {/* City Details */}
         {data.city?.detached_details && (
-          <div className="prose prose-sm md:prose-base lg:prose-lg max-w-none prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-gray-600 prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-img:rounded-lg [&_table]:!border [&_table]:!border-collapse [&_table]:!border-solid [&_table]:!border-black [&_th]:!border [&_th]:!border-solid [&_th]:!border-black [&_th]:!p-2 [&_td]:!border [&_td]:!border-solid [&_td]:!border-black [&_td]:!p-2 [&_tr]:!border [&_tr]:!border-solid [&_tr]:!border-black rich-text">
+          <div className="prose prose-sm md:prose-base lg:prose-lg max-w-none prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-gray-600 prose-a:text-teal-700 hover:prose-a:text-teal-600 prose-img:rounded-lg [&_table]:!border [&_table]:!border-collapse [&_table]:!border-solid [&_table]:!border-black [&_th]:!border [&_th]:!border-solid [&_th]:!border-black [&_th]:!p-2 [&_td]:!border [&_td]:!border-solid [&_td]:!border-black [&_td]:!p-2 [&_tr]:!border [&_tr]:!border-solid [&_tr]:!border-black rich-text">
             <div
               dangerouslySetInnerHTML={{
                 __html: data.city.detached_details,

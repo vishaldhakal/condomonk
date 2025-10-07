@@ -62,7 +62,7 @@ export default function BuyDubai() {
       </div>
 
       <div className="flex justify-center mt-14 sm:mt-20">
-        <button className="rounded-full bg-blue-600 text-white px-5 sm:px-6 py-2.5 sm:py-3 text-base sm:text-lg font-semibold shadow-md hover:bg-blue-700 transition">
+        <button className="rounded-full bg-teal-600 text-white px-5 sm:px-6 py-2.5 sm:py-3 text-base sm:text-lg font-semibold shadow-md hover:bg-teal-700 transition">
           Explore Off Plan Properties
         </button>
       </div>

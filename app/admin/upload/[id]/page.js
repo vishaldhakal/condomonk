@@ -409,7 +409,7 @@ export default function Update({ params }) {
               </div>
 
               <button
-                className="w-full bg-green-500 text-white py-3 rounded-lg mt-8 hover:bg-green-600 transition duration-200"
+                className="w-full bg-teal-600 text-white py-3 rounded-lg mt-8 hover:bg-green-600 transition duration-200"
                 onClick={(e) => handleCreateDeveloper(e)}
               >
                 Submit

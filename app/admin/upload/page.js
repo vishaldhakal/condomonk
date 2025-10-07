@@ -343,7 +343,7 @@ export default function Upload() {
               </div>
 
               <button
-                className="w-full mt-8 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-200"
+                className="w-full mt-8 py-3 bg-teal-600 text-white rounded-lg hover:bg-green-600 transition duration-200"
                 onClick={handleCreateDeveloper}
               >
                 Submit
@@ -664,7 +664,7 @@ export default function Upload() {
             <div className="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-lg">
               <div className="container mx-auto flex justify-center">
                 <button
-                  className="px-8 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-200 shadow-lg"
+                  className="px-8 py-3 bg-teal-600 text-white rounded-lg hover:bg-green-600 transition duration-200 shadow-lg"
                   onClick={handleSubmit}
                 >
                   Upload now

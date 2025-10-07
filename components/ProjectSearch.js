@@ -1,9 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
 import Link from "next/link";
 import citiesWithProvinces, { allCities } from "@/data/ontarioCities";
-import { cityRegions } from "@/data/postalCodeCities";
 import { usePathname, useRouter } from "next/navigation";
 import { X } from "lucide-react";
 
@@ -27,7 +25,6 @@ const SearchWithAutocomplete = ({
     resaleCities: [],
     properties: [],
   });
-  const [selectedOption, setSelectedOption] = useState(null);
   const [data, setData] = useState({
     cities: [],
     projects: [],
@@ -35,10 +32,9 @@ const SearchWithAutocomplete = ({
     properties: [],
   });
   const [isFocused, setIsFocused] = useState(false);
-  const [isTabbing, setIsTabbing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isNavigating, setIsNavigating] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [recentSearches, setRecentSearches] = useState([]);
 
   const inputRef = useRef(null);
   const dropdownRef = useRef(null);
@@ -82,6 +78,45 @@ const SearchWithAutocomplete = ({
     // Combine them
     return `/resale/listing/${addressPart}-${listingPart}`;
   };
+
+  // Recent searches helpers
+  const RECENT_KEY = "cm_recent_searches";
+  const MAX_RECENTS = 8;
+
+  const loadRecentSearches = () => {
+    try {
+      const raw = localStorage.getItem(RECENT_KEY);
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+
+  const saveRecentSearches = (items) => {
+    try {
+      localStorage.setItem(RECENT_KEY, JSON.stringify(items));
+    } catch {
+      // ignore
+    }
+  };
+
+  const addRecentSearch = (item) => {
+    if (!item || !item.href || !item.label) return;
+    setRecentSearches((prev) => {
+      const withoutDup = prev.filter((r) => r.href !== item.href);
+      const next = [item, ...withoutDup].slice(0, MAX_RECENTS);
+      saveRecentSearches(next);
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    // load on mount
+    const initial = loadRecentSearches();
+    setRecentSearches(initial);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -214,14 +249,6 @@ const SearchWithAutocomplete = ({
     };
   }, []);
 
-  // Add cleanup effect for navigation state
-  useEffect(() => {
-    // Cleanup function to reset navigation state
-    return () => {
-      setIsNavigating(false);
-    };
-  }, []);
-
   const handleSearch = (event) => {
     const term = event.target.value.toLowerCase();
     setSearchTerm(event.target.value);
@@ -267,7 +294,7 @@ const SearchWithAutocomplete = ({
   };
 
   useEffect(() => {
-  const currentCity = citiesWithProvinces
+    const currentCity = citiesWithProvinces
       .map((item) => item?.city)
       .find((city) => pathname.includes(city.toLowerCase()));
     currentCity && setLocalCityName(currentCity);
@@ -296,9 +323,7 @@ const SearchWithAutocomplete = ({
       setLocalCityName("");
     }
   };
-  {
-    console.log(localCityName);
-  }
+
   // Modify the handleBlur function
   const handleBlur = (e) => {
     // Check if the related target is within our dropdown
@@ -329,11 +354,20 @@ const SearchWithAutocomplete = ({
   };
 
   // Update handleLinkClick function
-  const handleLinkClick = async (e, href) => {
+  const handleLinkClick = async (e, href, meta) => {
     e.preventDefault();
     e.stopPropagation();
 
     try {
+      // store recent before navigation
+      if (meta?.label) {
+        addRecentSearch({
+          label: meta.label,
+          href,
+          type: meta.type || "link",
+          icon: meta.icon || "link",
+        });
+      }
       await router.push(href);
 
       // Clear states
@@ -351,11 +385,19 @@ const SearchWithAutocomplete = ({
   };
 
   // Update handleTouchStart function
-  const handleTouchStart = (e, href) => {
+  const handleTouchStart = (e, href, meta) => {
     e.preventDefault();
     e.stopPropagation();
 
     // Navigate and reset state
+    if (meta?.label) {
+      addRecentSearch({
+        label: meta.label,
+        href,
+        type: meta.type || "link",
+        icon: meta.icon || "link",
+      });
+    }
     router.push(href);
 
     // Clear states to close dropdown
@@ -375,18 +417,11 @@ const SearchWithAutocomplete = ({
 
   // Apply different classes based on whether this is the homepage or not
   const inputClasses = isHomepage
-    ? `w-full px-8  text-sm rounded-r-full border-0 shadow-lg focus:outline-none ${customInputClasses} focus:shadow-md`
+    ? `w-full px-8 text-sm rounded-r-full border-0 shadow-md focus:outline-none hover:bg-teal-50 focus:ring-1 focus:ring-teal-500 ${customInputClasses}`
     : `w-full md:py-3 py-4 px-10 text-black text-xs bg-white border ${
         !searchTypeOption ? "rounded-full" : "border-l-0 rounded-r-full "
-      } border-gray-300 focus:outline-none   transition-all duration-200 ease-in-out placeholder:text-gray-400 focus:shadow-md`;
+      } border-gray-300 focus:outline-none placeholder:text-gray-400 focus:ring-1 focus:ring-teal-500 hover:bg-teal-50`;
 
-  const iconClasses = isHomepage
-    ? "absolute top-1/2 -translate-y-1/2 right-4 text-2xl"
-    : "absolute top-1/2 -translate-y-1/2 right-4 text-[#FFA725] text-xl";
-
-  const iconStyle = isHomepage
-    ? { color: "#f8a100", right: "30px" }
-    : { color: "#FFC007", right: "15px" };
   const placeholderText = localCityName
     ? localCityName
     : isHomepage
@@ -394,23 +429,18 @@ const SearchWithAutocomplete = ({
       : "Search for a city or project...";
 
   return (
-    <div
-      className={`relative ${isHomepage ? "w-full" : "w-[380px]"}`}
-      style={{
-        borderBottom: "4px solid #FFD966", // yellow bottom border
-        borderRadius: "24px", // keep rounded
-      }}
-    >
+    <div className={`relative ${isHomepage ? "w-full" : "w-[380px]"}`}>
       <div className="relative flex text-xs ">
         <div className="relative ">
           {searchTypeOption && (
             <button
               onClick={handleDropdownClick}
-              className={`h-full px-3 py-3 ${
-                isHomepage
-                  ? "bg-green-100 text-gray-800"
-                  : "bg-black text-white"
-              } font-medium rounded-l-full border-y border-l border-gray-200 flex items-center gap-2 hover:transition-colors`}
+              className={`h-full px-3 py-3 text-white font-medium rounded-l-full flex items-center gap-2 hover:opacity-95`}
+              style={{
+                backdropFilter: "blur(4px)",
+                background:
+                  "linear-gradient(90.37deg, #0c4f47, #1e7167 99.68%)",
+              }}
             >
               {localSearchType === "preconstruction"
                 ? "Pre Construction"
@@ -479,15 +509,15 @@ const SearchWithAutocomplete = ({
             </div>
           )} */}
           {!searchTerm && localCityName && (
-            <div className="absolute inset-y-0 left-2 h-[80%] top-1 flex items-center px-2 text-red-500 font-semibold transition-colors w-fit text-base">
+            <div className="absolute inset-y-0 left-2 h-[80%] top-1 flex items-center px-2 text-gray-500 transition-colors w-fit text-base">
               {placeholderText}
               <button
                 type="button"
-                className="text-black ml-1"
+                className="text-gray-500 ml-1"
                 onClick={clearSearch}
                 tabIndex={0}
               >
-                <X className="w-6" />
+                <X className="w-4" />
               </button>
             </div>
           )}
@@ -497,16 +527,12 @@ const SearchWithAutocomplete = ({
       {isFocused && (
         <div
           ref={dropdownRef}
-          className="absolute w-full mt-2 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden z-30 transform-gpu animate-slideDown"
-          style={{
-            transformOrigin: "top",
-            animation: "slideDown 0.2s ease-out forwards",
-          }}
+          className="absolute w-full mt-2 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden z-30"
         >
           {/* Show default cities when no search term and on homepage */}
           {isHomepage && !searchTerm && defaultCities.length > 0 && (
             <div className="py-2">
-              <div className="px-4 py-2 text-sm font-medium text-black text-left">
+              <div className="px-4 py-2 text-sm font-medium text-gray-700 text-left">
                 Popular Cities
               </div>
               <div className="grid grid-cols-2 gap-1">
@@ -521,9 +547,21 @@ const SearchWithAutocomplete = ({
                     <Link
                       href={cityUrl}
                       key={index}
-                      onClick={(e) => handleLinkClick(e, cityUrl)}
-                      onTouchStart={(e) => handleTouchStart(e, cityUrl)}
-                      className="flex items-center px-4 py-3 hover:bg-gray-50 transition-colors"
+                      onClick={(e) =>
+                        handleLinkClick(e, cityUrl, {
+                          label: city.name,
+                          type: "city",
+                          icon: "location",
+                        })
+                      }
+                      onTouchStart={(e) =>
+                        handleTouchStart(e, cityUrl, {
+                          label: city.name,
+                          type: "city",
+                          icon: "location",
+                        })
+                      }
+                      className="flex items-center px-4 py-3 hover:bg-teal-50"
                     >
                       <i className="fa-solid fa-location-dot text-gray-400 text-base w-6"></i>
                       <span className="text-base text-gray-700">
@@ -533,6 +571,46 @@ const SearchWithAutocomplete = ({
                   );
                 })}
               </div>
+            </div>
+          )}
+
+          {/* Recent searches when typing */}
+          {searchTerm && recentSearches.length > 0 && (
+            <div className="py-2 border-b border-gray-100">
+              <div className="px-4 py-1 text-sm font-medium text-gray-700 text-left">
+                Recent Searches
+              </div>
+              {recentSearches
+                .filter((r) =>
+                  r.label.toLowerCase().includes(searchTerm.toLowerCase())
+                )
+                .slice(0, 5)
+                .map((r, idx) => (
+                  <Link
+                    href={r.href}
+                    key={`${r.href}-${idx}`}
+                    onClick={(e) =>
+                      handleLinkClick(e, r.href, {
+                        label: r.label,
+                        type: r.type,
+                        icon: r.icon,
+                      })
+                    }
+                    onTouchStart={(e) =>
+                      handleTouchStart(e, r.href, {
+                        label: r.label,
+                        type: r.type,
+                        icon: r.icon,
+                      })
+                    }
+                    className="flex items-start px-4 py-2 hover:bg-teal-50 border-b border-gray-100 last:border-0"
+                  >
+                    <i className="fa-regular fa-clock text-gray-400 text-sm w-6"></i>
+                    <span className="text-sm text-gray-700 truncate">
+                      {r.label}
+                    </span>
+                  </Link>
+                ))}
             </div>
           )}
 
@@ -548,18 +626,28 @@ const SearchWithAutocomplete = ({
                   {/* Pre-Construction Cities */}
                   {searchResults.cities?.length > 0 && (
                     <div className="py-2 border-t border-gray-100">
-                      <div className="px-4 py-1 text-sm font-medium text-black text-left">
+                      <div className="px-4 py-1 text-sm font-medium text-gray-700 text-left">
                         Cities
                       </div>
                       {searchResults.cities.map((city, index) => (
                         <Link
                           href={`/${city.slug}`}
                           key={index}
-                          onClick={(e) => handleLinkClick(e, `/${city.slug}`)}
-                          onTouchStart={(e) =>
-                            handleTouchStart(e, `/${city.slug}`)
+                          onClick={(e) =>
+                            handleLinkClick(e, `/${city.slug}`, {
+                              label: city.name,
+                              type: "city",
+                              icon: "location",
+                            })
                           }
-                          className="flex items-start px-4 py-2 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0"
+                          onTouchStart={(e) =>
+                            handleTouchStart(e, `/${city.slug}`, {
+                              label: city.name,
+                              type: "city",
+                              icon: "location",
+                            })
+                          }
+                          className="flex items-start px-4 py-2 hover:bg-teal-50 border-b border-gray-100 last:border-0"
                         >
                           <i className="fa-solid fa-location-dot text-gray-400 text-sm w-6"></i>
                           <span className="text-sm text-gray-700">
@@ -572,7 +660,7 @@ const SearchWithAutocomplete = ({
                   {/* Pre-Construction Projects */}
                   {searchResults.projects?.length > 0 && (
                     <div className="py-2">
-                      <div className="px-4 py-1 text-sm font-medium text-black text-left">
+                      <div className="px-4 py-1 text-sm font-medium text-gray-700 text-left">
                         Projects
                       </div>
                       {searchResults.projects.map((project, index) => (
@@ -582,16 +670,26 @@ const SearchWithAutocomplete = ({
                           onClick={(e) =>
                             handleLinkClick(
                               e,
-                              `/${project.city.slug}/${project.slug}`
+                              `/${project.city.slug}/${project.slug}`,
+                              {
+                                label: project.project_name,
+                                type: "project",
+                                icon: "building",
+                              }
                             )
                           }
                           onTouchStart={(e) =>
                             handleTouchStart(
                               e,
-                              `/${project.city.slug}/${project.slug}`
+                              `/${project.city.slug}/${project.slug}`,
+                              {
+                                label: project.project_name,
+                                type: "project",
+                                icon: "building",
+                              }
                             )
                           }
-                          className="flex items-start px-4 py-2 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0"
+                          className="flex items-start px-4 py-2 hover:bg-teal-50 border-b border-gray-100 last:border-0"
                         >
                           <i className="fa-solid fa-building text-gray-400 text-sm w-6"></i>
                           <div className="min-w-0 flex-1">
@@ -618,7 +716,7 @@ const SearchWithAutocomplete = ({
                       <div
                         className={`px-4 py-1 ${
                           isHomepage ? "text-base" : "text-sm"
-                        } font-medium text-gray-500 text-left`}
+                        } font-medium text-gray-700 text-left`}
                       >
                         Cities
                       </div>
@@ -634,11 +732,23 @@ const SearchWithAutocomplete = ({
                           <Link
                             href={href}
                             key={index}
-                            onClick={(e) => handleLinkClick(e, href)}
-                            onTouchStart={(e) => handleTouchStart(e, href)}
+                            onClick={(e) =>
+                              handleLinkClick(e, href, {
+                                label: city.city,
+                                type: "city",
+                                icon: "location",
+                              })
+                            }
+                            onTouchStart={(e) =>
+                              handleTouchStart(e, href, {
+                                label: city.city,
+                                type: "city",
+                                icon: "location",
+                              })
+                            }
                             className={`flex items-start px-4 ${
                               isHomepage ? "py-3 text-left" : "py-2"
-                            } hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0`}
+                            } hover:bg-teal-50 border-b border-gray-100 last:border-0`}
                           >
                             <i
                               className={`fa-solid fa-location-dot text-gray-400 ${
@@ -664,7 +774,7 @@ const SearchWithAutocomplete = ({
                       <div
                         className={`px-4 py-1 ${
                           isHomepage ? "text-base" : "text-sm"
-                        } font-medium text-gray-500 text-left`}
+                        } font-medium text-gray-700 text-left`}
                       >
                         Properties
                       </div>
@@ -674,11 +784,23 @@ const SearchWithAutocomplete = ({
                           <Link
                             href={href}
                             key={index}
-                            onClick={(e) => handleLinkClick(e, href)}
-                            onTouchStart={(e) => handleTouchStart(e, href)}
+                            onClick={(e) =>
+                              handleLinkClick(e, href, {
+                                label: property.address,
+                                type: "property",
+                                icon: "home",
+                              })
+                            }
+                            onTouchStart={(e) =>
+                              handleTouchStart(e, href, {
+                                label: property.address,
+                                type: "property",
+                                icon: "home",
+                              })
+                            }
                             className={`flex items-start px-4 ${
                               isHomepage ? "py-3 text-left" : "py-2"
-                            } hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-0`}
+                            } hover:bg-teal-50 border-b border-gray-100 last:border-0`}
                           >
                             <i
                               className={`fa-solid fa-home text-gray-400 ${

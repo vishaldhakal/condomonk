@@ -4,58 +4,22 @@ import Link from "next/link";
 import ProjectSearch from "./ProjectSearch";
 import { usePathname } from "next/navigation";
 // import MobileNavbar from "./MobileNavbar";
-import {
-  Navbar as NextUINavbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  NavbarMenu,
-  NavbarMenuItem,
-  NavbarMenuToggle,
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-  Button,
-} from "@nextui-org/react";
-import { ChevronDown } from "lucide-react";
 
 const Navbar = ({ cities, transparent }) => {
-  const [cityname, setCityname] = useState("");
-  const [navbar, setNavbar] = useState(true);
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const [buttonClicked, setButtonClicked] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [citiesDropdownOpen, setCitiesDropdownOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [closeTimeout, setCloseTimeout] = useState(null);
   const [showCities, setShowCities] = useState(false);
-
-  // Top 5 cities for quick access
-  const topCities = [
-    { name: "Toronto", slug: "toronto" },
-    { name: "Mississauga", slug: "mississauga" },
-    { name: "Brampton", slug: "brampton" },
-    { name: "Markham", slug: "markham" },
-    { name: "Vaughan", slug: "vaughan" },
-    { name: "Oakville", slug: "oakville" },
-  ];
 
   // Determine if we're on a preconstruction page
   const isPreconstructionPage =
     pathname.split("/").length >= 2 && !pathname.includes("resale");
 
   const changeBackground = () => {
-    if (window.scrollY >= 80) {
-      setNavbar(true);
-      setIsScrolled(true);
-    } else {
-      setNavbar(false);
-      setIsScrolled(false);
-    }
+    if (window.scrollY >= 80) setIsScrolled(true);
+    else setIsScrolled(false);
   };
 
   useEffect(() => {
@@ -78,7 +42,7 @@ const Navbar = ({ cities, transparent }) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest(".dropdown-fullwidth")) {
-        setIsDropdownOpen(false);
+        setCitiesDropdownOpen(false);
       }
     };
 
@@ -88,21 +52,7 @@ const Navbar = ({ cities, transparent }) => {
     };
   }, []);
 
-  const toggleCollapse = () => {
-    setIsCollapsed(!isCollapsed);
-    setButtonClicked(!buttonClicked);
-  };
-
-  const toggleDropdown = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDropdownOpen((prev) => !prev);
-  };
-
-  const handleCityClick = (e) => {
-    setIsDropdownOpen(false);
-    setIsCollapsed(false);
-  };
+  // No-op handlers removed for cleanliness
 
   // Helper functions for page type detection
   const isResalePage =
@@ -146,24 +96,15 @@ const Navbar = ({ cities, transparent }) => {
     return `/resale/ontario/${type}`;
   };
 
-  const isPreconCityPage = () => {
-    if (typeof window !== "undefined") {
-      const path = window.location.pathname;
-      // Remove leading/trailing slashes and split
-      const parts = path.replace(/^\/+|\/+$/g, "").split("/");
-      console.log(parts);
-      return parts.length === 1 && parts[0] !== "";
-    }
-    return false;
-  };
+  // Removed unused helper
 
   return (
-    <nav className="w-full bg-white z-[9999]">
+    <nav className="w-full bg-white z-[9999] border-b border-gray-100">
       <div className={`max-w-7xl mx-auto px-4`}>
         <div className="flex md:justify-between justify-center md:items-center items-between h-12 md:h-16">
           {/* Left section - Logo and Search */}
           <div className="flex items-center gap-8">
-            <Link href="/" className="text-xl font-bold">
+            <Link href="/" className="text-xl font-semibold">
               Condomonk
             </Link>
             <div className="hidden md:block md:w-[400px] ">
@@ -175,7 +116,7 @@ const Navbar = ({ cities, transparent }) => {
           </div>
 
           {/* Right section - Navigation */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-2 text-gray-700">
             {/* Cities Dropdown */}
             <div
               className="relative group"
@@ -193,7 +134,7 @@ const Navbar = ({ cities, transparent }) => {
                 setCloseTimeout(timeout);
               }}
             >
-              <button className="flex items-center gap-1 px-1 py-2 text-sm">
+              <button className="flex items-center gap-1 px-2 py-2 text-sm hover:text-teal-700">
                 Pre Construction Cities
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -221,7 +162,7 @@ const Navbar = ({ cities, transparent }) => {
                       <Link
                         key={city.id}
                         href={`/${city.slug}`}
-                        className="text-gray-600 hover:text-blue-600 text-sm"
+                        className="text-gray-600 hover:text-teal-600 text-sm"
                       >
                         {city.name}
                       </Link>
@@ -230,19 +171,31 @@ const Navbar = ({ cities, transparent }) => {
               </div>
             </div>
 
-            <Link href="/assignment-sale" className="px-1 py-2 text-sm">
+            <Link
+              href="/assignment-sale"
+              className="px-1 py-2 text-sm hover:text-teal-700"
+            >
               Assignment
             </Link>
-            <Link href="/blogs" className="px-1 py-2 text-sm">
+            <Link
+              href="/blogs"
+              className="px-1 py-2 text-sm hover:text-teal-700"
+            >
               Blogs
             </Link>
-            <Link href="#contact" className="px-1 py-2 text-sm">
+            <Link
+              href="#contact"
+              className="px-1 py-2 text-sm hover:text-teal-700"
+            >
               Contact
             </Link>
           </div>
 
           {/* Mobile menu button */}
-          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 text-gray-700"
+          >
             <svg
               className="h-6 w-6"
               fill="none"
@@ -293,7 +246,7 @@ const Navbar = ({ cities, transparent }) => {
               <div className="relative">
                 <button
                   onClick={() => setShowCities(!showCities)}
-                  className="flex items-center justify-between w-full px-4 py-2 text-gray-600 hover:text-blue-600"
+                  className="flex items-center justify-between w-full px-4 py-2 text-gray-700 hover:text-teal-700"
                 >
                   Cities
                   <svg
@@ -319,7 +272,7 @@ const Navbar = ({ cities, transparent }) => {
                       <Link
                         key={city.id}
                         href={`/${city.slug}`}
-                        className="block py-2 text-gray-600 hover:text-blue-600"
+                        className="block py-2 text-gray-600 hover:text-teal-600"
                       >
                         {city.name}
                       </Link>
@@ -329,13 +282,22 @@ const Navbar = ({ cities, transparent }) => {
               </div>
             )}
 
-            <Link href="/assignment-sale" className="block px-4 py-2">
+            <Link
+              href="/assignment-sale"
+              className="block px-4 py-2 text-gray-700 hover:text-teal-700"
+            >
               Assignment
             </Link>
-            <Link href="/blogs" className="block px-4 py-2">
+            <Link
+              href="/blogs"
+              className="block px-4 py-2 text-gray-700 hover:text-teal-700"
+            >
               Blogs
             </Link>
-            <Link href="#contact" className="block px-4 py-2">
+            <Link
+              href="#contact"
+              className="block px-4 py-2 text-gray-700 hover:text-teal-700"
+            >
               Contact
             </Link>
           </div>

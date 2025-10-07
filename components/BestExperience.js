@@ -51,7 +51,7 @@ const BestExperience = () => {
               ].map((feature, index) => (
                 <div key={index} className="flex items-start space-x-3">
                   <div className="flex-shrink-0">
-                    <span className="flex items-center justify-center w-6 h-6 rounded-full text-white bg-green-500">
+                    <span className="flex items-center justify-center w-6 h-6 rounded-full text-white bg-teal-600">
                       {feature.icon}
                     </span>
                   </div>

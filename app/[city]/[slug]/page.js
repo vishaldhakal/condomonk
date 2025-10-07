@@ -465,11 +465,3 @@ export default async function PropertyPage({ params }) {
     </div>
   );
 }
-
-// Helper component for info items
-const InfoItem = ({ label, value }) => (
-  <div>
-    <span className="font-semibold text-gray-900">{label}: </span>
-    <span className="text-gray-700">{value}</span>
-  </div>
-);

@@ -334,7 +334,7 @@ export default async function Home() {
           <div className="mt-12 text-center">
             <Link
               href="/pre-construction-homes"
-              className="inline-flex items-center justify-center px-6 py-3 bg-green-500 text-white rounded-full font-medium hover:bg-gray-800 transition-colors"
+              className="inline-flex items-center justify-center px-6 py-3 bg-teal-600 text-white rounded-full font-medium hover:bg-gray-800 transition-colors"
             >
               View All Projects
               <svg
@@ -441,7 +441,7 @@ export default async function Home() {
               <div>
                 <Link
                   href="/resale/ontario/price-reduced-homes-for-sale"
-                  className="inline-flex items-center bg-green-500  text-white px-6 py-3 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  className="inline-flex items-center bg-teal-600  text-white px-6 py-3 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
                 >
                   <span>View price dropped homes across ontario</span>
                   <svg
@@ -472,7 +472,7 @@ export default async function Home() {
 
                 {/* Price Drop Tags */}
                 <div className="absolute top-16 right-16 animate-bounce-slow">
-                  <div className="bg-green-500 text-white px-4 py-2 rounded-full flex items-center shadow-lg transform transition-all duration-300 hover:scale-110 hover:bg-green-600">
+                  <div className="bg-teal-600 text-white px-4 py-2 rounded-full flex items-center shadow-lg transform transition-all duration-300 hover:scale-110 hover:bg-green-600">
                     <svg
                       className="w-4 h-4 mr-1"
                       fill="none"
@@ -491,7 +491,7 @@ export default async function Home() {
                 </div>
 
                 <div className="absolute top-36 left-20 animate-bounce-slow animation-delay-300">
-                  <div className="bg-green-500 text-white px-4 py-2 rounded-full flex items-center shadow-lg transform transition-all duration-300 hover:scale-110 hover:bg-green-600">
+                  <div className="bg-teal-600 text-white px-4 py-2 rounded-full flex items-center shadow-lg transform transition-all duration-300 hover:scale-110 hover:bg-green-600">
                     <svg
                       className="w-4 h-4 mr-1"
                       fill="none"
@@ -510,7 +510,7 @@ export default async function Home() {
                 </div>
 
                 <div className="absolute bottom-32 left-1/2 -translate-x-1/2 animate-bounce-slow animation-delay-600">
-                  <div className="bg-green-500 text-white px-4 py-2 rounded-full flex items-center shadow-lg transform transition-all duration-300 hover:scale-110 hover:bg-green-600">
+                  <div className="bg-teal-600 text-white px-4 py-2 rounded-full flex items-center shadow-lg transform transition-all duration-300 hover:scale-110 hover:bg-green-600">
                     <svg
                       className="w-4 h-4 mr-1"
                       fill="none"
@@ -929,7 +929,7 @@ export default async function Home() {
         <div className="text-center mt-8">
           <Link
             href="/resale/ontario/homes-for-sale"
-            className="inline-flex items-center justify-center px-6 py-3 border bg-green-500 text-white rounded-full font-medium "
+            className="inline-flex items-center justify-center px-6 py-3 border bg-teal-600 text-white rounded-full font-medium "
           >
             View All Ontario Properties
             <svg
@@ -966,7 +966,7 @@ export default async function Home() {
         <div className="text-center mt-8">
           <Link
             href="resale/ontario/barrie/condos-for-sale"
-            className="inline-flex items-center justify-center px-3 py-2 border bg-green-500 text-white rounded-full font-medium "
+            className="inline-flex items-center justify-center px-3 py-2 border bg-teal-600 text-white rounded-full font-medium "
           >
             View All Condos in Barrie
             <svg
@@ -1054,7 +1054,7 @@ export default async function Home() {
         <div className="text-center mt-8">
           <Link
             href="/resale/ontario/mississauga/condos-for-lease"
-            className="inline-flex items-center justify-center px-3 py-2 border bg-green-500 text-white rounded-full font-medium "
+            className="inline-flex items-center justify-center px-3 py-2 border bg-teal-600 text-white rounded-full font-medium "
           >
             View All Rental Condos in Mississauga →
           </Link>
@@ -1243,7 +1243,7 @@ export default async function Home() {
         <div className="mt-5 text-center">
           <Link
             href="/builders"
-            className="inline-block bg-green-500  text-white px-4 py-2 rounded-full font-medium transition-colors duration-200"
+            className="inline-block bg-teal-600  text-white px-4 py-2 rounded-full font-medium transition-colors duration-200"
           >
             View All Builders
           </Link>

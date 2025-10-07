@@ -103,7 +103,7 @@ export default function PropertyCard({ property, index = 0 }) {
                   <div className="text-black md:text-[0.7rem] text-[0.52rem] p-[3px] px-2 shadow-2xl rounded-md mx-1 bg-[#f0fff4] items-center flex gap-1">
                     <span className="relative flex h-1 w-1">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-1 w-1 bg-green-500"></span>
+                      <span className="relative inline-flex rounded-full h-1 w-1 bg-teal-600"></span>
                     </span>
                     <span>Just Listed</span>
                   </div>
