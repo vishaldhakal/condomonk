@@ -438,7 +438,7 @@ export default async function Home() {
               </div>
 
               {/* CTA Button */}
-              <div>
+              {/* <div>
                 <Link
                   href="/resale/ontario/price-reduced-homes-for-sale"
                   className="inline-flex items-center bg-teal-600  text-white px-6 py-3 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
@@ -458,7 +458,7 @@ export default async function Home() {
                     />
                   </svg>
                 </Link>
-              </div>
+              </div> */}
             </div>
 
             {/* Right Section - House Image with Price Tags */}
@@ -560,12 +560,12 @@ export default async function Home() {
       </section>
 
       <div className=" py-10 bg-white"></div>
-      <Link href={"/resale/ontario"}>
+      {/* <Link href={"/resale/ontario"}>
         <h2 className="font-bold text-center mb-5 text-3xl text-black hover:underline">
           Explore Resale Homes For Sale in Ontario
         </h2>
-      </Link>
-      <div className="max-w-6xl mx-auto px-4 pb-20">
+      </Link> */}
+      {/* <div className="max-w-6xl mx-auto px-4 pb-20">
         <div className="grid grid-cols-2 md:grid-cols-4 md:gap-x-4 md:gap-y-8 gap-y-4 gap-x-3">
           <div className="flex flex-col">
             <Link
@@ -946,9 +946,9 @@ export default async function Home() {
             </svg>
           </Link>
         </div>
-      </div>
+      </div> */}
 
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      {/* <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <Link href={"resale/ontario/barrie/condos-for-sale"}>
           <h2 className="font-bold text-center  text-3xl text-black hover:underline">
             Latest Condos For Sale in Barrie
@@ -983,9 +983,9 @@ export default async function Home() {
             </svg>
           </Link>
         </div>
-      </section>
+      </section> */}
 
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      {/* <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <h3 className="text-3xl font-bold text-center mb-8">
           Explore Condos For Sale in Other Cities
         </h3>
@@ -1032,8 +1032,8 @@ export default async function Home() {
             </Link>
           ))}
         </div>
-      </section>
-
+      </section> */}
+      {/* 
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className=" justify-between items-center mb-6">
           <Link href={"/resale/ontario/mississauga/condos-for-lease"}>
@@ -1059,8 +1059,8 @@ export default async function Home() {
             View All Rental Condos in Mississauga →
           </Link>
         </div>
-      </section>
-
+      </section> */}
+      {/* 
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <h3 className="text-3xl font-bold text-center mb-8">
           Explore Rental Condos in Other Cities
@@ -1108,7 +1108,7 @@ export default async function Home() {
             </Link>
           ))}
         </div>
-      </section>
+      </section> */}
 
       <BuyDubai />
 

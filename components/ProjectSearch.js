@@ -40,8 +40,8 @@ const SearchWithAutocomplete = ({
   const dropdownRef = useRef(null);
   const router = useRouter();
   const pathname = usePathname();
-  // Add localSearchType state at component level
-  const [localSearchType, setLocalSearchType] = useState(searchType);
+  // Add localSearchType state at component level - always set to preconstruction
+  const [localSearchType, setLocalSearchType] = useState("preconstruction");
   const [localCityName, setLocalCityName] = useState(cityName);
 
   // Add this helper function to capitalize first letter of each word
@@ -434,55 +434,15 @@ const SearchWithAutocomplete = ({
         <div className="relative ">
           {searchTypeOption && (
             <button
-              onClick={handleDropdownClick}
-              className={`h-full px-3 py-3 text-white font-medium rounded-l-full flex items-center gap-2 hover:opacity-95`}
+              className={`h-full px-3 py-3 text-white font-medium rounded-l-full flex items-center gap-2 cursor-default`}
               style={{
                 backdropFilter: "blur(4px)",
                 background:
                   "linear-gradient(90.37deg, #0c4f47, #1e7167 99.68%)",
               }}
             >
-              {localSearchType === "preconstruction"
-                ? "Pre Construction"
-                : "Resale Homes"}
-              {/* <i
-                className={`fas fa-chevron-down transition-transform duration-200 ${
-                  isDropdownOpen ? "rotate-180" : ""
-                }`}
-              ></i> */}
+              Pre Construction
             </button>
-          )}
-          {isDropdownOpen && (
-            <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-40">
-              <button
-                onClick={() => handleOptionSelect("preconstruction")}
-                className={`w-full px-4 py-2 text-left hover:bg-gray-100  transition-colors ${
-                  localSearchType === "preconstruction"
-                    ? "text-black"
-                    : "text-gray-600"
-                }`}
-              >
-                <span className="flex items-center gap-2">
-                  {localSearchType === "preconstruction" && (
-                    <i className="fas fa-check text-black"></i>
-                  )}
-                  Pre Construction
-                </span>
-              </button>
-              <button
-                onClick={() => handleOptionSelect("sale")}
-                className={`w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors ${
-                  localSearchType === "sale" ? "text-black" : "text-gray-600"
-                }`}
-              >
-                <span className="flex items-center gap-2">
-                  {localSearchType === "sale" && (
-                    <i className="fas fa-check text-black"></i>
-                  )}
-                  Resale Homes
-                </span>
-              </button>
-            </div>
           )}
         </div>
         <div className="flex-1 relative">
@@ -537,11 +497,8 @@ const SearchWithAutocomplete = ({
               </div>
               <div className="grid grid-cols-2 gap-1">
                 {defaultCities.map((city, index) => {
-                  // Generate the appropriate URL based on search type
-                  const cityUrl =
-                    localSearchType === "preconstruction"
-                      ? `/${city.slug}`
-                      : `/resale/ontario/${city.slug}/homes-for-sale`;
+                  // Always use preconstruction URL
+                  const cityUrl = `/${city.slug}`;
 
                   return (
                     <Link
@@ -621,219 +578,85 @@ const SearchWithAutocomplete = ({
                 isHomepage ? "max-h-[450px]" : "max-h-[400px]"
               } overflow-y-auto`}
             >
-              {localSearchType === "preconstruction" ? (
-                <>
-                  {/* Pre-Construction Cities */}
-                  {searchResults.cities?.length > 0 && (
-                    <div className="py-2 border-t border-gray-100">
-                      <div className="px-4 py-1 text-sm font-medium text-gray-700 text-left">
-                        Cities
-                      </div>
-                      {searchResults.cities.map((city, index) => (
-                        <Link
-                          href={`/${city.slug}`}
-                          key={index}
-                          onClick={(e) =>
-                            handleLinkClick(e, `/${city.slug}`, {
-                              label: city.name,
-                              type: "city",
-                              icon: "location",
-                            })
+              {/* Pre-Construction Cities */}
+              {searchResults.cities?.length > 0 && (
+                <div className="py-2 border-t border-gray-100">
+                  <div className="px-4 py-1 text-sm font-medium text-gray-700 text-left">
+                    Cities
+                  </div>
+                  {searchResults.cities.map((city, index) => (
+                    <Link
+                      href={`/${city.slug}`}
+                      key={index}
+                      onClick={(e) =>
+                        handleLinkClick(e, `/${city.slug}`, {
+                          label: city.name,
+                          type: "city",
+                          icon: "location",
+                        })
+                      }
+                      onTouchStart={(e) =>
+                        handleTouchStart(e, `/${city.slug}`, {
+                          label: city.name,
+                          type: "city",
+                          icon: "location",
+                        })
+                      }
+                      className="flex items-start px-4 py-2 hover:bg-teal-50 border-b border-gray-100 last:border-0"
+                    >
+                      <i className="fa-solid fa-location-dot text-gray-400 text-sm w-6"></i>
+                      <span className="text-sm text-gray-700">{city.name}</span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+              {/* Pre-Construction Projects */}
+              {searchResults.projects?.length > 0 && (
+                <div className="py-2">
+                  <div className="px-4 py-1 text-sm font-medium text-gray-700 text-left">
+                    Projects
+                  </div>
+                  {searchResults.projects.map((project, index) => (
+                    <Link
+                      href={`/${project.city.slug}/${project.slug}`}
+                      key={index}
+                      onClick={(e) =>
+                        handleLinkClick(
+                          e,
+                          `/${project.city.slug}/${project.slug}`,
+                          {
+                            label: project.project_name,
+                            type: "project",
+                            icon: "building",
                           }
-                          onTouchStart={(e) =>
-                            handleTouchStart(e, `/${city.slug}`, {
-                              label: city.name,
-                              type: "city",
-                              icon: "location",
-                            })
+                        )
+                      }
+                      onTouchStart={(e) =>
+                        handleTouchStart(
+                          e,
+                          `/${project.city.slug}/${project.slug}`,
+                          {
+                            label: project.project_name,
+                            type: "project",
+                            icon: "building",
                           }
-                          className="flex items-start px-4 py-2 hover:bg-teal-50 border-b border-gray-100 last:border-0"
-                        >
-                          <i className="fa-solid fa-location-dot text-gray-400 text-sm w-6"></i>
-                          <span className="text-sm text-gray-700">
-                            {city.name}
-                          </span>
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                  {/* Pre-Construction Projects */}
-                  {searchResults.projects?.length > 0 && (
-                    <div className="py-2">
-                      <div className="px-4 py-1 text-sm font-medium text-gray-700 text-left">
-                        Projects
+                        )
+                      }
+                      className="flex items-start px-4 py-2 hover:bg-teal-50 border-b border-gray-100 last:border-0"
+                    >
+                      <i className="fa-solid fa-building text-gray-400 text-sm w-6"></i>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-sm text-gray-700 truncate">
+                          {project.project_name}
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          • {capitalizeWords(project.city.slug)}
+                          <span className="pl-2">- {project.project_type}</span>
+                        </div>
                       </div>
-                      {searchResults.projects.map((project, index) => (
-                        <Link
-                          href={`/${project.city.slug}/${project.slug}`}
-                          key={index}
-                          onClick={(e) =>
-                            handleLinkClick(
-                              e,
-                              `/${project.city.slug}/${project.slug}`,
-                              {
-                                label: project.project_name,
-                                type: "project",
-                                icon: "building",
-                              }
-                            )
-                          }
-                          onTouchStart={(e) =>
-                            handleTouchStart(
-                              e,
-                              `/${project.city.slug}/${project.slug}`,
-                              {
-                                label: project.project_name,
-                                type: "project",
-                                icon: "building",
-                              }
-                            )
-                          }
-                          className="flex items-start px-4 py-2 hover:bg-teal-50 border-b border-gray-100 last:border-0"
-                        >
-                          <i className="fa-solid fa-building text-gray-400 text-sm w-6"></i>
-                          <div className="min-w-0 flex-1">
-                            <div className="text-sm text-gray-700 truncate">
-                              {project.project_name}
-                            </div>
-                            <div className="text-xs text-gray-500">
-                              • {capitalizeWords(project.city.slug)}
-                              <span className="pl-2">
-                                - {project.project_type}
-                              </span>
-                            </div>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </>
-              ) : (
-                <>
-                  {/* Resale Cities Section */}
-                  {searchResults.resaleCities.length > 0 && (
-                    <div className="py-2">
-                      <div
-                        className={`px-4 py-1 ${
-                          isHomepage ? "text-base" : "text-sm"
-                        } font-medium text-gray-700 text-left`}
-                      >
-                        Cities
-                      </div>
-                      {searchResults.resaleCities.map((city, index) => {
-                        const cityPath =
-                          city.city.toLowerCase() === "stoney creek"
-                            ? "stoney-creek"
-                            : city.city.toLowerCase().replace(/ /g, "-");
-                        const href = generateCityUrl
-                          ? generateCityUrl(cityPath)
-                          : `/resale/ontario/${cityPath}/homes-for-sale`;
-                        return (
-                          <Link
-                            href={href}
-                            key={index}
-                            onClick={(e) =>
-                              handleLinkClick(e, href, {
-                                label: city.city,
-                                type: "city",
-                                icon: "location",
-                              })
-                            }
-                            onTouchStart={(e) =>
-                              handleTouchStart(e, href, {
-                                label: city.city,
-                                type: "city",
-                                icon: "location",
-                              })
-                            }
-                            className={`flex items-start px-4 ${
-                              isHomepage ? "py-3 text-left" : "py-2"
-                            } hover:bg-teal-50 border-b border-gray-100 last:border-0`}
-                          >
-                            <i
-                              className={`fa-solid fa-location-dot text-gray-400 ${
-                                isHomepage ? "text-base" : "text-sm"
-                              } w-6`}
-                            ></i>
-                            <span
-                              className={`${
-                                isHomepage ? "text-base" : "text-sm"
-                              } text-gray-700`}
-                            >
-                              {city.city}
-                            </span>
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  )}
-
-                  {/* Properties Section */}
-                  {searchResults.properties.length > 0 && (
-                    <div className="py-2 border-t border-gray-100">
-                      <div
-                        className={`px-4 py-1 ${
-                          isHomepage ? "text-base" : "text-sm"
-                        } font-medium text-gray-700 text-left`}
-                      >
-                        Properties
-                      </div>
-                      {searchResults.properties.map((property, index) => {
-                        const href = generateListingUrl(property);
-                        return (
-                          <Link
-                            href={href}
-                            key={index}
-                            onClick={(e) =>
-                              handleLinkClick(e, href, {
-                                label: property.address,
-                                type: "property",
-                                icon: "home",
-                              })
-                            }
-                            onTouchStart={(e) =>
-                              handleTouchStart(e, href, {
-                                label: property.address,
-                                type: "property",
-                                icon: "home",
-                              })
-                            }
-                            className={`flex items-start px-4 ${
-                              isHomepage ? "py-3 text-left" : "py-2"
-                            } hover:bg-teal-50 border-b border-gray-100 last:border-0`}
-                          >
-                            <i
-                              className={`fa-solid fa-home text-gray-400 ${
-                                isHomepage ? "text-base" : "text-sm"
-                              } w-6`}
-                            ></i>
-                            <div className="min-w-0 flex-1">
-                              <div
-                                className={`${
-                                  isHomepage ? "text-base" : "text-sm"
-                                } text-gray-700 truncate`}
-                              >
-                                {property.address}
-                              </div>
-                              <div
-                                className={`${
-                                  isHomepage ? "text-sm" : "text-xs"
-                                } text-gray-500`}
-                              >
-                                {property.city} - $
-                                {property.price?.toLocaleString()}
-                                {property.bedrooms &&
-                                  ` • ${property.bedrooms} bed`}
-                                {property.bathrooms &&
-                                  ` • ${property.bathrooms} bath`}
-                              </div>
-                            </div>
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  )}
-                </>
+                    </Link>
+                  ))}
+                </div>
               )}
             </div>
           )}
@@ -841,9 +664,7 @@ const SearchWithAutocomplete = ({
           {/* No results message */}
           {searchTerm &&
             !isLoading &&
-            !searchResults.properties.length &&
             !searchResults.cities.length &&
-            !searchResults.resaleCities.length &&
             !searchResults.projects.length && (
               <div className="py-8 text-center">
                 <div className="space-y-3">
