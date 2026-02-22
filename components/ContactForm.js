@@ -157,11 +157,7 @@ export default function ContactForm({
         </div>
 
         <div className="text-[0.8rem] md:text-[0.8rem] text-gray-500 leading-relaxed text-center">
-          By submitting this form, you give express written consent to eXp
-          Realty and its authorized representatives & homebaba agent partners to
-          contact you via email, telephone, text message, and other forms of
-          electronic communication, including through automated systems, AI
-          assistants, or prerecorded messages. Communications may include
+          By submitting this form, you give express written consent to Homebaba advertising real estate agent partners and its authorized representatives to contact you via email, telephone, text message, and other forms of electronic communication, including through automated systems, AI assistants, or prerecorded messages. Communications may include
           information about real estate services, property listings, market
           updates, or promotions related to your inquiry or expressed interests.
           You may withdraw your consent at any time by replying “STOP” to text
