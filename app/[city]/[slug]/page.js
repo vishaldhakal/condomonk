@@ -31,7 +31,7 @@ async function getData(slug) {
       `https://api.condomonk.ca/api/preconstructions-detail/${slug}`,
       {
         next: { revalidate: 10 },
-      }
+      },
     );
 
     if (!res.ok) {
@@ -51,7 +51,7 @@ async function getRelatedData(city) {
       `https://api.condomonk.ca/api/related-precons/${city}`,
       {
         next: { revalidate: 10 },
-      }
+      },
     );
 
     if (!res.ok) {
@@ -205,7 +205,7 @@ export default async function PropertyPage({ params }) {
                         Starting From Low $
                         {Nformatter(
                           data.preconstruction.price_starting_from,
-                          2
+                          2,
                         )}
                       </>
                     ) : (
@@ -276,7 +276,7 @@ export default async function PropertyPage({ params }) {
                   <span className="w-28 font-medium text-black">Type:</span>
                   <Link
                     href={`/${params.city}/${generateProjectTypeUrl(
-                      data.preconstruction.project_type
+                      data.preconstruction.project_type,
                     )}`}
                     className="text-blue-600 hover:underline"
                   >
@@ -400,7 +400,7 @@ export default async function PropertyPage({ params }) {
                   title="Walk Score"
                   className="w-full"
                   src={`https://www.walkscore.com/serve-walkscore-tile.php?wsid=&amp;s=${convDash(
-                    data.preconstruction.project_address
+                    data.preconstruction.project_address,
                   )}&amp;o=h&amp;c=f&amp;h=500&amp;fh=0&amp;w=737`}
                 />
               </div>
@@ -430,11 +430,6 @@ export default async function PropertyPage({ params }) {
                   defaultmessage={`Please send me additional information about ${data.preconstruction.project_name}. Thank you`}
                   city={data.preconstruction.city.name}
                 />
-
-                <p className="text-xs text-gray-500 text-center mt-4">
-                  By registering, you will be added to our database and may be
-                  contacted by a licensed real estate agent.
-                </p>
               </div>
             </div>
           </div>

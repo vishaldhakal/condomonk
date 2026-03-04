@@ -8,6 +8,7 @@ import { Mail, Phone, User, MessageSquare, ArrowRight } from "lucide-react";
 
 import { sendCMHCMail } from "@/api/sendCMHCMail";
 import { usePathname } from "next/navigation";
+import ContactFormDisclaimer from "../ContactFormDisclaimer";
 
 const CMHCContactForm = () => {
   const [formData, setFormData] = useState({
@@ -173,12 +174,7 @@ const CMHCContactForm = () => {
         )}
       </Button>
 
-      <p className="text-xs text-gray-500 text-center" id="disclaimer">
-        By submitting this form, you consent to be contacted with information
-        regarding CMHC MLI Select financing options. Your information will be
-        securely sent directly to Afaq Khan, a licensed real estate agent and
-        CMHC specialist, to assist you with your inquiry.
-      </p>
+      <ContactFormDisclaimer className="text-xs text-gray-500 text-center" id="disclaimer" />
     </form>
   );
 };

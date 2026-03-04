@@ -1,6 +1,7 @@
 // components/ImagePopup.js
 "use client";
 import { useState, useEffect } from "react";
+import ContactFormDisclaimer from "./ContactFormDisclaimer";
 
 const ImagePopup = ({ cityName, popupData, showPopup, onClose }) => {
   const [showForm, setShowForm] = useState(false);
@@ -269,51 +270,8 @@ const ImagePopup = ({ cityName, popupData, showPopup, onClose }) => {
                   </button>
                 </form>
 
-                {/* Disclaimer Section */}
-                <div className="mt-4">
-                  <div className="px-2">
-                    <div className="text-[8px] text-gray-600 leading-tight space-y-1">
-                      <p className="text-[8px] text-gray-600 leading-tight space-y-1">
-                        By submitting your information, you agree to do so
-                        voluntarily with the understanding that you may receive
-                        updates and related communication from Homebaba and/or
-                        its partner realtors and brokerages. You may unsubscribe
-                        at any time by contacting us at contact@homebaba.ca.
-                      </p>
-                      {showFullDisclaimer && (
-                        <>
-                          <p className="text-[8px] text-gray-600 leading-tight space-y-1">
-                            {" "}
-                            You also agree to Homebaba's Privacy Policy, and
-                            Terms of Service. Your agreement is not a condition
-                            to purchase any property, goods or services, and you
-                            may call us instead or submit the information
-                            online. You also acknowledge and agree that you can
-                            revoke your authorization at any time. Your consent
-                            herein also applies to any future registration on
-                            national or state Do-Not-Call lists. For mobile
-                            phones, standard message and data charges apply.
-                            Consult our Privacy Policy for additional
-                            information, including unsubscribe options.
-                          </p>
-                          <p className="text-[8px] text-gray-600 leading-tight space-y-2">
-                            This site is protected by reCAPTCHA and the Google
-                            Privacy Policy and Terms of Service apply.
-                          </p>
-                        </>
-                      )}
-                      <p className="text-[8px] text-gray-600 leading-tight space-y-1">
-                        <span
-                          className="text-blue-500 cursor-pointer hover:underline"
-                          onClick={() =>
-                            setShowFullDisclaimer(!showFullDisclaimer)
-                          }
-                        >
-                          {showFullDisclaimer ? "See less" : "See more"}
-                        </span>
-                      </p>
-                    </div>
-                  </div>
+                <div className="mt-4 px-2">
+                  <ContactFormDisclaimer className="text-[8px] text-gray-600 leading-tight" />
                 </div>
               </div>
 

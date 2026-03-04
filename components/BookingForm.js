@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import { CalendarIcon } from "lucide-react";
+import ContactFormDisclaimer from "./ContactFormDisclaimer";
 
 export default function BookingForm({
   propertyId,
@@ -62,7 +63,7 @@ export default function BookingForm({
       form_data.append("phone", formData.phone);
       form_data.append(
         "message",
-        formData.description || `Showing request for ${address}`
+        formData.description || `Showing request for ${address}`,
       );
       form_data.append("realtor", formData.realtor);
       form_data.append("proj_name", address || "");
@@ -85,7 +86,7 @@ export default function BookingForm({
       await swal(
         `Thank You, ${formData.name}`,
         "Please expect an email or call from us shortly",
-        "success"
+        "success",
       );
 
       // Reset form
@@ -106,7 +107,7 @@ export default function BookingForm({
       await swal(
         "Message Failed",
         "Cannot send your message. Please try again.",
-        "error"
+        "error",
       );
     }
   };
@@ -260,23 +261,7 @@ export default function BookingForm({
           {loading ? "Submitting..." : submitBtn}
         </button>
       </form>
-
-      <p className="text-[0.5rem] text-center text-gray-500 mt-2 leading-[0.9rem]">
-        By submitting this form, you give express written consent to Homebaba advertising real estate agent partners and its authorized representatives to contact you via email, telephone, text message, and other forms of electronic communication, including through automated systems, AI assistants, or prerecorded messages. Communications may include information about real estate
-        services, property listings, market updates, or promotions related to
-        your inquiry or expressed interests. You may withdraw your consent at
-        any time by replying “STOP” to text messages or clicking “unsubscribe”
-        in emails. Message and data rates may apply. For more details, please
-        review our{" "}
-        <a href="/privacy" className="text-red-500">
-          Privacy Policy
-        </a>{" "}
-        &{" "}
-        <a href="/privacy" className="text-red-500">
-          Terms of Service
-        </a>
-        .
-      </p>
+      <ContactFormDisclaimer />
     </div>
   );
 }

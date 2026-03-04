@@ -1,8 +1,9 @@
-"use client";
+ "use client";
 
-import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+ import { useState, useEffect } from "react";
+ import { usePathname } from "next/navigation";
+ import Link from "next/link";
+ import ContactFormDisclaimer from "./ContactFormDisclaimer";
 
 const projects = [
   {
@@ -496,20 +497,7 @@ export default function CommunityPopup() {
                   <span className="absolute inset-0 bg-white opacity-20 transform -translate-x-full hover:translate-x-0 transition-transform duration-700 ease-in-out"></span>
                 </button>
 
-                {/* Privacy Note */}
-                <p className="text-[0.5rem] text-center text-gray-500 mt-2 leading-[0.9rem]">
-                  By submitting this form, I consent to receive marketing
-                  emails, calls, and texts from Homebaba Technologies. Message
-                  and data rates may apply. Frequency may vary. See our{" "}
-                  <a href="/privacy" className="text-red-500">
-                    Privacy Policy
-                  </a>{" "}
-                  &{" "}
-                  <a href="/privacy" className="text-red-500">
-                    Terms of Service
-                  </a>
-                  . You can email us to unsubscribe.
-                </p>
+                <ContactFormDisclaimer />
               </form>
             </div>
           </div>

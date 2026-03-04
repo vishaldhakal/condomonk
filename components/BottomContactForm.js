@@ -1,8 +1,9 @@
-"use client";
-import { useState } from "react";
-import ContactFormSubmit from "./ContactFormSubmit";
+ "use client";
+ import { useState } from "react";
+ import ContactFormSubmit from "./ContactFormSubmit";
+ import ContactFormDisclaimer from "./ContactFormDisclaimer";
 
-export default function BottomContactForm(props) {
+ export default function BottomContactForm(props) {
   const [submitbtn, setSubmitbtn] = useState("Send a message");
   const [credentials, setCredentials] = useState({
     name: "",
@@ -127,14 +128,7 @@ export default function BottomContactForm(props) {
         </div>
       </form>
 
-      <p className="text-center text-[9px] text-gray-500 mt-6">
-        By submitting this form, you give express written consent to Homebaba advertising real estate agent partners and its authorized representatives to contact you via email, telephone, text message, and other forms of electronic communication, including through automated systems, AI assistants, or prerecorded messages. Communications may include information about real
-        estate services, property listings, market updates, or promotions
-        related to your inquiry or expressed interests. You may withdraw your
-        consent at any time by replying “STOP” to text messages or clicking
-        “unsubscribe” in emails. Message and data rates may apply. For more
-        details, please review our Privacy Policy & Terms of Service.
-      </p>
+      <ContactFormDisclaimer className="text-[0.5rem] text-center text-gray-500 mt-6 leading-[0.9rem]" />
     </div>
   );
 }

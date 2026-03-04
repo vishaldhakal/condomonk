@@ -1,10 +1,11 @@
-"use client";
-import Heading from "@/components/design/Heading";
-import { useState } from "react";
-import ContactFormSubmit from "./ContactFormSubmit";
-import { motion } from "framer-motion";
+ "use client";
+ import Heading from "@/components/design/Heading";
+ import { useState } from "react";
+ import ContactFormSubmit from "./ContactFormSubmit";
+ import { motion } from "framer-motion";
+ import ContactFormDisclaimer from "./ContactFormDisclaimer";
 
-const HomebabaAdvantage = () => {
+ const HomebabaAdvantage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [submitBtn, setSubmitBtn] = useState("Submit Your Interest");
   const [formData, setFormData] = useState({
@@ -270,11 +271,7 @@ const HomebabaAdvantage = () => {
                   {submitBtn}
                 </button>
 
-                <p className="text-[10px] text-[#6B7280] text-center leading-tight mt-4">
-                  By submitting this form, you agree to receive communications
-                  from Homebaba Technologies regarding your registration and
-                  other services. You can unsubscribe at any time.
-                </p>
+                <ContactFormDisclaimer className="text-[10px] text-[#6B7280] text-center leading-tight mt-4" />
               </form>
             </div>
           </motion.div>
