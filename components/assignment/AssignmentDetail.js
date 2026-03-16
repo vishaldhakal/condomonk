@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import { FaCheck } from "react-icons/fa";
 import SideContactForm from "../SideContactForm";
@@ -99,7 +98,7 @@ const AssignmentDetail = ({ assignment }) => {
           <div className="mb-6">
             <div className="relative h-[400px] w-full rounded-lg overflow-hidden border border-gray-200">
               {assignment.image1 ? (
-                <Image
+                <img
                   src={assignment.image1}
                   alt={`${assignment.project_name} - Main Image`}
                   fill
@@ -379,7 +378,7 @@ const AssignmentDetail = ({ assignment }) => {
           >
             <div className="flex items-center gap-2 mb-4">
               <div className="">
-                <Image
+                <img
                   src="/contact-bottom-2.png"
                   alt="Agent"
                   width={120}
@@ -392,7 +391,7 @@ const AssignmentDetail = ({ assignment }) => {
                 <p className="text-[10px] flex items-center justify-center gap-1">
                   Condomonk Verified Partner
                   <span>
-                    <Image
+                    <img
                       src="/cc.png"
                       alt="verified"
                       width={16}

@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import dayjs from "dayjs";
 import { endPoints } from "@/api/endpoints";
 
@@ -19,8 +18,8 @@ export default function BlogCard({ blog }) {
   const imageUrl = getImageUrl(blog.news_thumbnail);
 
   return (
-    <div className="relative my-3 md:my-0 rounded-lg shadow-lg overflow-hidden bg-white">
-      <div className="relative w-full aspect-[4/3]">
+    <div className="relative my-3 md:my-0 rounded-lg shadow-sm overflow-hidden bg-white">
+      <div className="relative w-full aspect-video">
         <Link href={`/blogs/${blog.slug}`} className="block h-full">
           {imageUrl ? (
             <img
@@ -45,7 +44,7 @@ export default function BlogCard({ blog }) {
       </div>
       <Link href={`/blogs/${blog.slug}`} className="block text-decoration-none">
         <div className="relative p-4">
-          <h5 className="font-bold md:text-lg text-md text-gray-900 mb-4 line-clamp-2 leading-tight">
+          <h5 className="font-medium md:text-lg text-md text-gray-900 mb-4 line-clamp-2 leading-tight">
             {blog.news_title}
           </h5>
           <div className="absolute bottom-0 mb-3 text-sm text-gray-500">

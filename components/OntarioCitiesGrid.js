@@ -33,12 +33,12 @@ export default function OntarioCitiesGrid() {
     const categories = {
       openHouses: [
         {
-          href: `/resale/ontario/${citySlug}/open-houses`,
+          href: `#/${citySlug}/open-houses`,
           text: `Open Houses in ${city}`,
         },
       ],
       propertyTypes: propertyTypes.map((propType) => ({
-        href: `/resale/ontario/${citySlug}/${propType.path}-for-sale`,
+        href: `#/${citySlug}/${propType.path}-for-sale`,
         text: `${propType.label} for sale in ${city}`,
       })),
       priceRanges: propertyTypes.flatMap((propType) =>
@@ -47,21 +47,21 @@ export default function OntarioCitiesGrid() {
           .map((range) => {
             if (range.minPrice && range.maxPrice) {
               return {
-                href: `/resale/ontario/${citySlug}/${propType.path}-between-${range.label}`,
+                href: `#/${citySlug}/${propType.path}-between-${range.label}`,
                 text: `${
                   propType.label
                 } in ${city} between $${range.minPrice.toLocaleString()} - $${range.maxPrice.toLocaleString()}`,
               };
             } else if (range.maxPrice) {
               return {
-                href: `/resale/ontario/${citySlug}/${propType.path}-under-${range.label}`,
+                href: `#/${citySlug}/${propType.path}-under-${range.label}`,
                 text: `${
                   propType.label
                 } in ${city} under $${range.maxPrice.toLocaleString()}`,
               };
             } else {
               return {
-                href: `/resale/ontario/${citySlug}/${propType.path}-over-${range.label}`,
+                href: `#/${citySlug}/${propType.path}-over-${range.label}`,
                 text: `${
                   propType.label
                 } in ${city} over $${range.minPrice.toLocaleString()}`,
@@ -70,7 +70,7 @@ export default function OntarioCitiesGrid() {
           })
       ),
       bedrooms: bedrooms.map((beds) => ({
-        href: `/resale/ontario/${citySlug}/homes-for-sale/${beds}-plus-bed`,
+        href: `#/${citySlug}/homes-for-sale/${beds}-plus-bed`,
         text: `${beds} bedroom homes for sale in ${city}`,
       })),
     };
@@ -98,9 +98,7 @@ export default function OntarioCitiesGrid() {
           return (
             <div key={cityObj.city} className="space-y-4">
               <Link
-                href={`/resale/ontario/${cityObj.city
-                  .toLowerCase()
-                  .replace(/ /g, "-")}`}
+                href="#"
               >
                 <h2 className="text-3xl font-bold mb-6 text-black hover:text-blue-800 pt-6">
                   {cityObj.city}

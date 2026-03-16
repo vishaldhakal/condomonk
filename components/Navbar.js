@@ -14,8 +14,7 @@ const Navbar = ({ cities, transparent }) => {
   const [showCities, setShowCities] = useState(false);
 
   // Determine if we're on a preconstruction page
-  const isPreconstructionPage =
-    pathname.split("/").length >= 2 && !pathname.includes("resale");
+  const isPreconstructionPage = true;
 
   const changeBackground = () => {
     if (window.scrollY >= 80) setIsScrolled(true);
@@ -55,14 +54,6 @@ const Navbar = ({ cities, transparent }) => {
   // No-op handlers removed for cleanliness
 
   // Helper functions for page type detection
-  const isResalePage =
-    pathname.includes("/resale/") && !pathname.includes("/resale/listing/");
-  const isMainResalePage =
-    pathname === "/resale/ontario/homes-for-sale" ||
-    pathname === "/resale/ontario/" ||
-    pathname === "/resale/ontario";
-  const isCityResalePage =
-    isResalePage && !isMainResalePage && pathname.includes("/resale/ontario/");
   const isSpecialPage =
     pathname.startsWith("/blogs") ||
     pathname.startsWith("/top-10-gta-projects") ||
@@ -71,16 +62,9 @@ const Navbar = ({ cities, transparent }) => {
 
   // Get current city from URL
   const getCurrentCity = () => {
-    if (isMainResalePage || isSpecialPage) return null;
-
-    if (isCityResalePage) {
-      const matches = pathname.match(/\/resale\/ontario\/([^\/]+)/);
-      if (matches) return matches[1].split("/")[0];
-    } else {
-      const city = pathname.split("/")[1];
-      return city && city !== "resale" ? city : null;
-    }
-    return null;
+    if (isSpecialPage) return null;
+    const city = pathname.split("/")[1];
+    return city ? city : null;
   };
 
   const currentCity = getCurrentCity();
@@ -88,15 +72,7 @@ const Navbar = ({ cities, transparent }) => {
     ? currentCity.charAt(0).toUpperCase() + currentCity.slice(1)
     : "";
 
-  // Helper function for resale links
-  const getResaleLink = (type) => {
-    if (currentCity && !isSpecialPage) {
-      return `/resale/ontario/${currentCity}/${type}`;
-    }
-    return `/resale/ontario/${type}`;
-  };
 
-  // Removed unused helper
 
   return (
     <nav className="w-full bg-white z-[9999] border-b border-gray-100">

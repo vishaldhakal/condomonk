@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import LightGallery from "lightgallery/react";
 import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-zoom.css";
@@ -39,7 +38,7 @@ export default function PropertyGallery({ images, propertyAddress }) {
         <div className="relative w-full">
           {/* Main Image */}
           <div className="relative w-full h-[300px]">
-            <Image
+            <img
               src={images[currentImageIndex]}
               alt={`${propertyAddress} Image ${currentImageIndex + 1}`}
               fill
@@ -113,7 +112,7 @@ export default function PropertyGallery({ images, propertyAddress }) {
                   currentImageIndex === index ? "ring-2 ring-blue-500" : ""
                 }`}
               >
-                <Image
+                <img
                   src={image}
                   alt={`${propertyAddress} Image ${index + 1}`}
                   fill
@@ -154,7 +153,7 @@ export default function PropertyGallery({ images, propertyAddress }) {
               data-lg-size="1600-2400"
             >
               <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
-                <Image
+                <img
                   src={image}
                   alt={`${propertyAddress} Image ${index + 1}`}
                   fill
@@ -203,7 +202,7 @@ export default function PropertyGallery({ images, propertyAddress }) {
               className="hidden"
               data-lg-size="1600-2400"
             >
-              <Image
+              <img
                 src={image}
                 alt={`${propertyAddress} Image ${index + 6}`}
                 width={1600}

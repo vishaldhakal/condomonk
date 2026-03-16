@@ -1,6 +1,5 @@
 import AssignmentGrid from "@/components/assignment/AssignmentGrid";
 import AssignmentStats from "@/components/assignment/AssignmentStats";
-import Image from "next/image";
 import ContactForm from "@/components/ContactForm";
 import PaginationControls from "@/components/assignment/PaginationControls";
 
@@ -64,78 +63,10 @@ export default async function AssignmentSalePage({ searchParams }) {
         />
       </div>
 
-      <div className="max-w-4xl mx-auto mt-20 px-6 md:px-0">
-        <div className="space-y-6">
-          <h3 className="text-xl font-semibold pb-2 underline">
-            Ontario Assignment Sale
-          </h3>
-          <p className="text-gray-700">
-            Check out Pre-construction Condos, Townhomes & Detached home
-            assignments for sale in Ontario, Canada.
-          </p>
-          <ol className="list-decimal pl-6 space-y-4">
-            <li>
-              <h5 className="text-lg font-semibold">
-                Why do buyers choose assignment sales in Ontario?
-              </h5>
-              <span className="text-gray-600">
-                Buyers opt for assignment sales to secure a pre-construction
-                property at an earlier price before completion. This allows them
-                to benefit from market appreciation and sometimes better deals
-                compared to resale properties. Additionally, assignment sales
-                provide access to new developments that may already be sold out.
-              </span>
-            </li>
-            <li>
-              <h5 className="text-lg font-semibold">
-                What are the benefits of purchasing an assignment sale property?
-              </h5>
-              <div className="text-gray-600">
-                <ul className="list-disc pl-6 space-y-1">
-                  <li>
-                    <strong>Lower Prices:</strong> Buyers may get a better price
-                    than the current market value.
-                  </li>
-                  <li>
-                    <strong>Brand-New Homes:</strong> Since the unit is still
-                    under construction, buyers receive a never-lived-in
-                    property.
-                  </li>
-                  <li>
-                    <strong>Potential for Appreciation:</strong> Buyers benefit
-                    from property value increases before taking ownership.
-                  </li>
-                  <li>
-                    <strong>Flexible Move-In Timeline:</strong> Since the
-                    closing date depends on construction progress, it allows
-                    time for financial planning.
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ol>
-          <p className="text-gray-500 italic">
-            Condomonk is one of the leading online marketplaces for
-            pre-construction and assignment sales in Ontario. Check out hundreds
-            of Ontario Assignment Sales advertised by Licensed Real Estate
-            Agents.
-            <br />
-            Toronto Assignment Sale -{" "}
-            <a
-              href="https://condomonk.ca/assignment-sale"
-              className="text-blue-600 underline"
-            >
-              Condomonk
-            </a>
-            .
-          </p>
-        </div>
-      </div>
-
-      <div className="my-20"></div>
+      <div className="my-10"></div>
       <div className="px-2">
         <div className="flex flex-col items-center mb-4 md:mb-5">
-          <Image
+          <img
             src="/contact-bottom-2.png"
             alt="Real Estate Agent"
             width={300}
@@ -143,7 +74,7 @@ export default async function AssignmentSalePage({ searchParams }) {
             className="rounded-full mb-6 md:mb-8 w-[200px] h-[200px] md:w-[300px] md:h-[300px] object-cover"
             priority={true}
           />
-          <h2 className="text-xl md:text-3xl font-bold text-gray-800 mb-2 text-center">
+          <h2 className="text-xl md:text-3xl font-medium text-gray-800 mb-2 text-center">
             Need help with Assignment Sale?
           </h2>
           <p className="text-gray-600 text-center text-sm md:text-base">

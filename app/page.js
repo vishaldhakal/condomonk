@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import HomeCarousel from "@/components/HomeCarousel";
 import BottomContactForm from "@/components/BottomContactForm";
@@ -33,8 +32,6 @@ async function getBlogs() {
 }
 export default async function Home() {
   const blogs = await getBlogs();
-  const barrieCondos = await getBarrieCondos(8);
-  const mississaugaRentals = await getMississaugaRentals(8);
 
   return (
     <>
@@ -89,7 +86,7 @@ export default async function Home() {
                 ].map((city) => (
                   <Link
                     key={city}
-                    href={`/resale/ontario/${city.toLowerCase()}/homes-for-sale`}
+                    href="#"
                     className="inline-flex items-center px-2 py-1.5 rounded-full text-sm 
                 bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 
                 hover:text-gray-900 hover:border-gray-300 transition-colors duration-200 
@@ -407,7 +404,7 @@ export default async function Home() {
                 ].map((location, index) => (
                   <Link
                     key={location.city}
-                    href={`/resale/ontario/${location.city.toLowerCase()}/price-reduced-homes-for-sale`}
+                    href="#"
                     className="flex items-center bg-white rounded-full px-4 py-2 border border-gray-200 shadow-sm hover:shadow-md hover:border-green-400 transform transition-all duration-300 hover:-translate-y-1"
                   >
                     <svg
@@ -440,7 +437,7 @@ export default async function Home() {
               {/* CTA Button */}
               {/* <div>
                 <Link
-                  href="/resale/ontario/price-reduced-homes-for-sale"
+                  href="#"
                   className="inline-flex items-center bg-teal-600  text-white px-6 py-3 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
                 >
                   <span>View price dropped homes across ontario</span>
@@ -560,7 +557,7 @@ export default async function Home() {
       </section>
 
       <div className=" py-10 bg-white"></div>
-      {/* <Link href={"/resale/ontario"}>
+      {/* <Link href="#">
         <h2 className="font-bold text-center mb-5 text-3xl text-black hover:underline">
           Explore Resale Homes For Sale in Ontario
         </h2>
@@ -569,7 +566,7 @@ export default async function Home() {
         <div className="grid grid-cols-2 md:grid-cols-4 md:gap-x-4 md:gap-y-8 gap-y-4 gap-x-3">
           <div className="flex flex-col">
             <Link
-              href="/resale/ontario/toronto/homes-for-sale"
+              href="#"
               className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
             >
               <img
@@ -586,25 +583,25 @@ export default async function Home() {
             </Link>
             <div className="mt-2 space-y-1 md:text-sm text-xs">
               <Link
-                href="/resale/ontario/toronto/semi-detached-homes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Semi Detached Homes in Toronto
               </Link>
               <Link
-                href="/resale/ontario/toronto/detached-homes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Detached Homes in Toronto
               </Link>
               <Link
-                href="/resale/ontario/toronto/townhomes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Townhomes in Toronto
               </Link>
               <Link
-                href="/resale/ontario/toronto/condos-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Condos in Toronto
@@ -614,7 +611,7 @@ export default async function Home() {
 
           <div className="flex flex-col">
             <Link
-              href="/resale/ontario/mississauga/homes-for-sale"
+              href="#"
               className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
             >
               <img
@@ -631,25 +628,25 @@ export default async function Home() {
             </Link>
             <div className="mt-2 space-y-1 md:text-sm text-xs">
               <Link
-                href="/resale/ontario/mississauga/semi-detached-homes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Semi Detached Homes in Mississauga
               </Link>
               <Link
-                href="/resale/ontario/mississauga/detached-homes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Detached Homes in Mississauga
               </Link>
               <Link
-                href="/resale/ontario/mississauga/townhomes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Townhomes in Mississauga
               </Link>
               <Link
-                href="/resale/ontario/mississauga/condos-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Condos in Mississauga
@@ -659,7 +656,7 @@ export default async function Home() {
 
           <div className="flex flex-col">
             <Link
-              href="/resale/ontario/brampton/homes-for-sale"
+              href="#"
               className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
             >
               <img
@@ -676,25 +673,25 @@ export default async function Home() {
             </Link>
             <div className="mt-2 space-y-1 md:text-sm text-xs">
               <Link
-                href="/resale/ontario/brampton/semi-detached-homes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Semi Detached Homes in Brampton
               </Link>
               <Link
-                href="/resale/ontario/brampton/detached-homes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Detached Homes in Brampton
               </Link>
               <Link
-                href="/resale/ontario/brampton/townhomes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Townhomes in Brampton
               </Link>
               <Link
-                href="/resale/ontario/brampton/condos-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Condos in Brampton
@@ -704,7 +701,7 @@ export default async function Home() {
 
           <div className="flex flex-col">
             <Link
-              href="/resale/ontario/oakville/homes-for-sale"
+              href="#"
               className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
             >
               <img
@@ -721,25 +718,25 @@ export default async function Home() {
             </Link>
             <div className="mt-2 space-y-1 md:text-sm text-xs">
               <Link
-                href="/resale/ontario/oakville/semi-detached-homes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Semi Detached Homes in Oakville
               </Link>
               <Link
-                href="/resale/ontario/oakville/detached-homes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Detached Homes in Oakville
               </Link>
               <Link
-                href="/resale/ontario/oakville/townhomes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Townhomes in Oakville
               </Link>
               <Link
-                href="/resale/ontario/oakville/condos-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Condos in Oakville
@@ -749,7 +746,7 @@ export default async function Home() {
 
           <div className="flex flex-col">
             <Link
-              href="/resale/ontario/barrie/homes-for-sale"
+              href="#"
               className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
             >
               <img
@@ -766,25 +763,25 @@ export default async function Home() {
             </Link>
             <div className="mt-2 space-y-1 md:text-sm text-xs">
               <Link
-                href="/resale/ontario/barrie/semi-detached-homes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Semi Detached Homes in Barrie
               </Link>
               <Link
-                href="/resale/ontario/barrie/detached-homes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Detached Homes in Barrie
               </Link>
               <Link
-                href="/resale/ontario/barrie/townhomes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Townhomes in Barrie
               </Link>
               <Link
-                href="/resale/ontario/barrie/condos-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Condos in Barrie
@@ -794,7 +791,7 @@ export default async function Home() {
 
           <div className="flex flex-col">
             <Link
-              href="/resale/ontario/ajax/homes-for-sale"
+              href="#"
               className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
             >
               <img
@@ -809,25 +806,25 @@ export default async function Home() {
             </Link>
             <div className="mt-2 space-y-1 md:text-sm text-xs">
               <Link
-                href="/resale/ontario/ajax/semi-detached-homes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Semi Detached Homes in Ajax
               </Link>
               <Link
-                href="/resale/ontario/ajax/detached-homes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Detached Homes in Ajax
               </Link>
               <Link
-                href="/resale/ontario/ajax/townhomes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Townhomes in Ajax
               </Link>
               <Link
-                href="/resale/ontario/ajax/condos-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Condos in Ajax
@@ -837,7 +834,7 @@ export default async function Home() {
 
           <div className="flex flex-col">
             <Link
-              href="/resale/ontario/ottawa/homes-for-sale"
+              href="#"
               className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
             >
               <img
@@ -854,25 +851,25 @@ export default async function Home() {
             </Link>
             <div className="mt-2 space-y-1 md:text-sm text-xs">
               <Link
-                href="/resale/ontario/ottawa/semi-detached-homes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Semi Detached Homes in Ottawa
               </Link>
               <Link
-                href="/resale/ontario/ottawa/detached-homes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Detached Homes in Ottawa
               </Link>
               <Link
-                href="/resale/ontario/ottawa/townhomes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Townhomes in Ottawa
               </Link>
               <Link
-                href="/resale/ontario/ottawa/condos-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Condos in Ottawa
@@ -882,7 +879,7 @@ export default async function Home() {
 
           <div className="flex flex-col">
             <Link
-              href="/resale/ontario/hamilton/homes-for-sale"
+              href="#"
               className="relative rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:scale-[1.02] block"
             >
               <img
@@ -899,25 +896,25 @@ export default async function Home() {
             </Link>
             <div className="mt-2 space-y-1 md:text-sm text-xs">
               <Link
-                href="/resale/ontario/hamilton/semi-detached-homes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Semi Detached Homes in Hamilton
               </Link>
               <Link
-                href="/resale/ontario/hamilton/detached-homes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Detached Homes in Hamilton
               </Link>
               <Link
-                href="/resale/ontario/hamilton/townhomes-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Townhomes in Hamilton
               </Link>
               <Link
-                href="/resale/ontario/hamilton/condos-for-sale"
+                href="#"
                 className="block text-gray-500 hover:text-black"
               >
                 Condos in Hamilton
@@ -928,7 +925,7 @@ export default async function Home() {
 
         <div className="text-center mt-8">
           <Link
-            href="/resale/ontario/homes-for-sale"
+            href="#"
             className="inline-flex items-center justify-center px-6 py-3 border bg-teal-600 text-white rounded-full font-medium "
           >
             View All Ontario Properties
@@ -958,9 +955,7 @@ export default async function Home() {
           Explore 195+ condos for sale in barrie, Ontario.
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {barrieCondos.map((property) => (
-            <PropertyCard key={property.ListingKey} property={property} />
-          ))}
+
         </div>
 
         <div className="text-center mt-8">
@@ -993,7 +988,7 @@ export default async function Home() {
           {getCityLinks().map((city) => (
             <Link
               key={`sale-${city.name}`}
-              href={`/resale/ontario/${city.name.toLowerCase()}/condos-for-sale`}
+              href="#"
               className="flex items-center p-3 rounded-lg hover:bg-gray-50 border border-gray-100 transition-all duration-300 group hover:border-gray-200 hover:shadow-md"
             >
               <div className="flex items-center space-x-3">
@@ -1036,7 +1031,7 @@ export default async function Home() {
       {/* 
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className=" justify-between items-center mb-6">
-          <Link href={"/resale/ontario/mississauga/condos-for-lease"}>
+          <Link href="#">
             <h2 className="font-bold text-center  text-3xl text-black hover:underline">
               Latest Rental Condos in Mississauga
             </h2>
@@ -1047,13 +1042,11 @@ export default async function Home() {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4">
-          {mississaugaRentals.map((property) => (
-            <PropertyCard key={property.ListingKey} property={property} />
-          ))}
+
         </div>
         <div className="text-center mt-8">
           <Link
-            href="/resale/ontario/mississauga/condos-for-lease"
+            href="#"
             className="inline-flex items-center justify-center px-3 py-2 border bg-teal-600 text-white rounded-full font-medium "
           >
             View All Rental Condos in Mississauga →
@@ -1069,7 +1062,7 @@ export default async function Home() {
           {getCityLinks().map((city) => (
             <Link
               key={`rental-${city.name}`}
-              href={`/resale/ontario/${city.name.toLowerCase()}/condos-for-lease`}
+              href="#"
               className="flex items-center p-3 rounded-lg hover:bg-gray-50 border border-gray-100 transition-all duration-300 group hover:border-gray-200 hover:shadow-md"
             >
               <div className="flex items-center space-x-3">
@@ -1294,7 +1287,7 @@ export default async function Home() {
       <div className="py-5 md:my-20 my-0" id="contact">
         <div className="container mx-auto px-5">
           <div className="flex justify-center">
-            <Image
+            <img
               src="/contact-bottom-2.png"
               alt="Contact bottom"
               width={250}

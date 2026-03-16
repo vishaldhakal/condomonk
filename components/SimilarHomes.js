@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import { formatPrice } from "@/utils/formatting";
 import { useRef, useState, useEffect } from "react";
 
@@ -75,7 +74,7 @@ export default function SimilarHomes({ properties }) {
           <div className="flex gap-3 min-w-min pb-1 ">
             {properties.map((property) => (
               <Link
-                href={`/resale/listing/${property.StreetNumber}-${property.StreetName}-${property.ListingKey}`}
+                href={`#/${property.StreetNumber}-${property.StreetName}-${property.ListingKey}`}
                 key={property.ListingKey}
                 className="flex-none md:w-[230px] w-[150px] group transition-all duration-300 rounded-xl overflow-hidden bg-white border hover:border-gray-300"
               >

@@ -1,0 +1,294 @@
+
+> condomonk-frontend@0.1.0 start
+> next start
+
+▲ Next.js 16.1.6
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.2:3000
+
+✓ Starting...
+✓ Ready in 371ms
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294)
+    at async z (.next/server/chunks/ssr/_0242f287._.js:1:6588) {
+  digest: '1743518721',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294)
+    at async z (.next/server/chunks/ssr/_0242f287._.js:1:6588) {
+  digest: '1743518721',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294) {
+  digest: '3854439712',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294) {
+  digest: '3854439712',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async s (.next/server/chunks/ssr/_0242f287._.js:1:4399)
+    at async z (.next/server/chunks/ssr/_0242f287._.js:1:6588) {
+  digest: '24005677',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async s (.next/server/chunks/ssr/_0242f287._.js:1:4399)
+    at async z (.next/server/chunks/ssr/_0242f287._.js:1:6588) {
+  digest: '24005677',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async s (.next/server/chunks/ssr/_0242f287._.js:1:4399)
+    at async z (.next/server/chunks/ssr/_0242f287._.js:1:6588) {
+  digest: '4034278606',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294) {
+  digest: '2894799011',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294)
+    at async z (.next/server/chunks/ssr/_0242f287._.js:1:6588) {
+  digest: '1743518721',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294)
+    at async z (.next/server/chunks/ssr/_0242f287._.js:1:6588) {
+  digest: '1743518721',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294)
+    at async z (.next/server/chunks/ssr/_0242f287._.js:1:6588) {
+  digest: '1743518721',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294)
+    at async z (.next/server/chunks/ssr/_0242f287._.js:1:6588) {
+  digest: '1743518721',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294)
+    at async z (.next/server/chunks/ssr/_0242f287._.js:1:6588) {
+  digest: '1743518721',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294)
+    at async z (.next/server/chunks/ssr/_0242f287._.js:1:6588) {
+  digest: '1743518721',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294)
+    at async z (.next/server/chunks/ssr/_0242f287._.js:1:6588) {
+  digest: '1743518721',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294) {
+  digest: '3854439712',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294) {
+  digest: '3854439712',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294) {
+  digest: '3854439712',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294) {
+  digest: '3854439712',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294) {
+  digest: '3854439712',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294) {
+  digest: '3854439712',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294) {
+  digest: '3854439712',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294) {
+  digest: '3854439712',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294) {
+  digest: '3854439712',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294) {
+  digest: '3854439712',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294)
+    at async z (.next/server/chunks/ssr/_0242f287._.js:1:6588) {
+  digest: '1743518721',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294)
+    at async z (.next/server/chunks/ssr/_0242f287._.js:1:6588) {
+  digest: '1743518721',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294)
+    at async z (.next/server/chunks/ssr/_0242f287._.js:1:6588) {
+  digest: '1743518721',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294)
+    at async z (.next/server/chunks/ssr/_0242f287._.js:1:6588) {
+  digest: '1743518721',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async r (.next/server/chunks/ssr/_0242f287._.js:1:4294)
+    at async z (.next/server/chunks/ssr/_0242f287._.js:1:6588) {
+  digest: '1743518721',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+TypeError: fetch failed
+    at async s (.next/server/chunks/ssr/_0242f287._.js:1:4399)
+    at async z (.next/server/chunks/ssr/_0242f287._.js:1:6588) {
+  digest: '4034278606',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async s (.next/server/chunks/ssr/_0242f287._.js:1:4399)
+    at async z (.next/server/chunks/ssr/_0242f287._.js:1:6588) {
+  digest: '4034278606',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}
+⨯ TypeError: fetch failed
+    at async s (.next/server/chunks/ssr/_0242f287._.js:1:4399)
+    at async z (.next/server/chunks/ssr/_0242f287._.js:1:6588) {
+  digest: '4034278606',
+  [cause]: Error [ConnectTimeoutError]: Connect Timeout Error (attempted address: api.condomonk.ca:443, timeout: 10000ms)
+      at ignore-listed frames {
+    code: 'UND_ERR_CONNECT_TIMEOUT'
+  }
+}

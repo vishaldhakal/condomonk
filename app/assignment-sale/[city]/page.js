@@ -1,5 +1,4 @@
 import AssignmentGrid from "@/components/assignment/AssignmentGrid";
-import Image from "next/image";
 import ContactForm from "@/components/ContactForm";
 import PaginationControls from "@/components/assignment/PaginationControls";
 
@@ -140,7 +139,7 @@ export default async function AssignmentSalePage({ params, searchParams }) {
       <div className="my-20"></div>
       <div className="px-2">
         <div className="flex flex-col items-center mb-4 md:mb-5">
-          <Image
+          <img
             src="/contact-bottom-2.png"
             alt="Real Estate Agent"
             width={300}

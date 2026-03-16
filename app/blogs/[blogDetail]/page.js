@@ -2,7 +2,6 @@ import React from "react";
 import { fetchBlogPostByCity, fetchBlogPostBySlug } from "@/api/blogs";
 import { endPoints } from "@/api/endpoints";
 import Link from "next/link";
-import Image from "next/image";
 import dayjs from "dayjs";
 import BottomContactForm from "@/components/BottomContactForm";
 import SocialMediaShare from "@/components/SocialMediaShare";
@@ -105,7 +104,7 @@ export default async function BlogDetails({ params }) {
           {/* Author Section */}
           <section className="flex items-center space-x-4">
             <div className="flex-shrink-0">
-              {/* <Image
+              {/* <img
                 width={60}
                 height={60}
                 className="rounded-full"
@@ -166,7 +165,7 @@ export default async function BlogDetails({ params }) {
         {/* Contact Form */}
         <div className="mt-24 hidden md:block">
           <div className="max-w-4xl mx-auto text-center">
-            <Image
+            <img
               src="/contact-bottom-2.png"
               alt="Contact Condomonk"
               width={160}

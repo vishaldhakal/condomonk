@@ -83,7 +83,7 @@ const bathOptions = [
 ];
 
 export default function FilterBar({ currentFilters }) {
-  const baseUrl = "/resale/ontario";
+  const baseUrl = "#";
   const cityPath = currentFilters.city
     ? `/${currentFilters.city.toLowerCase().replace(/ /g, "-")}`
     : "";

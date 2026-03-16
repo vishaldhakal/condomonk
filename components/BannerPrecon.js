@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -86,7 +85,7 @@ export default function BannerPrecon({
             className="w-full md:w-1/2"
           >
             <div className="relative w-full h-[300px] md:h-[360px] rounded-lg overflow-hidden shadow-xl">
-              <Image
+              <img
                 src="/standline.webp"
                 alt="People waiting in line"
                 fill
@@ -163,7 +162,7 @@ export default function BannerPrecon({
 
               {developer?.image && (
                 <div className="relative w-48 h-24">
-                  <Image
+                  <img
                     src={`https://api.condomonk.ca${developer.image}`}
                     alt={`${developer.name} Logo`}
                     fill

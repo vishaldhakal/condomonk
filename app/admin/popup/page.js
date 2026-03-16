@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 
 export default function PopupManager() {
   const [popups, setPopups] = useState([]);
@@ -212,7 +211,7 @@ export default function PopupManager() {
               {/* Popup Image */}
               <div className="h-48 bg-gray-200 relative">
                 {popup.PopupImage ? (
-                  <Image
+                  <img
                     src={popup.PopupImage}
                     alt={popup.PopupName}
                     fill

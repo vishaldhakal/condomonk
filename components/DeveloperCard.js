@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export default function DeveloperCard(props) {
   return (
@@ -12,7 +11,7 @@ export default function DeveloperCard(props) {
         >
           <div className="relative h-40 w-full bg-gray-100">
             {props.image ? (
-              <Image
+              <img
                 src={props.image}
                 alt={`${props.name} builder's logo`}
                 fill
@@ -20,7 +19,7 @@ export default function DeveloperCard(props) {
                 loading="lazy"
               />
             ) : (
-              <Image
+              <img
                 src="/noimage.webp"
                 alt={`no image available for ${props.name}`}
                 fill

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { FaBuilding } from "react-icons/fa";
 
@@ -31,7 +30,7 @@ const AssignmentCard = ({ assignment, index }) => {
             <img
               src={assignment.image1}
               alt={`${assignment.project_name} - ${assignment.unit_type}`}
-              className="object-cover transition-all duration-300 ease-in-out group-hover:scale-110 w-full h-48"
+              className="object-cover transition-all duration-300 ease-in-out group-hover:scale-110 w-full h-full"
             />
           ) : (
             <div className="h-full w-full bg-gray-100 flex items-center justify-center">
@@ -63,7 +62,7 @@ const AssignmentCard = ({ assignment, index }) => {
         </div> */}
         <div className="mb-6">
           <div className="flex items-center">
-            <span className="text-2xl font-bold text-black md:text-2xl">
+            <span className="text-xl font-semibold text-black md:text-2xl">
               ${formatPrice(assignment.price.replace(/\$|,/g, ""))}
             </span>
             <span className="ml-2 px-2 py-1 bg-gray-100 text-[9px] font-semibold rounded-md">

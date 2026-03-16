@@ -76,7 +76,7 @@ const SearchWithAutocomplete = ({
     const listingPart = property.listingId;
 
     // Combine them
-    return `/resale/listing/${addressPart}-${listingPart}`;
+    return `#/${addressPart}-${listingPart}`;
   };
 
   // Recent searches helpers
@@ -417,10 +417,8 @@ const SearchWithAutocomplete = ({
 
   // Apply different classes based on whether this is the homepage or not
   const inputClasses = isHomepage
-    ? `w-full px-8 text-sm rounded-r-full border-0 shadow-md focus:outline-none hover:bg-teal-50 focus:ring-1 focus:ring-teal-500 ${customInputClasses}`
-    : `w-full md:py-3 py-4 px-10 text-black text-xs bg-white border ${
-        !searchTypeOption ? "rounded-full" : "border-l-0 rounded-r-full "
-      } border-gray-300 focus:outline-none placeholder:text-gray-400 focus:ring-1 focus:ring-teal-500 hover:bg-teal-50`;
+    ? `w-full px-6 py-3 text-sm rounded-r-md border border-gray-200 focus:outline-none focus:ring-1 focus:ring-teal-500 bg-white ${customInputClasses}`
+    : `w-full px-6 py-3 text-sm text-black bg-white border ${!searchTypeOption ? "rounded-md" : "border-l-0 rounded-r-md"} border-gray-200 focus:outline-none placeholder:text-gray-400 focus:ring-1 focus:ring-teal-500`;
 
   const placeholderText = localCityName
     ? localCityName
@@ -434,12 +432,7 @@ const SearchWithAutocomplete = ({
         <div className="relative ">
           {searchTypeOption && (
             <button
-              className={`h-full px-3 py-3 text-white font-medium rounded-l-full flex items-center gap-2 cursor-default`}
-              style={{
-                backdropFilter: "blur(4px)",
-                background:
-                  "linear-gradient(90.37deg, #0c4f47, #1e7167 99.68%)",
-              }}
+              className="h-full px-4 py-3 text-white font-medium rounded-l-md bg-teal-700 flex items-center gap-2 cursor-default"
             >
               Pre Construction
             </button>

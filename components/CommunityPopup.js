@@ -88,7 +88,7 @@ export default function CommunityPopup() {
     const hasSubmitted = localStorage.getItem("communityFormSubmitted2");
     const lastClosed = localStorage.getItem("communityPopupLastClosed2");
     const today = new Date().toDateString();
-    const resalePage = pathname.includes("/resale");
+    const resalePage = false;
 
     // Only set up timeout if conditions are met
     if (
@@ -337,7 +337,7 @@ export default function CommunityPopup() {
               <div className="flex justify-center mt-2">
                 <div className="relative rounded-full p-1">
                   <div className="bg-white p-1 rounded-full">
-                    {/* <Image
+                    {/* <img
                       src="/angela.jpeg"
                       alt="Real Estate Agent"
                       width={200}

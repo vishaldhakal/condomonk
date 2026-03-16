@@ -5,7 +5,6 @@ import BottomContactForm from "@/components/BottomContactForm";
 import Newsletter from "@/components/Newsletter";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import PreconstructionFilter from "@/components/PreconstructionFilter";
 import ExpandableDescription from "@/components/ExpandableDescription";
 
@@ -89,14 +88,14 @@ export default async function CondosPage({ params }) {
         If you are looking to buy resale condos, Condomonk is your trusted
         platform to find{" "}
         <Link
-          href={`/resale/ontario/${params.city}/condos-for-sale`}
+          href="#"
           className="text-slate-700 underline hover:text-slate-900"
         >
           100+ condos for sale in {cityName}.{" "}
         </Link>
         Whether you are looking to downsize to affordable{" "}
         <Link
-          href={`/resale/ontario/${params.city}/condos-for-sale`}
+          href="#"
           className="text-slate-700 underline hover:text-slate-900"
         >
           {cityName} condos for sale,
@@ -199,7 +198,7 @@ export default async function CondosPage({ params }) {
         {/* Contact Form Section */}
         <div className="mt-24" id="contact">
           <div className="max-w-3xl mx-auto text-center">
-            <Image
+            <img
               src="/contact-bottom-2.png"
               alt="Contact"
               width={300}
@@ -235,7 +234,7 @@ export default async function CondosPage({ params }) {
 }
 
 // Generate static params for static site generation
-export async function generateStaticParams() {
+export async function generateStaticParams() { return [];
   const cities = await fetch("https://api.condomonk.ca/api/all-city").then(
     (res) => res.json()
   );

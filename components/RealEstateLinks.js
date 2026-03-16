@@ -24,9 +24,9 @@ export default function RealEstateLinks({ city = "Ontario" }) {
   // Function to generate the correct URL based on city
   const getUrl = (path) => {
     if (city.toLowerCase() === "ontario") {
-      return `/resale/ontario/${path}`;
+      return `#/${path}`;
     }
-    return `/resale/ontario/${city.toLowerCase()}/${path}`;
+    return `#/${city.toLowerCase()}/${path}`;
   };
 
   return (
@@ -255,9 +255,7 @@ export default function RealEstateLinks({ city = "Ontario" }) {
               <ul className="text-sm space-y-1 px-0">
                 <li>
                   <Link
-                    href={`/resale/ontario/${cityName
-                      .toLowerCase()
-                      .replace(/ /g, "-")}/detached-homes-for-sale`}
+                    href="#"
                     className="text-black hover:underline"
                   >
                     Detached homes for sale in {cityName}
@@ -265,9 +263,7 @@ export default function RealEstateLinks({ city = "Ontario" }) {
                 </li>
                 <li>
                   <Link
-                    href={`/resale/ontario/${cityName
-                      .toLowerCase()
-                      .replace(/ /g, "-")}/semi-detached-homes-for-sale`}
+                    href="#"
                     className="text-black hover:underline"
                   >
                     Semi-Detached homes for sale in {cityName}
@@ -275,9 +271,7 @@ export default function RealEstateLinks({ city = "Ontario" }) {
                 </li>
                 <li>
                   <Link
-                    href={`/resale/ontario/${cityName
-                      .toLowerCase()
-                      .replace(/ /g, "-")}/townhomes-for-sale`}
+                    href="#"
                     className="text-black hover:underline"
                   >
                     Townhomes for sale in {cityName}
@@ -285,9 +279,7 @@ export default function RealEstateLinks({ city = "Ontario" }) {
                 </li>
                 <li>
                   <Link
-                    href={`/resale/ontario/${cityName
-                      .toLowerCase()
-                      .replace(/ /g, "-")}/condo-townhomes-for-sale`}
+                    href="#"
                     className="text-black hover:underline"
                   >
                     Condo Townhomes for sale in {cityName}
@@ -295,9 +287,7 @@ export default function RealEstateLinks({ city = "Ontario" }) {
                 </li>
                 <li>
                   <Link
-                    href={`/resale/ontario/${cityName
-                      .toLowerCase()
-                      .replace(/ /g, "-")}/condos-for-sale`}
+                    href="#"
                     className="text-black hover:underline"
                   >
                     Condos for sale in {cityName}
@@ -310,9 +300,7 @@ export default function RealEstateLinks({ city = "Ontario" }) {
               <ul className="text-sm space-y-1 px-0">
                 <li>
                   <Link
-                    href={`/resale/ontario/${cityName
-                      .toLowerCase()
-                      .replace(/ /g, "-")}/open-houses`}
+                    href="#"
                     className="text-black hover:underline"
                   >
                     Open houses in {cityName}
@@ -320,9 +308,7 @@ export default function RealEstateLinks({ city = "Ontario" }) {
                 </li>
                 <li>
                   <Link
-                    href={`/resale/ontario/${cityName
-                      .toLowerCase()
-                      .replace(/ /g, "-")}/price-reduced-homes`}
+                    href="#"
                     className="text-black hover:underline"
                   >
                     Price dropped homes in {cityName}
@@ -336,7 +322,7 @@ export default function RealEstateLinks({ city = "Ontario" }) {
         {/* View More Cities Link */}
         <div className="mt-4">
           <Link
-            href="/resale/ontario"
+            href="#"
             className="text-black font-medium flex items-center"
           >
             View More Cities →
