@@ -76,7 +76,7 @@ export default function PropertyCard({ property, index = 0 }) {
 
   return (
     <section className="relative transition-all duration-200 transform bg-white group rounded-2xl p-0 hover:shadow-lg hover:rounded-t-2xl hover:-translate-y-1 overflow-hidden">
-      <Link href={`/resale/listing/${streetAndMLS}`} className="text-black">
+      <Link href={`#/${streetAndMLS}`} className="text-black">
         <div className="lg:px-0 h-full w-full">
           <div className="flex flex-col overflow-hidden relative">
             <div className="h-36 sm:h-52 overflow-hidden relative">

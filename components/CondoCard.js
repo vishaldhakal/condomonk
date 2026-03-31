@@ -230,7 +230,7 @@ export default function CondoCard(props) {
             <DialogContent className="p-3 w-[80%] md:w-[30rem] max-h-fit z-[99999]">
               <div className="block">
                 <div className="flex flex-col items-center mb-4 md:mb-5">
-                  {/* <Image
+                  {/* <img
                     src="/contact-bottom-2.png"
                     alt="Real Estate Agent"
                     width={100}

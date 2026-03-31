@@ -2,7 +2,6 @@ import DeveloperCard from "@/components/DeveloperCard";
 import BottomContactForm from "@/components/BottomContactForm";
 import { notFound } from "next/navigation";
 import FixedContactButton from "@/components/FixedContactButton";
-import Image from "next/image";
 
 // Revalidate the page every hour
 export const revalidate = 3600;
@@ -108,7 +107,7 @@ export default async function Builders() {
       <section className="py-16 bg-white" id="mycontact">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-8">
-            <Image
+            <img
               src="/contact-bottom-2.png"
               alt="Contact Condomonk"
               width={200}

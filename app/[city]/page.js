@@ -33,7 +33,7 @@ async function getData(city, priceFilter = null) {
     } else if (priceFilter === "under-1.5-million") {
       url += "?price_starting_from=0&price_to=1500000";
     } else {
-      const [min, max] = priceFilter.split("-").map((p) => parseInt(p) * 1000);
+      const [min, max] = String(priceFilter).split("-").map((p) => parseInt(p) * 1000);
       url += `?price_starting_from=${min}&price_to=${max}`;
     }
   }
@@ -90,12 +90,12 @@ async function getAssignments(city) {
 // Helper functions
 const CapitalizeFirst = (city) => {
   return (
-    city.split("-")[0].charAt(0).toUpperCase() + city.split("-")[0].slice(1)
+    String(city).split("-")[0].charAt(0).toUpperCase() + String(city).split("-")[0].slice(1)
   );
 };
 
 function getCleanCity(city) {
-  return city.split("-homes-")[0];
+  return String(city).split("-homes-")[0];
 }
 
 function formatPriceFilter(filter) {
@@ -141,7 +141,7 @@ function getPriceFilter(city) {
     "under-1.5-million",
   ];
   for (const filter of priceFilters) {
-    if (city.endsWith(`-homes-${filter}`)) {
+    if (String(city).endsWith(`-homes-${filter}`)) {
       return filter;
     }
   }
@@ -293,28 +293,28 @@ export default async function CityPage({ params }) {
         If you are looking to buy resale homes, Condomonk is your trusted
         platform to find{" "}
         <Link
-          href={`/resale/ontario/${cleanCity}/homes-for-sale`}
+          href="#"
           className="text-slate-700 underline hover:text-slate-900"
         >
           1000+ homes for sale in {CapitalizeFirst(cleanCity)}.{" "}
         </Link>
         Whether you are looking to downsize to buy{" "}
         <Link
-          href={`/resale/ontario/${cleanCity}/townhomes-for-sale`}
+          href="#"
           className="text-slate-700 underline hover:text-slate-900"
         >
           townhomes for sale in {CapitalizeFirst(cleanCity)}
         </Link>{" "}
         or looking to buy{" "}
         <Link
-          href={`/resale/ontario/${cleanCity}/condos-for-sale`}
+          href="#"
           className="text-slate-700 underline hover:text-slate-900"
         >
           condos in {CapitalizeFirst(cleanCity)}
         </Link>{" "}
         for your family or browsing{" "}
         <Link
-          href={`/resale/ontario/${cleanCity}/detached-homes-for-sale`}
+          href="#"
           className="text-slate-700 underline hover:text-slate-900"
         >
           {CapitalizeFirst(cleanCity)} detached homes for sale
@@ -384,7 +384,7 @@ export default async function CityPage({ params }) {
               <div className="flex justify-start">
                 <PreconstructionFilter
                   cityName={CapitalizeFirst(params.city)}
-                  citySlug={params.city.split("-homes-")[0]}
+                  citySlug={String(params.city).split("-homes-")[0]}
                 />
               </div>
             </div>
@@ -626,7 +626,7 @@ export default async function CityPage({ params }) {
         {/* Contact Form */}
         <div className="py-16" id="contact">
           <div className="max-w-4xl mx-auto text-center">
-            <Image
+            <img
               src="/contact-bottom-2.png"
               alt="Contact bottom"
               width={300}
@@ -685,7 +685,7 @@ export default async function CityPage({ params }) {
 }
 
 // Static params generation for static site generation
-export async function generateStaticParams() {
+export async function generateStaticParams() { return [];
   const cities = await fetch("https://api.condomonk.ca/api/all-city").then(
     (res) => res.json()
   );

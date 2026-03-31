@@ -8,7 +8,6 @@ import Gallery from "@/components/Gallery";
 import Link from "next/link";
 import CustomModal from "@/components/Modal";
 import ExpandableContent from "@/components/ExpandableContent";
-import dynamic from "next/dynamic";
 import GoogleMap from "@/components/GoogleMap";
 import SocialMediaShare from "@/components/SocialMediaShare";
 import Neighbourhood from "@/components/Neighbourhood";
@@ -22,7 +21,7 @@ import Amenities from "@/components/Amenities";
 import AutoModalWrapper from "@/components/AutoModalWrapper";
 
 // Dynamically import the Map component with no SSR
-const Map = dynamic(() => import("@/components/Map"), { ssr: false });
+import Map from "@/components/Map";
 
 // Define your functions outside of the component
 async function getData(slug) {

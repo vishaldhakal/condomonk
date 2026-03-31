@@ -11,7 +11,7 @@ const Footer = ({ cities }) => {
   }
 
   // Check if we're on a resale page
-  const isResalePage = pathname.startsWith("/resale");
+  const isResalePage = false;
 
   return (
     <div className="pt-5">
@@ -30,52 +30,11 @@ const Footer = ({ cities }) => {
                     cities.map((city) => (
                       <li key={city.id} className="mb-2">
                         <Link
-                          href={
-                            isResalePage
-                              ? `/resale/ontario/${city.slug.toLowerCase()}/homes-for-sale`
-                              : `/${city.slug}`
-                          }
+                          href={`/${city.slug}/townhomes`}
                           className="hover:text-blue-600 transition-colors"
                         >
                           <span>
-                            {isResalePage
-                              ? `Homes for sale in ${city.name}`
-                              : `Pre construction homes in ${city.name}`}
-                          </span>
-                        </Link>
-                      </li>
-                    ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className=" mx-auto px-4">
-          <div className="max-w-6xl mx-auto pt-5 mt-0 md:mt-10">
-            <div className="space-y-4">
-              <h3 className="text-center font-bold text-2xl font-[var(--font-family2)]">
-                {isResalePage
-                  ? "Detached Homes for sale in Ontario"
-                  : "Pre construction townhomes in Canada"}
-              </h3>
-              <div className="text-center pt-2">
-                <ul className="grid grid-cols-1 md:grid-cols-4 gap-2 items-center justify-center text-xs">
-                  {cities &&
-                    cities.map((city) => (
-                      <li key={city.id} className="mb-2">
-                        <Link
-                          href={
-                            isResalePage
-                              ? `/resale/ontario/${city.slug.toLowerCase()}/detached-homes-for-sale`
-                              : `/${city.slug}/townhomes`
-                          }
-                          className="hover:text-blue-600 transition-colors"
-                        >
-                          <span>
-                            {isResalePage
-                              ? `Detached Homes for sale in ${city.name}`
-                              : `Pre construction townhomes in ${city.name}`}
+                            {`Pre construction townhomes in ${city.name}`}
                           </span>
                         </Link>
                       </li>
