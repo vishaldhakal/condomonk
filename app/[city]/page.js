@@ -150,15 +150,15 @@ function getPriceFilter(city) {
 
 // Metadata generation
 export async function generateMetadata({ params }, parent) {
-  const { city } = params;
+  const { city } = await params;
   const cleanCity = getCleanCity(city);
   const data = await getData(cleanCity);
 
   const title = !["calgary", "edmonton"].includes(city)
-    ? `120+ Pre construction Homes in ${CapitalizeFirst(cleanCity)}`
+    ? `120+ Pre construction Homes in ${CapitalizeFirst(cleanCity)} (2026)`
     : `${CapitalizeFirst(
         cleanCity
-      )} Pre Construction & New Homes For Sale | Condomonk`;
+      )} Pre Construction & New Homes For Sale (2026) | Condomonk`;
   const description = !["calgary", "edmonton"].includes(city)
     ? `120+ Pre Construction Homes & New Developments in ${CapitalizeFirst(
         cleanCity
@@ -180,7 +180,7 @@ export async function generateMetadata({ params }, parent) {
 
 // Main page component
 export default async function CityPage({ params }) {
-  const { city } = params;
+  const { city } = await params;
   const cleanCity = getCleanCity(city);
   const priceFilter = getPriceFilter(city);
 
@@ -351,9 +351,16 @@ export default async function CityPage({ params }) {
   return (
     <div className="pt-4 lg:pt-8 bg-white">
       {/* Add the CityPopup component */}
-      <CombinedPopupManager cityName={params.city} />
+      <CombinedPopupManager cityName={city} />
 
       <div className="max-w-[85.625rem] mx-auto px-4">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-sm text-gray-500 mb-4">
+          <Link href="/" className="hover:text-gray-800 transition-colors">Home</Link>
+          <span className="text-gray-400">/</span>
+          <span className="text-gray-900 font-medium">{CapitalizeFirst(cleanCity)}</span>
+        </nav>
+
         {/* Header Section */}
         <div className="flex flex-col ">
           <div className="flex">
@@ -383,8 +390,8 @@ export default async function CityPage({ params }) {
             <div className="hidden md:block sticky z-50 bg-white md:z-[999] top-0 py-1 md:mt-0">
               <div className="flex justify-start">
                 <PreconstructionFilter
-                  cityName={CapitalizeFirst(params.city)}
-                  citySlug={String(params.city).split("-homes-")[0]}
+                  cityName={CapitalizeFirst(city)}
+                  citySlug={String(city).split("-homes-")[0]}
                 />
               </div>
             </div>
@@ -572,47 +579,47 @@ export default async function CityPage({ params }) {
         <div className="flex justify-center items-center max-w-7xl mx-auto px-4 md:px-6 mt-10 mb-16">
           <div className="max-w-6xl mt-14">
             <h2 className="text-sm md:text-3xl text-left font-semibold leading-normal mb-4 text-gray-900">
-              Pre Construction Home in {CapitalizeFirst(params.city)} – Explore
+              Pre Construction Home in {CapitalizeFirst(city)} – Explore
               New Upcoming Projects, Prices Ranges & Floor Plans
             </h2>
 
             <p className="mb-2">
               Looking for the ideal pre construction home in{" "}
-              {CapitalizeFirst(params.city)}? You have found the right place.
-              The pre construction home market in {CapitalizeFirst(params.city)}{" "}
+              {CapitalizeFirst(city)}? You have found the right place.
+              The pre construction home market in {CapitalizeFirst(city)}{" "}
               is booming, with new projects going up in top neighbourhoods such
               as Seton, Belmont, and Downtown. Searching for a stylish condo or
               a big detached house, you can find more than{" "}
               {data.preconstructions.length}+ pre construction homes in{" "}
-              {CapitalizeFirst(params.city)} available on Condomonk.
+              {CapitalizeFirst(city)} available on Condomonk.
             </p>
 
             <p className="mb-2">
-              A pre construction home in {CapitalizeFirst(params.city)} provides
+              A pre construction home in {CapitalizeFirst(city)} provides
               the option to personalize your ideal space at competitive pricing
               with contemporary features. 1-bedroom to 3+ bedroom houses, the
               choices are unparalleled. Top builders are providing pre
-              construction houses in {CapitalizeFirst(params.city)} with
+              construction houses in {CapitalizeFirst(city)} with
               versatile floor plans, efficient designs, and family-orientated
               layouts to fit any lifestyle.
             </p>
 
             <p className="mb-2">
-              Investing in a {CapitalizeFirst(params.city)} pre construction
+              Investing in a {CapitalizeFirst(city)} pre construction
               home provides you with early availability of pricing, incentives,
               and the top units in emerging communities. Discover floor plans in
               precise detail, handover dates estimated, and builder portfolios —
               everything under one roof. Whether you're purchasing your first
-              home or growing your portfolio, a {CapitalizeFirst(params.city)}{" "}
+              home or growing your portfolio, a {CapitalizeFirst(city)}{" "}
               pre construction home is a sound decision.
             </p>
 
             <p className="mb-2">
               Begin your search now — view the newest listings for a pre
-              construction home in {CapitalizeFirst(params.city)}, compare
+              construction home in {CapitalizeFirst(city)}, compare
               projects, and speak with reliable local real estate professionals.
               Get first access to exclusive listings and find your dream pre
-              construction home in {CapitalizeFirst(params.city)} at Condomonk.
+              construction home in {CapitalizeFirst(city)} at Condomonk.
             </p>
           </div>
         </div>

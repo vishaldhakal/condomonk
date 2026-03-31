@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Nformatter from "./Nformatter";
 import { useRouter } from "next/navigation";
-import { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
 import CustomModal from "./Modal";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import SideContactForm from "./SideContactForm";
@@ -22,9 +22,9 @@ export default function CondoCard(props) {
     }
   }
   const city = props.city.name.toLowerCase();
-  // Generate a random number between 800 and 3500 for views
-  const randomViews = useMemo(() => {
-    return Math.floor(Math.random() * (3500 - 800 + 1)) + 800;
+  const [randomViews, setRandomViews] = useState(null);
+  useEffect(() => {
+    setRandomViews(Math.floor(Math.random() * (3500 - 800 + 1)) + 800);
   }, []);
 
   // // Minimal version for map infowindow
@@ -168,7 +168,7 @@ export default function CondoCard(props) {
               >
                 <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zm-8 4.5c-3.314 0-6.057-2.614-7.342-4.5C1.943 6.614 4.686 4 8 4s6.057 2.614 7.342 4.5C14.057 9.386 11.314 12 8 12zm0-7a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zm0 4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
               </svg>
-              {randomViews.toLocaleString()}
+              {randomViews?.toLocaleString()}
             </span>
           </span>
         </div>

@@ -10,18 +10,12 @@ import CustomModal from "@/components/Modal";
 import ExpandableContent from "@/components/ExpandableContent";
 import GoogleMap from "@/components/GoogleMap";
 import SocialMediaShare from "@/components/SocialMediaShare";
-import Neighbourhood from "@/components/Neighbourhood";
 import BannerPrecon from "@/components/BannerPrecon";
-import { FileText } from "lucide-react";
-import EssentialInfo from "@/components/EssentialInfo";
 import FloorPlans from "@/components/FloorPlans";
 import Newsletter from "@/components/Newsletter";
 import DepositStructure from "@/components/DepositStructure";
 import Amenities from "@/components/Amenities";
 import AutoModalWrapper from "@/components/AutoModalWrapper";
-
-// Dynamically import the Map component with no SSR
-import Map from "@/components/Map";
 
 // Define your functions outside of the component
 async function getData(slug) {
@@ -78,7 +72,8 @@ function generateProjectTypeUrl(projectType) {
   }
 }
 export async function generateMetadata({ params }, parent) {
-  const data = await getData(params.slug);
+  const { city, slug } = await params;
+  const data = await getData(slug);
 
   const projectName = data.preconstruction.project_name;
   const projectType = data.preconstruction.project_type || "Condos";
@@ -87,7 +82,7 @@ export async function generateMetadata({ params }, parent) {
   return {
     ...parent,
     alternates: {
-      canonical: `https://condomonk.ca/${params.city}/${params.slug}`,
+      canonical: `https://condomonk.ca/${city}/${slug}`,
     },
     metadataBase: new URL("https://condomonk.ca"),
     title: `${projectName} ${projectCity} | Book Today`,
@@ -98,22 +93,9 @@ export async function generateMetadata({ params }, parent) {
 }
 
 export default async function PropertyPage({ params }) {
-  const data = await getData(params.slug);
-  const related = await getRelatedData(params.city);
-
-  const newImages = (images) => {
-    let neImgs = [...images];
-    neImgs.forEach((image) => {
-      image.image = `https://api.condomonk.ca${image.image}`;
-    });
-    for (let i = images.length; i < 7; i++) {
-      neImgs.push({
-        id: 0,
-        image: "https://condomonk.ca/noimage.webp",
-      });
-    }
-    return neImgs;
-  };
+  const { city, slug } = await params;
+  const data = await getData(slug);
+  const related = await getRelatedData(city);
 
   const convDash = (add) => add.replace(/[\s,]/g, "-");
 
@@ -259,7 +241,7 @@ export default async function PropertyPage({ params }) {
                 <li className="flex items-center text-gray-600">
                   <span className="w-28 font-medium text-black">City:</span>
                   <Link
-                    href={`/${params.city}`}
+                    href={`/${city}`}
                     className="text-blue-600 hover:underline"
                   >
                     {data.preconstruction.city.name}
@@ -274,7 +256,7 @@ export default async function PropertyPage({ params }) {
                 <li className="flex items-center text-gray-600">
                   <span className="w-28 font-medium text-black">Type:</span>
                   <Link
-                    href={`/${params.city}/${generateProjectTypeUrl(
+                    href={`/${city}/${generateProjectTypeUrl(
                       data.preconstruction.project_type,
                     )}`}
                     className="text-blue-600 hover:underline"

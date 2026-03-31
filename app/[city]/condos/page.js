@@ -33,27 +33,29 @@ const CapitalizeFirst = (city) => {
 
 // Metadata generation
 export async function generateMetadata({ params }, parent) {
-  const data = await getData(params.city);
-  const cityName = CapitalizeFirst(params.city);
+  const { city } = await params;
+  const data = await getData(city);
+  const cityName = CapitalizeFirst(city);
 
   return {
     ...parent,
     alternates: {
-      canonical: `https://condomonk.ca/${params.city}/condos/`,
+      canonical: `https://condomonk.ca/${city}/condos/`,
     },
     metadataBase: new URL("https://condomonk.ca"),
-    title: !["calgary", "edmonton"].includes(params.city)
-      ? `${data.preconstructions.length}+ Pre Construction Condos in ${cityName}`
-      : `${CapitalizeFirst(cityName)} Pre Construction & New Condos For Sale | Condomonk`,
-    description: !["calgary", "edmonton"].includes(params.city)
+    title: !["calgary", "edmonton"].includes(city)
+      ? `${data.preconstructions.length}+ Pre Construction Condos in ${cityName} (2026)`
+      : `${CapitalizeFirst(cityName)} Pre Construction & New Condos For Sale (2026) | Condomonk`,
+    description: !["calgary", "edmonton"].includes(city)
       ? `Explore ${data.preconstructions.length}+ pre construction condos in ${cityName}. Find affordable 1-4 bedroom new construction condos with updated floor plans & pricing.`
       : `Find new condos for sale in ${CapitalizeFirst(cityName)} | Check out plans, pricing, and availability`,
   };
 }
 
 export default async function CondosPage({ params }) {
-  const data = await getData(params.city);
-  const cityName = CapitalizeFirst(params.city);
+  const { city } = await params;
+  const data = await getData(city);
+  const cityName = CapitalizeFirst(city);
 
   // Filter projects by status
   const sellingProjects = data.preconstructions.filter(
@@ -64,15 +66,15 @@ export default async function CondosPage({ params }) {
   );
 
   const generateTitle = () => {
-    if (params.city == "calgary" || params.city == "edmonton") {
-      return `Pre Construction & New Condos for sale in ${CapitalizeFirst(params.city)}, AB`;
+    if (city == "calgary" || city == "edmonton") {
+      return `Pre Construction & New Condos for sale in ${CapitalizeFirst(city)}, AB`;
     }
-    return `Pre Construction Condos in ${CapitalizeFirst(params.city)}`;
+    return `Pre Construction Condos in ${CapitalizeFirst(city)}`;
   };
 
   const generateSubtitle = () => {
-    if (params.city == "calgary" || params.city == "edmonton") {
-      return `100+ new condos in ${CapitalizeFirst(params.city)}, AB | Explore Floor Plans, Pricing & Availability. Condomonk has over 120 new construction condos from trusted builders in ${CapitalizeFirst(params.city)}, AB. If you are looking to buy new  homes, Condomonk is your trusted platform to find 1000+  homes for sale in ${CapitalizeFirst(params.city)}. Whether you are looking to downsize to buy townhomes for sale in ${CapitalizeFirst(params.city)} or looking to buy condos in ${CapitalizeFirst(params.city)} for your family or browsing ${CapitalizeFirst(params.city)} detached homes for sale, our platform is updated daily with latest resale listings every hour. For new development homes, easily filter by number of bedrooms (1 to 4+), project type, and construction status from budget-friendly condo to a pre construction homes, contact us to connect you to the most exciting real estate opportunities in ${CapitalizeFirst(params.city)}.`;
+    if (city == "calgary" || city == "edmonton") {
+      return `100+ new condos in ${CapitalizeFirst(city)}, AB | Explore Floor Plans, Pricing & Availability. Condomonk has over 120 new construction condos from trusted builders in ${CapitalizeFirst(city)}, AB. If you are looking to buy new  homes, Condomonk is your trusted platform to find 1000+  homes for sale in ${CapitalizeFirst(city)}. Whether you are looking to downsize to buy townhomes for sale in ${CapitalizeFirst(city)} or looking to buy condos in ${CapitalizeFirst(city)} for your family or browsing ${CapitalizeFirst(city)} detached homes for sale, our platform is updated daily with latest resale listings every hour. For new development homes, easily filter by number of bedrooms (1 to 4+), project type, and construction status from budget-friendly condo to a pre construction homes, contact us to connect you to the most exciting real estate opportunities in ${CapitalizeFirst(city)}.`;
     }
     return (
       <>
@@ -127,6 +129,15 @@ export default async function CondosPage({ params }) {
   return (
     <div className="bg-white">
       <div className="max-w-[85.625rem] mx-auto px-4 py-12">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-sm text-gray-500 mb-4">
+          <Link href="/" className="hover:text-gray-800 transition-colors">Home</Link>
+          <span className="text-gray-400">/</span>
+          <Link href={`/${city}`} className="hover:text-gray-800 transition-colors">{cityName}</Link>
+          <span className="text-gray-400">/</span>
+          <span className="text-gray-900 font-medium">Condos</span>
+        </nav>
+
         {/* Header Section */}
         <div className="space-y-6">
           <h1 className="text-xl md:text-4xl font-bold text-gray-900">
@@ -139,7 +150,7 @@ export default async function CondosPage({ params }) {
 
           {/* PreconstructionFilter Component */}
           <div className="mt-6">
-            <PreconstructionFilter cityName={cityName} citySlug={params.city} />
+            <PreconstructionFilter cityName={cityName} citySlug={city} />
           </div>
         </div>
 
@@ -162,7 +173,7 @@ export default async function CondosPage({ params }) {
               <div className="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 <RightSidebarLinks
                   cityName={cityName}
-                  citySlug={params.city}
+                  citySlug={city}
                   projectTypes={["Condo", "Townhome", "Detached"]}
                   assignmentsCount={0}
                 />

@@ -23,10 +23,11 @@ export default function HorizontalCondoCard(props) {
 
   const city = props.city.name.toLowerCase();
 
-  // Generate a random number between 800 and 3500 for views
+  // Derive a stable view count from the project id to avoid hydration mismatch
   const randomViews = useMemo(() => {
-    return Math.floor(Math.random() * (3500 - 800 + 1)) + 800;
-  }, []);
+    const seed = props.id || 1;
+    return 800 + ((seed * 1637) % (3500 - 800 + 1));
+  }, [props.id]);
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 hover:border-gray-400 transition-all duration-300 overflow-hidden mb-4 transform-gpu hover:scale-[1.01]">

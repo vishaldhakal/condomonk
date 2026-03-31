@@ -1,4 +1,3 @@
-import Link from "next/link";
 import HomeSearch from "@/components/HomeSearch";
 import RealEstateLinks from "@/components/RealEstateLinks";
 

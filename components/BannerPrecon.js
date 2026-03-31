@@ -88,9 +88,7 @@ export default function BannerPrecon({
               <img
                 src="/standline.webp"
                 alt="People waiting in line"
-                fill
-                className="object-cover hover:scale-105 transition-transform duration-500"
-                priority="true"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
             </div>
@@ -165,9 +163,7 @@ export default function BannerPrecon({
                   <img
                     src={`https://api.condomonk.ca${developer.image}`}
                     alt={`${developer.name} Logo`}
-                    fill
-                    className="object-contain hover:scale-105 transition-transform duration-300"
-                    priority="true"
+                    className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
                   />
                 </div>
               )}
