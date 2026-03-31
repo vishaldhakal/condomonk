@@ -75,7 +75,7 @@ const Navbar = ({ cities, transparent }) => {
 
 
   return (
-    <nav className="w-full bg-white z-[9999] border-b border-gray-100">
+    <nav className="w-full bg-white z-[200] border-b border-gray-100">
       <div className={`max-w-7xl mx-auto px-4`}>
         <div className="flex md:justify-between justify-center md:items-center items-between h-12 md:h-16">
           {/* Left section - Logo and Search */}
@@ -202,8 +202,8 @@ const Navbar = ({ cities, transparent }) => {
         <div
           className={`${
             isScrolled && !pathname.includes("/listings")
-              ? " top-0 left-0 right-0 z-50"
-              : "sticky top-0 z-50"
+              ? " top-0 left-0 right-0 z-[200]"
+              : "sticky top-0 z-[200]"
           } bg-white `}
         >
           <div className="mx-auto px-4 md:py-2">

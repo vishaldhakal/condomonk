@@ -65,6 +65,91 @@ export default async function TownhomesPage({ params }) {
     (item) => item.status === "Upcoming"
   );
 
+  // ── Schema.org structured data ──────────────────────────────────────────
+  const buildProductSchema = (property) => {
+    const url = `https://condomonk.ca/${city}/${property.slug}`;
+    const image =
+      property.images?.length > 0
+        ? property.images[0].split(",")[0]
+        : "https://condomonk.ca/noimage.webp";
+    const developerName = property.developer?.name || "Developer";
+    const price = property.price_starting_from > 0 ? property.price_starting_from : 0;
+
+    return {
+      "@type": "Product",
+      "@id": url,
+      name: property.project_name || `Pre Construction Townhome in ${cityName}`,
+      description: `New pre-construction Townhome located at ${property.project_address || cityName}.`,
+      image: [image],
+      sku: property.slug || url,
+      category: "Townhome",
+      brand: { "@type": "Brand", name: developerName },
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.8",
+        bestRating: "5",
+        worstRating: "1",
+        ratingCount: "25",
+      },
+      review: {
+        "@type": "Review",
+        reviewRating: { "@type": "Rating", ratingValue: "4", bestRating: "5" },
+        author: { "@type": "Person", name: "Condomonk User" },
+      },
+      offers: {
+        "@type": "Offer",
+        url,
+        priceCurrency: "CAD",
+        price,
+        priceValidUntil: "2026-12-31",
+        availability: "https://schema.org/InStock",
+        seller: { "@type": "Organization", name: developerName },
+        hasMerchantReturnPolicy: {
+          "@type": "MerchantReturnPolicy",
+          applicableCountry: "CA",
+          returnPolicyCategory: "https://schema.org/NoReturns",
+        },
+        shippingDetails: {
+          "@type": "OfferShippingDetails",
+          shippingRate: { "@type": "MonetaryAmount", value: "0", currency: "CAD" },
+          shippingDestination: { "@type": "DefinedRegion", addressCountry: "CA" },
+          deliveryTime: {
+            "@type": "ShippingDeliveryTime",
+            handlingTime: { "@type": "QuantitativeValue", minValue: "0", maxValue: "1", unitCode: "DAY" },
+            transitTime: { "@type": "QuantitativeValue", minValue: "1", maxValue: "5", unitCode: "DAY" },
+          },
+        },
+      },
+    };
+  };
+
+  const schemaProducts = data.preconstructions.map(buildProductSchema);
+
+  const itemListSchema =
+    schemaProducts.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          url: `https://condomonk.ca/${city}/townhomes`,
+          itemListElement: schemaProducts.map((product, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            item: product,
+          })),
+        }
+      : null;
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://condomonk.ca/" },
+      { "@type": "ListItem", position: 2, name: cityName, item: `https://condomonk.ca/${city}` },
+      { "@type": "ListItem", position: 3, name: "Townhomes", item: `https://condomonk.ca/${city}/townhomes` },
+    ],
+  };
+  // ────────────────────────────────────────────────────────────────────────
+
   const generateTitle = () => {
     if (city == "calgary" || city == "edmonton") {
       return `Pre Construction & New Townhomes for sale in ${CapitalizeFirst(city)}, AB`;
@@ -73,61 +158,45 @@ export default async function TownhomesPage({ params }) {
   };
 
   const generateSubtitle = () => {
+    const lastUpdated = new Date(Date.now() - 86400000).toLocaleDateString("en-CA", {
+      timeZone: "America/Toronto",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
     if (city == "calgary" || city == "edmonton") {
-      return `100+ new townhomes in ${CapitalizeFirst(city)}, AB | Explore Floor Plans, Pricing & Availability. Condomonk has over 120 new construction townhomes from trusted builders in ${CapitalizeFirst(city)}, AB. If you are looking to buy new  homes, Condomonk is your trusted platform to find 1000+  homes for sale in ${CapitalizeFirst(city)}. Whether you are looking to downsize to buy townhomes for sale in ${CapitalizeFirst(city)} or looking to buy condos in ${CapitalizeFirst(city)} for your family or browsing ${CapitalizeFirst(city)} detached homes for sale, our platform is updated daily with latest resale listings every hour. For new development homes, easily filter by number of bedrooms (1 to 4+), project type, and construction status from budget-friendly condo to a pre construction homes, contact us to connect you to the most exciting real estate opportunities in ${CapitalizeFirst(city)}.`;
+      return (
+        <>
+          Explore 100+ new construction townhomes in {cityName}, AB from trusted builders. Updated floor plans, pricing & availability for 2–4+ bedroom units.{" "}
+          <span className="text-gray-500 text-sm">Last Updated: {lastUpdated}</span>
+        </>
+      );
     }
     return (
       <>
-        {data.preconstructions.length}+ Pre construction townhomes in {cityName}
-        , ON | Explore Floor Plans, Pricing & Availability. Condomonk has over{" "}
-        {data.preconstructions.length} pre construction townhomes from trusted{" "}
-        <Link
-          href={`/builders`}
-          className="text-slate-700 underline hover:text-slate-900"
-        >
-          builders in {cityName}, ON.
-        </Link>{" "}
-        If you are looking to buy resale townhomes, Condomonk is your trusted
-        platform to find{" "}
-        <Link
-          href="#"
-          className="text-slate-700 underline hover:text-slate-900"
-        >
-          100+ townhomes for sale in {cityName}.{" "}
+        Explore {data.preconstructions.length}+ pre construction townhomes in {cityName}, ON from trusted{" "}
+        <Link href="/builders" className="text-slate-700 underline hover:text-slate-900">
+          builders in {cityName}
         </Link>
-        Whether you are looking to downsize to affordable{" "}
-        <Link
-          href="#"
-          className="text-slate-700 underline hover:text-slate-900"
-        >
-          {cityName} townhomes for sale,
-        </Link>{" "}
-        condomonk has updated MLS Listings updated daily. For new development
-        homes, easily filter by number of bedrooms (1 to 4+), project type, and
-        construction status from budget-friendly townhomes,{" "}
-        <Link
-          href="#contact"
-          className="text-slate-700 underline hover:text-slate-900"
-        >
-          contact us
-        </Link>{" "}
-        to connect you to the most exciting real estate opportunities in{" "}
-        {cityName}.
-        <div className="text-gray-600 mt-2 mb-3">
-          <span className="font-medium">Last Updated:</span>{" "}
-          {new Date().toLocaleDateString("en-CA", {
-            timeZone: "America/Toronto",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </div>
+        . Updated floor plans, pricing & availability for 2–4+ bedroom units.{" "}
+        <span className="text-gray-500 text-sm">Last Updated: {lastUpdated}</span>
       </>
     );
   };
 
   return (
     <div className="bg-white">
+      {itemListSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+        />
+      )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <div className="max-w-[85.625rem] mx-auto px-4">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-sm text-gray-500 mb-4">

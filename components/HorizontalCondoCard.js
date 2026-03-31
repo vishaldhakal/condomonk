@@ -1,8 +1,7 @@
-"use client";
 import Link from "next/link";
 import Nformatter from "./Nformatter";
 import { useMemo } from "react";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 import SideContactForm from "./SideContactForm";
 
 export default function HorizontalCondoCard(props) {
@@ -165,7 +164,10 @@ export default function HorizontalCondoCard(props) {
                     Request Price List
                   </button>
                 </DialogTrigger>
-                <DialogContent className="p-6 w-[90%] md:w-[32rem] max-h-fit z-[99999]">
+                <DialogContent className="p-6 w-[90%] md:w-[32rem] max-h-fit">
+                  <DialogTitle className="sr-only">
+                    {props.project_name} - Request Price List
+                  </DialogTitle>
                   <div className="block">
                     <div className="flex flex-col items-center mb-6">
                       <h2 className="text-xl md:text-2xl text-gray-800 mb-2 text-center">

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import HomeCarousel from "@/components/HomeCarousel";
 import BottomContactForm from "@/components/BottomContactForm";
 import HomeSearch from "@/components/HomeSearch";
 import BlogCard from "@/components/BlogCard";
@@ -7,25 +6,7 @@ import { fetchAllBlogPosts } from "@/api/blogs";
 import BestExperience from "@/components/BestExperience";
 import Newsletter from "@/components/Newsletter";
 import HomebabaAdvantage from "@/components/HomebabaAdvantage";
-import { getBarrieCondos } from "@/lib/properties";
-import { getMississaugaRentals } from "@/lib/properties";
-import PropertyCard from "@/components/PropertyCard";
 import BuyDubai from "@/components/BuyDubai";
-
-const getCityLinks = () => [
-  { name: "Brampton" },
-  { name: "Mississauga" },
-  { name: "Innisfil" },
-  { name: "Orillia" },
-  { name: "Newmarket" },
-  { name: "Toronto" },
-  { name: "Hamilton" },
-  { name: "Oakville" },
-  { name: "Burlington" },
-  { name: "Milton" },
-  { name: "Ajax" },
-  { name: "Oshawa" },
-];
 
 async function getBlogs() {
   return await fetchAllBlogPosts();
@@ -86,7 +67,7 @@ export default async function Home() {
                 ].map((city) => (
                   <Link
                     key={city}
-                    href="#"
+                    href={`/${city.toLowerCase()}`}
                     className="inline-flex items-center px-2 py-1.5 rounded-full text-sm 
                 bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 
                 hover:text-gray-900 hover:border-gray-300 transition-colors duration-200 

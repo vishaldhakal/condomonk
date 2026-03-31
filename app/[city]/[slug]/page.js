@@ -104,11 +104,6 @@ export default async function PropertyPage({ params }) {
     return `Low $ ${Nformatter(price, 2)}`;
   };
 
-  const checkPricing = (price) => {
-    if (!price || parseInt(price) === 0) return "Pricing not available";
-    return `Starting from ${formatPrice(price)}`;
-  };
-
   return (
     <div className="min-h-screen bg-white">
       <FixedContactButton />
@@ -316,18 +311,9 @@ export default async function PropertyPage({ params }) {
                 />
               </div>
               <div className="prose max-w-none text-gray-600 rich-text">
-                <ExpandableContent
-                  content={data.preconstruction.description}
-                  maxWords={100}
-                />
+                <ExpandableContent content={data.preconstruction.description} />
               </div>
             </div>
-
-            {/* Essential Info Section */}
-            {/* <EssentialInfo
-              projectName={data.preconstruction.project_name}
-              city={data.preconstruction.city.name}
-            /> */}
 
             {/* Deposit Structure Section */}
             <DepositStructure

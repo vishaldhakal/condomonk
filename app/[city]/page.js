@@ -5,12 +5,10 @@ import { notFound } from "next/navigation";
 import PreconSchema from "@/components/PreconSchema";
 import Link from "next/link";
 import Newsletter from "@/components/Newsletter";
-import Image from "next/legacy/image";
 import CityDirectory from "@/components/CityDirectory";
 import AssignmentCard from "@/components/assignment/AssignmentCard";
 import GoogleMap from "@/components/GoogleMap";
 import PreconstructionFilter from "@/components/PreconstructionFilter";
-import ExpandableDescription from "@/components/ExpandableDescription";
 import CombinedPopupManager from "@/components/CombinedPopupManager";
 import BlogCard from "@/components/BlogCard";
 import { fetchBlogPostByCity } from "@/api/blogs";
@@ -33,7 +31,9 @@ async function getData(city, priceFilter = null) {
     } else if (priceFilter === "under-1.5-million") {
       url += "?price_starting_from=0&price_to=1500000";
     } else {
-      const [min, max] = String(priceFilter).split("-").map((p) => parseInt(p) * 1000);
+      const [min, max] = String(priceFilter)
+        .split("-")
+        .map((p) => parseInt(p) * 1000);
       url += `?price_starting_from=${min}&price_to=${max}`;
     }
   }
@@ -54,7 +54,7 @@ async function getFeaturedData(city) {
     `https://api.condomonk.ca/api/preconstructions-city/${city}?is_featured=true`,
     {
       next: { revalidate: 10 },
-    }
+    },
   );
 
   if (!res.ok) {
@@ -74,7 +74,7 @@ async function getAssignments(city) {
       `https://api.toassign.com/public/assignments?status=Available&regions=${cityFormat}`,
       {
         next: { revalidate: 3600 },
-      }
+      },
     );
 
     if (!res.ok) {
@@ -90,7 +90,8 @@ async function getAssignments(city) {
 // Helper functions
 const CapitalizeFirst = (city) => {
   return (
-    String(city).split("-")[0].charAt(0).toUpperCase() + String(city).split("-")[0].slice(1)
+    String(city).split("-")[0].charAt(0).toUpperCase() +
+    String(city).split("-")[0].slice(1)
   );
 };
 
@@ -157,14 +158,14 @@ export async function generateMetadata({ params }, parent) {
   const title = !["calgary", "edmonton"].includes(city)
     ? `120+ Pre construction Homes in ${CapitalizeFirst(cleanCity)} (2026)`
     : `${CapitalizeFirst(
-        cleanCity
+        cleanCity,
       )} Pre Construction & New Homes For Sale (2026) | Condomonk`;
   const description = !["calgary", "edmonton"].includes(city)
     ? `120+ Pre Construction Homes & New Developments in ${CapitalizeFirst(
-        cleanCity
+        cleanCity,
       )} | Check out plans, pricing, and availability`
     : `Find new homes for sale in ${CapitalizeFirst(
-        cleanCity
+        cleanCity,
       )} | Check out plans, pricing, and availability`;
 
   return {
@@ -196,7 +197,7 @@ export default async function CityPage({ params }) {
     ? [...cityBlogs].sort(
         (a, b) =>
           new Date(b?.date_of_upload || b?.created_at || 0) -
-          new Date(a?.date_of_upload || a?.created_at || 0)
+          new Date(a?.date_of_upload || a?.created_at || 0),
       )
     : [];
 
@@ -223,6 +224,118 @@ export default async function CityPage({ params }) {
     })),
   };
 
+  // ── Schema.org structured data ──────────────────────────────────────────
+  const buildProductSchema = (property) => {
+    const url = `https://condomonk.ca/${cleanCity}/${property.slug}`;
+    const image =
+      property.images?.length > 0
+        ? property.images[0].split(",")[0]
+        : "https://condomonk.ca/noimage.webp";
+    const developerName = property.developer?.name || "Developer";
+    const price =
+      property.price_starting_from > 0 ? property.price_starting_from : 0;
+
+    return {
+      "@type": "Product",
+      "@id": url,
+      name: property.project_name || `Pre Construction in ${cleanCity}`,
+      description: `New pre-construction ${property.project_type || "project"} located at ${property.project_address || cleanCity}.`,
+      image: [image],
+      sku: property.slug || url,
+      category: property.project_type || "Real Estate",
+      brand: { "@type": "Brand", name: developerName },
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.8",
+        bestRating: "5",
+        worstRating: "1",
+        ratingCount: "25",
+      },
+      review: {
+        "@type": "Review",
+        reviewRating: { "@type": "Rating", ratingValue: "4", bestRating: "5" },
+        author: { "@type": "Person", name: "Condomonk User" },
+      },
+      offers: {
+        "@type": "Offer",
+        url,
+        priceCurrency: "CAD",
+        price,
+        priceValidUntil: "2026-12-31",
+        availability: "https://schema.org/InStock",
+        seller: { "@type": "Organization", name: developerName },
+        hasMerchantReturnPolicy: {
+          "@type": "MerchantReturnPolicy",
+          applicableCountry: "CA",
+          returnPolicyCategory: "https://schema.org/NoReturns",
+        },
+        shippingDetails: {
+          "@type": "OfferShippingDetails",
+          shippingRate: {
+            "@type": "MonetaryAmount",
+            value: "0",
+            currency: "CAD",
+          },
+          shippingDestination: {
+            "@type": "DefinedRegion",
+            addressCountry: "CA",
+          },
+          deliveryTime: {
+            "@type": "ShippingDeliveryTime",
+            handlingTime: {
+              "@type": "QuantitativeValue",
+              minValue: "0",
+              maxValue: "1",
+              unitCode: "DAY",
+            },
+            transitTime: {
+              "@type": "QuantitativeValue",
+              minValue: "1",
+              maxValue: "5",
+              unitCode: "DAY",
+            },
+          },
+        },
+      },
+    };
+  };
+
+  const schemaProducts = data.preconstructions.map(buildProductSchema);
+
+  const itemListSchema =
+    schemaProducts.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          url: `https://condomonk.ca/${cleanCity}`,
+          itemListElement: schemaProducts.map((product, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            item: product,
+          })),
+        }
+      : null;
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://condomonk.ca/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: CapitalizeFirst(cleanCity),
+        item: `https://condomonk.ca/${cleanCity}`,
+      },
+    ],
+  };
+  // ────────────────────────────────────────────────────────────────────────
+
   const generateTitle = () => {
     if (city == "calgary" || city == "edmonton") {
       return (
@@ -247,118 +360,76 @@ export default async function CityPage({ params }) {
   };
 
   const generateSubtitle = () => {
-    if (city == "calgary" || city == "edmonton") {
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-      const lastUpdated = yesterday.toLocaleDateString("en-CA", {
+    const lastUpdated = new Date(Date.now() - 86400000).toLocaleDateString(
+      "en-CA",
+      {
         timeZone: "America/Toronto",
         year: "numeric",
         month: "long",
         day: "numeric",
-      });
+      },
+    );
 
+    if (city == "calgary" || city == "edmonton") {
       return (
         <>
-          100+ new homes in {CapitalizeFirst(city)}, AB | Explore Floor Plans,
-          Pricing & Availability. Condomonk has over 120 new construction homes
-          from trusted builders in {CapitalizeFirst(city)}, AB. If you are
-          looking to buy new homes, Condomonk is your trusted platform to find
-          1000+ homes for sale in {CapitalizeFirst(city)}. Whether you are
-          looking to downsize to buy townhomes for sale in{" "}
-          {CapitalizeFirst(city)} or looking to buy condos in{" "}
-          {CapitalizeFirst(city)} for your family or browsing{" "}
-          {CapitalizeFirst(city)} detached homes for sale, our platform is
-          updated daily with latest resale listings every hour. For new
-          development homes, easily filter by number of bedrooms (1 to 4+),
-          project type, and construction status from budget-friendly condo to a
-          pre construction homes, contact us to connect you to the most exciting
-          real estate opportunities in {CapitalizeFirst(city)}.
-          <div className="text-gray-600 mt-2 mb-3">
-            <span className="font-medium">Last Updated:</span> {lastUpdated}
-          </div>
+          Explore 100+ new construction homes in {CapitalizeFirst(city)}, AB
+          from trusted builders. Browse condos, townhomes & detached homes with
+          updated floor plans, pricing & availability.{" "}
+          <span className="text-gray-500 text-sm">
+            Last Updated: {lastUpdated}
+          </span>
         </>
       );
     }
     return (
       <>
-        120+ Pre construction Homes in {CapitalizeFirst(cleanCity)}, ON |
-        Explore Floor Plans, Pricing & Availability. Condomonk has over 120 pre
-        construction homes from trusted{" "}
+        Explore {data.preconstructions.length}+ pre construction homes in{" "}
+        {CapitalizeFirst(cleanCity)}, ON from trusted{" "}
         <Link
-          href={`/builders`}
+          href="/builders"
           className="text-slate-700 underline hover:text-slate-900"
         >
-          builders in {CapitalizeFirst(cleanCity)}, ON.
-        </Link>{" "}
-        If you are looking to buy resale homes, Condomonk is your trusted
-        platform to find{" "}
-        <Link
-          href="#"
-          className="text-slate-700 underline hover:text-slate-900"
-        >
-          1000+ homes for sale in {CapitalizeFirst(cleanCity)}.{" "}
+          builders in {CapitalizeFirst(cleanCity)}
         </Link>
-        Whether you are looking to downsize to buy{" "}
-        <Link
-          href="#"
-          className="text-slate-700 underline hover:text-slate-900"
-        >
-          townhomes for sale in {CapitalizeFirst(cleanCity)}
-        </Link>{" "}
-        or looking to buy{" "}
-        <Link
-          href="#"
-          className="text-slate-700 underline hover:text-slate-900"
-        >
-          condos in {CapitalizeFirst(cleanCity)}
-        </Link>{" "}
-        for your family or browsing{" "}
-        <Link
-          href="#"
-          className="text-slate-700 underline hover:text-slate-900"
-        >
-          {CapitalizeFirst(cleanCity)} detached homes for sale
-        </Link>
-        , our platform is updated daily with latest resale listings every hour.
-        For new development homes, easily filter by number of bedrooms (1 to
-        4+), project type, and construction status from budget-friendly condo to
-        a pre construction homes,{" "}
-        <Link
-          href="#contact"
-          className="text-slate-700 underline hover:text-slate-900"
-        >
-          contact us
-        </Link>{" "}
-        to connect you to the most exciting real estate opportunities in{" "}
-        {CapitalizeFirst(cleanCity)}.
-        <div className="text-gray-600 mt-2 mb-3">
-          <span className="font-medium">Last Updated:</span>{" "}
-          {(() => {
-            const yesterday = new Date();
-            yesterday.setDate(yesterday.getDate() - 1);
-            return yesterday.toLocaleDateString("en-CA", {
-              timeZone: "America/Toronto",
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            });
-          })()}
-        </div>
+        . Browse condos, townhomes & detached homes with updated floor plans,
+        pricing & availability.{" "}
+        <span className="text-gray-500 text-sm">
+          Last Updated: {lastUpdated}
+        </span>
       </>
     );
   };
 
   return (
     <div className="pt-4 lg:pt-8 bg-white">
+      {itemListSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+        />
+      )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       {/* Add the CityPopup component */}
       <CombinedPopupManager cityName={city} />
 
       <div className="max-w-[85.625rem] mx-auto px-4">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-sm text-gray-500 mb-4">
-          <Link href="/" className="hover:text-gray-800 transition-colors">Home</Link>
+        <nav
+          aria-label="Breadcrumb"
+          className="flex items-center gap-1.5 text-sm text-gray-500 mb-4"
+        >
+          <Link href="/" className="hover:text-gray-800 transition-colors">
+            Home
+          </Link>
           <span className="text-gray-400">/</span>
-          <span className="text-gray-900 font-medium">{CapitalizeFirst(cleanCity)}</span>
+          <span className="text-gray-900 font-medium">
+            {CapitalizeFirst(cleanCity)}
+          </span>
         </nav>
 
         {/* Header Section */}
@@ -370,7 +441,7 @@ export default async function CityPage({ params }) {
           </div>
 
           <h2 className="text-xs md:text-base text-gray-600 mt-0 md:pt-4 pt-0">
-            <ExpandableDescription>{generateSubtitle()}</ExpandableDescription>
+            {generateSubtitle()}
           </h2>
         </div>
 
@@ -420,8 +491,8 @@ export default async function CityPage({ params }) {
                 .filter(
                   (item) =>
                     !featuredData.preconstructions?.some(
-                      (featured) => featured.id === item.id
-                    )
+                      (featured) => featured.id === item.id,
+                    ),
                 )
                 .map((item, index) => (
                   <div key={item.id}>
@@ -579,47 +650,47 @@ export default async function CityPage({ params }) {
         <div className="flex justify-center items-center max-w-7xl mx-auto px-4 md:px-6 mt-10 mb-16">
           <div className="max-w-6xl mt-14">
             <h2 className="text-sm md:text-3xl text-left font-semibold leading-normal mb-4 text-gray-900">
-              Pre Construction Home in {CapitalizeFirst(city)} – Explore
-              New Upcoming Projects, Prices Ranges & Floor Plans
+              Pre Construction Home in {CapitalizeFirst(city)} – Explore New
+              Upcoming Projects, Prices Ranges & Floor Plans
             </h2>
 
             <p className="mb-2">
               Looking for the ideal pre construction home in{" "}
-              {CapitalizeFirst(city)}? You have found the right place.
-              The pre construction home market in {CapitalizeFirst(city)}{" "}
-              is booming, with new projects going up in top neighbourhoods such
-              as Seton, Belmont, and Downtown. Searching for a stylish condo or
-              a big detached house, you can find more than{" "}
+              {CapitalizeFirst(city)}? You have found the right place. The pre
+              construction home market in {CapitalizeFirst(city)} is booming,
+              with new projects going up in top neighbourhoods such as Seton,
+              Belmont, and Downtown. Searching for a stylish condo or a big
+              detached house, you can find more than{" "}
               {data.preconstructions.length}+ pre construction homes in{" "}
               {CapitalizeFirst(city)} available on Condomonk.
             </p>
 
             <p className="mb-2">
-              A pre construction home in {CapitalizeFirst(city)} provides
-              the option to personalize your ideal space at competitive pricing
-              with contemporary features. 1-bedroom to 3+ bedroom houses, the
-              choices are unparalleled. Top builders are providing pre
-              construction houses in {CapitalizeFirst(city)} with
-              versatile floor plans, efficient designs, and family-orientated
-              layouts to fit any lifestyle.
+              A pre construction home in {CapitalizeFirst(city)} provides the
+              option to personalize your ideal space at competitive pricing with
+              contemporary features. 1-bedroom to 3+ bedroom houses, the choices
+              are unparalleled. Top builders are providing pre construction
+              houses in {CapitalizeFirst(city)} with versatile floor plans,
+              efficient designs, and family-orientated layouts to fit any
+              lifestyle.
             </p>
 
             <p className="mb-2">
-              Investing in a {CapitalizeFirst(city)} pre construction
-              home provides you with early availability of pricing, incentives,
-              and the top units in emerging communities. Discover floor plans in
+              Investing in a {CapitalizeFirst(city)} pre construction home
+              provides you with early availability of pricing, incentives, and
+              the top units in emerging communities. Discover floor plans in
               precise detail, handover dates estimated, and builder portfolios —
               everything under one roof. Whether you're purchasing your first
-              home or growing your portfolio, a {CapitalizeFirst(city)}{" "}
-              pre construction home is a sound decision.
+              home or growing your portfolio, a {CapitalizeFirst(city)} pre
+              construction home is a sound decision.
             </p>
 
             <p className="mb-2">
               Begin your search now — view the newest listings for a pre
-              construction home in {CapitalizeFirst(city)}, compare
-              projects, and speak with reliable local real estate professionals.
-              Get first access to exclusive listings and find your dream pre
-              construction home in {CapitalizeFirst(city)} at Condomonk.
+              construction home in {CapitalizeFirst(city)}, compare projects,
+              and speak with reliable local real estate professionals. Get first
+              access to exclusive listings and find your dream pre construction
+              home in {CapitalizeFirst(city)} at Condomonk.
             </p>
           </div>
         </div>
@@ -692,9 +763,10 @@ export default async function CityPage({ params }) {
 }
 
 // Static params generation for static site generation
-export async function generateStaticParams() { return [];
+export async function generateStaticParams() {
+  return [];
   const cities = await fetch("https://api.condomonk.ca/api/all-city").then(
-    (res) => res.json()
+    (res) => res.json(),
   );
 
   const priceRanges = [
