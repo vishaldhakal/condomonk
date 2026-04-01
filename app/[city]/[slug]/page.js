@@ -71,6 +71,8 @@ function generateProjectTypeUrl(projectType) {
     return "";
   }
 }
+
+// [city]/[slug] : page.js
 export async function generateMetadata({ params }, parent) {
   const { city, slug } = await params;
   const data = await getData(slug);

@@ -31,7 +31,7 @@ const CapitalizeFirst = (city) => {
   );
 };
 
-// Metadata generation
+// townohme : pages.js
 export async function generateMetadata({ params }, parent) {
   const { city } = await params;
   const data = await getData(city);
@@ -43,12 +43,21 @@ export async function generateMetadata({ params }, parent) {
       canonical: `https://condomonk.ca/${city}/townhomes/`,
     },
     metadataBase: new URL("https://condomonk.ca"),
+    // title: !["calgary", "edmonton"].includes(city)
+    //   ? `${data.preconstructions.length}+ Pre Construction Townhomes in ${cityName} (2026)`
+    //   : `${CapitalizeFirst(cityName)} Pre Construction & New Townhomes For Sale (2026) | Condomonk`,
+    // description: !["calgary", "edmonton"].includes(city)
+    //   ? `Explore ${data.preconstructions.length}+ pre construction townhomes in ${cityName}. Find affordable new construction townhomes with updated floor plans & pricing.`
+    //   : `Find new Townhomes for sale in ${CapitalizeFirst(cityName)} | Check out plans, pricing, and availability`,
+
     title: !["calgary", "edmonton"].includes(city)
-      ? `${data.preconstructions.length}+ Pre Construction Townhomes in ${cityName} (2026)`
-      : `${CapitalizeFirst(cityName)} Pre Construction & New Townhomes For Sale (2026) | Condomonk`,
-    description: !["calgary", "edmonton"].includes(city)
-      ? `Explore ${data.preconstructions.length}+ pre construction townhomes in ${cityName}. Find affordable new construction townhomes with updated floor plans & pricing.`
-      : `Find new Townhomes for sale in ${CapitalizeFirst(cityName)} | Check out plans, pricing, and availability`,
+  ? `New Pre Construction Townhomes in ${cityName}, Ontario (2026) | Condomonk`
+  : `${cityName} Pre Construction & New Townhomes For Sale (2026) | Condomonk`,
+description: !["calgary", "edmonton"].includes(city)
+  ? `Browse ${data.preconstructions.length}+ pre construction townhomes in ${cityName}, Ontario for 2026. Explore new townhomes with pricing, floor plans & VIP access. Updated daily.`
+  : `Find new Townhomes for sale in ${cityName} | Check out plans, pricing, and availability`,
+
+
   };
 }
 
