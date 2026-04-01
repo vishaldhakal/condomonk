@@ -1,7 +1,7 @@
 import Link from "next/link";
 import HomeSearch from "@/components/HomeSearch";
 import RealEstateLinks from "@/components/RealEstateLinks";
-
+import Preconstruction from "@/components/Preconstruction";
 async function getCities() {
   const res = await fetch("https://api.condomonk.ca/api/all-city", {
     next: { revalidate: 10 },
@@ -35,9 +35,7 @@ export default async function NotFound() {
           </div>
         </div>
       </div>
-      <div className="py-20 max-w-7xl mx-auto">
-        <RealEstateLinks />
-      </div>
+      
     </>
   );
 }

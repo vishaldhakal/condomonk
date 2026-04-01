@@ -79,7 +79,8 @@ export default function RightSidebarLinks({
       {/* Browse by Type */}
       <div className="bg-white rounded-lg p-4">
         <h2 className={sectionHeader}>
-          Pre Construction Homes in {cityName} by Type
+          {/* Pre Construction Homes in {cityName} by Type */}
+          {cityName} Pre Construction Homes by Property Type
         </h2>
         <div className="space-y-1 ps-3">
           <h3 className="text-sm font-normal">
@@ -103,7 +104,8 @@ export default function RightSidebarLinks({
       {/* Browse by Price */}
       <div className="bg-white rounded-lg p-4">
         <h2 className={sectionHeader}>
-          Pre Construction Homes in {cityName} by Price
+          {/* Pre Construction Homes in {cityName} by Price */}
+          {cityName} New Homes by Budget — Find Your Price Range
         </h2>
         <div className="space-y-1 ps-3">
           {priceRanges.map((range) => (

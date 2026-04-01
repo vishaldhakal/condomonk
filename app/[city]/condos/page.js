@@ -31,7 +31,7 @@ const CapitalizeFirst = (city) => {
   );
 };
 
-// Metadata generation
+// (condos) : pages.js
 export async function generateMetadata({ params }, parent) {
   const { city } = await params;
   const data = await getData(city);
@@ -43,12 +43,18 @@ export async function generateMetadata({ params }, parent) {
       canonical: `https://condomonk.ca/${city}/condos/`,
     },
     metadataBase: new URL("https://condomonk.ca"),
+    // title: !["calgary", "edmonton"].includes(city)
+    //   ? `${data.preconstructions.length}+ Pre Construction Condos in ${cityName} (2026)`
+    //   : `${CapitalizeFirst(cityName)} Pre Construction & New Condos For Sale (2026) | Condomonk`,
+    // description: !["calgary", "edmonton"].includes(city)
+    //   ? `Explore ${data.preconstructions.length}+ pre construction condos in ${cityName}. Find affordable 1-4 bedroom new construction condos with updated floor plans & pricing.`
+    //   : `Find new condos for sale in ${CapitalizeFirst(cityName)} | Check out plans, pricing, and availability`,
     title: !["calgary", "edmonton"].includes(city)
-      ? `${data.preconstructions.length}+ Pre Construction Condos in ${cityName} (2026)`
-      : `${CapitalizeFirst(cityName)} Pre Construction & New Condos For Sale (2026) | Condomonk`,
-    description: !["calgary", "edmonton"].includes(city)
-      ? `Explore ${data.preconstructions.length}+ pre construction condos in ${cityName}. Find affordable 1-4 bedroom new construction condos with updated floor plans & pricing.`
-      : `Find new condos for sale in ${CapitalizeFirst(cityName)} | Check out plans, pricing, and availability`,
+  ? `New Pre Construction Condos in ${cityName}, Ontario (2026) | Condomonk`
+  : `${cityName} Pre Construction & New Condos For Sale (2026) | Condomonk`,
+     description: !["calgary", "edmonton"].includes(city)
+  ? `Browse ${data.preconstructions.length}+ pre construction condos in ${cityName}, Ontario for 2026. Explore new condos with pricing, floor plans & VIP access. Updated daily.`
+  : `Find new condos for sale in ${cityName} | Check out plans, pricing, and availability`,
   };
 }
 

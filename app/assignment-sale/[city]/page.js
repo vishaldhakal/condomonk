@@ -29,8 +29,13 @@ async function getAssignments(page = 1, city = "") {
 
 export default async function AssignmentSalePage({ params, searchParams }) {
   // Get the current page from the URL query parameters or default to page 1
-  const currentPage = searchParams?.page ? parseInt(searchParams.page) : 1;
-  const city = params.city;
+  // const currentPage = searchParams?.page ? parseInt(searchParams.page) : 1;
+  // const city = params.city;
+  const { city } = await params;
+  const { page } = await searchParams;
+  const currentPage = page ? parseInt(page) : 1;
+
+  if (!city) return null; 
   // Fetch data with pagination
   const assignments = await getAssignments(currentPage, city);
 
@@ -165,7 +170,9 @@ export default async function AssignmentSalePage({ params, searchParams }) {
 }
 
 export async function generateMetadata({ params }) {
-  const city = params.city;
+  // const city = params.city;
+   const { city } = await params;
+   if (!city) return {};
   let cityFormat = city
     .replace(/-/g, " ")
     .replace(/\b\w/g, (char) => char.toUpperCase());

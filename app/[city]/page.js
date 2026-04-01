@@ -149,24 +149,32 @@ function getPriceFilter(city) {
   return null;
 }
 
-// Metadata generation
+//[city] : pages.js 
 export async function generateMetadata({ params }, parent) {
   const { city } = await params;
   const cleanCity = getCleanCity(city);
   const data = await getData(cleanCity);
 
+  // const title = !["calgary", "edmonton"].includes(city)
+  //   ? `120+ Pre construction Homes in ${CapitalizeFirst(cleanCity)} (2026)`
+  //   : `${CapitalizeFirst(
+  //       cleanCity,
+  //     )} Pre Construction & New Homes For Sale (2026) | Condomonk`;
+  // const description = !["calgary", "edmonton"].includes(city)
+  //   ? `120+ Pre Construction Homes & New Developments in ${CapitalizeFirst(
+  //       cleanCity,
+  //     )} | Check out plans, pricing, and availability`
+  //   : `Find new homes for sale in ${CapitalizeFirst(
+  //       cleanCity,
+  //     )} | Check out plans, pricing, and availability`;
+
   const title = !["calgary", "edmonton"].includes(city)
-    ? `120+ Pre construction Homes in ${CapitalizeFirst(cleanCity)} (2026)`
-    : `${CapitalizeFirst(
-        cleanCity,
-      )} Pre Construction & New Homes For Sale (2026) | Condomonk`;
+  ? `New Pre Construction Homes in ${CapitalizeFirst(cleanCity)}, Ontario (2026) | Condomonk`
+  : `${CapitalizeFirst(cleanCity)} Pre Construction & New Homes For Sale (2026) | Condomonk`;
+
   const description = !["calgary", "edmonton"].includes(city)
-    ? `120+ Pre Construction Homes & New Developments in ${CapitalizeFirst(
-        cleanCity,
-      )} | Check out plans, pricing, and availability`
-    : `Find new homes for sale in ${CapitalizeFirst(
-        cleanCity,
-      )} | Check out plans, pricing, and availability`;
+  ? `Browse 120+ pre construction homes in ${CapitalizeFirst(cleanCity)}, Ontario for 2026. Explore new condos, townhomes & detached homes with pricing, floor plans & VIP access. Updated daily.`
+  : `Find new homes for sale in ${CapitalizeFirst(cleanCity)} | Check out plans, pricing, and availability`;
 
   return {
     ...parent,
@@ -340,21 +348,29 @@ export default async function CityPage({ params }) {
     if (city == "calgary" || city == "edmonton") {
       return (
         <>
+        <h2>
           Pre Construction & New Homes for sale in{" "}
           <span className="text-teal-600">{CapitalizeFirst(city)}</span>, AB
+        </h2>
         </>
       );
     }
     return priceFilter ? (
       <>
+        <h2>
+
         Pre construction Homes in{" "}
         <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>{" "}
         {formatPriceFilter(priceFilter)}
+        </h2>
       </>
     ) : (
       <>
-        120+ Pre Construction Homes in{" "}
-        <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>
+       <h2>
+        Pre Construction Homes in{" "}
+        <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>,
+        Ontario(2026) —{" "}120+ New Projects
+         </h2>
       </>
     );
   };
@@ -605,7 +621,8 @@ export default async function CityPage({ params }) {
           <div className="pt-32">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
-                Latest News and Insight in {CapitalizeFirst(cleanCity)}
+                {/* Latest News and Insight in {CapitalizeFirst(cleanCity)} */}
+                Why Buy Pre Construction in {CapitalizeFirst(cleanCity)}, Ontario?
               </h3>
               <Link
                 href={`/blogs/category/${cleanCity}`}

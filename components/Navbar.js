@@ -1,3 +1,4 @@
+//component Navbar.js
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -75,15 +76,15 @@ const Navbar = ({ cities, transparent }) => {
 
 
   return (
-    <nav className="w-full bg-white z-[200] border-b border-gray-100">
-      <div className={`max-w-7xl mx-auto px-4`}>
+    <nav className="w-full bg-white z-[200] border-b border-gray-100 ">
+      <div className="w-full max-w-7xl mx-auto px-4">
         <div className="flex md:justify-between justify-center md:items-center items-between h-12 md:h-16">
           {/* Left section - Logo and Search */}
           <div className="flex items-center gap-8">
             <Link href="/" className="text-xl font-semibold">
               Condomonk
             </Link>
-            <div className="hidden md:block md:w-[400px] ">
+            <div className="hidden md:block md:w-[400px] min-w-0 ">
               <ProjectSearch
                 searchType={isPreconstructionPage ? "preconstruction" : "sale"}
                 cityName={cityName}
@@ -206,10 +207,12 @@ const Navbar = ({ cities, transparent }) => {
               : "sticky top-0 z-[200]"
           } bg-white `}
         >
-          <div className="mx-auto px-4 md:py-2">
+          <div className="w-full px-4 md:py-2 pb-6">
             <ProjectSearch
               searchType={isPreconstructionPage ? "preconstruction" : "sale"}
               cityName={cityName}
+              customInputClasses="rounded-r-full"
+              buttonClasses="rounded-l-full"
             />
           </div>
         </div>

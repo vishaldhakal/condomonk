@@ -10,6 +10,7 @@ import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 import { allcities } from "@/datas/cities";
 import LoadingOverlay from "@/components/LoadingOverlay";
+import NotifyPopup from "@/components/NotifyPopup";
 
 const inter = Inter({ subsets: ["cyrillic"] });
 
@@ -165,6 +166,7 @@ export default function RootLayout({ children }) {
             <GoogleAnalytics />
             <main className="flex-grow">{children}</main>
           </Providers>
+          <NotifyPopup/>
           <Footer cities={cities}></Footer>
           {/* <CommunityPopup /> */}
         </div>

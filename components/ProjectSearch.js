@@ -1,3 +1,4 @@
+//component projectSearch.js
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
@@ -416,27 +417,31 @@ const SearchWithAutocomplete = ({
   };
 
   // Apply different classes based on whether this is the homepage or not
+  // const inputClasses = isHomepage
+  //   ? `w-full px-6 py-3 text-sm rounded-r-full border border-gray-200 focus:outline-none focus:ring-1 focus:ring-teal-500 bg-white ${customInputClasses}`
+  //   : `w-full px-6 py-3 text-sm text-black bg-white border ${!searchTypeOption ? "rounded-md" : "border-l-0 rounded-r-full"} border-gray-200 focus:outline-none placeholder:text-gray-400 focus:ring-1 focus:ring-teal-500`;
+
   const inputClasses = isHomepage
-    ? `w-full px-6 py-3 text-sm rounded-r-md border border-gray-200 focus:outline-none focus:ring-1 focus:ring-teal-500 bg-white ${customInputClasses}`
-    : `w-full px-6 py-3 text-sm text-black bg-white border ${!searchTypeOption ? "rounded-md" : "border-l-0 rounded-r-md"} border-gray-200 focus:outline-none placeholder:text-gray-400 focus:ring-1 focus:ring-teal-500`;
+  ? `w-full px-6 py-3 text-sm rounded-full border border-gray-200 focus:outline-none focus:ring-1 focus:ring-teal-500 bg-white ${customInputClasses}`
+  : `w-full px-6 py-3 text-sm text-black bg-white border rounded-full border-gray-200 focus:outline-none placeholder:text-gray-400 focus:ring-1 focus:ring-teal-500 ${customInputClasses}`;
 
   const placeholderText = localCityName
     ? localCityName
     : isHomepage
-      ? "Enter location, neighborhood, or property"
+      ? "Enter location or property"
       : "Search for a city or project...";
 
   return (
-    <div className={`relative ${isHomepage ? "w-full" : "w-[380px]"}`}>
+    <div className={`relative ${isHomepage ? "w-full" : "w-full max-w-[380px]"}`}>
       <div className="relative flex text-xs ">
         <div className="relative ">
-          {searchTypeOption && (
+          {/* {searchTypeOption && (
             <button
-              className="h-full px-4 py-3 text-white font-medium rounded-l-md bg-teal-700 flex items-center gap-2 cursor-default"
+              className="h-full px-4 py-3 text-white font-medium rounded-l-full bg-teal-700 flex items-center gap-2 cursor-default"
             >
               Pre Construction
             </button>
-          )}
+          )} */}
         </div>
         <div className="flex-1 relative">
           <input
@@ -449,7 +454,11 @@ const SearchWithAutocomplete = ({
             onFocus={handleFocus}
             onBlur={handleBlur}
             ref={inputRef}
+            placeholder={placeholderText}
           />
+
+
+
           {/* <X className="fa-solid fa-magnifying-glass absolute left-2 top-1/2 -translate-y-1/2 text-gray-400 text-lg" /> */}
           {/* {searchTerm && (
             <div className="">
@@ -461,7 +470,8 @@ const SearchWithAutocomplete = ({
               </button>
             </div>
           )} */}
-          {!searchTerm && localCityName && (
+          
+          {/* {!searchTerm && localCityName && (
             <div className="absolute inset-y-0 left-2 h-[80%] top-1 flex items-center px-2 text-gray-500 transition-colors w-fit text-base">
               {placeholderText}
               <button
@@ -473,7 +483,8 @@ const SearchWithAutocomplete = ({
                 <X className="w-4" />
               </button>
             </div>
-          )}
+          )} */}
+
         </div>
       </div>
 
