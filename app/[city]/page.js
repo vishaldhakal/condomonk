@@ -366,10 +366,10 @@ export default async function CityPage({ params }) {
       </>
     ) : (
       <>
-       <h2>
-        Pre Construction Homes in{" "}
-        <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>,
-        Ontario(2026) —{" "}120+ New Projects
+        <h2>
+         Pre Construction Homes in{" "}
+         <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>,
+         Ontario(2026) 
          </h2>
       </>
     );
