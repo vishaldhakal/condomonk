@@ -18,7 +18,7 @@ export default function BlogCard({ blog }) {
   const imageUrl = getImageUrl(blog.news_thumbnail);
 
   return (
-    <div className="relative my-3 md:my-0 rounded-lg shadow-sm overflow-hidden bg-white">
+    <div className="relative my-3 md:my-0 rounded-lg  overflow-hidden bg-white">
       <div className="relative w-full aspect-video">
         <Link href={`/blogs/${blog.slug}`} className="block h-full">
           {imageUrl ? (

@@ -12,7 +12,7 @@ const Hero = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <img
-          src="/hero.jpg"
+          src="/hero-bg-1.jpg"
           alt="Halton Region Real Estate"
           className="h-full w-full object-cover object-center brightness-[0.85]"
         />
@@ -25,7 +25,7 @@ const Hero = () => {
 {/* container */}
 
 
-          <div className="space-y-4">
+          <div className="space-y-2">
             <h1 
               className="font-sans text-[clamp(2.5rem,8vw,4rem)] font-extrabold tracking-tight text-white leading-[1.1]"
               style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5), 0px 0px 20px rgba(0,0,0,0.3)' }}
@@ -64,10 +64,16 @@ const Hero = () => {
                   <Link
                     key={city}
                     href={`/${city.toLowerCase()}`}
-                    className="inline-flex items-center px-2 py-1.5 rounded-full text-sm 
-                bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 
-                hover:text-gray-900 hover:border-gray-300 transition-colors duration-200 
-                shadow-sm hover:shadow"
+                //     className="inline-flex items-center px-2 py-1.5 rounded-full text-sm 
+                // bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 
+                // hover:text-gray-900 hover:border-gray-300 transition-colors duration-200 
+                // shadow-sm hover:shadow"
+                className="inline-flex items-center 
+  px-1.5 py-1 text-xs 
+  sm:px-2 sm:py-1.5 sm:text-sm 
+  rounded-full bg-white border border-gray-200 text-gray-600 
+  hover:bg-gray-50 hover:text-gray-900 hover:border-gray-300 
+  transition-colors duration-200 shadow-sm hover:shadow"
                   >
                     {city}
                   </Link>
@@ -76,7 +82,7 @@ const Hero = () => {
 
 
               {/* Scroll Indicator */}
-              <div className="mt-16 mb-4 animate-bounce">
+              {/* <div className="mt-16 mb-4 animate-bounce">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6 mx-auto text-gray-400"
@@ -91,7 +97,7 @@ const Hero = () => {
                     d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
                   />
                 </svg>
-              </div>
+              </div> */}
 
           </div>
 

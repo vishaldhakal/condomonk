@@ -256,11 +256,11 @@ export default async function Home() {
       </div>
 
       {/* Price Dropped Homes Section */}
-      <section className="bg-white py-20">
+      {/* <section className="bg-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-8">
-            {/* Left Section */}
-            <div className="flex flex-col justify-center space-y-6 max-w-lg">
+            Left Section */}
+            {/* <div className="flex flex-col justify-center space-y-6 max-w-lg">
               <div className="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -329,10 +329,10 @@ export default async function Home() {
                   </Link>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             {/* Right Section - House Image with Price Tags */}
-            <div className="relative">
+            {/* <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-xl">
                 <img
                   src="/pexels-bg.jpeg"
@@ -425,11 +425,13 @@ export default async function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
+
+
 
       <div className="py-10 bg-white"></div>
 
-      <BuyDubai />
+      {/* <BuyDubai /> */}
 
       <section className="max-w-6xl mx-auto px-4 py-20">
         <div className="text-center mb-4">
