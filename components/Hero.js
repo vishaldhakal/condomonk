@@ -33,10 +33,10 @@ const Hero = () => {
               Home for everyone
             </h1>
             <h2 
-              className="text-lg sm:text-xl md:text-2xl font-medium text-white/90 leading-relaxed"
+              className="text-lg sm:text-xl md:text-2xl font-medium text-white leading-relaxed"
               style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.5)' }}
             >
-              Leading Real Estate Homes Platform in Canada.
+              Pre-construction homes.
             </h2>
           </div>
 
