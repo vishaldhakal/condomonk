@@ -25,8 +25,11 @@ async function getAssignment(id) {
 }
 
 export async function generateMetadata({ params }) {
-  const ass = await getAssignment(params.id);
-  const assignment = ass.data;
+  const { city, id } = await params;
+  if (!id) return { title: "Assignment Not Found | Condomonk" };
+
+  const ass = await getAssignment(id);
+  const assignment = ass?.data;
 
   if (!assignment) {
     return {
@@ -50,16 +53,19 @@ export async function generateMetadata({ params }) {
       images: assignment.image1 ? [{ url: assignment.image1 }] : [],
     },
     alternates: {
-      canonical: `https://condomonk.ca/assignment-sale/${params.city}/${params.id}`,
+      canonical: `https://condomonk.ca/assignment-sale/${city}/${id}`,
     },
   };
 }
 
 export default async function AssignmentDetailPage({ params }) {
-  const ass = await getAssignment(params.id);
-  const assignment = ass.data;
+  const { city, id } = await params;
+  if (!id) return null;
 
-  let aid = params.id.split("-");
+  const ass = await getAssignment(id);
+  const assignment = ass?.data;
+
+  let aid = id.split("-");
   let nmid = aid[aid.length - 1];
 
   if (!assignment) {
@@ -82,16 +88,15 @@ export default async function AssignmentDetailPage({ params }) {
     );
   }
 
-  // Extract property type from unit_type for related assignments
   const propertyType =
     assignment.unit_type?.includes("Condo") ||
-    assignment.unit_type?.includes("1B") ||
-    assignment.unit_type?.includes("2B") ||
-    assignment.unit_type?.includes("3B")
+      assignment.unit_type?.includes("1B") ||
+      assignment.unit_type?.includes("2B") ||
+      assignment.unit_type?.includes("3B")
       ? "Condo"
       : assignment.unit_type?.includes("Town")
-      ? "Townhouse"
-      : "Condo";
+        ? "Townhouse"
+        : "Condo";
 
   return (
     <main>
@@ -113,7 +118,7 @@ export default async function AssignmentDetailPage({ params }) {
         }
       >
         <AssignmentRelated
-          currentAssignmentId={parseInt(params.nmid)}
+          currentAssignmentId={parseInt(nmid)}
           region={assignment.region}
           propertyType={propertyType}
         />

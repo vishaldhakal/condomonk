@@ -101,10 +101,7 @@ const AssignmentDetail = ({ assignment }) => {
                 <img
                   src={assignment.image1}
                   alt={`${assignment.project_name} - Main Image`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  priority="true"
+                  className="object-cover w-full h-full"
                 />
               ) : (
                 <div className="h-full w-full bg-gray-100 flex items-center justify-center">

@@ -2,7 +2,7 @@ import AssignmentGrid from "@/components/assignment/AssignmentGrid";
 import AssignmentStats from "@/components/assignment/AssignmentStats";
 import ContactForm from "@/components/ContactForm";
 import PaginationControls from "@/components/assignment/PaginationControls";
-
+import NotifyPopup from "@/components/NotifyPopup";
 async function getAssignments(page = 1) {
   try {
     const res = await fetch(
@@ -45,6 +45,8 @@ export default async function AssignmentSalePage({ searchParams }) {
     "Discover the best deals on price-reduced assignments in the Greater Toronto Area.";
 
   return (
+    <>
+       <NotifyPopup />
     <main className="pt-10 md:pt-20">
       <AssignmentGrid
         assignments={assignments.data}
@@ -86,8 +88,12 @@ export default async function AssignmentSalePage({ searchParams }) {
           defaultMessage={`I am interested in the ${title} assignment in Ontario. Please send me more information.`}
         />
       </div>
+      
     </main>
-  );
+
+    
+    </>
+     );
 }
 
 export async function generateMetadata() {

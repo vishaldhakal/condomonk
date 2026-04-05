@@ -13,6 +13,7 @@ import CombinedPopupManager from "@/components/CombinedPopupManager";
 import BlogCard from "@/components/BlogCard";
 import { fetchBlogPostByCity } from "@/api/blogs";
 
+
 // Data fetching functions
 async function getData(city, priceFilter = null) {
   let url = `https://api.condomonk.ca/api/preconstructions-city/${city}`;
