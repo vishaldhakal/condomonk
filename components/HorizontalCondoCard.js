@@ -37,7 +37,7 @@ export default function HorizontalCondoCard(props) {
             <img
               loading="lazy"
               src={
-                props.image.image
+                props.image?.image
                   ? `https://api.condomonk.ca${props.image.image}`
                   : "/noimage.webp"
               }
