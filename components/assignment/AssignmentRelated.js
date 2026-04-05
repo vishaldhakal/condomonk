@@ -24,9 +24,10 @@ const AssignmentRelated = ({ currentAssignmentId, region, propertyType }) => {
         const data = await response.json();
 
         // Filter out the current assignment and limit to 3 related assignments
-        const filtered = data
-          .filter((assignment) => assignment.id !== currentAssignmentId)
-          .slice(0, 3);
+        const assignments = data.data || data || [];
+        const filtered = assignments
+             .filter((assignment) => assignment.id !== currentAssignmentId)
+             .slice(0, 3);
 
         setRelatedAssignments(filtered);
       } catch (error) {

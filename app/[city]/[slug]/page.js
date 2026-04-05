@@ -156,7 +156,7 @@ export default async function PropertyPage({ params }) {
               {/* Project Title Section */}
               <div className="md:mt-4 mt-0 mb-2">
                 <div className="flex items-center gap-3 md:mb-4 mb-2">
-                  <h1 className="text-4xl leading-none text-black font-black whitespace-nowrap overflow-hidden text-ellipsis">
+                  <h1 className="text-4xl md:text-4xl leading-tight text-black font-black">
                     {data.preconstruction.project_name}
                   </h1>
                   {data.preconstruction.is_featured == true && (

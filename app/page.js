@@ -10,6 +10,7 @@ import Newsletter from "@/components/Newsletter";
 import HomebabaAdvantage from "@/components/HomebabaAdvantage";
 import BuyDubai from "@/components/BuyDubai";
 import Hero from "@/components/Hero";
+import NotifyPopup from "@/components/NotifyPopup";
 
 async function getBlogs() {
   return await fetchAllBlogPosts();
@@ -639,6 +640,7 @@ export default async function Home() {
           </div>
         </div>
       </div>
+      <NotifyPopup />
       <div className="pt-5 mt-5"></div>
       <Newsletter />
     </>
