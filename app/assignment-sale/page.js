@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import AssignmentGrid from "@/components/assignment/AssignmentGrid";
 import AssignmentStats from "@/components/assignment/AssignmentStats";
 import ContactForm from "@/components/ContactForm";
