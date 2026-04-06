@@ -100,3 +100,16 @@
     top: -3px;
   }
 }
+
+.rich-text table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rich-text td,
+.rich-text th {
+  min-width: 100px;
+  white-space: nowrap;
+}

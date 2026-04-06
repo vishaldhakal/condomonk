@@ -43,13 +43,21 @@ export default function BlogCard({ blog }) {
         </div>
       </div>
       <Link href={`/blogs/${blog.slug}`} className="block text-decoration-none">
-        <div className="relative p-4">
+        {/* <div className="relative p-4">
           <h5 className="font-medium md:text-lg text-md text-gray-900 mb-4 line-clamp-2 leading-tight">
             {blog.news_title}
           </h5>
           <div className="absolute bottom-0 mb-3 text-sm text-gray-500">
             Posted {dayjs(blog?.date_of_upload).format("MMMM DD, YYYY")}
           </div>
+        </div> */}
+        <div className="p-4 flex flex-col gap-2">
+            <h5 className="font-medium md:text-lg text-md text-gray-900 line-clamp-2 leading-tight">
+               {blog.news_title}
+            </h5>
+            <div className="text-sm text-gray-500">
+                Posted {dayjs(blog?.date_of_upload).format("MMMM DD, YYYY")}
+            </div>
         </div>
       </Link>
     </div>

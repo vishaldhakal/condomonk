@@ -1,3 +1,4 @@
+//app/blogs/[blogDetail]/page.js
 import React from "react";
 import { fetchBlogPostByCity, fetchBlogPostBySlug } from "@/api/blogs";
 import { endPoints } from "@/api/endpoints";
@@ -7,21 +8,52 @@ import BottomContactForm from "@/components/BottomContactForm";
 import SocialMediaShare from "@/components/SocialMediaShare";
 import BlogCard from "@/components/BlogCard";
 import Breadcrumb from "@/components/Breadcrumb";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }) {
-  const blogSlug = params?.blogDetail;
-  const blog = await fetchBlogPostBySlug(blogSlug);
+  // const blogSlug = params?.blogDetail;
+  // const blog = await fetchBlogPostBySlug(blogSlug);
+
+  // return {
+  //   title: blog.news_title,
+  //   description: blog.news_description?.slice(0, 160).replace(/<[^>]*>/g, ""),
+  //   alternates: {
+  //     canonical: `https://condomonk.ca/blogs/${blogSlug}`,
+  //   },
+  //   openGraph: {
+  //     title: blog.news_title,
+  //     description: blog.news_description?.slice(0, 160).replace(/<[^>]*>/g, ""),
+  //     url: `https://condomonk.ca/blogs/${blogSlug}`,
+  //     images: [
+  //       {
+  //         url: endPoints.baseURL + blog.news_thumbnail,
+  //         width: 1200,
+  //         height: 630,
+  //         alt: blog.news_title,
+  //       },
+  //     ],
+  //   },
+  // };
+   const { blogDetail } = await params;  // ← await params
+  const blog = await fetchBlogPostBySlug(blogDetail);
+
+  if (!blog) {  // ← null check
+    return {
+      title: "Blog Not Found | Condomonk",
+      description: "The requested blog post could not be found.",
+    };
+  }
 
   return {
     title: blog.news_title,
     description: blog.news_description?.slice(0, 160).replace(/<[^>]*>/g, ""),
     alternates: {
-      canonical: `https://condomonk.ca/blogs/${blogSlug}`,
+      canonical: `https://condomonk.ca/blogs/${blogDetail}`,
     },
     openGraph: {
       title: blog.news_title,
       description: blog.news_description?.slice(0, 160).replace(/<[^>]*>/g, ""),
-      url: `https://condomonk.ca/blogs/${blogSlug}`,
+      url: `https://condomonk.ca/blogs/${blogDetail}`,
       images: [
         {
           url: endPoints.baseURL + blog.news_thumbnail,
@@ -52,13 +84,36 @@ function RelatedBlogs({ blogs }) {
 }
 
 export default async function BlogDetails({ params }) {
-  const blogSlug = params?.blogDetail;
-  const blog = await fetchBlogPostBySlug(blogSlug);
+  // const blogSlug = params?.blogDetail;
+  // // const blog = await fetchBlogPostBySlug(blogSlug);
+  // // Wrap in try/catch and return notFound() or a fallback
+  // try {
+  //       const blog = await fetchBlogPostBySlug(blogSlug);
+  // // render page
+  // } catch (error) {
+  //    console.error("Blog fetch failed:", error);
+  //    notFound(); // shows your not-found page instead of crashing
+  // }
+  // const relatedBlogPosts = await fetchBlogPostByCity(blog.city.slug);
+
+  // const filteredBlogPosts = relatedBlogPosts.filter(
+  //   (relatedBlog) => blog.slug !== relatedBlog.slug
+  // );
+   const { blogDetail } = await params;  // ← await params
+  
+  const blog = await fetchBlogPostBySlug(blogDetail);
+  
+  if (!blog) {
+    notFound(); // ← handle null here
+  }
+
+  // now blog is guaranteed to exist below this line
   const relatedBlogPosts = await fetchBlogPostByCity(blog.city.slug);
 
   const filteredBlogPosts = relatedBlogPosts.filter(
     (relatedBlog) => blog.slug !== relatedBlog.slug
   );
+
 
   return (
     <div className="min-h-screen bg-white">
@@ -142,20 +197,24 @@ export default async function BlogDetails({ params }) {
           <section className="mt-8">
             <div className="relative w-full aspect-[16/9] mb-8">
               <img
-                src={endPoints.baseURL + blog.news_thumbnail}
-                alt={blog.news_title}
-                fill
-                className="object-cover rounded-lg w-full h-full"
-                priority="true"
+                  src={endPoints.baseURL + blog.news_thumbnail}
+                  alt={blog.news_title}
+                  className="object-cover rounded-lg w-full h-full"
               />
             </div>
 
-            <div
+            {/* <div
               className="prose prose-sm md:prose-base lg:prose-lg max-w-none prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-gray-600 prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-img:rounded-lg [&_table]:!border [&_table]:!border-collapse [&_table]:!border-solid [&_table]:!border-black [&_th]:!border [&_th]:!border-solid [&_th]:!border-black [&_th]:!p-2 [&_td]:!border [&_td]:!border-solid [&_td]:!border-black [&_td]:!p-2 [&_tr]:!border [&_tr]:!border-solid [&_tr]:!border-black rich-text"
               dangerouslySetInnerHTML={{
                 __html: blog.news_description,
               }}
-            />
+            /> */}
+            <div className="w-full overflow-x-auto">
+                <div
+                    className="prose prose-sm md:prose-base lg:prose-lg max-w-none prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-gray-600 prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-img:rounded-lg [&_table]:!border [&_table]:!border-collapse [&_table]:!border-solid [&_table]:!border-black [&_th]:!border [&_th]:!border-solid [&_th]:!border-black [&_th]:!p-2 [&_td]:!border [&_td]:!border-solid [&_td]:!border-black [&_td]:!p-2 [&_tr]:!border [&_tr]:!border-solid [&_tr]:!border-black rich-text"
+                    dangerouslySetInnerHTML={{ __html: blog.news_description }}
+                />
+            </div>
           </section>
 
           {/* Related Blogs */}
