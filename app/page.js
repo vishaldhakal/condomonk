@@ -1,14 +1,12 @@
-// page.js 
+// page.js
 
 import Link from "next/link";
 import BottomContactForm from "@/components/BottomContactForm";
-import HomeSearch from "@/components/HomeSearch";
 import BlogCard from "@/components/BlogCard";
 import { fetchAllBlogPosts } from "@/api/blogs";
 import BestExperience from "@/components/BestExperience";
 import Newsletter from "@/components/Newsletter";
 import HomebabaAdvantage from "@/components/HomebabaAdvantage";
-import BuyDubai from "@/components/BuyDubai";
 import Hero from "@/components/Hero";
 import NotifyPopup from "@/components/NotifyPopup";
 
@@ -20,8 +18,8 @@ export default async function Home() {
 
   return (
     <>
-      <Hero/>
-     
+      <Hero />
+
       {/* Pre Construction Homes across Canada Section */}
       <div className="bg-white">
         <BestExperience />
@@ -261,7 +259,7 @@ export default async function Home() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-8">
             Left Section */}
-            {/* <div className="flex flex-col justify-center space-y-6 max-w-lg">
+      {/* <div className="flex flex-col justify-center space-y-6 max-w-lg">
               <div className="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -332,8 +330,8 @@ export default async function Home() {
               </div>
             </div> */}
 
-            {/* Right Section - House Image with Price Tags */}
-            {/* <div className="relative">
+      {/* Right Section - House Image with Price Tags */}
+      {/* <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-xl">
                 <img
                   src="/pexels-bg.jpeg"
@@ -427,8 +425,6 @@ export default async function Home() {
           </div>
         </div>
       </section> */}
-
-
 
       <div className="py-10 bg-white"></div>
 

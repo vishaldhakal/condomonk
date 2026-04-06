@@ -1,9 +1,7 @@
 "use client";
 import Link from "next/link";
 import Nformatter from "./Nformatter";
-import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import CustomModal from "./Modal";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import SideContactForm from "./SideContactForm";
 export default function CondoCard(props) {
@@ -27,87 +25,6 @@ export default function CondoCard(props) {
     setRandomViews(Math.floor(Math.random() * (3500 - 800 + 1)) + 800);
   }, []);
 
-  // // Minimal version for map infowindow
-  // if (minimal) {
-  //   return (
-  //     <div
-  //       className={`rounded-xl my-3 md:my-0 transition-all duration-300 ${
-  //         props.is_featured
-  //           ? "shadow-featured border-blue-500 border"
-  //           : "shadow-lg"
-  //       } hover:shadow-xl hover:translate-y-[-5px]`}
-  //       style={{ maxWidth: "280px" }}
-  //     >
-  //       <div className={`relative`}>
-  //         {props.images && props.images.length > 0 ? (
-  //           <img
-  //             loading="lazy"
-  //             src={props.images[0].split(",")[0]}
-  //             className="w-full h-[150px] rounded-t-xl object-cover transition-transform duration-300 ease-in-out"
-  //             style={{
-  //               background:
-  //                 "linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%)",
-  //             }}
-  //             alt={`${props.project_name} located at ${props.project_address} cover image`}
-  //           />
-  //         ) : (
-  //           <img
-  //             loading="lazy"
-  //             src="/noimage.webp"
-  //             className="w-full h-[150px] rounded-t-xl object-cover transition-transform duration-300 ease-in-out"
-  //             style={{
-  //               background:
-  //                 "linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%)",
-  //             }}
-  //             alt={"no image available for " + props.project_name}
-  //           />
-  //         )}
-  //         {props.is_featured && (
-  //           <span className="absolute top-2 right-2 bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded flex items-center gap-1">
-  //             <svg
-  //               xmlns="http://www.w3.org/2000/svg"
-  //               width="14"
-  //               height="14"
-  //               fill="currentColor"
-  //               className="bi bi-star"
-  //               viewBox="0 0 22 22"
-  //             >
-  //               <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z" />
-  //             </svg>
-  //             Featured
-  //           </span>
-  //         )}
-  //         <span className="absolute bottom-2 left-2 bg-white px-2 py-1 rounded text-xs">
-  //           {props.status}
-  //         </span>
-  //       </div>
-  //       <div className={`block p-4 bg-white rounded-b-xl no-underline`}>
-  //         <div className="space-y-1">
-  //           <Link
-  //             href={`/${city}/${props.slug}`}
-  //             className="no-underline"
-  //             target="_blank"
-  //           >
-  //             <h3 className="md:text-[1.1rem] font-bold my-0 leading-tight line-clamp-1 hover:text-[#00b5d6] transition-colors duration-300">
-  //               {props.project_name}
-  //             </h3>
-  //           </Link>
-
-  //           <h5 className="truncate text-[0.9rem] my-0">
-  //             {props.project_address}
-  //           </h5>
-  //           <p className="text-[0.9rem] truncate my-0">
-  //             Occupancy {props.occupancy}
-  //           </p>
-
-  //           <InquiryButton minimal={true} city={city} props={props} />
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
-  // Original version for regular props pages
   return (
     <>
       <div
@@ -125,7 +42,7 @@ export default function CondoCard(props) {
             <img
               loading="lazy"
               src={
-                props.image.image
+                props.image?.image
                   ? `https://api.condomonk.ca${props.image.image}`
                   : "/noimage.webp"
               }

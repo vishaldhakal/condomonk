@@ -150,7 +150,7 @@ function getPriceFilter(city) {
   return null;
 }
 
-//[city] : pages.js 
+//[city] : pages.js
 export async function generateMetadata({ params }, parent) {
   const { city } = await params;
   const cleanCity = getCleanCity(city);
@@ -170,12 +170,12 @@ export async function generateMetadata({ params }, parent) {
   //     )} | Check out plans, pricing, and availability`;
 
   const title = !["calgary", "edmonton"].includes(city)
-  ? `New Pre Construction Homes in ${CapitalizeFirst(cleanCity)}, Ontario (2026) | Condomonk`
-  : `${CapitalizeFirst(cleanCity)} Pre Construction & New Homes For Sale (2026) | Condomonk`;
+    ? `New Pre Construction Homes in ${CapitalizeFirst(cleanCity)}, Ontario (2026) | Condomonk`
+    : `${CapitalizeFirst(cleanCity)} Pre Construction & New Homes For Sale (2026) | Condomonk`;
 
   const description = !["calgary", "edmonton"].includes(city)
-  ? `Browse 120+ pre construction homes in ${CapitalizeFirst(cleanCity)}, Ontario for 2026. Explore new condos, townhomes & detached homes with pricing, floor plans & VIP access. Updated daily.`
-  : `Find new homes for sale in ${CapitalizeFirst(cleanCity)} | Check out plans, pricing, and availability`;
+    ? `Browse 120+ pre construction homes in ${CapitalizeFirst(cleanCity)}, Ontario for 2026. Explore new condos, townhomes & detached homes with pricing, floor plans & VIP access. Updated daily.`
+    : `Find new homes for sale in ${CapitalizeFirst(cleanCity)} | Check out plans, pricing, and availability`;
 
   return {
     ...parent,
@@ -376,11 +376,25 @@ export default async function CityPage({ params }) {
   //   );
   // };
   const generateTitle = () => {
-  if (city == "calgary" || city == "edmonton") {
-    return (
+    if (city == "calgary" || city == "edmonton") {
+      return (
+        <>
+          Pre Construction & New Homes for sale in{" "}
+          <span className="text-teal-600">{CapitalizeFirst(city)}</span>, AB
+        </>
+      );
+    }
+    return priceFilter ? (
       <>
-        Pre Construction & New Homes for sale in{" "}
-        <span className="text-teal-600">{CapitalizeFirst(city)}</span>, AB
+        Pre construction Homes in{" "}
+        <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>{" "}
+        {formatPriceFilter(priceFilter)}
+      </>
+    ) : (
+      <>
+        Pre Construction Homes in{" "}
+        <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>,
+        Ontario(2026)
       </>
     );
   }
@@ -646,7 +660,8 @@ export default async function CityPage({ params }) {
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
                 {/* Latest News and Insight in {CapitalizeFirst(cleanCity)} */}
-                Why Buy Pre Construction in {CapitalizeFirst(cleanCity)}, Ontario?
+                Why Buy Pre Construction in {CapitalizeFirst(cleanCity)},
+                Ontario?
               </h3>
               <Link
                 href={`/blogs/category/${cleanCity}`}
