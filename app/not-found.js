@@ -29,7 +29,7 @@ export default async function NotFound() {
             </span>
           </h4>
 
-          <div className="pb-1 pt-20 px-3 w-full max-w-4xl mx-auto">
+          <div className="pb-1 pt-20 md:pt-10 px-3 w-full max-w-4xl mx-auto">
             {/* Search Component */}
             <HomeSearch />
           </div>

@@ -30,7 +30,7 @@ export default function RealEstateLinks({ city = "Ontario" }) {
   };
 
   return (
-    <div className="my-10 border-t border-b py-6">
+    <div className="my-10 border-t border-b p-6">
       <h2 className="text-xl md:text-4xl font-bold mb-4">
         {city} Real Estate | Homes for Sale
       </h2>

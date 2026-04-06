@@ -345,36 +345,59 @@ export default async function CityPage({ params }) {
   };
   // ────────────────────────────────────────────────────────────────────────
 
-  const generateTitle = () => {
-    if (city == "calgary" || city == "edmonton") {
-      return (
-        <>
-        <h2>
-          Pre Construction & New Homes for sale in{" "}
-          <span className="text-teal-600">{CapitalizeFirst(city)}</span>, AB
-        </h2>
-        </>
-      );
-    }
-    return priceFilter ? (
-      <>
-        <h2>
+  // const generateTitle = () => {
+  //   if (city == "calgary" || city == "edmonton") {
+  //     return (
+  //       <>
+  //       <h2>
+  //         Pre Construction & New Homes for sale in{" "}
+  //         <span className="text-teal-600">{CapitalizeFirst(city)}</span>, AB
+  //       </h2>
+  //       </>
+  //     );
+  //   }
+  //   return priceFilter ? (
+  //     <>
+  //       <h2>
 
-        Pre construction Homes in{" "}
-        <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>{" "}
-        {formatPriceFilter(priceFilter)}
-        </h2>
-      </>
-    ) : (
+  //       Pre construction Homes in{" "}
+  //       <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>{" "}
+  //       {formatPriceFilter(priceFilter)}
+  //       </h2>
+  //     </>
+  //   ) : (
+  //     <>
+  //       <h2>
+  //        Pre Construction Homes in{" "}
+  //        <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>,
+  //        Ontario(2026) 
+  //        </h2>
+  //     </>
+  //   );
+  // };
+  const generateTitle = () => {
+  if (city == "calgary" || city == "edmonton") {
+    return (
       <>
-        <h2>
-         Pre Construction Homes in{" "}
-         <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>,
-         Ontario(2026) 
-         </h2>
+        Pre Construction & New Homes for sale in{" "}
+        <span className="text-teal-600">{CapitalizeFirst(city)}</span>, AB
       </>
     );
-  };
+  }
+  return priceFilter ? (
+    <>
+      Pre Construction Homes in{" "}
+      <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>{" "}
+      {formatPriceFilter(priceFilter)}
+    </>
+  ) : (
+    <>
+      Pre Construction Homes in{" "}
+      <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>,
+      Ontario (2026)
+    </>
+  );
+};
 
   const generateSubtitle = () => {
     const lastUpdated = new Date(Date.now() - 86400000).toLocaleDateString(

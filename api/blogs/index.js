@@ -1,4 +1,5 @@
-import { notFound } from "next/navigation";
+// api/blogs/index.js
+
 
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 2000; // 2 seconds
@@ -22,8 +23,8 @@ const fetchWithRetry = async (url, options, retries = MAX_RETRIES) => {
       clearTimeout(id);
 
       if (!res.ok) {
-        if (res.status === 504) {
-          console.log(`Attempt ${i + 1}: Gateway timeout for ${url}`);
+        if (res.status === 504 || res.status === 500) {
+          console.log(`Attempt ${i + 1}: Server error for ${url}`);
           await delay(RETRY_DELAY);
           continue;
         }
@@ -74,7 +75,7 @@ export const fetchBlogPostBySlug = async (slug) => {
     return blog;
   } catch (error) {
     console.error(`Error fetching blog post ${slug}:`, error);
-    notFound();
+    return null;
   }
 };
 
