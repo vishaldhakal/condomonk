@@ -26,7 +26,6 @@ export default async function BlogLayout({ children }) {
   return (
     <div className="min-h-screen flex flex-col">
       <main className="flex-grow">{children}</main>
-      <Footer cities={cities} />
     </div>
   );
 }
