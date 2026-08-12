@@ -98,7 +98,7 @@
           <div className="relative">
             <input
               type="tel"
-pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+
               id="phone"
               name="phone"
               className="w-full h-[70px] px-4 bg-[#F4F6F9] rounded-xl border-0 focus:ring-0 text-gray-900 placeholder-gray-500"

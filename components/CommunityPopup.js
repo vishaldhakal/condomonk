@@ -476,7 +476,7 @@ export default function CommunityPopup() {
                     </div>
                     <input
                       type="tel"
-pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+
                       name="phone"
                       placeholder="Phone Number"
                       required
