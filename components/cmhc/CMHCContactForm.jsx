@@ -9,6 +9,7 @@ import { Mail, Phone, User, MessageSquare, ArrowRight } from "lucide-react";
 import { sendCMHCMail } from "@/api/sendCMHCMail";
 import { usePathname } from "next/navigation";
 import ContactFormDisclaimer from "../ContactFormDisclaimer";
+import { formatPhoneNumber, handlePhoneKeyDown } from "@/utils/phoneUtils";
 
 const CMHCContactForm = () => {
   const [formData, setFormData] = useState({
@@ -21,9 +22,10 @@ const CMHCContactForm = () => {
   const pathname = usePathname();
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    const newValue = name === "phone" ? formatPhoneNumber(value) : value;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: newValue,
     }));
   };
   const cityName = () => {
@@ -104,9 +106,13 @@ const CMHCContactForm = () => {
             id="phone"
             name="phone"
             type="tel"
-
+            inputMode="numeric"
+            pattern="[0-9\s\(\)\-]+"
+            maxLength={14}
+            placeholder="(416) 555-1234"
             value={formData.phone}
             onChange={handleInputChange}
+            onKeyDown={handlePhoneKeyDown}
             className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
           />
         </div>

@@ -4,6 +4,7 @@
  import ContactFormSubmit from "./ContactFormSubmit";
  import { motion } from "framer-motion";
  import ContactFormDisclaimer from "./ContactFormDisclaimer";
+ import { formatPhoneNumber, handlePhoneKeyDown } from "@/utils/phoneUtils";
 
  const HomebabaAdvantage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -61,9 +62,11 @@
   };
 
   const handleChange = (e) => {
+    const newValue =
+      e.target.name === "phone" ? formatPhoneNumber(e.target.value) : e.target.value;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [e.target.name]: newValue,
     });
   };
 
@@ -240,14 +243,17 @@
                   />
                   <input
                     type="tel"
-
+                    inputMode="numeric"
+                    pattern="[0-9\s\(\)\-]+"
+                    maxLength={14}
                     id="phone"
                     name="phone"
                     required
                     value={formData.phone}
                     onChange={handleChange}
+                    onKeyDown={handlePhoneKeyDown}
                     className="w-full px-4 py-3 border border-[#E5E7EB] rounded-xl text-[#2C2C2C] placeholder-[#6B7280] focus:outline-none text-[14px]"
-                    placeholder="Phone Number"
+                    placeholder="(416) 555-1234"
                   />
                 </div>
 

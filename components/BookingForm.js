@@ -5,6 +5,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import { CalendarIcon } from "lucide-react";
 import ContactFormDisclaimer from "./ContactFormDisclaimer";
+import { formatPhoneNumber, handlePhoneKeyDown } from "@/utils/phoneUtils";
 
 export default function BookingForm({
   propertyId,
@@ -114,9 +115,10 @@ export default function BookingForm({
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    const newValue = name === "phone" ? formatPhoneNumber(value) : value;
     setFormData((prevState) => ({
       ...prevState,
-      [name]: value,
+      [name]: newValue,
     }));
   };
 
@@ -212,13 +214,16 @@ export default function BookingForm({
 
           <input
             type="tel"
-
+            inputMode="numeric"
+            pattern="[0-9\s\(\)\-]+"
+            maxLength={14}
             required
             name="phone"
-            placeholder="Phone"
+            placeholder="(416) 555-1234"
             className="w-full p-3 border rounded-lg focus:outline-none focus:ring-black text-sm"
             value={formData.phone}
             onChange={handleChange}
+            onKeyDown={handlePhoneKeyDown}
           />
         </div>
 

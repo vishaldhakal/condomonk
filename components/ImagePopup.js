@@ -2,6 +2,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import ContactFormDisclaimer from "./ContactFormDisclaimer";
+import { formatPhoneNumber, handlePhoneKeyDown } from "@/utils/phoneUtils";
 
 const ImagePopup = ({ cityName, popupData, showPopup, onClose }) => {
   const [showForm, setShowForm] = useState(false);
@@ -28,9 +29,10 @@ const ImagePopup = ({ cityName, popupData, showPopup, onClose }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    const newValue = name === "phone" ? formatPhoneNumber(value) : value;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: newValue,
     }));
   };
 
@@ -232,11 +234,14 @@ const ImagePopup = ({ cityName, popupData, showPopup, onClose }) => {
                     />
                     <input
                       type="tel"
-
+                      inputMode="numeric"
+                      pattern="[0-9\s\(\)\-]+"
+                      maxLength={14}
                       name="phone"
-                      placeholder="Phone"
+                      placeholder="(416) 555-1234"
                       value={formData.phone}
                       onChange={handleInputChange}
+                      onKeyDown={handlePhoneKeyDown}
                       className="w-full px-3 py-2.5 border border-[#E5E7EB] rounded-xl text-[#2C2C2C] placeholder-[#6B7280] focus:outline-none text-sm placeholder:text-xs"
                     />
                   </div>

@@ -1,6 +1,7 @@
 // components/CityPopup.js
 "use client";
 import { useState, useEffect } from "react";
+import { formatPhoneNumber, handlePhoneKeyDown } from "@/utils/phoneUtils";
 
 const CityPopup = ({ cityName, popupData, showPopup, onClose }) => {
   const [showForm, setShowForm] = useState(false); // New state for form stage
@@ -15,9 +16,10 @@ const CityPopup = ({ cityName, popupData, showPopup, onClose }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    const newValue = name === "phone" ? formatPhoneNumber(value) : value;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: newValue,
     }));
   };
 
@@ -384,11 +386,14 @@ const CityPopup = ({ cityName, popupData, showPopup, onClose }) => {
                           </div>
                           <input
                             type="tel"
-
+                            inputMode="numeric"
+                            pattern="[0-9\s\(\)\-]+"
+                            maxLength={14}
                             name="phone"
-                            placeholder="Phone Number"
+                            placeholder="(416) 555-1234"
                             value={formData.phone}
                             onChange={handleInputChange}
+                            onKeyDown={handlePhoneKeyDown}
                             required
                             className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md placeholder:text-gray-400 placeholder:text-xs md:placeholder:text-sm text-sm"
                           />

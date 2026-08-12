@@ -4,6 +4,7 @@
  import { usePathname } from "next/navigation";
  import Link from "next/link";
  import ContactFormDisclaimer from "./ContactFormDisclaimer";
+ import { formatPhoneNumber, handlePhoneKeyDown } from "@/utils/phoneUtils";
 
 const projects = [
   {
@@ -476,12 +477,20 @@ export default function CommunityPopup() {
                     </div>
                     <input
                       type="tel"
-
+                      inputMode="numeric"
+                      pattern="[0-9\s\(\)\-]+"
+                      maxLength={14}
                       name="phone"
-                      placeholder="Phone Number"
+                      placeholder="(416) 555-1234"
                       required
                       value={formData.phone}
-                      onChange={handleChange}
+                      onChange={(e) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          phone: formatPhoneNumber(e.target.value),
+                        }))
+                      }
+                      onKeyDown={handlePhoneKeyDown}
                       className="w-full pl-10 pr-4 py-3 h-14 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-gray-50 transition-all duration-300"
                     />
                   </div>

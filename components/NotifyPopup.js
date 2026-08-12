@@ -2,6 +2,7 @@
 import { useState } from "react";
 
 import ContactFormSubmit from "@/components/ContactFormSubmit";
+import { formatPhoneNumber, handlePhoneKeyDown } from "@/utils/phoneUtils";
 
 
 export default function NotifyPopup() {
@@ -17,7 +18,8 @@ export default function NotifyPopup() {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setCredentials((prev) => ({ ...prev, [id]: value }));
+    const newValue = id === "phone" ? formatPhoneNumber(value) : value;
+    setCredentials((prev) => ({ ...prev, [id]: newValue }));
   };
 
   const handleSubmit = (e) => {
@@ -78,11 +80,14 @@ export default function NotifyPopup() {
                 />
                 <input
                   type="tel"
-
-                  placeholder="Phone"
+                  inputMode="numeric"
+                  pattern="[0-9\s\(\)\-]+"
+                  maxLength={14}
+                  placeholder="(416) 555-1234"
                   id="phone"
                   value={credentials.phone}
                   onChange={handleChange}
+                  onKeyDown={handlePhoneKeyDown}
                   className="border border-gray-300 rounded-lg px-3 py-2.5 text-sm w-full focus:outline-none focus:ring-2 focus:ring-gray-900"
                 />
               </div>

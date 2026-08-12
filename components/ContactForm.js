@@ -3,6 +3,7 @@
  import { usePathname } from "next/navigation";
  import ContactFormSubmit from "./ContactFormSubmit";
  import ContactFormDisclaimer from "./ContactFormDisclaimer";
+ import { formatPhoneNumber, handlePhoneKeyDown } from "@/utils/phoneUtils";
 
  export default function ContactForm({
   projectName,
@@ -54,9 +55,10 @@
 
   const handleChange = (e) => {
     const { id, value } = e.target;
+    const newValue = id === "phone" ? formatPhoneNumber(value) : value;
     setCredentials((prevState) => ({
       ...prevState,
-      [id]: value,
+      [id]: newValue,
     }));
   };
 
@@ -98,13 +100,16 @@
           <div className="relative">
             <input
               type="tel"
-
               id="phone"
               name="phone"
+              inputMode="numeric"
+              pattern="[0-9\s\(\)\-]+"
+              maxLength={14}
               className="w-full h-[70px] px-4 bg-[#F4F6F9] rounded-xl border-0 focus:ring-0 text-gray-900 placeholder-gray-500"
               value={credentials.phone}
               onChange={handleChange}
-              placeholder="Phone"
+              onKeyDown={handlePhoneKeyDown}
+              placeholder="(416) 555-1234"
               required
             />
           </div>
