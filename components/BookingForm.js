@@ -212,6 +212,7 @@ export default function BookingForm({
 
           <input
             type="tel"
+pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             required
             name="phone"
             placeholder="Phone"

@@ -384,6 +384,7 @@ const CityPopup = ({ cityName, popupData, showPopup, onClose }) => {
                           </div>
                           <input
                             type="tel"
+pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                             name="phone"
                             placeholder="Phone Number"
                             value={formData.phone}

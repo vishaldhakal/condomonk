@@ -78,6 +78,7 @@ export default function NotifyPopup() {
                 />
                 <input
                   type="tel"
+pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                   placeholder="Phone"
                   id="phone"
                   value={credentials.phone}
