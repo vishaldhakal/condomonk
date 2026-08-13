@@ -1,5 +1,6 @@
 import axios from "axios";
 import swal from "sweetalert";
+import { openLeadFollowUp } from "@/helpers/leadFollowUp";
 
 function ContactFormSubmit(msgdata, setSubmitbtn, setCredentials) {
   let baseUrl = "https://admin.homebaba.ca";
@@ -73,11 +74,22 @@ function ContactFormSubmit(msgdata, setSubmitbtn, setCredentials) {
       setTimeout(() => {
         setSubmitbtn("Contact Now");
       }, 2000);
-      swal(
-        `Thank You, ${msgdata.name}`,
-        "Please expect an email or call from us shortly",
-        "success"
-      );
+
+      openLeadFollowUp({
+        userName: msgdata.name || "",
+        partnerdata: msgdata.partnerdata || null,
+        inquiry: {
+          name: msgdata.name || "",
+          email: msgdata.email,
+          phone: msgdata.phone,
+          message: msgdata.message || "",
+          realtor: msgdata.realtor || "No",
+          proj_name: proj_name || "",
+          cityy: city || "",
+          source: source,
+        },
+      });
+
       setCredentials({
         ...msgdata,
         name: "",

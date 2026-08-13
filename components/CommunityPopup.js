@@ -1,10 +1,11 @@
- "use client";
+"use client";
 
  import { useState, useEffect } from "react";
  import { usePathname } from "next/navigation";
  import Link from "next/link";
  import ContactFormDisclaimer from "./ContactFormDisclaimer";
  import { formatPhoneNumber, handlePhoneKeyDown } from "@/utils/phoneUtils";
+import { openLeadFollowUp } from "@/helpers/leadFollowUp";
 
 const projects = [
   {
@@ -174,20 +175,24 @@ export default function CommunityPopup() {
 
       if (response.ok) {
         setSubmitBtn("Successfully Submitted");
-        // Show success message
-        if (typeof window !== "undefined" && window.swal) {
-          window.swal(
-            `Thank You, ${formData.name}`,
-            "Please expect an email or call from us shortly",
-            "success"
-          );
-        }
+        setIsOpen(false); // Close modal immediately
+
+        openLeadFollowUp({
+          userName: formData.name || "",
+          inquiry: {
+            name: formData.name || "",
+            email: formData.email,
+            phone: formData.phone,
+            message: `User is interested in learning more about ${selectedProject?.name || "the selected project"}.`,
+            realtor: "No",
+            proj_name: selectedProject?.name || "",
+            cityy: selectedProject?.city || "",
+            source: typeof window !== "undefined" ? window.location.href : "",
+          },
+        });
+
         localStorage.setItem("communityFormSubmitted2", "true");
         setFormData({ name: "", email: "", phone: "" });
-        setTimeout(() => {
-          setIsOpen(false);
-          setSubmitBtn("Request Prices & Floor Plans");
-        }, 2000);
       } else {
         throw new Error("Form submission failed");
       }

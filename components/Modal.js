@@ -18,7 +18,17 @@ export default function CustomModal({
   subtitle,
   image,
 }) {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
+
+  React.useEffect(() => {
+    const handleClose = () => {
+      onClose();
+    };
+    window.addEventListener("homebaba:lead-followup", handleClose);
+    return () => {
+      window.removeEventListener("homebaba:lead-followup", handleClose);
+    };
+  }, [onClose]);
 
   return (
     <>

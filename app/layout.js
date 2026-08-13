@@ -11,6 +11,7 @@ import { Providers } from "./providers";
 import { allcities } from "@/datas/cities";
 import LoadingOverlay from "@/components/LoadingOverlay";
 // import NotifyPopup from "@/components/NotifyPopup";
+import LeadFollowUpHost from "@/components/LeadFollowUpHost";
 
 const inter = Inter({ subsets: ["cyrillic"] });
 
@@ -48,7 +49,7 @@ export const viewport = {
 export default function RootLayout({ children }) {
   let cities = allcities;
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <Script id="analytics" strategy="afterInteractive">
           {`
@@ -79,6 +80,8 @@ export default function RootLayout({ children }) {
                     ...commonData,
                     ...data
                   })
+                }).catch(function(err) {
+                  console.warn('Analytics track failed:', err);
                 });
               }
 
@@ -164,7 +167,10 @@ export default function RootLayout({ children }) {
           <Navbar cities={cities}></Navbar>
           <Providers>
             <GoogleAnalytics />
-            <main className="flex-grow">{children}</main>
+            <main className="flex-grow">
+              {children}
+              <LeadFollowUpHost />
+            </main>
           </Providers>
         
           <Footer cities={cities}></Footer>

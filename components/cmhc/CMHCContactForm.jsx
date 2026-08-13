@@ -10,6 +10,7 @@ import { sendCMHCMail } from "@/api/sendCMHCMail";
 import { usePathname } from "next/navigation";
 import ContactFormDisclaimer from "../ContactFormDisclaimer";
 import { formatPhoneNumber, handlePhoneKeyDown } from "@/utils/phoneUtils";
+import { openLeadFollowUp } from "@/helpers/leadFollowUp";
 
 const CMHCContactForm = () => {
   const [formData, setFormData] = useState({
@@ -43,8 +44,35 @@ const CMHCContactForm = () => {
     // Update button state and show loading
     const submitButton = e.target.querySelector('button[type="submit"]');
     submitButton.disabled = true;
-    await sendCMHCMail(formData, cityName());
-    setIsSubmitting(false);
+    try {
+      await sendCMHCMail(formData, cityName());
+      openLeadFollowUp({
+        userName: formData.name || "",
+        inquiry: {
+          name: formData.name || "",
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message || "CMHC MLI Select inquiry",
+          realtor: "No",
+          proj_name: "CMHC MLI Select",
+          cityy: cityName() || "",
+          source: typeof window !== "undefined" ? window.location.href : "",
+        },
+      });
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSubmitting(false);
+      if (submitButton) {
+        submitButton.disabled = false;
+      }
+    }
   };
   return (
     <form

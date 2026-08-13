@@ -21,8 +21,20 @@ export default function CondoCard(props) {
   }
   const city = props.city.name.toLowerCase();
   const [randomViews, setRandomViews] = useState(null);
+  const [open, setOpen] = useState(false);
+
   useEffect(() => {
     setRandomViews(Math.floor(Math.random() * (3500 - 800 + 1)) + 800);
+  }, []);
+
+  useEffect(() => {
+    const handleClose = () => {
+      setOpen(false);
+    };
+    window.addEventListener("homebaba:lead-followup", handleClose);
+    return () => {
+      window.removeEventListener("homebaba:lead-followup", handleClose);
+    };
   }, []);
 
   return (
@@ -138,7 +150,7 @@ export default function CondoCard(props) {
           <h4 className="text-[0.9rem] font-normal text-black my-0">
             {checkPricing(props.price_starting_from)}
           </h4>
-          <Dialog>
+          <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
               <button className="py-2 text-xs md:text-base text-center flex flex-row items-center justify-center gap-1 font-medium text-white bg-teal-600 hover:bg-teal-700 shadow-md border-0 px-3 rounded-md w-full transition-colors duration-200">
                 Request Price List

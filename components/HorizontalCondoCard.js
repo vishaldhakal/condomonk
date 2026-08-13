@@ -1,6 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import Nformatter from "./Nformatter";
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 import SideContactForm from "./SideContactForm";
 
@@ -27,6 +29,18 @@ export default function HorizontalCondoCard(props) {
     const seed = props.id || 1;
     return 800 + ((seed * 1637) % (3500 - 800 + 1));
   }, [props.id]);
+
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const handleClose = () => {
+      setOpen(false);
+    };
+    window.addEventListener("homebaba:lead-followup", handleClose);
+    return () => {
+      window.removeEventListener("homebaba:lead-followup", handleClose);
+    };
+  }, []);
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 hover:border-gray-400 transition-all duration-300 overflow-hidden mb-4 transform-gpu hover:scale-[1.01]">
@@ -140,7 +154,7 @@ export default function HorizontalCondoCard(props) {
 
             {/* Bottom CTA Button */}
             <div className="mt-auto">
-              <Dialog>
+              <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                   <button
                     className="w-fit bg-[#e5eff0] text-[#006169] border border-[#e5eff0] py-2 px-4 rounded-lg text-sm font-medium hover:bg-[#d1e8eb] transition-colors flex items-center gap-2"

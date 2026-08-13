@@ -6,6 +6,7 @@ import swal from "sweetalert";
 import { CalendarIcon } from "lucide-react";
 import ContactFormDisclaimer from "./ContactFormDisclaimer";
 import { formatPhoneNumber, handlePhoneKeyDown } from "@/utils/phoneUtils";
+import { openLeadFollowUp } from "@/helpers/leadFollowUp";
 
 export default function BookingForm({
   propertyId,
@@ -84,11 +85,20 @@ export default function BookingForm({
 
       setLoading(false);
       setSubmitBtn("Successfully Submitted");
-      await swal(
-        `Thank You, ${formData.name}`,
-        "Please expect an email or call from us shortly",
-        "success",
-      );
+      
+      openLeadFollowUp({
+        userName: formData.name || "",
+        inquiry: {
+          name: formData.name || "",
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.description || `Showing request for ${address}`,
+          realtor: formData.realtor || "No",
+          proj_name: address || "",
+          cityy: typeof window !== "undefined" ? window.location.pathname.split("/")[1] || "" : "",
+          source: fullUrl,
+        },
+      });
 
       // Reset form
       setFormData({

@@ -2,6 +2,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { formatPhoneNumber, handlePhoneKeyDown } from "@/utils/phoneUtils";
+import { openLeadFollowUp } from "@/helpers/leadFollowUp";
 
 const CityPopup = ({ cityName, popupData, showPopup, onClose }) => {
   const [showForm, setShowForm] = useState(false); // New state for form stage
@@ -68,31 +69,28 @@ const CityPopup = ({ cityName, popupData, showPopup, onClose }) => {
       if (response.ok) {
         setSubmitBtn("SUCCESSFULLY SUBMITTED");
 
-        // Show success message using SweetAlert if available
-        if (typeof window !== "undefined" && window.swal) {
-          window.swal(
-            `Thank You, ${formData.firstName}!`,
-            `Your inquiry for ${popupData.PopupName} in ${cityName} has been sent. Please expect an email or call from us shortly.`,
-            "success"
-          );
-        } else {
-          // Fallback alert
-          alert(
-            `Thank you, ${formData.firstName}! Your inquiry has been sent successfully.`
-          );
+        // Close the popup immediately to prevent backdrop stacking
+        if (onClose) {
+          onClose();
         }
+        setShowForm(false); // Reset form stage
+
+        openLeadFollowUp({
+          userName: formData.firstName || "",
+          inquiry: {
+            name: formData.firstName || "",
+            email: formData.email,
+            phone: formData.phone,
+            message: `[POPUP INQUIRY] I would like to get the pricing, floor plans, and payment plan for ${popupData.PopupName} in ${cityName}. Please contact me with more information. This inquiry was submitted through the city popup on your website.`,
+            realtor: "No",
+            proj_name: popupData.PopupName || "",
+            cityy: cityName || "",
+            source: `${fullUrl} - City Popup (${cityName})`,
+          },
+        });
 
         // Reset form
         setFormData({ firstName: "", email: "", phone: "" });
-
-        // Close popup after successful submission
-        setTimeout(() => {
-          if (onClose) {
-            onClose();
-          }
-          setShowForm(false); // Reset form stage
-          setSubmitBtn("Request Prices & Floor Plans");
-        }, 2000);
       } else {
         throw new Error("Form submission failed");
       }
