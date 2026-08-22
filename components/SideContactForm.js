@@ -1,10 +1,11 @@
- "use client";
+"use client";
 
- import { useEffect, useState } from "react";
- import ContactFormSubmit from "./ContactFormSubmit";
- import ContactFormDisclaimer from "./ContactFormDisclaimer";
+import { useEffect, useState } from "react";
+import ContactFormSubmit from "./ContactFormSubmit";
+import ContactFormDisclaimer from "./ContactFormDisclaimer";
+import { formatPhoneNumber, handlePhoneKeyDown } from "@/utils/phoneUtils";
 
- export default function SideContactForm(props) {
+export default function SideContactForm(props) {
   const [submitbtn, setSubmitbtn] = useState("Send me info");
   const [credentials, setCredentials] = useState({
     name: "",
@@ -18,9 +19,10 @@
 
   const handleChange = (e) => {
     const { id, value } = e.target;
+    const newValue = id === "phone" ? formatPhoneNumber(value) : value;
     setCredentials((prevState) => ({
       ...prevState,
-      [id]: value,
+      [id]: newValue,
     }));
   };
 
@@ -63,12 +65,16 @@
         </div>
         <div>
           <input
-            type="text"
+            type="tel"
             name="phone"
             id="phone"
-            placeholder="Phone"
+            inputMode="numeric"
+            pattern="[0-9\s\(\)\-]+"
+            maxLength={14}
+            placeholder="(416) 555-1234"
             value={credentials.phone}
             onChange={(e) => handleChange(e)}
+            onKeyDown={handlePhoneKeyDown}
             required={true}
             className="w-full px-4 py-4 rounded-lg bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
             autoFocus={false}

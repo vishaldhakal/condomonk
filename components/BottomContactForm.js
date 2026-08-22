@@ -1,10 +1,10 @@
- "use client";
- import { useState } from "react";
- import ContactFormSubmit from "./ContactFormSubmit";
- import ContactFormDisclaimer from "./ContactFormDisclaimer";
- import { formatPhoneNumber, handlePhoneKeyDown } from "@/utils/phoneUtils";
+"use client";
+import { useState } from "react";
+import ContactFormSubmit from "./ContactFormSubmit";
+import ContactFormDisclaimer from "./ContactFormDisclaimer";
+import { formatPhoneNumber, handlePhoneKeyDown } from "@/utils/phoneUtils";
 
- export default function BottomContactForm(props) {
+export default function BottomContactForm(props) {
   const [submitbtn, setSubmitbtn] = useState("Send a message");
   const [credentials, setCredentials] = useState({
     name: "",
