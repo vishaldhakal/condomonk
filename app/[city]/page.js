@@ -10,6 +10,7 @@ import AssignmentCard from "@/components/assignment/AssignmentCard";
 import GoogleMap from "@/components/GoogleMap";
 import PreconstructionFilter from "@/components/PreconstructionFilter";
 import CombinedPopupManager from "@/components/CombinedPopupManager";
+import PreconExperts from "@/components/PreconExperts";
 import BlogCard from "@/components/BlogCard";
 import { fetchBlogPostByCity } from "@/api/blogs";
 
@@ -492,6 +493,8 @@ export default async function CityPage({ params }) {
             {generateSubtitle()}
           </h2>
         </div>
+
+        <PreconExperts />
 
         {/* Filter Section */}
 

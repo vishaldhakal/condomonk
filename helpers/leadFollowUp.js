@@ -44,13 +44,8 @@ export const REALTOR_OPTIONS = [
  * Build preference text to append into the inquiry message.
  */
 export function formatPreferencesBlock(preferences = {}) {
-  const {
-    buyerType,
-    sizeNeed,
-    interest,
-    purchaseBudget,
-    workingWithRealtor,
-  } = preferences || {};
+  const { buyerType, sizeNeed, interest, purchaseBudget, workingWithRealtor } =
+    preferences || {};
 
   if (
     !buyerType &&
