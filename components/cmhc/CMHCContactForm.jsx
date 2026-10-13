@@ -19,7 +19,7 @@ const CMHCContactForm = () => {
     phone: "",
     message: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting] = useState(false);
   const pathname = usePathname();
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -37,42 +37,40 @@ const CMHCContactForm = () => {
     }
     return null;
   };
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    const city = cityName();
 
-    // Update button state and show loading
-    const submitButton = e.target.querySelector('button[type="submit"]');
-    submitButton.disabled = true;
-    try {
-      await sendCMHCMail(formData, cityName());
-      openLeadFollowUp({
-        userName: formData.name || "",
-        inquiry: {
-          name: formData.name || "",
-          email: formData.email,
-          phone: formData.phone,
-          message: formData.message || "CMHC MLI Select inquiry",
-          realtor: "No",
-          proj_name: "CMHC MLI Select",
-          cityy: cityName() || "",
-          source: typeof window !== "undefined" ? window.location.href : "",
-        },
-      });
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsSubmitting(false);
-      if (submitButton) {
-        submitButton.disabled = false;
-      }
-    }
+    // Sent once by the Quick Preferences popup (with answers, or without on dismiss)
+    openLeadFollowUp({
+      userName: formData.name || "",
+      inquiry: {
+        name: formData.name || "",
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message || "CMHC MLI Select inquiry",
+        realtor: "No",
+        proj_name: "CMHC MLI Select",
+        cityy: city || "",
+        source: typeof window !== "undefined" ? window.location.href : "",
+        send: (payload) =>
+          sendCMHCMail(
+            {
+              name: payload.name,
+              email: payload.email,
+              phone: payload.phone,
+              message: payload.message,
+            },
+            city,
+          ),
+      },
+    });
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    });
   };
   return (
     <form

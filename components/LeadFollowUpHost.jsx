@@ -14,7 +14,7 @@ import {
   BUDGET_OPTIONS,
   REALTOR_OPTIONS,
   submitContactInquiry,
-  submitInquiryWithPreferences,
+  flushInquiryOnExit,
 } from "@/helpers/leadFollowUp";
 
 const BUYER_TYPE_OPTIONS = [
@@ -124,15 +124,20 @@ export default function LeadFollowUpHost() {
   const [step, setStep] = useState("prefs");
   const [userName, setUserName] = useState("");
   const [partnerName, setPartnerName] = useState(null);
-  const [inquiry, setInquiry] = useState(null);
-  const [pendingSubmit, setPendingSubmit] = useState(false);
   const [buyerType, setBuyerType] = useState("");
   const [sizeNeed, setSizeNeed] = useState("");
   const [interest, setInterest] = useState("");
   const [purchaseBudget, setPurchaseBudget] = useState("");
   const [workingWithRealtor, setWorkingWithRealtor] = useState("");
   const [saving, setSaving] = useState(false);
-  const didSubmitRef = useRef(false);
+  const [sendFailed, setSendFailed] = useState(false);
+  // Inquiry that still has to be sent (null once delivered or in flight)
+  const pendingInquiryRef = useRef(null);
+  // Preferences the visitor confirmed with Continue, reused if a retry is needed
+  const confirmedPrefsRef = useRef(null);
+  const inFlightRef = useRef(null);
+  // Bumped on every open/close so a stale send cannot touch a newer popup
+  const sessionRef = useRef(0);
 
   const resetPrefs = useCallback(() => {
     setBuyerType("");
@@ -142,81 +147,120 @@ export default function LeadFollowUpHost() {
     setWorkingWithRealtor("");
     setStep("prefs");
     setSaving(false);
+    setSendFailed(false);
+  }, []);
+
+  // Sends the pending inquiry exactly once; puts it back if delivery failed
+  // and the same popup is still open so Continue can be retried.
+  const sendPending = useCallback((preferences = null) => {
+    const pending = pendingInquiryRef.current;
+    if (!pending) return inFlightRef.current?.request || Promise.resolve(true);
+
+    const session = sessionRef.current;
+    pendingInquiryRef.current = null;
+    const request = submitContactInquiry(pending, preferences).then((ok) => {
+      if (!ok && session === sessionRef.current) {
+        pendingInquiryRef.current = pending;
+      }
+      if (inFlightRef.current?.request === request) inFlightRef.current = null;
+      return ok;
+    });
+    inFlightRef.current = { request, inquiry: pending };
+    return request;
+  }, []);
+
+  // Dismissed popup: deliver whatever is still unsent in the background.
+  const settlePending = useCallback(() => {
+    const preferences = confirmedPrefsRef.current;
+    confirmedPrefsRef.current = null;
+    // Claim the unsent inquiry now: a new popup may set its own right after this
+    const unsent = pendingInquiryRef.current;
+    pendingInquiryRef.current = null;
+    const inFlight = inFlightRef.current;
+
+    const deliver = (pending) =>
+      submitContactInquiry(pending, preferences).then((ok) => {
+        if (!ok) flushInquiryOnExit(pending, preferences);
+      });
+
+    if (unsent) {
+      deliver(unsent);
+    } else if (inFlight) {
+      // Continue was pressed and is still sending; retry only if it fails
+      inFlight.request.then((ok) => {
+        if (!ok) deliver(inFlight.inquiry);
+      });
+    }
   }, []);
 
   useEffect(() => {
     const handler = (event) => {
       const detail = event?.detail || {};
-      const nextInquiry = detail.inquiry || null;
+      // A previous popup was replaced before it was answered
+      settlePending();
+      sessionRef.current += 1;
+      pendingInquiryRef.current = detail.inquiry || null;
       setUserName(detail.userName || "");
       setPartnerName(detail.partnerName || null);
-      setInquiry(nextInquiry);
-      setPendingSubmit(Boolean(detail.pendingSubmit));
-      didSubmitRef.current = !detail.pendingSubmit;
-      setBuyerType("");
-      setSizeNeed("");
-      setInterest("");
-      setPurchaseBudget("");
-      setWorkingWithRealtor("");
-      setStep("prefs");
-      setSaving(false);
+      resetPrefs();
       setOpen(true);
     };
 
+    // Tab closed / refreshed while the questions are still open
+    const handlePageHide = () => {
+      const pending = pendingInquiryRef.current;
+      if (!pending) return;
+      pendingInquiryRef.current = null;
+      flushInquiryOnExit(pending, confirmedPrefsRef.current);
+    };
+
     window.addEventListener(LEAD_FOLLOWUP_EVENT, handler);
-    return () => window.removeEventListener(LEAD_FOLLOWUP_EVENT, handler);
-  }, []);
+    window.addEventListener("pagehide", handlePageHide);
+    return () => {
+      window.removeEventListener(LEAD_FOLLOWUP_EVENT, handler);
+      window.removeEventListener("pagehide", handlePageHide);
+    };
+  }, [resetPrefs, settlePending]);
 
   const canContinue = Boolean(
     buyerType && sizeNeed && interest && purchaseBudget && workingWithRealtor,
   );
 
-  const ensureInquirySent = async (preferences = null) => {
-    if (!inquiry || didSubmitRef.current) {
-      // Inquiry already sent - only push preferences if user filled them
-      if (!pendingSubmit && preferences && inquiry) {
-        await submitInquiryWithPreferences(inquiry, preferences);
-      }
-      return true;
-    }
-
-    const ok = await submitContactInquiry(inquiry, preferences);
-    if (ok) didSubmitRef.current = true;
-    return ok;
-  };
-
   const handleContinue = async () => {
     if (!canContinue || saving) return;
-    setSaving(true);
-    await ensureInquirySent({
+    const session = sessionRef.current;
+    const preferences = {
       buyerType,
       sizeNeed,
       interest,
       purchaseBudget,
       workingWithRealtor,
-    });
+    };
+    confirmedPrefsRef.current = preferences;
+    setSaving(true);
+    setSendFailed(false);
+    const ok = await sendPending(preferences);
+    if (session !== sessionRef.current) return;
     setSaving(false);
-    setStep("thanks");
+    if (ok) {
+      setStep("thanks");
+    } else {
+      setSendFailed(true);
+    }
   };
 
-  const handleOpenChange = async (next) => {
-    if (!next) {
-      // Outside click / X close: still submit the inquiry if pending
-      if (pendingSubmit && inquiry && !didSubmitRef.current) {
-        setSaving(true);
-        await ensureInquirySent(null);
-        setSaving(false);
-      }
-      setOpen(false);
-      resetPrefs();
-      setUserName("");
-      setPartnerName(null);
-      setInquiry(null);
-      setPendingSubmit(false);
-      didSubmitRef.current = false;
+  const handleOpenChange = (next) => {
+    if (next) {
+      setOpen(true);
       return;
     }
-    setOpen(next);
+    // Outside click / X / Done: close right away, send without blocking the UI
+    sessionRef.current += 1;
+    setOpen(false);
+    resetPrefs();
+    setUserName("");
+    setPartnerName(null);
+    settlePending();
   };
 
   const thankYouLine = partnerName
@@ -274,11 +318,17 @@ export default function LeadFollowUpHost() {
               />
             </div>
 
+            {sendFailed && (
+              <p role="alert" className="mt-4 text-[13px] text-red-600">
+                We couldn&apos;t send your request. Please try again.
+              </p>
+            )}
+
             <button
               type="button"
               onClick={handleContinue}
               disabled={!canContinue || saving}
-              className="mt-6 w-full rounded-xl bg-neutral-900 px-4 py-3 text-sm font-medium text-white transition-colors hover:bg-neutral-800 disabled:cursor-not-allowed disabled:bg-neutral-300"
+              className={`${sendFailed ? "mt-3" : "mt-6"} w-full rounded-xl bg-neutral-900 px-4 py-3 text-sm font-medium text-white transition-colors hover:bg-neutral-800 disabled:cursor-not-allowed disabled:bg-neutral-300`}
             >
               {saving ? "Sending..." : "Continue"}
             </button>

@@ -11,9 +11,28 @@ const CityPopup = ({ cityName, popupData, showPopup, onClose }) => {
     email: "",
     phone: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitBtn, setSubmitBtn] = useState("Request Info From Builder");
+  const [submitBtn] = useState("Request Info From Builder");
   const [showFullDisclaimer, setShowFullDisclaimer] = useState(false);
+
+  // While open: lock page scroll behind the popup and close on Escape
+  useEffect(() => {
+    if (!popupData || !showPopup) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (e) => {
+      if (e.key !== "Escape") return;
+      setShowForm(false);
+      if (onClose) onClose();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [popupData, showPopup, onClose]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -24,96 +43,40 @@ const CityPopup = ({ cityName, popupData, showPopup, onClose }) => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitBtn("SUBMITTING...");
 
-    try {
-      let form_data = new FormData();
+    const fullUrl =
+      typeof window !== "undefined" ? window.location.href : "no-url-captured";
 
-      // Get the complete URL
-      let fullUrl = "no-url-captured";
-      if (typeof window !== "undefined") {
-        try {
-          fullUrl = window.location.href;
-        } catch (error) {
-          console.error("Error capturing URL:", error);
-          fullUrl = "error-capturing-url";
-        }
-      }
-
-      // Prepare form data
-      form_data.append("name", formData.firstName);
-      form_data.append("email", formData.email);
-      form_data.append("phone", formData.phone);
-      form_data.append(
-        "message",
-        `[POPUP INQUIRY] I would like to get the pricing, floor plans, and payment plan for ${popupData.PopupName} in ${cityName}. Please contact me with more information. This inquiry was submitted through the city popup on your website.`
-      );
-      form_data.append("popup_id", popupData.id || "");
-      form_data.append("realtor", "No");
-      form_data.append("source", `${fullUrl} - City Popup (${cityName})`);
-      form_data.append("popup_city", cityName);
-      form_data.append("builder_email", popupData.popupBuilderEmail || "");
-      form_data.append("inquiry_type", "City Popup Form");
-
-      const response = await fetch(
-        "https://admin.homebaba.ca/api/builder-popup-submit/",
-        {
-          method: "POST",
-          body: form_data,
-        }
-      );
-
-      if (response.ok) {
-        setSubmitBtn("SUCCESSFULLY SUBMITTED");
-
-        // Close the popup immediately to prevent backdrop stacking
-        if (onClose) {
-          onClose();
-        }
-        setShowForm(false); // Reset form stage
-
-        openLeadFollowUp({
-          userName: formData.firstName || "",
-          inquiry: {
-            name: formData.firstName || "",
-            email: formData.email,
-            phone: formData.phone,
-            message: `[POPUP INQUIRY] I would like to get the pricing, floor plans, and payment plan for ${popupData.PopupName} in ${cityName}. Please contact me with more information. This inquiry was submitted through the city popup on your website.`,
-            realtor: "No",
-            proj_name: popupData.PopupName || "",
-            cityy: cityName || "",
-            source: `${fullUrl} - City Popup (${cityName})`,
-          },
-        });
-
-        // Reset form
-        setFormData({ firstName: "", email: "", phone: "" });
-      } else {
-        throw new Error("Form submission failed");
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      setSubmitBtn("FAILED TO SUBMIT. TRY AGAIN");
-
-      if (typeof window !== "undefined" && window.swal) {
-        window.swal(
-          "Submission Failed",
-          "Cannot send your message. Please try again.",
-          "error"
-        );
-      } else {
-        alert("Failed to submit form. Please try again.");
-      }
-
-      setTimeout(() => {
-        setSubmitBtn("Request Prices & Floor Plans");
-      }, 3000);
-    } finally {
-      setIsSubmitting(false);
+    // Close the popup immediately to prevent backdrop stacking
+    if (onClose) {
+      onClose({ submitted: true });
     }
+    setShowForm(false); // Reset form stage
+
+    // Sent once by the Quick Preferences popup (with answers, or without on dismiss)
+    openLeadFollowUp({
+      userName: formData.firstName || "",
+      inquiry: {
+        endpoint: "https://admin.homebaba.ca/api/builder-popup-submit/",
+        name: formData.firstName || "",
+        email: formData.email,
+        phone: formData.phone,
+        message: `[POPUP INQUIRY] I would like to get the pricing, floor plans, and payment plan for ${popupData.PopupName} in ${cityName}. Please contact me with more information. This inquiry was submitted through the city popup on your website.`,
+        realtor: "No",
+        source: `${fullUrl} - City Popup (${cityName})`,
+        extraFields: {
+          popup_id: popupData.id || "",
+          popup_city: cityName,
+          builder_email: popupData.popupBuilderEmail || "",
+          inquiry_type: "City Popup Form",
+        },
+      },
+    });
+
+    // Reset form
+    setFormData({ firstName: "", email: "", phone: "" });
   };
 
   const closePopup = () => {
@@ -402,7 +365,6 @@ const CityPopup = ({ cityName, popupData, showPopup, onClose }) => {
                     {/* Submit Button */}
                     <button
                       type="submit"
-                      disabled={isSubmitting}
                       className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1 active:translate-y-0 shadow-lg hover:shadow-xl text-sm mt-6"
                     >
                       {submitBtn}

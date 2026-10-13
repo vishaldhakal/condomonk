@@ -23,9 +23,9 @@ export default function NotifyPopup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Close first so the Quick Preferences popup is not stacked on this one
+    setIsOpen(false);
     ContactFormSubmit(credentials, setSubmitbtn, setCredentials);
-    // close after short delay to let swal show
-    setTimeout(() => setIsOpen(false), 500);
   };
 
   return (

@@ -55,10 +55,9 @@
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Close first so the Quick Preferences popup is not stacked on this one
+    setIsModalOpen(false);
     ContactFormSubmit(formData, setSubmitBtn, setFormData);
-    setTimeout(() => {
-      setIsModalOpen(false);
-    }, 2000);
   };
 
   const handleChange = (e) => {

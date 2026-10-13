@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import ContactFormDisclaimer from "./ContactFormDisclaimer";
 import { formatPhoneNumber, handlePhoneKeyDown } from "@/utils/phoneUtils";
+import { openLeadFollowUp } from "@/helpers/leadFollowUp";
 
 const ImagePopup = ({ cityName, popupData, showPopup, onClose }) => {
   const [showForm, setShowForm] = useState(false);
@@ -12,8 +13,7 @@ const ImagePopup = ({ cityName, popupData, showPopup, onClose }) => {
     phone: "",
     message: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitBtn, setSubmitBtn] = useState("Submit Inquiry");
+  const [submitBtn] = useState("Submit Inquiry");
   const [showFullDisclaimer, setShowFullDisclaimer] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -26,6 +26,26 @@ const ImagePopup = ({ cityName, popupData, showPopup, onClose }) => {
       img.src = popupData.image;
     }
   }, [popupData]);
+
+  // While open: lock page scroll behind the popup and close on Escape
+  useEffect(() => {
+    if (!popupData || !showPopup) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (e) => {
+      if (e.key !== "Escape") return;
+      setShowForm(false);
+      if (onClose) onClose();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [popupData, showPopup, onClose]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -40,94 +60,39 @@ const ImagePopup = ({ cityName, popupData, showPopup, onClose }) => {
     setShowForm(true);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitBtn("Submitting...");
 
-    try {
-      let form_data = new FormData();
-      let fullUrl = "no-url-captured";
+    const fullUrl =
+      typeof window !== "undefined" ? window.location.href : "no-url-captured";
 
-      if (typeof window !== "undefined") {
-        try {
-          fullUrl = window.location.href;
-        } catch (error) {
-          fullUrl = "error-capturing-url";
-        }
-      }
-
-      form_data.append("name", formData.name);
-      form_data.append("email", formData.email);
-      form_data.append("phone", formData.phone);
-      form_data.append(
-        "message",
-        formData.message ||
-          `[IMAGE POPUP INQUIRY] I would like to get more information about the property in ${cityName}. Please contact me with details. This inquiry was submitted through the image popup on your website.`
-      );
-      form_data.append("image_popup_id", popupData.id || "");
-      form_data.append("source", `${fullUrl} - Image Popup (${cityName})`);
-
-      const response = await fetch(
-        "https://admin.homebaba.ca/api/image-popup-submit/",
-        {
-          method: "POST",
-          body: form_data,
-        }
-      );
-
-      if (response.ok) {
-        setSubmitBtn("Successfully Submitted");
-
-        // Show success message using SweetAlert if available
-        if (typeof window !== "undefined" && window.swal) {
-          window.swal(
-            `Thank You, ${formData.name}!`,
-            "Please expect an email or call from us shortly",
-            "success"
-          );
-        } else {
-          // Fallback alert
-          alert(
-            `Thank you, ${formData.name}! Your inquiry has been sent successfully.`
-          );
-        }
-
-        // Reset form
-        setFormData({ name: "", email: "", phone: "", message: "" });
-
-        // Close popup after successful submission
-        setTimeout(() => {
-          if (onClose) {
-            onClose();
-          }
-          setShowForm(false);
-          setSubmitBtn("Submit Inquiry");
-        }, 2000);
-      } else {
-        throw new Error("Form submission failed");
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      setSubmitBtn("Failed to submit. Try again.");
-
-      // Show error message using SweetAlert if available
-      if (typeof window !== "undefined" && window.swal) {
-        window.swal(
-          "Submission Failed",
-          "Cannot send your message. Please try again.",
-          "error"
-        );
-      } else {
-        alert("Failed to submit form. Please try again.");
-      }
-
-      setTimeout(() => {
-        setSubmitBtn("Submit Inquiry");
-      }, 3000);
-    } finally {
-      setIsSubmitting(false);
+    // Close the popup immediately to prevent backdrop stacking
+    if (onClose) {
+      onClose({ submitted: true });
     }
+    setShowForm(false);
+
+    // Sent once by the Quick Preferences popup (with answers, or without on dismiss)
+    openLeadFollowUp({
+      userName: formData.name || "",
+      inquiry: {
+        endpoint: "https://admin.homebaba.ca/api/image-popup-submit/",
+        name: formData.name || "",
+        email: formData.email,
+        phone: formData.phone,
+        message:
+          formData.message ||
+          `[IMAGE POPUP INQUIRY] I would like to get more information about the property in ${cityName}. Please contact me with details. This inquiry was submitted through the image popup on your website.`,
+        realtor: "No",
+        source: `${fullUrl} - Image Popup (${cityName})`,
+        extraFields: {
+          image_popup_id: popupData.id || "",
+        },
+      },
+    });
+
+    // Reset form
+    setFormData({ name: "", email: "", phone: "", message: "" });
   };
 
   const closePopup = () => {
@@ -269,7 +234,6 @@ const ImagePopup = ({ cityName, popupData, showPopup, onClose }) => {
 
                   <button
                     type="submit"
-                    disabled={isSubmitting}
                     className="w-full bg-black hover:bg-slate-800 text-white py-3 rounded-xl text-base font-bold transition duration-200 shadow-large disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {submitBtn}

@@ -1,11 +1,14 @@
-import axios from "axios";
-import swal from "sweetalert";
 import { openLeadFollowUp } from "@/helpers/leadFollowUp";
 
+/**
+ * Shared handler for the contact forms.
+ *
+ * Nothing is posted here. The inquiry is handed to the Quick Preferences popup,
+ * which sends it once: with the answers on Continue, or without them if the
+ * visitor dismisses the popup. Repeat inquiries from the same email / phone on
+ * the same day still see the success flow but are not sent again.
+ */
 function ContactFormSubmit(msgdata, setSubmitbtn, setCredentials) {
-  let baseUrl = "https://admin.homebaba.ca";
-  setSubmitbtn("Submitting...");
-
   // Parse URL to get city and project name
   const path = window.location.pathname.split("/").filter(Boolean);
   let city = null;
@@ -18,92 +21,31 @@ function ContactFormSubmit(msgdata, setSubmitbtn, setCredentials) {
     proj_name = path[1];
   }
 
-  // Get the full URL of the page
-  let fullUrl = "no-url-captured";
+  const fullUrl = window.location.href;
 
-  if (typeof window !== "undefined") {
-    try {
-      // Get the complete URL
-      fullUrl = window.location.href;
-      console.log("Full URL captured:", fullUrl);
-    } catch (error) {
-      console.error("Error capturing full URL:", error);
-    }
-  }
+  openLeadFollowUp({
+    userName: msgdata.name || "",
+    partnerdata: msgdata.partnerdata || null,
+    inquiry: {
+      name: msgdata.name || "",
+      email: msgdata.email || "",
+      phone: msgdata.phone || "",
+      message: msgdata.message || "",
+      realtor: msgdata.realtor || "No",
+      proj_name: proj_name || "",
+      cityy: city || "",
+      source: fullUrl,
+      full_url: fullUrl,
+    },
+  });
 
-  // Use the full URL as the source as well to ensure it's being sent correctly
-  let source = fullUrl;
-
-  // Log all the data we're about to send
-  console.log("Form submission data:");
-  console.log("- Full URL:", fullUrl);
-  console.log("- Source:", source);
-  console.log("- City:", city);
-  console.log("- Project Name:", proj_name);
-
-  // Form data for homebaba API
-  let form_data = new FormData();
-  form_data.append("name", msgdata.name);
-  form_data.append("email", msgdata.email);
-  form_data.append("phone", msgdata.phone);
-  form_data.append("message", msgdata.message);
-  form_data.append("realtor", msgdata.realtor);
-  form_data.append("proj_name", proj_name || ""); // Send empty string if null
-  form_data.append("cityy", city || ""); // Send empty string if null
-  form_data.append("source", source); // Now using full URL as source
-  form_data.append("full_url", fullUrl); // Add the full URL to the form data
-
-  // Log the FormData entries to verify what's being sent
-  console.log("FormData entries:");
-  for (let pair of form_data.entries()) {
-    console.log(`- ${pair[0]}: ${pair[1]}`);
-  }
-
-  // Send request to Homebaba API
-  axios
-    .post(`${baseUrl}/api/contact-form-submit/`, form_data, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Accept: "*/*",
-      },
-      withCredentials: false,
-    })
-    .then((response) => {
-      console.log("Homebaba API Response:", response);
-      setSubmitbtn("Successfully Submitted");
-      setTimeout(() => {
-        setSubmitbtn("Contact Now");
-      }, 2000);
-
-      openLeadFollowUp({
-        userName: msgdata.name || "",
-        partnerdata: msgdata.partnerdata || null,
-        inquiry: {
-          name: msgdata.name || "",
-          email: msgdata.email,
-          phone: msgdata.phone,
-          message: msgdata.message || "",
-          realtor: msgdata.realtor || "No",
-          proj_name: proj_name || "",
-          cityy: city || "",
-          source: source,
-        },
-      });
-
-      setCredentials({
-        ...msgdata,
-        name: "",
-        phone: "",
-        email: "",
-        message: "",
-      });
-    })
-    .catch((error) => {
-      console.error("Homebaba API Error:", error);
-      console.log("Form Data:", Object.fromEntries(form_data));
-      setSubmitbtn("Contact Now");
-      swal("Message Failed", "Cannot send your message", "error");
-    });
+  // Keep the message so the form's default text survives for the next visitor action
+  setCredentials({
+    ...msgdata,
+    name: "",
+    phone: "",
+    email: "",
+  });
 }
 
 export default ContactFormSubmit;

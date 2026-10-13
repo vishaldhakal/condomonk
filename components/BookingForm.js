@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import axios from "axios";
-import swal from "sweetalert";
 import { CalendarIcon } from "lucide-react";
 import ContactFormDisclaimer from "./ContactFormDisclaimer";
 import { formatPhoneNumber, handlePhoneKeyDown } from "@/utils/phoneUtils";
@@ -14,8 +12,8 @@ export default function BookingForm({
   price,
   transactionType,
 }) {
-  const [loading, setLoading] = useState(false);
-  const [submitBtn, setSubmitBtn] = useState("Book a Showing");
+  const [loading] = useState(false);
+  const [submitBtn] = useState("Book a Showing");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -50,77 +48,41 @@ export default function BookingForm({
   const dates = generateDates();
   const [selectedDate, setSelectedDate] = useState(dates[0].fullDate);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    setSubmitBtn("Submitting...");
 
-    try {
-      // Get the full URL for source
-      const fullUrl = window.location.href;
+    const fullUrl = window.location.href;
 
-      let form_data = new FormData();
-      form_data.append("full_name", formData.name);
-      form_data.append("email", formData.email);
-      form_data.append("phone", formData.phone);
-      form_data.append(
-        "message",
-        formData.description || `Showing request for ${address}`,
-      );
-      form_data.append("realtor", formData.realtor);
-      form_data.append("proj_name", address || "");
-      form_data.append("source", fullUrl);
-
-      if (formData.date) {
-        form_data.append("preferred_date", formData.date);
-      }
-
-      const url = "https://admin.homebaba.ca/api/contact-form-resale-submit/";
-      const response = await axios.post(url, form_data, {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-        mode: "no-cors",
-      });
-
-      setLoading(false);
-      setSubmitBtn("Successfully Submitted");
-      
-      openLeadFollowUp({
-        userName: formData.name || "",
-        inquiry: {
-          name: formData.name || "",
-          email: formData.email,
-          phone: formData.phone,
-          message: formData.description || `Showing request for ${address}`,
-          realtor: formData.realtor || "No",
+    // Sent once by the Quick Preferences popup (with answers, or without on dismiss)
+    openLeadFollowUp({
+      userName: formData.name || "",
+      inquiry: {
+        endpoint: "https://admin.homebaba.ca/api/contact-form-resale-submit/",
+        nameField: "full_name",
+        name: formData.name || "",
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.description || `Showing request for ${address}`,
+        realtor: formData.realtor || "No",
+        source: fullUrl,
+        extraFields: {
           proj_name: address || "",
-          cityy: typeof window !== "undefined" ? window.location.pathname.split("/")[1] || "" : "",
-          source: fullUrl,
+          preferred_date: formData.date || undefined,
         },
-      });
+      },
+    });
 
-      // Reset form
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        description: "",
-        date: "",
-        realtor: "No",
-        proj_name: address,
-        message: "",
-      });
-    } catch (error) {
-      console.error("Failed to submit form:", error);
-      setLoading(false);
-      setSubmitBtn("Book a Showing");
-      await swal(
-        "Message Failed",
-        "Cannot send your message. Please try again.",
-        "error",
-      );
-    }
+    // Reset form
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      description: "",
+      date: "",
+      realtor: "No",
+      proj_name: address,
+      message: "",
+    });
   };
 
   const handleChange = (e) => {

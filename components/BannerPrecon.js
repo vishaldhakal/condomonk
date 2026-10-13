@@ -48,11 +48,8 @@ export default function BannerPrecon({
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    setShowContactModal(false);
     ContactFormSubmit(credentials, setSubmitBtn, setCredentials);
-    const timer = setTimeout(() => {
-      setShowContactModal(false);
-    }, 2000);
-    return () => clearTimeout(timer);
   };
 
   const handleReserveNow = () => {

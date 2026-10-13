@@ -29,7 +29,7 @@ const projects = [
 export default function CommunityPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
-  const [submitBtn, setSubmitBtn] = useState("Request Prices & Floor Plans");
+  const [submitBtn] = useState("Request Prices & Floor Plans");
   const [selectedProject, setSelectedProject] = useState(null);
   const pathname = usePathname();
   const [isCityPopupActive, setIsCityPopupActive] = useState(false);
@@ -118,94 +118,31 @@ export default function CommunityPopup() {
     setIsOpen(false);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitBtn("Submitting...");
+    if (!formData.name || !formData.email || !formData.phone) return;
 
-    let form_data = new FormData();
+    setIsOpen(false); // Close modal immediately
 
-    // Log window object availability
-    console.log("Window object available:", typeof window !== "undefined");
+    // Sent once by the Quick Preferences popup (with answers, or without on dismiss)
+    openLeadFollowUp({
+      userName: formData.name || "",
+      inquiry: {
+        name: formData.name || "",
+        email: formData.email,
+        phone: formData.phone,
+        message: `I would like to get the price list and floor plans for ${
+          selectedProject?.name || "the selected project"
+        }`,
+        realtor: "No",
+        proj_name: selectedProject?.name || "",
+        cityy: selectedProject?.city || "",
+        source: typeof window !== "undefined" ? window.location.href : "",
+      },
+    });
 
-    // Get the complete URL with multiple methods for debugging
-    let fullUrl = "no-url-captured";
-
-    if (typeof window !== "undefined") {
-      try {
-        fullUrl = window.location.href;
-        console.log("Current URL:", fullUrl);
-      } catch (error) {
-        console.error("Error capturing URL:", error);
-        fullUrl = "error-capturing-url";
-      }
-    }
-
-    // Log form data being prepared
-    console.log("Form data preparation started");
-    form_data.append("name", formData.name);
-    form_data.append("email", formData.email);
-    form_data.append("phone", formData.phone);
-    form_data.append(
-      "message",
-      `I would like to get the price list and floor plans for ${
-        selectedProject?.name || "the selected project"
-      }`
-    );
-    form_data.append("realtor", "No");
-    form_data.append("source", fullUrl);
-
-    // Log form data entries if possible
-    try {
-      console.log("Form data entries:");
-      for (let pair of form_data.entries()) {
-        console.log(pair[0] + ": " + pair[1]);
-      }
-    } catch (e) {
-      console.log("Could not log form data entries:", e);
-    }
-
-    try {
-      const response = await fetch(
-        "https://admin.homebaba.ca/api/contact-form-submit/",
-        {
-          method: "POST",
-          body: form_data,
-        }
-      );
-
-      if (response.ok) {
-        setSubmitBtn("Successfully Submitted");
-        setIsOpen(false); // Close modal immediately
-
-        openLeadFollowUp({
-          userName: formData.name || "",
-          inquiry: {
-            name: formData.name || "",
-            email: formData.email,
-            phone: formData.phone,
-            message: `User is interested in learning more about ${selectedProject?.name || "the selected project"}.`,
-            realtor: "No",
-            proj_name: selectedProject?.name || "",
-            cityy: selectedProject?.city || "",
-            source: typeof window !== "undefined" ? window.location.href : "",
-          },
-        });
-
-        localStorage.setItem("communityFormSubmitted2", "true");
-        setFormData({ name: "", email: "", phone: "" });
-      } else {
-        throw new Error("Form submission failed");
-      }
-    } catch (error) {
-      console.error("Form submission error:", error);
-      setSubmitBtn("Failed to submit. Try again");
-      if (typeof window !== "undefined" && window.swal) {
-        window.swal("Message Failed", "Cannot send your message", "error");
-      }
-      setTimeout(() => {
-        setSubmitBtn("Request Prices & Floor Plans");
-      }, 3000);
-    }
+    localStorage.setItem("communityFormSubmitted2", "true");
+    setFormData({ name: "", email: "", phone: "" });
   };
 
   const handleChange = (e) => {
