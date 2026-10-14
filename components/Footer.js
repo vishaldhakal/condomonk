@@ -202,6 +202,15 @@ const Footer = ({ cities }) => {
           <p className="text-sm text-gray-600 mt-1">
             Condomonk is a digital asset of Homebaba Technologies Inc.{" "}
           </p>
+          <a
+            href="https://homebaba.ca/"
+            target="_blank"
+            rel="noopener"
+            className="inline-flex items-center gap-1.5 mt-4 px-4 py-1.5 rounded-full border border-gray-200 bg-gray-50 text-xs text-gray-600 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+          >
+            <span>Powered by</span>
+            <span className="font-bold text-gray-900">Homebaba</span>
+          </a>
         </div>
       </footer>
     </div>
