@@ -1,5 +1,6 @@
 import HorizontalCondoCard from "@/components/HorizontalCondoCard";
 import RightSidebarLinks from "@/components/RightSidebarLinks";
+import GoodAccountingNote from "@/components/GoodAccountingNote";
 import BottomContactForm from "@/components/BottomContactForm";
 import { notFound } from "next/navigation";
 import PreconSchema from "@/components/PreconSchema";
@@ -655,6 +656,7 @@ export default async function CityPage({ params }) {
                     className="w-full h-auto hover:scale-[1.02] transition-transform duration-200"
                   />
                 </a>
+                <GoodAccountingNote />
               </div>
             </div>
           </div>

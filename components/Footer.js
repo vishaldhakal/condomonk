@@ -3,6 +3,30 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Newsletter from "./Newsletter";
 
+const partners = [
+  {
+    name: "Good Accounting",
+    href: "https://goodaccounting.ca/",
+    logo: "/partner/good-accounting.webp",
+  },
+  {
+    name: "Homebaba",
+    href: "https://homebaba.ca/",
+    logo: "/partner/homebaba-logo.webp",
+  },
+  { name: "Bizmonk", href: "https://bizmonk.ca/", logo: "/partner/bizmonk.webp" },
+  {
+    name: "The Halton",
+    href: "https://thehalton.ca/",
+    logo: "/partner/thehalton.webp",
+  },
+  {
+    name: "The Pickering",
+    href: "https://thepickering.ca/",
+    logo: "/partner/pickering.webp",
+  },
+];
+
 const Footer = ({ cities }) => {
   const pathname = usePathname();
 
@@ -211,6 +235,32 @@ const Footer = ({ cities }) => {
             <span>Powered by</span>
             <span className="font-bold text-gray-900">Homebaba</span>
           </a>
+        </div>
+
+        <div className="max-w-5xl mx-auto px-4 pt-8 mt-5 border-t border-gray-200">
+          <p className="text-center text-xs font-semibold uppercase tracking-widest text-gray-500">
+            Our Partners
+          </p>
+          <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+            {partners.map((partner) => (
+              <li key={partner.href}>
+                <a
+                  href={partner.href}
+                  target="_blank"
+                  rel="noopener"
+                  title={partner.name}
+                  className="block opacity-80 hover:opacity-100 transition-opacity"
+                >
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    loading="lazy"
+                    className="h-8 w-auto object-contain"
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </footer>
     </div>

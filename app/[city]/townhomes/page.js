@@ -1,6 +1,7 @@
 import CondoCard from "@/components/CondoCard";
 import HorizontalCondoCard from "@/components/HorizontalCondoCard";
 import RightSidebarLinks from "@/components/RightSidebarLinks";
+import GoodAccountingNote from "@/components/GoodAccountingNote";
 import BottomContactForm from "@/components/BottomContactForm";
 import Newsletter from "@/components/Newsletter";
 import { notFound } from "next/navigation";
@@ -329,6 +330,7 @@ export default async function TownhomesPage({ params }) {
                       className="w-full h-auto hover:scale-[1.02] transition-transform duration-200"
                     />
                   </a>
+                  <GoodAccountingNote />
                 </div>
               </div>
             </div>
