@@ -641,11 +641,20 @@ export default async function CityPage({ params }) {
             {/* Ad Placement - Sticky */}
             <div className="sticky top-5 z-20">
               <div className="bg-white">
-                <img
-                  src="/des.png"
-                  alt="Real Estate Investment"
-                  className="w-full h-auto object-contain hover:scale-105 transition-transform duration-200"
-                />
+                <a
+                  href="http://goodaccounting.ca"
+                  target="_blank"
+                  className="block overflow-hidden rounded-xl shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <img
+                    src="/goodaccounting-new-ad.webp"
+                    alt="Good Accounting - Book a free 15 minute call with an accountant"
+                    width={1080}
+                    height={1500}
+                    loading="lazy"
+                    className="w-full h-auto hover:scale-[1.02] transition-transform duration-200"
+                  />
+                </a>
               </div>
             </div>
           </div>

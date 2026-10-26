@@ -6,7 +6,13 @@ const nearbyCitiesOntario = {
   mississauga: ["toronto", "brampton", "oakville", "vaughan", "burlington"],
   brampton: ["mississauga", "vaughan", "caledon", "toronto", "georgetown"],
   vaughan: ["toronto", "markham", "richmond-hill", "brampton", "king"],
-  markham: ["richmond-hill", "vaughan", "pickering", "toronto", "whitchurch-stouffville"],
+  markham: [
+    "richmond-hill",
+    "vaughan",
+    "pickering",
+    "toronto",
+    "whitchurch-stouffville",
+  ],
   "richmond-hill": ["vaughan", "markham", "aurora", "newmarket", "toronto"],
   oakville: ["burlington", "mississauga", "milton", "hamilton", "toronto"],
   burlington: ["oakville", "hamilton", "milton", "mississauga", "dundas"],
@@ -19,7 +25,13 @@ const nearbyCitiesOntario = {
 
 const nearbyCitiesAlberta = {
   calgary: ["airdrie", "cochrane", "okotoks", "chestermere", "canmore"],
-  edmonton: ["st-albert", "sherwood-park", "spruce-grove", "leduc", "fort-saskatchewan"],
+  edmonton: [
+    "st-albert",
+    "sherwood-park",
+    "spruce-grove",
+    "leduc",
+    "fort-saskatchewan",
+  ],
 };
 
 const priceRanges = [
@@ -32,9 +44,7 @@ const priceRanges = [
 ];
 
 function capitalizeWords(str) {
-  return str
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase());
+  return str.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 const sectionHeader =
@@ -47,32 +57,15 @@ export default function RightSidebarLinks({
   citySlug,
   assignmentsCount,
 }) {
-  const isAlbertaCity = ["calgary", "edmonton"].includes(citySlug.toLowerCase());
+  const isAlbertaCity = ["calgary", "edmonton"].includes(
+    citySlug.toLowerCase(),
+  );
   const nearbyCities = isAlbertaCity
     ? nearbyCitiesAlberta[citySlug.toLowerCase()] || []
     : nearbyCitiesOntario[citySlug.toLowerCase()] || [];
 
   const content = (
     <div className="space-y-1">
-      {/* Good Accounting Ad */}
-      <div className="px-4 pb-4">
-        <a
-          href="http://goodaccounting.ca"
-          target="_blank"
-          rel="noopener noreferrer sponsored"
-          className="block overflow-hidden rounded-xl shadow-sm hover:shadow-md transition-shadow"
-        >
-          <img
-            src="/goodaccounting-new-ad.webp"
-            alt="Good Accounting - Book a free 15 minute call with an accountant"
-            width={1080}
-            height={1500}
-            loading="lazy"
-            className="w-full h-auto hover:scale-[1.02] transition-transform duration-200"
-          />
-        </a>
-      </div>
-
       {/* Alert Me */}
       <div className="bg-white rounded-lg p-4 pt-0">
         <p className="text-sm text-black mb-3">
@@ -163,11 +156,9 @@ export default function RightSidebarLinks({
           <h2 className={sectionHeader}>Assignment Sales</h2>
           <div className="ps-3">
             <h3 className="text-sm font-normal">
-              <Link
-                href={`/assignment-sale/${citySlug}`}
-                className={linkStyle}
-              >
-                {assignmentsCount} Assignment Sale{assignmentsCount > 1 ? "s" : ""} in {cityName}
+              <Link href={`/assignment-sale/${citySlug}`} className={linkStyle}>
+                {assignmentsCount} Assignment Sale
+                {assignmentsCount > 1 ? "s" : ""} in {cityName}
               </Link>
             </h3>
           </div>
