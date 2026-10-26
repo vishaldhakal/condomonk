@@ -1,5 +1,5 @@
 const GoodAccountingNote = () => (
-  <p className="mt-4 text-sm text-gray-700 leading-relaxed">
+  <p className="mt-4 text-xs text-gray-700 leading-relaxed">
     Have questions on the{" "}
     <a
       href="https://goodaccounting.ca/services/hst-gst-filing"
