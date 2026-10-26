@@ -54,6 +54,25 @@ export default function RightSidebarLinks({
 
   const content = (
     <div className="space-y-1">
+      {/* Good Accounting Ad */}
+      <div className="px-4 pb-4">
+        <a
+          href="http://goodaccounting.ca"
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          className="block overflow-hidden rounded-xl shadow-sm hover:shadow-md transition-shadow"
+        >
+          <img
+            src="/goodaccounting-new-ad.webp"
+            alt="Good Accounting - Book a free 15 minute call with an accountant"
+            width={1080}
+            height={1500}
+            loading="lazy"
+            className="w-full h-auto hover:scale-[1.02] transition-transform duration-200"
+          />
+        </a>
+      </div>
+
       {/* Alert Me */}
       <div className="bg-white rounded-lg p-4 pt-0">
         <p className="text-sm text-black mb-3">
