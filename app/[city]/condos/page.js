@@ -14,7 +14,7 @@ async function getData(city) {
     `https://api.condomonk.ca/api/preconstructions-city/${city}?project_type=Condo&page_size=200`,
     {
       next: { revalidate: 3600 }, // Cache for 1 hour
-    }
+    },
   );
 
   if (!res.ok) {
@@ -50,11 +50,11 @@ export async function generateMetadata({ params }, parent) {
     //   ? `Explore ${data.preconstructions.length}+ pre construction condos in ${cityName}. Find affordable 1-4 bedroom new construction condos with updated floor plans & pricing.`
     //   : `Find new condos for sale in ${CapitalizeFirst(cityName)} | Check out plans, pricing, and availability`,
     title: !["calgary", "edmonton"].includes(city)
-  ? `New Pre Construction Condos in ${cityName}, Ontario (2026) | Condomonk`
-  : `${cityName} Pre Construction & New Condos For Sale (2026) | Condomonk`,
-     description: !["calgary", "edmonton"].includes(city)
-  ? `Browse ${data.preconstructions.length}+ pre construction condos in ${cityName}, Ontario for 2026. Explore new condos with pricing, floor plans & VIP access. Updated daily.`
-  : `Find new condos for sale in ${cityName} | Check out plans, pricing, and availability`,
+      ? `New Pre Construction Condos in ${cityName}, Ontario (2026) | Condomonk`
+      : `${cityName} Pre Construction & New Condos For Sale (2026) | Condomonk`,
+    description: !["calgary", "edmonton"].includes(city)
+      ? `Browse ${data.preconstructions.length}+ pre construction condos in ${cityName}, Ontario for 2026. Explore new condos with pricing, floor plans & VIP access. Updated daily.`
+      : `Find new condos for sale in ${cityName} | Check out plans, pricing, and availability`,
   };
 }
 
@@ -65,10 +65,10 @@ export default async function CondosPage({ params }) {
 
   // Filter projects by status
   const sellingProjects = data.preconstructions.filter(
-    (item) => item.status === "Selling"
+    (item) => item.status === "Selling",
   );
   const upcomingProjects = data.preconstructions.filter(
-    (item) => item.status === "Upcoming"
+    (item) => item.status === "Upcoming",
   );
 
   // ── Schema.org structured data ──────────────────────────────────────────
@@ -79,7 +79,8 @@ export default async function CondosPage({ params }) {
         ? property.images[0].split(",")[0]
         : "https://condomonk.ca/noimage.webp";
     const developerName = property.developer?.name || "Developer";
-    const price = property.price_starting_from > 0 ? property.price_starting_from : 0;
+    const price =
+      property.price_starting_from > 0 ? property.price_starting_from : 0;
 
     return {
       "@type": "Product",
@@ -117,12 +118,29 @@ export default async function CondosPage({ params }) {
         },
         shippingDetails: {
           "@type": "OfferShippingDetails",
-          shippingRate: { "@type": "MonetaryAmount", value: "0", currency: "CAD" },
-          shippingDestination: { "@type": "DefinedRegion", addressCountry: "CA" },
+          shippingRate: {
+            "@type": "MonetaryAmount",
+            value: "0",
+            currency: "CAD",
+          },
+          shippingDestination: {
+            "@type": "DefinedRegion",
+            addressCountry: "CA",
+          },
           deliveryTime: {
             "@type": "ShippingDeliveryTime",
-            handlingTime: { "@type": "QuantitativeValue", minValue: "0", maxValue: "1", unitCode: "DAY" },
-            transitTime: { "@type": "QuantitativeValue", minValue: "1", maxValue: "5", unitCode: "DAY" },
+            handlingTime: {
+              "@type": "QuantitativeValue",
+              minValue: "0",
+              maxValue: "1",
+              unitCode: "DAY",
+            },
+            transitTime: {
+              "@type": "QuantitativeValue",
+              minValue: "1",
+              maxValue: "5",
+              unitCode: "DAY",
+            },
           },
         },
       },
@@ -149,9 +167,24 @@ export default async function CondosPage({ params }) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://condomonk.ca/" },
-      { "@type": "ListItem", position: 2, name: cityName, item: `https://condomonk.ca/${city}` },
-      { "@type": "ListItem", position: 3, name: "Condos", item: `https://condomonk.ca/${city}/condos` },
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://condomonk.ca/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: cityName,
+        item: `https://condomonk.ca/${city}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Condos",
+        item: `https://condomonk.ca/${city}/condos`,
+      },
     ],
   };
   // ────────────────────────────────────────────────────────────────────────
@@ -164,29 +197,42 @@ export default async function CondosPage({ params }) {
   };
 
   const generateSubtitle = () => {
-    const lastUpdated = new Date(Date.now() - 86400000).toLocaleDateString("en-CA", {
-      timeZone: "America/Toronto",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+    const lastUpdated = new Date(Date.now() - 86400000).toLocaleDateString(
+      "en-CA",
+      {
+        timeZone: "America/Toronto",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      },
+    );
 
     if (city == "calgary" || city == "edmonton") {
       return (
         <>
-          Explore 100+ new construction condos in {cityName}, AB from trusted builders. Updated floor plans, pricing & availability for 1–4+ bedroom units.{" "}
-          <span className="text-gray-500 text-sm">Last Updated: {lastUpdated}</span>
+          Explore 100+ new construction condos in {cityName}, AB from trusted
+          builders. Updated floor plans, pricing & availability for 1–4+ bedroom
+          units.{" "}
+          <span className="text-gray-500 text-sm">
+            Last Updated: {lastUpdated}
+          </span>
         </>
       );
     }
     return (
       <>
-        Explore {data.preconstructions.length}+ pre construction condos in {cityName}, ON from trusted{" "}
-        <Link href="/builders" className="text-slate-700 underline hover:text-slate-900">
+        Explore {data.preconstructions.length}+ pre construction condos in{" "}
+        {cityName}, ON from trusted{" "}
+        <Link
+          href="/builders"
+          className="text-slate-700 underline hover:text-slate-900"
+        >
           builders in {cityName}
         </Link>
         . Updated floor plans, pricing & availability for 1–4+ bedroom units.{" "}
-        <span className="text-gray-500 text-sm">Last Updated: {lastUpdated}</span>
+        <span className="text-gray-500 text-sm">
+          Last Updated: {lastUpdated}
+        </span>
       </>
     );
   };
@@ -205,10 +251,20 @@ export default async function CondosPage({ params }) {
       />
       <div className="max-w-[85.625rem] mx-auto px-4 py-12">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-sm text-gray-500 mb-4">
-          <Link href="/" className="hover:text-gray-800 transition-colors">Home</Link>
+        <nav
+          aria-label="Breadcrumb"
+          className="flex items-center gap-1.5 text-sm text-gray-500 mb-4"
+        >
+          <Link href="/" className="hover:text-gray-800 transition-colors">
+            Home
+          </Link>
           <span className="text-gray-400">/</span>
-          <Link href={`/${city}`} className="hover:text-gray-800 transition-colors">{cityName}</Link>
+          <Link
+            href={`/${city}`}
+            className="hover:text-gray-800 transition-colors"
+          >
+            {cityName}
+          </Link>
           <span className="text-gray-400">/</span>
           <span className="text-gray-900 font-medium">Condos</span>
         </nav>
@@ -244,14 +300,35 @@ export default async function CondosPage({ params }) {
             </div>
 
             {/* Right Column - Sidebar Links - Sticky and Scrollable */}
-            <div className="lg:w-1/3">
-              <div className="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <div className="lg:w-2/6">
+              {/* Main Sidebar Links - Normal scroll */}
+              <div className="mb-8">
                 <RightSidebarLinks
-                  cityName={cityName}
-                  citySlug={city}
-                  projectTypes={["Condo", "Townhome", "Detached"]}
-                  assignmentsCount={0}
+                  cityName={CapitalizeFirst(cleanCity)}
+                  citySlug={cleanCity}
+                  projectTypes={cityDirectoryData.city_data.project_types}
+                  assignmentsCount={assignments.data?.length || 0}
                 />
+              </div>
+
+              {/* Ad Placement - Sticky */}
+              <div className="sticky top-5 z-20">
+                <div className="bg-white">
+                  <a
+                    href="http://goodaccounting.ca"
+                    target="_blank"
+                    className="block overflow-hidden rounded-xl shadow-sm hover:shadow-md transition-shadow"
+                  >
+                    <img
+                      src="/goodaccounting-new-ad.webp"
+                      alt="Good Accounting - Book a free 15 minute call with an accountant"
+                      width={1080}
+                      height={1500}
+                      loading="lazy"
+                      className="w-full h-auto hover:scale-[1.02] transition-transform duration-200"
+                    />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -320,9 +397,10 @@ export default async function CondosPage({ params }) {
 }
 
 // Generate static params for static site generation
-export async function generateStaticParams() { return [];
+export async function generateStaticParams() {
+  return [];
   const cities = await fetch("https://api.condomonk.ca/api/all-city").then(
-    (res) => res.json()
+    (res) => res.json(),
   );
 
   return cities.map((city) => ({

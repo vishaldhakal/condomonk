@@ -301,14 +301,35 @@ export default async function TownhomesPage({ params }) {
             </div>
 
             {/* Right Column - Sidebar Links - Sticky and Scrollable */}
-            <div className="lg:w-1/3">
-              <div className="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <div className="lg:w-2/6">
+              {/* Main Sidebar Links - Normal scroll */}
+              <div className="mb-8">
                 <RightSidebarLinks
-                  cityName={cityName}
-                  citySlug={city}
-                  projectTypes={["Condo", "Townhome", "Detached"]}
-                  assignmentsCount={0}
+                  cityName={CapitalizeFirst(cleanCity)}
+                  citySlug={cleanCity}
+                  projectTypes={cityDirectoryData.city_data.project_types}
+                  assignmentsCount={assignments.data?.length || 0}
                 />
+              </div>
+
+              {/* Ad Placement - Sticky */}
+              <div className="sticky top-5 z-20">
+                <div className="bg-white">
+                  <a
+                    href="http://goodaccounting.ca"
+                    target="_blank"
+                    className="block overflow-hidden rounded-xl shadow-sm hover:shadow-md transition-shadow"
+                  >
+                    <img
+                      src="/goodaccounting-new-ad.webp"
+                      alt="Good Accounting - Book a free 15 minute call with an accountant"
+                      width={1080}
+                      height={1500}
+                      loading="lazy"
+                      className="w-full h-auto hover:scale-[1.02] transition-transform duration-200"
+                    />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
