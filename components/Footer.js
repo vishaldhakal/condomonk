@@ -237,25 +237,32 @@ const Footer = ({ cities }) => {
           </a>
         </div>
 
-        <div className="max-w-5xl mx-auto px-4 pt-8 mt-5 border-t border-gray-200">
-          <p className="text-center text-xs font-semibold uppercase tracking-widest text-gray-500">
-            Our Partners
-          </p>
-          <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+        <div className="max-w-6xl mx-auto px-4 pt-12 pb-4 mt-5 border-t border-gray-200">
+          <div className="text-center">
+            <h3 className="text-2xl md:text-3xl font-bold text-black tracking-tight">
+              Our Trusted Platform Network
+            </h3>
+            <div className="mx-auto mt-3 h-1 w-12 rounded-full bg-black" />
+            <p className="mt-4 text-sm text-gray-600 max-w-xl mx-auto">
+              A family of trusted platforms helping Canadians buy, sell, and
+              invest with confidence.
+            </p>
+          </div>
+          <ul className="mt-8 flex flex-wrap items-stretch justify-center gap-4">
             {partners.map((partner) => (
-              <li key={partner.href}>
+              <li key={partner.href} className="w-[calc(50%-0.5rem)] sm:w-44">
                 <a
                   href={partner.href}
                   target="_blank"
                   rel="noopener"
                   title={partner.name}
-                  className="block opacity-80 hover:opacity-100 transition-opacity"
+                  className="flex h-20 items-center justify-center rounded-xl border border-gray-200 bg-white px-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-md"
                 >
                   <img
                     src={partner.logo}
                     alt={partner.name}
                     loading="lazy"
-                    className="h-8 w-auto object-contain"
+                    className="max-h-9 w-auto max-w-full object-contain"
                   />
                 </a>
               </li>
