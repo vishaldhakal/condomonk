@@ -306,8 +306,8 @@ export default async function TownhomesPage({ params }) {
               {/* Main Sidebar Links - Normal scroll */}
               <div className="mb-8">
                 <RightSidebarLinks
-                  cityName={CapitalizeFirst(cleanCity)}
-                  citySlug={cleanCity}
+                  cityName={CapitalizeFirst(city)}
+                  citySlug={city}
                   projectTypes={cityDirectoryData.city_data.project_types}
                   assignmentsCount={assignments.data?.length || 0}
                 />
