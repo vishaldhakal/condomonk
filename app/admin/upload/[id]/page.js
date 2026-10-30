@@ -4,10 +4,11 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import swal from "sweetalert";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { Editor } from "@tinymce/tinymce-react";
 
-export default function Update({ params }) {
+export default function Update() {
+  const params = useParams();
   let stat = {
     id: 1,
     project_name: "",
@@ -139,7 +140,7 @@ export default function Update({ params }) {
       .catch((err) => {
         console.log(err.data);
       });
-  }, [refetch]);
+  }, [refetch, params.id]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -210,7 +211,7 @@ export default function Update({ params }) {
           headers: {
             "Content-Type": "multipart/form-data",
           },
-        }
+        },
       )
       .then((res) => {
         console.log(res.data);
@@ -394,14 +395,28 @@ export default function Update({ params }) {
                       About <span className="text-red-500">*</span>{" "}
                     </p>
                     <div className="min-h-[200px]">
-                      <TiptapEditor
-                        content={developerdata.details}
-                        onChange={(newContent) =>
+                      <Editor
+                        apiKey="vlst3njmwg1i2353hvmwo871hdw6pm0clfrt0h43bhbeojh1"
+                        value={developerdata.details}
+                        onEditorChange={(newContent) =>
                           setDeveloperData((prevState) => ({
                             ...prevState,
                             details: newContent,
                           }))
                         }
+                        init={{
+                          height: 300,
+                          menubar: false,
+                          plugins: [
+                            "advlist",
+                            "autolink",
+                            "lists",
+                            "link",
+                            "code",
+                          ],
+                          toolbar:
+                            "undo redo | bold italic | bullist numlist | link | removeformat",
+                        }}
                       />
                     </div>
                   </div>
@@ -470,7 +485,7 @@ export default function Update({ params }) {
                     id="project_type"
                     value={predata.project_type}
                     onChange={(e) => handleChange(e)}
-                    ariaLabel="Floating label select example"
+                    aria-label="Floating label select example"
                   >
                     <option value="Condo">Condo</option>
                     <option value="Townhome">Townhome</option>
@@ -520,7 +535,7 @@ export default function Update({ params }) {
                     id="status"
                     value={predata.status}
                     onChange={(e) => handleChange(e)}
-                    ariaLabel="Floating label select example"
+                    aria-label="Floating label select example"
                   >
                     <option value="Selling">Selling</option>
                     <option value="Upcoming">Upcoming</option>
@@ -539,7 +554,7 @@ export default function Update({ params }) {
                     id="co_op_available"
                     value={predata.co_op_available}
                     onChange={(e) => handleChange(e)}
-                    ariaLabel="Floating label select example"
+                    aria-label="Floating label select example"
                   >
                     <option value={false}>Not Available</option>
                     <option value={true}>Available</option>
@@ -557,7 +572,7 @@ export default function Update({ params }) {
                     id="is_featured"
                     value={predata.is_featured}
                     onChange={(e) => handleChange(e)}
-                    ariaLabel="Floating label select example"
+                    aria-label="Floating label select example"
                   >
                     <option value={false}>Not Featured</option>
                     <option value={true}>Featured</option>
@@ -604,7 +619,7 @@ export default function Update({ params }) {
                     id="city"
                     value={predata.city.name}
                     onChange={(e) => handleChangeCity(e)}
-                    ariaLabel="Floating label select example"
+                    aria-label="Floating label select example"
                   >
                     {cities.map((city) => (
                       <option key={city.id} value={city.name}>
@@ -632,7 +647,7 @@ export default function Update({ params }) {
                     id="developer"
                     value={predata.developer.name}
                     onChange={(e) => handleChangeDev(e)}
-                    ariaLabel="Floating label select example"
+                    aria-label="Floating label select example"
                   >
                     {developers &&
                       developers.map((developer) => (
@@ -680,12 +695,26 @@ export default function Update({ params }) {
                 height: 400,
                 menubar: true,
                 plugins: [
-                  "advlist autolink lists link image charmap print preview anchor",
-                  "searchreplace visualblocks code fullscreen",
-                  "insertdatetime media table paste code help wordcount",
+                  "advlist",
+                  "autolink",
+                  "lists",
+                  "link",
+                  "image",
+                  "charmap",
+                  "preview",
+                  "anchor",
+                  "searchreplace",
+                  "visualblocks",
+                  "code",
+                  "fullscreen",
+                  "insertdatetime",
+                  "media",
+                  "table",
+                  "help",
+                  "wordcount",
                 ],
                 toolbar:
-                  "undo redo | formatselect | " +
+                  "undo redo | blocks | " +
                   "bold italic backcolor | alignleft aligncenter " +
                   "alignright alignjustify | bullist numlist outdent indent | " +
                   "removeformat | help",

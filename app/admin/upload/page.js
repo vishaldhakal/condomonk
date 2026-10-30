@@ -325,12 +325,26 @@ export default function Upload() {
                         height: 400,
                         menubar: true,
                         plugins: [
-                          "advlist autolink lists link image charmap print preview anchor",
-                          "searchreplace visualblocks code fullscreen",
-                          "insertdatetime media table paste code help wordcount",
+                          "advlist",
+                          "autolink",
+                          "lists",
+                          "link",
+                          "image",
+                          "charmap",
+                          "preview",
+                          "anchor",
+                          "searchreplace",
+                          "visualblocks",
+                          "code",
+                          "fullscreen",
+                          "insertdatetime",
+                          "media",
+                          "table",
+                          "help",
+                          "wordcount",
                         ],
                         toolbar:
-                          "undo redo | formatselect | " +
+                          "undo redo | blocks | " +
                           "bold italic backcolor | alignleft aligncenter " +
                           "alignright alignjustify | bullist numlist outdent indent | " +
                           "removeformat | help",
@@ -482,7 +496,7 @@ export default function Upload() {
                   id="is_featured"
                   value={predata.is_featured}
                   onChange={handleChange}
-                  ariaLabel="Floating label select example"
+                  aria-label="Floating label select example"
                 >
                   <option value={false}>Not Featured</option>
                   <option value={true}>Featured</option>
@@ -586,12 +600,26 @@ export default function Upload() {
                       height: 400,
                       menubar: true,
                       plugins: [
-                        "advlist autolink lists link image charmap print preview anchor",
-                        "searchreplace visualblocks code fullscreen",
-                        "insertdatetime media table paste code help wordcount",
+                        "advlist",
+                        "autolink",
+                        "lists",
+                        "link",
+                        "image",
+                        "charmap",
+                        "preview",
+                        "anchor",
+                        "searchreplace",
+                        "visualblocks",
+                        "code",
+                        "fullscreen",
+                        "insertdatetime",
+                        "media",
+                        "table",
+                        "help",
+                        "wordcount",
                       ],
                       toolbar:
-                        "undo redo | formatselect | " +
+                        "undo redo | blocks | " +
                         "bold italic backcolor | alignleft aligncenter " +
                         "alignright alignjustify | bullist numlist outdent indent | " +
                         "removeformat | help",

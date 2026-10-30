@@ -25,6 +25,24 @@ async function getData(city) {
   return res.json();
 }
 
+async function getAssignments(city) {
+  const cityFormat = city
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+
+  try {
+    const res = await fetch(
+      `https://api.toassign.com/public/assignments?status=Available&regions=${cityFormat}`,
+      { next: { revalidate: 3600 } },
+    );
+    if (!res.ok) return { data: [] };
+    return res.json();
+  } catch (error) {
+    console.error(`Error loading assignments for ${city}:`, error);
+    return { data: [] };
+  }
+}
+
 // Helper function to capitalize city name
 const CapitalizeFirst = (city) => {
   return (
@@ -55,7 +73,10 @@ export async function generateMetadata({ params }, parent) {
 
 export default async function DetachedPage({ params }) {
   const { city } = await params;
-  const data = await getData(city);
+  const [data, assignments] = await Promise.all([
+    getData(city),
+    getAssignments(city),
+  ]);
   const cityName = CapitalizeFirst(city);
 
   // ── Schema.org structured data ──────────────────────────────────────────
@@ -305,7 +326,6 @@ export default async function DetachedPage({ params }) {
                 <RightSidebarLinks
                   cityName={CapitalizeFirst(city)}
                   citySlug={city}
-                  projectTypes={cityDirectoryData.city_data.project_types}
                   assignmentsCount={assignments.data?.length || 0}
                 />
               </div>
