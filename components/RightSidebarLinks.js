@@ -56,6 +56,7 @@ export default function RightSidebarLinks({
   cityName,
   citySlug,
   assignmentsCount,
+  layout = "stack",
 }) {
   const isAlbertaCity = ["calgary", "edmonton"].includes(
     citySlug.toLowerCase(),
@@ -65,7 +66,13 @@ export default function RightSidebarLinks({
     : nearbyCitiesOntario[citySlug.toLowerCase()] || [];
 
   const content = (
-    <div className="space-y-1">
+    <div
+      className={
+        layout === "grid"
+          ? "grid gap-x-4 gap-y-6 sm:grid-cols-3 xl:grid-cols-6 [&>div]:p-0 [&>div]:pt-0"
+          : "space-y-1"
+      }
+    >
       {/* Alert Me */}
       <div className="bg-white rounded-lg p-4 pt-0">
         <p className="text-sm text-black mb-3">

@@ -1,12 +1,10 @@
-import CondoCard from "@/components/CondoCard";
-import HorizontalCondoCard from "@/components/HorizontalCondoCard";
 import RightSidebarLinks from "@/components/RightSidebarLinks";
-import GoodAccountingNote from "@/components/GoodAccountingNote";
 import BottomContactForm from "@/components/BottomContactForm";
 import Newsletter from "@/components/Newsletter";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import PreconstructionFilter from "@/components/PreconstructionFilter";
+import ListingHeader from "@/components/listing/ListingHeader";
+import ListingGrid from "@/components/listing/ListingGrid";
 import ExpandableDescription from "@/components/ExpandableDescription";
 
 // Data fetching function
@@ -223,7 +221,7 @@ export default async function DetachedPage({ params }) {
           Explore 100+ new construction detached homes in {cityName}, AB from
           trusted builders. Updated floor plans, pricing & availability for 2–5+
           bedroom homes.{" "}
-          <span className="text-gray-500 text-sm">
+          <span className="text-gray-500 text-[13px]">
             Last Updated: {lastUpdated}
           </span>
         </>
@@ -240,7 +238,7 @@ export default async function DetachedPage({ params }) {
           builders in {cityName}
         </Link>
         . Updated floor plans, pricing & availability for 2–5+ bedroom homes.{" "}
-        <span className="text-gray-500 text-sm">
+        <span className="text-gray-500 text-[13px]">
           Last Updated: {lastUpdated}
         </span>
       </>
@@ -268,115 +266,62 @@ export default async function DetachedPage({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <div className="max-w-[85.625rem] mx-auto px-4">
-        {/* Breadcrumb */}
-        <nav
-          aria-label="Breadcrumb"
-          className="flex items-center gap-1.5 text-sm text-gray-500 mb-4"
-        >
-          <Link href="/" className="hover:text-gray-800 transition-colors">
-            Home
-          </Link>
-          <span className="text-gray-400">/</span>
-          <Link
-            href={`/${city}`}
-            className="hover:text-gray-800 transition-colors"
-          >
-            {cityName}
-          </Link>
-          <span className="text-gray-400">/</span>
-          <span className="text-gray-900 font-medium">Detached</span>
-        </nav>
-
-        {/* Header Section */}
-        <div className="space-y-6">
-          <h1 className="text-xl md:text-4xl font-bold text-gray-900">
-            {generateTitle()}
-          </h1>
-
-          <h2 className="text-xs md:text-base text-gray-600">
+        <ListingHeader
+          crumbs={[{ label: cityName, href: `/${city}` }, { label: "Detached" }]}
+          title={generateTitle()}
+          description={
             <ExpandableDescription>{generateSubtitle()}</ExpandableDescription>
-          </h2>
+          }
+          citySlug={city}
+          cityName={cityName}
+          activeType="detached"
+        />
 
-          {/* PreconstructionFilter Component */}
-          <div className="sticky top-0 bg-white py-3 z-[9999] -mx-4">
-            <div className="flex justify-start px-4">
-              <PreconstructionFilter cityName={cityName} citySlug={city} />
+        <section className="pb-16">
+          {sellingProjects.length > 0 || upcomingProjects.length > 0 ? (
+            <>
+              <p className="mb-4 text-[13px] text-black">
+                Showing{" "}
+                <span className="font-semibold">
+                  {sellingProjects.length || upcomingProjects.length}
+                </span>{" "}
+                {sellingProjects.length > 0 ? "selling" : "upcoming"} projects
+              </p>
+              <ListingGrid
+                projects={
+                  sellingProjects.length > 0 ? sellingProjects : upcomingProjects
+                }
+                showAd
+                withSchema={false}
+                priorityCount={4}
+              />
+            </>
+          ) : (
+            <p className="py-16 text-[13px] text-black">
+              No projects available at this time.
+            </p>
+          )}
+
+          {/* Upcoming Projects Section - Only show if there are selling projects */}
+          {sellingProjects.length > 0 && upcomingProjects.length > 0 && (
+            <div className="mt-16">
+              <h2 className="mb-6 text-2xl font-bold text-black">
+                Upcoming Pre Construction Detached Homes in {cityName}
+              </h2>
+              <ListingGrid projects={upcomingProjects} withSchema={false} />
             </div>
-          </div>
-        </div>
+          )}
+        </section>
 
-        {/* Two Column Layout: Projects on Left, Sidebar on Right */}
-        {(sellingProjects.length > 0 || upcomingProjects.length > 0) && (
-          <div className="flex flex-col lg:flex-row gap-6 mt-4">
-            {/* Left Column - Projects List - Scrollable */}
-            <div className="flex-1 lg:w-2/3 overflow-y-auto">
-              {sellingProjects.length > 0
-                ? sellingProjects.map((item, index) => (
-                    <HorizontalCondoCard key={item.id} {...item} no={index} />
-                  ))
-                : upcomingProjects.map((item, index) => (
-                    <HorizontalCondoCard key={item.id} {...item} no={index} />
-                  ))}
-            </div>
-
-            {/* Right Column - Sidebar Links - Sticky and Scrollable */}
-            <div className="lg:w-2/6">
-              {/* Main Sidebar Links - Normal scroll */}
-              <div className="mb-8">
-                <RightSidebarLinks
-                  cityName={CapitalizeFirst(city)}
-                  citySlug={city}
-                  assignmentsCount={assignments.data?.length || 0}
-                />
-              </div>
-
-              {/* Ad Placement - Sticky */}
-              <div className="sticky top-5 z-20">
-                <div className="bg-white">
-                  <a
-                    href="http://goodaccounting.ca"
-                    target="_blank"
-                    className="block overflow-hidden rounded-xl shadow-sm hover:shadow-md transition-shadow"
-                  >
-                    <img
-                      src="/goodaccounting-new-ad.webp"
-                      alt="Good Accounting - Book a free 15 minute call with an accountant"
-                      width={1080}
-                      height={1500}
-                      loading="lazy"
-                      className="w-full h-auto hover:scale-[1.02] transition-transform duration-200"
-                    />
-                  </a>
-                  <GoodAccountingNote />
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* No Projects Message */}
-        {sellingProjects.length === 0 && upcomingProjects.length === 0 && (
-          <div className="text-center py-12 text-gray-500">
-            No projects available at this time.
-          </div>
-        )}
-
-        {/* Upcoming Projects Section - Only show if there are selling projects */}
-        {sellingProjects.length > 0 && upcomingProjects.length > 0 && (
-          <div className="mt-16">
-            <h2 className="text-2xl font-bold mb-8 text-gray-900">
-              Upcoming Pre Construction Detached Homes in {cityName}
-            </h2>
-            <div className="flex flex-col lg:flex-row gap-6">
-              <div className="flex-1 lg:w-2/3 overflow-y-auto">
-                {upcomingProjects.map((item, index) => (
-                  <HorizontalCondoCard key={item.id} {...item} no={index} />
-                ))}
-              </div>
-              <div className="lg:w-1/3"></div>
-            </div>
-          </div>
-        )}
+        {/* Quick links (previously the right sidebar) */}
+        <section className="border-t border-[#e7e9ee] pt-8">
+          <RightSidebarLinks
+            cityName={cityName}
+            citySlug={city}
+            assignmentsCount={assignments.data?.length || 0}
+            layout="grid"
+          />
+        </section>
 
         {/* Contact Form Section */}
         <div className="mt-24" id="contact">

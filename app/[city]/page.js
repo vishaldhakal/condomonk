@@ -1,17 +1,14 @@
-import HorizontalCondoCard from "@/components/HorizontalCondoCard";
 import RightSidebarLinks from "@/components/RightSidebarLinks";
-import GoodAccountingNote from "@/components/GoodAccountingNote";
 import BottomContactForm from "@/components/BottomContactForm";
 import { notFound } from "next/navigation";
-import PreconSchema from "@/components/PreconSchema";
 import Link from "next/link";
 import Newsletter from "@/components/Newsletter";
 import CityDirectory from "@/components/CityDirectory";
 import AssignmentCard from "@/components/assignment/AssignmentCard";
 import GoogleMap from "@/components/GoogleMap";
-import PreconstructionFilter from "@/components/PreconstructionFilter";
 import CombinedPopupManager from "@/components/CombinedPopupManager";
-import PreconExperts from "@/components/PreconExperts";
+import ListingHeader from "@/components/listing/ListingHeader";
+import ListingGrid from "@/components/listing/ListingGrid";
 import BlogCard from "@/components/BlogCard";
 import { fetchBlogPostByCity } from "@/api/blogs";
 
@@ -216,6 +213,15 @@ export default async function CityPage({ params }) {
     return data.preconstructions.filter((item) => item.status === status);
   };
 
+  // Featured first, then the rest of the selling projects
+  const featuredList = featuredData.preconstructions || [];
+  const sellingList = [
+    ...featuredList,
+    ...filteredProjects("Selling").filter(
+      (item) => !featuredList.some((featured) => featured.id === item.id),
+    ),
+  ];
+
   // Prepare city directory data
   const cityDirectoryData = {
     city_data: {
@@ -351,20 +357,20 @@ export default async function CityPage({ params }) {
   //       return (
   //         <>
   //           Pre Construction & New Homes for sale in{" "}
-  //           <span className="text-teal-600">{CapitalizeFirst(city)}</span>, AB
+  //           <span>{CapitalizeFirst(city)}</span>, AB
   //         </>
   //       );
   //     }
   //     return priceFilter ? (
   //       <>
   //         Pre construction Homes in{" "}
-  //         <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>{" "}
+  //         <span>{CapitalizeFirst(cleanCity)}</span>{" "}
   //         {formatPriceFilter(priceFilter)}
   //       </>
   //     ) : (
   //       <>
   //         Pre Construction Homes in{" "}
-  //         <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>,
+  //         <span>{CapitalizeFirst(cleanCity)}</span>,
   //         Ontario(2026)
   //       </>
   //     );
@@ -372,13 +378,13 @@ export default async function CityPage({ params }) {
   //   return priceFilter ? (
   //     <>
   //       Pre Construction Homes in{" "}
-  //       <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>{" "}
+  //       <span>{CapitalizeFirst(cleanCity)}</span>{" "}
   //       {formatPriceFilter(priceFilter)}
   //     </>
   //   ) : (
   //     <>
   //       Pre Construction Homes in{" "}
-  //       <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>,
+  //       <span>{CapitalizeFirst(cleanCity)}</span>,
   //       Ontario (2026)
   //     </>
   //   );
@@ -389,7 +395,7 @@ export default async function CityPage({ params }) {
       return (
         <>
           Pre Construction & New Homes for sale in{" "}
-          <span className="text-teal-600">{CapitalizeFirst(city)}</span>, AB
+          <span>{CapitalizeFirst(city)}</span>, AB
         </>
       );
     }
@@ -397,13 +403,13 @@ export default async function CityPage({ params }) {
     return priceFilter ? (
       <>
         Pre construction Homes in{" "}
-        <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>{" "}
+        <span>{CapitalizeFirst(cleanCity)}</span>{" "}
         {formatPriceFilter(priceFilter)}
       </>
     ) : (
       <>
         Pre Construction Homes in{" "}
-        <span className="text-teal-600">{CapitalizeFirst(cleanCity)}</span>,
+        <span>{CapitalizeFirst(cleanCity)}</span>,
         Ontario (2026)
       </>
     );
@@ -444,7 +450,7 @@ export default async function CityPage({ params }) {
         </Link>
         . Browse condos, townhomes & detached homes with updated floor plans,
         pricing & availability.{" "}
-        <span className="text-gray-500 text-sm">
+        <span className="text-gray-500 text-[13px]">
           Last Updated: {lastUpdated}
         </span>
       </>
@@ -452,7 +458,7 @@ export default async function CityPage({ params }) {
   };
 
   return (
-    <div className="pt-4 lg:pt-8 bg-white">
+    <div className="bg-white">
       {itemListSchema && (
         <script
           type="application/ld+json"
@@ -468,199 +474,83 @@ export default async function CityPage({ params }) {
       <CombinedPopupManager cityName={city} />
 
       <div className="max-w-[85.625rem] mx-auto px-4">
-        {/* Breadcrumb */}
-        <nav
-          aria-label="Breadcrumb"
-          className="flex items-center gap-1.5 text-sm text-gray-500 mb-4"
-        >
-          <Link href="/" className="hover:text-gray-800 transition-colors">
-            Home
-          </Link>
-          <span className="text-gray-400">/</span>
-          <span className="text-gray-900 font-medium">
-            {CapitalizeFirst(cleanCity)}
-          </span>
-        </nav>
+        <ListingHeader
+          crumbs={[{ label: CapitalizeFirst(cleanCity) }]}
+          title={generateTitle()}
+          description={generateSubtitle()}
+          citySlug={cleanCity}
+          cityName={CapitalizeFirst(cleanCity)}
+          activeType="all"
+          activePrice={priceFilter}
+        />
 
-        {/* Header Section */}
-        <div className="flex flex-col ">
-          <div className="flex">
-            <h1 className="text-xl md:text-4xl font-bold mb-0 text-gray-900">
-              {generateTitle()}
-            </h1>
+        {/* Listings */}
+        <section className="pb-16">
+          <div className="mb-4 flex items-center justify-between">
+            <p className="text-[13px] text-black">
+              Showing{" "}
+              <span className="font-semibold">{sellingList.length}</span>{" "}
+              selling new homes
+              {data.preconstructions.length > sellingList.length && (
+                <> of {data.preconstructions.length} total</>
+              )}
+            </p>
           </div>
 
-          <h2 className="text-xs md:text-base text-gray-600 mt-0 md:pt-4 pt-0">
-            {generateSubtitle()}
-          </h2>
-        </div>
+          <div id="selling">
+            <ListingGrid projects={sellingList} showAd priorityCount={4} />
+          </div>
 
-        <PreconExperts />
-
-        {/* Filter Section */}
-
-        <div>
-          <p className="pt-md-2 pt-4">
-            Showing result{" "}
-            <span className="font-semibold">25 of 100 new homes</span>
-          </p>
-        </div>
-
-        {/* Unified Layout: All Content on Left, Comprehensive Sidebar on Right */}
-        <div className="flex flex-col lg:flex-row gap-6 mt-2">
-          {/* Left Column - All Content - Scrollable */}
-          <div className="flex-1 lg:w-4/6">
-            <div className="hidden md:block sticky z-50 bg-white md:z-[999] top-0 py-1 md:mt-0">
-              <div className="flex justify-start">
-                <PreconstructionFilter
-                  cityName={CapitalizeFirst(city)}
-                  citySlug={String(city).split("-homes-")[0]}
-                />
-              </div>
+          {/* Upcoming Projects */}
+          {filteredProjects("Upcoming").length > 0 && (
+            <div id="upcoming" className="mt-16">
+              <h3 className="mb-6 text-2xl md:text-3xl font-bold text-black">
+                Launching Soon - New Pre Construction Homes in{" "}
+                {CapitalizeFirst(cleanCity)}
+              </h3>
+              <ListingGrid projects={filteredProjects("Upcoming")} />
             </div>
-            {/* Featured Projects First */}
-            <div id="selling">
-              {featuredData.preconstructions?.map((item, index) => (
-                <div key={item.id}>
-                  <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{
-                      __html: JSON.stringify(PreconSchema(item)),
-                    }}
-                  />
-                  <div className="priority-content">
-                    <HorizontalCondoCard
-                      {...item}
-                      no={index}
-                      priority={(index < 4).toString()}
-                    />
-                  </div>
-                </div>
-              ))}
+          )}
 
-              {/* Non-Featured Selling Projects */}
-              {filteredProjects("Selling")
-                .filter(
-                  (item) =>
-                    !featuredData.preconstructions?.some(
-                      (featured) => featured.id === item.id,
-                    ),
-                )
-                .map((item, index) => (
-                  <div key={item.id}>
-                    <script
-                      type="application/ld+json"
-                      dangerouslySetInnerHTML={{
-                        __html: JSON.stringify(PreconSchema(item)),
-                      }}
-                    />
-                    <HorizontalCondoCard
-                      {...item}
-                      no={index + (featuredData.preconstructions?.length || 0)}
-                      priority="false"
-                    />
-                  </div>
+          {/* Sold Out Projects */}
+          {filteredProjects("Sold out").length > 0 && (
+            <div id="soldout" className="mt-16">
+              <h3 className="mb-6 text-2xl font-bold text-black">
+                Past Communities in {CapitalizeFirst(cleanCity)} - Sold out
+              </h3>
+              <ListingGrid projects={filteredProjects("Sold out")} />
+            </div>
+          )}
+
+          {/* Assignments Section */}
+          {assignments.data?.length > 0 && (
+            <div className="mt-16">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                Assignment Sales in {CapitalizeFirst(cleanCity)}
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {assignments.data.map((assignment, index) => (
+                  <AssignmentCard
+                    key={assignment.id}
+                    assignment={assignment}
+                    index={index}
+                  />
                 ))}
-            </div>
-
-            {/* Upcoming Projects */}
-            {filteredProjects("Upcoming").length > 0 && (
-              <div id="upcoming" className="mb-16 mt-16">
-                <h3 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900">
-                  Launching Soon - New Pre Construction Homes in{" "}
-                  {CapitalizeFirst(cleanCity)}
-                </h3>
-                <div className="space-y-4">
-                  {filteredProjects("Upcoming").map((item, index) => (
-                    <div key={item.id}>
-                      <script
-                        type="application/ld+json"
-                        dangerouslySetInnerHTML={{
-                          __html: JSON.stringify(PreconSchema(item)),
-                        }}
-                      />
-                      <HorizontalCondoCard {...item} no={index} />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Sold Out Projects */}
-            {filteredProjects("Sold out").length > 0 && (
-              <div id="soldout" className="mb-16">
-                <h3 className="text-2xl font-bold mb-8 text-gray-900">
-                  Past Communities in {CapitalizeFirst(cleanCity)} - Sold out
-                </h3>
-                <div className="space-y-4">
-                  {filteredProjects("Sold out").map((item, index) => (
-                    <div key={item.id}>
-                      <script
-                        type="application/ld+json"
-                        dangerouslySetInnerHTML={{
-                          __html: JSON.stringify(PreconSchema(item)),
-                        }}
-                      />
-                      <HorizontalCondoCard {...item} no={index} />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Assignments Section */}
-            {assignments.data?.length > 0 && (
-              <div className="mb-16">
-                <h3 className="text-2xl md:text-3xl font-bold mb-4">
-                  Assignment Sales in {CapitalizeFirst(cleanCity)}
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {assignments.data.map((assignment, index) => (
-                    <AssignmentCard
-                      key={assignment.id}
-                      assignment={assignment}
-                      index={index}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Right Column - Sidebar */}
-          <div className="lg:w-2/6">
-            {/* Main Sidebar Links - Normal scroll */}
-            <div className="mb-8">
-              <RightSidebarLinks
-                cityName={CapitalizeFirst(cleanCity)}
-                citySlug={cleanCity}
-                projectTypes={cityDirectoryData.city_data.project_types}
-                assignmentsCount={assignments.data?.length || 0}
-              />
-            </div>
-
-            {/* Ad Placement - Sticky */}
-            <div className="sticky top-5 z-20">
-              <div className="bg-white">
-                <a
-                  href="http://goodaccounting.ca"
-                  target="_blank"
-                  className="block overflow-hidden rounded-xl shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <img
-                    src="/goodaccounting-new-ad.webp"
-                    alt="Good Accounting - Book a free 15 minute call with an accountant"
-                    width={1080}
-                    height={1500}
-                    loading="lazy"
-                    className="w-full h-auto hover:scale-[1.02] transition-transform duration-200"
-                  />
-                </a>
-                <GoodAccountingNote />
               </div>
             </div>
-          </div>
-        </div>
+          )}
+        </section>
+
+        {/* Quick links (previously the right sidebar) */}
+        <section className="border-t border-[#e7e9ee] pt-8">
+          <RightSidebarLinks
+            cityName={CapitalizeFirst(cleanCity)}
+            citySlug={cleanCity}
+            projectTypes={cityDirectoryData.city_data.project_types}
+            assignmentsCount={assignments.data?.length || 0}
+            layout="grid"
+          />
+        </section>
 
         {/* Latest News and Insight */}
         {latestCityBlogs?.length > 0 && (
