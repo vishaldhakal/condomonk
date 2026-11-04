@@ -96,7 +96,7 @@ export default function ListingCard(props) {
         <div className="mt-auto pt-4">
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-              <button className="block w-full rounded-xl bg-[#e3f5e9] py-2.5 text-center text-[14px] font-semibold text-black transition hover:bg-[#cdeed8]">
+              <button className="block w-full rounded-xl bg-[#fffbe6] py-2.5 text-center text-[14px] font-semibold text-black transition hover:bg-[#fff4c2]">
                 Request more info
               </button>
             </DialogTrigger>
