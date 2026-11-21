@@ -219,7 +219,7 @@ const Footer = ({ cities }) => {
 
         <div className="container mx-auto px-4 text-center py-5 border-t border-gray-200 mt-10">
           <p className="text-sm text-gray-600">
-            ©2025 <span>Copyright</span>{" "}
+            ©2026 <span>Copyright</span>{" "}
             <strong className="px-1">Condomonk</strong>{" "}
             <span>All Rights Reserved</span>
           </p>

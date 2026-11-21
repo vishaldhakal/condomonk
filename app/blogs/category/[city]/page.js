@@ -97,7 +97,7 @@
 //         {/* Main Content */}
 //         <div className="max-w-7xl mx-auto">
 //           <h1 className="text-2xl md:text-3xl font-bold text-gray-900 max-w-3xl mx-auto text-center my-2 pt-6">
-//             Explore 2025 real estate trends in Canada, with daily updates and
+//             Explore 2026 real estate trends in Canada, with daily updates and
 //             city-specific comparisons
 //           </h1>
 //           <p className="max-w-3xl mx-auto text-center mb-8">
@@ -256,7 +256,7 @@ export default async function CityBlogs({ params }) {
 
         <div className="max-w-7xl mx-auto">
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900 max-w-3xl mx-auto text-center my-2 pt-6">
-            Explore 2025 real estate trends in Canada, with daily updates and
+            Explore 2026 real estate trends in Canada, with daily updates and
             city-specific comparisons
           </h1>
           <p className="max-w-3xl mx-auto text-center mb-8">
